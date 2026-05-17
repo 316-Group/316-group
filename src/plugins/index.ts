@@ -93,7 +93,13 @@ export const plugins: Plugin[] = [
   payloadCloudPlugin(),
   s3Storage({
     collections: {
-      media: { prefix: '316-group-media' },
+      media: { 
+        prefix: 'website-media/316-group-media',
+        disableLocalStorage: true,
+        generateFileURL: ({ filename, prefix }) => {
+          return `${process.env.R2_PUBLIC_URL}/${prefix ? prefix + '/' : ''}${filename}`
+        }
+      },
     },
     bucket: process.env.R2_BUCKET || '',
     config: {
@@ -103,6 +109,7 @@ export const plugins: Plugin[] = [
       },
       region: process.env.R2_REGION || 'auto',
       endpoint: process.env.R2_ENDPOINT || '',
+      forcePathStyle: true,
     },
   }),
 ]

@@ -6,7 +6,6 @@ import VideoComponent from './VideoComponent'
 import { ImageComponent } from './ImageComponent'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
-import { CMSLink } from '@/components/Link'
 
 interface SlideCardProps {
   isProductSlider?: boolean
@@ -50,10 +49,11 @@ const SlideCard = ({ slide, isProductSlider }: SlideCardProps) => {
           />
           <div>
             {slide.link && slide.enableLink && (
-              <CMSLink
-                {...slide.link}
+              <span
                 className="bg-black text-white px-6 py-3 rounded-full inline-block hover:bg-slate-200 hover:text-slate-900 transition-colors text-left animate__animated"
-              />
+              >
+                {slide.link.label || 'Learn More →'}
+              </span>
             )}
           </div>
         </div>
@@ -92,11 +92,11 @@ const SlideCard = ({ slide, isProductSlider }: SlideCardProps) => {
         className={cn(slide.descriptionClasses)}
         dangerouslySetInnerHTML={{ __html: slide.description }}
       />
-      <button
-        className={`mt-6 bg-cyan-200 text-black px-6 py-2 rounded-full hover:bg-slate-900 hover:text-white transition-colors text-left animate__animated ${animationClass}`}
+      <span
+        className={`mt-6 inline-block bg-cyan-200 text-black px-6 py-2 rounded-full hover:bg-slate-900 hover:text-white transition-colors text-left animate__animated ${animationClass}`}
       >
         Learn More →
-      </button>
+      </span>
     </div>
   )
 }
