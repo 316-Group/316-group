@@ -58,7 +58,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         href={href || url || ''}
         {...newTabProps}
       >
-        {label && label}
+        {label && <span dangerouslySetInnerHTML={{ __html: label }} />}
         {icon && iconType === 'arrow-right' && <ArrowRight />}
         {icon && iconType === 'chevron-right' && <ChevronRight />}
         {icon && iconType === 'external-link' && <ExternalLink />}
@@ -80,7 +80,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         href={href || url || ''}
         {...newTabProps}
       >
-        {label && label}
+        {label && <span dangerouslySetInnerHTML={{ __html: label }} />}
         {icon && iconType === 'arrow-right' && <ArrowRight />}
         {icon && iconType === 'chevron-right' && <ChevronRight />}
         {icon && iconType === 'external-link' && <ExternalLink />}
@@ -92,7 +92,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
+        {label && <span dangerouslySetInnerHTML={{ __html: label }} />}
         {icon && iconType === 'arrow-right' && <ArrowRight />}
         {icon && iconType === 'chevron-right' && <ChevronRight />}
         {icon && iconType === 'external-link' && <ExternalLink />}

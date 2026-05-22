@@ -179,7 +179,7 @@ export default function ComponentClient({ footer }: { footer: Footer }) {
                   <CMSLink
                     key={j}
                     {...linkObj.link}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-white font-normal hover:text-gray-300 transition-colors"
                   />
                 ))}
               </nav>
