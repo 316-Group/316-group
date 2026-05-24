@@ -41,6 +41,8 @@ export const buttonClasses: buttonClassesType = ({
       { label: 'Bordered Gray', value: 'border-gray' },
       { label: 'Bordered Black', value: 'border-black' },
       { label: 'Bordered White', value: 'border-white' },
+      { label: 'Bordered Neon Cyan (#10EBFF)', value: 'border-cyan-neon' },
+      { label: 'Bordered Custom Blue (#0256FF)', value: 'border-blue-custom' },
       //background colors
       { label: 'BG Inherit', value: 'bg-inherit' },
       { label: 'BG Current', value: 'bg-current' },
@@ -55,6 +57,8 @@ export const buttonClasses: buttonClassesType = ({
       { label: 'BG Purple', value: 'bg-purple' },
       { label: 'BG Pink', value: 'bg-pink' },
       { label: 'BG Gray', value: 'bg-gray' },
+      { label: 'BG Neon Cyan (#10EBFF)', value: 'bg-cyan-neon' },
+      { label: 'BG Custom Blue (#0256FF)', value: 'bg-blue-custom' },
       { label: 'BG Transparent', value: 'bg-transparent' },
       // button text colours
       { label: 'Text Black', value: 'text-black' },
@@ -67,6 +71,8 @@ export const buttonClasses: buttonClassesType = ({
       { label: 'Text Purple', value: 'text-purple' },
       { label: 'Text Pink', value: 'text-pink' },
       { label: 'Text Gray', value: 'text-gray' },
+      { label: 'Text Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
+      { label: 'Text Custom Blue (#0256FF)', value: 'text-blue-custom' },
       { label: 'Text White', value: 'text-white' },
       { label: 'Text Transparent', value: 'text-transparent' },
       //hover backgrounds
@@ -83,6 +89,10 @@ export const buttonClasses: buttonClassesType = ({
       { label: 'Hover txt purple', value: 'hover:text-purple' },
       { label: 'Hover txt pink', value: 'hover:text-pink' },
       { label: 'Hover txt gray', value: 'hover:text-gray' },
+      { label: 'Hover bg neon cyan', value: 'hover:bg-cyan-neon' },
+      { label: 'Hover bg custom blue', value: 'hover:bg-blue-custom' },
+      { label: 'Hover txt neon cyan', value: 'hover:text-cyan-neon' },
+      { label: 'Hover txt custom blue', value: 'hover:text-blue-custom' },
       { label: 'Hover txt white', value: 'hover:text-white' },
       { label: 'Hover txt transparent', value: 'hover:text-transparent' },
       //hover border colors
@@ -96,6 +106,8 @@ export const buttonClasses: buttonClassesType = ({
       { label: 'Hover border gray', value: 'hover:border-gray' },
       { label: 'Hover border black', value: 'hover:border-black' },
       { label: 'Hover border white', value: 'hover:border-white' },
+      { label: 'Hover border neon cyan', value: 'hover:border-cyan-neon' },
+      { label: 'Hover border custom blue', value: 'hover:border-blue-custom' },
       { label: 'Hover border transparent', value: 'hover:border-transparent' },
       { label: 'MT None', value: 'mt-0' },
       { label: 'MT XS', value: 'mt-1' },
