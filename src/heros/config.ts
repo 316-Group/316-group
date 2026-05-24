@@ -51,6 +51,10 @@ export const hero: Field = {
           value: 'productHero2',
         },
         {
+          label: 'Product Page Hero About',
+          value: 'productHeroAbout',
+        },
+        {
           label: 'Services Page Hero',
           value: 'servicesHero',
         },
@@ -72,7 +76,7 @@ export const hero: Field = {
       type: 'text',
       admin: {
         condition: (_, { type }) =>
-          ['productHero2', 'productHero', 'servicesHero', 'swiperHero'].includes(type),
+          ['productHero2', 'productHeroAbout', 'productHero', 'servicesHero', 'swiperHero'].includes(type),
       },
     },
     buttonClasses({
@@ -81,7 +85,7 @@ export const hero: Field = {
         label: 'Hero Title Classes',
         admin: {
           condition: (_, { type }) =>
-            ['productHero2', 'productHero', 'servicesHero', 'swiperHero'].includes(type),
+            ['productHero2', 'productHeroAbout', 'productHero', 'servicesHero', 'swiperHero'].includes(type),
         },
         defaultValue: [
           'mt-4',
@@ -101,7 +105,7 @@ export const hero: Field = {
       type: 'text',
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'servicesHero', 'swiperHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
       },
       required: true,
       defaultValue:
@@ -113,7 +117,7 @@ export const hero: Field = {
         label: 'Title Classes',
         admin: {
           condition: (_, { type }) =>
-            ['productHero', 'productHero2', 'servicesHero', 'swiperHero'].includes(type),
+            ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
         },
         defaultValue: ['text-4xl', 'md:text-6xl', 'font-bold', 'text-white'],
       },
@@ -123,7 +127,7 @@ export const hero: Field = {
       type: 'text',
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'servicesHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero'].includes(type),
       },
     },
     textClasses({
@@ -132,7 +136,7 @@ export const hero: Field = {
         label: 'Sub Title Classes',
         admin: {
           condition: (_, { type }) =>
-            ['productHero', 'productHero2', 'servicesHero'].includes(type),
+            ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero'].includes(type),
         },
       },
     }),
@@ -152,7 +156,7 @@ export const hero: Field = {
       }),
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'servicesHero', 'swiperHero'].includes(
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(
             type,
           ),
       },
@@ -163,7 +167,7 @@ export const hero: Field = {
         label: 'Description Classes',
         admin: {
           condition: (_, { type }) =>
-            ['productHero', 'productHero2', 'servicesHero', 'swiperHero'].includes(type),
+            ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
         },
       },
     }),
@@ -185,6 +189,7 @@ export const hero: Field = {
         condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'lowImpact','specialHero',
               'productHero',
               'productHero2',
+              'productHeroAbout',
               'servicesHero',].includes(type),
       },
     },
@@ -201,6 +206,7 @@ export const hero: Field = {
               'specialHero',
               'productHero',
               'productHero2',
+              'productHeroAbout',
               'servicesHero',
               'swiperHero',
             ].includes(type),
@@ -220,6 +226,7 @@ export const hero: Field = {
             'specialHero',
             'productHero',
             'productHero2',
+            'productHeroAbout',
             'servicesHero',
           ].includes(type),
       },
@@ -233,7 +240,7 @@ export const hero: Field = {
       type: 'upload',
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'servicesHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero'].includes(type),
       },
       relationTo: 'media',
       required: true,
@@ -243,7 +250,7 @@ export const hero: Field = {
         name: 'bgColor',
         label: 'Background Color',
         admin: {
-          condition: (_, { type }) => ['productHero2', 'servicesHero', 'swiperHero'].includes(type),
+          condition: (_, { type }) => ['productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
         },
         defaultValue: 'bg-sky-800',
       },
@@ -253,7 +260,7 @@ export const hero: Field = {
       type: 'upload',
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'servicesHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero'].includes(type),
       },
       relationTo: 'media',
       required: true,
@@ -263,7 +270,7 @@ export const hero: Field = {
       type: 'checkbox',
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'specialHero', 'servicesHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'specialHero', 'servicesHero'].includes(type),
       },
     },
     {
@@ -273,7 +280,7 @@ export const hero: Field = {
       defaultValue: true,
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'specialHero', 'servicesHero'].includes(type),
+          ['productHero', 'productHero2', 'productHeroAbout', 'specialHero', 'servicesHero'].includes(type),
       },
     },
     {

@@ -56,6 +56,21 @@ const columnFields: Field[] = [
     type: 'number',
   },
   {
+    name: 'alignment',
+    type: 'select',
+    defaultValue: 'left',
+    options: [
+      {
+        label: 'Default',
+        value: 'left',
+      },
+      {
+        label: 'Center',
+        value: 'center',
+      },
+    ],
+  },
+  {
     name: 'columnContent',
     type: 'array',
     label: 'Column Content',

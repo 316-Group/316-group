@@ -8,6 +8,7 @@ import { MediumImpactHero } from '@/heros/MediumImpact'
 import { SpecialHero } from './SpecialHero'
 import { ProductHero } from './ProductHero'
 import { ProductHero2 } from './ProductHero2'
+import { ProductHeroAbout } from './ProductHeroAbout'
 import { ServicesHero } from './ServicesHero'
 import { NoHero } from './NoHero'
 import { SwiperHero } from './SwiperHero'
@@ -20,6 +21,7 @@ const heroes = {
   specialHero: SpecialHero,
   productHero: ProductHero,
   productHero2: ProductHero2,
+  productHeroAbout: ProductHeroAbout,
   servicesHero: ServicesHero,
   swiperHero: SwiperHero,
   noHero: NoHero,

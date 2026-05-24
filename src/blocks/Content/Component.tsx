@@ -186,6 +186,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   colWidth, // Responsive column spans
                   orderClass, // Mobile order
                   mdOrderClass, // Reset order on desktop
+                  col.alignment === 'center' && 'text-center flex flex-col items-center justify-center',
                 )}
               >
                 {col.columnContent?.map((content, index) => {
@@ -286,7 +287,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                           content={richText}
                           enableGutter={false}
                           enableProse={false}
-                          className={cn(richTextClasses)}
+                          className={cn(richTextClasses, col.alignment === 'center' && 'text-center mx-auto')}
                         />
                       )
                     )
@@ -299,6 +300,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                           key={index}
                           className={cn(
                             styledHeading?.headingClasses,
+                            col.alignment === 'center' && 'text-center mx-auto',
                             styledHeading?.leftBorderStyle &&
                               `pl-4 md:pl-8 border-l-4 border-${styledHeading?.borderColor}`,
                           )}
