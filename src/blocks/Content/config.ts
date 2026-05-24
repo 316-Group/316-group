@@ -725,6 +725,15 @@ const columnFields: Field[] = [
               { label: 'Center', value: 'center' },
             ],
           },
+          {
+            name: 'alignCardContent',
+            type: 'select',
+            defaultValue: 'left',
+            options: [
+              { label: 'Default (Left)', value: 'left' },
+              { label: 'Center', value: 'center' },
+            ],
+          },
         ],
         admin: {
           condition: (_, { contentType }) => contentType === 'styledCards',

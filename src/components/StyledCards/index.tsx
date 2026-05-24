@@ -25,6 +25,7 @@ interface StyledCardsProps {
   cardsPerRow?: string | null
   marginSpace?: string | null
   alignContent?: string | null
+  alignCardContent?: string | null
 }
 
 export const StyledCards: React.FC<StyledCardsProps> = ({
@@ -40,8 +41,10 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
   cardsPerRow = '3',
   marginSpace = 'my-0',
   alignContent = 'left',
+  alignCardContent = 'left',
 }) => {
   const isCentered = alignContent === 'center'
+  const isCardCentered = alignCardContent === 'center'
 
   return (
     <div
@@ -75,7 +78,7 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
           <div
             className={cn(
               'flex flex-col gap-4 w-full',
-              isCentered ? 'items-center text-center' : 'items-start',
+              isCardCentered ? 'items-center text-center' : 'items-start',
             )}
           >
             <div className={cn('relative overflow-hidden rounded-lg w-full', imageClasses)}>
@@ -84,13 +87,13 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
             <div
               className={cn(
                 'flex flex-col gap-2 w-full',
-                isCentered ? 'items-center text-center' : 'items-start',
+                isCardCentered ? 'items-center text-center' : 'items-start',
               )}
             >
-              <h3 className={cn(titleClasses, isCentered && 'text-center w-full')}>
+              <h3 className={cn(titleClasses, isCardCentered && 'text-center w-full')}>
                 {card.title}
               </h3>
-              <p className={cn(descriptionClasses, isCentered && 'text-center w-full')}>
+              <p className={cn(descriptionClasses, isCardCentered && 'text-center w-full')}>
                 {card.description}
               </p>
             </div>

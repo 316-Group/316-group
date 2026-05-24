@@ -17146,6 +17146,7 @@ export interface ContentBlock {
                 cardsPerRow?: ('2' | '3' | '4') | null;
                 marginSpace?: ('my-0' | 'my-4' | 'my-8' | 'my-12' | 'my-16') | null;
                 alignContent?: ('left' | 'center') | null;
+                alignCardContent?: ('left' | 'center') | null;
               };
               statusBanner?: {
                 icon?: string | null;
@@ -102944,6 +102945,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     cardsPerRow?: T;
                     marginSpace?: T;
                     alignContent?: T;
+                    alignCardContent?: T;
                   };
               statusBanner?:
                 | T

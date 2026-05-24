@@ -414,6 +414,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       cardsPerRow,
                       marginSpace,
                       alignContent,
+                      alignCardContent,
                     } = content.styledCards
                     return (
                       <StyledCards
@@ -430,6 +431,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         cardsPerRow={cardsPerRow}
                         marginSpace={marginSpace}
                         alignContent={alignContent}
+                        alignCardContent={alignCardContent}
                       />
                     )
                   }
