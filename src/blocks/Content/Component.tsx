@@ -411,6 +411,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       cardBgColor,
                       cardHoverBgColor,
                       borderClasses,
+                      cardsPerRow,
+                      marginSpace,
+                      alignContent,
                     } = content.styledCards
                     return (
                       <StyledCards
@@ -424,6 +427,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         cardBgColor={cardBgColor}
                         cardHoverBgColor={cardHoverBgColor}
                         borderClasses={borderClasses}
+                        cardsPerRow={cardsPerRow}
+                        marginSpace={marginSpace}
+                        alignContent={alignContent}
                       />
                     )
                   }

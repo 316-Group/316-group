@@ -17143,6 +17143,9 @@ export interface ContentBlock {
                       | 'border-l'
                     )[]
                   | null;
+                cardsPerRow?: ('2' | '3' | '4') | null;
+                marginSpace?: ('my-0' | 'my-4' | 'my-8' | 'my-12' | 'my-16') | null;
+                alignContent?: ('left' | 'center') | null;
               };
               statusBanner?: {
                 icon?: string | null;
@@ -102938,6 +102941,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     cardBgColor?: T;
                     cardHoverBgColor?: T;
                     borderClasses?: T;
+                    cardsPerRow?: T;
+                    marginSpace?: T;
+                    alignContent?: T;
                   };
               statusBanner?:
                 | T

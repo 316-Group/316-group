@@ -694,6 +694,37 @@ const columnFields: Field[] = [
               defaultValue: ['border', 'border-gray-500'],
             },
           }),
+          {
+            name: 'cardsPerRow',
+            type: 'select',
+            defaultValue: '3',
+            options: [
+              { label: '2 Cards', value: '2' },
+              { label: '3 Cards', value: '3' },
+              { label: '4 Cards', value: '4' },
+            ],
+          },
+          {
+            name: 'marginSpace',
+            type: 'select',
+            defaultValue: 'my-0',
+            options: [
+              { label: 'None', value: 'my-0' },
+              { label: 'Small', value: 'my-4' },
+              { label: 'Medium', value: 'my-8' },
+              { label: 'Large', value: 'my-12' },
+              { label: 'Extra Large', value: 'my-16' },
+            ],
+          },
+          {
+            name: 'alignContent',
+            type: 'select',
+            defaultValue: 'left',
+            options: [
+              { label: 'Default', value: 'left' },
+              { label: 'Center', value: 'center' },
+            ],
+          },
         ],
         admin: {
           condition: (_, { contentType }) => contentType === 'styledCards',
