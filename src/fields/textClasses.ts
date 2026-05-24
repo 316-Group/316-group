@@ -22,7 +22,8 @@ export const textClasses: textClassesType = ({ condition = () => true, overrides
       { label: 'Color - Transparent', value: 'text-transparent' },
       { label: 'Color - Black', value: 'text-black' },
       { label: 'Color - White', value: 'text-white' },
-
+      { label: 'Color - Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
+      { label: 'Color - Custom Blue (#0256FF)', value: 'text-blue-custom' },
       // Slate
       { label: 'Color - Slate 50', value: 'text-slate-50' },
       { label: 'Color - Slate 100', value: 'text-slate-100' },

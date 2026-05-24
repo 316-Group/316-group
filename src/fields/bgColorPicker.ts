@@ -11,6 +11,8 @@ export const bgColorPickerLight: Field = {
   type: 'select',
   label: 'Background Color',
   options: [
+    { label: 'Custom Blue (#0256FF)', value: 'bg-blue-custom' },
+    { label: 'Neon Cyan (#10EBFF)', value: 'bg-cyan-neon' },
     { label: 'Slate 50', value: 'bg-slate-50' },
     { label: 'Slate 100', value: 'bg-slate-100' },
     { label: 'Gray 50', value: 'bg-gray-50' },
@@ -68,6 +70,8 @@ export const bgColorPickerAll: bgColorType = ({ condition = () => true, override
       { label: 'Transparent', value: 'bg-transparent' },
       { label: 'Black', value: 'bg-black' },
       { label: 'White', value: 'bg-white' },
+      { label: 'Custom Blue (#0256FF)', value: 'bg-blue-custom' },
+      { label: 'Neon Cyan (#10EBFF)', value: 'bg-cyan-neon' },
       { label: 'Slate 50', value: 'bg-slate-50' },
       { label: 'Slate 100', value: 'bg-slate-100' },
       { label: 'Slate 200', value: 'bg-slate-200' },

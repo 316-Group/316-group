@@ -15,6 +15,8 @@ export const colorPickerAll: colorType = ({ condition = () => true, overrides = 
       { label: 'Transparent', value: 'transparent' },
       { label: 'Black', value: 'black' },
       { label: 'White', value: 'white' },
+      { label: 'Neon Cyan (#10EBFF)', value: 'cyan-neon' },
+      { label: 'Custom Blue (#0256FF)', value: 'blue-custom' },
       { label: 'Slate 50', value: 'slate-50' },
       { label: 'Slate 100', value: 'slate-100' },
       { label: 'Slate 200', value: 'slate-200' },

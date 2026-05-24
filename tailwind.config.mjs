@@ -63,6 +63,8 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        'cyan-neon': '#10EBFF',
+        'blue-custom': '#0256FF',
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',

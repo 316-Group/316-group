@@ -19,6 +19,8 @@ export const textColorPickerAll: textColorType = ({
       { label: 'Transparent', value: 'text-transparent' },
       { label: 'Black', value: 'text-black' },
       { label: 'White', value: 'text-white' },
+      { label: 'Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
+      { label: 'Custom Blue (#0256FF)', value: 'text-blue-custom' },
       { label: 'Slate 50', value: 'text-slate-50' },
       { label: 'Slate 100', value: 'text-slate-100' },
       { label: 'Slate 200', value: 'text-slate-200' },
