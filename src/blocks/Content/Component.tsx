@@ -18,6 +18,7 @@ import { paddingGenerator } from '@/utilities/paddingGenerator'
 import { AccordionClient } from './AccordionClient'
 import { CaseStudySliderClient } from './CaseStudySliderClient'
 import { getBestContrastTextColor } from '@/utilities/getBestContrastTextColor'
+import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -576,6 +577,16 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <CaseStudySliderClient
                         key={index}
                         caseStudySlider={content.caseStudySlider}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'imageTextSplit' && content.imageTextSplit) {
+                    return (
+                      <ImageTextSplitBlock
+                        key={index}
+                        blockType="imageTextSplit"
+                        {...content.imageTextSplit}
                       />
                     )
                   }
