@@ -94,7 +94,6 @@ const columnFields: Field[] = [
           { label: 'Card with List', value: 'cardWithList' },
           { label: 'Auto Scroll Slider', value: 'autoScrollSlider' },
           { label: 'Styled Cards', value: 'styledCards' },
-          { label: 'Styled Cards', value: 'styledCards' },
           { label: 'Swiper Images Slider', value: 'swiperSlider' },
           { label: 'Status Banner', value: 'statusBanner' },
           { label: 'Spacer', value: 'spacer' },
