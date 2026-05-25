@@ -1154,9 +1154,28 @@ const columnFields: Field[] = [
       {
         name: 'customButton',
         type: 'group',
+        validate: (value, { siblingData }) => {
+          const sibling = siblingData as Record<string, any>
+          if (sibling?.contentType !== 'customButton') {
+            return true
+          }
+          const val = value as Record<string, any>
+          const linkVal = val?.link
+          if (!linkVal?.label) {
+            return 'Button label is required'
+          }
+          if (linkVal?.type === 'custom' && !linkVal?.url) {
+            return 'Custom URL is required'
+          }
+          if (linkVal?.type === 'reference' && !linkVal?.reference) {
+            return 'Document reference is required'
+          }
+          return true
+        },
         fields: [
           link({
             appearances: false,
+            required: false,
           }),
           {
             name: 'paddingX',
@@ -1243,9 +1262,36 @@ const columnFields: Field[] = [
       {
         name: 'flexButton',
         type: 'group',
+        validate: (value, { siblingData }) => {
+          const sibling = siblingData as Record<string, any>
+          if (sibling?.contentType !== 'flexButton') {
+            return true
+          }
+          const val = value as Record<string, any>
+          const linkVal = val?.link
+          if (!linkVal?.label) {
+            return 'Button label is required'
+          }
+          if (linkVal?.type === 'custom' && !linkVal?.url) {
+            return 'Custom URL is required'
+          }
+          if (linkVal?.type === 'reference' && !linkVal?.reference) {
+            return 'Document reference is required'
+          }
+
+          const nested = val?.nestedButton
+          if (!nested?.text) {
+            return 'Badge text is required'
+          }
+          if (!nested?.image) {
+            return 'Badge image/icon is required'
+          }
+          return true
+        },
         fields: [
           link({
             appearances: false,
+            required: false,
           }),
           {
             name: 'paddingX',
@@ -1322,12 +1368,10 @@ const columnFields: Field[] = [
                 name: 'image',
                 type: 'upload',
                 relationTo: 'media',
-                required: true,
               },
               {
                 name: 'text',
                 type: 'text',
-                required: true,
               },
               bgColorPickerAll({
                 overrides: {

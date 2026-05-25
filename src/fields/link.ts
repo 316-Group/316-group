@@ -32,6 +32,7 @@ type LinkType = (options?: {
   disableLabel?: boolean
   overrides?: Record<string, unknown>
   condition?: (_, siblingData) => boolean
+  required?: boolean
 }) => Field
 
 export const link: LinkType = ({
@@ -39,6 +40,7 @@ export const link: LinkType = ({
   disableLabel = false,
   overrides = {},
   condition = () => true,
+  required = true,
 } = {}) => {
   const linkResult: Field = {
     name: 'link',
@@ -96,7 +98,7 @@ export const link: LinkType = ({
       label: 'Document to link to',
       maxDepth: 1,
       relationTo: ['pages', 'posts', 'case-studies', 'ebooks-and-guides', 'brands'],
-      required: true,
+      required: required,
     },
     {
       name: 'url',
@@ -105,7 +107,7 @@ export const link: LinkType = ({
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
       label: 'Custom URL',
-      required: true,
+      required: required,
     },
   ]
 
@@ -129,7 +131,7 @@ export const link: LinkType = ({
             width: '50%',
           },
           label: 'Label',
-          required: true,
+          required: required,
         },
       ],
     })

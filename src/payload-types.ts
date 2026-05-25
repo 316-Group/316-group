@@ -27939,7 +27939,7 @@ export interface ContentBlock {
                         value: string | Brand;
                       } | null);
                   url?: string | null;
-                  label: string;
+                  label?: string | null;
                 };
                 paddingX?: ('px-4' | 'px-6' | 'px-8' | 'px-12') | null;
                 paddingY?: ('py-2' | 'py-3' | 'py-4' | 'py-6') | null;
@@ -28734,7 +28734,7 @@ export interface ContentBlock {
                         value: string | Brand;
                       } | null);
                   url?: string | null;
-                  label: string;
+                  label?: string | null;
                 };
                 paddingX?: ('px-4' | 'px-6' | 'px-8' | 'px-12') | null;
                 paddingY?: ('py-2' | 'py-3' | 'py-4' | 'py-6') | null;
@@ -29501,9 +29501,9 @@ export interface ContentBlock {
                       | 'rose-950'
                     )
                   | null;
-                nestedButton: {
-                  image: string | Media;
-                  text: string;
+                nestedButton?: {
+                  image?: (string | null) | Media;
+                  text?: string | null;
                   bgColor?:
                     | (
                         | 'bg-inherit'
