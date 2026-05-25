@@ -593,13 +593,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
                   if (contentType === 'divider' && content.divider) {
                     const { color, thickness, width, alignment } = content.divider
+                    // Map legacy 'center' value (old DB data) to 'mx-auto'
+                    const resolvedAlignment = alignment === 'center' ? 'mx-auto' : alignment
                     return (
                       <div className="py-4 w-full" key={index}>
                         <hr
                           className={cn(
                             thickness,
                             width,
-                            alignment,
+                            resolvedAlignment,
                             color ? `border-${color}` : 'border-slate-300',
                           )}
                         />

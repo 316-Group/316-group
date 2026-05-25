@@ -27911,7 +27911,7 @@ export interface ContentBlock {
                   | null;
                 thickness?: ('border-t' | 'border-t-2' | 'border-t-4' | 'border-t-8') | null;
                 width?: ('w-full' | 'w-3/4' | 'w-1/2' | 'w-1/4') | null;
-                alignment?: ('mr-auto ml-0' | 'mx-auto' | 'ml-auto mr-0') | null;
+                alignment?: ('mr-auto ml-0' | 'mx-auto' | 'ml-auto mr-0' | 'center') | null;
               };
               customJobAction?: {
                 link?: {
