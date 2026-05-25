@@ -607,6 +607,107 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     )
                   }
 
+                  if (contentType === 'customButton' && content.customButton) {
+                    const {
+                      link,
+                      paddingX,
+                      paddingY,
+                      rounded,
+                      borderWidth,
+                      borderColor,
+                      bgColor,
+                      textColor,
+                      alignment,
+                    } = content.customButton
+                    return (
+                      <div
+                        className={cn(
+                          'w-full flex py-2',
+                          alignment === 'center' && 'justify-center',
+                          alignment === 'right' && 'justify-end',
+                          alignment === 'left' && 'justify-start',
+                        )}
+                        key={index}
+                      >
+                        <CMSLink
+                          {...link}
+                          className={cn(
+                            'inline-flex items-center justify-center transition-all duration-300',
+                            paddingX,
+                            paddingY,
+                            rounded,
+                            borderWidth,
+                            borderColor && `border-${borderColor}`,
+                            bgColor,
+                            textColor && `text-${textColor}`,
+                          )}
+                        />
+                      </div>
+                    )
+                  }
+
+                  if (contentType === 'flexButton' && content.flexButton) {
+                    const {
+                      link,
+                      paddingX,
+                      paddingY,
+                      rounded,
+                      borderWidth,
+                      borderColor,
+                      bgColor,
+                      textColor,
+                      nestedButton,
+                    } = content.flexButton
+
+                    const nestedBg = nestedButton?.bgColor || 'bg-slate-100'
+                    const nestedText = nestedButton?.textColor ? `text-${nestedButton.textColor}` : 'text-slate-900'
+                    const nestedRounded = nestedButton?.rounded || 'rounded-full'
+
+                    return (
+                      <div className="py-2 w-full" key={index}>
+                        <CMSLink
+                          {...link}
+                          className={cn(
+                            'flex items-center justify-between transition-all duration-300 w-full text-left',
+                            paddingX,
+                            paddingY,
+                            rounded,
+                            borderWidth,
+                            borderColor && `border-${borderColor}`,
+                            bgColor,
+                            textColor && `text-${textColor}`,
+                          )}
+                        >
+                          <span className="font-semibold">{link?.label}</span>
+                          
+                          {nestedButton && (
+                            <div
+                              className={cn(
+                                'flex items-center gap-2 py-1.5 px-4 transition-all duration-300',
+                                nestedBg,
+                                nestedText,
+                                nestedRounded,
+                              )}
+                            >
+                              {nestedButton.image && typeof nestedButton.image === 'object' && (
+                                <div className="relative w-5 h-5 overflow-hidden flex-shrink-0">
+                                  <Media
+                                    resource={nestedButton.image}
+                                    imgClassName="object-contain w-full h-full"
+                                    fill
+                                  />
+                                </div>
+                              )}
+                              <span className="text-sm font-medium whitespace-nowrap">
+                                {nestedButton.text}
+                              </span>
+                            </div>
+                          )}
+                        </CMSLink>
+                      </div>
+                    )
+                  }
+
                   return (
                     Array.isArray(links) &&
                     links.length > 0 && (

@@ -27,6 +27,7 @@ import { HoverSliderBlock } from '../HoverSlider/config'
 import { colorPickerAll } from '@/fields/colorPicker'
 import { icon } from '@/fields/icon'
 import { gradientColorPicker } from '@/fields/gradientColorPicker'
+import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
   {
@@ -102,6 +103,8 @@ const columnFields: Field[] = [
           { label: 'Case Study Slider', value: 'caseStudySlider' },
           { label: 'Image Text Split', value: 'imageTextSplit' },
           { label: 'Divider / Line', value: 'divider' },
+          { label: 'Custom Button', value: 'customButton' },
+          { label: 'Flex Button with Badge', value: 'flexButton' },
         ],
       },
       {
@@ -1147,6 +1150,218 @@ const columnFields: Field[] = [
         ],
         admin: {
           condition: (_, { contentType }) => contentType === 'divider',
+        },
+      },
+      {
+        name: 'customButton',
+        type: 'group',
+        fields: [
+          link({
+            appearances: false,
+          }),
+          {
+            name: 'paddingX',
+            type: 'select',
+            defaultValue: 'px-6',
+            options: [
+              { label: 'Small (px-4)', value: 'px-4' },
+              { label: 'Medium (px-6)', value: 'px-6' },
+              { label: 'Large (px-8)', value: 'px-8' },
+              { label: 'Extra Large (px-12)', value: 'px-12' },
+            ],
+          },
+          {
+            name: 'paddingY',
+            type: 'select',
+            defaultValue: 'py-3',
+            options: [
+              { label: 'Small (py-2)', value: 'py-2' },
+              { label: 'Medium (py-3)', value: 'py-3' },
+              { label: 'Large (py-4)', value: 'py-4' },
+              { label: 'Extra Large (py-6)', value: 'py-6' },
+            ],
+          },
+          {
+            name: 'rounded',
+            type: 'select',
+            defaultValue: 'rounded-xl',
+            options: [
+              { label: 'None', value: 'rounded-none' },
+              { label: 'Small', value: 'rounded-sm' },
+              { label: 'Medium', value: 'rounded-md' },
+              { label: 'Large', value: 'rounded-lg' },
+              { label: 'Extra Large', value: 'rounded-xl' },
+              { label: 'Full Rounded', value: 'rounded-full' },
+            ],
+          },
+          {
+            name: 'borderWidth',
+            type: 'select',
+            defaultValue: 'border',
+            options: [
+              { label: 'None', value: 'border-0' },
+              { label: 'Thin (1px)', value: 'border' },
+              { label: 'Medium (2px)', value: 'border-2' },
+              { label: 'Thick (4px)', value: 'border-4' },
+            ],
+          },
+          colorPickerAll({
+            overrides: {
+              name: 'borderColor',
+              label: 'Border Color',
+              defaultValue: 'slate-300',
+            },
+          }),
+          bgColorPickerAll({
+            overrides: {
+              name: 'bgColor',
+              label: 'Background Color',
+              defaultValue: 'bg-transparent',
+            },
+          }),
+          colorPickerAll({
+            overrides: {
+              name: 'textColor',
+              label: 'Text Color',
+              defaultValue: 'black',
+            },
+          }),
+          {
+            name: 'alignment',
+            type: 'select',
+            defaultValue: 'left',
+            options: [
+              { label: 'Left', value: 'left' },
+              { label: 'Center', value: 'center' },
+              { label: 'Right', value: 'right' },
+            ],
+          },
+        ],
+        admin: {
+          condition: (_, { contentType }) => contentType === 'customButton',
+        },
+      },
+      {
+        name: 'flexButton',
+        type: 'group',
+        fields: [
+          link({
+            appearances: false,
+          }),
+          {
+            name: 'paddingX',
+            type: 'select',
+            defaultValue: 'px-6',
+            options: [
+              { label: 'Small (px-4)', value: 'px-4' },
+              { label: 'Medium (px-6)', value: 'px-6' },
+              { label: 'Large (px-8)', value: 'px-8' },
+              { label: 'Extra Large (px-12)', value: 'px-12' },
+            ],
+          },
+          {
+            name: 'paddingY',
+            type: 'select',
+            defaultValue: 'py-3',
+            options: [
+              { label: 'Small (py-2)', value: 'py-2' },
+              { label: 'Medium (py-3)', value: 'py-3' },
+              { label: 'Large (py-4)', value: 'py-4' },
+              { label: 'Extra Large (py-6)', value: 'py-6' },
+            ],
+          },
+          {
+            name: 'rounded',
+            type: 'select',
+            defaultValue: 'rounded-xl',
+            options: [
+              { label: 'None', value: 'rounded-none' },
+              { label: 'Small', value: 'rounded-sm' },
+              { label: 'Medium', value: 'rounded-md' },
+              { label: 'Large', value: 'rounded-lg' },
+              { label: 'Extra Large', value: 'rounded-xl' },
+              { label: 'Full Rounded', value: 'rounded-full' },
+            ],
+          },
+          {
+            name: 'borderWidth',
+            type: 'select',
+            defaultValue: 'border',
+            options: [
+              { label: 'None', value: 'border-0' },
+              { label: 'Thin (1px)', value: 'border' },
+              { label: 'Medium (2px)', value: 'border-2' },
+              { label: 'Thick (4px)', value: 'border-4' },
+            ],
+          },
+          colorPickerAll({
+            overrides: {
+              name: 'borderColor',
+              label: 'Border Color',
+              defaultValue: 'slate-300',
+            },
+          }),
+          bgColorPickerAll({
+            overrides: {
+              name: 'bgColor',
+              label: 'Background Color',
+              defaultValue: 'bg-transparent',
+            },
+          }),
+          colorPickerAll({
+            overrides: {
+              name: 'textColor',
+              label: 'Text Color',
+              defaultValue: 'black',
+            },
+          }),
+          {
+            name: 'nestedButton',
+            type: 'group',
+            fields: [
+              {
+                name: 'image',
+                type: 'upload',
+                relationTo: 'media',
+                required: true,
+              },
+              {
+                name: 'text',
+                type: 'text',
+                required: true,
+              },
+              bgColorPickerAll({
+                overrides: {
+                  name: 'bgColor',
+                  label: 'Badge Background Color',
+                  defaultValue: 'bg-slate-100',
+                },
+              }),
+              colorPickerAll({
+                overrides: {
+                  name: 'textColor',
+                  label: 'Badge Text Color',
+                  defaultValue: 'slate-900',
+                },
+              }),
+              {
+                name: 'rounded',
+                type: 'select',
+                defaultValue: 'rounded-full',
+                options: [
+                  { label: 'None', value: 'rounded-none' },
+                  { label: 'Small', value: 'rounded-sm' },
+                  { label: 'Medium', value: 'rounded-md' },
+                  { label: 'Large', value: 'rounded-lg' },
+                  { label: 'Extra Large', value: 'rounded-xl' },
+                  { label: 'Full Rounded', value: 'rounded-full' },
+                ],
+              },
+            ],
+          },
+        ],
+        admin: {
+          condition: (_, { contentType }) => contentType === 'flexButton',
         },
       },
     ],
