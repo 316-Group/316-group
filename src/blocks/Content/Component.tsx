@@ -591,6 +591,22 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     )
                   }
 
+                  if (contentType === 'divider' && content.divider) {
+                    const { color, thickness, width, alignment } = content.divider
+                    return (
+                      <div className="py-4 w-full" key={index}>
+                        <hr
+                          className={cn(
+                            thickness,
+                            width,
+                            alignment,
+                            color ? `border-${color}` : 'border-slate-300',
+                          )}
+                        />
+                      </div>
+                    )
+                  }
+
                   return (
                     Array.isArray(links) &&
                     links.length > 0 && (

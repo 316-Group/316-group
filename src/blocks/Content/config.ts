@@ -101,6 +101,7 @@ const columnFields: Field[] = [
           { label: 'Accordion', value: 'accordion' },
           { label: 'Case Study Slider', value: 'caseStudySlider' },
           { label: 'Image Text Split', value: 'imageTextSplit' },
+          { label: 'Divider / Line', value: 'divider' },
         ],
       },
       {
@@ -1098,6 +1099,54 @@ const columnFields: Field[] = [
         ],
         admin: {
           condition: (_, { contentType }) => contentType === 'imageTextSplit',
+        },
+      },
+      {
+        name: 'divider',
+        type: 'group',
+        fields: [
+          colorPickerAll({
+            overrides: {
+              name: 'color',
+              label: 'Line Color',
+              defaultValue: 'slate-300',
+            },
+          }),
+          {
+            name: 'thickness',
+            type: 'select',
+            defaultValue: 'border-t',
+            options: [
+              { label: 'Thin (1px)', value: 'border-t' },
+              { label: 'Medium (2px)', value: 'border-t-2' },
+              { label: 'Thick (4px)', value: 'border-t-4' },
+              { label: 'Extra Thick (8px)', value: 'border-t-8' },
+            ],
+          },
+          {
+            name: 'width',
+            type: 'select',
+            defaultValue: 'w-full',
+            options: [
+              { label: 'Full Width', value: 'w-full' },
+              { label: 'Three Quarters (75%)', value: 'w-3/4' },
+              { label: 'Half (50%)', value: 'w-1/2' },
+              { label: 'Quarter (25%)', value: 'w-1/4' },
+            ],
+          },
+          {
+            name: 'alignment',
+            type: 'select',
+            defaultValue: 'center',
+            options: [
+              { label: 'Left', value: 'mr-auto ml-0' },
+              { label: 'Center', value: 'mx-auto' },
+              { label: 'Right', value: 'ml-auto mr-0' },
+            ],
+          },
+        ],
+        admin: {
+          condition: (_, { contentType }) => contentType === 'divider',
         },
       },
     ],

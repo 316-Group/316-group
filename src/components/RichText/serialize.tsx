@@ -130,6 +130,9 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             case 'linebreak': {
               return <br className="col-start-2" key={index} />
             }
+            case 'horizontalrule': {
+              return <hr className="col-start-2 my-6 border-t border-slate-300 w-full" key={index} />
+            }
             case 'paragraph': {
               const alignmentClass =
                 node.format === 'center'
