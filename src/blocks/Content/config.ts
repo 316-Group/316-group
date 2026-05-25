@@ -1147,13 +1147,11 @@ const columnFields: Field[] = [
             name: 'alignment',
             type: 'select',
             defaultValue: 'mx-auto',
-            // custom validate to accept legacy 'center' value from old DB data
-            validate: () => true,
             options: [
               { label: 'Left', value: 'mr-auto ml-0' },
               { label: 'Center', value: 'mx-auto' },
               { label: 'Right', value: 'ml-auto mr-0' },
-              // Legacy value kept to prevent validation errors on existing documents
+              // Legacy value: existing DB documents saved with old 'center' default
               { label: 'Center (Legacy)', value: 'center' },
             ],
           },
