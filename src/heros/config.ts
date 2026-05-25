@@ -266,6 +266,16 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'heroGraphicPlain',
+      label: 'Use Plain Hero Graphic (No border radius or shadow)',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        condition: (_, { type } = {}) =>
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero'].includes(type),
+      },
+    },
+    {
       name: 'includeStoreLinks',
       type: 'checkbox',
       admin: {

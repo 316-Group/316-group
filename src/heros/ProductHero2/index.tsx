@@ -14,6 +14,7 @@ export const ProductHero2: React.FC<Page['hero']> = ({
   media,
   includeStoreLinks,
   heroGraphic,
+  heroGraphicPlain,
   title,
   titleClasses,
   subTitle,
@@ -152,7 +153,7 @@ export const ProductHero2: React.FC<Page['hero']> = ({
                   priority={false}
                   loading="lazy"
                   resource={heroGraphic}
-                  className="rounded-t-[3em]"
+                  className={cn(!heroGraphicPlain && "rounded-t-[3em]")}
                 />
               </div>
             )}

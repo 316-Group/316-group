@@ -4204,6 +4204,7 @@ export interface Page {
         )
       | null;
     heroGraphic?: (string | null) | Media;
+    heroGraphicPlain?: boolean | null;
     includeStoreLinks?: boolean | null;
     padTop?: boolean | null;
     overlayText?: string | null;
@@ -108294,6 +108295,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaMobile?: T;
         bgColor?: T;
         heroGraphic?: T;
+        heroGraphicPlain?: T;
         includeStoreLinks?: T;
         padTop?: T;
         overlayText?: T;
