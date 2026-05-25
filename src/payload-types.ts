@@ -28706,6 +28706,12 @@ export interface ContentBlock {
                       | 'rose-950'
                     )
                   | null;
+                fontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                fontStyle?: ('not-italic' | 'italic') | null;
+                textSize?: ('text-xs' | 'text-sm' | 'text-base' | 'text-lg' | 'text-xl' | 'text-2xl') | null;
+                textTransform?: ('normal-case' | 'uppercase' | 'lowercase' | 'capitalize') | null;
                 nestedBadge?: {
                   image?: (string | null) | Media;
                   text?: string | null;
@@ -108791,6 +108797,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     borderColor?: T;
                     bgColor?: T;
                     textColor?: T;
+                    fontWeight?: T;
+                    fontStyle?: T;
+                    textSize?: T;
+                    textTransform?: T;
                     nestedBadge?:
                       | T
                       | {

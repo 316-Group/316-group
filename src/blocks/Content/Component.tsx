@@ -620,16 +620,26 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       bgColor,
                       textColor,
                       nestedBadge,
+                      fontWeight,
+                      fontStyle,
+                      textSize,
+                      textTransform,
                     } = content.customJobAction
 
                     const nestedBg = nestedBadge?.bgColor || 'bg-slate-100'
                     const nestedText = nestedBadge?.textColor ? `text-${nestedBadge.textColor}` : 'text-slate-900'
                     const nestedRounded = nestedBadge?.rounded || 'rounded-full'
 
+                    const resolvedFontWeight = fontWeight || 'font-semibold'
+                    const resolvedFontStyle = fontStyle || 'not-italic'
+                    const resolvedTextSize = textSize || 'text-base'
+                    const resolvedTextTransform = textTransform || 'normal-case'
+
                     return (
                       <div className="py-2 w-full" key={index}>
                         <CMSLink
                           {...link}
+                          label={null}
                           className={cn(
                             'flex items-center justify-between transition-all duration-300 w-full text-left',
                             paddingX,
@@ -641,7 +651,16 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                             textColor && `text-${textColor}`,
                           )}
                         >
-                          <span className="font-semibold">{link?.label}</span>
+                          <span
+                            className={cn(
+                              resolvedFontWeight,
+                              resolvedFontStyle,
+                              resolvedTextSize,
+                              resolvedTextTransform,
+                            )}
+                          >
+                            {link?.label}
+                          </span>
                           
                           {nestedBadge && (
                             <div

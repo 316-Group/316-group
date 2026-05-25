@@ -1262,6 +1262,52 @@ const columnFields: Field[] = [
             },
           }),
           {
+            name: 'fontWeight',
+            type: 'select',
+            defaultValue: 'font-semibold',
+            options: [
+              { label: 'Light', value: 'font-light' },
+              { label: 'Normal', value: 'font-normal' },
+              { label: 'Medium', value: 'font-medium' },
+              { label: 'Semi-bold', value: 'font-semibold' },
+              { label: 'Bold', value: 'font-bold' },
+              { label: 'Extra Bold', value: 'font-extrabold' },
+            ],
+          },
+          {
+            name: 'fontStyle',
+            type: 'select',
+            defaultValue: 'not-italic',
+            options: [
+              { label: 'Normal', value: 'not-italic' },
+              { label: 'Italic', value: 'italic' },
+            ],
+          },
+          {
+            name: 'textSize',
+            type: 'select',
+            defaultValue: 'text-base',
+            options: [
+              { label: 'Extra Small', value: 'text-xs' },
+              { label: 'Small', value: 'text-sm' },
+              { label: 'Medium/Base', value: 'text-base' },
+              { label: 'Large', value: 'text-lg' },
+              { label: 'Extra Large', value: 'text-xl' },
+              { label: 'Double Extra Large', value: 'text-2xl' },
+            ],
+          },
+          {
+            name: 'textTransform',
+            type: 'select',
+            defaultValue: 'normal-case',
+            options: [
+              { label: 'Normal', value: 'normal-case' },
+              { label: 'Uppercase', value: 'uppercase' },
+              { label: 'Lowercase', value: 'lowercase' },
+              { label: 'Capitalize', value: 'capitalize' },
+            ],
+          },
+          {
             name: 'nestedBadge',
             type: 'group',
             fields: [
