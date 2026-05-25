@@ -669,6 +669,45 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     )
                   }
 
+                  if (contentType === 'customButton' && content.customButton) {
+                    const {
+                      link,
+                      paddingX,
+                      paddingY,
+                      rounded,
+                      borderWidth,
+                      borderColor,
+                      bgColor,
+                      textColor,
+                      alignment,
+                    } = content.customButton
+                    return (
+                      <div
+                        className={cn(
+                          'w-full flex py-2',
+                          alignment === 'center' && 'justify-center',
+                          alignment === 'right' && 'justify-end',
+                          alignment === 'left' && 'justify-start',
+                        )}
+                        key={index}
+                      >
+                        <CMSLink
+                          {...link}
+                          className={cn(
+                            'inline-flex items-center justify-center transition-all duration-300',
+                            paddingX,
+                            paddingY,
+                            rounded,
+                            borderWidth,
+                            borderColor && `border-${borderColor}`,
+                            bgColor,
+                            textColor && `text-${textColor}`,
+                          )}
+                        />
+                      </div>
+                    )
+                  }
+
                   return (
                     Array.isArray(links) &&
                     links.length > 0 && (

@@ -103,6 +103,7 @@ const columnFields: Field[] = [
           { label: 'Image Text Split', value: 'imageTextSplit' },
           { label: 'Divider / Line', value: 'divider' },
           { label: 'Custom Job Action', value: 'customJobAction' },
+          { label: 'Custom Button', value: 'customButton' },
         ],
       },
       {
@@ -1105,6 +1106,13 @@ const columnFields: Field[] = [
       {
         name: 'divider',
         type: 'group',
+        validate: (value, { siblingData }) => {
+          const sibling = siblingData as Record<string, any>
+          if (sibling?.contentType !== 'divider') {
+            return true
+          }
+          return true
+        },
         fields: [
           colorPickerAll({
             overrides: {
@@ -1138,7 +1146,7 @@ const columnFields: Field[] = [
           {
             name: 'alignment',
             type: 'select',
-            defaultValue: 'center',
+            defaultValue: 'mx-auto',
             options: [
               { label: 'Left', value: 'mr-auto ml-0' },
               { label: 'Center', value: 'mx-auto' },
@@ -1296,6 +1304,114 @@ const columnFields: Field[] = [
         ],
         admin: {
           condition: (_, { contentType }) => contentType === 'customJobAction',
+        },
+      },
+      {
+        name: 'customButton',
+        type: 'group',
+        validate: (value, { siblingData }) => {
+          const sibling = siblingData as Record<string, any>
+          if (sibling?.contentType !== 'customButton') {
+            return true
+          }
+          const val = value as Record<string, any>
+          const linkVal = val?.link
+          if (!linkVal?.label) {
+            return 'Button label/text is required'
+          }
+          if (linkVal?.type === 'custom' && !linkVal?.url) {
+            return 'Custom URL is required'
+          }
+          if (linkVal?.type === 'reference' && !linkVal?.reference) {
+            return 'Document reference is required'
+          }
+          return true
+        },
+        fields: [
+          link({
+            appearances: false,
+            required: false,
+          }),
+          {
+            name: 'paddingX',
+            type: 'select',
+            defaultValue: 'px-6',
+            options: [
+              { label: 'Small (px-4)', value: 'px-4' },
+              { label: 'Medium (px-6)', value: 'px-6' },
+              { label: 'Large (px-8)', value: 'px-8' },
+              { label: 'Extra Large (px-12)', value: 'px-12' },
+            ],
+          },
+          {
+            name: 'paddingY',
+            type: 'select',
+            defaultValue: 'py-3',
+            options: [
+              { label: 'Small (py-2)', value: 'py-2' },
+              { label: 'Medium (py-3)', value: 'py-3' },
+              { label: 'Large (py-4)', value: 'py-4' },
+              { label: 'Extra Large (py-6)', value: 'py-6' },
+            ],
+          },
+          {
+            name: 'rounded',
+            type: 'select',
+            defaultValue: 'rounded-xl',
+            options: [
+              { label: 'None', value: 'rounded-none' },
+              { label: 'Small', value: 'rounded-sm' },
+              { label: 'Medium', value: 'rounded-md' },
+              { label: 'Large', value: 'rounded-lg' },
+              { label: 'Extra Large', value: 'rounded-xl' },
+              { label: 'Full Rounded', value: 'rounded-full' },
+            ],
+          },
+          {
+            name: 'borderWidth',
+            type: 'select',
+            defaultValue: 'border',
+            options: [
+              { label: 'None', value: 'border-0' },
+              { label: 'Thin (1px)', value: 'border' },
+              { label: 'Medium (2px)', value: 'border-2' },
+              { label: 'Thick (4px)', value: 'border-4' },
+            ],
+          },
+          colorPickerAll({
+            overrides: {
+              name: 'borderColor',
+              label: 'Border Color',
+              defaultValue: 'slate-300',
+            },
+          }),
+          bgColorPickerAll({
+            overrides: {
+              name: 'bgColor',
+              label: 'Background Color',
+              defaultValue: 'bg-transparent',
+            },
+          }),
+          colorPickerAll({
+            overrides: {
+              name: 'textColor',
+              label: 'Text Color',
+              defaultValue: 'black',
+            },
+          }),
+          {
+            name: 'alignment',
+            type: 'select',
+            defaultValue: 'left',
+            options: [
+              { label: 'Left', value: 'left' },
+              { label: 'Center', value: 'center' },
+              { label: 'Right', value: 'right' },
+            ],
+          },
+        ],
+        admin: {
+          condition: (_, { contentType }) => contentType === 'customButton',
         },
       },
     ],
