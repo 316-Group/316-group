@@ -7424,6 +7424,10 @@ export interface ContentBlock {
                * Enter a valid CSS width value (e.g. 500px, 50%, 20rem)
                */
               mediaCustomWidth?: string | null;
+              /**
+               * Optional: Override the width on mobile screens (max 768px). Enter a valid CSS value (e.g. 100%, 300px, 80vw). Leave blank to use the default width.
+               */
+              mediaMobileCustomWidth?: string | null;
               links?:
                 | {
                     link?: {
@@ -17152,6 +17156,21 @@ export interface ContentBlock {
                 marginSpace?: ('my-0' | 'my-4' | 'my-8' | 'my-12' | 'my-16') | null;
                 alignContent?: ('left' | 'center') | null;
                 alignCardContent?: ('left' | 'center') | null;
+                cardRounded?:
+                  | (
+                      | 'rounded-none'
+                      | 'rounded-sm'
+                      | 'rounded-md'
+                      | 'rounded-lg'
+                      | 'rounded-xl'
+                      | 'rounded-2xl'
+                      | 'rounded-full'
+                    )
+                  | null;
+                /**
+                 * Override description text alignment independently of the card content alignment.
+                 */
+                descriptionAlign?: ('inherit' | 'left' | 'center') | null;
               };
               statusBanner?: {
                 icon?: string | null;
@@ -108490,6 +108509,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
               media?: T;
               mediaWidth?: T;
               mediaCustomWidth?: T;
+              mediaMobileCustomWidth?: T;
               links?:
                 | T
                 | {
@@ -108622,6 +108642,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     marginSpace?: T;
                     alignContent?: T;
                     alignCardContent?: T;
+                    cardRounded?: T;
+                    descriptionAlign?: T;
                   };
               statusBanner?:
                 | T

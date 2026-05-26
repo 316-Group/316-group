@@ -26,6 +26,10 @@ interface StyledCardsProps {
   marginSpace?: string | null
   alignContent?: string | null
   alignCardContent?: string | null
+  /** Border radius applied to each card. Defaults to 'rounded-xl'. */
+  cardRounded?: string | null
+  /** Override description text alignment independently of alignCardContent. */
+  descriptionAlign?: string | null
 }
 
 export const StyledCards: React.FC<StyledCardsProps> = ({
@@ -42,9 +46,22 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
   marginSpace = 'my-0',
   alignContent = 'left',
   alignCardContent = 'left',
+  cardRounded = 'rounded-xl',
+  descriptionAlign = 'inherit',
 }) => {
   const isCentered = alignContent === 'center'
   const isCardCentered = alignCardContent === 'center'
+
+  // Resolve the description text alignment class.
+  // 'inherit' means follow the card's alignCardContent setting.
+  const resolvedDescAlign =
+    descriptionAlign === 'center'
+      ? 'text-center w-full'
+      : descriptionAlign === 'left'
+        ? 'text-left'
+        : isCardCentered
+          ? 'text-center w-full'
+          : ''
 
   return (
     <div
@@ -65,10 +82,13 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
         <div
           key={i}
           className={cn(
-            'rounded-xl p-6 transition-all duration-300 w-full',
+            'p-6 transition-all duration-300 w-full',
+            cardRounded,
             isCentered && cardsPerRow === '2' && 'md:w-[calc(50%-12px)]',
             isCentered && cardsPerRow === '3' && 'md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]',
-            isCentered && cardsPerRow === '4' && 'md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]',
+            isCentered &&
+              cardsPerRow === '4' &&
+              'md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]',
             cardBgColor,
             cardHoverBgColor && `hover:${cardHoverBgColor}`,
             shadowClasses,
@@ -93,9 +113,8 @@ export const StyledCards: React.FC<StyledCardsProps> = ({
               <h3 className={cn(titleClasses, isCardCentered && 'text-center w-full')}>
                 {card.title}
               </h3>
-              <p className={cn(descriptionClasses, isCardCentered && 'text-center w-full')}>
-                {card.description}
-              </p>
+              {/* Description uses its own alignment, independent of title/card alignment */}
+              <p className={cn(descriptionClasses, resolvedDescAlign)}>{card.description}</p>
             </div>
           </div>
         </div>

@@ -204,11 +204,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   } = content
 
                   if (contentType === 'media' && media && typeof media !== 'string') {
-                    const { mediaWidth, mediaCustomWidth } = content
+                    const { mediaWidth, mediaCustomWidth, mediaMobileCustomWidth } = content
                     let wrapperClasses = 'rounded-xl overflow-hidden'
                     let imgClasses = 'rounded-xl'
                     let fill = false
                     const wrapperStyle: React.CSSProperties = {}
+                    const mobileClass = mediaMobileCustomWidth
+                      ? `media-mobile-${index}`
+                      : undefined
 
                     if (mediaWidth === 'fill') {
                       wrapperClasses = cn(wrapperClasses, 'relative w-full h-full')
@@ -223,9 +226,18 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     }
 
                     return (
-                      <div className={wrapperClasses} style={wrapperStyle} key={index}>
-                        <Media resource={media} size="33vw" imgClassName={imgClasses} fill={fill} />
-                      </div>
+                      <>
+                        {mobileClass && (
+                          <style>{`@media (max-width: 768px) { .${mobileClass} { width: ${mediaMobileCustomWidth} !important; } }`}</style>
+                        )}
+                        <div
+                          className={cn(wrapperClasses, mobileClass)}
+                          style={wrapperStyle}
+                          key={index}
+                        >
+                          <Media resource={media} size="33vw" imgClassName={imgClasses} fill={fill} />
+                        </div>
+                      </>
                     )
                   }
                   if (contentType === 'cardInvert' && content.cardInvert) {
@@ -416,6 +428,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       marginSpace,
                       alignContent,
                       alignCardContent,
+                      cardRounded,
+                      descriptionAlign,
                     } = content.styledCards
                     return (
                       <StyledCards
@@ -433,6 +447,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         marginSpace={marginSpace}
                         alignContent={alignContent}
                         alignCardContent={alignCardContent}
+                        cardRounded={cardRounded}
+                        descriptionAlign={descriptionAlign}
                       />
                     )
                   }

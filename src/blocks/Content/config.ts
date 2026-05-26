@@ -428,6 +428,15 @@ const columnFields: Field[] = [
           description: 'Enter a valid CSS width value (e.g. 500px, 50%, 20rem)',
         },
       },
+      {
+        name: 'mediaMobileCustomWidth',
+        type: 'text',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'media',
+          description:
+            'Optional: Override the width on mobile screens (max 768px). Enter a valid CSS value (e.g. 100%, 300px, 80vw). Leave blank to use the default width.',
+        },
+      },
 
       linkGroup({
         overrides: {
@@ -736,6 +745,33 @@ const columnFields: Field[] = [
             defaultValue: 'left',
             options: [
               { label: 'Default (Left)', value: 'left' },
+              { label: 'Center', value: 'center' },
+            ],
+          },
+          {
+            name: 'cardRounded',
+            type: 'select',
+            defaultValue: 'rounded-xl',
+            options: [
+              { label: 'None', value: 'rounded-none' },
+              { label: 'Small', value: 'rounded-sm' },
+              { label: 'Medium', value: 'rounded-md' },
+              { label: 'Large', value: 'rounded-lg' },
+              { label: 'Extra Large', value: 'rounded-xl' },
+              { label: '2XL', value: 'rounded-2xl' },
+              { label: 'Full', value: 'rounded-full' },
+            ],
+          },
+          {
+            name: 'descriptionAlign',
+            type: 'select',
+            defaultValue: 'inherit',
+            admin: {
+              description: 'Override description text alignment independently of the card content alignment.',
+            },
+            options: [
+              { label: 'Follow Card Alignment', value: 'inherit' },
+              { label: 'Left', value: 'left' },
               { label: 'Center', value: 'center' },
             ],
           },
