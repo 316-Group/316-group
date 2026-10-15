@@ -43,6 +43,10 @@ export const hero: Field = {
           value: 'specialHero',
         },
         {
+          label: 'Group Home Hero V2',
+          value: 'groupHeroV2',
+        },
+        {
           label: 'Product Page Hero 1',
           value: 'productHero',
         },
@@ -156,7 +160,7 @@ export const hero: Field = {
       }),
       admin: {
         condition: (_, { type } = {}) =>
-          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(
+          ['productHero', 'productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero', 'groupHeroV2'].includes(
             type,
           ),
       },
@@ -186,11 +190,18 @@ export const hero: Field = {
       }),
       label: false,
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'lowImpact','specialHero',
-              'productHero',
-              'productHero2',
-              'productHeroAbout',
-              'servicesHero',].includes(type),
+        condition: (_, { type } = {}) =>
+          [
+            'highImpact',
+            'mediumImpact',
+            'lowImpact',
+            'specialHero',
+            'productHero',
+            'productHero2',
+            'productHeroAbout',
+            'servicesHero',
+            'groupHeroV2',
+          ].includes(type),
       },
     },
 
@@ -209,6 +220,7 @@ export const hero: Field = {
               'productHeroAbout',
               'servicesHero',
               'swiperHero',
+              'groupHeroV2',
             ].includes(type),
         },
       },
@@ -216,7 +228,7 @@ export const hero: Field = {
 
     {
       name: 'media',
-      label: 'Hero Background Image',
+      label: 'Hero Background Image / Video',
       type: 'upload',
       admin: {
         condition: (_, { type } = {}) =>
@@ -228,10 +240,11 @@ export const hero: Field = {
             'productHero2',
             'productHeroAbout',
             'servicesHero',
+            'groupHeroV2',
           ].includes(type),
       },
       relationTo: 'media',
-      required: true,
+      required: false,
     },
 
     {
@@ -250,7 +263,8 @@ export const hero: Field = {
         name: 'bgColor',
         label: 'Background Color',
         admin: {
-          condition: (_, { type }) => ['productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
+          condition: (_, { type }) =>
+            ['productHero2', 'productHeroAbout', 'servicesHero', 'swiperHero'].includes(type),
         },
         defaultValue: 'bg-sky-800',
       },
@@ -332,6 +346,196 @@ export const hero: Field = {
           name: 'media',
           type: 'upload',
           relationTo: 'media',
+          required: true,
+        },
+      ],
+    },
+
+    // ─── Group Hero V2 fields ─────────────────────────────────────────────────
+
+    bgColorPickerAll({
+      overrides: {
+        name: 'heroBgColor',
+        label: 'Hero Zone Background Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+          description:
+            'Background color for the entire top hero zone (including where the header floats).',
+        },
+        defaultValue: 'bg-blue-custom',
+      },
+    }),
+
+    {
+      name: 'badgeText',
+      type: 'text',
+      label: 'Badge Text',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Short pill/badge label, e.g. "The group at a glance".',
+      },
+    },
+
+    bgColorPickerAll({
+      overrides: {
+        name: 'badgeBgColor',
+        label: 'Badge Background Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'bg-white',
+      },
+    }),
+
+    {
+      name: 'glanceHeading',
+      type: 'richText',
+      label: 'Glance Heading (Left Column)',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Large heading in left column of the "at a glance" section.',
+      },
+    },
+
+    {
+      name: 'glanceDescription',
+      type: 'richText',
+      label: 'Glance Description (Right Column)',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Paragraph text in right column, aligned with the glance heading.',
+      },
+    },
+
+    {
+      name: 'dividerColor',
+      type: 'select',
+      label: 'Divider Line Color',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+      },
+      defaultValue: 'border-white/30',
+      options: [
+        { label: 'White (30% opacity)', value: 'border-white/30' },
+        { label: 'White (60% opacity)', value: 'border-white/60' },
+        { label: 'White (full)', value: 'border-white' },
+        { label: 'Black (30% opacity)', value: 'border-black/30' },
+        { label: 'Black (60% opacity)', value: 'border-black/60' },
+        { label: 'Black (full)', value: 'border-black' },
+        { label: 'Gray 300', value: 'border-gray-300' },
+        { label: 'Gray 500', value: 'border-gray-500' },
+        { label: 'Gray 700', value: 'border-gray-700' },
+        { label: 'Custom Blue', value: 'border-blue-custom' },
+        { label: 'Transparent', value: 'border-transparent' },
+      ],
+    },
+
+    {
+      name: 'dividerWidth',
+      type: 'select',
+      label: 'Divider Width',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+      },
+      defaultValue: 'w-full',
+      options: [
+        { label: 'Full Width', value: 'w-full' },
+        { label: '11/12', value: 'w-11/12' },
+        { label: '4/5', value: 'w-4/5' },
+        { label: '3/4', value: 'w-3/4' },
+        { label: '1/2', value: 'w-1/2' },
+      ],
+    },
+
+    {
+      name: 'statItems',
+      type: 'array',
+      label: 'Stat Items (max 4)',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description:
+          'Each item shows a large bold value (e.g. "04") with a smaller label below. Max 4 shown per row.',
+      },
+      minRows: 1,
+      maxRows: 4,
+      fields: [
+        {
+          name: 'statValue',
+          type: 'text',
+          label: 'Value',
+          required: true,
+        },
+        {
+          name: 'statLabel',
+          type: 'text',
+          label: 'Label',
+          required: true,
+        },
+      ],
+    },
+
+    // ─── Group Hero V2 — Ecosystem Strip ─────────────────────────────────────
+
+    {
+      name: 'ecosystemTitle',
+      type: 'text',
+      label: 'Ecosystem Section Title',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Label shown on the left of the ecosystem strip, e.g. "OUR CONNECTED ECOSYSTEM".',
+      },
+    },
+
+    bgColorPickerAll({
+      overrides: {
+        name: 'ecosystemBgColor',
+        label: 'Ecosystem Strip Background Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+          description:
+            'Background of the bottom ecosystem strip. Use bg-transparent for no background.',
+        },
+        defaultValue: 'bg-transparent',
+      },
+    }),
+
+    {
+      name: 'ecosystemItems',
+      type: 'array',
+      label: 'Ecosystem Items (max 5)',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description:
+          'Each item is a brand name. Use the Bold button in the toolbar to bold part of the text (e.g. select "Connect" in "FintecConnect" and click Bold).',
+      },
+      maxRows: 5,
+      fields: [
+        {
+          name: 'itemText',
+          type: 'richText',
+          label: 'Brand Name',
+          editor: lexicalEditor({
+            features: ({ rootFeatures }) => [
+              ...rootFeatures,
+              FixedToolbarFeature(),
+              InlineToolbarFeature(),
+            ],
+          }),
           required: true,
         },
       ],
