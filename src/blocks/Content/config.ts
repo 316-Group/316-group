@@ -104,6 +104,7 @@ const columnFields: Field[] = [
           { label: 'Divider / Line', value: 'divider' },
           { label: 'Custom Job Action', value: 'customJobAction' },
           { label: 'Custom Button', value: 'customButton' },
+          { label: 'Solutions Accordion', value: 'solutionsAccordion' },
         ],
       },
       {
@@ -1497,6 +1498,162 @@ const columnFields: Field[] = [
         admin: {
           condition: (_, { contentType }) => contentType === 'customButton',
         },
+      },
+
+      // ─── Solutions Accordion ──────────────────────────────────────────────────
+      {
+        name: 'solutionsAccordion',
+        type: 'group',
+        label: 'Solutions Accordion',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'solutionsAccordion',
+        },
+        fields: [
+          // Section bg
+          bgColorPickerAll({
+            overrides: {
+              name: 'sectionBgColor',
+              label: 'Section Background Color',
+              defaultValue: 'bg-white',
+            },
+          }),
+
+          // ── Left Panel ────────────────────────────────────────────────────────
+          {
+            name: 'leftPanel',
+            type: 'group',
+            label: 'Left Panel',
+            fields: [
+              bgColorPickerAll({
+                overrides: {
+                  name: 'bgColor',
+                  label: 'Left Column Background',
+                  defaultValue: 'bg-white',
+                },
+              }),
+              { name: 'badgeText', type: 'text', label: 'Badge Text', defaultValue: 'Our Solutions' },
+              bgColorPickerAll({
+                overrides: { name: 'badgeBgColor', label: 'Badge Background Color', defaultValue: 'bg-gray-100' },
+              }),
+              textClasses({
+                overrides: { name: 'badgeTextClasses', label: 'Badge Text Classes', defaultValue: ['text-gray-800', 'text-sm'] },
+              }),
+              {
+                name: 'heading',
+                type: 'richText',
+                label: 'Heading',
+                editor: lexicalEditor({
+                  features: ({ rootFeatures }) => [
+                    ...rootFeatures,
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                  ],
+                }),
+              },
+              textClasses({
+                overrides: { name: 'headingTextClasses', label: 'Heading Text Classes', defaultValue: ['text-black'] },
+              }),
+              { name: 'showSubBadge', type: 'checkbox', label: 'Show Sub-Badge / Button', defaultValue: true },
+              {
+                name: 'subBadgeText', type: 'text', label: 'Sub-Badge Text', defaultValue: 'Explore payments',
+                admin: { condition: (_, s) => s.showSubBadge !== false },
+              },
+              bgColorPickerAll({
+                overrides: {
+                  name: 'subBadgeBgColor', label: 'Sub-Badge Background Color', defaultValue: 'bg-blue-custom',
+                  admin: { condition: (_, s) => s.showSubBadge !== false },
+                },
+              }),
+              textClasses({
+                overrides: {
+                  name: 'subBadgeTextClasses', label: 'Sub-Badge Text Classes', defaultValue: ['text-white', 'text-sm'],
+                  admin: { condition: (_, s) => s.showSubBadge !== false },
+                },
+              }),
+            ],
+          },
+
+          // ── Right Panel background ────────────────────────────────────────────
+          bgColorPickerAll({
+            overrides: { name: 'rightBgColor', label: 'Right Column Background', defaultValue: 'bg-white' },
+          }),
+
+          // ── Accordion Items ───────────────────────────────────────────────────
+          {
+            name: 'accordionItems',
+            type: 'array',
+            label: 'Accordion Items',
+            minRows: 1,
+            fields: [
+              { name: 'title', type: 'text', label: 'Title', required: true },
+              { name: 'icon', type: 'upload', relationTo: 'media', label: 'Icon (inactive)', required: false },
+              { name: 'iconActive', type: 'upload', relationTo: 'media', label: 'Icon (active/white)', required: false },
+              bgColorPickerAll({
+                overrides: { name: 'activeBgColor', label: 'Active Card Background', defaultValue: 'bg-blue-custom' },
+              }),
+              { name: 'subHeading', type: 'text', label: 'Sub-Heading (shown when open)' },
+              {
+                name: 'bodyText',
+                type: 'richText',
+                label: 'Body Text (shown when open)',
+                editor: lexicalEditor({
+                  features: ({ rootFeatures }) => [
+                    ...rootFeatures,
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                  ],
+                }),
+              },
+              { name: 'image', type: 'upload', relationTo: 'media', label: 'Left Column Image (active state)', required: false },
+              { name: 'showCTAButton', type: 'checkbox', label: 'Show CTA Button', defaultValue: true },
+              {
+                name: 'ctaLabel', type: 'text', label: 'CTA Label', defaultValue: 'Learn more',
+                admin: { condition: (_, s) => s.showCTAButton !== false },
+              },
+              bgColorPickerAll({
+                overrides: {
+                  name: 'ctaBgColor', label: 'CTA Background', defaultValue: 'bg-white',
+                  admin: { condition: (_, s) => s.showCTAButton !== false },
+                },
+              }),
+              textClasses({
+                overrides: {
+                  name: 'ctaTextClasses', label: 'CTA Text Classes', defaultValue: ['text-blue-custom', 'text-sm'],
+                  admin: { condition: (_, s) => s.showCTAButton !== false },
+                },
+              }),
+            ],
+          },
+
+          // ── Scroll Animation ──────────────────────────────────────────────────
+          {
+            name: 'scrollAnimation',
+            type: 'group',
+            label: 'Scroll Entrance Animation',
+            fields: [
+              { name: 'enabled', type: 'checkbox', label: 'Enable Scroll Animation', defaultValue: true },
+              {
+                name: 'type', type: 'select', label: 'Animation Type', defaultValue: 'fade-up',
+                admin: { condition: (_, s) => s.enabled !== false },
+                options: [
+                  { label: 'Fade Up', value: 'fade-up' },
+                  { label: 'Fade Down', value: 'fade-down' },
+                  { label: 'Fade In', value: 'fade-in' },
+                  { label: 'Zoom In', value: 'zoom-in' },
+                ],
+              },
+              {
+                name: 'speed', type: 'select', label: 'Speed', defaultValue: 'normal',
+                admin: { condition: (_, s) => s.enabled !== false },
+                options: [
+                  { label: 'Fast (350ms)', value: 'fast' },
+                  { label: 'Normal (650ms)', value: 'normal' },
+                  { label: 'Slow (1000ms)', value: 'slow' },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -19,6 +19,7 @@ import { AccordionClient } from './AccordionClient'
 import { CaseStudySliderClient } from './CaseStudySliderClient'
 import { getBestContrastTextColor } from '@/utilities/getBestContrastTextColor'
 import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
+import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -742,6 +743,21 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                           )}
                         />
                       </div>
+                    )
+                  }
+
+                  if (contentType === 'solutionsAccordion' && content.solutionsAccordion) {
+                    const { leftPanel, accordionItems, rightBgColor, sectionBgColor, scrollAnimation } =
+                      content.solutionsAccordion
+                    return (
+                      <AccordionPanel
+                        key={index}
+                        leftPanel={leftPanel}
+                        accordionItems={accordionItems}
+                        rightBgColor={rightBgColor}
+                        sectionBgColor={sectionBgColor}
+                        scrollAnimation={scrollAnimation}
+                      />
                     )
                   }
 
