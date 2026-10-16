@@ -35,6 +35,7 @@ import { CardGridBlock } from './CardGrid/Component'
 import { BrandSliderBlock } from './BrandSlider/Component'
 import { ImageTextSplitBlock } from './ImageTextSplit/Component'
 import { AgenticGridBlock } from './AgenticGrid/Component'
+import { SolutionsAccordionBlock } from './SolutionsAccordion/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -69,6 +70,7 @@ const blockComponents = {
   brandSlider: BrandSliderBlock,
   imageTextSplit: ImageTextSplitBlock,
   agenticGrid: AgenticGridBlock,
+  solutionsAccordion: SolutionsAccordionBlock,
 }
 
 export const RenderBlocks: React.FC<{

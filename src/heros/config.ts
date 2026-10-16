@@ -11,6 +11,7 @@ import { linkGroup } from '@/fields/linkGroup'
 import { textClasses } from '@/fields/textClasses'
 import { buttonClasses } from '@/fields/buttonClasses'
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
+import { textColorPickerAll } from '@/fields/textColorPicker'
 
 export const hero: Field = {
   name: 'hero',
@@ -367,6 +368,216 @@ export const hero: Field = {
     }),
 
     {
+      name: 'heroRounded',
+      type: 'checkbox',
+      label: 'Rounded Hero Zone Border',
+      defaultValue: true,
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'When enabled the hero zone background gets a large rounded corner (rounded-[2rem]). Uncheck for sharp edges.',
+      },
+    },
+
+    // ─── GroupHeroV2 Text Colour Pickers ─────────────────────────────────────
+
+    textColorPickerAll({
+      overrides: {
+        name: 'headingTextColor',
+        label: 'Heading Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'descriptionTextColor',
+        label: 'Description Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'glanceHeadingTextColor',
+        label: 'Glance Heading Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'glanceDescriptionTextColor',
+        label: 'Glance Description Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'statValueTextColor',
+        label: 'Stat Value Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'statLabelTextColor',
+        label: 'Stat Label Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-white',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'ecosystemTitleTextColor',
+        label: 'Ecosystem Title Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-current',
+      },
+    }),
+
+    textColorPickerAll({
+      overrides: {
+        name: 'ecosystemItemsTextColor',
+        label: 'Ecosystem Items Text Color',
+        admin: {
+          condition: (_, { type }) => type === 'groupHeroV2',
+        },
+        defaultValue: 'text-current',
+      },
+    }),
+
+    // ─── GroupHeroV2 Entrance Animation ───────────────────────────────────────
+    {
+      name: 'entranceAnimation',
+      type: 'group',
+      label: 'Entrance Animation',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Controls the animated entrance when the page loads.',
+      },
+      fields: [
+        {
+          name: 'enabled',
+          type: 'checkbox',
+          label: 'Enable Entrance Animation',
+          defaultValue: true,
+        },
+        {
+          name: 'type',
+          type: 'select',
+          label: 'Animation Type',
+          defaultValue: 'fade-up',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'Fade Up (default)', value: 'fade-up' },
+            { label: 'Fade Down', value: 'fade-down' },
+            { label: 'Fade In (no movement)', value: 'fade-in' },
+            { label: 'Fade Left (slide from right)', value: 'fade-left' },
+            { label: 'Fade Right (slide from left)', value: 'fade-right' },
+            { label: 'Zoom In', value: 'zoom-in' },
+            { label: 'Slide Up', value: 'slide-up' },
+          ],
+        },
+        {
+          name: 'speed',
+          type: 'select',
+          label: 'Animation Speed',
+          defaultValue: 'normal',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'Fast (350ms)', value: 'fast' },
+            { label: 'Normal (650ms)', value: 'normal' },
+            { label: 'Slow (1000ms)', value: 'slow' },
+          ],
+        },
+        {
+          name: 'headingDelay',
+          type: 'select',
+          label: 'Heading Delay',
+          defaultValue: '0',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'No delay', value: '0' },
+            { label: '100ms', value: '100' },
+            { label: '150ms', value: '150' },
+            { label: '200ms', value: '200' },
+            { label: '300ms', value: '300' },
+          ],
+        },
+        {
+          name: 'descriptionDelay',
+          type: 'select',
+          label: 'Description Delay',
+          defaultValue: '150',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'No delay', value: '0' },
+            { label: '100ms', value: '100' },
+            { label: '150ms', value: '150' },
+            { label: '200ms', value: '200' },
+            { label: '300ms', value: '300' },
+            { label: '400ms', value: '400' },
+          ],
+        },
+        {
+          name: 'mediaDelay',
+          type: 'select',
+          label: 'Media / Image Delay',
+          defaultValue: '300',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'No delay', value: '0' },
+            { label: '150ms', value: '150' },
+            { label: '200ms', value: '200' },
+            { label: '300ms', value: '300' },
+            { label: '400ms', value: '400' },
+            { label: '500ms', value: '500' },
+            { label: '600ms', value: '600' },
+          ],
+        },
+        {
+          name: 'statsDelay',
+          type: 'select',
+          label: 'Stats Section Delay',
+          defaultValue: '400',
+          admin: { condition: (_, s) => s.enabled !== false },
+          options: [
+            { label: 'No delay', value: '0' },
+            { label: '200ms', value: '200' },
+            { label: '300ms', value: '300' },
+            { label: '400ms', value: '400' },
+            { label: '500ms', value: '500' },
+            { label: '600ms', value: '600' },
+            { label: '800ms', value: '800' },
+          ],
+        },
+      ],
+    },
+
+
+    {
       name: 'badgeText',
       type: 'text',
       label: 'Badge Text',
@@ -375,6 +586,7 @@ export const hero: Field = {
         description: 'Short pill/badge label, e.g. "The group at a glance".',
       },
     },
+
 
     bgColorPickerAll({
       overrides: {

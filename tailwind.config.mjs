@@ -65,6 +65,7 @@ export default {
       colors: {
         'cyan-neon': '#10EBFF',
         'blue-custom': '#0256FF',
+        'light-sky': '#ADE2FF',
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',

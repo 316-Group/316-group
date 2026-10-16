@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { Menu, X, ArrowLeft } from 'lucide-react'
+import { Menu, X, ArrowLeft, ArrowRight } from 'lucide-react'
 import { MenuItem } from './MenuItem'
 import { MegaMenuContent } from './MegaMenuContent'
 import type { Link as LinkType } from './types'
@@ -14,10 +14,12 @@ export const MegaMenu = ({
   className,
   header,
   theme,
+  pillMode = false,
 }: {
   className: string
   header: Header
   theme: string | null
+  pillMode?: boolean
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
@@ -99,24 +101,46 @@ export const MegaMenu = ({
       </button>
 
       {/* Desktop Navigation */}
-      <nav className="hidden lg:flex items-center space-x-8">
-        {header.navItems?.map((section, index) => (
-          <MenuItem
-            className={cn('font-normal justify-start text-xl')}
-            isMobile={isMobile}
-            key={index}
-            title={section.hasMegaMenu ? section.title : section.link?.label}
-            href={getHref(section.link)}
-            hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-            isActive={activeSection === section.title}
-            onClick={() => {
-              if (section.hasMegaMenu !== true) {
-              } else
-                section.title &&
-                  setActiveSection(activeSection === section.title ? null : section.title)
-            }}
-          />
-        ))}
+      <nav className="hidden lg:flex items-center space-x-6">
+        {header.navItems?.map((section, index) => {
+          // Detect if this is the last item and labelled "Contact" (or only item with no mega menu)
+          const isContact = !section.hasMegaMenu && (
+            section.link?.label?.toLowerCase() === 'contact' ||
+            section.title?.toLowerCase() === 'contact'
+          )
+          if (pillMode && isContact) {
+            return (
+              <Link
+                key={index}
+                href={getHref(section.link)}
+                className="flex items-center gap-1.5 bg-white/90 hover:bg-white text-gray-900 text-sm font-semibold px-4 py-2 rounded-full transition-colors duration-200"
+              >
+                {section.link?.label || section.title}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            )
+          }
+          return (
+            <MenuItem
+              className={cn(
+                'font-normal justify-start text-sm',
+                pillMode ? 'text-white/90 hover:text-white' : 'text-xl',
+              )}
+              isMobile={isMobile}
+              key={index}
+              title={section.hasMegaMenu ? section.title : section.link?.label}
+              href={getHref(section.link)}
+              hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
+              isActive={activeSection === section.title}
+              onClick={() => {
+                if (section.hasMegaMenu !== true) {
+                } else
+                  section.title &&
+                    setActiveSection(activeSection === section.title ? null : section.title)
+              }}
+            />
+          )
+        })}
       </nav>
 
       {/* Overlay */}

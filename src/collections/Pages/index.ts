@@ -47,6 +47,7 @@ import { CardGrid } from '@/blocks/CardGrid/config'
 import { BrandSlider } from '@/blocks/BrandSlider/config'
 import { ImageTextSplit } from '@/blocks/ImageTextSplit/config'
 import { AgenticGrid } from '@/blocks/AgenticGrid/config'
+import { SolutionsAccordion } from '@/blocks/SolutionsAccordion/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -136,6 +137,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 BrandSlider,
                 ImageTextSplit,
                 AgenticGrid,
+                SolutionsAccordion,
               ],
               required: true,
             },

@@ -1,0 +1,327 @@
+'use client'
+
+import React, { useState } from 'react'
+import { Plus, Minus, ArrowUpRight } from 'lucide-react'
+import { cn } from '@/utilities/cn'
+import { Media } from '@/components/Media'
+import RichText from '@/components/RichText'
+import { CMSLink } from '@/components/Link'
+import type { SolutionsAccordionBlock } from '@/payload-types'
+import Link from 'next/link'
+import { AnimateIn, type AnimationType, type AnimationSpeed, type AnimationDelay } from '@/components/AnimateIn'
+
+type AccordionItem = NonNullable<SolutionsAccordionBlock['accordionItems']>[number]
+
+// Map animation speed to duration class
+const speedMap: Record<string, string> = {
+  fast: '150',
+  normal: '300',
+  slow: '500',
+}
+
+function getTransitionStyle(speed: string = 'normal'): React.CSSProperties {
+  return { transitionDuration: `${speedMap[speed] ?? '300'}ms` }
+}
+
+interface Props {
+  leftPanel: SolutionsAccordionBlock['leftPanel']
+  accordionItems: SolutionsAccordionBlock['accordionItems']
+  rightBgColor?: string | null
+  sectionBgColor?: string | null
+  scrollAnimation?: SolutionsAccordionBlock['scrollAnimation']
+}
+
+export const AccordionPanel: React.FC<Props> = ({
+  leftPanel,
+  accordionItems,
+  rightBgColor,
+  sectionBgColor,
+  scrollAnimation,
+}) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+
+  const items = accordionItems ?? []
+  const activeItem = items[activeIndex] as AccordionItem | undefined
+
+  // Scroll animation config
+  const saEnabled = scrollAnimation?.enabled !== false
+  const saType = (scrollAnimation?.type as AnimationType) ?? 'fade-up'
+  const saSpeed = (scrollAnimation?.speed as AnimationSpeed) ?? 'normal'
+  const saLeftDelay = (scrollAnimation?.leftDelay as AnimationDelay) ?? '0'
+  const saRightDelay = (scrollAnimation?.rightDelay as AnimationDelay) ?? '200'
+
+  // Helper to get a link href from a CMS link object
+  const getLinkHref = (linkObj: any): string => {
+    if (!linkObj) return '#'
+    if (linkObj.type === 'custom') return linkObj.url || '#'
+    if (linkObj.type === 'reference' && linkObj.reference?.value) {
+      const val = linkObj.reference.value
+      if (typeof val === 'object' && val.slug) {
+        const rel = linkObj.reference.relationTo
+        if (rel === 'pages') return `/${val.slug}`
+        return `/${rel}/${val.slug}`
+      }
+    }
+    return '#'
+  }
+
+  return (
+    <div className={cn('w-full flex flex-col md:flex-row min-h-[600px]', sectionBgColor ?? 'bg-white')}>
+      {/* ── LEFT COLUMN ─────────────────────────────────────────────────────── */}
+      <AnimateIn
+        animation={saEnabled ? saType : 'none'}
+        speed={saSpeed}
+        delay={saLeftDelay}
+        trigger="scroll"
+        className={cn(
+          'w-full md:w-[45%] flex flex-col justify-between p-8 md:p-12 xl:p-16',
+          leftPanel?.bgColor ?? 'bg-white',
+        )}
+      >
+        <div className="flex flex-col gap-6">
+          {/* Badge */}
+          {leftPanel?.badgeText && (
+            <span
+              className={cn(
+                'inline-flex self-start items-center px-4 py-1.5 rounded-full text-sm font-medium',
+                leftPanel.badgeBgColor ?? 'bg-gray-100',
+                leftPanel.badgeTextColor ?? 'text-gray-800',
+              )}
+            >
+              {leftPanel.badgeText}
+            </span>
+          )}
+
+          {/* Main Heading */}
+          {leftPanel?.heading && (
+            <div className={cn('text-3xl md:text-4xl lg:text-5xl font-normal leading-tight', leftPanel.headingTextColor ?? 'text-black')}>
+              <RichText
+                content={leftPanel.heading}
+                enableGutter={false}
+                enableProse={false}
+                className="[&_strong]:font-bold [&_p]:leading-tight [&_p]:m-0"
+              />
+            </div>
+          )}
+
+          {/* Sub-badge / button */}
+          {leftPanel?.showSubBadge !== false && leftPanel?.subBadgeText && (
+            <div>
+              {leftPanel.subBadgeLink ? (
+                <Link
+                  href={getLinkHref(leftPanel.subBadgeLink)}
+                  className={cn(
+                    'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-90',
+                    leftPanel.subBadgeBgColor ?? 'bg-blue-custom',
+                    leftPanel.subBadgeTextColor ?? 'text-white',
+                  )}
+                >
+                  {leftPanel.subBadgeText}
+                </Link>
+              ) : (
+                <span
+                  className={cn(
+                    'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold',
+                    leftPanel.subBadgeBgColor ?? 'bg-blue-custom',
+                    leftPanel.subBadgeTextColor ?? 'text-white',
+                  )}
+                >
+                  {leftPanel.subBadgeText}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Image — transitions when activeIndex changes */}
+        <div className="mt-8 relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md">
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className="absolute inset-0 transition-opacity"
+              style={{
+                opacity: i === activeIndex ? 1 : 0,
+                transitionDuration: '400ms',
+                transitionTimingFunction: 'ease-in-out',
+                pointerEvents: i === activeIndex ? 'auto' : 'none',
+              }}
+            >
+              {item.image && typeof item.image === 'object' && (
+                <Media
+                  resource={item.image}
+                  fill
+                  imgClassName="object-cover w-full h-full"
+                  className="absolute inset-0 w-full h-full"
+                />
+              )}
+            </div>
+          ))}
+          {/* Fallback placeholder if no image */}
+          {items.every((item) => !item.image) && (
+            <div className="absolute inset-0 bg-gray-100 rounded-2xl" />
+          )}
+        </div>
+      </AnimateIn>
+
+      {/* ── RIGHT COLUMN ────────────────────────────────────────────────────── */}
+      <AnimateIn
+        animation={saEnabled ? saType : 'none'}
+        speed={saSpeed}
+        delay={saRightDelay}
+        trigger="scroll"
+        className={cn(
+          'w-full md:w-[55%] flex items-start p-6 md:p-10 xl:p-14',
+          rightBgColor ?? 'bg-white',
+        )}
+      >
+        <div className="w-full space-y-0">
+          {items.map((item, index) => {
+            const isActive = activeIndex === index
+            const animStyle = item.animationStyle ?? 'slide'
+            const speed = item.animationSpeed ?? 'normal'
+            const transStyle = getTransitionStyle(speed)
+
+            // Easing per animation style
+            const easing =
+              animStyle === 'fade'
+                ? 'ease-in'
+                : animStyle === 'scale'
+                  ? 'ease-out'
+                  : 'ease-in-out'
+
+            return (
+              <div key={index}>
+                {isActive ? (
+                  /* ── ACTIVE card ─────────────────────────────────────── */
+                  <div
+                    className={cn(
+                      'rounded-2xl p-6 md:p-8 transition-all',
+                      item.activeBgColor ?? 'bg-blue-custom',
+                    )}
+                    style={{ ...transStyle, transitionTimingFunction: easing }}
+                  >
+                    {/* Icon + Title + Dash */}
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="flex items-center gap-3">
+                        {/* Active (white) icon */}
+                        {item.iconActive && typeof item.iconActive === 'object' && (
+                          <div className="w-8 h-8 shrink-0 relative">
+                            <Media
+                              resource={item.iconActive}
+                              imgClassName="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <span className="text-lg md:text-xl font-semibold text-white">
+                          {item.title}
+                        </span>
+                      </div>
+                      {/* Dash / minus */}
+                      <Minus className="h-5 w-5 text-white shrink-0" />
+                    </div>
+
+                    {/* Sub-heading */}
+                    {item.subHeading && (
+                      <p
+                        className={cn(
+                          'text-base font-semibold mb-3 leading-snug',
+                          item.subHeadingTextColor ?? 'text-white',
+                        )}
+                      >
+                        {item.subHeading}
+                      </p>
+                    )}
+
+                    {/* Body text */}
+                    {item.bodyText && (
+                      <div
+                        className={cn(
+                          'text-sm leading-relaxed mb-6',
+                          item.bodyTextColor ?? 'text-white/90',
+                        )}
+                      >
+                        <RichText
+                          content={item.bodyText}
+                          enableGutter={false}
+                          enableProse={false}
+                          className="[&_p]:mb-0 [&_p]:leading-relaxed"
+                        />
+                      </div>
+                    )}
+
+                    {/* CTA Button */}
+                    {item.showCTAButton !== false && item.ctaLabel && (
+                      <div>
+                        {item.ctaLink ? (
+                          <Link
+                            href={getLinkHref(item.ctaLink)}
+                            className={cn(
+                              'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-90',
+                              item.ctaBgColor ?? 'bg-white',
+                              item.ctaTextColor ?? 'text-blue-custom',
+                            )}
+                          >
+                            {item.ctaLabel}
+                            <span className={cn('inline-flex items-center justify-center w-6 h-6 rounded-full', item.ctaTextColor ? 'bg-current/10' : 'bg-blue-custom')}>
+                              <ArrowUpRight className="h-3.5 w-3.5" style={{ color: 'inherit' }} />
+                            </span>
+                          </Link>
+                        ) : (
+                          <span
+                            className={cn(
+                              'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold',
+                              item.ctaBgColor ?? 'bg-white',
+                              item.ctaTextColor ?? 'text-blue-custom',
+                            )}
+                          >
+                            {item.ctaLabel}
+                            <ArrowUpRight className="h-4 w-4" />
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  /* ── INACTIVE row ────────────────────────────────────── */
+                  <button
+                    onClick={() => setActiveIndex(index)}
+                    className="w-full flex items-center justify-between py-5 px-2 text-left group transition-colors hover:bg-gray-50/50 rounded-lg"
+                  >
+                    <div className="flex items-center gap-3">
+                      {/* Default icon */}
+                      {item.icon && typeof item.icon === 'object' && (
+                        <div className="w-8 h-8 shrink-0 relative">
+                          <Media
+                            resource={item.icon}
+                            imgClassName="w-full h-full object-contain"
+                          />
+                        </div>
+                      )}
+                      <span
+                        className={cn(
+                          'text-base md:text-lg font-semibold',
+                          item.titleTextColor ?? 'text-black',
+                        )}
+                      >
+                        {item.title}
+                      </span>
+                    </div>
+                    <Plus
+                      className={cn(
+                        'h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110',
+                        item.titleTextColor ?? 'text-black',
+                      )}
+                    />
+                  </button>
+                )}
+
+                {/* HR divider below each row */}
+                <hr className="border-t border-gray-200 w-full" />
+              </div>
+            )
+          })}
+        </div>
+      </AnimateIn>
+    </div>
+  )
+}

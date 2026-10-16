@@ -187,3 +187,55 @@ html[data-theme='light'] {
 .animate-gradient-slow {
   background-size: 400% 400%;
 }
+
+/* ─── Scroll & Entrance Animation System ──────────────────────────────────── */
+/* data-animate="<variant>"  +  data-visible="false|true"                      */
+/* IntersectionObserver flips data-visible to "true" → CSS transitions resolve  */
+
+[data-animate] {
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-duration: var(--animate-duration, 700ms);
+  transition-delay: var(--animate-delay, 0ms);
+}
+
+/* Hidden / starting states */
+[data-animate="fade-up"]    { opacity: 0; transform: translateY(40px); }
+[data-animate="fade-down"]  { opacity: 0; transform: translateY(-40px); }
+[data-animate="fade-left"]  { opacity: 0; transform: translateX(40px); }
+[data-animate="fade-right"] { opacity: 0; transform: translateX(-40px); }
+[data-animate="fade-in"]    { opacity: 0; transform: none; }
+[data-animate="zoom-in"]    { opacity: 0; transform: scale(0.92); }
+[data-animate="slide-up"]   { opacity: 0; transform: translateY(60px); }
+
+/* Resolved / visible state */
+[data-animate][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Duration helpers */
+[data-speed="fast"]   { --animate-duration: 350ms; }
+[data-speed="normal"] { --animate-duration: 650ms; }
+[data-speed="slow"]   { --animate-duration: 1000ms; }
+
+/* Delay helpers */
+[data-delay="0"]   { --animate-delay: 0ms; }
+[data-delay="100"] { --animate-delay: 100ms; }
+[data-delay="150"] { --animate-delay: 150ms; }
+[data-delay="200"] { --animate-delay: 200ms; }
+[data-delay="300"] { --animate-delay: 300ms; }
+[data-delay="400"] { --animate-delay: 400ms; }
+[data-delay="500"] { --animate-delay: 500ms; }
+[data-delay="600"] { --animate-delay: 600ms; }
+[data-delay="800"] { --animate-delay: 800ms; }
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
