@@ -69,6 +69,7 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
       : { animation: 'none' as const }
 
   return (
+    // Outer wrapper: starts from very top of page (header is position:fixed, no flow offset)
     <div className="relative">
       {/* ── Part 1: Hero Zone ─────────────────────────────────────────────────── */}
       <div
@@ -78,8 +79,8 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
           roundedClass,
         )}
       >
-        {/* Spacer so content clears the floating header (~80px) */}
-        <div className="h-20" />
+        {/* Spacer to push content below the fixed floating header (~88px total with pt-4 + pill height) */}
+        <div className="h-24" />
 
         <div className="container max-w-screen-2xl">
           {/* Top content row */}
@@ -295,10 +296,10 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
                   </div>
                 )}
               </div>
-
-              {/* Full-width divider below ecosystem items */}
-              <hr className="w-full border-t border-current opacity-20 mt-6 md:mt-8" />
             </div>
+
+            {/* Full-width divider — outside container so it spans edge-to-edge */}
+            <hr className="w-full border-t border-current opacity-20 mt-6 md:mt-8" />
           </div>
         </AnimateIn>
       )}
