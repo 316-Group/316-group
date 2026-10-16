@@ -6,10 +6,16 @@ FROM base AS builder
 WORKDIR /app
 COPY . .
 
+# Install pnpm
 RUN npm install -g pnpm
-RUN pnpm install
-# Rebuild sharp to ensure linux binaries are present
+
+# Install dependencies — onlyBuiltDependencies in package.json allows
+# esbuild and sharp to run their install scripts (pnpm v10+ blocks them by default)
+RUN pnpm install --frozen-lockfile
+
+# Ensure sharp has linux binaries (belt-and-suspenders after install scripts run)
 RUN pnpm rebuild sharp
+
 RUN pnpm run build
 
 # Production image, copy all the files and run next
