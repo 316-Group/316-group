@@ -81,12 +81,12 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
               <div className="relative rounded-t-[3em] h-[60vh] overflow-hidden mx-4 md:mx-8 2xl:mx-0">
                 <Media
                   fill
-                  imgClassName="-z-10 object-cover inset-0 w-full h-full"
-                  videoClassName="-z-10 absolute object-cover inset-0 w-full max-h-[100%]"
+                  imgClassName="object-cover absolute inset-0 w-full h-full"
+                  videoClassName="absolute object-cover inset-0 w-full h-full"
                   priority={false}
                   loading="lazy"
                   resource={media}
-                  className="rounded-t-[3em]"
+                  className="absolute inset-0 w-full h-full rounded-t-[3em]"
                 />
               </div>
             </div>
@@ -95,12 +95,12 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
               <div className="relative rounded-t-[3em] h-[50vh] overflow-hidden">
                 <Media
                   fill
-                  imgClassName="-z-10 object-cover inset-0 w-full h-full"
-                  videoClassName="-z-10 absolute object-cover inset-0 w-full h-full"
+                  imgClassName="object-cover absolute inset-0 w-full h-full"
+                  videoClassName="absolute object-cover inset-0 w-full h-full"
                   priority={false}
                   loading="lazy"
                   resource={media}
-                  className="rounded-t-[3em]"
+                  className="absolute inset-0 w-full h-full rounded-t-[3em]"
                 />
               </div>
             </div>
@@ -159,9 +159,9 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
               )}
             />
 
-            {/* Stat items grid */}
+            {/* Stat items — flex between */}
             {Array.isArray(statItems) && statItems.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="flex flex-wrap justify-between gap-y-8">
                 {statItems.map((item, i) => (
                   <div key={i} className="flex flex-col gap-2">
                     <span className="text-white text-4xl md:text-5xl font-bold leading-none">
@@ -187,17 +187,17 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
           )}
         >
           <div className="container max-w-screen-2xl">
-            <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
               {/* Left: section title */}
               {ecosystemTitle && (
-                <span className="text-xs font-semibold tracking-widest uppercase text-current shrink-0">
+                <span className="text-xs font-semibold tracking-widest uppercase text-current shrink-0 mr-6">
                   {ecosystemTitle}
                 </span>
               )}
 
-              {/* Right: ecosystem brand items */}
+              {/* Right: ecosystem brand items — up to 5 per row, flex between */}
               {Array.isArray(ecosystemItems) && ecosystemItems.length > 0 && (
-                <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+                <div className="flex flex-1 flex-wrap items-center justify-between gap-y-3">
                   {ecosystemItems.map((item, i) => (
                     <div key={i} className="text-base md:text-lg">
                       <RichText

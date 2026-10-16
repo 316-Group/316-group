@@ -517,13 +517,12 @@ export const hero: Field = {
     {
       name: 'ecosystemItems',
       type: 'array',
-      label: 'Ecosystem Items (max 5)',
+      label: 'Ecosystem Items',
       admin: {
         condition: (_, { type }) => type === 'groupHeroV2',
         description:
-          'Each item is a brand name. Use the Bold button in the toolbar to bold part of the text (e.g. select "Connect" in "FintecConnect" and click Bold).',
+          'Each item is a brand name. Add as many as needed — up to 5 will display per row. Use the Bold button to bold part of the text (e.g. bold "Connect" in "FintecConnect").',
       },
-      maxRows: 5,
       fields: [
         {
           name: 'itemText',
