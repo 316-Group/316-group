@@ -226,6 +226,7 @@ export const clickExpandFields: Field[] = [
                   name: 'color',
                   label: 'Kicker Color',
                   defaultValue: 'text-[#52B5D8]',
+                  validate: allowAnySelect,
                   admin: {
                     width: '33.33%',
                   },
@@ -236,6 +237,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Kicker Font Size',
                 defaultValue: 'text-base md:text-lg',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: {
                   width: '33.33%',
@@ -246,6 +248,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Kicker Font Weight',
                 defaultValue: 'font-semibold',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: {
                   width: '33.33%',
@@ -277,6 +280,7 @@ export const clickExpandFields: Field[] = [
                   name: 'headingColor',
                   label: 'Heading Color',
                   defaultValue: 'text-white',
+                  validate: allowAnySelect,
                   admin: {
                     width: '25%',
                   },
@@ -287,6 +291,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Active Heading Size',
                 defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: {
                   width: '25%',
@@ -297,6 +302,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Heading Font Weight',
                 defaultValue: 'font-bold',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: {
                   width: '25%',
@@ -307,6 +313,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Collapsed Bottom Font Size',
                 defaultValue: 'text-xl md:text-2xl',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: {
                   width: '25%',
@@ -339,6 +346,7 @@ export const clickExpandFields: Field[] = [
                   name: 'descriptionColor',
                   label: 'Description Color',
                   defaultValue: 'text-white/90',
+                  validate: allowAnySelect,
                   admin: {
                     width: '33.33%',
                   },
@@ -349,6 +357,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Description Font Size',
                 defaultValue: 'text-base md:text-lg',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: {
                   width: '33.33%',
@@ -359,6 +368,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Description Font Weight',
                 defaultValue: 'font-normal',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: {
                   width: '33.33%',
@@ -466,6 +476,7 @@ export const clickExpandFields: Field[] = [
                       name: 'titleColor',
                       label: 'Heading Color',
                       defaultValue: 'text-white',
+                      validate: allowAnySelect,
                       admin: {
                         width: '25%',
                       },
@@ -476,6 +487,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Font Size',
                     defaultValue: 'text-lg md:text-xl',
+                    validate: allowAnySelect,
                     options: fontSizeOptions,
                     admin: {
                       width: '25%',
@@ -486,6 +498,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Font Weight',
                     defaultValue: 'font-bold',
+                    validate: allowAnySelect,
                     options: fontWeightOptions,
                     admin: {
                       width: '25%',
@@ -496,6 +509,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Heading Alignment',
                     defaultValue: 'left',
+                    validate: allowAnySelect,
                     options: alignmentOptions,
                     admin: {
                       width: '25%',
@@ -517,6 +531,7 @@ export const clickExpandFields: Field[] = [
                       name: 'descriptionColor',
                       label: 'Description Color',
                       defaultValue: 'text-white/80',
+                      validate: allowAnySelect,
                       admin: {
                         width: '25%',
                       },
@@ -527,6 +542,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Font Size',
                     defaultValue: 'text-xs md:text-sm',
+                    validate: allowAnySelect,
                     options: fontSizeOptions,
                     admin: {
                       width: '25%',
@@ -537,6 +553,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Font Weight',
                     defaultValue: 'font-normal',
+                    validate: allowAnySelect,
                     options: fontWeightOptions,
                     admin: {
                       width: '25%',
@@ -547,6 +564,7 @@ export const clickExpandFields: Field[] = [
                     type: 'select',
                     label: 'Description Alignment',
                     defaultValue: 'left',
+                    validate: allowAnySelect,
                     options: alignmentOptions,
                     admin: {
                       width: '25%',
@@ -602,6 +620,7 @@ export const clickExpandFields: Field[] = [
                   name: 'buttonTextColor',
                   label: 'Button Text Color',
                   defaultValue: 'text-white',
+                  validate: allowAnySelect,
                   admin: {
                     width: '33.33%',
                   },
@@ -612,6 +631,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Button Font Size',
                 defaultValue: 'text-base',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: {
                   width: '33.33%',
@@ -630,6 +650,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Button Font Weight',
                 defaultValue: 'font-medium',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: {
                   width: '33.33%',
@@ -640,6 +661,7 @@ export const clickExpandFields: Field[] = [
                   name: 'iconBgColor',
                   label: 'Circled Icon Background',
                   defaultValue: 'bg-white',
+                  validate: allowAnySelect,
                   admin: {
                     width: '33.33%',
                   },
@@ -650,6 +672,7 @@ export const clickExpandFields: Field[] = [
                   name: 'iconColor',
                   label: 'Circled Icon Arrow Color',
                   defaultValue: 'text-slate-900',
+                  validate: allowAnySelect,
                   admin: {
                     width: '33.33%',
                   },
