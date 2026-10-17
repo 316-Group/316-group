@@ -292,9 +292,44 @@ export const animatedIconsGridFields: Field[] = [
       maxRows: 21,
       admin: {
         description:
-          'Add items with PNG/SVG images. Cards without an image render as subtle empty rounded cards as seen in the mockup.',
+          'Add items with PNG/SVG images. Select which card slot each image belongs to, or leave as Auto.',
       },
       fields: [
+        {
+          name: 'slotNumber',
+          type: 'select',
+          label: 'Card Position / Slot Number',
+          defaultValue: 'auto',
+          validate: allowAnySelect,
+          admin: {
+            description:
+              'Choose which card slot this image displays on (Card 1 to Card 21). Leave as Auto to fill sequentially.',
+          },
+          options: [
+            { label: 'Auto (Next available slot)', value: 'auto' },
+            { label: 'Card 1 — Left Wing (Row 1, Col 1) • Mobile: Top Row, Col 1', value: '1' },
+            { label: 'Card 2 — Left Wing (Row 1, Col 2) • Mobile: Left Wing, Row 2', value: '2' },
+            { label: 'Card 3 — Left Wing (Row 2, Col 1) • Mobile: Left Wing, Row 3', value: '3' },
+            { label: 'Card 4 — Left Wing (Row 2, Col 2) • Mobile: Left Wing, Row 4', value: '4' },
+            { label: 'Card 5 — Left Wing (Row 3, Col 1) • Desktop Only', value: '5' },
+            { label: 'Card 6 — Left Wing (Row 3, Col 2) • Desktop Only', value: '6' },
+            { label: 'Card 7 — Left Wing (Row 4, Col 1) • Desktop Only', value: '7' },
+            { label: 'Card 8 — Left Wing (Row 4, Col 2) • Desktop Only', value: '8' },
+            { label: 'Card 9 — Top Center (Row 1, Col 3) • Mobile: Top Row, Col 2', value: '9' },
+            { label: 'Card 10 — Top Center (Row 1, Col 4) • Mobile: Top Row, Col 3', value: '10' },
+            { label: 'Card 11 — Top Center (Row 1, Col 5) • Mobile: Top Row, Col 4', value: '11' },
+            { label: 'Card 12 — Top Center (Row 1, Col 6) • Mobile: Top Row, Col 5', value: '12' },
+            { label: 'Card 13 — Top Center (Row 1, Col 7) • Mobile: Top Row, Col 6', value: '13' },
+            { label: 'Card 14 — Right Wing (Row 1, Col 8) • Mobile: Top Row, Col 7', value: '14' },
+            { label: 'Card 15 — Right Wing (Row 1, Col 9) • Mobile: Right Wing, Row 2', value: '15' },
+            { label: 'Card 16 — Right Wing (Row 2, Col 8) • Mobile: Right Wing, Row 3', value: '16' },
+            { label: 'Card 17 — Right Wing (Row 2, Col 9) • Mobile: Right Wing, Row 4', value: '17' },
+            { label: 'Card 18 — Right Wing (Row 3, Col 8) • Desktop Only', value: '18' },
+            { label: 'Card 19 — Right Wing (Row 3, Col 9) • Desktop Only', value: '19' },
+            { label: 'Card 20 — Right Wing (Row 4, Col 8) • Desktop Only', value: '20' },
+            { label: 'Card 21 — Right Wing (Row 4, Col 9) • Desktop Only', value: '21' },
+          ],
+        },
         {
           name: 'image',
           type: 'upload',

@@ -9,6 +9,7 @@ import type { Media as MediaType } from '@/payload-types'
 
 export interface CardItem {
   id?: string | null
+  slotNumber?: string | null
   image?: MediaType | string | null
   altText?: string | null
   cardBgColor?: string | null
@@ -123,35 +124,40 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
 
   // Randomized Asynchronous Fade-In / Fade-Out Engine
   useEffect(() => {
-    if (!isInView) return
+    if (!isInView) {
+      setFadedOutSlots(Array(TOTAL_DESKTOP_SLOTS).fill(false))
+      return
+    }
 
     const timers: NodeJS.Timeout[] = []
 
     // Launch an independent animation loop for each card slot
     for (let i = 0; i < TOTAL_DESKTOP_SLOTS; i++) {
-      const runCycle = () => {
-        // Slower random breathing cycle between 6000ms and 14000ms
-        const nextDelay = 6000 + Math.random() * 8000
+      let isFaded = false
 
-        const timer = setTimeout(() => {
-          setFadedOutSlots((prev) => {
-            const next = [...prev]
-            // Toggle slot fade state
-            next[i] = !next[i]
-            return next
-          })
-          runCycle()
-        }, nextDelay)
+      const runStep = () => {
+        isFaded = !isFaded
+        setFadedOutSlots((prev) => {
+          const next = [...prev]
+          next[i] = isFaded
+          return next
+        })
 
+        // When fading OUT (opacity -> 0):
+        // 3500ms transition + 2500ms..4500ms delay in faded-out state = 6000ms..8000ms
+        // When fading IN (opacity -> 1):
+        // 3500ms transition + 6000ms..12000ms delay in fully visible state = 9500ms..15500ms
+        const nextDelay = isFaded
+          ? 3500 + 2500 + Math.random() * 2000
+          : 3500 + 6000 + Math.random() * 6000
+
+        const timer = setTimeout(runStep, nextDelay)
         timers.push(timer)
       }
 
-      // Initial stagger spread over 0s to 8s so cards don't start at once
-      const initialStagger = Math.random() * 8000
-      const initialTimer = setTimeout(() => {
-        runCycle()
-      }, initialStagger)
-
+      // Initial stagger so cards desynchronize naturally (between 1s and 8s)
+      const initialStagger = 1000 + Math.random() * 7000
+      const initialTimer = setTimeout(runStep, initialStagger)
       timers.push(initialTimer)
     }
 
@@ -160,24 +166,53 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     }
   }, [isInView])
 
-  // Normalized cards array
-  const rawCards = useMemo(() => (Array.isArray(cards) ? cards : []), [cards])
+  // Normalized cards array mapped directly to 21 discrete slots
+  const slotMap = useMemo(() => {
+    const rawList = Array.isArray(cards) ? cards : []
+    const mapped: (CardItem | null)[] = Array(TOTAL_DESKTOP_SLOTS).fill(null)
+    const unassigned: CardItem[] = []
+
+    // Pass 1: Place cards with an explicit slotNumber (1..21)
+    for (const card of rawList) {
+      if (!card) continue
+      const slotNum = card.slotNumber ? parseInt(card.slotNumber, 10) : NaN
+      if (!isNaN(slotNum) && slotNum >= 1 && slotNum <= TOTAL_DESKTOP_SLOTS) {
+        mapped[slotNum - 1] = card
+      } else {
+        unassigned.push(card)
+      }
+    }
+
+    // Pass 2: Place unassigned or 'auto' cards into remaining empty slots
+    let emptyIdx = 0
+    for (const card of unassigned) {
+      while (emptyIdx < TOTAL_DESKTOP_SLOTS && mapped[emptyIdx] !== null) {
+        emptyIdx++
+      }
+      if (emptyIdx < TOTAL_DESKTOP_SLOTS) {
+        mapped[emptyIdx] = card
+        emptyIdx++
+      }
+    }
+
+    return mapped
+  }, [cards])
 
   // Slots distribution:
-  // Left Wing (8 cards: rows 0..3, cols 0..1): indices 0..7
-  // Top Center (5 cards: row 0, cols 2..6): indices 8..12
-  // Right Wing (8 cards: rows 0..3, cols 7..8): indices 13..20
+  // Left Wing (8 cards: rows 0..3, cols 0..1): indices 0..7 (Slots 1..8)
+  // Top Center (5 cards: row 0, cols 2..6): indices 8..12 (Slots 9..13)
+  // Right Wing (8 cards: rows 0..3, cols 7..8): indices 13..20 (Slots 14..21)
   const leftWingCards = useMemo(() => {
-    return Array.from({ length: 8 }).map((_, i) => rawCards[i] || null)
-  }, [rawCards])
+    return slotMap.slice(0, 8)
+  }, [slotMap])
 
   const topCenterCards = useMemo(() => {
-    return Array.from({ length: 5 }).map((_, i) => rawCards[8 + i] || null)
-  }, [rawCards])
+    return slotMap.slice(8, 13)
+  }, [slotMap])
 
   const rightWingCards = useMemo(() => {
-    return Array.from({ length: 8 }).map((_, i) => rawCards[13 + i] || null)
-  }, [rawCards])
+    return slotMap.slice(13, 21)
+  }, [slotMap])
 
   // Alignment helpers
   const textAlignClasses = {
@@ -232,18 +267,27 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
         className={cn(
           'relative rounded-xl sm:rounded-2xl md:rounded-[1.25rem] flex items-center justify-center p-1.5 sm:p-2.5 md:p-3 aspect-square',
           'border border-white/70 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] backdrop-blur-sm',
-          'transition-all duration-[2600ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
           customBg,
-          isFaded ? 'opacity-25' : 'opacity-100',
+          isFaded ? 'opacity-35' : 'opacity-100',
           extraClasses,
         )}
+        style={{
+          transition:
+            'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1), background-color 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+          willChange: 'opacity, transform',
+        }}
       >
         {card?.image && typeof card.image === 'object' && (
           <div
             className={cn(
-              'w-full h-full flex items-center justify-center transition-all duration-[2600ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
-              isFaded ? 'opacity-0 scale-95' : 'opacity-100 scale-100',
+              'w-full h-full flex items-center justify-center',
+              isFaded ? 'opacity-0 scale-90' : 'opacity-100 scale-100',
             )}
+            style={{
+              transition:
+                'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'opacity, transform',
+            }}
           >
             <Media
               resource={card.image}
@@ -258,9 +302,14 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
             src={card.image}
             alt={card.altText || 'Connector Logo'}
             className={cn(
-              'max-w-full max-h-full object-contain rounded-full transition-all duration-[2600ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
-              isFaded ? 'opacity-0 scale-95' : 'opacity-100 scale-100',
+              'max-w-full max-h-full object-contain rounded-full',
+              isFaded ? 'opacity-0 scale-90' : 'opacity-100 scale-100',
             )}
+            style={{
+              transition:
+                'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+              willChange: 'opacity, transform',
+            }}
             loading="lazy"
           />
         )}

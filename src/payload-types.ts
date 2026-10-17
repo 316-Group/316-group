@@ -9941,10 +9941,39 @@ export interface Page {
             | null;
         };
         /**
-         * Add items with PNG/SVG images. Cards without an image render as subtle empty rounded cards as seen in the mockup.
+         * Add items with PNG/SVG images. Select which card slot each image belongs to, or leave as Auto.
          */
         cards?:
           | {
+              /**
+               * Choose which card slot this image displays on (Card 1 to Card 21). Leave as Auto to fill sequentially.
+               */
+              slotNumber?:
+                | (
+                    | 'auto'
+                    | '1'
+                    | '2'
+                    | '3'
+                    | '4'
+                    | '5'
+                    | '6'
+                    | '7'
+                    | '8'
+                    | '9'
+                    | '10'
+                    | '11'
+                    | '12'
+                    | '13'
+                    | '14'
+                    | '15'
+                    | '16'
+                    | '17'
+                    | '18'
+                    | '19'
+                    | '20'
+                    | '21'
+                  )
+                | null;
               image?: (string | null) | Media;
               altText?: string | null;
               /**
@@ -51486,10 +51515,39 @@ export interface ContentBlock {
                     | null;
                 };
                 /**
-                 * Add items with PNG/SVG images. Cards without an image render as subtle empty rounded cards as seen in the mockup.
+                 * Add items with PNG/SVG images. Select which card slot each image belongs to, or leave as Auto.
                  */
                 cards?:
                   | {
+                      /**
+                       * Choose which card slot this image displays on (Card 1 to Card 21). Leave as Auto to fill sequentially.
+                       */
+                      slotNumber?:
+                        | (
+                            | 'auto'
+                            | '1'
+                            | '2'
+                            | '3'
+                            | '4'
+                            | '5'
+                            | '6'
+                            | '7'
+                            | '8'
+                            | '9'
+                            | '10'
+                            | '11'
+                            | '12'
+                            | '13'
+                            | '14'
+                            | '15'
+                            | '16'
+                            | '17'
+                            | '18'
+                            | '19'
+                            | '20'
+                            | '21'
+                          )
+                        | null;
                       image?: (string | null) | Media;
                       altText?: string | null;
                       /**
@@ -143043,6 +143101,7 @@ export interface PagesSelect<T extends boolean = true> {
               cards?:
                 | T
                 | {
+                    slotNumber?: T;
                     image?: T;
                     altText?: T;
                     cardBgColor?: T;
@@ -143914,6 +143973,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     cards?:
                       | T
                       | {
+                          slotNumber?: T;
                           image?: T;
                           altText?: T;
                           cardBgColor?: T;
