@@ -7,9 +7,32 @@ import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 
+export interface SubCardItem {
+  id?: string | null
+  title?: string | null
+  titleColor?: string | null
+  titleFontSize?: string | null
+  titleFontWeight?: string | null
+  titleAlignment?: 'left' | 'center' | 'right' | null
+  description?: string | null
+  descriptionColor?: string | null
+  descriptionFontSize?: string | null
+  descriptionFontWeight?: string | null
+  descriptionAlignment?: 'left' | 'center' | 'right' | null
+}
+
 export interface CardItem {
   image?: MediaType | string | null
   overlayStyle?: 'vignette' | 'subtle' | 'medium' | 'heavy' | 'none' | null
+  activeBlur?: 'blur-[2px]' | 'blur-sm' | 'blur-md' | 'blur-none' | null
+
+  kickerGroup?: {
+    text?: string | null
+    color?: string | null
+    fontSize?: string | null
+    fontWeight?: string | null
+  } | null
+
   headingGroup?: {
     heading?: string | null
     headingColor?: string | null
@@ -17,12 +40,22 @@ export interface CardItem {
     headingFontWeight?: string | null
     collapsedFontSize?: string | null
   } | null
+
   descriptionGroup?: {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
     descriptionFontWeight?: string | null
   } | null
+
+  subCardsGroup?: {
+    enableSubCards?: boolean | null
+    subCardsBgColor?: string | null
+    subCardsRounded?: string | null
+    subCardsBorder?: string | null
+    items?: SubCardItem[] | null
+  } | null
+
   buttonGroup?: {
     showButton?: boolean | null
     buttonText?: string | null
@@ -70,7 +103,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   sectionBgColor = 'bg-white',
   paddingTop = 'pt-16',
   paddingBottom = 'pb-16',
-  cardHeight = 'h-[520px] md:h-[620px] lg:h-[660px]',
+  cardHeight = 'h-[580px] md:h-[680px] lg:h-[720px]',
   scrollBehavior = 'sticky',
   showIndicators = true,
   cards = [],
@@ -78,8 +111,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   isEmbedded = false,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [isInView, setIsInView] = useState<boolean>(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const isScrollingProgrammatically = useRef<boolean>(false)
   const lastWheelTime = useRef<number>(0)
@@ -102,16 +137,36 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     return '#'
   }
 
-  // Smoothly scroll the cards track to keep the active card visible
+  // IntersectionObserver to trigger reload and scroll entrance animations
+  useEffect(() => {
+    const target = sectionRef.current || wrapperRef.current
+    if (!target) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+        } else {
+          // Re-enable trigger when scrolling away so scrolling back up re-triggers animation
+          setIsInView(false)
+        }
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px',
+      },
+    )
+
+    observer.observe(target)
+    return () => observer.disconnect()
+  }, [])
+
+  // Smoothly scroll the cards track to keep the active card centered / fully visible
   const scrollCardIntoView = useCallback((index: number) => {
     const cardEl = cardRefs.current[index]
     const trackEl = trackRef.current
     if (!cardEl || !trackEl) return
 
-    const cardRect = cardEl.getBoundingClientRect()
-    const trackRect = trackEl.getBoundingClientRect()
-
-    // Determine target scroll position to center the active card or reveal upcoming items
     const scrollTarget =
       cardEl.offsetLeft -
       (trackEl.clientWidth / 2 - cardEl.clientWidth / 2) +
@@ -123,7 +178,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     })
   }, [])
 
-  // When active index changes, gently auto-scroll the track
+  // When active index changes, auto-scroll the track
   useEffect(() => {
     scrollCardIntoView(activeIndex)
   }, [activeIndex, scrollCardIntoView])
@@ -201,14 +256,12 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     if (now - lastWheelTime.current < 450) return // debounce wheel events
 
     if (e.deltaY > 25) {
-      // Scroll down -> next card
       if (activeIndex < count - 1) {
         e.preventDefault()
         lastWheelTime.current = now
         setActiveIndex((prev) => prev + 1)
       }
     } else if (e.deltaY < -25) {
-      // Scroll up -> previous card
       if (activeIndex > 0) {
         e.preventDefault()
         lastWheelTime.current = now
@@ -234,11 +287,18 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
 
   // Overlay styles map
   const overlayMap = {
-    vignette: 'bg-gradient-to-t from-black/85 via-black/40 to-black/30',
+    vignette: 'bg-gradient-to-t from-black/85 via-black/40 to-black/35',
     subtle: 'bg-black/30',
     medium: 'bg-black/50',
     heavy: 'bg-black/70',
     none: 'bg-transparent',
+  }
+
+  // Alignment classes for sub-card texts
+  const alignmentTextClasses = {
+    left: 'text-left',
+    center: 'text-center',
+    right: 'text-right',
   }
 
   // Wrapper height when sticky scroll is enabled
@@ -254,6 +314,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
       className={cn('relative w-full', sectionBgColor || 'bg-white', className)}
     >
       <section
+        ref={sectionRef}
         onWheel={handleWheel}
         onKeyDown={handleKeyDown}
         tabIndex={0}
@@ -275,23 +336,52 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
             {items.map((card, idx) => {
               const isActive = idx === activeIndex
               const overlay = overlayMap[card.overlayStyle || 'vignette']
+              const activeBlurClass = card.activeBlur || 'blur-[2px]'
 
-              // Heading config
-              const headingText = card.headingGroup?.heading || 'Card Heading'
+              // ─── Kicker config ─────────────────────────────────────────────
+              const kickerText = card.kickerGroup?.text || 'Fintech & Payments'
+              const kickerColor = card.kickerGroup?.color || 'text-[#52B5D8]'
+              const kickerSize = card.kickerGroup?.fontSize || 'text-base md:text-lg'
+              const kickerWeight = card.kickerGroup?.fontWeight || 'font-semibold'
+
+              // ─── Heading config ────────────────────────────────────────────
+              const headingText =
+                card.headingGroup?.heading || 'Making everyday finance more connected.'
               const headingColor = card.headingGroup?.headingColor || 'text-white'
               const headingSize =
-                card.headingGroup?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl'
+                card.headingGroup?.headingFontSize || 'text-3xl sm:text-4xl md:text-5xl'
               const headingWeight = card.headingGroup?.headingFontWeight || 'font-bold'
               const collapsedSize =
                 card.headingGroup?.collapsedFontSize || 'text-xl md:text-2xl'
 
-              // Description config
+              // ─── Description config ────────────────────────────────────────
               const descText = card.descriptionGroup?.description
               const descColor = card.descriptionGroup?.descriptionColor || 'text-white/90'
               const descSize = card.descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
               const descWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
 
-              // Button config
+              // ─── Sub-Cards config (Up to 3) ─────────────────────────────────
+              const subCardsConfig = card.subCardsGroup
+              const showSubCards = subCardsConfig?.enableSubCards !== false
+              const subCardsBg = subCardsConfig?.subCardsBgColor || 'bg-white/15 backdrop-blur-md'
+              const subCardsRounded = subCardsConfig?.subCardsRounded || 'rounded-2xl'
+              const subCardsBorder = subCardsConfig?.subCardsBorder || 'border border-white/20'
+              const subCardsItems = subCardsConfig?.items || [
+                {
+                  title: 'Multi-currency\nwallets',
+                  description: 'Hold and manage supported currency balances.',
+                },
+                {
+                  title: 'Send\n& receive',
+                  description: 'Transfers, requests, bill splitting and remittance.',
+                },
+                {
+                  title: 'Everyday\nmoney tools',
+                  description: 'Virtual cards, statements and account experiences.',
+                },
+              ]
+
+              // ─── Button config ─────────────────────────────────────────────
               const showButton = card.buttonGroup?.showButton !== false
               const buttonText = card.buttonGroup?.buttonText || 'Learn more'
               const buttonBg = card.buttonGroup?.buttonBgColor || 'bg-white/20'
@@ -313,26 +403,28 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   className={cn(
                     'relative rounded-[28px] md:rounded-[36px] overflow-hidden cursor-pointer group shrink-0',
                     'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
-                    cardHeight || 'h-[520px] md:h-[620px] lg:h-[660px]',
+                    cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
                     // Flex / width based on active state
                     isActive
-                      ? 'w-[85vw] sm:w-[500px] md:w-[620px] lg:w-[680px] xl:w-[760px] md:flex-[3.5] shadow-2xl'
+                      ? 'w-[90vw] sm:w-[580px] md:w-[680px] lg:w-[780px] xl:w-[860px] md:flex-[3.5] shadow-2xl'
                       : 'w-[140px] sm:w-[170px] md:w-[200px] lg:w-[220px] md:flex-[1] shadow-md hover:brightness-105',
                   )}
                 >
-                  {/* Background Image */}
+                  {/* Background Image with Active Blur effect */}
                   {card.image && typeof card.image === 'object' && (
                     <Media
                       resource={card.image}
                       fill
                       imgClassName={cn(
-                        'object-cover w-full h-full transition-transform duration-700 ease-out',
-                        isActive ? 'scale-100' : 'scale-105 group-hover:scale-110',
+                        'object-cover w-full h-full transition-all duration-700 ease-out',
+                        isActive
+                          ? cn('scale-105', activeBlurClass)
+                          : 'scale-100 blur-none group-hover:scale-105',
                       )}
                     />
                   )}
 
-                  {/* Gradient / Dark Vignette Overlay */}
+                  {/* Dark Vignette Overlay */}
                   <div
                     className={cn(
                       'absolute inset-0 pointer-events-none transition-opacity duration-700',
@@ -342,10 +434,11 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                     )}
                   />
 
-                  {/* ─── ACTIVE CARD CONTENT ─────────────────────────────────── */}
+                  {/* ─── ACTIVE CARD CONTENT (Vertically Centered) ───────────── */}
                   <div
                     className={cn(
-                      'relative z-10 h-full flex flex-col justify-between',
+                      'relative z-10 h-full flex flex-col justify-center',
+                      'gap-5 sm:gap-6 md:gap-7',
                       'p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14',
                       'transition-all duration-500 ease-out',
                       isActive
@@ -353,11 +446,27 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         : 'opacity-0 pointer-events-none absolute inset-0',
                     )}
                   >
-                    {/* Top Content: Heading & Description */}
+                    {/* Top Group: Kicker + Heading + Description */}
                     <div className="flex flex-col">
+                      {/* Small Kicker */}
+                      {kickerText && (
+                        <span
+                          className={cn(
+                            'block mb-2 md:mb-3 tracking-normal transition-all duration-700',
+                            isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
+                            kickerSize,
+                            kickerColor,
+                            kickerWeight,
+                          )}
+                          dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
+                        />
+                      )}
+
+                      {/* Main Heading */}
                       <h3
                         className={cn(
-                          'tracking-tight leading-[1.18] transition-colors',
+                          'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
+                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
                           headingSize,
                           headingColor,
                           headingWeight,
@@ -365,10 +474,12 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
                       />
 
+                      {/* Description */}
                       {descText && (
                         <div
                           className={cn(
-                            'mt-4 md:mt-6 leading-relaxed max-w-xl transition-all duration-500 delay-100',
+                            'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
+                            isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
                             descSize,
                             descColor,
                             descWeight,
@@ -378,16 +489,80 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                       )}
                     </div>
 
-                    {/* Bottom Content: Pill Action Button */}
+                    {/* ─── Sub-Cards Row (Up to 3 cards) ─────────────────────── */}
+                    {showSubCards && subCardsItems.length > 0 && (
+                      <div
+                        className={cn(
+                          'grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full transition-all duration-700 delay-300',
+                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+                        )}
+                      >
+                        {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
+                          const title = subCard.title || 'Feature'
+                          const titleColor = subCard.titleColor || 'text-white'
+                          const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
+                          const titleWeight = subCard.titleFontWeight || 'font-bold'
+                          const titleAlign = subCard.titleAlignment || 'left'
+
+                          const subDesc = subCard.description
+                          const subDescColor = subCard.descriptionColor || 'text-white/80'
+                          const subDescSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
+                          const subDescWeight = subCard.descriptionFontWeight || 'font-normal'
+                          const subDescAlign = subCard.descriptionAlignment || 'left'
+
+                          return (
+                            <div
+                              key={subCard.id || subIdx}
+                              className={cn(
+                                'flex flex-col justify-between h-full min-h-[130px] sm:min-h-[145px] md:min-h-[160px]',
+                                'p-4 sm:p-5 md:p-6 shadow-md transition-all duration-300 hover:scale-[1.02]',
+                                subCardsBg,
+                                subCardsRounded,
+                                subCardsBorder,
+                              )}
+                            >
+                              <div
+                                className={cn(
+                                  'leading-snug transition-colors',
+                                  titleSize,
+                                  titleColor,
+                                  titleWeight,
+                                  alignmentTextClasses[titleAlign],
+                                )}
+                                dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
+                              />
+
+                              {subDesc && (
+                                <div
+                                  className={cn(
+                                    'mt-3 leading-relaxed transition-colors',
+                                    subDescSize,
+                                    subDescColor,
+                                    subDescWeight,
+                                    alignmentTextClasses[subDescAlign],
+                                  )}
+                                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
+                                />
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )}
+
+                    {/* ─── Bottom Pill Action Button ──────────────────────────── */}
                     {showButton && (
-                      <div className="mt-8 pt-4 flex items-center">
+                      <div
+                        className={cn(
+                          'pt-1 flex items-center transition-all duration-700 delay-400',
+                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
+                        )}
+                      >
                         <Link
                           href={buttonHref}
                           target={isNewTab ? '_blank' : undefined}
                           rel={isNewTab ? 'noopener noreferrer' : undefined}
                           onClick={(e) => {
-                            // If user clicks the button on the active card, allow navigation;
-                            // stop propagation so card click handler doesn't interfere
                             e.stopPropagation()
                           }}
                           className={cn(
@@ -430,7 +605,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         headingColor,
                         headingWeight,
                       )}
-                      dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
+                      dangerouslySetInnerHTML={{
+                        __html: formatInlineHtml(kickerText || headingText),
+                      }}
                     />
                   </div>
                 </div>

@@ -29,6 +29,7 @@ export default {
     'bg-[#3F5AC9]',
     'bg-[#F7F8F4]',
     'text-[#F7F8F4]',
+    'text-[#52B5D8]',
   ],
   theme: {
     container: {

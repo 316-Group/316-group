@@ -22,6 +22,7 @@ export const textColorPickerAll: textColorType = ({
       { label: 'Indigo Accent (#3F5AC9)', value: 'text-[#3F5AC9]' },
       { label: 'Soft Blue Gray (#EFF1F8)', value: 'text-[#EFF1F8]' },
       { label: 'Light Sky Blue (#ADE2FF)', value: 'text-light-sky' },
+      { label: 'Teal Cyan (#52B5D8)', value: 'text-[#52B5D8]' },
       { label: 'Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
       { label: 'Custom Blue (#0256FF)', value: 'text-blue-custom' },
       { label: 'Slate 50', value: 'text-slate-50' },

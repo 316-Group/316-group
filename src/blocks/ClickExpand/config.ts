@@ -4,6 +4,12 @@ import { textColorPickerAll } from '@/fields/textColorPicker'
 import { link } from '@/fields/link'
 import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
 
+const alignmentOptions = [
+  { label: 'Left (Default)', value: 'left' },
+  { label: 'Center', value: 'center' },
+  { label: 'Right', value: 'right' },
+]
+
 export const buttonBgOptions = [
   { label: 'Semi-Transparent White (bg-white/20 - Default)', value: 'bg-white/20' },
   { label: 'Light Transparent White (bg-white/10)', value: 'bg-white/10' },
@@ -81,13 +87,13 @@ export const clickExpandFields: Field[] = [
         name: 'cardHeight',
         type: 'select',
         label: 'Cards Height',
-        defaultValue: 'h-[520px] md:h-[620px] lg:h-[660px]',
+        defaultValue: 'h-[580px] md:h-[680px] lg:h-[720px]',
         options: [
-          { label: 'Compact (h-500px)', value: 'h-[460px] md:h-[500px]' },
-          { label: 'Medium (h-580px)', value: 'h-[480px] md:h-[580px]' },
-          { label: 'Standard (h-660px - Default)', value: 'h-[520px] md:h-[620px] lg:h-[660px]' },
-          { label: 'Large (h-740px)', value: 'h-[560px] md:h-[680px] lg:h-[740px]' },
-          { label: 'Viewport Height (80vh)', value: 'h-[70vh] md:h-[80vh]' },
+          { label: 'Compact (h-520px)', value: 'h-[480px] md:h-[520px]' },
+          { label: 'Medium (h-620px)', value: 'h-[520px] md:h-[620px]' },
+          { label: 'Standard (h-720px - Default)', value: 'h-[580px] md:h-[680px] lg:h-[720px]' },
+          { label: 'Large (h-780px)', value: 'h-[620px] md:h-[720px] lg:h-[780px]' },
+          { label: 'Viewport Height (85vh)', value: 'h-[75vh] md:h-[85vh]' },
         ],
         admin: {
           width: '50%',
@@ -149,30 +155,104 @@ export const clickExpandFields: Field[] = [
         required: true,
       },
       {
-        name: 'overlayStyle',
-        type: 'select',
-        label: 'Image Dark Overlay Style',
-        defaultValue: 'vignette',
-        options: [
-          { label: 'Vignette Dark Gradient (Recommended)', value: 'vignette' },
-          { label: 'Subtle Dark Overlay', value: 'subtle' },
-          { label: 'Medium Dark Overlay', value: 'medium' },
-          { label: 'Heavy Dark Overlay', value: 'heavy' },
-          { label: 'None (Pure Image)', value: 'none' },
+        type: 'row',
+        fields: [
+          {
+            name: 'overlayStyle',
+            type: 'select',
+            label: 'Image Dark Overlay Style',
+            defaultValue: 'vignette',
+            options: [
+              { label: 'Vignette Dark Gradient (Recommended)', value: 'vignette' },
+              { label: 'Subtle Dark Overlay', value: 'subtle' },
+              { label: 'Medium Dark Overlay', value: 'medium' },
+              { label: 'Heavy Dark Overlay', value: 'heavy' },
+              { label: 'None (Pure Image)', value: 'none' },
+            ],
+            admin: {
+              width: '50%',
+            },
+          },
+          {
+            name: 'activeBlur',
+            type: 'select',
+            label: 'Active Card Background Blur Effect',
+            defaultValue: 'blur-[2px]',
+            options: [
+              { label: 'Subtle Blur (Default - 2px)', value: 'blur-[2px]' },
+              { label: 'Medium Blur (blur-sm - 4px)', value: 'blur-sm' },
+              { label: 'Strong Blur (blur-md - 8px)', value: 'blur-md' },
+              { label: 'No Blur (Crisp Image)', value: 'blur-none' },
+            ],
+            admin: {
+              width: '50%',
+              description: 'Applied when this card is active. Collapsed cards stay crisp with no blur.',
+            },
+          },
         ],
       },
 
-      // ─── Heading ───────────────────────────────────────────────────────────
+      // ─── Small Top Kicker Heading (e.g. Fintech & Payments) ─────────────────
+      {
+        name: 'kickerGroup',
+        type: 'group',
+        label: 'Small Top Kicker Heading (e.g. Fintech & Payments)',
+        fields: [
+          {
+            name: 'text',
+            type: 'text',
+            label: 'Kicker Text',
+            defaultValue: 'Fintech & Payments',
+          },
+          {
+            type: 'row',
+            fields: [
+              textColorPickerAll({
+                overrides: {
+                  name: 'color',
+                  label: 'Kicker Color',
+                  defaultValue: 'text-[#52B5D8]',
+                  admin: {
+                    width: '33.33%',
+                  },
+                },
+              }),
+              {
+                name: 'fontSize',
+                type: 'select',
+                label: 'Kicker Font Size',
+                defaultValue: 'text-base md:text-lg',
+                options: fontSizeOptions,
+                admin: {
+                  width: '33.33%',
+                },
+              },
+              {
+                name: 'fontWeight',
+                type: 'select',
+                label: 'Kicker Font Weight',
+                defaultValue: 'font-semibold',
+                options: fontWeightOptions,
+                admin: {
+                  width: '33.33%',
+                },
+              },
+            ],
+          },
+        ],
+      },
+
+      // ─── Main Heading (e.g. Making everyday finance more connected.) ─────────
       {
         name: 'headingGroup',
         type: 'group',
-        label: 'Heading',
+        label: 'Main Heading',
         fields: [
           {
             name: 'heading',
             type: 'text',
-            label: 'Heading Text (supports inline HTML like <style="color:red">, <span>, <strong>, <br />)',
-            defaultValue: 'Fintech & Payments',
+            label: 'Heading Text (supports inline HTML like <strong>, <style="color:red">, <span>)',
+            defaultValue: 'Making everyday finance more connected.',
             required: true,
           },
           {
@@ -233,7 +313,7 @@ export const clickExpandFields: Field[] = [
           {
             name: 'description',
             type: 'textarea',
-            label: 'Description Text (supports inline HTML like <style="color:red"> or <span style="...">)',
+            label: 'Description Text (supports inline HTML)',
             defaultValue:
               'Digital wallets, multi-currency accounts, international transfers, remittance, virtual cards and everyday financial services for individuals and businesses across borders.',
           },
@@ -269,6 +349,193 @@ export const clickExpandFields: Field[] = [
                 admin: {
                   width: '33.33%',
                 },
+              },
+            ],
+          },
+        ],
+      },
+
+      // ─── Floating Sub-Cards (Up to 3 cards) ────────────────────────────────
+      {
+        name: 'subCardsGroup',
+        type: 'group',
+        label: 'Floating Glass Sub-Cards (Up to 3 cards)',
+        fields: [
+          {
+            name: 'enableSubCards',
+            type: 'checkbox',
+            label: 'Enable Floating Glass Cards',
+            defaultValue: true,
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, siblingData) => siblingData?.enableSubCards !== false,
+            },
+            fields: [
+              {
+                name: 'subCardsBgColor',
+                type: 'select',
+                label: 'Cards Transparent Overlay Background',
+                defaultValue: 'bg-white/15 backdrop-blur-md',
+                options: [
+                  { label: 'Transparent White 15% with Blur (Default)', value: 'bg-white/15 backdrop-blur-md' },
+                  { label: 'Transparent White 10% with Blur', value: 'bg-white/10 backdrop-blur-md' },
+                  { label: 'Transparent White 20% with Blur', value: 'bg-white/20 backdrop-blur-md' },
+                  { label: 'Transparent White 25% with Blur', value: 'bg-white/25 backdrop-blur-md' },
+                  { label: 'Transparent Dark 20% with Blur', value: 'bg-black/20 backdrop-blur-md' },
+                  { label: 'Transparent Dark 30% with Blur', value: 'bg-black/30 backdrop-blur-md' },
+                  { label: 'Subtle Glass (bg-white/5 backdrop-blur-sm)', value: 'bg-white/5 backdrop-blur-sm' },
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+              {
+                name: 'subCardsRounded',
+                type: 'select',
+                label: 'Cards Border Radius',
+                defaultValue: 'rounded-2xl',
+                options: [
+                  { label: 'Rounded 2XL (24px - Default)', value: 'rounded-2xl' },
+                  { label: 'Rounded 3XL (32px)', value: 'rounded-3xl' },
+                  { label: 'Rounded XL (16px)', value: 'rounded-xl' },
+                  { label: 'Rounded LG (12px)', value: 'rounded-lg' },
+                  { label: 'None', value: 'rounded-none' },
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+              {
+                name: 'subCardsBorder',
+                type: 'select',
+                label: 'Cards Border',
+                defaultValue: 'border border-white/20',
+                options: [
+                  { label: 'Subtle Glass Border (Default)', value: 'border border-white/20' },
+                  { label: 'Soft Border (border-white/10)', value: 'border border-white/10' },
+                  { label: 'Strong Border (border-white/30)', value: 'border border-white/30' },
+                  { label: 'No Border', value: 'border-0' },
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+            ],
+          },
+          {
+            name: 'items',
+            type: 'array',
+            label: 'Sub-Card Items (Maximum 3)',
+            maxRows: 3,
+            minRows: 0,
+            admin: {
+              condition: (_, siblingData) => siblingData?.enableSubCards !== false,
+            },
+            fields: [
+              {
+                name: 'title',
+                type: 'text',
+                label: 'Card Heading (e.g. Multi-currency wallets)',
+                required: true,
+                defaultValue: 'Multi-currency wallets',
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'titleColor',
+                      label: 'Heading Color',
+                      defaultValue: 'text-white',
+                      admin: {
+                        width: '25%',
+                      },
+                    },
+                  }),
+                  {
+                    name: 'titleFontSize',
+                    type: 'select',
+                    label: 'Font Size',
+                    defaultValue: 'text-lg md:text-xl',
+                    options: fontSizeOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                  {
+                    name: 'titleFontWeight',
+                    type: 'select',
+                    label: 'Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                  {
+                    name: 'titleAlignment',
+                    type: 'select',
+                    label: 'Heading Alignment',
+                    defaultValue: 'left',
+                    options: alignmentOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                ],
+              },
+              {
+                name: 'description',
+                type: 'textarea',
+                label: 'Card Description',
+                defaultValue: 'Hold and manage supported currency balances.',
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'descriptionColor',
+                      label: 'Description Color',
+                      defaultValue: 'text-white/80',
+                      admin: {
+                        width: '25%',
+                      },
+                    },
+                  }),
+                  {
+                    name: 'descriptionFontSize',
+                    type: 'select',
+                    label: 'Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                  {
+                    name: 'descriptionFontWeight',
+                    type: 'select',
+                    label: 'Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                  {
+                    name: 'descriptionAlignment',
+                    type: 'select',
+                    label: 'Description Alignment',
+                    defaultValue: 'left',
+                    options: alignmentOptions,
+                    admin: {
+                      width: '25%',
+                    },
+                  },
+                ],
               },
             ],
           },
