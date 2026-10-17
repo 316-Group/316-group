@@ -29,6 +29,7 @@ import { icon } from '@/fields/icon'
 import { gradientColorPicker } from '@/fields/gradientColorPicker'
 import { link } from '@/fields/link'
 import { centeredContentFields } from '../CenteredContent/config'
+import { clickExpandFields } from '../ClickExpand/config'
 
 const columnFields: Field[] = [
   {
@@ -107,6 +108,7 @@ const columnFields: Field[] = [
           { label: 'Custom Button', value: 'customButton' },
           { label: 'Solutions Accordion', value: 'solutionsAccordion' },
           { label: 'Centered Content', value: 'centeredContent' },
+          { label: 'Click Expand Cards', value: 'clickExpand' },
         ],
       },
       {
@@ -1667,6 +1669,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'centeredContent',
         },
         fields: centeredContentFields,
+      },
+
+      // ─── Click Expand Cards ────────────────────────────────────────────────
+      {
+        name: 'clickExpand',
+        type: 'group',
+        label: 'Click Expand Cards',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'clickExpand',
+        },
+        fields: clickExpandFields,
       },
     ],
   },

@@ -21,6 +21,7 @@ import { getBestContrastTextColor } from '@/utilities/getBestContrastTextColor'
 import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
 import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
 import { CenteredContentComponent } from '../CenteredContent/Component'
+import { ClickExpandBlock } from '../ClickExpand/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -767,6 +768,16 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <CenteredContentComponent
                         key={index}
                         {...(content as any).centeredContent}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'clickExpand' && (content as any).clickExpand) {
+                    return (
+                      <ClickExpandBlock
+                        key={index}
+                        isEmbedded={true}
+                        {...(content as any).clickExpand}
                       />
                     )
                   }

@@ -37,6 +37,7 @@ import { ImageTextSplitBlock } from './ImageTextSplit/Component'
 import { AgenticGridBlock } from './AgenticGrid/Component'
 import { SolutionsAccordionBlock } from './SolutionsAccordion/Component'
 import { CenteredContentBlock } from './CenteredContent/Component'
+import { ClickExpandBlock } from './ClickExpand/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -73,6 +74,7 @@ const blockComponents = {
   agenticGrid: AgenticGridBlock,
   solutionsAccordion: SolutionsAccordionBlock,
   centeredContent: CenteredContentBlock,
+  clickExpand: ClickExpandBlock,
 }
 
 export const RenderBlocks: React.FC<{
