@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Menu, X, ArrowLeft, ArrowRight } from 'lucide-react'
 import { MenuItem } from './MenuItem'
 import { MegaMenuContent } from './MegaMenuContent'
@@ -26,6 +27,11 @@ export const MegaMenu = ({
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   useEffect(() => {
     // Set initial value and listen for changes
     const handleResize = () => {
@@ -151,163 +157,154 @@ export const MegaMenu = ({
         })}
       </nav>
 
-      {/* Overlay */}
-      {(isOpen || activeSection) && (
-        <div
-          className={cn(
-            'fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300',
-            {
-              'opacity-100': isOpen || activeSection,
-              'opacity-0': !isOpen && !activeSection,
-            },
-          )}
-          onClick={() => {
-            setIsOpen(false)
-            setActiveSection(null)
-          }}
-        />
-      )}
-
-      {/* Desktop Mega Menu */}
-      <div
-        className={cn(
-          'hidden lg:block fixed top-0 right-0 bg-white dark:bg-gray-900 shadow-xl z-50 pl-8',
-          'rounded-l-2xl',
-          'animate-in slide-in-from-top',
-          {
-            'translate-y-0 opacity-100 transition-all duration-300 ease-in-out': activeSection,
-            '-translate-y-4 opacity-0 pointer-events-none': !activeSection,
-          },
-        )}
-        style={{
-          height: '100vh',
-          width: 'max(55%, 900px)',
-          visibility: activeSection ? 'visible' : 'hidden',
-        }}
-      >
-        <div className="p-8">
-          {/* Menu Items at Top */}
-          <div className="flex gap-6 justify-start mb-8  pb-4">
-            {header.navItems?.map((section, index) => (
-              <MenuItem
-                className={cn('font-normal justify-start text-xl')}
-                isMobile={isMobile}
-                key={index}
-                href={getHref(section.link)}
-                title={section.title}
-                hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-                isActive={activeSection === section.title}
+      {/* Portalled Drawer and Overlay so they are never trapped by backdrop-blur or container overflow */}
+      {mounted &&
+        createPortal(
+          <>
+            {/* Overlay */}
+            {(isOpen || activeSection) && (
+              <div
+                className={cn(
+                  'fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300',
+                  {
+                    'opacity-100': isOpen || activeSection,
+                    'opacity-0': !isOpen && !activeSection,
+                  },
+                )}
                 onClick={() => {
-                  if (section.hasMegaMenu !== true) {
-                    setIsOpen(false)
-                    setActiveSection(null)
-                  } else
-                    section.title &&
-                      setActiveSection(activeSection === section.title ? null : section.title)
+                  setIsOpen(false)
+                  setActiveSection(null)
                 }}
               />
-            ))}
-          </div>
+            )}
 
-          {/* Active Section Content */}
-          {activeSection !== null && (
-            <MegaMenuContent
-              setActiveSection={setActiveSection}
-              setIsOpen={setIsOpen}
-              items={getMegaMenuItems(activeSection)}
-            />
-          )}
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={cn(
-          'fixed inset-0 top-0 bg-white dark:bg-gray-900 z-50 transition-all duration-300 ease-in-out overflow-auto lg:hidden p-4',
-          {
-            'translate-y-0': isOpen,
-            'translate-y-full': !isOpen,
-          },
-        )}
-      >
-        {/*
-         * In heroOverlay mode the parent pill header already shows the logo
-         * and hamburger. Render a minimal close-only bar to avoid duplicates.
-         */}
-        {heroOverlay ? (
-          <div className="flex items-center justify-end px-1 pb-16 pt-4">
-            <button
-              onClick={handleToggle}
-              className="lg:hidden hover:bg-gray-100 rounded-md transition-colors"
-              aria-label="Close menu"
-            >
-              {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center justify-between px-1 pb-16 pt-4">
-            <Link href="/">
-              {theme && theme === 'light' ? (
-                <Logo loading="eager" priority="high" />
-              ) : (
-                <LogoDark loading="eager" priority="high" />
+            {/* Desktop Mega Menu */}
+            <div
+              className={cn(
+                'hidden lg:block fixed top-0 right-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-xl z-50 pl-8',
+                'rounded-l-2xl',
+                'animate-in slide-in-from-top',
+                {
+                  'translate-y-0 opacity-100 transition-all duration-300 ease-in-out': activeSection,
+                  '-translate-y-4 opacity-0 pointer-events-none': !activeSection,
+                },
               )}
-            </Link>
-            <button
-              onClick={handleToggle}
-              className="lg:hidden hover:bg-gray-100 rounded-md transition-colors"
-              aria-label="Toggle menu"
+              style={{
+                height: '100vh',
+                width: 'max(55%, 900px)',
+                visibility: activeSection ? 'visible' : 'hidden',
+              }}
             >
-              {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
-            </button>
-          </div>
-        )}
-        {activeSection ? (
-          <div
-            className={cn('transition-all duration-300 ease-in-out', {
-              'animate-in-left': activeSection,
-              'animate-out-left': !activeSection,
-            })}
-          >
-            <button
-              onClick={handleBack}
-              className="flex items-center text-gray-600 hover:text-gray-900 py-4 px-1 w-[100%]"
-            >
-              <ArrowLeft className="h-6 w-6 mr-2 text-gray-900 dark:text-gray-100" />
-              {/* Back to Menu */}
-            </button>
-            <div className="p-1">
-              <MegaMenuContent
-                setActiveSection={setActiveSection}
-                setIsOpen={setIsOpen}
-                items={getMegaMenuItems(activeSection)}
-              />
+              <div className="p-8">
+                {/* Menu Items at Top */}
+                <div className="flex gap-6 justify-start mb-8 pb-4">
+                  {header.navItems?.map((section, index) => (
+                    <MenuItem
+                      className={cn('font-normal justify-start text-xl text-gray-900 dark:text-gray-100')}
+                      isMobile={isMobile}
+                      key={index}
+                      href={getHref(section.link)}
+                      title={section.title}
+                      hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
+                      isActive={activeSection === section.title}
+                      onClick={() => {
+                        if (section.hasMegaMenu !== true) {
+                          setIsOpen(false)
+                          setActiveSection(null)
+                        } else
+                          section.title &&
+                            setActiveSection(activeSection === section.title ? null : section.title)
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Active Section Content */}
+                {activeSection !== null && (
+                  <MegaMenuContent
+                    setActiveSection={setActiveSection}
+                    setIsOpen={setIsOpen}
+                    items={getMegaMenuItems(activeSection)}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="p-1 space-y-8">
-            {header.navItems?.map((section) => (
-              <MenuItem
-                className={cn('font-normal text-2xl justify-between w-[100%]')}
-                key={section.title}
-                title={section.title}
-                hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-                isActive={false}
-                href={getHref(section.link)}
-                onClick={() => {
-                  if (section.hasMegaMenu !== true) {
-                    setIsOpen(false)
-                    setActiveSection(null)
-                  } else
-                    section.title &&
-                      setActiveSection(activeSection === section.title ? null : section.title)
-                }}
-                isMobile={isMobile}
-              />
-            ))}
-          </div>
+
+            {/* Mobile Menu */}
+            <div
+              className={cn(
+                'fixed inset-0 top-0 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 z-50 transition-all duration-300 ease-in-out overflow-auto lg:hidden p-4',
+                {
+                  'translate-y-0': isOpen,
+                  'translate-y-full': !isOpen,
+                },
+              )}
+            >
+              <div className="flex items-center justify-between px-1 pb-16 pt-4">
+                <Link href="/">
+                  {theme && theme === 'light' ? (
+                    <Logo loading="eager" priority="high" />
+                  ) : (
+                    <LogoDark loading="eager" priority="high" />
+                  )}
+                </Link>
+                <button
+                  onClick={handleToggle}
+                  className="lg:hidden hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors text-gray-900 dark:text-gray-100"
+                  aria-label="Toggle menu"
+                >
+                  {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+                </button>
+              </div>
+              {activeSection ? (
+                <div
+                  className={cn('transition-all duration-300 ease-in-out', {
+                    'animate-in-left': activeSection,
+                    'animate-out-left': !activeSection,
+                  })}
+                >
+                  <button
+                    onClick={handleBack}
+                    className="flex items-center text-gray-600 hover:text-gray-900 py-4 px-1 w-[100%]"
+                  >
+                    <ArrowLeft className="h-6 w-6 mr-2 text-gray-900 dark:text-gray-100" />
+                    {/* Back to Menu */}
+                  </button>
+                  <div className="p-1">
+                    <MegaMenuContent
+                      setActiveSection={setActiveSection}
+                      setIsOpen={setIsOpen}
+                      items={getMegaMenuItems(activeSection)}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="p-1 space-y-8">
+                  {header.navItems?.map((section) => (
+                    <MenuItem
+                      className={cn('font-normal text-2xl justify-between w-[100%] text-gray-900 dark:text-gray-100')}
+                      key={section.title}
+                      title={section.title}
+                      hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
+                      isActive={false}
+                      href={getHref(section.link)}
+                      onClick={() => {
+                        if (section.hasMegaMenu !== true) {
+                          setIsOpen(false)
+                          setActiveSection(null)
+                        } else
+                          section.title &&
+                            setActiveSection(activeSection === section.title ? null : section.title)
+                      }}
+                      isMobile={isMobile}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          </>,
+          document.body,
         )}
-      </div>
     </div>
   )
 }

@@ -74,7 +74,7 @@ export const MegaMenuContent = ({ items, setIsOpen, setActiveSection }: MegaMenu
             <a
               key={index}
               href={getHref(item.link)}
-              className="block text-2xl font-normal text-gray-1000 hover:text-teal-600 py-2 transition-colors duration-200"
+              className="block text-2xl font-normal text-gray-900 dark:text-gray-100 hover:text-teal-600 py-2 transition-colors duration-200"
               onClick={() => {
                 setIsOpen(false)
                 setActiveSection(null)
@@ -84,7 +84,7 @@ export const MegaMenuContent = ({ items, setIsOpen, setActiveSection }: MegaMenu
                 <span dangerouslySetInnerHTML={{ __html: item.link?.label }}></span>
               )}
               {item.description && (
-                <span className="block text-sm text-gray-900 mt-1 hover:text-teal-600">
+                <span className="block text-sm text-gray-900 dark:text-gray-100 mt-1 hover:text-teal-600">
                   {item.description}
                 </span>
               )}

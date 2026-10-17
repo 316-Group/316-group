@@ -23,7 +23,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
 
   useEffect(() => {
     setHeaderTheme(null)
-    setHeroOverlay(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -32,7 +31,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
-  if (heroOverlay) {
+  if (heroOverlay || pathname === '/home-2') {
     /*
      * ── Hero Overlay Mode (GroupHeroV2) ──────────────────────────────────────
      * The GroupHeroV2 hero renders its own self-contained nav bar INSIDE the
