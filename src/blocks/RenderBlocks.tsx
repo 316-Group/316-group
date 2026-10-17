@@ -39,6 +39,7 @@ import { SolutionsAccordionBlock } from './SolutionsAccordion/Component'
 import { CenteredContentBlock } from './CenteredContent/Component'
 import { ClickExpandBlock } from './ClickExpand/Component'
 import { GridColBlock } from './GridCol/Component'
+import { AnimatedIconsGridBlock } from './AnimatedIconsGrid/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -77,6 +78,7 @@ const blockComponents = {
   centeredContent: CenteredContentBlock,
   clickExpand: ClickExpandBlock,
   gridCol: GridColBlock,
+  animatedIconsGrid: AnimatedIconsGridBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -51,6 +51,7 @@ import { SolutionsAccordion } from '@/blocks/SolutionsAccordion/config'
 import { CenteredContent } from '@/blocks/CenteredContent/config'
 import { ClickExpand } from '@/blocks/ClickExpand/config'
 import { GridCol } from '@/blocks/GridCol/config'
+import { AnimatedIconsGrid } from '@/blocks/AnimatedIconsGrid/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -144,6 +145,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 CenteredContent,
                 ClickExpand,
                 GridCol,
+                AnimatedIconsGrid,
               ],
               required: true,
             },
