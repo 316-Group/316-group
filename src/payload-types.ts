@@ -8872,11 +8872,6 @@ export interface Page {
                   value: string | Brand;
                 } | null);
             url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline' | 'ghost' | 'secondary' | 'underline') | null;
           };
           buttonBgColor?:
             | (
@@ -50422,11 +50417,6 @@ export interface ContentBlock {
                           value: string | Brand;
                         } | null);
                     url?: string | null;
-                    label: string;
-                    /**
-                     * Choose how the link should be rendered.
-                     */
-                    appearance?: ('default' | 'outline' | 'ghost' | 'secondary' | 'underline') | null;
                   };
                   buttonBgColor?:
                     | (
@@ -143041,8 +143031,6 @@ export interface PagesSelect<T extends boolean = true> {
                           newTab?: T;
                           reference?: T;
                           url?: T;
-                          label?: T;
-                          appearance?: T;
                         };
                     buttonBgColor?: T;
                     buttonTextColor?: T;
@@ -143914,8 +143902,6 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 newTab?: T;
                                 reference?: T;
                                 url?: T;
-                                label?: T;
-                                appearance?: T;
                               };
                           buttonBgColor?: T;
                           buttonTextColor?: T;

@@ -3,6 +3,8 @@ import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
 import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
 
+const allowAnySelect = (() => true as const) as any
+
 const alignmentOptions = [
   { label: 'Left (Default)', value: 'left' },
   { label: 'Center', value: 'center' },
@@ -19,6 +21,7 @@ export const featureCardsFields: Field[] = [
           name: 'sectionBgColor',
           label: 'Section Background Color',
           defaultValue: 'bg-transparent',
+          validate: allowAnySelect,
           admin: { width: '33.33%' },
         },
       }),
@@ -27,6 +30,7 @@ export const featureCardsFields: Field[] = [
         type: 'select',
         label: 'Padding Top',
         defaultValue: 'pt-16',
+        validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
           { label: 'None (0)', value: 'pt-0' },
@@ -41,6 +45,7 @@ export const featureCardsFields: Field[] = [
         type: 'select',
         label: 'Padding Bottom',
         defaultValue: 'pb-16',
+        validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
           { label: 'None (0)', value: 'pb-0' },
@@ -134,6 +139,7 @@ export const featureCardsFields: Field[] = [
           name: 'cardBgColor',
           label: 'Card Background Color',
           defaultValue: 'bg-white',
+          validate: allowAnySelect,
         },
       }),
 
@@ -157,6 +163,7 @@ export const featureCardsFields: Field[] = [
                   name: 'iconCardBgColor',
                   label: 'Icon Badge Background',
                   defaultValue: 'bg-[#EFF2FE]',
+                  validate: allowAnySelect,
                   admin: { width: '50%' },
                 },
               }),
@@ -165,6 +172,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Icon Badge Alignment',
                 defaultValue: 'left',
+                validate: allowAnySelect,
                 options: alignmentOptions,
                 admin: { width: '50%' },
               },
@@ -198,6 +206,7 @@ export const featureCardsFields: Field[] = [
                   name: 'headingColor',
                   label: 'Heading Color',
                   defaultValue: 'text-gray-950',
+                  validate: allowAnySelect,
                   admin: { width: '25%' },
                 },
               }),
@@ -206,6 +215,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Font Size',
                 defaultValue: 'text-2xl md:text-[1.65rem]',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: { width: '25%' },
               },
@@ -214,6 +224,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Font Weight',
                 defaultValue: 'font-bold',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: { width: '25%' },
               },
@@ -222,6 +233,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Alignment',
                 defaultValue: 'left',
+                validate: allowAnySelect,
                 options: alignmentOptions,
                 admin: { width: '25%' },
               },
@@ -249,6 +261,7 @@ export const featureCardsFields: Field[] = [
                   name: 'descriptionColor',
                   label: 'Description Color',
                   defaultValue: 'text-gray-600',
+                  validate: allowAnySelect,
                   admin: { width: '25%' },
                 },
               }),
@@ -257,6 +270,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Font Size',
                 defaultValue: 'text-sm md:text-base',
+                validate: allowAnySelect,
                 options: fontSizeOptions,
                 admin: { width: '25%' },
               },
@@ -265,6 +279,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Font Weight',
                 defaultValue: 'font-normal',
+                validate: allowAnySelect,
                 options: fontWeightOptions,
                 admin: { width: '25%' },
               },
@@ -273,6 +288,7 @@ export const featureCardsFields: Field[] = [
                 type: 'select',
                 label: 'Alignment',
                 defaultValue: 'left',
+                validate: allowAnySelect,
                 options: alignmentOptions,
                 admin: { width: '25%' },
               },
