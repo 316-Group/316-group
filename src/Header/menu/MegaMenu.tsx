@@ -15,11 +15,13 @@ export const MegaMenu = ({
   header,
   theme,
   pillMode = false,
+  heroOverlay = false,
 }: {
   className: string
   header: Header
   theme: string | null
   pillMode?: boolean
+  heroOverlay?: boolean
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
@@ -94,11 +96,17 @@ export const MegaMenu = ({
       {/* Mobile Menu Button */}
       <button
         onClick={handleToggle}
-        className="lg:hidden p-2 hover:bg-gray-100 rounded-md transition-colors"
+        className={cn(
+          'lg:hidden p-2 rounded-md transition-colors',
+          pillMode || heroOverlay
+            ? 'text-white hover:bg-white/20'
+            : 'hover:bg-gray-100',
+        )}
         aria-label="Toggle menu"
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
+
 
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex items-center space-x-6">
@@ -222,22 +230,38 @@ export const MegaMenu = ({
           },
         )}
       >
-        <div className="flex items-center justify-between px-1 pb-16 pt-4">
-          <Link href="/">
-            {theme && theme === 'light' ? (
-              <Logo loading="eager" priority="high" />
-            ) : (
-              <LogoDark loading="eager" priority="high" />
-            )}
-          </Link>
-          <button
-            onClick={handleToggle}
-            className="lg:hidden hover:bg-gray-100 rounded-md transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
-          </button>
-        </div>
+        {/*
+         * In heroOverlay mode the parent pill header already shows the logo
+         * and hamburger. Render a minimal close-only bar to avoid duplicates.
+         */}
+        {heroOverlay ? (
+          <div className="flex items-center justify-end px-1 pb-16 pt-4">
+            <button
+              onClick={handleToggle}
+              className="lg:hidden hover:bg-gray-100 rounded-md transition-colors"
+              aria-label="Close menu"
+            >
+              {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-center justify-between px-1 pb-16 pt-4">
+            <Link href="/">
+              {theme && theme === 'light' ? (
+                <Logo loading="eager" priority="high" />
+              ) : (
+                <LogoDark loading="eager" priority="high" />
+              )}
+            </Link>
+            <button
+              onClick={handleToggle}
+              className="lg:hidden hover:bg-gray-100 rounded-md transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+            </button>
+          </div>
+        )}
         {activeSection ? (
           <div
             className={cn('transition-all duration-300 ease-in-out', {

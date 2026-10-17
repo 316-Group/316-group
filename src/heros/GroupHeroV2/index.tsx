@@ -70,7 +70,7 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
 
   return (
     // Outer wrapper: starts from very top of page (header is position:fixed, no flow offset)
-    <div className="relative">
+    <div className="relative mt-6">
       {/* ── Part 1: Hero Zone ─────────────────────────────────────────────────── */}
       <div
         className={cn(
@@ -88,15 +88,26 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
             {/* Left: large heading */}
             {richText && (
               <AnimateIn {...anim(hDelay)}>
-                <RichText
+                {/*
+                 * Wrap in a container that sets the colour via CSS custom property.
+                 * Any heading with an inline `style` attribute (e.g. style="color:red")
+                 * will naturally override the inherited colour class, so per-heading
+                 * colour control works without removing the parent class.
+                 */}
+                <div
                   className={cn(
                     'font-normal text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] leading-tight',
                     headingTextColor ?? 'text-white',
+                    // Allow child elements with an inline style to override the color
+                    '[&_[style*="color"]]:text-[unset]',
                   )}
-                  content={richText}
-                  enableGutter={false}
-                  enableProse={false}
-                />
+                >
+                  <RichText
+                    content={richText}
+                    enableGutter={false}
+                    enableProse={false}
+                  />
+                </div>
               </AnimateIn>
             )}
 
@@ -133,7 +144,7 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
           <AnimateIn {...anim(mDelay)}>
             {/* Desktop */}
             <div className="hidden md:block w-full">
-              <div className="relative rounded-t-[3em] h-[60vh] overflow-hidden mx-4 md:mx-8 2xl:mx-0">
+              <div className="relative rounded-t-[3em] h-[60vh] overflow-hidden mx-4 md:mx-8 2xl:mx-12">
                 <Media
                   fill
                   imgClassName="object-cover absolute inset-0 w-full h-full"
@@ -147,7 +158,7 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
             </div>
             {/* Mobile */}
             <div className="block md:hidden w-full">
-              <div className="relative rounded-t-[3em] h-[50vh] overflow-hidden">
+              <div className="relative rounded-t-[3em] h-[50vh] overflow-hidden mx-3">
                 <Media
                   fill
                   imgClassName="object-cover absolute inset-0 w-full h-full"

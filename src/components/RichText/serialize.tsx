@@ -29,6 +29,26 @@ type Props = {
   nodes: NodeTypes[]
 }
 
+/**
+ * Converts a CSS string (e.g. "color: red; font-size: 14px") into a React
+ * CSSProperties object so it can be spread onto a JSX element.
+ */
+function parseInlineStyle(styleStr: string): React.CSSProperties {
+  const result: Record<string, string> = {}
+  if (!styleStr) return result
+  styleStr.split(';').forEach((declaration) => {
+    const [rawProp, ...valueParts] = declaration.split(':')
+    if (!rawProp) return
+    const prop = rawProp.trim()
+    const value = valueParts.join(':').trim()
+    if (!prop || !value) return
+    // Convert kebab-case to camelCase for React
+    const camelProp = prop.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+    result[camelProp] = value
+  })
+  return result as React.CSSProperties
+}
+
 export function serializeLexical({ nodes }: Props): JSX.Element {
   return (
     <Fragment>
@@ -69,8 +89,19 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             text = <sup key={index}>{text}</sup>
           }
 
+          // Apply any inline CSS styles set via the Lexical editor (e.g. font color)
+          const nodeStyle = (node as any).style
+          if (nodeStyle) {
+            text = (
+              <span key={index} style={parseInlineStyle(nodeStyle)}>
+                {text}
+              </span>
+            )
+          }
+
           return text
         }
+
 
         // NOTE: Hacky fix for
         // https://github.com/facebook/lexical/blob/d10c4e6e55261b2fdd7d1845aed46151d0f06a8c/packages/lexical-list/src/LexicalListItemNode.ts#L133
@@ -142,8 +173,14 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     : node.format === 'justify'
                       ? 'text-justify'
                       : ''
+              // Pass through any inline styles set via the Lexical editor
+              const inlineStyle = (node as any).style
               return (
-                <p className={`col-start-2 ${alignmentClass}`} key={index}>
+                <p
+                  className={`col-start-2 ${alignmentClass}`}
+                  key={index}
+                  {...(inlineStyle ? { style: parseInlineStyle(inlineStyle) } : {})}
+                >
                   {serializedChildren}
                 </p>
               )
@@ -158,8 +195,14 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                     : node.format === 'justify'
                       ? 'text-justify'
                       : ''
+              // Pass through any inline styles set via the Lexical editor (e.g. color)
+              const inlineStyle = (node as any).style
               return (
-                <Tag className={alignmentClass} key={index}>
+                <Tag
+                  className={alignmentClass}
+                  key={index}
+                  {...(inlineStyle ? { style: parseInlineStyle(inlineStyle) } : {})}
+                >
                   {serializedChildren}
                 </Tag>
               )

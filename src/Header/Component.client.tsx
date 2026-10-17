@@ -35,28 +35,33 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
   if (heroOverlay) {
     /*
      * ── Hero Overlay Mode (GroupHeroV2) ──────────────────────────────────────
-     * Use position:fixed so this header floats OVER the hero without consuming
-     * any document-flow space. The hero component itself provides top padding
-     * to push its content clear of this bar.
+     * Fixed pill header floating over the hero. A max-width container centres
+     * it so it never stretches edge-to-edge on ultra-wide viewports.
+     * The hero component itself provides top padding to push its content
+     * clear of this bar.
      */
     return (
-      <header className="fixed top-0 left-0 right-0 z-50 px-[5px] pt-4 pointer-events-none">
-        <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-3 pointer-events-auto">
-          {theme && theme === 'light' ? (
-            <Link href="/">
-              <Logo loading="eager" priority="high" />
-            </Link>
-          ) : (
-            <Link href="/">
-              <LogoDark loading="eager" priority="high" />
-            </Link>
-          )}
-          <MegaMenu
-            className="dark:text-gray-100"
-            header={header}
-            theme={theme}
-            pillMode
-          />
+      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+        {/* Outer centering shell — same max-width as the hero zone container */}
+        <div className="mx-auto w-full max-w-screen-2xl px-[5px] pt-4">
+          <div className="flex justify-between items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-3 pointer-events-auto">
+            {theme && theme === 'light' ? (
+              <Link href="/">
+                <Logo loading="eager" priority="high" />
+              </Link>
+            ) : (
+              <Link href="/">
+                <LogoDark loading="eager" priority="high" />
+              </Link>
+            )}
+            <MegaMenu
+              className="dark:text-gray-100"
+              header={header}
+              theme={theme}
+              pillMode
+              heroOverlay
+            />
+          </div>
         </div>
       </header>
     )
