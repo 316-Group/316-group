@@ -9,9 +9,10 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
 import { AnimateIn, type AnimationType, type AnimationSpeed, type AnimationDelay } from '@/components/AnimateIn'
-import { GroupHeroV2Nav } from './GroupHeroV2Nav'
 
-export const GroupHeroV2: React.FC<Page['hero']> = ({
+// `nav` is injected by GroupHeroV2Wrapper (a Server Component) so we never
+// import server-only code into this client bundle.
+export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = ({
   richText,
   descriptionText,
   links,
@@ -39,6 +40,8 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
   ecosystemItemsTextColor,
   // entrance animation
   entranceAnimation,
+  // injected by GroupHeroV2Wrapper (server component) as ReactNode
+  nav,
 }) => {
   const { setHeaderTheme, setHeroOverlay } = useHeaderTheme()
 
@@ -87,12 +90,11 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
         )}
       >
         {/*
-         * Self-contained nav bar — rendered as a React Server Component that
-         * fetches the header global and renders Logo + MegaMenu inside this
-         * card. Normal document flow = scrolls away naturally. No fixed
+         * Nav bar injected by GroupHeroV2Wrapper (server component).
+         * Normal document flow = scrolls away naturally. No fixed
          * positioning = no double-header.
          */}
-        <GroupHeroV2Nav />
+        {nav}
 
         <div className="container max-w-screen-2xl">
           {/* Top content row */}
