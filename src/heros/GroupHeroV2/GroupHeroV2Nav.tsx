@@ -12,18 +12,27 @@ import React from 'react'
 import Link from 'next/link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import type { Header } from '@/payload-types'
-import { Logo } from '@/components/Logo/Logo'
 import { MegaMenuHero } from './MegaMenuHero'
 
 export async function GroupHeroV2Nav() {
   const header: Header = await getCachedGlobal('header', 1)()
 
   return (
-    <div className="w-full px-4 md:px-8 pt-6 pb-2">
-      <div className="flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" aria-label="Home">
-          <Logo loading="eager" priority="high" />
+    // Same container as the hero content so the pill's edges line up with
+    // the heading on the left and the right-column text on the right.
+    <div className="container max-w-screen-2xl pt-6 md:pt-8">
+      <div className="flex justify-between items-center gap-4 rounded-full bg-white/10 border border-white/15 backdrop-blur-md pl-4 pr-2 md:pl-6 md:pr-3 py-2">
+        {/* Logo — white "316.group" text variant */}
+        <Link href="/" aria-label="Home" className="shrink-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/logo-white.svg"
+            alt="316 Group Logo"
+            width={130}
+            height={44}
+            fetchPriority="high"
+            className="h-9 md:h-10 w-auto"
+          />
         </Link>
 
         {/* Navigation */}
