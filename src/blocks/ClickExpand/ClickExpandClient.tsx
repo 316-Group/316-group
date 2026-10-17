@@ -111,6 +111,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   isEmbedded = false,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [sectionInView, setSectionInView] = useState<boolean>(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -120,6 +121,22 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
 
   const items = cards && Array.isArray(cards) && cards.length > 0 ? cards : []
   const count = items.length
+
+  // Slide-up entrance animation observer
+  useEffect(() => {
+    const el = wrapperRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setSectionInView(true)
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -5% 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   // Resolve link destination
   const getHref = (linkObj?: CardItem['buttonGroup'] extends { buttonLink?: infer L } ? L : any) => {
@@ -136,16 +153,13 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     return '#'
   }
 
-  // Smoothly scroll the cards track to keep the active card centered / fully visible
+  // Smoothly scroll the cards track so the active card is positioned at the start, showing next cards and peeking card
   const scrollCardIntoView = useCallback((index: number) => {
     const cardEl = cardRefs.current[index]
     const trackEl = trackRef.current
     if (!cardEl || !trackEl) return
 
-    const scrollTarget =
-      cardEl.offsetLeft -
-      (trackEl.clientWidth / 2 - cardEl.clientWidth / 2) +
-      trackEl.scrollLeft
+    const scrollTarget = cardEl.offsetLeft - trackEl.offsetLeft
 
     trackEl.scrollTo({
       left: Math.max(0, scrollTarget),
@@ -157,6 +171,35 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   useEffect(() => {
     scrollCardIntoView(activeIndex)
   }, [activeIndex, scrollCardIntoView])
+
+  // Synchronize sticky window scroll with active index
+  const syncStickyScroll = useCallback(
+    (targetIndex: number) => {
+      if (scrollBehavior === 'sticky' && count > 1 && !isEmbedded) {
+        const wrapper = wrapperRef.current
+        if (!wrapper) return
+        const rect = wrapper.getBoundingClientRect()
+        const totalScrollableDistance = wrapper.offsetHeight - window.innerHeight
+        if (totalScrollableDistance > 0) {
+          isScrollingProgrammatically.current = true
+          const targetY =
+            window.scrollY +
+            rect.top +
+            (targetIndex / (count - 1 || 1)) * totalScrollableDistance
+
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth',
+          })
+
+          setTimeout(() => {
+            isScrollingProgrammatically.current = false
+          }, 450)
+        }
+      }
+    },
+    [scrollBehavior, count, isEmbedded],
+  )
 
   // Handle Sticky Scroll Progress
   useEffect(() => {
@@ -195,53 +238,39 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   // Handle direct click on a card
   const handleCardClick = (index: number) => {
     setActiveIndex(index)
-
-    // In sticky mode, also gently sync window scroll position so wheel continues seamlessly
-    if (scrollBehavior === 'sticky' && count > 1 && !isEmbedded) {
-      const wrapper = wrapperRef.current
-      if (wrapper) {
-        const rect = wrapper.getBoundingClientRect()
-        const totalScrollableDistance = wrapper.offsetHeight - window.innerHeight
-        if (totalScrollableDistance > 0) {
-          isScrollingProgrammatically.current = true
-          const targetY =
-            window.scrollY +
-            rect.top +
-            (index / (count - 1 || 1)) * totalScrollableDistance
-
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth',
-          })
-
-          setTimeout(() => {
-            isScrollingProgrammatically.current = false
-          }, 600)
-        }
-      }
-    }
+    syncStickyScroll(index)
   }
 
-  // Handle mouse wheel when scrollBehavior is 'wheel' or when embedded
+  // Handle mouse wheel interaction: steps through cards 0..count-1, then releases to page scroll
   const handleWheel = (e: React.WheelEvent) => {
     if (scrollBehavior === 'clickOnly' || count <= 1) return
-    if (scrollBehavior !== 'wheel' && !isEmbedded) return
 
     const now = Date.now()
-    if (now - lastWheelTime.current < 450) return // debounce wheel events
 
-    if (e.deltaY > 25) {
+    if (e.deltaY > 20) {
+      // Scrolling DOWN
       if (activeIndex < count - 1) {
         e.preventDefault()
-        lastWheelTime.current = now
-        setActiveIndex((prev) => prev + 1)
+        if (now - lastWheelTime.current >= 380) {
+          lastWheelTime.current = now
+          const nextIdx = activeIndex + 1
+          setActiveIndex(nextIdx)
+          syncStickyScroll(nextIdx)
+        }
       }
-    } else if (e.deltaY < -25) {
+      // If on the last card, do NOT preventDefault(), allowing window scroll to proceed down
+    } else if (e.deltaY < -20) {
+      // Scrolling UP
       if (activeIndex > 0) {
         e.preventDefault()
-        lastWheelTime.current = now
-        setActiveIndex((prev) => prev - 1)
+        if (now - lastWheelTime.current >= 380) {
+          lastWheelTime.current = now
+          const prevIdx = activeIndex - 1
+          setActiveIndex(prevIdx)
+          syncStickyScroll(prevIdx)
+        }
       }
+      // If on the first card, do NOT preventDefault(), allowing window scroll to proceed up
     }
   }
 
@@ -249,10 +278,14 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault()
-      setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+      const nextIdx = Math.min(count - 1, activeIndex + 1)
+      setActiveIndex(nextIdx)
+      syncStickyScroll(nextIdx)
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault()
-      setActiveIndex((prev) => Math.max(0, prev - 1))
+      const prevIdx = Math.max(0, activeIndex - 1)
+      setActiveIndex(prevIdx)
+      syncStickyScroll(prevIdx)
     }
   }
 
@@ -285,7 +318,8 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   const trackContent = (
     <div
       ref={trackRef}
-      className="flex items-stretch gap-4 md:gap-6 overflow-x-auto scrollbar-none py-2 px-1 scroll-smooth w-full"
+      onWheel={handleWheel}
+      className="flex items-stretch gap-4 md:gap-5 lg:gap-6 overflow-x-auto scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-2 px-1 scroll-smooth w-full"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
       {items.map((card, idx) => {
@@ -360,10 +394,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               'bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D]',
               'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
               cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
-              // Flex / width based on active state
+              // Proportional widths for exactly 4 cards in view on large screen: Active (~57%) + 2 Minimized (~14% each) + 1 Peeking (~7% in view, 50% cut off)
               isActive
-                ? 'w-[90vw] sm:w-[580px] md:w-[680px] lg:w-[780px] xl:w-[860px] md:flex-[3.5] shadow-2xl'
-                : 'w-[140px] sm:w-[170px] md:w-[200px] lg:w-[220px] md:flex-[1] shadow-md hover:brightness-105',
+                ? 'w-[88vw] sm:w-[520px] md:w-[600px] lg:flex-[0_0_57%] lg:w-[57%]'
+                : 'w-[140px] sm:w-[160px] md:w-[180px] lg:flex-[0_0_14%] lg:w-[14%] hover:brightness-105',
             )}
           >
             {/* Background Image with Active Blur effect */}
@@ -390,18 +424,24 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               )}
             />
 
-            {/* ─── ACTIVE CARD CONTENT (Vertically Centered with Top & Bottom Padding) ─── */}
+            {/* ─── ACTIVE CARD CONTENT: Layer 1 (Dedicated Scroll Container) ─── */}
             <div
               className={cn(
-                'relative z-10 h-full flex flex-col justify-center overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
-                'gap-5 sm:gap-6 md:gap-7',
-                'py-10 sm:py-12 md:py-14 lg:py-16 px-6 sm:px-8 md:px-12 lg:px-14 xl:px-16',
+                'relative z-10 h-full w-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
                 'transition-all duration-500 ease-out',
                 isActive
                   ? 'opacity-100 pointer-events-auto'
                   : 'opacity-0 pointer-events-none absolute inset-0',
               )}
             >
+              {/* ─── Layer 2 (Centered Content Wrapper with min-h-full & my-auto) ─── */}
+              <div
+                className={cn(
+                  'min-h-full flex flex-col justify-center my-auto',
+                  'gap-5 sm:gap-6 md:gap-7',
+                  'py-10 sm:py-12 md:py-14 lg:py-16 px-6 sm:px-8 md:px-12 lg:px-14 xl:px-16',
+                )}
+              >
               {/* Top Group: Kicker + Heading + Description */}
               <div className="flex flex-col">
                 {/* Small Kicker */}
@@ -542,6 +582,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   </Link>
                 </div>
               )}
+              </div>
             </div>
 
             {/* ─── INACTIVE CARD CONTENT (Title at bottom) ─────────────── */}
@@ -594,7 +635,14 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   // In embedded mode (e.g. inside a column of Content block), omit the outer section box
   if (isEmbedded) {
     return (
-      <div ref={wrapperRef} className={cn('relative w-full', className)}>
+      <div
+        ref={wrapperRef}
+        className={cn(
+          'relative w-full overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]',
+          sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
+          className,
+        )}
+      >
         {trackContent}
         {indicatorsContent}
       </div>
@@ -615,13 +663,14 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
         tabIndex={0}
         aria-label="Expandable Cards Section"
         className={cn(
-          'w-full outline-none select-none transition-colors duration-200',
+          'w-full outline-none select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]',
+          sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
           isStickyMode ? 'sticky top-0 h-screen flex flex-col justify-center' : '',
           !isStickyMode && (paddingTop || 'pt-16'),
           !isStickyMode && (paddingBottom || 'pb-16'),
         )}
       >
-        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col">
+        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col overflow-hidden">
           {trackContent}
           {indicatorsContent}
         </div>
