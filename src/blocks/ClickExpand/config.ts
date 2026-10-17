@@ -138,7 +138,6 @@ export const clickExpandFields: Field[] = [
     name: 'cards',
     type: 'array',
     label: 'Expandable Card Items',
-    minRows: 1,
     admin: {
       initCollapsed: false,
       components: {
@@ -152,7 +151,7 @@ export const clickExpandFields: Field[] = [
         type: 'upload',
         relationTo: 'media',
         label: 'Card Background Image',
-        required: true,
+        required: false,
       },
       {
         type: 'row',
@@ -253,7 +252,7 @@ export const clickExpandFields: Field[] = [
             type: 'text',
             label: 'Heading Text (supports inline HTML like <strong>, <style="color:red">, <span>)',
             defaultValue: 'Making everyday finance more connected.',
-            required: true,
+            required: false,
           },
           {
             type: 'row',
@@ -438,7 +437,7 @@ export const clickExpandFields: Field[] = [
                 name: 'title',
                 type: 'text',
                 label: 'Card Heading (e.g. Multi-currency wallets)',
-                required: true,
+                required: false,
                 defaultValue: 'Multi-currency wallets',
               },
               {
@@ -641,6 +640,7 @@ export const clickExpandFields: Field[] = [
           },
           link({
             appearances: false,
+            disableLabel: true,
             required: false,
             condition: (_, siblingData) => siblingData?.showButton !== false,
             overrides: {

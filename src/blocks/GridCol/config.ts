@@ -488,7 +488,6 @@ export const gridColFields: Field[] = [
             name: 'items',
             type: 'array',
             label: 'Feature Items (each with hr divider & clickable link)',
-            minRows: 1,
             admin: {
               initCollapsed: false,
               components: {
@@ -500,7 +499,7 @@ export const gridColFields: Field[] = [
                 name: 'text',
                 type: 'text',
                 label: 'Item Text',
-                required: true,
+                required: false,
                 defaultValue: '316 Money - digital accounts and multi-currency tools',
               },
               {
@@ -540,6 +539,7 @@ export const gridColFields: Field[] = [
               },
               link({
                 appearances: false,
+                disableLabel: true,
                 required: false,
                 overrides: {
                   name: 'itemLink',
@@ -650,6 +650,7 @@ export const gridColFields: Field[] = [
           },
           link({
             appearances: false,
+            disableLabel: true,
             required: false,
             condition: (_, siblingData) => siblingData?.showButton !== false,
             overrides: {
@@ -673,7 +674,7 @@ export const gridColFields: Field[] = [
         type: 'upload',
         relationTo: 'media',
         label: 'Feature Image',
-        required: true,
+        required: false,
       },
       {
         type: 'row',

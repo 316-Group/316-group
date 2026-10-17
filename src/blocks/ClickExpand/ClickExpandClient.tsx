@@ -401,7 +401,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   }}
                   onClick={() => handleCardClick(idx)}
                   className={cn(
-                    'relative rounded-[28px] md:rounded-[36px] overflow-hidden cursor-pointer group shrink-0',
+                    'relative rounded-[28px] md:rounded-[36px] overflow-hidden cursor-pointer group shrink-0 bg-slate-900',
                     'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
                     cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
                     // Flex / width based on active state

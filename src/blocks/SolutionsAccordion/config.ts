@@ -119,6 +119,9 @@ export const SolutionsAccordion: Block = {
           },
         }),
         link({
+          appearances: false,
+          disableLabel: true,
+          required: false,
           overrides: {
             name: 'subBadgeLink',
             label: 'Sub-Badge Link',
@@ -147,14 +150,13 @@ export const SolutionsAccordion: Block = {
         singular: 'Accordion Item',
         plural: 'Accordion Items',
       },
-      minRows: 1,
       fields: [
         // ── Row header ────────────────────────────────────────────────────────
         {
           name: 'title',
           type: 'text',
           label: 'Title',
-          required: true,
+          required: false,
         },
         textColorPickerAll({
           overrides: {
@@ -272,6 +274,9 @@ export const SolutionsAccordion: Block = {
           },
         }),
         link({
+          appearances: false,
+          disableLabel: true,
+          required: false,
           overrides: {
             name: 'ctaLink',
             label: 'CTA Button Link',

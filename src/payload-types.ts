@@ -40180,7 +40180,7 @@ export interface ContentBlock {
                 showIndicators?: boolean | null;
                 cards?:
                   | {
-                      image: string | Media;
+                      image?: (string | null) | Media;
                       overlayStyle?: ('vignette' | 'subtle' | 'medium' | 'heavy' | 'none') | null;
                       /**
                        * Applied when this card is active. Collapsed cards stay crisp with no blur.
@@ -40481,8 +40481,8 @@ export interface ContentBlock {
                             )
                           | null;
                       };
-                      headingGroup: {
-                        heading: string;
+                      headingGroup?: {
+                        heading?: string | null;
                         headingColor?:
                           | (
                               | 'text-inherit'
@@ -41125,7 +41125,7 @@ export interface ContentBlock {
                           | null;
                         items?:
                           | {
-                              title: string;
+                              title?: string | null;
                               titleColor?:
                                 | (
                                     | 'text-inherit'
@@ -42565,7 +42565,6 @@ export interface ContentBlock {
                                 value: string | Brand;
                               } | null);
                           url?: string | null;
-                          label?: string | null;
                         };
                       };
                       id?: string | null;
@@ -44859,7 +44858,7 @@ export interface ContentBlock {
                     titleAlignment?: ('left' | 'center' | 'right') | null;
                     items?:
                       | {
-                          text: string;
+                          text?: string | null;
                           textColor?:
                             | (
                                 | 'text-inherit'
@@ -45177,7 +45176,6 @@ export interface ContentBlock {
                                   value: string | Brand;
                                 } | null);
                             url?: string | null;
-                            label?: string | null;
                           };
                           id?: string | null;
                         }[]
@@ -46018,12 +46016,11 @@ export interface ContentBlock {
                             value: string | Brand;
                           } | null);
                       url?: string | null;
-                      label?: string | null;
                     };
                   };
                 };
-                imageColumn: {
-                  image: string | Media;
+                imageColumn?: {
+                  image?: (string | null) | Media;
                   imageRounded?:
                     | (
                         | 'rounded-[36px]'
@@ -122872,11 +122869,6 @@ export interface SolutionsAccordionBlock {
             value: string | Brand;
           } | null);
       url?: string | null;
-      label: string;
-      /**
-       * Choose how the link should be rendered.
-       */
-      appearance?: ('default' | 'outline' | 'ghost' | 'secondary' | 'underline') | null;
     };
   };
   rightBgColor?:
@@ -123138,7 +123130,7 @@ export interface SolutionsAccordionBlock {
     | null;
   accordionItems?:
     | {
-        title: string;
+        title?: string | null;
         titleTextColor?:
           | (
               | 'text-inherit'
@@ -124733,11 +124725,6 @@ export interface SolutionsAccordionBlock {
                 value: string | Brand;
               } | null);
           url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline' | 'ghost' | 'secondary' | 'underline') | null;
         };
         animationStyle?: ('slide' | 'fade' | 'scale') | null;
         animationSpeed?: ('fast' | 'normal' | 'slow') | null;
@@ -126719,7 +126706,7 @@ export interface ClickExpandBlock {
   showIndicators?: boolean | null;
   cards?:
     | {
-        image: string | Media;
+        image?: (string | null) | Media;
         overlayStyle?: ('vignette' | 'subtle' | 'medium' | 'heavy' | 'none') | null;
         /**
          * Applied when this card is active. Collapsed cards stay crisp with no blur.
@@ -127013,8 +127000,8 @@ export interface ClickExpandBlock {
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
         };
-        headingGroup: {
-          heading: string;
+        headingGroup?: {
+          heading?: string | null;
           headingColor?:
             | (
                 | 'text-inherit'
@@ -127636,7 +127623,7 @@ export interface ClickExpandBlock {
             | null;
           items?:
             | {
-                title: string;
+                title?: string | null;
                 titleColor?:
                   | (
                       | 'text-inherit'
@@ -129055,7 +129042,6 @@ export interface ClickExpandBlock {
                   value: string | Brand;
                 } | null);
             url?: string | null;
-            label?: string | null;
           };
         };
         id?: string | null;
@@ -131328,7 +131314,7 @@ export interface GridColBlock {
       titleAlignment?: ('left' | 'center' | 'right') | null;
       items?:
         | {
-            text: string;
+            text?: string | null;
             textColor?:
               | (
                   | 'text-inherit'
@@ -131639,7 +131625,6 @@ export interface GridColBlock {
                     value: string | Brand;
                   } | null);
               url?: string | null;
-              label?: string | null;
             };
             id?: string | null;
           }[]
@@ -132473,12 +132458,11 @@ export interface GridColBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label?: string | null;
       };
     };
   };
-  imageColumn: {
-    image: string | Media;
+  imageColumn?: {
+    image?: (string | null) | Media;
     imageRounded?:
       | ('rounded-[36px]' | 'rounded-[40px]' | 'rounded-[32px]' | 'rounded-2xl' | 'rounded-xl' | 'rounded-none')
       | null;
@@ -136672,7 +136656,6 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       newTab?: T;
                                       reference?: T;
                                       url?: T;
-                                      label?: T;
                                     };
                               };
                           id?: T;
@@ -136758,7 +136741,6 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                             newTab?: T;
                                             reference?: T;
                                             url?: T;
-                                            label?: T;
                                           };
                                       id?: T;
                                     };
@@ -136781,7 +136763,6 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       newTab?: T;
                                       reference?: T;
                                       url?: T;
-                                      label?: T;
                                     };
                               };
                         };
@@ -137714,8 +137695,6 @@ export interface SolutionsAccordionBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
-              label?: T;
-              appearance?: T;
             };
       };
   rightBgColor?: T;
@@ -137743,8 +137722,6 @@ export interface SolutionsAccordionBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
-              label?: T;
-              appearance?: T;
             };
         animationStyle?: T;
         animationSpeed?: T;
@@ -137893,7 +137870,6 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
-                    label?: T;
                   };
             };
         id?: T;
@@ -137983,7 +137959,6 @@ export interface GridColBlockSelect<T extends boolean = true> {
                           newTab?: T;
                           reference?: T;
                           url?: T;
-                          label?: T;
                         };
                     id?: T;
                   };
@@ -138006,7 +137981,6 @@ export interface GridColBlockSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
-                    label?: T;
                   };
             };
       };

@@ -1216,32 +1216,7 @@ const columnFields: Field[] = [
       {
         name: 'customJobAction',
         type: 'group',
-        validate: (value, { siblingData }) => {
-          const sibling = siblingData as Record<string, any>
-          if (sibling?.contentType !== 'customJobAction') {
-            return true
-          }
-          const val = value as Record<string, any>
-          const linkVal = val?.link
-          if (!linkVal?.label) {
-            return 'Button label/text is required'
-          }
-          if (linkVal?.type === 'custom' && !linkVal?.url) {
-            return 'Custom URL is required'
-          }
-          if (linkVal?.type === 'reference' && !linkVal?.reference) {
-            return 'Document reference is required'
-          }
-
-          const nested = val?.nestedBadge
-          if (!nested?.text) {
-            return 'Badge text is required'
-          }
-          if (!nested?.image) {
-            return 'Badge image/icon is required'
-          }
-          return true
-        },
+        validate: () => true,
         fields: [
           link({
             appearances: false,
@@ -1410,24 +1385,7 @@ const columnFields: Field[] = [
       {
         name: 'customButton',
         type: 'group',
-        validate: (value, { siblingData }) => {
-          const sibling = siblingData as Record<string, any>
-          if (sibling?.contentType !== 'customButton') {
-            return true
-          }
-          const val = value as Record<string, any>
-          const linkVal = val?.link
-          if (!linkVal?.label) {
-            return 'Button label/text is required'
-          }
-          if (linkVal?.type === 'custom' && !linkVal?.url) {
-            return 'Custom URL is required'
-          }
-          if (linkVal?.type === 'reference' && !linkVal?.reference) {
-            return 'Document reference is required'
-          }
-          return true
-        },
+        validate: () => true,
         fields: [
           link({
             appearances: false,
