@@ -132,7 +132,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
           setSectionInView(true)
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -5% 0px' },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -638,7 +638,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
       <div
         ref={wrapperRef}
         className={cn(
-          'relative w-full overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]',
+          'relative w-full overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
           sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
           className,
         )}
@@ -663,7 +663,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
         tabIndex={0}
         aria-label="Expandable Cards Section"
         className={cn(
-          'w-full outline-none select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]',
+          'w-full outline-none select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
           sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
           isStickyMode ? 'sticky top-0 h-screen flex flex-col justify-center' : '',
           !isStickyMode && (paddingTop || 'pt-16'),

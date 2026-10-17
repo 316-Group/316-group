@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '@/utilities/cn'
 
 export interface CenteredContentProps {
@@ -62,6 +64,24 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
   descriptionGroup,
   className,
 }) => {
+  const [isInView, setIsInView] = useState<boolean>(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
   const align = alignment || 'center'
 
   // Alignment classes for outer container & children
@@ -123,8 +143,10 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
 
   return (
     <section
+      ref={sectionRef}
       className={cn(
-        'w-full relative transition-colors duration-200',
+        'w-full relative transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
         sectionBgColor || 'bg-white',
         paddingTop || 'pt-16',
         paddingBottom || 'pb-16',

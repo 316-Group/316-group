@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Plus, Minus, ArrowUpRight } from 'lucide-react'
 import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
@@ -39,6 +39,24 @@ export const AccordionPanel: React.FC<Props> = ({
   scrollAnimation,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const [isInView, setIsInView] = useState<boolean>(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const items = accordionItems ?? []
   const activeItem = items[activeIndex] as AccordionItem | undefined
@@ -47,8 +65,8 @@ export const AccordionPanel: React.FC<Props> = ({
   const saEnabled = scrollAnimation?.enabled !== false
   const saType = (scrollAnimation?.type as AnimationType) ?? 'fade-up'
   const saSpeed = (scrollAnimation?.speed as AnimationSpeed) ?? 'normal'
-  const saLeftDelay = (scrollAnimation?.leftDelay as AnimationDelay) ?? '0'
-  const saRightDelay = (scrollAnimation?.rightDelay as AnimationDelay) ?? '200'
+  const saLeftDelay = (scrollAnimation?.leftDelay as AnimationDelay) ?? '200'
+  const saRightDelay = (scrollAnimation?.rightDelay as AnimationDelay) ?? '350'
 
   // Helper to get a link href from a CMS link object
   const getLinkHref = (linkObj: any): string => {
@@ -66,7 +84,14 @@ export const AccordionPanel: React.FC<Props> = ({
   }
 
   return (
-    <div className={cn('w-full flex flex-col md:flex-row min-h-[600px]', sectionBgColor ?? 'bg-white')}>
+    <div
+      ref={sectionRef}
+      className={cn(
+        'w-full flex flex-col md:flex-row min-h-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
+        sectionBgColor ?? 'bg-white',
+      )}
+    >
       {/* ── LEFT COLUMN ─────────────────────────────────────────────────────── */}
       <AnimateIn
         animation={saEnabled ? saType : 'none'}

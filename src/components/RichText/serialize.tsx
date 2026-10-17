@@ -49,6 +49,42 @@ function parseInlineStyle(styleStr: string): React.CSSProperties {
   return result as React.CSSProperties
 }
 
+/**
+ * Parses user-entered inline style tags like <style="color:red">text</style>
+ * or <span style="color:red">text</span> into styled React <span> elements.
+ */
+function parseInlineCustomStyles(rawText: string, baseKey: string | number): React.ReactNode {
+  if (!rawText || (!rawText.includes('<style=') && !rawText.includes('<span style='))) {
+    return rawText
+  }
+
+  // Regex matching <style="...">(.*?)</style> or <span style="...">(.*?)</span>
+  const regex = /<(?:style|span style)=(["'])(.*?)\1>(.*?)<\/(?:style|span)>/gi
+  const elements: React.ReactNode[] = []
+  let lastIndex = 0
+  let match: RegExpExecArray | null
+
+  while ((match = regex.exec(rawText)) !== null) {
+    if (match.index > lastIndex) {
+      elements.push(rawText.substring(lastIndex, match.index))
+    }
+    const styleString = match[2]
+    const innerText = match[3]
+    elements.push(
+      <span key={`${baseKey}-inline-${match.index}`} style={parseInlineStyle(styleString)}>
+        {innerText}
+      </span>,
+    )
+    lastIndex = regex.lastIndex
+  }
+
+  if (lastIndex < rawText.length) {
+    elements.push(rawText.substring(lastIndex))
+  }
+
+  return elements
+}
+
 export function serializeLexical({ nodes }: Props): JSX.Element {
   return (
     <Fragment>
@@ -58,7 +94,8 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         }
 
         if (node.type === 'text') {
-          let text = <React.Fragment key={index}>{node.text}</React.Fragment>
+          const content = parseInlineCustomStyles(node.text, index)
+          let text = <React.Fragment key={index}>{content}</React.Fragment>
           if (node.format & IS_BOLD) {
             text = <strong key={index}>{text}</strong>
           }

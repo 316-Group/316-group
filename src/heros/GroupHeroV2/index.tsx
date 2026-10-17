@@ -1,6 +1,6 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import type { Page } from '@/payload-types'
 
@@ -44,14 +44,24 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
   nav,
 }) => {
   const { setHeaderTheme, setHeroOverlay } = useHeaderTheme()
+  const [isHeroMounted, setIsHeroMounted] = useState<boolean>(false)
 
   useEffect(() => {
     setHeaderTheme('light')
     // Tell the layout-level header to hide itself (renders null)
     // while this hero renders its own self-contained nav bar inside the card.
     setHeroOverlay(true)
+
+    // Mount animation trigger
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsHeroMounted(true)
+      })
+    })
+
     return () => {
       setHeroOverlay(false)
+      cancelAnimationFrame(raf)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -63,10 +73,10 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
   const animEnabled = entranceAnimation?.enabled !== false
   const animType = (entranceAnimation?.type as AnimationType) ?? 'fade-up'
   const animSpeed = (entranceAnimation?.speed as AnimationSpeed) ?? 'normal'
-  const hDelay = (entranceAnimation?.headingDelay as AnimationDelay) ?? '0'
-  const dDelay = (entranceAnimation?.descriptionDelay as AnimationDelay) ?? '150'
-  const mDelay = (entranceAnimation?.mediaDelay as AnimationDelay) ?? '300'
-  const sDelay = (entranceAnimation?.statsDelay as AnimationDelay) ?? '400'
+  const hDelay = (entranceAnimation?.headingDelay as AnimationDelay) ?? '150'
+  const dDelay = (entranceAnimation?.descriptionDelay as AnimationDelay) ?? '300'
+  const mDelay = (entranceAnimation?.mediaDelay as AnimationDelay) ?? '400'
+  const sDelay = (entranceAnimation?.statsDelay as AnimationDelay) ?? '500'
 
   // Shorthand wrapper so we don't repeat props every time
   const anim = (delay: AnimationDelay) =>
@@ -80,7 +90,12 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
      * mt-6 gives a small gap from the top of the page so the card floats.
      * mx-[5px] gives the left/right breathing room seen in the mockup.
      */
-    <div className="relative mt-6">
+    <div
+      className={cn(
+        'relative mt-6 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
+        isHeroMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+      )}
+    >
       {/* ── Part 1: Hero Zone ─────────────────────────────────────────────────── */}
       <div
         className={cn(
