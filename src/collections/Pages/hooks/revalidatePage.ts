@@ -14,7 +14,11 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     payload.logger.info(`Revalidating page at path: ${path}`)
 
-    revalidatePath(path)
+    try {
+      revalidatePath(path)
+    } catch (err) {
+      payload.logger.error(`Error revalidating page at path ${path}: ${err}`)
+    }
   }
 
   // If the page was previously published, we need to revalidate the old path
@@ -23,7 +27,11 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
     payload.logger.info(`Revalidating old page at path: ${oldPath}`)
 
-    revalidatePath(oldPath)
+    try {
+      revalidatePath(oldPath)
+    } catch (err) {
+      payload.logger.error(`Error revalidating old page at path ${oldPath}: ${err}`)
+    }
   }
 
   return doc

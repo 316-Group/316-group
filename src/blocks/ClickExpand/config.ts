@@ -34,7 +34,7 @@ export const clickExpandFields: Field[] = [
         overrides: {
           name: 'sectionBgColor',
           label: 'Section Background Color',
-          defaultValue: 'bg-white',
+          defaultValue: 'bg-transparent',
           admin: {
             width: '33.33%',
           },

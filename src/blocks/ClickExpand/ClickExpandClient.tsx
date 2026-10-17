@@ -100,7 +100,7 @@ export function formatInlineHtml(content?: string | null): string {
 }
 
 export const ClickExpandClient: React.FC<ClickExpandProps> = ({
-  sectionBgColor = 'bg-white',
+  sectionBgColor = 'bg-transparent',
   paddingTop = 'pt-16',
   paddingBottom = 'pb-16',
   cardHeight = 'h-[580px] md:h-[680px] lg:h-[720px]',
@@ -111,7 +111,6 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   isEmbedded = false,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
-  const [isInView, setIsInView] = useState<boolean>(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -136,30 +135,6 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     }
     return '#'
   }
-
-  // IntersectionObserver to trigger reload and scroll entrance animations
-  useEffect(() => {
-    const target = sectionRef.current || wrapperRef.current
-    if (!target) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-        } else {
-          // Re-enable trigger when scrolling away so scrolling back up re-triggers animation
-          setIsInView(false)
-        }
-      },
-      {
-        threshold: 0.15,
-        rootMargin: '0px 0px -10% 0px',
-      },
-    )
-
-    observer.observe(target)
-    return () => observer.disconnect()
-  }, [])
 
   // Smoothly scroll the cards track to keep the active card centered / fully visible
   const scrollCardIntoView = useCallback((index: number) => {
@@ -307,11 +282,331 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     ? `${100 + (count - 1) * 75}vh`
     : 'auto'
 
+  const trackContent = (
+    <div
+      ref={trackRef}
+      className="flex items-stretch gap-4 md:gap-6 overflow-x-auto scrollbar-none py-2 px-1 scroll-smooth w-full"
+      style={{ WebkitOverflowScrolling: 'touch' }}
+    >
+      {items.map((card, idx) => {
+        const isActive = idx === activeIndex
+        const overlay = overlayMap[card.overlayStyle || 'vignette']
+        const activeBlurClass = card.activeBlur || 'blur-[2px]'
+
+        // ─── Kicker config ─────────────────────────────────────────────
+        const kickerText = card.kickerGroup?.text || 'Fintech & Payments'
+        const kickerColor = card.kickerGroup?.color || 'text-[#52B5D8]'
+        const kickerSize = card.kickerGroup?.fontSize || 'text-base md:text-lg'
+        const kickerWeight = card.kickerGroup?.fontWeight || 'font-semibold'
+
+        // ─── Heading config ────────────────────────────────────────────
+        const headingText =
+          card.headingGroup?.heading || 'Making everyday finance more connected.'
+        const headingColor = card.headingGroup?.headingColor || 'text-white'
+        const headingSize =
+          card.headingGroup?.headingFontSize || 'text-3xl sm:text-4xl md:text-5xl'
+        const headingWeight = card.headingGroup?.headingFontWeight || 'font-bold'
+        const collapsedSize =
+          card.headingGroup?.collapsedFontSize || 'text-xl md:text-2xl'
+
+        // ─── Description config ────────────────────────────────────────
+        const descText = card.descriptionGroup?.description
+        const descColor = card.descriptionGroup?.descriptionColor || 'text-white/90'
+        const descSize = card.descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
+        const descWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
+
+        // ─── Sub-Cards config (Up to 3) ─────────────────────────────────
+        const subCardsConfig = card.subCardsGroup
+        const showSubCards = subCardsConfig?.enableSubCards !== false
+        const subCardsBg = subCardsConfig?.subCardsBgColor || 'bg-white/15 backdrop-blur-md'
+        const subCardsRounded = subCardsConfig?.subCardsRounded || 'rounded-2xl'
+        const subCardsBorder = subCardsConfig?.subCardsBorder || 'border border-white/20'
+        const subCardsItems = subCardsConfig?.items || [
+          {
+            title: 'Multi-currency\nwallets',
+            description: 'Hold and manage supported currency balances.',
+          },
+          {
+            title: 'Send\n& receive',
+            description: 'Transfers, requests, bill splitting and remittance.',
+          },
+          {
+            title: 'Everyday\nmoney tools',
+            description: 'Virtual cards, statements and account experiences.',
+          },
+        ]
+
+        // ─── Button config ─────────────────────────────────────────────
+        const showButton = card.buttonGroup?.showButton !== false
+        const buttonText = card.buttonGroup?.buttonText || 'Learn more'
+        const buttonBg = card.buttonGroup?.buttonBgColor || 'bg-white/20'
+        const buttonTextCol = card.buttonGroup?.buttonTextColor || 'text-white'
+        const buttonSize = card.buttonGroup?.buttonFontSize || 'text-base'
+        const buttonWeight = card.buttonGroup?.buttonFontWeight || 'font-medium'
+        const iconBg = card.buttonGroup?.iconBgColor || 'bg-white'
+        const iconCol = card.buttonGroup?.iconColor || 'text-slate-900'
+        const buttonHref = getHref(card.buttonGroup?.buttonLink)
+        const isNewTab = card.buttonGroup?.buttonLink?.newTab
+
+        return (
+          <div
+            key={idx}
+            ref={(el) => {
+              cardRefs.current[idx] = el
+            }}
+            onClick={() => handleCardClick(idx)}
+            className={cn(
+              'relative rounded-[28px] md:rounded-[36px] overflow-hidden cursor-pointer group shrink-0',
+              'bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D]',
+              'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
+              cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
+              // Flex / width based on active state
+              isActive
+                ? 'w-[90vw] sm:w-[580px] md:w-[680px] lg:w-[780px] xl:w-[860px] md:flex-[3.5] shadow-2xl'
+                : 'w-[140px] sm:w-[170px] md:w-[200px] lg:w-[220px] md:flex-[1] shadow-md hover:brightness-105',
+            )}
+          >
+            {/* Background Image with Active Blur effect */}
+            {card.image && typeof card.image === 'object' && (
+              <Media
+                resource={card.image}
+                fill
+                imgClassName={cn(
+                  'object-cover w-full h-full transition-all duration-700 ease-out',
+                  isActive
+                    ? cn('scale-105', activeBlurClass)
+                    : 'scale-100 blur-none group-hover:scale-105',
+                )}
+              />
+            )}
+
+            {/* Vignette Overlay (applied when image is present; inactive cards get gentle bottom fade) */}
+            <div
+              className={cn(
+                'absolute inset-0 pointer-events-none transition-opacity duration-700',
+                card.image ? overlay : 'bg-transparent',
+                // Bottom darkening on inactive card for bottom title legibility
+                !isActive && 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
+              )}
+            />
+
+            {/* ─── ACTIVE CARD CONTENT (Vertically Centered with Top & Bottom Padding) ─── */}
+            <div
+              className={cn(
+                'relative z-10 h-full flex flex-col justify-center overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
+                'gap-5 sm:gap-6 md:gap-7',
+                'py-10 sm:py-12 md:py-14 lg:py-16 px-6 sm:px-8 md:px-12 lg:px-14 xl:px-16',
+                'transition-all duration-500 ease-out',
+                isActive
+                  ? 'opacity-100 pointer-events-auto'
+                  : 'opacity-0 pointer-events-none absolute inset-0',
+              )}
+            >
+              {/* Top Group: Kicker + Heading + Description */}
+              <div className="flex flex-col">
+                {/* Small Kicker */}
+                {kickerText && (
+                  <span
+                    className={cn(
+                      'block mb-2 md:mb-3 tracking-normal transition-all duration-700',
+                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                      kickerSize,
+                      kickerColor,
+                      kickerWeight,
+                    )}
+                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
+                  />
+                )}
+
+                {/* Main Heading */}
+                <h3
+                  className={cn(
+                    'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
+                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                    headingSize,
+                    headingColor,
+                    headingWeight,
+                  )}
+                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
+                />
+
+                {/* Description */}
+                {descText && (
+                  <div
+                    className={cn(
+                      'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
+                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                      descSize,
+                      descColor,
+                      descWeight,
+                    )}
+                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
+                  />
+                )}
+              </div>
+
+              {/* ─── Sub-Cards Row (Up to 3 cards) ─────────────────────── */}
+              {showSubCards && subCardsItems.length > 0 && (
+                <div
+                  className={cn(
+                    'grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full transition-all duration-700 delay-300',
+                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
+                  )}
+                >
+                  {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
+                    const title = subCard.title || 'Feature'
+                    const titleColor = subCard.titleColor || 'text-white'
+                    const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
+                    const titleWeight = subCard.titleFontWeight || 'font-bold'
+                    const titleAlign = subCard.titleAlignment || 'left'
+
+                    const subDesc = subCard.description
+                    const subDescColor = subCard.descriptionColor || 'text-white/80'
+                    const subDescSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
+                    const subDescWeight = subCard.descriptionFontWeight || 'font-normal'
+                    const subDescAlign = subCard.descriptionAlignment || 'left'
+
+                    return (
+                      <div
+                        key={subCard.id || subIdx}
+                        className={cn(
+                          'flex flex-col justify-between h-full min-h-[130px] sm:min-h-[145px] md:min-h-[160px]',
+                          'p-4 sm:p-5 md:p-6 shadow-md transition-all duration-300 hover:scale-[1.02]',
+                          subCardsBg,
+                          subCardsRounded,
+                          subCardsBorder,
+                        )}
+                      >
+                        <div
+                          className={cn(
+                            'leading-snug transition-colors',
+                            titleSize,
+                            titleColor,
+                            titleWeight,
+                            alignmentTextClasses[titleAlign],
+                          )}
+                          dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
+                        />
+
+                        {subDesc && (
+                          <div
+                            className={cn(
+                              'mt-3 leading-relaxed transition-colors',
+                              subDescSize,
+                              subDescColor,
+                              subDescWeight,
+                              alignmentTextClasses[subDescAlign],
+                            )}
+                            dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
+                          />
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+
+              {/* ─── Bottom Pill Action Button ──────────────────────────── */}
+              {showButton && (
+                <div
+                  className={cn(
+                    'pt-1 flex items-center transition-all duration-700 delay-400',
+                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
+                  )}
+                >
+                  <Link
+                    href={buttonHref}
+                    target={isNewTab ? '_blank' : undefined}
+                    rel={isNewTab ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                    }}
+                    className={cn(
+                      'inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full backdrop-blur-md',
+                      'shadow-lg border border-white/20 transition-all duration-300',
+                      'hover:scale-[1.03] active:scale-[0.98] group/btn',
+                      buttonBg,
+                    )}
+                  >
+                    <span className={cn('tracking-normal', buttonTextCol, buttonSize, buttonWeight)}>
+                      {buttonText}
+                    </span>
+                    <span
+                      className={cn(
+                        'w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
+                        iconBg,
+                      )}
+                    >
+                      <ArrowUpRight className={cn('w-4 h-4 md:w-5 md:h-5 transition-colors', iconCol)} />
+                    </span>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* ─── INACTIVE CARD CONTENT (Title at bottom) ─────────────── */}
+            <div
+              className={cn(
+                'absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5 md:p-6 pb-6 md:pb-8',
+                'transition-all duration-500 ease-out flex flex-col justify-end',
+                !isActive
+                  ? 'opacity-100 pointer-events-none translate-y-0'
+                  : 'opacity-0 pointer-events-none translate-y-4',
+              )}
+            >
+              <div
+                className={cn(
+                  'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors',
+                  collapsedSize,
+                  headingColor,
+                  headingWeight,
+                )}
+                dangerouslySetInnerHTML={{
+                  __html: formatInlineHtml(kickerText || headingText),
+                }}
+              />
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+
+  const indicatorsContent = showIndicators !== false && count > 1 && (
+    <div className="mt-4 md:mt-6 flex items-center gap-2 pl-2">
+      {items.map((_, i) => (
+        <button
+          key={i}
+          type="button"
+          aria-label={`Go to slide ${i + 1}`}
+          onClick={() => handleCardClick(i)}
+          className={cn(
+            'h-1.5 transition-all duration-300 rounded-full focus:outline-none',
+            i === activeIndex
+              ? 'w-7 sm:w-8 bg-slate-900 dark:bg-white'
+              : 'w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400',
+          )}
+        />
+      ))}
+    </div>
+  )
+
+  // In embedded mode (e.g. inside a column of Content block), omit the outer section box
+  if (isEmbedded) {
+    return (
+      <div ref={wrapperRef} className={cn('relative w-full', className)}>
+        {trackContent}
+        {indicatorsContent}
+      </div>
+    )
+  }
+
+  // Standalone block rendering with sticky scroll support
   return (
     <div
       ref={wrapperRef}
       style={{ minHeight: isStickyMode ? stickyWrapperHeight : undefined }}
-      className={cn('relative w-full', sectionBgColor || 'bg-white', className)}
+      className={cn('relative w-full', sectionBgColor || 'bg-transparent', className)}
     >
       <section
         ref={sectionRef}
@@ -327,313 +622,8 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
         )}
       >
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col">
-          {/* ─── Cards Track ────────────────────────────────────────────────────── */}
-          <div
-            ref={trackRef}
-            className="flex items-stretch gap-4 md:gap-6 overflow-x-auto scrollbar-none py-2 px-1 scroll-smooth w-full"
-            style={{ WebkitOverflowScrolling: 'touch' }}
-          >
-            {items.map((card, idx) => {
-              const isActive = idx === activeIndex
-              const overlay = overlayMap[card.overlayStyle || 'vignette']
-              const activeBlurClass = card.activeBlur || 'blur-[2px]'
-
-              // ─── Kicker config ─────────────────────────────────────────────
-              const kickerText = card.kickerGroup?.text || 'Fintech & Payments'
-              const kickerColor = card.kickerGroup?.color || 'text-[#52B5D8]'
-              const kickerSize = card.kickerGroup?.fontSize || 'text-base md:text-lg'
-              const kickerWeight = card.kickerGroup?.fontWeight || 'font-semibold'
-
-              // ─── Heading config ────────────────────────────────────────────
-              const headingText =
-                card.headingGroup?.heading || 'Making everyday finance more connected.'
-              const headingColor = card.headingGroup?.headingColor || 'text-white'
-              const headingSize =
-                card.headingGroup?.headingFontSize || 'text-3xl sm:text-4xl md:text-5xl'
-              const headingWeight = card.headingGroup?.headingFontWeight || 'font-bold'
-              const collapsedSize =
-                card.headingGroup?.collapsedFontSize || 'text-xl md:text-2xl'
-
-              // ─── Description config ────────────────────────────────────────
-              const descText = card.descriptionGroup?.description
-              const descColor = card.descriptionGroup?.descriptionColor || 'text-white/90'
-              const descSize = card.descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
-              const descWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
-
-              // ─── Sub-Cards config (Up to 3) ─────────────────────────────────
-              const subCardsConfig = card.subCardsGroup
-              const showSubCards = subCardsConfig?.enableSubCards !== false
-              const subCardsBg = subCardsConfig?.subCardsBgColor || 'bg-white/15 backdrop-blur-md'
-              const subCardsRounded = subCardsConfig?.subCardsRounded || 'rounded-2xl'
-              const subCardsBorder = subCardsConfig?.subCardsBorder || 'border border-white/20'
-              const subCardsItems = subCardsConfig?.items || [
-                {
-                  title: 'Multi-currency\nwallets',
-                  description: 'Hold and manage supported currency balances.',
-                },
-                {
-                  title: 'Send\n& receive',
-                  description: 'Transfers, requests, bill splitting and remittance.',
-                },
-                {
-                  title: 'Everyday\nmoney tools',
-                  description: 'Virtual cards, statements and account experiences.',
-                },
-              ]
-
-              // ─── Button config ─────────────────────────────────────────────
-              const showButton = card.buttonGroup?.showButton !== false
-              const buttonText = card.buttonGroup?.buttonText || 'Learn more'
-              const buttonBg = card.buttonGroup?.buttonBgColor || 'bg-white/20'
-              const buttonTextCol = card.buttonGroup?.buttonTextColor || 'text-white'
-              const buttonSize = card.buttonGroup?.buttonFontSize || 'text-base'
-              const buttonWeight = card.buttonGroup?.buttonFontWeight || 'font-medium'
-              const iconBg = card.buttonGroup?.iconBgColor || 'bg-white'
-              const iconCol = card.buttonGroup?.iconColor || 'text-slate-900'
-              const buttonHref = getHref(card.buttonGroup?.buttonLink)
-              const isNewTab = card.buttonGroup?.buttonLink?.newTab
-
-              return (
-                <div
-                  key={idx}
-                  ref={(el) => {
-                    cardRefs.current[idx] = el
-                  }}
-                  onClick={() => handleCardClick(idx)}
-                  className={cn(
-                    'relative rounded-[28px] md:rounded-[36px] overflow-hidden cursor-pointer group shrink-0 bg-slate-900',
-                    'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
-                    cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
-                    // Flex / width based on active state
-                    isActive
-                      ? 'w-[90vw] sm:w-[580px] md:w-[680px] lg:w-[780px] xl:w-[860px] md:flex-[3.5] shadow-2xl'
-                      : 'w-[140px] sm:w-[170px] md:w-[200px] lg:w-[220px] md:flex-[1] shadow-md hover:brightness-105',
-                  )}
-                >
-                  {/* Background Image with Active Blur effect */}
-                  {card.image && typeof card.image === 'object' && (
-                    <Media
-                      resource={card.image}
-                      fill
-                      imgClassName={cn(
-                        'object-cover w-full h-full transition-all duration-700 ease-out',
-                        isActive
-                          ? cn('scale-105', activeBlurClass)
-                          : 'scale-100 blur-none group-hover:scale-105',
-                      )}
-                    />
-                  )}
-
-                  {/* Dark Vignette Overlay */}
-                  <div
-                    className={cn(
-                      'absolute inset-0 pointer-events-none transition-opacity duration-700',
-                      overlay,
-                      // Darker gradient on inactive card for bottom title legibility
-                      !isActive && 'bg-gradient-to-t from-black/90 via-black/40 to-black/20',
-                    )}
-                  />
-
-                  {/* ─── ACTIVE CARD CONTENT (Vertically Centered) ───────────── */}
-                  <div
-                    className={cn(
-                      'relative z-10 h-full flex flex-col justify-center',
-                      'gap-5 sm:gap-6 md:gap-7',
-                      'p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14',
-                      'transition-all duration-500 ease-out',
-                      isActive
-                        ? 'opacity-100 pointer-events-auto'
-                        : 'opacity-0 pointer-events-none absolute inset-0',
-                    )}
-                  >
-                    {/* Top Group: Kicker + Heading + Description */}
-                    <div className="flex flex-col">
-                      {/* Small Kicker */}
-                      {kickerText && (
-                        <span
-                          className={cn(
-                            'block mb-2 md:mb-3 tracking-normal transition-all duration-700',
-                            isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
-                            kickerSize,
-                            kickerColor,
-                            kickerWeight,
-                          )}
-                          dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
-                        />
-                      )}
-
-                      {/* Main Heading */}
-                      <h3
-                        className={cn(
-                          'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
-                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
-                          headingSize,
-                          headingColor,
-                          headingWeight,
-                        )}
-                        dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
-                      />
-
-                      {/* Description */}
-                      {descText && (
-                        <div
-                          className={cn(
-                            'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
-                            isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
-                            descSize,
-                            descColor,
-                            descWeight,
-                          )}
-                          dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
-                        />
-                      )}
-                    </div>
-
-                    {/* ─── Sub-Cards Row (Up to 3 cards) ─────────────────────── */}
-                    {showSubCards && subCardsItems.length > 0 && (
-                      <div
-                        className={cn(
-                          'grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full transition-all duration-700 delay-300',
-                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
-                        )}
-                      >
-                        {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
-                          const title = subCard.title || 'Feature'
-                          const titleColor = subCard.titleColor || 'text-white'
-                          const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
-                          const titleWeight = subCard.titleFontWeight || 'font-bold'
-                          const titleAlign = subCard.titleAlignment || 'left'
-
-                          const subDesc = subCard.description
-                          const subDescColor = subCard.descriptionColor || 'text-white/80'
-                          const subDescSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
-                          const subDescWeight = subCard.descriptionFontWeight || 'font-normal'
-                          const subDescAlign = subCard.descriptionAlignment || 'left'
-
-                          return (
-                            <div
-                              key={subCard.id || subIdx}
-                              className={cn(
-                                'flex flex-col justify-between h-full min-h-[130px] sm:min-h-[145px] md:min-h-[160px]',
-                                'p-4 sm:p-5 md:p-6 shadow-md transition-all duration-300 hover:scale-[1.02]',
-                                subCardsBg,
-                                subCardsRounded,
-                                subCardsBorder,
-                              )}
-                            >
-                              <div
-                                className={cn(
-                                  'leading-snug transition-colors',
-                                  titleSize,
-                                  titleColor,
-                                  titleWeight,
-                                  alignmentTextClasses[titleAlign],
-                                )}
-                                dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
-                              />
-
-                              {subDesc && (
-                                <div
-                                  className={cn(
-                                    'mt-3 leading-relaxed transition-colors',
-                                    subDescSize,
-                                    subDescColor,
-                                    subDescWeight,
-                                    alignmentTextClasses[subDescAlign],
-                                  )}
-                                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
-                                />
-                              )}
-                            </div>
-                          )
-                        })}
-                      </div>
-                    )}
-
-                    {/* ─── Bottom Pill Action Button ──────────────────────────── */}
-                    {showButton && (
-                      <div
-                        className={cn(
-                          'pt-1 flex items-center transition-all duration-700 delay-400',
-                          isInView && isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4',
-                        )}
-                      >
-                        <Link
-                          href={buttonHref}
-                          target={isNewTab ? '_blank' : undefined}
-                          rel={isNewTab ? 'noopener noreferrer' : undefined}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                          }}
-                          className={cn(
-                            'inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full backdrop-blur-md',
-                            'shadow-lg border border-white/20 transition-all duration-300',
-                            'hover:scale-[1.03] active:scale-[0.98] group/btn',
-                            buttonBg,
-                          )}
-                        >
-                          <span className={cn('tracking-normal', buttonTextCol, buttonSize, buttonWeight)}>
-                            {buttonText}
-                          </span>
-                          <span
-                            className={cn(
-                              'w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
-                              iconBg,
-                            )}
-                          >
-                            <ArrowUpRight className={cn('w-4 h-4 md:w-5 md:h-5 transition-colors', iconCol)} />
-                          </span>
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* ─── INACTIVE CARD CONTENT (Title at bottom) ─────────────── */}
-                  <div
-                    className={cn(
-                      'absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5 md:p-6 pb-6 md:pb-8',
-                      'transition-all duration-500 ease-out flex flex-col justify-end',
-                      !isActive
-                        ? 'opacity-100 pointer-events-none translate-y-0'
-                        : 'opacity-0 pointer-events-none translate-y-4',
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors',
-                        collapsedSize,
-                        headingColor,
-                        headingWeight,
-                      )}
-                      dangerouslySetInnerHTML={{
-                        __html: formatInlineHtml(kickerText || headingText),
-                      }}
-                    />
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* ─── Bottom Position Indicators ───────────────────────────────────── */}
-          {showIndicators !== false && count > 1 && (
-            <div className="mt-6 md:mt-8 flex items-center gap-2 pl-2">
-              {items.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  aria-label={`Go to slide ${i + 1}`}
-                  onClick={() => handleCardClick(i)}
-                  className={cn(
-                    'h-1.5 transition-all duration-300 rounded-full focus:outline-none',
-                    i === activeIndex
-                      ? 'w-7 sm:w-8 bg-slate-900 dark:bg-white'
-                      : 'w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400',
-                  )}
-                />
-              ))}
-            </div>
-          )}
+          {trackContent}
+          {indicatorsContent}
         </div>
       </section>
     </div>
