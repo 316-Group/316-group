@@ -31,6 +31,8 @@ import { link } from '@/fields/link'
 import { centeredContentFields } from '../CenteredContent/config'
 import { clickExpandFields } from '../ClickExpand/config'
 import { gridColFields } from '../GridCol/config'
+import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
+import { featureCardsFields } from '../FeatureCards/config'
 
 const columnFields: Field[] = [
   {
@@ -121,6 +123,8 @@ const columnFields: Field[] = [
           { label: 'Centered Content', value: 'centeredContent' },
           { label: 'Click Expand Cards', value: 'clickExpand' },
           { label: 'Grid Col Feature', value: 'gridCol' },
+          { label: 'Animated Icons Grid', value: 'animatedIconsGrid' },
+          { label: 'Feature Cards', value: 'featureCards' },
         ],
       },
       {
@@ -1661,6 +1665,28 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'gridCol',
         },
         fields: gridColFields,
+      },
+
+      // ─── Animated Icons Grid ───────────────────────────────────────────────
+      {
+        name: 'animatedIconsGrid',
+        type: 'group',
+        label: 'Animated Icons Grid',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'animatedIconsGrid',
+        },
+        fields: animatedIconsGridFields,
+      },
+
+      // ─── Feature Cards ─────────────────────────────────────────────────────
+      {
+        name: 'featureCards',
+        type: 'group',
+        label: 'Feature Cards',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'featureCards',
+        },
+        fields: featureCardsFields,
       },
     ],
   },

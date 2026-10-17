@@ -52,6 +52,7 @@ import { CenteredContent } from '@/blocks/CenteredContent/config'
 import { ClickExpand } from '@/blocks/ClickExpand/config'
 import { GridCol } from '@/blocks/GridCol/config'
 import { AnimatedIconsGrid } from '@/blocks/AnimatedIconsGrid/config'
+import { FeatureCards } from '@/blocks/FeatureCards/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -146,6 +147,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ClickExpand,
                 GridCol,
                 AnimatedIconsGrid,
+                FeatureCards,
               ],
               required: true,
             },

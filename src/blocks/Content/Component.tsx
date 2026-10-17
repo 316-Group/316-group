@@ -23,6 +23,8 @@ import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
 import { CenteredContentComponent } from '../CenteredContent/Component'
 import { ClickExpandBlock } from '../ClickExpand/Component'
 import { GridColBlock } from '../GridCol/Component'
+import { AnimatedIconsGridBlock } from '../AnimatedIconsGrid/Component'
+import { FeatureCardsBlock } from '../FeatureCards/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -790,6 +792,24 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <GridColBlock
                         key={index}
                         {...(content as any).gridCol}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'animatedIconsGrid' && (content as any).animatedIconsGrid) {
+                    return (
+                      <AnimatedIconsGridBlock
+                        key={index}
+                        {...(content as any).animatedIconsGrid}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'featureCards' && (content as any).featureCards) {
+                    return (
+                      <FeatureCardsBlock
+                        key={index}
+                        {...(content as any).featureCards}
                       />
                     )
                   }

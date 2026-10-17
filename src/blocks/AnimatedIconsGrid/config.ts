@@ -10,17 +10,11 @@ const alignmentOptions = [
   { label: 'Right', value: 'right' },
 ]
 
-export const AnimatedIconsGrid: Block = {
-  slug: 'animatedIconsGrid',
-  labels: {
-    singular: 'Animated Icons Grid',
-    plural: 'Animated Icons Grid Blocks',
-  },
-  fields: [
-    // ─── 1. Section Spacing & Background ─────────────────────────────────────
-    {
-      type: 'row',
-      fields: [
+export const animatedIconsGridFields: Field[] = [
+  // ─── 1. Section Spacing & Background ─────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
         bgColorPickerAll({
           overrides: {
             name: 'sectionBgColor',
@@ -301,5 +295,14 @@ export const AnimatedIconsGrid: Block = {
         },
       ],
     },
-  ],
+  ]
+
+export const AnimatedIconsGrid: Block = {
+  slug: 'animatedIconsGrid',
+  labels: {
+    singular: 'Animated Icons Grid',
+    plural: 'Animated Icons Grid Blocks',
+  },
+  fields: animatedIconsGridFields,
 }
+

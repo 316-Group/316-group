@@ -40,6 +40,7 @@ import { CenteredContentBlock } from './CenteredContent/Component'
 import { ClickExpandBlock } from './ClickExpand/Component'
 import { GridColBlock } from './GridCol/Component'
 import { AnimatedIconsGridBlock } from './AnimatedIconsGrid/Component'
+import { FeatureCardsBlock } from './FeatureCards/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -79,6 +80,7 @@ const blockComponents = {
   clickExpand: ClickExpandBlock,
   gridCol: GridColBlock,
   animatedIconsGrid: AnimatedIconsGridBlock,
+  featureCards: FeatureCardsBlock,
 }
 
 export const RenderBlocks: React.FC<{
