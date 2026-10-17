@@ -121,7 +121,7 @@ export const MegaMenu = ({
               <Link
                 key={index}
                 href={getHref(section.link)}
-                className="flex items-center gap-1.5 bg-white/90 hover:bg-white text-gray-900 text-sm font-semibold px-4 py-2 rounded-full transition-colors duration-200"
+                className="flex items-center gap-1.5 bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors duration-200"
               >
                 {section.link?.label || section.title}
                 <ArrowRight className="h-4 w-4" />

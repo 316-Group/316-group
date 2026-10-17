@@ -9,6 +9,7 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
 import { AnimateIn, type AnimationType, type AnimationSpeed, type AnimationDelay } from '@/components/AnimateIn'
+import { GroupHeroV2Nav } from './GroupHeroV2Nav'
 
 export const GroupHeroV2: React.FC<Page['hero']> = ({
   richText,
@@ -43,6 +44,8 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
 
   useEffect(() => {
     setHeaderTheme('light')
+    // Tell the layout-level header to hide itself (renders null)
+    // while this hero renders its own self-contained nav bar inside the card.
     setHeroOverlay(true)
     return () => {
       setHeroOverlay(false)
@@ -69,7 +72,11 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
       : { animation: 'none' as const }
 
   return (
-    // Outer wrapper: starts from very top of page (header is position:fixed, no flow offset)
+    /*
+     * Outer wrapper — sits in normal document flow (NOT fixed/absolute).
+     * mt-6 gives a small gap from the top of the page so the card floats.
+     * mx-[5px] gives the left/right breathing room seen in the mockup.
+     */
     <div className="relative mt-6">
       {/* ── Part 1: Hero Zone ─────────────────────────────────────────────────── */}
       <div
@@ -79,8 +86,13 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
           roundedClass,
         )}
       >
-        {/* Spacer to push content below the fixed floating header (~88px total with pt-4 + pill height) */}
-        <div className="h-24" />
+        {/*
+         * Self-contained nav bar — rendered as a React Server Component that
+         * fetches the header global and renders Logo + MegaMenu inside this
+         * card. Normal document flow = scrolls away naturally. No fixed
+         * positioning = no double-header.
+         */}
+        <GroupHeroV2Nav />
 
         <div className="container max-w-screen-2xl">
           {/* Top content row */}
@@ -89,17 +101,15 @@ export const GroupHeroV2: React.FC<Page['hero']> = ({
             {richText && (
               <AnimateIn {...anim(hDelay)}>
                 {/*
-                 * Wrap in a container that sets the colour via CSS custom property.
-                 * Any heading with an inline `style` attribute (e.g. style="color:red")
-                 * will naturally override the inherited colour class, so per-heading
-                 * colour control works without removing the parent class.
+                 * Wrap in a container div that carries the default colour.
+                 * Individual headings/spans that have an inline `style`
+                 * (e.g. color:red set via the Lexical editor colour picker)
+                 * naturally override the inherited CSS colour.
                  */}
                 <div
                   className={cn(
                     'font-normal text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] leading-tight',
                     headingTextColor ?? 'text-white',
-                    // Allow child elements with an inline style to override the color
-                    '[&_[style*="color"]]:text-[unset]',
                   )}
                 >
                   <RichText
