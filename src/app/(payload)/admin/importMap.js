@@ -13,6 +13,7 @@ import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { default as default_bea9d87f067d645528cefb13512c87d5 } from '@/components/Admin/IconPicker'
 import { RowLabel as RowLabel_0505e7b3a2a4047861b04f05e6f3730d } from '../../../blocks/ClickExpand/RowLabel'
+import { RowLabel as RowLabel_2dd32562cbc4b0bca041bf328ffd0a46 } from '../../../blocks/GridCol/RowLabel'
 import { AlignFeatureClient as AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
@@ -45,6 +46,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/Admin/IconPicker#default": default_bea9d87f067d645528cefb13512c87d5,
   "/blocks/ClickExpand/RowLabel#RowLabel": RowLabel_0505e7b3a2a4047861b04f05e6f3730d,
+  "/blocks/GridCol/RowLabel#RowLabel": RowLabel_2dd32562cbc4b0bca041bf328ffd0a46,
   "@payloadcms/richtext-lexical/client#AlignFeatureClient": AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaTitleComponent": MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c0860,

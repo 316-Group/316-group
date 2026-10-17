@@ -30,6 +30,7 @@ import { gradientColorPicker } from '@/fields/gradientColorPicker'
 import { link } from '@/fields/link'
 import { centeredContentFields } from '../CenteredContent/config'
 import { clickExpandFields } from '../ClickExpand/config'
+import { gridColFields } from '../GridCol/config'
 
 const columnFields: Field[] = [
   {
@@ -74,6 +75,16 @@ const columnFields: Field[] = [
       },
     ],
   },
+  bgColorPickerAll({
+    overrides: {
+      name: 'columnBgColor',
+      label: 'Column Background Color',
+      defaultValue: 'bg-transparent',
+      admin: {
+        description: 'Set a full width background color for this column.',
+      },
+    },
+  }),
   {
     name: 'columnContent',
     type: 'array',
@@ -109,6 +120,7 @@ const columnFields: Field[] = [
           { label: 'Solutions Accordion', value: 'solutionsAccordion' },
           { label: 'Centered Content', value: 'centeredContent' },
           { label: 'Click Expand Cards', value: 'clickExpand' },
+          { label: 'Grid Col Feature', value: 'gridCol' },
         ],
       },
       {
@@ -1680,6 +1692,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'clickExpand',
         },
         fields: clickExpandFields,
+      },
+
+      // ─── Grid Col Feature ──────────────────────────────────────────────────
+      {
+        name: 'gridCol',
+        type: 'group',
+        label: 'Grid Col Feature',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'gridCol',
+        },
+        fields: gridColFields,
       },
     ],
   },

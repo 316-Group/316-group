@@ -50,6 +50,7 @@ import { AgenticGrid } from '@/blocks/AgenticGrid/config'
 import { SolutionsAccordion } from '@/blocks/SolutionsAccordion/config'
 import { CenteredContent } from '@/blocks/CenteredContent/config'
 import { ClickExpand } from '@/blocks/ClickExpand/config'
+import { GridCol } from '@/blocks/GridCol/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -142,6 +143,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 SolutionsAccordion,
                 CenteredContent,
                 ClickExpand,
+                GridCol,
               ],
               required: true,
             },

@@ -22,6 +22,7 @@ import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
 import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
 import { CenteredContentComponent } from '../CenteredContent/Component'
 import { ClickExpandBlock } from '../ClickExpand/Component'
+import { GridColBlock } from '../GridCol/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -183,6 +184,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
             const orderClass = orderClasses[mobileOrder as keyof typeof orderClasses] || ''
             const mdOrderClass = mdOrderClasses[index + 1] || 'md:order-0'
             const colWidth = colsSpanClasses[size]
+            const colBg = (col as any).columnBgColor
             return (
               <div
                 key={index}
@@ -191,6 +193,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   orderClass, // Mobile order
                   mdOrderClass, // Reset order on desktop
                   col.alignment === 'center' && 'text-center flex flex-col items-center justify-center',
+                  colBg && colBg !== 'bg-transparent' && colBg,
                 )}
               >
                 {col.columnContent?.map((content, index) => {
@@ -778,6 +781,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         key={index}
                         isEmbedded={true}
                         {...(content as any).clickExpand}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'gridCol' && (content as any).gridCol) {
+                    return (
+                      <GridColBlock
+                        key={index}
+                        {...(content as any).gridCol}
                       />
                     )
                   }

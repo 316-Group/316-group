@@ -11,6 +11,7 @@ export const bgColorPickerLight: Field = {
   type: 'select',
   label: 'Background Color',
   options: [
+    { label: 'Soft Alabaster (#F7F8F4)', value: 'bg-[#F7F8F4]' },
     { label: 'Soft Blue Gray (#EFF1F8)', value: 'bg-[#EFF1F8]' },
     { label: 'Indigo Accent (#3F5AC9)', value: 'bg-[#3F5AC9]' },
     { label: 'Custom Blue (#0256FF)', value: 'bg-blue-custom' },
@@ -72,6 +73,7 @@ export const bgColorPickerAll: bgColorType = ({ condition = () => true, override
       { label: 'Transparent', value: 'bg-transparent' },
       { label: 'Black', value: 'bg-black' },
       { label: 'White', value: 'bg-white' },
+      { label: 'Soft Alabaster (#F7F8F4)', value: 'bg-[#F7F8F4]' },
       { label: 'Soft Blue Gray (#EFF1F8)', value: 'bg-[#EFF1F8]' },
       { label: 'Indigo Accent (#3F5AC9)', value: 'bg-[#3F5AC9]' },
       { label: 'Light Sky Blue (#ADE2FF)', value: 'bg-light-sky' },
