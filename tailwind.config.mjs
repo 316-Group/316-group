@@ -23,6 +23,10 @@ export default {
     'bg-success/30',
     'border-warning',
     'bg-warning/30',
+    'text-[#3F5AC9]',
+    'bg-[#EFF1F8]',
+    'text-[#EFF1F8]',
+    'bg-[#3F5AC9]',
   ],
   theme: {
     container: {
@@ -66,6 +70,8 @@ export default {
         'cyan-neon': '#10EBFF',
         'blue-custom': '#0256FF',
         'light-sky': '#ADE2FF',
+        'indigo-accent': '#3F5AC9',
+        'soft-blue-gray': '#EFF1F8',
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',

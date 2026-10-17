@@ -48,6 +48,7 @@ import { BrandSlider } from '@/blocks/BrandSlider/config'
 import { ImageTextSplit } from '@/blocks/ImageTextSplit/config'
 import { AgenticGrid } from '@/blocks/AgenticGrid/config'
 import { SolutionsAccordion } from '@/blocks/SolutionsAccordion/config'
+import { CenteredContent } from '@/blocks/CenteredContent/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -138,6 +139,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ImageTextSplit,
                 AgenticGrid,
                 SolutionsAccordion,
+                CenteredContent,
               ],
               required: true,
             },

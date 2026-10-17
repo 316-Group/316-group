@@ -20,6 +20,7 @@ import { CaseStudySliderClient } from './CaseStudySliderClient'
 import { getBestContrastTextColor } from '@/utilities/getBestContrastTextColor'
 import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
 import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
+import { CenteredContentComponent } from '../CenteredContent/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -757,6 +758,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         rightBgColor={rightBgColor}
                         sectionBgColor={sectionBgColor}
                         scrollAnimation={scrollAnimation}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'centeredContent' && (content as any).centeredContent) {
+                    return (
+                      <CenteredContentComponent
+                        key={index}
+                        {...(content as any).centeredContent}
                       />
                     )
                   }

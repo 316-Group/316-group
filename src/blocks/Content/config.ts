@@ -28,6 +28,7 @@ import { colorPickerAll } from '@/fields/colorPicker'
 import { icon } from '@/fields/icon'
 import { gradientColorPicker } from '@/fields/gradientColorPicker'
 import { link } from '@/fields/link'
+import { centeredContentFields } from '../CenteredContent/config'
 
 const columnFields: Field[] = [
   {
@@ -105,6 +106,7 @@ const columnFields: Field[] = [
           { label: 'Custom Job Action', value: 'customJobAction' },
           { label: 'Custom Button', value: 'customButton' },
           { label: 'Solutions Accordion', value: 'solutionsAccordion' },
+          { label: 'Centered Content', value: 'centeredContent' },
         ],
       },
       {
@@ -1654,6 +1656,17 @@ const columnFields: Field[] = [
             ],
           },
         ],
+      },
+
+      // ─── Centered Content ──────────────────────────────────────────────────
+      {
+        name: 'centeredContent',
+        type: 'group',
+        label: 'Centered Content',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'centeredContent',
+        },
+        fields: centeredContentFields,
       },
     ],
   },
