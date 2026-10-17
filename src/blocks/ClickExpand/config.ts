@@ -23,6 +23,8 @@ export const buttonBgOptions = [
   { label: 'Glass with Border (bg-white/15 border border-white/30)', value: 'bg-white/15 border border-white/30' },
 ]
 
+const allowAnySelect = (() => true as const) as any
+
 export const clickExpandFields: Field[] = [
   // ─── Section Background & Spacing ──────────────────────────────────────────
   {
@@ -43,6 +45,7 @@ export const clickExpandFields: Field[] = [
         type: 'select',
         label: 'Padding Top',
         defaultValue: 'pt-16',
+        validate: allowAnySelect,
         options: [
           { label: 'None (0)', value: 'pt-0' },
           { label: 'Extra Small (pt-4)', value: 'pt-4' },
@@ -62,6 +65,7 @@ export const clickExpandFields: Field[] = [
         type: 'select',
         label: 'Padding Bottom',
         defaultValue: 'pb-16',
+        validate: allowAnySelect,
         options: [
           { label: 'None (0)', value: 'pb-0' },
           { label: 'Extra Small (pb-4)', value: 'pb-4' },
@@ -88,12 +92,19 @@ export const clickExpandFields: Field[] = [
         type: 'select',
         label: 'Cards Height',
         defaultValue: 'h-[580px] md:h-[680px] lg:h-[720px]',
+        validate: allowAnySelect,
         options: [
+          { label: 'Standard (h-720px - Default)', value: 'h-[580px] md:h-[680px] lg:h-[720px]' },
           { label: 'Compact (h-520px)', value: 'h-[480px] md:h-[520px]' },
           { label: 'Medium (h-620px)', value: 'h-[520px] md:h-[620px]' },
-          { label: 'Standard (h-720px - Default)', value: 'h-[580px] md:h-[680px] lg:h-[720px]' },
           { label: 'Large (h-780px)', value: 'h-[620px] md:h-[720px] lg:h-[780px]' },
           { label: 'Viewport Height (85vh)', value: 'h-[75vh] md:h-[85vh]' },
+          // Legacy options from previous versions of this block
+          { label: 'Standard (Legacy 660px)', value: 'h-[520px] md:h-[620px] lg:h-[660px]' },
+          { label: 'Compact (Legacy 500px)', value: 'h-[460px] md:h-[500px]' },
+          { label: 'Medium (Legacy 580px)', value: 'h-[480px] md:h-[580px]' },
+          { label: 'Large (Legacy 740px)', value: 'h-[560px] md:h-[680px] lg:h-[740px]' },
+          { label: 'Viewport Height (Legacy 80vh)', value: 'h-[70vh] md:h-[80vh]' },
         ],
         admin: {
           width: '50%',
@@ -104,6 +115,7 @@ export const clickExpandFields: Field[] = [
         type: 'select',
         label: 'Mouse Scroll Interaction',
         defaultValue: 'sticky',
+        validate: allowAnySelect,
         options: [
           {
             label: 'Pinned Sticky Scroll (Locks section on screen while scrolling mouse through cards, page continues only after last item)',
@@ -138,6 +150,7 @@ export const clickExpandFields: Field[] = [
     name: 'cards',
     type: 'array',
     label: 'Expandable Card Items',
+    validate: allowAnySelect,
     admin: {
       initCollapsed: false,
       components: {
@@ -161,6 +174,7 @@ export const clickExpandFields: Field[] = [
             type: 'select',
             label: 'Image Dark Overlay Style',
             defaultValue: 'vignette',
+            validate: allowAnySelect,
             options: [
               { label: 'Vignette Dark Gradient (Recommended)', value: 'vignette' },
               { label: 'Subtle Dark Overlay', value: 'subtle' },
@@ -177,6 +191,7 @@ export const clickExpandFields: Field[] = [
             type: 'select',
             label: 'Active Card Background Blur Effect',
             defaultValue: 'blur-[2px]',
+            validate: allowAnySelect,
             options: [
               { label: 'Subtle Blur (Default - 2px)', value: 'blur-[2px]' },
               { label: 'Medium Blur (blur-sm - 4px)', value: 'blur-sm' },
@@ -377,6 +392,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Cards Transparent Overlay Background',
                 defaultValue: 'bg-white/15 backdrop-blur-md',
+                validate: allowAnySelect,
                 options: [
                   { label: 'Transparent White 15% with Blur (Default)', value: 'bg-white/15 backdrop-blur-md' },
                   { label: 'Transparent White 10% with Blur', value: 'bg-white/10 backdrop-blur-md' },
@@ -395,6 +411,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Cards Border Radius',
                 defaultValue: 'rounded-2xl',
+                validate: allowAnySelect,
                 options: [
                   { label: 'Rounded 2XL (24px - Default)', value: 'rounded-2xl' },
                   { label: 'Rounded 3XL (32px)', value: 'rounded-3xl' },
@@ -411,6 +428,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Cards Border',
                 defaultValue: 'border border-white/20',
+                validate: allowAnySelect,
                 options: [
                   { label: 'Subtle Glass Border (Default)', value: 'border border-white/20' },
                   { label: 'Soft Border (border-white/10)', value: 'border border-white/10' },
@@ -573,6 +591,7 @@ export const clickExpandFields: Field[] = [
                 type: 'select',
                 label: 'Button Background Style',
                 defaultValue: 'bg-white/20',
+                validate: allowAnySelect,
                 options: buttonBgOptions,
                 admin: {
                   width: '33.33%',

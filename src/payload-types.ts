@@ -40166,11 +40166,16 @@ export interface ContentBlock {
                 paddingBottom?: ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
                 cardHeight?:
                   | (
+                      | 'h-[580px] md:h-[680px] lg:h-[720px]'
                       | 'h-[480px] md:h-[520px]'
                       | 'h-[520px] md:h-[620px]'
-                      | 'h-[580px] md:h-[680px] lg:h-[720px]'
                       | 'h-[620px] md:h-[720px] lg:h-[780px]'
                       | 'h-[75vh] md:h-[85vh]'
+                      | 'h-[520px] md:h-[620px] lg:h-[660px]'
+                      | 'h-[460px] md:h-[500px]'
+                      | 'h-[480px] md:h-[580px]'
+                      | 'h-[560px] md:h-[680px] lg:h-[740px]'
+                      | 'h-[70vh] md:h-[80vh]'
                     )
                   | null;
                 /**
@@ -126692,11 +126697,16 @@ export interface ClickExpandBlock {
   paddingBottom?: ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
   cardHeight?:
     | (
+        | 'h-[580px] md:h-[680px] lg:h-[720px]'
         | 'h-[480px] md:h-[520px]'
         | 'h-[520px] md:h-[620px]'
-        | 'h-[580px] md:h-[680px] lg:h-[720px]'
         | 'h-[620px] md:h-[720px] lg:h-[780px]'
         | 'h-[75vh] md:h-[85vh]'
+        | 'h-[520px] md:h-[620px] lg:h-[660px]'
+        | 'h-[460px] md:h-[500px]'
+        | 'h-[480px] md:h-[580px]'
+        | 'h-[560px] md:h-[680px] lg:h-[740px]'
+        | 'h-[70vh] md:h-[80vh]'
       )
     | null;
   /**
