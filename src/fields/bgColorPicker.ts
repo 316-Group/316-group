@@ -73,6 +73,7 @@ export const bgColorPickerAll: bgColorType = ({ condition = () => true, override
       { label: 'Transparent', value: 'bg-transparent' },
       { label: 'Black', value: 'bg-black' },
       { label: 'White', value: 'bg-white' },
+      { label: 'White Translucent (20%)', value: 'bg-white/20' },
       { label: 'Soft Alabaster (#F7F8F4)', value: 'bg-[#F7F8F4]' },
       { label: 'Soft Blue Gray (#EFF1F8)', value: 'bg-[#EFF1F8]' },
       { label: 'Brand Light Slate (#F4F6FB)', value: 'bg-[#F4F6FB]' },

@@ -1572,6 +1572,30 @@ const columnFields: Field[] = [
               { name: 'icon', type: 'upload', relationTo: 'media', label: 'Icon (inactive)', required: false },
               { name: 'iconActive', type: 'upload', relationTo: 'media', label: 'Icon (active/white)', required: false },
               bgColorPickerAll({
+                overrides: {
+                  name: 'iconCardBgColor',
+                  label: 'Icon Card Background (Inactive)',
+                  defaultValue: 'bg-[#EFF2FE]',
+                  validate: allowAnySelect,
+                  admin: {
+                    description:
+                      'Background color of the small rounded card containing the inactive icon.',
+                  },
+                },
+              }),
+              bgColorPickerAll({
+                overrides: {
+                  name: 'activeIconCardBgColor',
+                  label: 'Icon Card Background (Active/Open)',
+                  defaultValue: 'bg-white/20',
+                  validate: allowAnySelect,
+                  admin: {
+                    description:
+                      'Background color of the small rounded card when active/open (e.g. translucent white).',
+                  },
+                },
+              }),
+              bgColorPickerAll({
                 overrides: { name: 'activeBgColor', label: 'Active Card Background', defaultValue: 'bg-blue-custom' },
               }),
               {

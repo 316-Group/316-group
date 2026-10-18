@@ -263,13 +263,20 @@ export const AccordionPanel: React.FC<Props> = ({
                     {/* Icon + Title + Dash */}
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-3">
-                        {/* Active (white) icon */}
+                        {/* Active (white) icon card */}
                         {item.iconActive && typeof item.iconActive === 'object' && (
-                          <div className="w-8 h-8 shrink-0 relative">
-                            <Media
-                              resource={item.iconActive}
-                              imgClassName="w-full h-full object-contain"
-                            />
+                          <div
+                            className={cn(
+                              'w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform duration-200',
+                              (item as any).activeIconCardBgColor || 'bg-white/20 backdrop-blur-sm',
+                            )}
+                          >
+                            <div className="w-5 h-5 sm:w-6 sm:h-6 relative">
+                              <Media
+                                resource={item.iconActive}
+                                imgClassName="w-full h-full object-contain"
+                              />
+                            </div>
                           </div>
                         )}
                         <span className="text-lg md:text-xl font-semibold text-white">
@@ -348,13 +355,20 @@ export const AccordionPanel: React.FC<Props> = ({
                     className="w-full flex items-center justify-between py-5 px-2 text-left group transition-colors hover:bg-gray-50/50 rounded-lg"
                   >
                     <div className="flex items-center gap-3">
-                      {/* Default icon */}
+                      {/* Inactive icon card */}
                       {item.icon && typeof item.icon === 'object' && (
-                        <div className="w-8 h-8 shrink-0 relative">
-                          <Media
-                            resource={item.icon}
-                            imgClassName="w-full h-full object-contain"
-                          />
+                        <div
+                          className={cn(
+                            'w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform duration-200 group-hover:scale-105',
+                            (item as any).iconCardBgColor || 'bg-[#EFF2FE]',
+                          )}
+                        >
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 relative">
+                            <Media
+                              resource={item.icon}
+                              imgClassName="w-full h-full object-contain"
+                            />
+                          </div>
                         </div>
                       )}
                       <span

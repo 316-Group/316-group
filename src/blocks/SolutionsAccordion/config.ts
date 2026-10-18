@@ -189,6 +189,30 @@ export const SolutionsAccordion: Block = {
             description: 'White/light variant of the icon shown inside the open card.',
           },
         },
+        bgColorPickerAll({
+          overrides: {
+            name: 'iconCardBgColor',
+            label: 'Icon Card Background (Inactive)',
+            defaultValue: 'bg-[#EFF2FE]',
+            validate: allowAnySelect,
+            admin: {
+              description:
+                'Background color of the small rounded card containing the inactive icon.',
+            },
+          },
+        }),
+        bgColorPickerAll({
+          overrides: {
+            name: 'activeIconCardBgColor',
+            label: 'Icon Card Background (Active/Open)',
+            defaultValue: 'bg-white/20',
+            validate: allowAnySelect,
+            admin: {
+              description:
+                'Background color of the small rounded card when active/open (e.g. translucent white).',
+            },
+          },
+        }),
 
         // Active card content
         bgColorPickerAll({
