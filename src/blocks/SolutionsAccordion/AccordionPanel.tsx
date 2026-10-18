@@ -160,27 +160,60 @@ export const AccordionPanel: React.FC<Props> = ({
 
         {/* Image — transitions when activeIndex changes */}
         <div className="mt-8 relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md">
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className="absolute inset-0 transition-opacity"
-              style={{
-                opacity: i === activeIndex ? 1 : 0,
-                transitionDuration: '400ms',
-                transitionTimingFunction: 'ease-in-out',
-                pointerEvents: i === activeIndex ? 'auto' : 'none',
-              }}
-            >
-              {item.image && typeof item.image === 'object' && (
-                <Media
-                  resource={item.image}
-                  fill
-                  imgClassName="object-cover w-full h-full"
-                  className="absolute inset-0 w-full h-full"
-                />
-              )}
-            </div>
-          ))}
+          {items.map((item, i) => {
+            const badges = [
+              (item as any).imageBadges?.badge1,
+              (item as any).imageBadges?.badge2,
+              (item as any).imageBadges?.badge3,
+            ].filter((b): b is string => Boolean(b && typeof b === 'string' && b.trim().length > 0))
+
+            const badgeBg =
+              (item as any).imageBadges?.badgeBgOverlay ||
+              'bg-white/20 backdrop-blur-md border border-white/25'
+            const badgeTextCol = (item as any).imageBadges?.badgeTextColor || 'text-white'
+
+            return (
+              <div
+                key={i}
+                className="absolute inset-0 transition-opacity"
+                style={{
+                  opacity: i === activeIndex ? 1 : 0,
+                  transitionDuration: '400ms',
+                  transitionTimingFunction: 'ease-in-out',
+                  pointerEvents: i === activeIndex ? 'auto' : 'none',
+                }}
+              >
+                {item.image && typeof item.image === 'object' && (
+                  <Media
+                    resource={item.image}
+                    fill
+                    imgClassName="object-cover w-full h-full"
+                    className="absolute inset-0 w-full h-full"
+                  />
+                )}
+
+                {/* ─── Bottom-Left Frosted Glass Overlay Badges ─── */}
+                {badges.length > 0 && (
+                  <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                    {badges.map((text, badgeIdx) => (
+                      <div
+                        key={badgeIdx}
+                        className={cn(
+                          'h-11 sm:h-12 md:h-13 px-5 sm:px-6 rounded-xl sm:rounded-2xl',
+                          'flex items-center justify-center font-semibold text-sm sm:text-base tracking-normal',
+                          'shadow-sm select-none transition-all duration-300',
+                          badgeBg,
+                          badgeTextCol,
+                        )}
+                      >
+                        {text}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
           {/* Fallback placeholder if no image */}
           {items.every((item) => !item.image) && (
             <div className="absolute inset-0 bg-gray-100 rounded-2xl" />
