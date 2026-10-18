@@ -10,6 +10,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
+import { textColorPickerAll } from '@/fields/textColorPicker'
 import { VerticalCTAFields } from '@/fields/vcta'
 import { textClasses } from '@/fields/textClasses'
 import { linkGroup } from '@/fields/linkGroup'
@@ -34,6 +35,8 @@ import { gridColFields } from '../GridCol/config'
 import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
 import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
+
+const allowAnySelect = (() => true as const) as any
 
 const columnFields: Field[] = [
   {
@@ -1585,6 +1588,104 @@ const columnFields: Field[] = [
                 }),
               },
               { name: 'image', type: 'upload', relationTo: 'media', label: 'Left Column Image (active state)', required: false },
+
+              // Image Overlay Badges (Three translucent cards at bottom-left of the image)
+              {
+                name: 'imageBadges',
+                type: 'group',
+                label: 'Image Overlay Badges (Bottom-Left Cards)',
+                admin: {
+                  description:
+                    'Up to 3 frosted glass cards displayed at the bottom-left of this image (e.g. Wallets, Transfers, Fx). Only cards with content will display.',
+                },
+                fields: [
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'badge1',
+                        type: 'text',
+                        label: 'Card 1 Text',
+                        defaultValue: 'Wallets',
+                        required: false,
+                        admin: { width: '33.33%', placeholder: 'e.g. Wallets' },
+                      },
+                      {
+                        name: 'badge2',
+                        type: 'text',
+                        label: 'Card 2 Text',
+                        defaultValue: 'Transfers',
+                        required: false,
+                        admin: { width: '33.33%', placeholder: 'e.g. Transfers' },
+                      },
+                      {
+                        name: 'badge3',
+                        type: 'text',
+                        label: 'Card 3 Text',
+                        defaultValue: 'Fx',
+                        required: false,
+                        admin: { width: '33.33%', placeholder: 'e.g. Fx' },
+                      },
+                    ],
+                  },
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'badgeBgOverlay',
+                        type: 'select',
+                        label: 'Card Overlay Background',
+                        defaultValue: 'bg-white/20 backdrop-blur-md border border-white/25',
+                        validate: allowAnySelect,
+                        options: [
+                          {
+                            label: 'Frosted Glass White - 20% (Default from mockup)',
+                            value: 'bg-white/20 backdrop-blur-md border border-white/25',
+                          },
+                          {
+                            label: 'Frosted Glass White - 30% (Slightly Stronger)',
+                            value: 'bg-white/30 backdrop-blur-md border border-white/30',
+                          },
+                          {
+                            label: 'Frosted Glass White - 15% (Subtle)',
+                            value: 'bg-white/15 backdrop-blur-md border border-white/20',
+                          },
+                          {
+                            label: 'Frosted Glass White - 40% (High Contrast)',
+                            value: 'bg-white/40 backdrop-blur-md border border-white/40',
+                          },
+                          {
+                            label: 'Frosted Dark Glass - 25% (Dark Overlay)',
+                            value: 'bg-black/25 backdrop-blur-md border border-white/15',
+                          },
+                          {
+                            label: 'Frosted Dark Glass - 40%',
+                            value: 'bg-black/40 backdrop-blur-md border border-white/20',
+                          },
+                          {
+                            label: 'Solid White (Clean Pill)',
+                            value: 'bg-white border border-gray-100 shadow-md',
+                          },
+                          {
+                            label: 'Brand Blue Glass',
+                            value: 'bg-blue-600/30 backdrop-blur-md border border-blue-400/30',
+                          },
+                        ],
+                        admin: { width: '50%' },
+                      },
+                      textColorPickerAll({
+                        overrides: {
+                          name: 'badgeTextColor',
+                          label: 'Card Text Color',
+                          defaultValue: 'text-white',
+                          validate: allowAnySelect,
+                          admin: { width: '50%' },
+                        },
+                      }),
+                    ],
+                  },
+                ],
+              },
               { name: 'showCTAButton', type: 'checkbox', label: 'Show CTA Button', defaultValue: true },
               {
                 name: 'ctaLabel', type: 'text', label: 'CTA Label', defaultValue: 'Learn more',
