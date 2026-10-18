@@ -199,6 +199,16 @@ export const SolutionsAccordion: Block = {
           },
         }),
         {
+          name: 'activeTitle',
+          type: 'text',
+          label: 'Active Title (shown when open beside icon)',
+          required: false,
+          admin: {
+            description:
+              'Optional custom title shown when this accordion item is active/open. If empty, the default title is used.',
+          },
+        },
+        {
           name: 'subHeading',
           type: 'text',
           label: 'Sub-Heading (shown when open)',

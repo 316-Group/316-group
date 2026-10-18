@@ -1574,6 +1574,16 @@ const columnFields: Field[] = [
               bgColorPickerAll({
                 overrides: { name: 'activeBgColor', label: 'Active Card Background', defaultValue: 'bg-blue-custom' },
               }),
+              {
+                name: 'activeTitle',
+                type: 'text',
+                label: 'Active Title (shown when open beside icon)',
+                required: false,
+                admin: {
+                  description:
+                    'Optional custom title shown when this accordion item is active/open. If empty, Title is used.',
+                },
+              },
               { name: 'subHeading', type: 'text', label: 'Sub-Heading (shown when open)' },
               {
                 name: 'bodyText',

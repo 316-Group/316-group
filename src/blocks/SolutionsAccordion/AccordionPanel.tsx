@@ -273,7 +273,7 @@ export const AccordionPanel: React.FC<Props> = ({
                           </div>
                         )}
                         <span className="text-lg md:text-xl font-semibold text-white">
-                          {item.title}
+                          {(item as any).activeTitle || item.title}
                         </span>
                       </div>
                       {/* Dash / minus */}

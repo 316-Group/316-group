@@ -41002,6 +41002,10 @@ export interface ContentBlock {
                             | 'bg-rose-950'
                           )
                         | null;
+                      /**
+                       * Optional custom title shown when this accordion item is active/open. If empty, Title is used.
+                       */
+                      activeTitle?: string | null;
                       subHeading?: string | null;
                       bodyText?: {
                         root: {
@@ -133585,6 +133589,10 @@ export interface SolutionsAccordionBlock {
               | 'bg-rose-950'
             )
           | null;
+        /**
+         * Optional custom title shown when this accordion item is active/open. If empty, the default title is used.
+         */
+        activeTitle?: string | null;
         subHeading?: string | null;
         subHeadingTextColor?:
           | (
@@ -148810,6 +148818,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           icon?: T;
                           iconActive?: T;
                           activeBgColor?: T;
+                          activeTitle?: T;
                           subHeading?: T;
                           bodyText?: T;
                           image?: T;
@@ -150165,6 +150174,7 @@ export interface SolutionsAccordionBlockSelect<T extends boolean = true> {
         icon?: T;
         iconActive?: T;
         activeBgColor?: T;
+        activeTitle?: T;
         subHeading?: T;
         subHeadingTextColor?: T;
         bodyText?: T;
