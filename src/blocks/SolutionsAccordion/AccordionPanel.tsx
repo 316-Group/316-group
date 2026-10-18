@@ -194,13 +194,15 @@ export const AccordionPanel: React.FC<Props> = ({
 
                 {/* ─── Bottom-Left Frosted Glass Overlay Badges ─── */}
                 {badges.length > 0 && (
-                  <div className="absolute bottom-6 left-3 sm:bottom-8 sm:left-5 md:bottom-10 md:left-6 lg:bottom-12 lg:left-8 z-20 flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2.5 md:gap-3 max-w-[calc(100%-1.5rem)]">
+                  <div className="absolute bottom-5 left-3 sm:bottom-6 sm:left-4 md:bottom-7 md:left-5 lg:bottom-8 lg:left-6 z-20 flex flex-wrap items-center gap-1.5 sm:gap-2 md:gap-2.5 max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-2rem)]">
                     {badges.map((text, badgeIdx) => (
                       <div
                         key={badgeIdx}
                         className={cn(
-                          'h-7 sm:h-9 md:h-11 lg:h-12 px-2.5 sm:px-3.5 md:px-5 lg:px-6 rounded-lg sm:rounded-xl md:rounded-2xl',
-                          'flex items-center justify-center font-semibold text-[10px] sm:text-xs md:text-sm lg:text-base tracking-normal whitespace-nowrap shrink-0',
+                          'px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-3.5 md:py-1.5 lg:px-4 lg:py-2',
+                          'rounded-md sm:rounded-lg md:rounded-xl',
+                          'flex items-center justify-center font-medium sm:font-semibold',
+                          'text-[11px] sm:text-xs md:text-[13px] lg:text-sm tracking-normal',
                           'shadow-sm select-none transition-all duration-300',
                           badgeBg,
                           badgeTextCol,
