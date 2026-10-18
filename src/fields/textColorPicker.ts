@@ -28,6 +28,8 @@ export const textColorPickerAll: textColorType = ({
       { label: 'Teal Cyan (#52B5D8)', value: 'text-[#52B5D8]' },
       { label: 'Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
       { label: 'Custom Blue (#0256FF)', value: 'text-blue-custom' },
+      { label: 'Brand Blue (#0256FF)', value: 'text-[#0256FF]' },
+      { label: 'Brand Royal Blue (#1D4ED8)', value: 'text-[#1D4ED8]' },
       { label: 'Slate 50', value: 'text-slate-50' },
       { label: 'Slate 100', value: 'text-slate-100' },
       { label: 'Slate 200', value: 'text-slate-200' },

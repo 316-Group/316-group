@@ -154,6 +154,7 @@ export const featureCardsFields: Field[] = [
             type: 'upload',
             relationTo: 'media',
             label: 'Upload Icon Image (SVG / PNG)',
+            required: false,
           },
           {
             type: 'row',
