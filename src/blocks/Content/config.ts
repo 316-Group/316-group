@@ -33,6 +33,7 @@ import { clickExpandFields } from '../ClickExpand/config'
 import { gridColFields } from '../GridCol/config'
 import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
+import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
 
 const columnFields: Field[] = [
   {
@@ -125,6 +126,7 @@ const columnFields: Field[] = [
           { label: 'Grid Col Feature', value: 'gridCol' },
           { label: 'Animated Icons Grid', value: 'animatedIconsGrid' },
           { label: 'Feature Cards', value: 'featureCards' },
+          { label: 'Vertical CTA v2', value: 'verticalCTAv2' },
         ],
       },
       {
@@ -1687,6 +1689,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'featureCards',
         },
         fields: featureCardsFields,
+      },
+
+      // ─── Vertical CTA v2 ──────────────────────────────────────────────────
+      {
+        name: 'verticalCTAv2',
+        type: 'group',
+        label: 'Vertical CTA v2',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'verticalCTAv2',
+        },
+        fields: verticalCTAv2Fields,
       },
     ],
   },

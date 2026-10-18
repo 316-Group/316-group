@@ -15,6 +15,14 @@ export interface FeatureCardItem {
     iconAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
+  subtitleGroup?: {
+    subtitle?: string | null
+    subtitleColor?: string | null
+    subtitleFontSize?: string | null
+    subtitleFontWeight?: string | null
+    subtitleAlignment?: 'left' | 'center' | 'right' | null
+  } | null
+
   headingGroup?: {
     heading: string
     headingColor?: string | null
@@ -119,6 +127,12 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
             const iconBadgeBg = card.iconGroup?.iconCardBgColor || 'bg-[#EFF2FE]'
             const iconAlign = card.iconGroup?.iconAlignment || 'left'
 
+            const subtitleText = card.subtitleGroup?.subtitle || ''
+            const subtitleColor = card.subtitleGroup?.subtitleColor || 'text-gray-950'
+            const subtitleSize = card.subtitleGroup?.subtitleFontSize || 'text-base'
+            const subtitleWeight = card.subtitleGroup?.subtitleFontWeight || 'font-normal'
+            const subtitleAlign = card.subtitleGroup?.subtitleAlignment || 'left'
+
             const headingText = card.headingGroup?.heading || ''
             const headingColor = card.headingGroup?.headingColor || 'text-gray-950'
             const headingSize = card.headingGroup?.headingFontSize || 'text-2xl md:text-[1.65rem]'
@@ -172,6 +186,20 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
                       )}
                     </div>
                   </div>
+                )}
+
+                {/* ─── Subtitle / Pre-Heading (e.g. "Future proof") ────────────── */}
+                {subtitleText && (
+                  <div
+                    className={cn(
+                      'leading-snug transition-colors mb-2 md:mb-2.5',
+                      subtitleSize,
+                      subtitleColor,
+                      subtitleWeight,
+                      textAlignClasses[subtitleAlign],
+                    )}
+                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(subtitleText) }}
+                  />
                 )}
 
                 {/* ─── Heading ────────────────────────────────────────────────── */}

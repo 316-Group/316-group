@@ -182,6 +182,66 @@ export const featureCardsFields: Field[] = [
         ],
       },
 
+      // ── Subtitle / Pre-Heading Settings ──
+      {
+        name: 'subtitleGroup',
+        type: 'group',
+        label: 'Subtitle / Pre-Heading Settings',
+        fields: [
+          {
+            name: 'subtitle',
+            type: 'text',
+            label: 'Subtitle / Tagline Text',
+            required: false,
+            admin: {
+              description:
+                'Optional text shown under the icon and above the heading (e.g. "Future proof"). Supports inline styling.',
+            },
+          },
+          {
+            type: 'row',
+            fields: [
+              textColorPickerAll({
+                overrides: {
+                  name: 'subtitleColor',
+                  label: 'Text Color',
+                  defaultValue: 'text-gray-950',
+                  validate: allowAnySelect,
+                  admin: { width: '25%' },
+                },
+              }),
+              {
+                name: 'subtitleFontSize',
+                type: 'select',
+                label: 'Font Size',
+                defaultValue: 'text-base',
+                validate: allowAnySelect,
+                options: fontSizeOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'subtitleFontWeight',
+                type: 'select',
+                label: 'Font Weight',
+                defaultValue: 'font-normal',
+                validate: allowAnySelect,
+                options: fontWeightOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'subtitleAlignment',
+                type: 'select',
+                label: 'Alignment',
+                defaultValue: 'left',
+                validate: allowAnySelect,
+                options: alignmentOptions,
+                admin: { width: '25%' },
+              },
+            ],
+          },
+        ],
+      },
+
       // ── Heading Settings ──
       {
         name: 'headingGroup',
