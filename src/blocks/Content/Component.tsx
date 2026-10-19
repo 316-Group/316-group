@@ -857,7 +857,6 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     return (
                       <ClickExpandBlock
                         key={index}
-                        isEmbedded={true}
                         {...(content as any).clickExpand}
                       />
                     )

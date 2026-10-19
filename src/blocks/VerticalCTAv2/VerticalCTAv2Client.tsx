@@ -123,7 +123,7 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
 
   // Heading config
   const headingText = headingGroup?.heading ?? 'Technology that moves businesses forward'
-  const headingColor = headingGroup?.headingColor || 'text-gray-950 dark:text-white'
+  const headingColor = headingGroup?.headingColor || 'text-gray-950'
   const headingSize = headingGroup?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl'
   const headingWeight = headingGroup?.headingFontWeight || 'font-bold'
   const headingAlign = headingGroup?.headingAlignment || 'left'
@@ -132,7 +132,7 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
   const descText =
     descriptionGroup?.description ??
     "316 Group's Digital Advisory service helps businesses navigate the complexities of the digital economy. Whether you're scaling a startup, transforming your operations, or exploring new revenue streams by leveraging technology and AI, our experts provide the insights and direction to turn your vision into reality."
-  const descColor = descriptionGroup?.descriptionColor || 'text-gray-800 dark:text-gray-300'
+  const descColor = descriptionGroup?.descriptionColor || 'text-gray-800'
   const descSize = descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
   const descWeight = descriptionGroup?.descriptionFontWeight || 'font-normal'
   const descAlign = descriptionGroup?.descriptionAlignment || 'left'
@@ -142,7 +142,7 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
   const btnText = buttonGroup?.buttonText || 'Explore our digital advisory solutions'
   const btnHref = resolveHref(buttonGroup?.buttonLink)
   const isNewTab = Boolean(buttonGroup?.buttonLink?.newTab)
-  const btnTextCol = buttonGroup?.buttonTextColor || 'text-gray-950 dark:text-white'
+  const btnTextCol = buttonGroup?.buttonTextColor || 'text-gray-950'
   const btnSize = buttonGroup?.buttonFontSize || 'text-lg md:text-xl lg:text-2xl'
   const btnWeight = buttonGroup?.buttonFontWeight || 'font-bold'
   const btnAlign = buttonGroup?.buttonAlignment || 'left'

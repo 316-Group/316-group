@@ -83,6 +83,94 @@ export const clickExpandFields: Field[] = [
     ],
   },
 
+  // ─── Horizontal Padding Controls ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'paddingMode',
+        type: 'select',
+        label: 'Horizontal Padding Mode',
+        defaultValue: 'default',
+        validate: allowAnySelect,
+        options: [
+          { label: 'Default Padding (Matches Standard Container Margins)', value: 'default' },
+          { label: 'No Padding / Full Column Width (0px)', value: 'none' },
+          { label: 'Custom Horizontal Padding', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          description: 'Set to "No Padding" to let cards fill the 100% full width of the column.',
+        },
+      },
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left / Right',
+        defaultValue: '48px',
+        validate: allowAnySelect,
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '16px', value: '16px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: '48px (Default)', value: '48px' },
+          { label: '60px', value: '60px' },
+          { label: '80px', value: '80px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding Left / Right',
+        defaultValue: '16px',
+        validate: allowAnySelect,
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '16px (Default)', value: '16px' },
+          { label: '24px', value: '24px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 50px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
+
   // ─── Height & Scroll Behavior ──────────────────────────────────────────────
   {
     type: 'row',

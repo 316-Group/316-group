@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { ArrowUpRight } from 'lucide-react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
+import { ArrowUpRight } from 'lucide-react'
 
 export interface SubCardItem {
   id?: string | null
@@ -22,9 +22,10 @@ export interface SubCardItem {
 }
 
 export interface CardItem {
+  id?: string | null
   image?: MediaType | string | null
   overlayStyle?: 'vignette' | 'subtle' | 'medium' | 'heavy' | 'none' | null
-  activeBlur?: 'blur-[2px]' | 'blur-sm' | 'blur-md' | 'blur-none' | null
+  activeBlur?: 'blur-none' | 'blur-[2px]' | 'blur-[4px]' | 'blur-[8px]' | null
 
   kickerGroup?: {
     text?: string | null
@@ -81,6 +82,14 @@ export interface ClickExpandProps {
   sectionBgColor?: string | null
   paddingTop?: string | null
   paddingBottom?: string | null
+
+  // Horizontal Padding Controls
+  paddingMode?: 'default' | 'none' | 'custom' | null
+  paddingXDesktop?: string | null
+  paddingXMobile?: string | null
+  paddingXDesktopCustom?: string | null
+  paddingXMobileCustom?: string | null
+
   cardHeight?: string | null
   scrollBehavior?: 'sticky' | 'wheel' | 'clickOnly' | null
   showIndicators?: boolean | null
@@ -103,6 +112,11 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   sectionBgColor = 'bg-transparent',
   paddingTop = 'pt-16',
   paddingBottom = 'pb-16',
+  paddingMode = 'default',
+  paddingXDesktop = '48px',
+  paddingXMobile = '16px',
+  paddingXDesktopCustom,
+  paddingXMobileCustom,
   cardHeight = 'h-[580px] md:h-[680px] lg:h-[720px]',
   scrollBehavior = 'sticky',
   showIndicators = true,
@@ -110,17 +124,39 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   className,
   isEmbedded = false,
 }) => {
+  const uid = React.useId().replace(/:/g, '')
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [sectionInView, setSectionInView] = useState<boolean>(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-  const isScrollingProgrammatically = useRef<boolean>(false)
   const lastWheelTime = useRef<number>(0)
 
   const items = cards && Array.isArray(cards) && cards.length > 0 ? cards : []
   const count = items.length
+
+  // ─── Layout & Padding Resolution ───────────────────────────────────────────
+  const resolvedDesktopPad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXDesktop === 'custom'
+          ? paddingXDesktopCustom || '48px'
+          : paddingXDesktop || '48px'
+        : undefined
+
+  const resolvedMobilePad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXMobile === 'custom'
+          ? paddingXMobileCustom || '16px'
+          : paddingXMobile || '16px'
+        : undefined
+
+  const padClassName =
+    paddingMode === 'custom' || paddingMode === 'none' ? `clickexpand-pad-${uid}` : ''
 
   // Slide-up entrance animation observer
   useEffect(() => {
@@ -153,139 +189,160 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     return '#'
   }
 
-  // Smoothly scroll the cards track so the active card is positioned at the start, showing next cards and peeking card
+  // ─── Multi-Pass Smooth Alignment: Guarantees Active Card is Never Cut Off ──
   const scrollCardIntoView = useCallback((index: number) => {
-    const cardEl = cardRefs.current[index]
-    const trackEl = trackRef.current
-    if (!cardEl || !trackEl) return
+    const align = () => {
+      const cardEl = cardRefs.current[index]
+      const trackEl = trackRef.current
+      if (!cardEl || !trackEl) return
 
-    const scrollTarget = cardEl.offsetLeft - trackEl.offsetLeft
+      const scrollTarget = cardEl.offsetLeft - trackEl.offsetLeft
 
-    trackEl.scrollTo({
-      left: Math.max(0, scrollTarget),
-      behavior: 'smooth',
-    })
+      trackEl.scrollTo({
+        left: Math.max(0, scrollTarget),
+        behavior: 'smooth',
+      })
+    }
+
+    // 1. Immediate pass
+    align()
+
+    // 2. Multi-pass sync while CSS width transition (700ms) animates
+    const t1 = setTimeout(align, 80)
+    const t2 = setTimeout(align, 200)
+    const t3 = setTimeout(align, 400)
+    const t4 = setTimeout(align, 650)
+
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      clearTimeout(t4)
+    }
   }, [])
 
-  // When active index changes, auto-scroll the track
+  // When active index changes, auto-scroll and align the track
   useEffect(() => {
-    scrollCardIntoView(activeIndex)
+    const cleanup = scrollCardIntoView(activeIndex)
+    return () => {
+      if (typeof cleanup === 'function') cleanup()
+    }
   }, [activeIndex, scrollCardIntoView])
 
-  // Synchronize sticky window scroll with active index
-  const syncStickyScroll = useCallback(
-    (targetIndex: number) => {
-      if (scrollBehavior === 'sticky' && count > 1 && !isEmbedded) {
-        const wrapper = wrapperRef.current
-        if (!wrapper) return
-        const rect = wrapper.getBoundingClientRect()
-        const totalScrollableDistance = wrapper.offsetHeight - window.innerHeight
-        if (totalScrollableDistance > 0) {
-          isScrollingProgrammatically.current = true
-          const targetY =
-            window.scrollY +
-            rect.top +
-            (targetIndex / (count - 1 || 1)) * totalScrollableDistance
-
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth',
-          })
-
-          setTimeout(() => {
-            isScrollingProgrammatically.current = false
-          }, 450)
-        }
-      }
-    },
-    [scrollBehavior, count, isEmbedded],
-  )
-
-  // Handle Sticky Scroll Progress
+  // ─── Viewport-Aware Scroll-Driven Stepping (Scroll Down & Up) ──────────────
   useEffect(() => {
-    if (scrollBehavior !== 'sticky' || count <= 1 || isEmbedded) return
+    if (count <= 1 || scrollBehavior === 'clickOnly') return
 
-    const handleScroll = () => {
-      if (isScrollingProgrammatically.current) return
-      const wrapper = wrapperRef.current
-      if (!wrapper) return
+    const handleWindowWheel = (e: WheelEvent) => {
+      const targetElement = sectionRef.current || wrapperRef.current
+      if (!targetElement) return
 
-      const rect = wrapper.getBoundingClientRect()
-      const totalScrollableDistance = wrapper.offsetHeight - window.innerHeight
+      const rect = targetElement.getBoundingClientRect()
+      const windowH = window.innerHeight
 
-      if (totalScrollableDistance <= 0) return
+      // Section is in active viewing zone when its center/body occupies the screen
+      const isClearlyInView = rect.top <= windowH * 0.35 && rect.bottom >= windowH * 0.65
 
-      // When the top of wrapper reaches top of viewport (rect.top <= 0)
-      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
-        const scrolled = -rect.top
-        const progress = Math.min(1, Math.max(0, scrolled / totalScrollableDistance))
-        const targetIndex = Math.min(count - 1, Math.floor(progress * count))
+      if (!isClearlyInView) return
 
-        if (targetIndex !== activeIndex) {
-          setActiveIndex(targetIndex)
+      const now = Date.now()
+
+      if (e.deltaY > 15) {
+        // Scrolling DOWN
+        if (activeIndex < count - 1) {
+          e.preventDefault()
+          if (now - lastWheelTime.current >= 380) {
+            lastWheelTime.current = now
+            setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+          }
         }
-      } else if (rect.top > 0) {
-        if (activeIndex !== 0) setActiveIndex(0)
-      } else if (rect.bottom < window.innerHeight) {
-        if (activeIndex !== count - 1) setActiveIndex(count - 1)
+        // When activeIndex === count - 1: Do NOT preventDefault.
+        // The wheel event continues naturally to scroll down to the next section!
+      } else if (e.deltaY < -15) {
+        // Scrolling UP
+        if (activeIndex > 0) {
+          e.preventDefault()
+          if (now - lastWheelTime.current >= 380) {
+            lastWheelTime.current = now
+            setActiveIndex((prev) => Math.max(0, prev - 1))
+          }
+        }
+        // When activeIndex === 0: Do NOT preventDefault.
+        // The wheel event continues naturally to scroll up to previous content!
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [scrollBehavior, count, activeIndex, isEmbedded])
+    window.addEventListener('wheel', handleWindowWheel, { passive: false })
+    return () => window.removeEventListener('wheel', handleWindowWheel)
+  }, [count, activeIndex, scrollBehavior])
 
-  // Handle direct click on a card
+  // ─── Touch Stepping for Mobile ─────────────────────────────────────────────
+  useEffect(() => {
+    if (count <= 1 || scrollBehavior === 'clickOnly') return
+    const targetElement = sectionRef.current || wrapperRef.current
+    if (!targetElement) return
+
+    let touchStartY = 0
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchY = e.touches[0].clientY
+      const diff = touchStartY - touchY
+      const rect = targetElement.getBoundingClientRect()
+      const windowH = window.innerHeight
+      const isClearlyInView = rect.top <= windowH * 0.35 && rect.bottom >= windowH * 0.65
+
+      if (!isClearlyInView) return
+
+      const now = Date.now()
+      if (diff > 45) {
+        // Swiping UP (scrolling DOWN)
+        if (activeIndex < count - 1) {
+          e.preventDefault()
+          if (now - lastWheelTime.current >= 380) {
+            lastWheelTime.current = now
+            touchStartY = touchY
+            setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+          }
+        }
+      } else if (diff < -45) {
+        // Swiping DOWN (scrolling UP)
+        if (activeIndex > 0) {
+          e.preventDefault()
+          if (now - lastWheelTime.current >= 380) {
+            lastWheelTime.current = now
+            touchStartY = touchY
+            setActiveIndex((prev) => Math.max(0, prev - 1))
+          }
+        }
+      }
+    }
+
+    targetElement.addEventListener('touchstart', handleTouchStart, { passive: true })
+    targetElement.addEventListener('touchmove', handleTouchMove, { passive: false })
+
+    return () => {
+      targetElement.removeEventListener('touchstart', handleTouchStart)
+      targetElement.removeEventListener('touchmove', handleTouchMove)
+    }
+  }, [count, activeIndex, scrollBehavior])
+
+  // Direct click on any card
   const handleCardClick = (index: number) => {
     setActiveIndex(index)
-    syncStickyScroll(index)
-  }
-
-  // Handle mouse wheel interaction: steps through cards 0..count-1, then releases to page scroll
-  const handleWheel = (e: React.WheelEvent) => {
-    if (scrollBehavior === 'clickOnly' || count <= 1) return
-
-    const now = Date.now()
-
-    if (e.deltaY > 20) {
-      // Scrolling DOWN
-      if (activeIndex < count - 1) {
-        e.preventDefault()
-        if (now - lastWheelTime.current >= 380) {
-          lastWheelTime.current = now
-          const nextIdx = activeIndex + 1
-          setActiveIndex(nextIdx)
-          syncStickyScroll(nextIdx)
-        }
-      }
-      // If on the last card, do NOT preventDefault(), allowing window scroll to proceed down
-    } else if (e.deltaY < -20) {
-      // Scrolling UP
-      if (activeIndex > 0) {
-        e.preventDefault()
-        if (now - lastWheelTime.current >= 380) {
-          lastWheelTime.current = now
-          const prevIdx = activeIndex - 1
-          setActiveIndex(prevIdx)
-          syncStickyScroll(prevIdx)
-        }
-      }
-      // If on the first card, do NOT preventDefault(), allowing window scroll to proceed up
-    }
   }
 
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault()
-      const nextIdx = Math.min(count - 1, activeIndex + 1)
-      setActiveIndex(nextIdx)
-      syncStickyScroll(nextIdx)
+      setActiveIndex((prev) => Math.min(count - 1, prev + 1))
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault()
-      const prevIdx = Math.max(0, activeIndex - 1)
-      setActiveIndex(prevIdx)
-      syncStickyScroll(prevIdx)
+      setActiveIndex((prev) => Math.max(0, prev - 1))
     }
   }
 
@@ -309,16 +366,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     right: 'text-right',
   }
 
-  // Wrapper height when sticky scroll is enabled
-  const isStickyMode = scrollBehavior === 'sticky' && count > 1 && !isEmbedded
-  const stickyWrapperHeight = isStickyMode
-    ? `${100 + (count - 1) * 75}vh`
-    : 'auto'
-
   const trackContent = (
     <div
       ref={trackRef}
-      onWheel={handleWheel}
       className="flex items-stretch gap-4 md:gap-5 lg:gap-6 overflow-x-auto scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-2 px-1 scroll-smooth w-full"
       style={{ WebkitOverflowScrolling: 'touch' }}
     >
@@ -394,10 +444,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               'bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D]',
               'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
               cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
-              // Proportional widths for exactly 4 cards in view on large screen: Active (~57%) + 2 Minimized (~14% each) + 1 Peeking (~7% in view, 50% cut off)
+              // Active card expands fully (60%), inactive cards collapse (13%)
               isActive
-                ? 'w-[88vw] sm:w-[520px] md:w-[600px] lg:flex-[0_0_57%] lg:w-[57%]'
-                : 'w-[140px] sm:w-[160px] md:w-[180px] lg:flex-[0_0_14%] lg:w-[14%] hover:brightness-105',
+                ? 'w-[88vw] sm:w-[540px] md:w-[620px] lg:flex-[0_0_60%] lg:w-[60%]'
+                : 'w-[130px] sm:w-[150px] md:w-[170px] lg:flex-[0_0_13%] lg:w-[13%] hover:brightness-105',
             )}
           >
             {/* Background Image with Active Blur effect */}
@@ -414,17 +464,16 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               />
             )}
 
-            {/* Vignette Overlay (applied when image is present; inactive cards get gentle bottom fade) */}
+            {/* Vignette Overlay (applied when image is present) */}
             <div
               className={cn(
                 'absolute inset-0 pointer-events-none transition-opacity duration-700',
                 card.image ? overlay : 'bg-transparent',
-                // Bottom darkening on inactive card for bottom title legibility
                 !isActive && 'bg-gradient-to-t from-black/90 via-black/40 to-transparent',
               )}
             />
 
-            {/* ─── ACTIVE CARD CONTENT: Layer 1 (Dedicated Scroll Container) ─── */}
+            {/* ─── ACTIVE CARD CONTENT ─── */}
             <div
               className={cn(
                 'relative z-10 h-full w-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
@@ -434,7 +483,6 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   : 'opacity-0 pointer-events-none absolute inset-0',
               )}
             >
-              {/* ─── Layer 2 (Centered Content Wrapper with min-h-full & my-auto) ─── */}
               <div
                 className={cn(
                   'min-h-full flex flex-col justify-center my-auto',
@@ -442,160 +490,153 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   'py-10 sm:py-12 md:py-14 lg:py-16 px-6 sm:px-8 md:px-12 lg:px-14 xl:px-16',
                 )}
               >
-              {/* Top Group: Kicker + Heading + Description */}
-              <div className="flex flex-col">
-                {/* Small Kicker */}
-                {kickerText && (
-                  <span
-                    className={cn(
-                      'block mb-2 md:mb-3 tracking-normal transition-all duration-700',
-                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                      kickerSize,
-                      kickerColor,
-                      kickerWeight,
-                    )}
-                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
-                  />
-                )}
-
-                {/* Main Heading */}
-                <h3
-                  className={cn(
-                    'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                    headingSize,
-                    headingColor,
-                    headingWeight,
-                  )}
-                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
-                />
-
-                {/* Description */}
-                {descText && (
-                  <div
-                    className={cn(
-                      'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
-                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                      descSize,
-                      descColor,
-                      descWeight,
-                    )}
-                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
-                  />
-                )}
-              </div>
-
-              {/* ─── Sub-Cards Row (Up to 3 cards) ─────────────────────── */}
-              {showSubCards && subCardsItems.length > 0 && (
-                <div
-                  className={cn(
-                    'grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full transition-all duration-700 delay-300',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
-                  )}
-                >
-                  {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
-                    const title = subCard.title || 'Feature'
-                    const titleColor = subCard.titleColor || 'text-white'
-                    const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
-                    const titleWeight = subCard.titleFontWeight || 'font-bold'
-                    const titleAlign = subCard.titleAlignment || 'left'
-
-                    const subDesc = subCard.description
-                    const subDescColor = subCard.descriptionColor || 'text-white/80'
-                    const subDescSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
-                    const subDescWeight = subCard.descriptionFontWeight || 'font-normal'
-                    const subDescAlign = subCard.descriptionAlignment || 'left'
-
-                    return (
-                      <div
-                        key={subCard.id || subIdx}
-                        className={cn(
-                          'flex flex-col justify-between h-full min-h-[130px] sm:min-h-[145px] md:min-h-[160px]',
-                          'p-4 sm:p-5 md:p-6 shadow-md transition-all duration-300 hover:scale-[1.02]',
-                          subCardsBg,
-                          subCardsRounded,
-                          subCardsBorder,
-                        )}
-                      >
-                        <div
-                          className={cn(
-                            'leading-snug transition-colors',
-                            titleSize,
-                            titleColor,
-                            titleWeight,
-                            alignmentTextClasses[titleAlign],
-                          )}
-                          dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
-                        />
-
-                        {subDesc && (
-                          <div
-                            className={cn(
-                              'mt-3 leading-relaxed transition-colors',
-                              subDescSize,
-                              subDescColor,
-                              subDescWeight,
-                              alignmentTextClasses[subDescAlign],
-                            )}
-                            dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
-                          />
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              )}
-
-              {/* ─── Bottom Pill Action Button ──────────────────────────── */}
-              {showButton && (
-                <div
-                  className={cn(
-                    'pt-1 flex items-center transition-all duration-700 delay-400',
-                    isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
-                  )}
-                >
-                  <Link
-                    href={buttonHref}
-                    target={isNewTab ? '_blank' : undefined}
-                    rel={isNewTab ? 'noopener noreferrer' : undefined}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                    }}
-                    className={cn(
-                      'inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full backdrop-blur-md',
-                      'shadow-lg border border-white/20 transition-all duration-300',
-                      'hover:scale-[1.03] active:scale-[0.98] group/btn',
-                      buttonBg,
-                    )}
-                  >
-                    <span className={cn('tracking-normal', buttonTextCol, buttonSize, buttonWeight)}>
-                      {buttonText}
-                    </span>
+                {/* Top Group: Kicker + Heading + Description */}
+                <div className="flex flex-col">
+                  {/* Small Kicker */}
+                  {kickerText && (
                     <span
                       className={cn(
-                        'w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
-                        iconBg,
+                        'block mb-2 md:mb-3 tracking-normal transition-all duration-700',
+                        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                        kickerSize,
+                        kickerColor,
+                        kickerWeight,
+                      )}
+                      dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
+                    />
+                  )}
+
+                  {/* Main Heading */}
+                  <h3
+                    className={cn(
+                      'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
+                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                      headingSize,
+                      headingColor,
+                      headingWeight,
+                    )}
+                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
+                  />
+
+                  {/* Description */}
+                  {descText && (
+                    <div
+                      className={cn(
+                        'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
+                        isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                        descSize,
+                        descColor,
+                        descWeight,
+                      )}
+                      dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
+                    />
+                  )}
+                </div>
+
+                {/* Sub-Cards Row (Up to 3 cards) */}
+                {showSubCards && subCardsItems.length > 0 && (
+                  <div
+                    className={cn(
+                      'grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 w-full transition-all duration-700 delay-300',
+                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3',
+                    )}
+                  >
+                    {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
+                      const title = subCard.title || 'Feature'
+                      const titleColor = subCard.titleColor || 'text-white'
+                      const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
+                      const titleWeight = subCard.titleFontWeight || 'font-bold'
+                      const titleAlign = subCard.titleAlignment || 'left'
+
+                      const subDesc = subCard.description
+                      const descColor = subCard.descriptionColor || 'text-white/80'
+                      const descSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
+                      const descWeight = subCard.descriptionFontWeight || 'font-normal'
+                      const descAlign = subCard.descriptionAlignment || 'left'
+
+                      return (
+                        <div
+                          key={subIdx}
+                          className={cn(
+                            'p-5 md:p-6 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]',
+                            subCardsBg,
+                            subCardsRounded,
+                            subCardsBorder,
+                          )}
+                        >
+                          <h4
+                            className={cn(
+                              'whitespace-pre-line leading-tight tracking-tight mb-2',
+                              titleSize,
+                              titleColor,
+                              titleWeight,
+                              alignmentTextClasses[titleAlign],
+                            )}
+                            dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
+                          />
+                          {subDesc && (
+                            <p
+                              className={cn(
+                                'leading-relaxed',
+                                descSize,
+                                descColor,
+                                descWeight,
+                                alignmentTextClasses[descAlign],
+                              )}
+                              dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
+                            />
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
+                {/* Bottom Action Button */}
+                {showButton && (
+                  <div
+                    className={cn(
+                      'pt-1 transition-all duration-700 delay-400',
+                      isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
+                    )}
+                  >
+                    <Link
+                      href={buttonHref}
+                      target={isNewTab ? '_blank' : undefined}
+                      rel={isNewTab ? 'noopener noreferrer' : undefined}
+                      className={cn(
+                        'inline-flex items-center gap-3 px-5 py-3 rounded-full',
+                        'backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm',
+                        buttonBg,
                       )}
                     >
-                      <ArrowUpRight className={cn('w-4 h-4 md:w-5 md:h-5 transition-colors', iconCol)} />
-                    </span>
-                  </Link>
-                </div>
-              )}
+                      <span className={cn('tracking-normal', buttonTextCol, buttonSize, buttonWeight)}>
+                        {buttonText}
+                      </span>
+                      <span
+                        className={cn(
+                          'w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110',
+                          iconBg,
+                        )}
+                      >
+                        <ArrowUpRight className={cn('w-4 h-4', iconCol)} />
+                      </span>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* ─── INACTIVE CARD CONTENT (Title at bottom) ─────────────── */}
+            {/* ─── INACTIVE COLLAPSED PREVIEW ─── */}
             <div
               className={cn(
-                'absolute bottom-0 left-0 right-0 z-10 p-4 sm:p-5 md:p-6 pb-6 md:pb-8',
-                'transition-all duration-500 ease-out flex flex-col justify-end',
+                'absolute inset-0 z-20 flex flex-col justify-end p-5 md:p-6 transition-all duration-500 ease-out',
                 !isActive
-                  ? 'opacity-100 pointer-events-none translate-y-0'
-                  : 'opacity-0 pointer-events-none translate-y-4',
+                  ? 'opacity-100 pointer-events-auto'
+                  : 'opacity-0 pointer-events-none',
               )}
             >
-              <div
+              <h3
                 className={cn(
                   'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors',
                   collapsedSize,
@@ -622,7 +663,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
           aria-label={`Go to slide ${i + 1}`}
           onClick={() => handleCardClick(i)}
           className={cn(
-            'h-1.5 transition-all duration-300 rounded-full focus:outline-none',
+            'h-1.5 transition-all duration-300 rounded-full focus:outline-none cursor-pointer',
             i === activeIndex
               ? 'w-7 sm:w-8 bg-slate-900 dark:bg-white'
               : 'w-2 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400',
@@ -632,45 +673,48 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     </div>
   )
 
-  // In embedded mode (e.g. inside a column of Content block), omit the outer section box
-  if (isEmbedded) {
-    return (
-      <div
-        ref={wrapperRef}
-        className={cn(
-          'relative w-full overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
-          sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
-          className,
-        )}
-      >
-        {trackContent}
-        {indicatorsContent}
-      </div>
-    )
-  }
-
-  // Standalone block rendering with sticky scroll support
   return (
     <div
       ref={wrapperRef}
-      style={{ minHeight: isStickyMode ? stickyWrapperHeight : undefined }}
-      className={cn('relative w-full', sectionBgColor || 'bg-transparent', className)}
+      className={cn('relative w-full transition-colors duration-300', sectionBgColor, className)}
     >
+      {/* Dynamic Custom Horizontal Padding Overrides */}
+      {(paddingMode === 'custom' || paddingMode === 'none') && (
+        <style>{`
+          .${padClassName} {
+            padding-left: ${resolvedMobilePad} !important;
+            padding-right: ${resolvedMobilePad} !important;
+            max-width: 100% !important;
+            width: 100% !important;
+          }
+          @media (min-width: 1024px) {
+            .${padClassName} {
+              padding-left: ${resolvedDesktopPad} !important;
+              padding-right: ${resolvedDesktopPad} !important;
+            }
+          }
+        `}</style>
+      )}
+
       <section
         ref={sectionRef}
-        onWheel={handleWheel}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         aria-label="Expandable Cards Section"
         className={cn(
           'w-full outline-none select-none transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
           sectionInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
-          isStickyMode ? 'sticky top-0 h-screen flex flex-col justify-center' : '',
-          !isStickyMode && (paddingTop || 'pt-16'),
-          !isStickyMode && (paddingBottom || 'pb-16'),
+          paddingTop,
+          paddingBottom,
         )}
       >
-        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex flex-col overflow-hidden">
+        <div
+          className={cn(
+            'w-full flex flex-col overflow-hidden',
+            paddingMode === 'default' && 'max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12',
+            padClassName,
+          )}
+        >
           {trackContent}
           {indicatorsContent}
         </div>

@@ -167,7 +167,7 @@ export const splitTextFields: Field[] = [
                 overrides: {
                   name: 'bgColor',
                   label: 'Badge Background Color',
-                  defaultValue: 'bg-black/5 dark:bg-white/10',
+                  defaultValue: 'bg-[#EFF1F8]',
                   validate: allowAnySelect,
                   admin: { width: '50%' },
                 },
@@ -176,7 +176,7 @@ export const splitTextFields: Field[] = [
                 overrides: {
                   name: 'textColor',
                   label: 'Badge Text Color',
-                  defaultValue: 'text-gray-900 dark:text-white',
+                  defaultValue: 'text-[#3F5AC9]',
                   validate: allowAnySelect,
                   admin: { width: '50%' },
                 },
@@ -265,7 +265,7 @@ export const splitTextFields: Field[] = [
                 overrides: {
                   name: 'color',
                   label: 'Heading Color',
-                  defaultValue: 'text-gray-950 dark:text-white',
+                  defaultValue: 'text-gray-950',
                   validate: allowAnySelect,
                   admin: { width: '33.33%' },
                 },
@@ -328,7 +328,7 @@ export const splitTextFields: Field[] = [
             overrides: {
               name: 'color',
               label: 'Text Color',
-              defaultValue: 'text-gray-600 dark:text-gray-300',
+              defaultValue: 'text-gray-600',
               validate: allowAnySelect,
               admin: { width: '33.33%' },
             },

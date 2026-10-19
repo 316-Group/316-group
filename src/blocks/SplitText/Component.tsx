@@ -91,8 +91,8 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
   // ─── Left Column: Badge ───────────────────────────────────────────────────
   const badgeText = leftColumn?.badgeGroup?.text?.trim()
   const hasBadgeText = Boolean(badgeText)
-  const badgeBg = leftColumn?.badgeGroup?.bgColor || 'bg-black/5 dark:bg-white/10'
-  const badgeTextCol = leftColumn?.badgeGroup?.textColor || 'text-gray-900 dark:text-white'
+  const badgeBg = leftColumn?.badgeGroup?.bgColor || 'bg-[#EFF1F8]'
+  const badgeTextCol = leftColumn?.badgeGroup?.textColor || 'text-[#3F5AC9]'
   const badgeSize = leftColumn?.badgeGroup?.fontSize || 'text-sm'
   const badgeWeight = leftColumn?.badgeGroup?.fontWeight || 'font-medium'
 
@@ -106,7 +106,7 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
   // Heading
   const headingText = leftColumn?.headingGroup?.text?.trim()
   const hasHeadingText = Boolean(headingText)
-  const headingColor = leftColumn?.headingGroup?.color || 'text-gray-950 dark:text-white'
+  const headingColor = leftColumn?.headingGroup?.color || 'text-gray-950'
   const headingSize =
     leftColumn?.headingGroup?.fontSize || 'text-3xl md:text-4xl lg:text-5xl'
   const headingWeight = leftColumn?.headingGroup?.fontWeight || 'font-semibold'
@@ -115,7 +115,7 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
   // ─── Right Column: Description ────────────────────────────────────────────
   const descText = rightColumn?.text?.trim()
   const hasDescText = Boolean(descText)
-  const descColor = rightColumn?.color || 'text-gray-600 dark:text-gray-300'
+  const descColor = rightColumn?.color || 'text-gray-600'
   const descSize = rightColumn?.fontSize || 'text-base md:text-lg'
   const descWeight = rightColumn?.fontWeight || 'font-normal'
 
