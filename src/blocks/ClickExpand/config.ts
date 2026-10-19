@@ -606,6 +606,40 @@ export const clickExpandFields: Field[] = [
                 ],
               },
               {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'spacingBottom',
+                    type: 'select',
+                    label: 'Spacing Between Heading & Description',
+                    defaultValue: '10px',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: '0px (No Spacing)', value: '0px' },
+                      { label: '6px', value: '6px' },
+                      { label: '8px', value: '8px' },
+                      { label: '10px (Default)', value: '10px' },
+                      { label: '12px', value: '12px' },
+                      { label: '16px', value: '16px' },
+                      { label: '20px', value: '20px' },
+                      { label: 'Custom (px)', value: 'custom' },
+                    ],
+                    admin: {
+                      width: '50%',
+                    },
+                  },
+                  {
+                    name: 'spacingBottomCustom',
+                    type: 'text',
+                    label: 'Custom Spacing (e.g. 14px)',
+                    admin: {
+                      width: '50%',
+                      condition: (_, siblingData) => siblingData?.spacingBottom === 'custom',
+                    },
+                  },
+                ],
+              },
+              {
                 name: 'description',
                 type: 'textarea',
                 label: 'Card Description',

@@ -46374,6 +46374,10 @@ export interface ContentBlock {
                                   )
                                 | null;
                               titleAlignment?: ('left' | 'center' | 'right') | null;
+                              spacingBottom?:
+                                | ('0px' | '6px' | '8px' | '10px' | '12px' | '16px' | '20px' | 'custom')
+                                | null;
+                              spacingBottomCustom?: string | null;
                               description?: string | null;
                               descriptionColor?:
                                 | (
@@ -147606,6 +147610,8 @@ export interface ClickExpandBlock {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 titleAlignment?: ('left' | 'center' | 'right') | null;
+                spacingBottom?: ('0px' | '6px' | '8px' | '10px' | '12px' | '16px' | '20px' | 'custom') | null;
+                spacingBottomCustom?: string | null;
                 description?: string | null;
                 descriptionColor?:
                   | (
@@ -158381,6 +158387,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       titleFontSize?: T;
                                       titleFontWeight?: T;
                                       titleAlignment?: T;
+                                      spacingBottom?: T;
+                                      spacingBottomCustom?: T;
                                       description?: T;
                                       descriptionColor?: T;
                                       descriptionFontSize?: T;
@@ -160069,6 +160077,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
                     titleFontSize?: T;
                     titleFontWeight?: T;
                     titleAlignment?: T;
+                    spacingBottom?: T;
+                    spacingBottomCustom?: T;
                     description?: T;
                     descriptionColor?: T;
                     descriptionFontSize?: T;

@@ -14,6 +14,8 @@ export interface SubCardItem {
   titleFontSize?: string | null
   titleFontWeight?: string | null
   titleAlignment?: 'left' | 'center' | 'right' | null
+  spacingBottom?: string | null
+  spacingBottomCustom?: string | null
   description?: string | null
   descriptionColor?: string | null
   descriptionFontSize?: string | null
@@ -126,12 +128,29 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
 }) => {
   const uid = React.useId().replace(/:/g, '')
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const activeIndexRef = useRef<number>(0)
   const [sectionInView, setSectionInView] = useState<boolean>(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const lastWheelTime = useRef<number>(0)
+
+  // Keep activeIndexRef immediately synchronized for wheel and touch event handlers
+  useEffect(() => {
+    activeIndexRef.current = activeIndex
+  }, [activeIndex])
+
+  // Resolve configurable spacing between sub-card heading and description
+  const resolveSubCardSpacing = (val?: string | null, custom?: string | null): string => {
+    if (val === 'custom') {
+      if (!custom) return '10px'
+      return custom.endsWith('px') || custom.endsWith('rem') || custom.endsWith('em')
+        ? custom
+        : `${custom}px`
+    }
+    return val || '10px'
+  }
 
   const items = cards && Array.isArray(cards) && cards.length > 0 ? cards : []
   const count = items.length
@@ -229,109 +248,176 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     }
   }, [activeIndex, scrollCardIntoView])
 
-  // ─── Viewport-Aware Scroll-Driven Stepping (Scroll Down & Up) ──────────────
+  // ─── Helper: Viewport Centering & Measurement ──────────────────────────────
+  const getSectionCenterInfo = useCallback((targetElement: HTMLElement) => {
+    const rect = targetElement.getBoundingClientRect()
+    const windowH = window.innerHeight
+    // Center of the section in viewport coordinates
+    const sectionCenterY = rect.top + rect.height / 2
+    // Center of viewport
+    const viewportCenterY = windowH / 2
+    // Distance from center: > 0 means section is lower than screen center, < 0 means higher
+    const diff = sectionCenterY - viewportCenterY
+    // Tolerance zone: within 16% of viewport height (clamped between 60px and 120px)
+    const tolerance = Math.min(120, Math.max(60, windowH * 0.16))
+    const isCentered = Math.abs(diff) <= tolerance
+
+    return { isCentered, diff, rect, windowH }
+  }, [])
+
+  // ─── Centered Viewport Scroll Lock & Sequential Card Expansion (Desktop) ───
   useEffect(() => {
     if (count <= 1 || scrollBehavior === 'clickOnly') return
 
     const handleWindowWheel = (e: WheelEvent) => {
+      // Ignore tiny micro-scroll jitters
+      if (Math.abs(e.deltaY) < 6) return
+
       const targetElement = sectionRef.current || wrapperRef.current
       if (!targetElement) return
 
-      const rect = targetElement.getBoundingClientRect()
-      const windowH = window.innerHeight
-
-      // Section is in active viewing zone when its center/body occupies the screen
-      const isClearlyInView = rect.top <= windowH * 0.35 && rect.bottom >= windowH * 0.65
-
-      if (!isClearlyInView) return
-
+      const { isCentered, diff, rect, windowH } = getSectionCenterInfo(targetElement)
+      const currentIdx = activeIndexRef.current
       const now = Date.now()
 
-      if (e.deltaY > 15) {
+      // Section is considered actively engaged if it is centered in the viewport,
+      // OR if the user is in the middle of card steps (0 < currentIdx < count - 1)
+      // and the section still occupies the screen.
+      const isMidSequence = currentIdx > 0 && currentIdx < count - 1
+      const isEngaged =
+        isCentered ||
+        (isMidSequence && rect.top <= windowH * 0.75 && rect.bottom >= windowH * 0.25)
+
+      if (!isEngaged) return
+
+      if (e.deltaY > 0) {
         // Scrolling DOWN
-        if (activeIndex < count - 1) {
+        if (currentIdx < count - 1) {
+          // INTERCEPT: Stop page scroll and step to next card
           e.preventDefault()
+
           if (now - lastWheelTime.current >= 380) {
             lastWheelTime.current = now
-            setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+            if (Math.abs(diff) > 6) {
+              window.scrollBy({ top: diff, behavior: 'smooth' })
+            }
+            const nextIdx = currentIdx + 1
+            activeIndexRef.current = nextIdx
+            setActiveIndex(nextIdx)
           }
         }
-        // When activeIndex === count - 1: Do NOT preventDefault.
-        // The wheel event continues naturally to scroll down to the next section!
-      } else if (e.deltaY < -15) {
+        // When currentIdx === count - 1:
+        // Do NOT preventDefault! The page scrolls down past the section naturally.
+      } else if (e.deltaY < 0) {
         // Scrolling UP
-        if (activeIndex > 0) {
+        if (currentIdx > 0) {
+          // INTERCEPT: Stop page scroll and step to previous card
           e.preventDefault()
+
           if (now - lastWheelTime.current >= 380) {
             lastWheelTime.current = now
-            setActiveIndex((prev) => Math.max(0, prev - 1))
+            if (Math.abs(diff) > 6) {
+              window.scrollBy({ top: diff, behavior: 'smooth' })
+            }
+            const prevIdx = currentIdx - 1
+            activeIndexRef.current = prevIdx
+            setActiveIndex(prevIdx)
           }
         }
-        // When activeIndex === 0: Do NOT preventDefault.
-        // The wheel event continues naturally to scroll up to previous content!
+        // When currentIdx === 0:
+        // Do NOT preventDefault! The page scrolls up past the section naturally.
       }
     }
 
     window.addEventListener('wheel', handleWindowWheel, { passive: false })
     return () => window.removeEventListener('wheel', handleWindowWheel)
-  }, [count, activeIndex, scrollBehavior])
+  }, [count, scrollBehavior, getSectionCenterInfo])
 
-  // ─── Touch Stepping for Mobile ─────────────────────────────────────────────
+  // ─── Touch Stepping for Mobile (Centered Viewport Lock) ─────────────────────
   useEffect(() => {
     if (count <= 1 || scrollBehavior === 'clickOnly') return
-    const targetElement = sectionRef.current || wrapperRef.current
-    if (!targetElement) return
 
     let touchStartY = 0
+    let touchStartX = 0
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY
+      if (e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY
+        touchStartX = e.touches[0].clientX
+      }
     }
 
     const handleTouchMove = (e: TouchEvent) => {
-      const touchY = e.touches[0].clientY
-      const diff = touchStartY - touchY
-      const rect = targetElement.getBoundingClientRect()
-      const windowH = window.innerHeight
-      const isClearlyInView = rect.top <= windowH * 0.35 && rect.bottom >= windowH * 0.65
+      if (e.touches.length === 0) return
+      const targetElement = sectionRef.current || wrapperRef.current
+      if (!targetElement) return
 
-      if (!isClearlyInView) return
+      const touchY = e.touches[0].clientY
+      const touchX = e.touches[0].clientX
+      const diffY = touchStartY - touchY // > 0 means swipe UP (scrolling DOWN), < 0 means swipe DOWN (scrolling UP)
+      const diffX = touchStartX - touchX
+
+      // Ignore pure horizontal track dragging gestures
+      if (Math.abs(diffX) > Math.abs(diffY) * 1.5) return
+      // Ignore tiny jitter
+      if (Math.abs(diffY) < 15) return
+
+      const { isCentered, diff, rect, windowH } = getSectionCenterInfo(targetElement)
+      const currentIdx = activeIndexRef.current
+      const isMidSequence = currentIdx > 0 && currentIdx < count - 1
+      const isEngaged =
+        isCentered ||
+        (isMidSequence && rect.top <= windowH * 0.75 && rect.bottom >= windowH * 0.25)
+
+      if (!isEngaged) return
 
       const now = Date.now()
-      if (diff > 45) {
+
+      if (diffY > 0) {
         // Swiping UP (scrolling DOWN)
-        if (activeIndex < count - 1) {
-          e.preventDefault()
+        if (currentIdx < count - 1) {
+          if (e.cancelable) e.preventDefault()
           if (now - lastWheelTime.current >= 380) {
             lastWheelTime.current = now
             touchStartY = touchY
-            setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+            if (Math.abs(diff) > 6) {
+              window.scrollBy({ top: diff, behavior: 'smooth' })
+            }
+            const nextIdx = currentIdx + 1
+            activeIndexRef.current = nextIdx
+            setActiveIndex(nextIdx)
           }
         }
-      } else if (diff < -45) {
+      } else if (diffY < 0) {
         // Swiping DOWN (scrolling UP)
-        if (activeIndex > 0) {
-          e.preventDefault()
+        if (currentIdx > 0) {
+          if (e.cancelable) e.preventDefault()
           if (now - lastWheelTime.current >= 380) {
             lastWheelTime.current = now
             touchStartY = touchY
-            setActiveIndex((prev) => Math.max(0, prev - 1))
+            if (Math.abs(diff) > 6) {
+              window.scrollBy({ top: diff, behavior: 'smooth' })
+            }
+            const prevIdx = currentIdx - 1
+            activeIndexRef.current = prevIdx
+            setActiveIndex(prevIdx)
           }
         }
       }
     }
 
-    targetElement.addEventListener('touchstart', handleTouchStart, { passive: true })
-    targetElement.addEventListener('touchmove', handleTouchMove, { passive: false })
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchmove', handleTouchMove, { passive: false })
 
     return () => {
-      targetElement.removeEventListener('touchstart', handleTouchStart)
-      targetElement.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchmove', handleTouchMove)
     }
-  }, [count, activeIndex, scrollBehavior])
+  }, [count, scrollBehavior, getSectionCenterInfo])
 
   // Direct click on any card
   const handleCardClick = (index: number) => {
+    activeIndexRef.current = index
     setActiveIndex(index)
   }
 
@@ -339,10 +425,14 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault()
-      setActiveIndex((prev) => Math.min(count - 1, prev + 1))
+      const next = Math.min(count - 1, activeIndexRef.current + 1)
+      activeIndexRef.current = next
+      setActiveIndex(next)
     } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       e.preventDefault()
-      setActiveIndex((prev) => Math.max(0, prev - 1))
+      const prev = Math.max(0, activeIndexRef.current - 1)
+      activeIndexRef.current = prev
+      setActiveIndex(prev)
     }
   }
 
@@ -554,11 +644,16 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                       const descWeight = subCard.descriptionFontWeight || 'font-normal'
                       const descAlign = subCard.descriptionAlignment || 'left'
 
+                      const spacing = resolveSubCardSpacing(
+                        subCard.spacingBottom,
+                        subCard.spacingBottomCustom,
+                      )
+
                       return (
                         <div
                           key={subIdx}
                           className={cn(
-                            'p-5 md:p-6 flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]',
+                            'p-5 md:p-6 flex flex-col justify-start transition-transform duration-300 hover:scale-[1.02]',
                             subCardsBg,
                             subCardsRounded,
                             subCardsBorder,
@@ -566,7 +661,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         >
                           <h4
                             className={cn(
-                              'whitespace-pre-line leading-tight tracking-tight mb-2',
+                              'whitespace-pre-line leading-tight tracking-tight',
                               titleSize,
                               titleColor,
                               titleWeight,
@@ -574,6 +669,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                             )}
                             dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
                           />
+
+                          {/* Configurable Spacing between Heading and Description */}
+                          <div style={{ height: spacing }} aria-hidden="true" />
+
                           {subDesc && (
                             <p
                               className={cn(
