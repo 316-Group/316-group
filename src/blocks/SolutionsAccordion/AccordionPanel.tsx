@@ -310,147 +310,171 @@ export const AccordionPanel: React.FC<Props> = ({
                   : 'ease-in-out'
 
             return (
-              <div key={index}>
-                {isActive ? (
-                  /* ── ACTIVE card ─────────────────────────────────────── */
-                  <div
-                    className={cn(
-                      'rounded-2xl p-6 md:p-8 transition-all',
-                      item.activeBgColor ?? 'bg-blue-custom',
-                    )}
-                    style={{ ...transStyle, transitionTimingFunction: easing }}
+              <div key={index} className="w-full">
+                {/* ── UNIFIED ACCORDION ITEM CARD ── */}
+                <div
+                  className={cn(
+                    'w-full transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden',
+                    isActive
+                      ? cn('rounded-2xl p-6 md:p-8', item.activeBgColor ?? 'bg-blue-custom')
+                      : 'rounded-xl py-5 px-3 md:px-4 bg-transparent hover:bg-gray-50/60',
+                  )}
+                >
+                  {/* Clickable Header Row */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className="w-full flex items-center justify-between text-left group cursor-pointer focus:outline-none"
                   >
-                    {/* Icon + Title + Dash */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex items-center gap-3">
-                        {/* Active (white) icon card */}
-                        {item.iconActive && typeof item.iconActive === 'object' && (
-                          <div
-                            className={cn(
-                              'w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform duration-200',
-                              (item as any).activeIconCardBgColor || 'bg-white/20 backdrop-blur-sm',
-                            )}
-                          >
-                            <div className="w-5 h-5 sm:w-6 sm:h-6 relative">
+                    <div className="flex items-center gap-3">
+                      {/* Icon card with smooth color transition */}
+                      {(item.icon || item.iconActive) && (
+                        <div
+                          className={cn(
+                            'w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 shrink-0 transition-all duration-500',
+                            isActive
+                              ? ((item as any).activeIconCardBgColor || 'bg-white/20 backdrop-blur-sm')
+                              : ((item as any).iconCardBgColor || 'bg-[#EFF2FE] group-hover:scale-105'),
+                          )}
+                        >
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 relative">
+                            {isActive && item.iconActive && typeof item.iconActive === 'object' ? (
                               <Media
                                 resource={item.iconActive}
                                 imgClassName="w-full h-full object-contain"
                               />
-                            </div>
-                          </div>
-                        )}
-                        <span className="text-lg md:text-xl font-semibold text-white">
-                          {(item as any).activeTitle || item.title}
-                        </span>
-                      </div>
-                      {/* Dash / minus */}
-                      <Minus className="h-5 w-5 text-white shrink-0" />
-                    </div>
-
-                    {/* Sub-heading */}
-                    {item.subHeading && (
-                      <p
-                        className={cn(
-                          'text-base font-semibold mb-3 leading-snug',
-                          item.subHeadingTextColor ?? 'text-white',
-                        )}
-                      >
-                        {item.subHeading}
-                      </p>
-                    )}
-
-                    {/* Body text */}
-                    {item.bodyText && (
-                      <div
-                        className={cn(
-                          'text-sm leading-relaxed mb-6',
-                          item.bodyTextColor ?? 'text-white/90',
-                        )}
-                      >
-                        <RichText
-                          content={item.bodyText}
-                          enableGutter={false}
-                          enableProse={false}
-                          className="[&_p]:mb-0 [&_p]:leading-relaxed"
-                        />
-                      </div>
-                    )}
-
-                    {/* CTA Button */}
-                    {item.showCTAButton !== false && item.ctaLabel && (
-                      <div>
-                        {item.ctaLink ? (
-                          <Link
-                            href={getLinkHref(item.ctaLink)}
-                            className={cn(
-                              'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-90',
-                              item.ctaBgColor ?? 'bg-white',
-                              item.ctaTextColor ?? 'text-blue-custom',
-                            )}
-                          >
-                            {item.ctaLabel}
-                            <span className={cn('inline-flex items-center justify-center w-6 h-6 rounded-full', item.ctaTextColor ? 'bg-current/10' : 'bg-blue-custom')}>
-                              <ArrowUpRight className="h-3.5 w-3.5" style={{ color: 'inherit' }} />
-                            </span>
-                          </Link>
-                        ) : (
-                          <span
-                            className={cn(
-                              'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold',
-                              item.ctaBgColor ?? 'bg-white',
-                              item.ctaTextColor ?? 'text-blue-custom',
-                            )}
-                          >
-                            {item.ctaLabel}
-                            <ArrowUpRight className="h-4 w-4" />
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  /* ── INACTIVE row ────────────────────────────────────── */
-                  <button
-                    onClick={() => setActiveIndex(index)}
-                    className="w-full flex items-center justify-between py-5 px-2 text-left group transition-colors hover:bg-gray-50/50 rounded-lg"
-                  >
-                    <div className="flex items-center gap-3">
-                      {/* Inactive icon card */}
-                      {item.icon && typeof item.icon === 'object' && (
-                        <div
-                          className={cn(
-                            'w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center p-2 shrink-0 transition-transform duration-200 group-hover:scale-105',
-                            (item as any).iconCardBgColor || 'bg-[#EFF2FE]',
-                          )}
-                        >
-                          <div className="w-5 h-5 sm:w-6 sm:h-6 relative">
-                            <Media
-                              resource={item.icon}
-                              imgClassName="w-full h-full object-contain"
-                            />
+                            ) : item.icon && typeof item.icon === 'object' ? (
+                              <Media
+                                resource={item.icon}
+                                imgClassName="w-full h-full object-contain"
+                              />
+                            ) : null}
                           </div>
                         </div>
                       )}
                       <span
                         className={cn(
-                          'text-base md:text-lg font-semibold',
-                          item.titleTextColor ?? 'text-black',
+                          'text-base sm:text-lg md:text-xl font-semibold transition-colors duration-500',
+                          isActive ? 'text-white' : (item.titleTextColor ?? 'text-black'),
                         )}
                       >
-                        {item.title}
+                        {isActive ? ((item as any).activeTitle || item.title) : item.title}
                       </span>
                     </div>
-                    <Plus
-                      className={cn(
-                        'h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110',
-                        item.titleTextColor ?? 'text-black',
+
+                    {/* Plus / Minus indicator */}
+                    <div className="shrink-0 transition-transform duration-500">
+                      {isActive ? (
+                        <Minus className="h-5 w-5 text-white transition-all duration-300" />
+                      ) : (
+                        <Plus
+                          className={cn(
+                            'h-5 w-5 transition-transform duration-300 group-hover:scale-110',
+                            item.titleTextColor ?? 'text-black',
+                          )}
+                        />
                       )}
-                    />
+                    </div>
                   </button>
-                )}
+
+                  {/* ── EXPANDABLE CONTENT (Slide-Up on open, Slide-Down on close) ── */}
+                  <div
+                    className={cn(
+                      'grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                      isActive
+                        ? 'grid-rows-[1fr] opacity-100 mt-5'
+                        : 'grid-rows-[0fr] opacity-0 pointer-events-none mt-0',
+                    )}
+                  >
+                    <div className="overflow-hidden">
+                      <div
+                        className={cn(
+                          'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                          isActive
+                            ? 'translate-y-0 opacity-100 delay-150'
+                            : 'translate-y-4 opacity-0 delay-0',
+                        )}
+                      >
+                        {/* Sub-heading */}
+                        {item.subHeading && (
+                          <p
+                            className={cn(
+                              'text-base font-semibold mb-3 leading-snug',
+                              item.subHeadingTextColor ?? 'text-white',
+                            )}
+                          >
+                            {item.subHeading}
+                          </p>
+                        )}
+
+                        {/* Body text */}
+                        {item.bodyText && (
+                          <div
+                            className={cn(
+                              'text-sm leading-relaxed mb-6',
+                              item.bodyTextColor ?? 'text-white/90',
+                            )}
+                          >
+                            <RichText
+                              content={item.bodyText}
+                              enableGutter={false}
+                              enableProse={false}
+                              className="[&_p]:mb-0 [&_p]:leading-relaxed"
+                            />
+                          </div>
+                        )}
+
+                        {/* CTA Button */}
+                        {item.showCTAButton !== false && item.ctaLabel && (
+                          <div>
+                            {item.ctaLink ? (
+                              <Link
+                                href={getLinkHref(item.ctaLink)}
+                                className={cn(
+                                  'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-opacity hover:opacity-90',
+                                  item.ctaBgColor ?? 'bg-white',
+                                  item.ctaTextColor ?? 'text-blue-custom',
+                                )}
+                              >
+                                {item.ctaLabel}
+                                <span
+                                  className={cn(
+                                    'inline-flex items-center justify-center w-6 h-6 rounded-full',
+                                    item.ctaTextColor ? 'bg-current/10' : 'bg-blue-custom',
+                                  )}
+                                >
+                                  <ArrowUpRight
+                                    className="h-3.5 w-3.5"
+                                    style={{ color: 'inherit' }}
+                                  />
+                                </span>
+                              </Link>
+                            ) : (
+                              <span
+                                className={cn(
+                                  'inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold',
+                                  item.ctaBgColor ?? 'bg-white',
+                                  item.ctaTextColor ?? 'text-blue-custom',
+                                )}
+                              >
+                                {item.ctaLabel}
+                                <ArrowUpRight className="h-4 w-4" />
+                              </span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 {/* HR divider below each row */}
-                <hr className="border-t border-gray-200 w-full" />
+                <hr
+                  className={cn(
+                    'border-t transition-opacity duration-300 w-full',
+                    isActive ? 'border-transparent opacity-0 my-0' : 'border-gray-200 opacity-100 my-1',
+                  )}
+                />
               </div>
             )
           })}
