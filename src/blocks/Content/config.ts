@@ -39,6 +39,7 @@ import { solutionsAccordionLayoutFields } from '../SolutionsAccordion/config'
 import { splitTextFields } from '../SplitText/config'
 import { imageSliderFields } from '../ImageSlider/config'
 import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
+import { readyToGrowFields } from '../ReadyToGrow/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -238,6 +239,7 @@ const columnFields: Field[] = [
           { label: 'Split Text', value: 'splitText' },
           { label: 'Image Slider', value: 'imageSlider' },
           { label: 'Blog Post Updated', value: 'blogPostUpdated' },
+          { label: 'Ready to Grow', value: 'readyToGrow' },
         ],
       },
       {
@@ -1978,6 +1980,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'blogPostUpdated',
         },
         fields: blogPostUpdatedFields,
+      },
+
+      // ─── Ready to Grow ──────────────────────────────────────────────────────
+      {
+        name: 'readyToGrow',
+        type: 'group',
+        label: 'Ready to Grow',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'readyToGrow',
+        },
+        fields: readyToGrowFields,
       },
     ],
   },

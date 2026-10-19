@@ -29,6 +29,7 @@ import { VerticalCTAv2Component } from '../VerticalCTAv2/Component'
 import { SplitTextBlock } from '../SplitText/Component'
 import { ImageSliderBlock } from '../ImageSlider/Component'
 import { BlogPostUpdatedBlock } from '../BlogPostUpdated/Component'
+import { ReadyToGrowBlock } from '../ReadyToGrow/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -922,6 +923,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <BlogPostUpdatedBlock
                         key={index}
                         {...(content as any).blogPostUpdated}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'readyToGrow' && (content as any).readyToGrow) {
+                    return (
+                      <ReadyToGrowBlock
+                        key={index}
+                        {...(content as any).readyToGrow}
                       />
                     )
                   }
