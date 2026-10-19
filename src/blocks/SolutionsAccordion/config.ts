@@ -1,4 +1,4 @@
-import { Block } from 'payload'
+import { Block, Field } from 'payload'
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
@@ -9,6 +9,135 @@ import { textColorPickerAll } from '@/fields/textColorPicker'
 import { link } from '@/fields/link'
 
 const allowAnySelect = (() => true as const) as any
+
+export const solutionsAccordionLayoutFields: Field[] = [
+  // ─── Horizontal Padding Controls ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'paddingMode',
+        type: 'select',
+        label: 'Horizontal Padding Mode',
+        defaultValue: 'default',
+        options: [
+          { label: 'Default Padding (~50px)', value: 'default' },
+          { label: 'No Padding / Full Width Screen Bleed (0px)', value: 'none' },
+          { label: 'Custom Horizontal Padding', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          description: 'Control the left and right padding of the accordion section.',
+        },
+      },
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left / Right',
+        defaultValue: '50px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '10px', value: '10px' },
+          { label: '20px', value: '20px' },
+          { label: '30px', value: '30px' },
+          { label: '40px', value: '40px' },
+          { label: '50px (Default)', value: '50px' },
+          { label: '60px', value: '60px' },
+          { label: '80px', value: '80px' },
+          { label: '100px', value: '100px' },
+          { label: '120px', value: '120px' },
+          { label: '150px', value: '150px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding Left / Right',
+        defaultValue: '16px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '10px', value: '10px' },
+          { label: '16px (Default Mobile)', value: '16px' },
+          { label: '20px', value: '20px' },
+          { label: '24px', value: '24px' },
+          { label: '30px', value: '30px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 75px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
+
+  // ─── 2-Column Grid Gap ─────────────────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'columnGap',
+        type: 'select',
+        label: 'Column Gap (Between Left & Right Column)',
+        defaultValue: '0px',
+        options: [
+          { label: '0px (Default - No Gap)', value: '0px' },
+          { label: '16px (Small Gap)', value: '16px' },
+          { label: '24px (Medium Gap)', value: '24px' },
+          { label: '32px (Standard Gap)', value: '32px' },
+          { label: '48px (Large Gap)', value: '48px' },
+          { label: '64px (Extra Large Gap)', value: '64px' },
+          { label: 'Custom Gap', value: 'custom' },
+        ],
+        admin: {
+          width: '50%',
+          description: 'Set the spacing gap between the left panel and right accordion list.',
+        },
+      },
+      {
+        name: 'columnGapCustom',
+        type: 'text',
+        label: 'Custom Gap Value (e.g. 40px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnGap === 'custom',
+        },
+      },
+    ],
+  },
+]
 
 export const SolutionsAccordion: Block = {
   slug: 'solutionsAccordion',
@@ -26,6 +155,8 @@ export const SolutionsAccordion: Block = {
         defaultValue: 'bg-white',
       },
     }),
+
+    ...solutionsAccordionLayoutFields,
 
     // ─── Left Panel ───────────────────────────────────────────────────────────
     {

@@ -35,10 +35,112 @@ import { gridColFields } from '../GridCol/config'
 import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
 import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
+import { solutionsAccordionLayoutFields } from '../SolutionsAccordion/config'
 
 const allowAnySelect = (() => true as const) as any
 
 const columnFields: Field[] = [
+  {
+    name: 'widthMode',
+    type: 'select',
+    label: 'Column Width Mode',
+    defaultValue: 'contained',
+    options: [
+      { label: 'Contained (Default - Max 1376px Container)', value: 'contained' },
+      { label: 'Full Width (Edge-to-Edge of Viewport)', value: 'fullWidth' },
+    ],
+    admin: {
+      description:
+        'Choose whether this column is contained within standard page margins or spans the full width of the screen.',
+    },
+  },
+  {
+    name: 'paddingMode',
+    type: 'select',
+    label: 'Column Content Horizontal Padding',
+    defaultValue: 'default',
+    options: [
+      { label: 'Default Padding', value: 'default' },
+      { label: 'No Padding / Full Width Screen Bleed (0px)', value: 'none' },
+      { label: 'Custom Horizontal Padding', value: 'custom' },
+    ],
+    admin: {
+      description:
+        'Adjust or remove horizontal (left & right) padding for the content in this column.',
+    },
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left / Right',
+        defaultValue: '50px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '10px', value: '10px' },
+          { label: '20px', value: '20px' },
+          { label: '30px', value: '30px' },
+          { label: '40px', value: '40px' },
+          { label: '50px (Default)', value: '50px' },
+          { label: '60px', value: '60px' },
+          { label: '80px', value: '80px' },
+          { label: '100px', value: '100px' },
+          { label: '120px', value: '120px' },
+          { label: '150px', value: '150px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 75px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding Left / Right',
+        defaultValue: '16px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '10px', value: '10px' },
+          { label: '16px (Standard Mobile)', value: '16px' },
+          { label: '20px', value: '20px' },
+          { label: '24px', value: '24px' },
+          { label: '30px', value: '30px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
   {
     name: 'size',
     type: 'select',
@@ -1500,6 +1602,8 @@ const columnFields: Field[] = [
               defaultValue: 'bg-white',
             },
           }),
+
+          ...solutionsAccordionLayoutFields,
 
           // ── Left Panel ────────────────────────────────────────────────────────
           {

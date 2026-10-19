@@ -11,14 +11,25 @@ import { cn } from '@/utilities/cn'
 import { AnimateIn, type AnimationType, type AnimationSpeed, type AnimationDelay } from '@/components/AnimateIn'
 
 // `nav` is injected by GroupHeroV2Wrapper (a Server Component) so we never
-// import server-only code into this client bundle.
-export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = ({
+export const GroupHeroV2: React.FC<
+  Page['hero'] & {
+    nav?: React.ReactNode
+    heroBoxMargin?: string | null
+    heroBoxMarginCustom?: string | null
+    headerContentSpacing?: string | null
+    headerContentSpacingCustom?: string | null
+  }
+> = ({
   richText,
   descriptionText,
   links,
   media,
   heroBgColor,
   heroRounded,
+  heroBoxMargin,
+  heroBoxMarginCustom,
+  headerContentSpacing,
+  headerContentSpacingCustom,
   badgeText,
   badgeBgColor,
   glanceHeading,
@@ -84,6 +95,22 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
       ? { animation: animType, speed: animSpeed, delay, trigger: 'load' as const }
       : { animation: 'none' as const }
 
+  // Box margin: either Tailwind class from select, or custom CSS margin
+  const boxMarginClass = heroBoxMargin === 'custom' ? undefined : (heroBoxMargin ?? 'mx-[5px]')
+  const boxMarginStyle =
+    heroBoxMargin === 'custom' && heroBoxMarginCustom
+      ? { marginLeft: heroBoxMarginCustom, marginRight: heroBoxMarginCustom }
+      : undefined
+
+  // Header-to-content spacing: pushes content down and expands hero container height
+  const contentSpacingVal =
+    headerContentSpacing === 'custom'
+      ? headerContentSpacingCustom
+      : headerContentSpacing && headerContentSpacing !== 'default'
+        ? headerContentSpacing
+        : undefined
+  const contentSpacingStyle = contentSpacingVal ? { paddingTop: contentSpacingVal } : undefined
+
   return (
     /*
      * Outer wrapper — sits in normal document flow (NOT fixed/absolute).
@@ -99,10 +126,11 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
       {/* ── Part 1: Hero Zone ─────────────────────────────────────────────────── */}
       <div
         className={cn(
-          'mx-[5px]',
+          boxMarginClass,
           heroBgColor ?? 'bg-blue-custom',
           roundedClass,
         )}
+        style={boxMarginStyle}
       >
         {/*
          * Nav bar injected by GroupHeroV2Wrapper (server component).
@@ -113,7 +141,13 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
 
         <div className="container max-w-screen-2xl">
           {/* Top content row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 pb-10 md:pt-6 md:pb-14 items-end">
+          <div
+            className={cn(
+              'grid grid-cols-1 md:grid-cols-2 gap-8 pb-10 md:pb-14 items-end',
+              !contentSpacingVal && 'pt-4 md:pt-6',
+            )}
+            style={contentSpacingStyle}
+          >
             {/* Left: large heading */}
             {richText && (
               <AnimateIn {...anim(hDelay)}>
@@ -297,9 +331,19 @@ export const GroupHeroV2: React.FC<Page['hero'] & { nav?: React.ReactNode }> = (
         <AnimateIn animation={animEnabled ? animType : 'none'} speed={animSpeed} delay={sDelay} trigger="load">
           <div
             className={cn(
-              'px-[5px] py-6 md:py-8',
+              heroBoxMargin === 'custom'
+                ? undefined
+                : heroBoxMargin
+                  ? heroBoxMargin.replace('mx-', 'px-')
+                  : 'px-[5px]',
+              'py-6 md:py-8',
               ecosystemBgColor ?? 'bg-transparent',
             )}
+            style={
+              heroBoxMargin === 'custom' && heroBoxMarginCustom
+                ? { paddingLeft: heroBoxMarginCustom, paddingRight: heroBoxMarginCustom }
+                : undefined
+            }
           >
             <div className="container max-w-screen-2xl">
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">

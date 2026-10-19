@@ -179,27 +179,81 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       )}
     >
       {backgroundType === 'media' && renderBackgroundMedia()}
-      <div className="container max-w-screen-2xl z-5">
-        <div className="mobile-only:flex mobile-only:flex-col gap-8 md:grid lg:grid-cols-12 md:grid-cols-4 lg:gap-y-12 lg:gap-x-16">
-          {columns?.map((col, index) => {
-            const size = col.size || 'full'
-            const mobileOrder = col.mobileOrder || index + 1
-            const orderClass = orderClasses[mobileOrder as keyof typeof orderClasses] || ''
-            const mdOrderClass = mdOrderClasses[index + 1] || 'md:order-0'
-            const colWidth = colsSpanClasses[size]
-            const colBg = (col as any).columnBgColor
-            return (
-              <div
-                key={index}
-                className={cn(
-                  colWidth, // Responsive column spans
-                  orderClass, // Mobile order
-                  mdOrderClass, // Reset order on desktop
-                  col.alignment === 'center' && 'text-center flex flex-col items-center justify-center',
-                  colBg && colBg !== 'bg-transparent' && colBg,
-                )}
-              >
-                {col.columnContent?.map((content, index) => {
+      {(() => {
+        const hasFullWidthCol = columns?.some((c) => (c as any).widthMode === 'fullWidth')
+        return (
+          <div className={cn(hasFullWidthCol ? 'w-full' : 'container max-w-screen-2xl', 'z-5')}>
+            <div
+              className={cn(
+                'mobile-only:flex mobile-only:flex-col gap-8 md:grid lg:grid-cols-12 md:grid-cols-4 lg:gap-y-12',
+                !hasFullWidthCol && 'lg:gap-x-16',
+              )}
+            >
+              {columns?.map((col, index) => {
+                const size = col.size || 'full'
+                const mobileOrder = col.mobileOrder || index + 1
+                const orderClass = orderClasses[mobileOrder as keyof typeof orderClasses] || ''
+                const mdOrderClass = mdOrderClasses[index + 1] || 'md:order-0'
+                const colWidth = colsSpanClasses[size]
+                const colBg = (col as any).columnBgColor
+                const isColFullWidth = (col as any).widthMode === 'fullWidth'
+
+                // Column padding resolution
+                const colPaddingMode = (col as any).paddingMode || 'default'
+                const colDesktopPad =
+                  colPaddingMode === 'none'
+                    ? '0px'
+                    : colPaddingMode === 'custom'
+                      ? (col as any).paddingXDesktop === 'custom'
+                        ? (col as any).paddingXDesktopCustom || '50px'
+                        : (col as any).paddingXDesktop || '50px'
+                      : undefined
+                const colMobilePad =
+                  colPaddingMode === 'none'
+                    ? '0px'
+                    : colPaddingMode === 'custom'
+                      ? (col as any).paddingXMobile === 'custom'
+                        ? (col as any).paddingXMobileCustom || '16px'
+                        : (col as any).paddingXMobile || '16px'
+                      : undefined
+
+                const colPadUid =
+                  colPaddingMode === 'none' || colPaddingMode === 'custom'
+                    ? `col-pad-${index}`
+                    : undefined
+
+                return (
+                  <React.Fragment key={index}>
+                    {colPadUid && (
+                      <style>{`
+                        .${colPadUid} {
+                          padding-left: ${colMobilePad || '0px'};
+                          padding-right: ${colMobilePad || '0px'};
+                        }
+                        @media (min-width: 768px) {
+                          .${colPadUid} {
+                            padding-left: ${colDesktopPad || '0px'};
+                            padding-right: ${colDesktopPad || '0px'};
+                          }
+                        }
+                      `}</style>
+                    )}
+                    <div
+                      className={cn(
+                        colWidth, // Responsive column spans
+                        orderClass, // Mobile order
+                        mdOrderClass, // Reset order on desktop
+                        colPadUid,
+                        col.alignment === 'center' &&
+                          'text-center flex flex-col items-center justify-center',
+                        colBg && colBg !== 'bg-transparent' && colBg,
+                        hasFullWidthCol &&
+                          !isColFullWidth &&
+                          !colPadUid &&
+                          'max-w-screen-2xl mx-auto px-4 md:px-8',
+                      )}
+                    >
+                      {col.columnContent?.map((content, index) => {
                   const {
                     contentType,
                     links,
@@ -755,8 +809,20 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'solutionsAccordion' && content.solutionsAccordion) {
-                    const { leftPanel, accordionItems, rightBgColor, sectionBgColor, scrollAnimation } =
-                      content.solutionsAccordion
+                    const {
+                      leftPanel,
+                      accordionItems,
+                      rightBgColor,
+                      sectionBgColor,
+                      scrollAnimation,
+                      paddingMode,
+                      paddingXDesktop,
+                      paddingXDesktopCustom,
+                      paddingXMobile,
+                      paddingXMobileCustom,
+                      columnGap,
+                      columnGapCustom,
+                    } = content.solutionsAccordion as any
                     return (
                       <AccordionPanel
                         key={index}
@@ -765,6 +831,13 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         rightBgColor={rightBgColor}
                         sectionBgColor={sectionBgColor}
                         scrollAnimation={scrollAnimation}
+                        paddingMode={paddingMode}
+                        paddingXDesktop={paddingXDesktop}
+                        paddingXDesktopCustom={paddingXDesktopCustom}
+                        paddingXMobile={paddingXMobile}
+                        paddingXMobileCustom={paddingXMobileCustom}
+                        columnGap={columnGap}
+                        columnGapCustom={columnGapCustom}
                       />
                     )
                   }
@@ -854,11 +927,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     )
                   )
                 })}
-              </div>
+                </div>
+              </React.Fragment>
             )
           })}
-        </div>
-      </div>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }

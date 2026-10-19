@@ -5260,6 +5260,24 @@ export interface Page {
      * When enabled the hero zone background gets a large rounded corner (rounded-[2rem]). Uncheck for sharp edges.
      */
     heroRounded?: boolean | null;
+    /**
+     * Outer horizontal margin for the hero card and ecosystem strip.
+     */
+    heroBoxMargin?:
+      | ('mx-0' | 'mx-[5px]' | 'mx-2' | 'mx-[10px]' | 'mx-3' | 'mx-4' | 'mx-5' | 'mx-6' | 'mx-8' | 'custom')
+      | null;
+    /**
+     * Specify a custom CSS margin value (e.g., 15px, 2.5rem).
+     */
+    heroBoxMarginCustom?: string | null;
+    /**
+     * Vertical spacing between the header navigation and the hero title/content. Pushes content down and expands total container height.
+     */
+    headerContentSpacing?: ('default' | '30px' | '50px' | '75px' | '100px' | '125px' | '150px' | 'custom') | null;
+    /**
+     * Specify a custom pixel or rem value (e.g., 80px, 120px).
+     */
+    headerContentSpacingCustom?: string | null;
     headingTextColor?:
       | (
           | 'text-inherit'
@@ -11893,6 +11911,33 @@ export interface Media {
 export interface ContentBlock {
   columns?:
     | {
+        /**
+         * Choose whether this column is contained within standard page margins or spans the full width of the screen.
+         */
+        widthMode?: ('contained' | 'fullWidth') | null;
+        /**
+         * Adjust or remove horizontal (left & right) padding for the content in this column.
+         */
+        paddingMode?: ('default' | 'none' | 'custom') | null;
+        paddingXDesktop?:
+          | (
+              | '0px'
+              | '10px'
+              | '20px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | 'custom'
+            )
+          | null;
+        paddingXDesktopCustom?: string | null;
+        paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+        paddingXMobileCustom?: string | null;
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
         mobileOrder?: number | null;
         alignment?: ('left' | 'center') | null;
@@ -37393,6 +37438,34 @@ export interface ContentBlock {
                       | 'bg-rose-950'
                     )
                   | null;
+                /**
+                 * Control the left and right padding of the accordion section.
+                 */
+                paddingMode?: ('default' | 'none' | 'custom') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '10px'
+                      | '20px'
+                      | '30px'
+                      | '40px'
+                      | '50px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+                paddingXDesktopCustom?: string | null;
+                paddingXMobileCustom?: string | null;
+                /**
+                 * Set the spacing gap between the left panel and right accordion list.
+                 */
+                columnGap?: ('0px' | '16px' | '24px' | '32px' | '48px' | '64px' | 'custom') | null;
+                columnGapCustom?: string | null;
                 leftPanel?: {
                   bgColor?:
                     | (
@@ -131788,6 +131861,21 @@ export interface SolutionsAccordionBlock {
         | 'bg-rose-950'
       )
     | null;
+  /**
+   * Control the left and right padding of the accordion section.
+   */
+  paddingMode?: ('default' | 'none' | 'custom') | null;
+  paddingXDesktop?:
+    | ('0px' | '10px' | '20px' | '30px' | '40px' | '50px' | '60px' | '80px' | '100px' | '120px' | '150px' | 'custom')
+    | null;
+  paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+  paddingXDesktopCustom?: string | null;
+  paddingXMobileCustom?: string | null;
+  /**
+   * Set the spacing gap between the left panel and right accordion list.
+   */
+  columnGap?: ('0px' | '16px' | '24px' | '32px' | '48px' | '64px' | 'custom') | null;
+  columnGapCustom?: string | null;
   leftPanel?: {
     bgColor?:
       | (
@@ -149264,6 +149352,10 @@ export interface PagesSelect<T extends boolean = true> {
             };
         heroBgColor?: T;
         heroRounded?: T;
+        heroBoxMargin?: T;
+        heroBoxMarginCustom?: T;
+        headerContentSpacing?: T;
+        headerContentSpacingCustom?: T;
         headingTextColor?: T;
         descriptionTextColor?: T;
         glanceHeadingTextColor?: T;
@@ -149558,6 +149650,12 @@ export interface ContentBlockSelect<T extends boolean = true> {
   columns?:
     | T
     | {
+        widthMode?: T;
+        paddingMode?: T;
+        paddingXDesktop?: T;
+        paddingXDesktopCustom?: T;
+        paddingXMobile?: T;
+        paddingXMobileCustom?: T;
         size?: T;
         mobileOrder?: T;
         alignment?: T;
@@ -149943,6 +150041,13 @@ export interface ContentBlockSelect<T extends boolean = true> {
                 | T
                 | {
                     sectionBgColor?: T;
+                    paddingMode?: T;
+                    paddingXDesktop?: T;
+                    paddingXMobile?: T;
+                    paddingXDesktopCustom?: T;
+                    paddingXMobileCustom?: T;
+                    columnGap?: T;
+                    columnGapCustom?: T;
                     leftPanel?:
                       | T
                       | {
@@ -151292,6 +151397,13 @@ export interface AgenticGridBlockSelect<T extends boolean = true> {
  */
 export interface SolutionsAccordionBlockSelect<T extends boolean = true> {
   sectionBgColor?: T;
+  paddingMode?: T;
+  paddingXDesktop?: T;
+  paddingXMobile?: T;
+  paddingXDesktopCustom?: T;
+  paddingXMobileCustom?: T;
+  columnGap?: T;
+  columnGapCustom?: T;
   leftPanel?:
     | T
     | {

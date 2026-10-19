@@ -29,6 +29,13 @@ interface Props {
   rightBgColor?: string | null
   sectionBgColor?: string | null
   scrollAnimation?: SolutionsAccordionBlock['scrollAnimation']
+  paddingMode?: 'default' | 'none' | 'custom' | null
+  paddingXDesktop?: string | null
+  paddingXDesktopCustom?: string | null
+  paddingXMobile?: string | null
+  paddingXMobileCustom?: string | null
+  columnGap?: string | null
+  columnGapCustom?: string | null
 }
 
 export const AccordionPanel: React.FC<Props> = ({
@@ -37,10 +44,18 @@ export const AccordionPanel: React.FC<Props> = ({
   rightBgColor,
   sectionBgColor,
   scrollAnimation,
+  paddingMode,
+  paddingXDesktop,
+  paddingXDesktopCustom,
+  paddingXMobile,
+  paddingXMobileCustom,
+  columnGap,
+  columnGapCustom,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isInView, setIsInView] = useState<boolean>(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const uid = React.useId().replace(/:/g, '')
 
   useEffect(() => {
     const el = sectionRef.current
@@ -83,26 +98,71 @@ export const AccordionPanel: React.FC<Props> = ({
     return '#'
   }
 
+  // Resolve column gap
+  const resolvedGap =
+    columnGap === 'custom' ? columnGapCustom || '0px' : columnGap || '0px'
+
+  // Resolve horizontal padding
+  const resolvedDesktopPad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXDesktop === 'custom'
+          ? paddingXDesktopCustom || '50px'
+          : paddingXDesktop || '50px'
+        : undefined
+
+  const resolvedMobilePad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXMobile === 'custom'
+          ? paddingXMobileCustom || '16px'
+          : paddingXMobile || '16px'
+        : undefined
+
+  const padClassName =
+    paddingMode === 'custom' || paddingMode === 'none' ? `accordion-pad-${uid}` : ''
+
   return (
-    <div
-      ref={sectionRef}
-      className={cn(
-        'w-full flex flex-col md:flex-row min-h-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
-        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
-        sectionBgColor ?? 'bg-white',
+    <>
+      {padClassName && (
+        <style>{`
+          .${padClassName} {
+            padding-left: ${resolvedMobilePad || '0px'};
+            padding-right: ${resolvedMobilePad || '0px'};
+          }
+          @media (min-width: 768px) {
+            .${padClassName} {
+              padding-left: ${resolvedDesktopPad || '0px'};
+              padding-right: ${resolvedDesktopPad || '0px'};
+            }
+          }
+        `}</style>
       )}
-    >
-      {/* ── LEFT COLUMN ─────────────────────────────────────────────────────── */}
-      <AnimateIn
-        animation={saEnabled ? saType : 'none'}
-        speed={saSpeed}
-        delay={saLeftDelay}
-        trigger="scroll"
+      <div
+        ref={sectionRef}
         className={cn(
-          'w-full md:w-[45%] flex flex-col justify-between p-8 md:p-12 xl:p-16',
-          leftPanel?.bgColor ?? 'bg-white',
+          'w-full flex flex-col md:flex-row min-h-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
+          padClassName,
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
+          sectionBgColor ?? 'bg-white',
         )}
+        style={{
+          gap: resolvedGap !== '0px' ? resolvedGap : undefined,
+        }}
       >
+        {/* ── LEFT COLUMN ─────────────────────────────────────────────────────── */}
+        <AnimateIn
+          animation={saEnabled ? saType : 'none'}
+          speed={saSpeed}
+          delay={saLeftDelay}
+          trigger="scroll"
+          className={cn(
+            'w-full md:w-[45%] md:shrink-0 flex flex-col justify-between p-8 md:p-12 xl:p-16',
+            leftPanel?.bgColor ?? 'bg-white',
+          )}
+        >
         <div className="flex flex-col gap-6">
           {/* Badge */}
           {leftPanel?.badgeText && (
@@ -230,7 +290,7 @@ export const AccordionPanel: React.FC<Props> = ({
         delay={saRightDelay}
         trigger="scroll"
         className={cn(
-          'w-full md:w-[55%] flex items-start p-6 md:p-10 xl:p-14',
+          'w-full md:flex-1 flex items-start p-6 md:p-10 xl:p-14',
           rightBgColor ?? 'bg-white',
         )}
       >
@@ -396,6 +456,7 @@ export const AccordionPanel: React.FC<Props> = ({
           })}
         </div>
       </AnimateIn>
-    </div>
+      </div>
+    </>
   )
 }

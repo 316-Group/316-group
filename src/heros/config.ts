@@ -378,6 +378,71 @@ export const hero: Field = {
       },
     },
 
+    {
+      name: 'heroBoxMargin',
+      type: 'select',
+      label: 'Hero Box Horizontal Margin',
+      defaultValue: 'mx-[5px]',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description: 'Outer horizontal margin for the hero card and ecosystem strip.',
+      },
+      options: [
+        { label: 'No Margin (0px - Full Bleed)', value: 'mx-0' },
+        { label: '5px (Default)', value: 'mx-[5px]' },
+        { label: '8px', value: 'mx-2' },
+        { label: '10px', value: 'mx-[10px]' },
+        { label: '12px', value: 'mx-3' },
+        { label: '16px', value: 'mx-4' },
+        { label: '20px', value: 'mx-5' },
+        { label: '24px', value: 'mx-6' },
+        { label: '32px', value: 'mx-8' },
+        { label: 'Custom Margin', value: 'custom' },
+      ],
+    },
+    {
+      name: 'heroBoxMarginCustom',
+      type: 'text',
+      label: 'Custom Margin Value (e.g. 15px)',
+      admin: {
+        condition: (_, { type, heroBoxMargin }) =>
+          type === 'groupHeroV2' && heroBoxMargin === 'custom',
+        description: 'Specify a custom CSS margin value (e.g., 15px, 2.5rem).',
+      },
+    },
+
+    {
+      name: 'headerContentSpacing',
+      type: 'select',
+      label: 'Header to Content Spacing',
+      defaultValue: 'default',
+      admin: {
+        condition: (_, { type }) => type === 'groupHeroV2',
+        description:
+          'Vertical spacing between the header navigation and the hero title/content. Pushes content down and expands total container height.',
+      },
+      options: [
+        { label: 'Default (~24px)', value: 'default' },
+        { label: 'Extra Small (30px)', value: '30px' },
+        { label: 'Small (50px)', value: '50px' },
+        { label: 'Medium (75px)', value: '75px' },
+        { label: 'Standard (100px)', value: '100px' },
+        { label: 'Large (125px)', value: '125px' },
+        { label: 'Extra Large (150px)', value: '150px' },
+        { label: 'Custom Spacing', value: 'custom' },
+      ],
+    },
+    {
+      name: 'headerContentSpacingCustom',
+      type: 'text',
+      label: 'Custom Spacing Value (e.g. 80px or 120px)',
+      admin: {
+        condition: (_, { type, headerContentSpacing }) =>
+          type === 'groupHeroV2' && headerContentSpacing === 'custom',
+        description: 'Specify a custom pixel or rem value (e.g., 80px, 120px).',
+      },
+    },
+
     // ─── GroupHeroV2 Text Colour Pickers ─────────────────────────────────────
 
     textColorPickerAll({
