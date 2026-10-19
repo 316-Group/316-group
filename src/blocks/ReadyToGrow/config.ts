@@ -252,7 +252,7 @@ export const readyToGrowFields: Field[] = [
             name: 'fontSize',
             type: 'select',
             label: 'Font Size',
-            defaultValue: 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
+            defaultValue: 'text-4xl md:text-5xl lg:text-6xl',
             validate: allowAnySelect,
             options: fontSizeOptions,
             admin: { width: '25%' },

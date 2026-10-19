@@ -150,7 +150,7 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
   // ─── 2. Heading Settings ────────────────────────────────────────────────────
   const headingText = headingGroup?.text?.trim() ?? "Let's build what comes next, together."
   const headingColor = headingGroup?.color || 'text-white'
-  const headingSize = headingGroup?.fontSize || 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl'
+  const headingSize = headingGroup?.fontSize || 'text-4xl md:text-5xl lg:text-6xl'
   const headingWeight = headingGroup?.fontWeight || 'font-bold'
   const headingAlign = headingGroup?.alignment || 'center'
   const headingSpacing = resolveSpacing(headingGroup?.spacingBottom, headingGroup?.spacingBottomCustom, '20px')
