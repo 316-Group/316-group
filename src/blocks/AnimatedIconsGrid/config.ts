@@ -283,9 +283,175 @@ export const animatedIconsGridFields: Field[] = [
     ],
   },
 
-    // ─── 5. Small Cards Array (PNG Image Cards) ──────────────────────────────
-    {
-      name: 'cards',
+  // ─── 5. Card Animation & Timing Settings ──────────────────────────────────
+  {
+    name: 'animationSettings',
+    type: 'group',
+    label: 'Card Animation & Timing Settings',
+    admin: {
+      description:
+        'Configure the randomized fade-in and fade-out speed, delay times, and opacity for the 21 icon cards.',
+    },
+    fields: [
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'speedPreset',
+            type: 'select',
+            label: 'Animation Speed Preset',
+            defaultValue: 'default',
+            validate: allowAnySelect,
+            options: [
+              {
+                label: 'Default Speed (3.5s fade, 6s–12s visible, 2.5s–4.5s hidden)',
+                value: 'default',
+              },
+              {
+                label: 'Fast & Lively (1.5s fade, 2s–4s visible, 1s–2s hidden)',
+                value: 'fast',
+              },
+              {
+                label: 'Slow & Calm (5s fade, 10s–16s visible, 4s–7s hidden)',
+                value: 'slow',
+              },
+              {
+                label: 'Ultra Slow Breathing (7s fade, 15s–25s visible, 6s–10s hidden)',
+                value: 'ultraSlow',
+              },
+              {
+                label: 'Custom Timing (Enter Custom Delays in Milliseconds Below)',
+                value: 'custom',
+              },
+            ],
+            admin: {
+              width: '50%',
+              description:
+                'Quickly pick a pre-tuned animation speed, or choose "Custom Timing" to configure exact millisecond values.',
+            },
+          },
+          {
+            name: 'fadedOpacity',
+            type: 'select',
+            label: 'Faded Card Opacity Level',
+            defaultValue: '0.35',
+            validate: allowAnySelect,
+            options: [
+              { label: '35% Opacity (Default — Frosted outline visible)', value: '0.35' },
+              { label: '0% Opacity (Completely invisible when faded)', value: '0' },
+              { label: '15% Opacity (Very faint outline)', value: '0.15' },
+              { label: '25% Opacity (Soft outline)', value: '0.25' },
+              { label: '50% Opacity (Semi-transparent)', value: '0.50' },
+            ],
+            admin: {
+              width: '50%',
+              description: 'Opacity of the card when it fades out.',
+            },
+          },
+        ],
+      },
+
+      // ── Granular Timing Inputs (Visible only when Custom Timing is selected) ────
+      {
+        type: 'row',
+        admin: {
+          condition: (_, siblingData) => siblingData?.speedPreset === 'custom',
+        },
+        fields: [
+          {
+            name: 'fadeDuration',
+            type: 'number',
+            label: 'Fade Transition Duration (ms)',
+            defaultValue: 3500,
+            min: 200,
+            max: 20000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Duration of the fade transition in ms (Default: 3500ms = 3.5s). Lower = faster fade, Higher = slower fade.',
+            },
+          },
+          {
+            name: 'visibleDelayMin',
+            type: 'number',
+            label: 'Min Visible Duration (ms)',
+            defaultValue: 6000,
+            min: 500,
+            max: 60000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Minimum time a card remains visible before fading out (Default: 6000ms = 6s).',
+            },
+          },
+          {
+            name: 'visibleDelayMax',
+            type: 'number',
+            label: 'Max Visible Duration (ms)',
+            defaultValue: 12000,
+            min: 500,
+            max: 60000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Maximum time a card remains visible before fading out (Default: 12000ms = 12s).',
+            },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        admin: {
+          condition: (_, siblingData) => siblingData?.speedPreset === 'custom',
+        },
+        fields: [
+          {
+            name: 'hiddenDelayMin',
+            type: 'number',
+            label: 'Min Faded-Out Duration (ms)',
+            defaultValue: 2500,
+            min: 200,
+            max: 60000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Minimum time a card stays faded out before fading back in (Default: 2500ms = 2.5s).',
+            },
+          },
+          {
+            name: 'hiddenDelayMax',
+            type: 'number',
+            label: 'Max Faded-Out Duration (ms)',
+            defaultValue: 4500,
+            min: 200,
+            max: 60000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Maximum time a card stays faded out before fading back in (Default: 4500ms = 4.5s).',
+            },
+          },
+          {
+            name: 'initialStaggerMax',
+            type: 'number',
+            label: 'Initial Stagger Spread (ms)',
+            defaultValue: 8000,
+            min: 500,
+            max: 30000,
+            admin: {
+              width: '33.33%',
+              description:
+                'Max initial random delay so cards desynchronize naturally (Default: 8000ms = 8s).',
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  // ─── 6. Small Cards Array (PNG Image Cards) ──────────────────────────────
+  {
+    name: 'cards',
       type: 'array',
       label: 'Small Card Items (Up to 21 on Desktop)',
       minRows: 0,

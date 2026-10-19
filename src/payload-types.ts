@@ -10017,6 +10017,43 @@ export interface Page {
             | null;
         };
         /**
+         * Configure the randomized fade-in and fade-out speed, delay times, and opacity for the 21 icon cards.
+         */
+        animationSettings?: {
+          /**
+           * Quickly pick a pre-tuned animation speed, or choose "Custom Timing" to configure exact millisecond values.
+           */
+          speedPreset?: ('default' | 'fast' | 'slow' | 'ultraSlow' | 'custom') | null;
+          /**
+           * Opacity of the card when it fades out.
+           */
+          fadedOpacity?: ('0.35' | '0' | '0.15' | '0.25' | '0.50') | null;
+          /**
+           * Duration of the fade transition in ms (Default: 3500ms = 3.5s). Lower = faster fade, Higher = slower fade.
+           */
+          fadeDuration?: number | null;
+          /**
+           * Minimum time a card remains visible before fading out (Default: 6000ms = 6s).
+           */
+          visibleDelayMin?: number | null;
+          /**
+           * Maximum time a card remains visible before fading out (Default: 12000ms = 12s).
+           */
+          visibleDelayMax?: number | null;
+          /**
+           * Minimum time a card stays faded out before fading back in (Default: 2500ms = 2.5s).
+           */
+          hiddenDelayMin?: number | null;
+          /**
+           * Maximum time a card stays faded out before fading back in (Default: 4500ms = 4.5s).
+           */
+          hiddenDelayMax?: number | null;
+          /**
+           * Max initial random delay so cards desynchronize naturally (Default: 8000ms = 8s).
+           */
+          initialStaggerMax?: number | null;
+        };
+        /**
          * Add items with PNG/SVG images. Select which card slot each image belongs to, or leave as Auto.
          */
         cards?:
@@ -10327,6 +10364,63 @@ export interface Page {
           | null;
         paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
         paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-28') | null;
+        /**
+         * Set to "No Padding" to let the cards span the full available width of the column.
+         */
+        paddingMode?: ('default' | 'none' | 'custom') | null;
+        paddingXDesktop?:
+          | ('0px' | '10px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+          | null;
+        paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+        paddingXDesktopCustom?: string | null;
+        paddingXMobileCustom?: string | null;
+        /**
+         * When enabled, feature cards display as a swipeable/sliding carousel with configurable controls.
+         */
+        enableSlider?: boolean | null;
+        /**
+         * Configure slides to show, scroll steps, autoplay, direction, indicators, and arrows.
+         */
+        sliderSettings?: {
+          /**
+           * Number of cards visible at once on desktop (screen width >= 1024px).
+           */
+          slidesToShowDesktop?: ('4' | '3' | '2' | '1' | 'custom') | null;
+          slidesToShowDesktopCustom?: number | null;
+          /**
+           * Number of cards visible at once on mobile.
+           */
+          slidesToShowMobile?: ('1' | '1.2' | '1.5' | '2' | 'custom') | null;
+          slidesToShowMobileCustom?: number | null;
+          /**
+           * How many cards to advance when sliding on desktop.
+           */
+          slidesToScrollDesktop?: ('1' | '2' | '3' | '4') | null;
+          /**
+           * How many cards to advance when sliding on mobile.
+           */
+          slidesToScrollMobile?: ('1' | '2') | null;
+          /**
+           * Automatically advance to the next slide at timed intervals.
+           */
+          autoSlide?: boolean | null;
+          /**
+           * Time in milliseconds between auto transitions (Default: 4000ms = 4 seconds).
+           */
+          autoSlideInterval?: number | null;
+          /**
+           * Direction in which the slider advances.
+           */
+          slideDirection?: ('ltr' | 'rtl') | null;
+          /**
+           * Displays Left & Right arrow buttons at the top-right end above the cards.
+           */
+          showArrows?: boolean | null;
+          /**
+           * Displays clickable dots at the bottom to jump directly to any slide.
+           */
+          showIndicators?: boolean | null;
+        };
         cards?:
           | {
               cardBgColor?:
@@ -53034,6 +53128,43 @@ export interface ContentBlock {
                     | null;
                 };
                 /**
+                 * Configure the randomized fade-in and fade-out speed, delay times, and opacity for the 21 icon cards.
+                 */
+                animationSettings?: {
+                  /**
+                   * Quickly pick a pre-tuned animation speed, or choose "Custom Timing" to configure exact millisecond values.
+                   */
+                  speedPreset?: ('default' | 'fast' | 'slow' | 'ultraSlow' | 'custom') | null;
+                  /**
+                   * Opacity of the card when it fades out.
+                   */
+                  fadedOpacity?: ('0.35' | '0' | '0.15' | '0.25' | '0.50') | null;
+                  /**
+                   * Duration of the fade transition in ms (Default: 3500ms = 3.5s). Lower = faster fade, Higher = slower fade.
+                   */
+                  fadeDuration?: number | null;
+                  /**
+                   * Minimum time a card remains visible before fading out (Default: 6000ms = 6s).
+                   */
+                  visibleDelayMin?: number | null;
+                  /**
+                   * Maximum time a card remains visible before fading out (Default: 12000ms = 12s).
+                   */
+                  visibleDelayMax?: number | null;
+                  /**
+                   * Minimum time a card stays faded out before fading back in (Default: 2500ms = 2.5s).
+                   */
+                  hiddenDelayMin?: number | null;
+                  /**
+                   * Maximum time a card stays faded out before fading back in (Default: 4500ms = 4.5s).
+                   */
+                  hiddenDelayMax?: number | null;
+                  /**
+                   * Max initial random delay so cards desynchronize naturally (Default: 8000ms = 8s).
+                   */
+                  initialStaggerMax?: number | null;
+                };
+                /**
                  * Add items with PNG/SVG images. Select which card slot each image belongs to, or leave as Auto.
                  */
                 cards?:
@@ -53341,6 +53472,75 @@ export interface ContentBlock {
                   | null;
                 paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
                 paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-28') | null;
+                /**
+                 * Set to "No Padding" to let the cards span the full available width of the column.
+                 */
+                paddingMode?: ('default' | 'none' | 'custom') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '10px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+                paddingXDesktopCustom?: string | null;
+                paddingXMobileCustom?: string | null;
+                /**
+                 * When enabled, feature cards display as a swipeable/sliding carousel with configurable controls.
+                 */
+                enableSlider?: boolean | null;
+                /**
+                 * Configure slides to show, scroll steps, autoplay, direction, indicators, and arrows.
+                 */
+                sliderSettings?: {
+                  /**
+                   * Number of cards visible at once on desktop (screen width >= 1024px).
+                   */
+                  slidesToShowDesktop?: ('4' | '3' | '2' | '1' | 'custom') | null;
+                  slidesToShowDesktopCustom?: number | null;
+                  /**
+                   * Number of cards visible at once on mobile.
+                   */
+                  slidesToShowMobile?: ('1' | '1.2' | '1.5' | '2' | 'custom') | null;
+                  slidesToShowMobileCustom?: number | null;
+                  /**
+                   * How many cards to advance when sliding on desktop.
+                   */
+                  slidesToScrollDesktop?: ('1' | '2' | '3' | '4') | null;
+                  /**
+                   * How many cards to advance when sliding on mobile.
+                   */
+                  slidesToScrollMobile?: ('1' | '2') | null;
+                  /**
+                   * Automatically advance to the next slide at timed intervals.
+                   */
+                  autoSlide?: boolean | null;
+                  /**
+                   * Time in milliseconds between auto transitions (Default: 4000ms = 4 seconds).
+                   */
+                  autoSlideInterval?: number | null;
+                  /**
+                   * Direction in which the slider advances.
+                   */
+                  slideDirection?: ('ltr' | 'rtl') | null;
+                  /**
+                   * Displays Left & Right arrow buttons at the top-right end above the cards.
+                   */
+                  showArrows?: boolean | null;
+                  /**
+                   * Displays clickable dots at the bottom to jump directly to any slide.
+                   */
+                  showIndicators?: boolean | null;
+                };
                 cards?:
                   | {
                       cardBgColor?:
@@ -149539,6 +149739,18 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonFontSize?: T;
                     buttonFontWeight?: T;
                   };
+              animationSettings?:
+                | T
+                | {
+                    speedPreset?: T;
+                    fadedOpacity?: T;
+                    fadeDuration?: T;
+                    visibleDelayMin?: T;
+                    visibleDelayMax?: T;
+                    hiddenDelayMin?: T;
+                    hiddenDelayMax?: T;
+                    initialStaggerMax?: T;
+                  };
               cards?:
                 | T
                 | {
@@ -149557,6 +149769,27 @@ export interface PagesSelect<T extends boolean = true> {
               sectionBgColor?: T;
               paddingTop?: T;
               paddingBottom?: T;
+              paddingMode?: T;
+              paddingXDesktop?: T;
+              paddingXMobile?: T;
+              paddingXDesktopCustom?: T;
+              paddingXMobileCustom?: T;
+              enableSlider?: T;
+              sliderSettings?:
+                | T
+                | {
+                    slidesToShowDesktop?: T;
+                    slidesToShowDesktopCustom?: T;
+                    slidesToShowMobile?: T;
+                    slidesToShowMobileCustom?: T;
+                    slidesToScrollDesktop?: T;
+                    slidesToScrollMobile?: T;
+                    autoSlide?: T;
+                    autoSlideInterval?: T;
+                    slideDirection?: T;
+                    showArrows?: T;
+                    showIndicators?: T;
+                  };
               cards?:
                 | T
                 | {
@@ -150453,6 +150686,18 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           buttonFontSize?: T;
                           buttonFontWeight?: T;
                         };
+                    animationSettings?:
+                      | T
+                      | {
+                          speedPreset?: T;
+                          fadedOpacity?: T;
+                          fadeDuration?: T;
+                          visibleDelayMin?: T;
+                          visibleDelayMax?: T;
+                          hiddenDelayMin?: T;
+                          hiddenDelayMax?: T;
+                          initialStaggerMax?: T;
+                        };
                     cards?:
                       | T
                       | {
@@ -150469,6 +150714,27 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     sectionBgColor?: T;
                     paddingTop?: T;
                     paddingBottom?: T;
+                    paddingMode?: T;
+                    paddingXDesktop?: T;
+                    paddingXMobile?: T;
+                    paddingXDesktopCustom?: T;
+                    paddingXMobileCustom?: T;
+                    enableSlider?: T;
+                    sliderSettings?:
+                      | T
+                      | {
+                          slidesToShowDesktop?: T;
+                          slidesToShowDesktopCustom?: T;
+                          slidesToShowMobile?: T;
+                          slidesToShowMobileCustom?: T;
+                          slidesToScrollDesktop?: T;
+                          slidesToScrollMobile?: T;
+                          autoSlide?: T;
+                          autoSlideInterval?: T;
+                          slideDirection?: T;
+                          showArrows?: T;
+                          showIndicators?: T;
+                        };
                     cards?:
                       | T
                       | {

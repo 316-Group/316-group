@@ -15,6 +15,17 @@ export interface CardItem {
   cardBgColor?: string | null
 }
 
+export interface AnimationSettings {
+  speedPreset?: 'default' | 'fast' | 'slow' | 'ultraSlow' | 'custom' | null
+  fadedOpacity?: string | null
+  fadeDuration?: number | null
+  visibleDelayMin?: number | null
+  visibleDelayMax?: number | null
+  hiddenDelayMin?: number | null
+  hiddenDelayMax?: number | null
+  initialStaggerMax?: number | null
+}
+
 export interface AnimatedIconsGridProps {
   sectionBgColor?: string | null
   paddingTop?: string | null
@@ -57,6 +68,8 @@ export interface AnimatedIconsGridProps {
     buttonFontWeight?: string | null
   } | null
 
+  animationSettings?: AnimationSettings | null
+
   cards?: CardItem[] | null
   className?: string
 }
@@ -95,6 +108,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   headingGroup,
   descriptionGroup,
   buttonGroup,
+  animationSettings,
   cards,
   className,
 }) => {
@@ -105,6 +119,75 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   const [fadedOutSlots, setFadedOutSlots] = useState<boolean[]>(() =>
     Array(TOTAL_DESKTOP_SLOTS).fill(false),
   )
+
+  // ─── Animation Timing Resolution ───────────────────────────────────────────
+  const anim = animationSettings
+  const speedPreset = anim?.speedPreset ?? 'default'
+
+  let transitionDuration = 3500
+  let visibleMin = 6000
+  let visibleMax = 12000
+  let hiddenMin = 2500
+  let hiddenMax = 4500
+  let initialStagger = 8000
+
+  if (speedPreset === 'fast') {
+    transitionDuration = 1500
+    visibleMin = 2000
+    visibleMax = 4000
+    hiddenMin = 1000
+    hiddenMax = 2000
+    initialStagger = 3000
+  } else if (speedPreset === 'slow') {
+    transitionDuration = 5000
+    visibleMin = 10000
+    visibleMax = 16000
+    hiddenMin = 4000
+    hiddenMax = 7000
+    initialStagger = 10000
+  } else if (speedPreset === 'ultraSlow') {
+    transitionDuration = 7000
+    visibleMin = 15000
+    visibleMax = 25000
+    hiddenMin = 6000
+    hiddenMax = 10000
+    initialStagger = 14000
+  } else if (speedPreset === 'custom') {
+    transitionDuration =
+      typeof anim?.fadeDuration === 'number' && anim.fadeDuration > 0
+        ? anim.fadeDuration
+        : 3500
+    visibleMin =
+      typeof anim?.visibleDelayMin === 'number' && anim.visibleDelayMin > 0
+        ? anim.visibleDelayMin
+        : 6000
+    visibleMax =
+      typeof anim?.visibleDelayMax === 'number' && anim.visibleDelayMax > 0
+        ? anim.visibleDelayMax
+        : 12000
+    hiddenMin =
+      typeof anim?.hiddenDelayMin === 'number' && anim.hiddenDelayMin > 0
+        ? anim.hiddenDelayMin
+        : 2500
+    hiddenMax =
+      typeof anim?.hiddenDelayMax === 'number' && anim.hiddenDelayMax > 0
+        ? anim.hiddenDelayMax
+        : 4500
+    initialStagger =
+      typeof anim?.initialStaggerMax === 'number' && anim.initialStaggerMax > 0
+        ? anim.initialStaggerMax
+        : 8000
+  }
+
+  // Ensure max >= min
+  if (visibleMax < visibleMin) visibleMax = visibleMin
+  if (hiddenMax < hiddenMin) hiddenMax = hiddenMin
+
+  // Target opacity for faded card (default 0.35)
+  const targetFadedOpacity =
+    anim?.fadedOpacity !== undefined && anim?.fadedOpacity !== null && anim.fadedOpacity !== ''
+      ? parseFloat(anim.fadedOpacity)
+      : 0.35
 
   // Viewport intersection observer for scroll-in & scroll-out detection
   useEffect(() => {
@@ -130,6 +213,8 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     }
 
     const timers: NodeJS.Timeout[] = []
+    const visibleSpread = Math.max(0, visibleMax - visibleMin)
+    const hiddenSpread = Math.max(0, hiddenMax - hiddenMin)
 
     // Launch an independent animation loop for each card slot
     for (let i = 0; i < TOTAL_DESKTOP_SLOTS; i++) {
@@ -143,28 +228,28 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           return next
         })
 
-        // When fading OUT (opacity -> 0):
-        // 3500ms transition + 2500ms..4500ms delay in faded-out state = 6000ms..8000ms
+        // When fading OUT (opacity -> targetFadedOpacity):
+        // transitionDuration + hiddenMin..hiddenMax
         // When fading IN (opacity -> 1):
-        // 3500ms transition + 6000ms..12000ms delay in fully visible state = 9500ms..15500ms
+        // transitionDuration + visibleMin..visibleMax
         const nextDelay = isFaded
-          ? 3500 + 2500 + Math.random() * 2000
-          : 3500 + 6000 + Math.random() * 6000
+          ? transitionDuration + hiddenMin + Math.random() * hiddenSpread
+          : transitionDuration + visibleMin + Math.random() * visibleSpread
 
         const timer = setTimeout(runStep, nextDelay)
         timers.push(timer)
       }
 
-      // Initial stagger so cards desynchronize naturally (between 1s and 8s)
-      const initialStagger = 1000 + Math.random() * 7000
-      const initialTimer = setTimeout(runStep, initialStagger)
+      // Initial stagger so cards desynchronize naturally
+      const staggerSpread = Math.max(500, initialStagger - 1000)
+      const initialTimer = setTimeout(runStep, 1000 + Math.random() * staggerSpread)
       timers.push(initialTimer)
     }
 
     return () => {
       timers.forEach((t) => clearTimeout(t))
     }
-  }, [isInView])
+  }, [isInView, transitionDuration, visibleMin, visibleMax, hiddenMin, hiddenMax, initialStagger])
 
   // Normalized cards array mapped directly to 21 discrete slots
   const slotMap = useMemo(() => {
@@ -268,12 +353,11 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           'relative rounded-xl sm:rounded-2xl md:rounded-[1.25rem] flex items-center justify-center p-1.5 sm:p-2.5 md:p-3 aspect-square',
           'border border-white/70 dark:border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.04)] backdrop-blur-sm',
           customBg,
-          isFaded ? 'opacity-35' : 'opacity-100',
           extraClasses,
         )}
         style={{
-          transition:
-            'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1), background-color 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+          opacity: isFaded ? targetFadedOpacity : 1,
+          transition: `opacity ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1), transform ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1), background-color ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
           willChange: 'opacity, transform',
         }}
       >
@@ -284,8 +368,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               isFaded ? 'opacity-0 scale-90' : 'opacity-100 scale-100',
             )}
             style={{
-              transition:
-                'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: `opacity ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1), transform ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
               willChange: 'opacity, transform',
             }}
           >
@@ -306,8 +389,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               isFaded ? 'opacity-0 scale-90' : 'opacity-100 scale-100',
             )}
             style={{
-              transition:
-                'opacity 3500ms cubic-bezier(0.4, 0, 0.2, 1), transform 3500ms cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: `opacity ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1), transform ${transitionDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
               willChange: 'opacity, transform',
             }}
             loading="lazy"

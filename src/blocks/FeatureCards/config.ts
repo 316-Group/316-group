@@ -58,7 +58,300 @@ export const featureCardsFields: Field[] = [
     ],
   },
 
-  // ─── 2. Cards Array (Max 3 Per Row) ──────────────────────────────────────
+  // ─── Horizontal Padding Controls ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'paddingMode',
+        type: 'select',
+        label: 'Horizontal Padding Mode',
+        defaultValue: 'default',
+        validate: allowAnySelect,
+        options: [
+          { label: 'Default Padding (Responsive 16px - 48px, Max-Width 1280px)', value: 'default' },
+          { label: 'No Padding / Full Width Column Bleed (0px)', value: 'none' },
+          { label: 'Custom Horizontal Padding', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          description: 'Set to "No Padding" to let the cards span the full available width of the column.',
+        },
+      },
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left / Right',
+        defaultValue: '48px',
+        validate: allowAnySelect,
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '10px', value: '10px' },
+          { label: '16px', value: '16px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: '48px (Default XL)', value: '48px' },
+          { label: '60px', value: '60px' },
+          { label: '80px', value: '80px' },
+          { label: '100px', value: '100px' },
+          { label: '120px', value: '120px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding Left / Right',
+        defaultValue: '16px',
+        validate: allowAnySelect,
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '10px', value: '10px' },
+          { label: '16px (Default Mobile)', value: '16px' },
+          { label: '20px', value: '20px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 50px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 15px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
+
+  // ─── Slider Carousel Controls ─────────────────────────────────────────────
+  {
+    name: 'enableSlider',
+    type: 'checkbox',
+    label: 'Enable Slider Carousel (Slide cards instead of static grid)',
+    defaultValue: false,
+    admin: {
+      description: 'When enabled, feature cards display as a swipeable/sliding carousel with configurable controls.',
+    },
+  },
+  {
+    name: 'sliderSettings',
+    type: 'group',
+    label: 'Slider Carousel Settings',
+    admin: {
+      condition: (_, siblingData) => Boolean(siblingData?.enableSlider),
+      description: 'Configure slides to show, scroll steps, autoplay, direction, indicators, and arrows.',
+    },
+    fields: [
+      // 1. Visible Cards Count (Desktop & Mobile)
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'slidesToShowDesktop',
+            type: 'select',
+            label: 'Desktop: Cards to Show',
+            defaultValue: '4',
+            validate: allowAnySelect,
+            options: [
+              { label: '4 Cards (Default)', value: '4' },
+              { label: '3 Cards', value: '3' },
+              { label: '2 Cards', value: '2' },
+              { label: '1 Card', value: '1' },
+              { label: 'Custom', value: 'custom' },
+            ],
+            admin: {
+              width: '25%',
+              description: 'Number of cards visible at once on desktop (screen width >= 1024px).',
+            },
+          },
+          {
+            name: 'slidesToShowDesktopCustom',
+            type: 'number',
+            label: 'Custom Desktop Cards Count',
+            defaultValue: 4,
+            min: 1,
+            max: 8,
+            admin: {
+              width: '25%',
+              condition: (_, siblingData) => siblingData?.slidesToShowDesktop === 'custom',
+            },
+          },
+          {
+            name: 'slidesToShowMobile',
+            type: 'select',
+            label: 'Mobile: Cards to Show',
+            defaultValue: '1',
+            validate: allowAnySelect,
+            options: [
+              { label: '1 Card (Default)', value: '1' },
+              { label: '1.2 Cards (Peek next card)', value: '1.2' },
+              { label: '1.5 Cards', value: '1.5' },
+              { label: '2 Cards', value: '2' },
+              { label: 'Custom', value: 'custom' },
+            ],
+            admin: {
+              width: '25%',
+              description: 'Number of cards visible at once on mobile.',
+            },
+          },
+          {
+            name: 'slidesToShowMobileCustom',
+            type: 'number',
+            label: 'Custom Mobile Cards Count',
+            defaultValue: 1,
+            min: 1,
+            max: 4,
+            admin: {
+              width: '25%',
+              condition: (_, siblingData) => siblingData?.slidesToShowMobile === 'custom',
+            },
+          },
+        ],
+      },
+
+      // 2. Slides to Scroll (Step)
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'slidesToScrollDesktop',
+            type: 'select',
+            label: 'Desktop: Cards to Slide Over Per Step',
+            defaultValue: '1',
+            validate: allowAnySelect,
+            options: [
+              { label: '1 Card at a time (Default)', value: '1' },
+              { label: '2 Cards at a time', value: '2' },
+              { label: '3 Cards at a time', value: '3' },
+              { label: '4 Cards at a time (Full page flip)', value: '4' },
+            ],
+            admin: {
+              width: '50%',
+              description: 'How many cards to advance when sliding on desktop.',
+            },
+          },
+          {
+            name: 'slidesToScrollMobile',
+            type: 'select',
+            label: 'Mobile: Cards to Slide Over Per Step',
+            defaultValue: '1',
+            validate: allowAnySelect,
+            options: [
+              { label: '1 Card at a time (Default)', value: '1' },
+              { label: '2 Cards at a time', value: '2' },
+            ],
+            admin: {
+              width: '50%',
+              description: 'How many cards to advance when sliding on mobile.',
+            },
+          },
+        ],
+      },
+
+      // 3. Autoplay & Direction
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'autoSlide',
+            type: 'checkbox',
+            label: 'Enable Auto Slider (Autoplay)',
+            defaultValue: false,
+            admin: {
+              width: '33.33%',
+              description: 'Automatically advance to the next slide at timed intervals.',
+            },
+          },
+          {
+            name: 'autoSlideInterval',
+            type: 'number',
+            label: 'Auto Slide Delay / Interval (ms)',
+            defaultValue: 4000,
+            min: 1000,
+            max: 30000,
+            admin: {
+              width: '33.33%',
+              condition: (_, siblingData) => Boolean(siblingData?.autoSlide),
+              description: 'Time in milliseconds between auto transitions (Default: 4000ms = 4 seconds).',
+            },
+          },
+          {
+            name: 'slideDirection',
+            type: 'select',
+            label: 'Slider Movement Direction',
+            defaultValue: 'ltr',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Left to Right (Standard Forward - Default)', value: 'ltr' },
+              { label: 'Right to Left (Reverse Direction)', value: 'rtl' },
+            ],
+            admin: {
+              width: '33.33%',
+              description: 'Direction in which the slider advances.',
+            },
+          },
+        ],
+      },
+
+      // 4. Navigation Arrows & Footer Indicators
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'showArrows',
+            type: 'checkbox',
+            label: 'Show Navigation Arrows (Positioned at right end)',
+            defaultValue: true,
+            admin: {
+              width: '50%',
+              description: 'Displays Left & Right arrow buttons at the top-right end above the cards.',
+            },
+          },
+          {
+            name: 'showIndicators',
+            type: 'checkbox',
+            label: 'Show Footer Indicators (Clickable pagination dots)',
+            defaultValue: true,
+            admin: {
+              width: '50%',
+              description: 'Displays clickable dots at the bottom to jump directly to any slide.',
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  // ─── Cards Array ──────────────────────────────────────────────────────────
   {
     name: 'cards',
     type: 'array',
