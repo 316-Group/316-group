@@ -64591,7 +64591,28 @@ export interface ContentBlock {
                     | null;
                 };
                 imagesGroup?: {
-                  spacingTop?: ('24px' | '32px' | '40px' | '48px' | '64px' | '80px') | null;
+                  spacingTop?: ('24px' | '32px' | '40px' | '48px' | '64px' | '80px' | 'custom') | null;
+                  /**
+                   * Controls the margin-bottom / spacing between the bottom edge and Image 1 (left capsule) & Image 4 (right capsule).
+                   */
+                  outerCapsulesMarginBottom?:
+                    | (
+                        | '0px'
+                        | '12px'
+                        | '16px'
+                        | '20px'
+                        | '24px'
+                        | '32px'
+                        | '40px'
+                        | '48px'
+                        | '60px'
+                        | '80px'
+                        | '100px'
+                        | 'custom'
+                      )
+                    | null;
+                  spacingTopCustom?: string | null;
+                  outerCapsulesMarginBottomCustom?: string | null;
                   /**
                    * Upright stadium/capsule shape on the far left. Visible fully.
                    */
@@ -158977,6 +158998,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                       | T
                       | {
                           spacingTop?: T;
+                          outerCapsulesMarginBottom?: T;
+                          spacingTopCustom?: T;
+                          outerCapsulesMarginBottomCustom?: T;
                           image1?: T;
                           image2?: T;
                           image3?: T;

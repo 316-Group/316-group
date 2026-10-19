@@ -65,6 +65,9 @@ export interface ReadyToGrowProps {
 
   imagesGroup?: {
     spacingTop?: string | null
+    spacingTopCustom?: string | null
+    outerCapsulesMarginBottom?: string | null
+    outerCapsulesMarginBottomCustom?: string | null
     image1?: MediaType | string | null
     image2?: MediaType | string | null
     image3?: MediaType | string | null
@@ -194,7 +197,16 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
   const newTabProps = linkObj?.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
   // ─── 5. Images Settings ─────────────────────────────────────────────────────
-  const imagesTopSpacing = imagesGroup?.spacingTop || '48px'
+  const imagesTopSpacing = resolveSpacing(
+    imagesGroup?.spacingTop,
+    imagesGroup?.spacingTopCustom,
+    '48px',
+  )
+  const outerCapsulesMarginBottom = resolveSpacing(
+    imagesGroup?.outerCapsulesMarginBottom,
+    imagesGroup?.outerCapsulesMarginBottomCustom,
+    '32px',
+  )
   const image1 = imagesGroup?.image1
   const image2 = imagesGroup?.image2
   const image3 = imagesGroup?.image3
@@ -342,7 +354,10 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
         {/* ─── Bottom 4 Arch / Capsule Images ──────────────────────────────────── */}
         <div className="w-full flex items-end justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-[1400px] mx-auto select-none">
           {/* Image 1: Left Outer Capsule (Full Upright Stadium) */}
-          <div className="w-[21%] sm:w-[21%] md:w-[22%] max-w-[260px] aspect-[10/16] rounded-full overflow-hidden shrink-0 shadow-lg relative bg-white/10">
+          <div
+            style={{ marginBottom: outerCapsulesMarginBottom }}
+            className="w-[21%] sm:w-[21%] md:w-[22%] max-w-[260px] aspect-[10/16] rounded-full overflow-hidden shrink-0 shadow-lg relative bg-white/10 transition-all duration-300"
+          >
             {renderSlotImage(image1, 'Image 1 - Left Outer Capsule')}
           </div>
 
@@ -357,7 +372,10 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
           </div>
 
           {/* Image 4: Right Outer Capsule (Full Upright Stadium) */}
-          <div className="w-[21%] sm:w-[21%] md:w-[22%] max-w-[260px] aspect-[10/16] rounded-full overflow-hidden shrink-0 shadow-lg relative bg-white/10">
+          <div
+            style={{ marginBottom: outerCapsulesMarginBottom }}
+            className="w-[21%] sm:w-[21%] md:w-[22%] max-w-[260px] aspect-[10/16] rounded-full overflow-hidden shrink-0 shadow-lg relative bg-white/10 transition-all duration-300"
+          >
             {renderSlotImage(image4, 'Image 4 - Right Outer Capsule')}
           </div>
         </div>

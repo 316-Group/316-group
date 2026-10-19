@@ -493,8 +493,58 @@ export const readyToGrowFields: Field[] = [
               { label: '48px (Default)', value: '48px' },
               { label: '64px', value: '64px' },
               { label: '80px', value: '80px' },
+              { label: 'Custom Value', value: 'custom' },
             ],
             admin: { width: '50%' },
+          },
+          {
+            name: 'outerCapsulesMarginBottom',
+            type: 'select',
+            label: 'Outer Capsules Bottom Spacing (Images 1 & 4)',
+            defaultValue: '32px',
+            validate: allowAnySelect,
+            options: [
+              { label: 'None (0px / Flush Bottom)', value: '0px' },
+              { label: '12px', value: '12px' },
+              { label: '16px', value: '16px' },
+              { label: '20px', value: '20px' },
+              { label: '24px', value: '24px' },
+              { label: '32px (Default)', value: '32px' },
+              { label: '40px', value: '40px' },
+              { label: '48px', value: '48px' },
+              { label: '60px', value: '60px' },
+              { label: '80px', value: '80px' },
+              { label: '100px', value: '100px' },
+              { label: 'Custom Value', value: 'custom' },
+            ],
+            admin: {
+              width: '50%',
+              description:
+                'Controls the margin-bottom / spacing between the bottom edge and Image 1 (left capsule) & Image 4 (right capsule).',
+            },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'spacingTopCustom',
+            type: 'text',
+            label: 'Custom Spacing Above Images (e.g. 56px)',
+            admin: {
+              width: '50%',
+              condition: (_, s) => s?.spacingTop === 'custom',
+            },
+          },
+          {
+            name: 'outerCapsulesMarginBottomCustom',
+            type: 'text',
+            label: 'Custom Outer Capsules Bottom Spacing (e.g. 45px)',
+            admin: {
+              width: '50%',
+              condition: (_, s) => s?.outerCapsulesMarginBottom === 'custom',
+            },
           },
         ],
       },
