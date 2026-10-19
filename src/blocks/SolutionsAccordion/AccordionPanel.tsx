@@ -124,6 +124,22 @@ export const AccordionPanel: React.FC<Props> = ({
   const padClassName =
     paddingMode === 'custom' || paddingMode === 'none' ? `accordion-pad-${uid}` : ''
 
+  // Helper to extract image badges configuration
+  const getItemBadges = (item: AccordionItem) => {
+    const badges = [
+      (item as any).imageBadges?.badge1,
+      (item as any).imageBadges?.badge2,
+      (item as any).imageBadges?.badge3,
+    ].filter((b): b is string => Boolean(b && typeof b === 'string' && b.trim().length > 0))
+
+    const badgeBg =
+      (item as any).imageBadges?.badgeBgOverlay ||
+      'bg-white/20 backdrop-blur-md border border-white/25'
+    const badgeTextCol = (item as any).imageBadges?.badgeTextColor || 'text-white'
+
+    return { badges, badgeBg, badgeTextCol }
+  }
+
   return (
     <>
       {padClassName && (
@@ -218,19 +234,10 @@ export const AccordionPanel: React.FC<Props> = ({
           )}
         </div>
 
-        {/* Image — transitions when activeIndex changes */}
-        <div className="mt-8 relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md">
+        {/* DESKTOP ONLY: Image — transitions when activeIndex changes */}
+        <div className="mt-8 relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md hidden md:block">
           {items.map((item, i) => {
-            const badges = [
-              (item as any).imageBadges?.badge1,
-              (item as any).imageBadges?.badge2,
-              (item as any).imageBadges?.badge3,
-            ].filter((b): b is string => Boolean(b && typeof b === 'string' && b.trim().length > 0))
-
-            const badgeBg =
-              (item as any).imageBadges?.badgeBgOverlay ||
-              'bg-white/20 backdrop-blur-md border border-white/25'
-            const badgeTextCol = (item as any).imageBadges?.badgeTextColor || 'text-white'
+            const { badges, badgeBg, badgeTextCol } = getItemBadges(item)
 
             return (
               <div
@@ -300,6 +307,7 @@ export const AccordionPanel: React.FC<Props> = ({
             const animStyle = item.animationStyle ?? 'slide'
             const speed = item.animationSpeed ?? 'normal'
             const transStyle = getTransitionStyle(speed)
+            const itemBadges = getItemBadges(item)
 
             // Easing per animation style
             const easing =
@@ -395,6 +403,38 @@ export const AccordionPanel: React.FC<Props> = ({
                             : 'translate-y-4 opacity-0 delay-0',
                         )}
                       >
+                        {/* ── MOBILE ONLY: Image with Overlay Badges (shown inside the open accordion) ── */}
+                        {item.image && typeof item.image === 'object' && (
+                          <div className="md:hidden block mb-4 relative rounded-xl overflow-hidden aspect-[4/3] w-full shadow-md bg-white/10">
+                            <Media
+                              resource={item.image}
+                              fill
+                              imgClassName="object-cover w-full h-full"
+                              className="absolute inset-0 w-full h-full"
+                            />
+                            {/* Badges on the image */}
+                            {itemBadges.badges.length > 0 && (
+                              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-20 flex flex-wrap items-center gap-1.5 sm:gap-2 max-w-[calc(100%-1.5rem)]">
+                                {itemBadges.badges.map((text, badgeIdx) => (
+                                  <div
+                                    key={badgeIdx}
+                                    className={cn(
+                                      'px-2.5 py-1 rounded-md sm:rounded-lg',
+                                      'flex items-center justify-center font-medium sm:font-semibold',
+                                      'text-[11px] sm:text-xs tracking-normal',
+                                      'shadow-sm select-none',
+                                      itemBadges.badgeBg,
+                                      itemBadges.badgeTextCol,
+                                    )}
+                                  >
+                                    {text}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
                         {/* Sub-heading */}
                         {item.subHeading && (
                           <p

@@ -298,7 +298,7 @@ export const GroupHeroV2: React.FC<
             {/* Stat items */}
             {Array.isArray(statItems) && statItems.length > 0 && (
               <AnimateIn {...anim(sDelay)}>
-                <div className="flex flex-wrap justify-between gap-y-8">
+                <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between gap-x-6 sm:gap-x-8 md:gap-x-0 gap-y-8">
                   {statItems.map((item, i) => (
                     <div key={i} className="flex flex-col gap-2">
                       <span
