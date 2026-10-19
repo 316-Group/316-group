@@ -66,6 +66,137 @@ export const gridColFields: Field[] = [
     ],
   },
 
+  // ─── Horizontal Padding Controls ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'paddingMode',
+        type: 'select',
+        label: 'Horizontal Padding Mode',
+        defaultValue: 'default',
+        options: [
+          { label: 'Default Padding (Responsive 16px - 48px, Max-Width 1280px)', value: 'default' },
+          { label: 'No Padding / Full Width Column Bleed (0px)', value: 'none' },
+          { label: 'Custom Horizontal Padding', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          description: 'Set to "No Padding" to let the content fill the full width of the column.',
+        },
+      },
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left / Right',
+        defaultValue: '48px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '10px', value: '10px' },
+          { label: '16px', value: '16px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: '48px (Default XL)', value: '48px' },
+          { label: '60px', value: '60px' },
+          { label: '80px', value: '80px' },
+          { label: '100px', value: '100px' },
+          { label: '120px', value: '120px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding Left / Right',
+        defaultValue: '16px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '10px', value: '10px' },
+          { label: '16px (Default Mobile)', value: '16px' },
+          { label: '20px', value: '20px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '33.33%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 75px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
+
+  // ─── 2-Column Grid Gap ─────────────────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'columnGap',
+        type: 'select',
+        label: 'Column Gap (Between Content & Image Columns)',
+        defaultValue: 'default',
+        options: [
+          { label: 'Default Spacing (gap-10 md:gap-14 xl:gap-20)', value: 'default' },
+          { label: '0px (No Gap)', value: '0px' },
+          { label: '16px (Extra Small)', value: '16px' },
+          { label: '24px (Small)', value: '24px' },
+          { label: '32px (Medium)', value: '32px' },
+          { label: '40px (Standard - 40px)', value: '40px' },
+          { label: '56px (Large - 56px)', value: '56px' },
+          { label: '80px (Extra Large - 80px)', value: '80px' },
+          { label: '100px (2X Large)', value: '100px' },
+          { label: '120px (3X Large)', value: '120px' },
+          { label: '150px (Huge Spacing)', value: '150px' },
+          { label: 'Custom Gap (px)', value: 'custom' },
+        ],
+        admin: {
+          width: '50%',
+          description: 'Set the spacing gap between the text content column and the media image column.',
+        },
+      },
+      {
+        name: 'columnGapCustom',
+        type: 'text',
+        label: 'Custom Gap Value (e.g. 90px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnGap === 'custom',
+        },
+      },
+    ],
+  },
+
   // ─── Column Layout Toggle ──────────────────────────────────────────────────
   {
     name: 'reverseLayout',

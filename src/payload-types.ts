@@ -47714,6 +47714,48 @@ export interface ContentBlock {
                 paddingTop?: ('pt-0' | 'pt-4' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-24' | 'pt-32') | null;
                 paddingBottom?: ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
                 /**
+                 * Set to "No Padding" to let the content fill the full width of the column.
+                 */
+                paddingMode?: ('default' | 'none' | 'custom') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '10px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+                paddingXDesktopCustom?: string | null;
+                paddingXMobileCustom?: string | null;
+                /**
+                 * Set the spacing gap between the text content column and the media image column.
+                 */
+                columnGap?:
+                  | (
+                      | 'default'
+                      | '0px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '56px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | 'custom'
+                    )
+                  | null;
+                columnGapCustom?: string | null;
+                /**
                  * By default, the content is on the left and image is on the right. Check to swap positions.
                  */
                 reverseLayout?: boolean | null;
@@ -140917,6 +140959,23 @@ export interface GridColBlock {
   paddingTop?: ('pt-0' | 'pt-4' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-24' | 'pt-32') | null;
   paddingBottom?: ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
   /**
+   * Set to "No Padding" to let the content fill the full width of the column.
+   */
+  paddingMode?: ('default' | 'none' | 'custom') | null;
+  paddingXDesktop?:
+    | ('0px' | '10px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+    | null;
+  paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+  paddingXDesktopCustom?: string | null;
+  paddingXMobileCustom?: string | null;
+  /**
+   * Set the spacing gap between the text content column and the media image column.
+   */
+  columnGap?:
+    | ('default' | '0px' | '16px' | '24px' | '32px' | '40px' | '56px' | '80px' | '100px' | '120px' | '150px' | 'custom')
+    | null;
+  columnGapCustom?: string | null;
+  /**
    * By default, the content is on the left and image is on the right. Check to swap positions.
    */
   reverseLayout?: boolean | null;
@@ -150235,6 +150294,13 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     sectionBgColor?: T;
                     paddingTop?: T;
                     paddingBottom?: T;
+                    paddingMode?: T;
+                    paddingXDesktop?: T;
+                    paddingXMobile?: T;
+                    paddingXDesktopCustom?: T;
+                    paddingXMobileCustom?: T;
+                    columnGap?: T;
+                    columnGapCustom?: T;
                     reverseLayout?: T;
                     badgeGroup?:
                       | T
@@ -151626,6 +151692,13 @@ export interface GridColBlockSelect<T extends boolean = true> {
   sectionBgColor?: T;
   paddingTop?: T;
   paddingBottom?: T;
+  paddingMode?: T;
+  paddingXDesktop?: T;
+  paddingXMobile?: T;
+  paddingXDesktopCustom?: T;
+  paddingXMobileCustom?: T;
+  columnGap?: T;
+  columnGapCustom?: T;
   reverseLayout?: T;
   badgeGroup?:
     | T

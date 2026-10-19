@@ -346,7 +346,7 @@ export const GroupHeroV2: React.FC<
             }
           >
             <div className="container max-w-screen-2xl">
-              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+              <div className="flex flex-nowrap md:flex-wrap items-center justify-start md:justify-between gap-x-6 md:gap-x-6 gap-y-4 overflow-x-auto md:overflow-visible scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-1">
                 {ecosystemTitle && (
                   <span
                     className={cn(
@@ -361,12 +361,12 @@ export const GroupHeroV2: React.FC<
                 {Array.isArray(ecosystemItems) && ecosystemItems.length > 0 && (
                   <div
                     className={cn(
-                      'flex flex-1 flex-wrap items-center justify-between gap-y-3',
+                      'flex items-center flex-nowrap md:flex-wrap md:flex-1 justify-start md:justify-between gap-x-8 md:gap-x-6 gap-y-3 shrink-0 md:shrink',
                       ecosystemItemsTextColor ?? 'text-current',
                     )}
                   >
                     {ecosystemItems.map((item, i) => (
-                      <div key={i} className="text-base md:text-lg">
+                      <div key={i} className="text-base md:text-lg shrink-0 whitespace-nowrap">
                         <RichText
                           content={item.itemText}
                           enableGutter={false}

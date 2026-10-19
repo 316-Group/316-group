@@ -32,6 +32,16 @@ export interface GridColProps {
   paddingBottom?: string | null
   reverseLayout?: boolean | null
 
+  // Layout & Spacing Controls
+  paddingMode?: 'default' | 'none' | 'custom' | null
+  paddingXDesktop?: string | null
+  paddingXMobile?: string | null
+  paddingXDesktopCustom?: string | null
+  paddingXMobileCustom?: string | null
+
+  columnGap?: string | null
+  columnGapCustom?: string | null
+
   // Top Badge
   badgeGroup?: {
     enableBadge?: boolean | null
@@ -142,12 +152,20 @@ export const GridColBlock: React.FC<GridColProps> = ({
   paddingTop = 'pt-16',
   paddingBottom = 'pb-16',
   reverseLayout = false,
+  paddingMode = 'default',
+  paddingXDesktop = '48px',
+  paddingXMobile = '16px',
+  paddingXDesktopCustom,
+  paddingXMobileCustom,
+  columnGap = 'default',
+  columnGapCustom,
   badgeGroup,
   mainHeadingGroup,
   contentColumn,
   imageColumn,
   className,
 }) => {
+  const uid = React.useId().replace(/:/g, '')
   const [isInView, setIsInView] = useState<boolean>(false)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -166,6 +184,34 @@ export const GridColBlock: React.FC<GridColProps> = ({
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
+
+  // ─── Layout & Spacing Resolution ───────────────────────────────────────────
+  const resolvedDesktopPad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXDesktop === 'custom'
+          ? paddingXDesktopCustom || '48px'
+          : paddingXDesktop || '48px'
+        : undefined
+
+  const resolvedMobilePad =
+    paddingMode === 'none'
+      ? '0px'
+      : paddingMode === 'custom'
+        ? paddingXMobile === 'custom'
+          ? paddingXMobileCustom || '16px'
+          : paddingXMobile || '16px'
+        : undefined
+
+  const padClassName =
+    paddingMode === 'custom' || paddingMode === 'none' ? `gridcol-pad-${uid}` : ''
+
+  const isDefaultGap = !columnGap || columnGap === 'default'
+  const resolvedGap =
+    columnGap === 'custom'
+      ? columnGapCustom || '40px'
+      : columnGap || 'default'
 
   // Alignment mappings
   const alignWrapperClasses = {
@@ -260,7 +306,28 @@ export const GridColBlock: React.FC<GridColProps> = ({
         className,
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl">
+      {padClassName && (
+        <style>{`
+          .${padClassName} {
+            padding-left: ${resolvedMobilePad || '0px'};
+            padding-right: ${resolvedMobilePad || '0px'};
+          }
+          @media (min-width: 768px) {
+            .${padClassName} {
+              padding-left: ${resolvedDesktopPad || '0px'};
+              padding-right: ${resolvedDesktopPad || '0px'};
+            }
+          }
+        `}</style>
+      )}
+      <div
+        className={cn(
+          (!paddingMode || paddingMode === 'default') &&
+            'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl',
+          paddingMode === 'none' && 'w-full max-w-none px-0',
+          paddingMode === 'custom' && cn('w-full max-w-none', padClassName),
+        )}
+      >
         {/* ─── Top Badge ─────────────────────────────────────────────────────── */}
         {showBadge && (
           <div className={cn('w-full mb-6', alignWrapperClasses[badgeAlign])}>
@@ -295,7 +362,21 @@ export const GridColBlock: React.FC<GridColProps> = ({
         )}
 
         {/* ─── 2-Column Grid ─────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-20 items-center">
+        <div
+          className={cn(
+            'grid grid-cols-1 lg:grid-cols-12 items-center',
+            isDefaultGap && 'gap-10 lg:gap-14 xl:gap-20',
+            !isDefaultGap && 'gap-y-10 lg:gap-y-0',
+          )}
+          style={
+            !isDefaultGap
+              ? {
+                  columnGap: resolvedGap,
+                  ...(resolvedGap === '0px' ? { rowGap: '0px' } : {}),
+                }
+              : undefined
+          }
+        >
           {/* Content Column */}
           <div
             className={cn(
