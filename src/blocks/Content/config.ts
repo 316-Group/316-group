@@ -36,6 +36,8 @@ import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
 import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
 import { solutionsAccordionLayoutFields } from '../SolutionsAccordion/config'
+import { splitTextFields } from '../SplitText/config'
+import { imageSliderFields } from '../ImageSlider/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -232,6 +234,8 @@ const columnFields: Field[] = [
           { label: 'Animated Icons Grid', value: 'animatedIconsGrid' },
           { label: 'Feature Cards', value: 'featureCards' },
           { label: 'Vertical CTA v2', value: 'verticalCTAv2' },
+          { label: 'Split Text', value: 'splitText' },
+          { label: 'Image Slider', value: 'imageSlider' },
         ],
       },
       {
@@ -1939,6 +1943,28 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'verticalCTAv2',
         },
         fields: verticalCTAv2Fields,
+      },
+
+      // ─── Split Text ────────────────────────────────────────────────────────
+      {
+        name: 'splitText',
+        type: 'group',
+        label: 'Split Text',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'splitText',
+        },
+        fields: splitTextFields,
+      },
+
+      // ─── Image Slider ──────────────────────────────────────────────────────
+      {
+        name: 'imageSlider',
+        type: 'group',
+        label: 'Image Slider',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'imageSlider',
+        },
+        fields: imageSliderFields,
       },
     ],
   },

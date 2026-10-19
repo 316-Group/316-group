@@ -26,6 +26,8 @@ import { GridColBlock } from '../GridCol/Component'
 import { AnimatedIconsGridBlock } from '../AnimatedIconsGrid/Component'
 import { FeatureCardsBlock } from '../FeatureCards/Component'
 import { VerticalCTAv2Component } from '../VerticalCTAv2/Component'
+import { SplitTextBlock } from '../SplitText/Component'
+import { ImageSliderBlock } from '../ImageSlider/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -893,6 +895,24 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <VerticalCTAv2Component
                         key={index}
                         {...(content as any).verticalCTAv2}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'splitText' && (content as any).splitText) {
+                    return (
+                      <SplitTextBlock
+                        key={index}
+                        {...(content as any).splitText}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'imageSlider' && (content as any).imageSlider) {
+                    return (
+                      <ImageSliderBlock
+                        key={index}
+                        {...(content as any).imageSlider}
                       />
                     )
                   }
