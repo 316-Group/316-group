@@ -28,6 +28,7 @@ import { FeatureCardsBlock } from '../FeatureCards/Component'
 import { VerticalCTAv2Component } from '../VerticalCTAv2/Component'
 import { SplitTextBlock } from '../SplitText/Component'
 import { ImageSliderBlock } from '../ImageSlider/Component'
+import { BlogPostUpdatedBlock } from '../BlogPostUpdated/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -912,6 +913,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <ImageSliderBlock
                         key={index}
                         {...(content as any).imageSlider}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'blogPostUpdated' && (content as any).blogPostUpdated) {
+                    return (
+                      <BlogPostUpdatedBlock
+                        key={index}
+                        {...(content as any).blogPostUpdated}
                       />
                     )
                   }

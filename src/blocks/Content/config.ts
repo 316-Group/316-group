@@ -38,6 +38,7 @@ import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
 import { solutionsAccordionLayoutFields } from '../SolutionsAccordion/config'
 import { splitTextFields } from '../SplitText/config'
 import { imageSliderFields } from '../ImageSlider/config'
+import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -236,6 +237,7 @@ const columnFields: Field[] = [
           { label: 'Vertical CTA v2', value: 'verticalCTAv2' },
           { label: 'Split Text', value: 'splitText' },
           { label: 'Image Slider', value: 'imageSlider' },
+          { label: 'Blog Post Updated', value: 'blogPostUpdated' },
         ],
       },
       {
@@ -1965,6 +1967,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'imageSlider',
         },
         fields: imageSliderFields,
+      },
+
+      // ─── Blog Post Updated ──────────────────────────────────────────────────
+      {
+        name: 'blogPostUpdated',
+        type: 'group',
+        label: 'Blog Post Updated',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'blogPostUpdated',
+        },
+        fields: blogPostUpdatedFields,
       },
     ],
   },
