@@ -45,18 +45,29 @@ const allowAnySelect = (() => true as const) as any
 
 const columnFields: Field[] = [
   {
+    name: 'matchHeaderPillWidth',
+    type: 'checkbox',
+    label: 'Match Header Pill Width (Home Hero V2)',
+    defaultValue: false,
+    admin: {
+      description:
+        'Toggle ON to make this column width equivalent to the Group Home Hero V2 header pill (max 1,472px container, centered).',
+    },
+  },
+  {
     name: 'widthMode',
     type: 'select',
     label: 'Column Width Mode',
     defaultValue: 'contained',
+    admin: {
+      condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
+      description:
+        'Choose whether this column is contained within standard page margins or spans the full width of the screen.',
+    },
     options: [
       { label: 'Contained (Default - Max 1376px Container)', value: 'contained' },
       { label: 'Full Width (Edge-to-Edge of Viewport)', value: 'fullWidth' },
     ],
-    admin: {
-      description:
-        'Choose whether this column is contained within standard page margins or spans the full width of the screen.',
-    },
   },
   {
     name: 'paddingMode',
@@ -149,6 +160,9 @@ const columnFields: Field[] = [
     name: 'size',
     type: 'select',
     defaultValue: 'full',
+    admin: {
+      condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
+    },
     options: [
       {
         label: 'One Third',

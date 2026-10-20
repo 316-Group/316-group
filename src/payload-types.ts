@@ -12006,6 +12006,10 @@ export interface ContentBlock {
   columns?:
     | {
         /**
+         * Toggle ON to make this column width equivalent to the Group Home Hero V2 header pill (max 1,472px container, centered).
+         */
+        matchHeaderPillWidth?: boolean | null;
+        /**
          * Choose whether this column is contained within standard page margins or spans the full width of the screen.
          */
         widthMode?: ('contained' | 'fullWidth') | null;
@@ -157855,6 +157859,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
   columns?:
     | T
     | {
+        matchHeaderPillWidth?: T;
         widthMode?: T;
         paddingMode?: T;
         paddingXDesktop?: T;

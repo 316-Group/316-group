@@ -184,7 +184,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     >
       {backgroundType === 'media' && renderBackgroundMedia()}
       {(() => {
-        const hasFullWidthCol = columns?.some((c) => (c as any).widthMode === 'fullWidth')
+        const hasFullWidthCol = columns?.some(
+          (c) => (c as any).widthMode === 'fullWidth' && !(c as any).matchHeaderPillWidth,
+        )
         return (
           <div className={cn(hasFullWidthCol ? 'w-full' : 'container max-w-screen-2xl', 'z-5')}>
             <div
@@ -194,13 +196,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               )}
             >
               {columns?.map((col, index) => {
-                const size = col.size || 'full'
+                const isMatchHeaderPillWidth = Boolean((col as any).matchHeaderPillWidth)
+                const size = isMatchHeaderPillWidth ? 'full' : (col.size || 'full')
                 const mobileOrder = col.mobileOrder || index + 1
                 const orderClass = orderClasses[mobileOrder as keyof typeof orderClasses] || ''
                 const mdOrderClass = mdOrderClasses[index + 1] || 'md:order-0'
                 const colWidth = colsSpanClasses[size]
                 const colBg = (col as any).columnBgColor
-                const isColFullWidth = (col as any).widthMode === 'fullWidth'
+                const isColFullWidth = !isMatchHeaderPillWidth && (col as any).widthMode === 'fullWidth'
 
                 // Column padding resolution
                 const colPaddingMode = (col as any).paddingMode || 'default'
@@ -251,6 +254,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         col.alignment === 'center' &&
                           'text-center flex flex-col items-center justify-center',
                         colBg && colBg !== 'bg-transparent' && colBg,
+                        isMatchHeaderPillWidth && 'w-full max-w-[1472px] mx-auto',
                         hasFullWidthCol &&
                           !isColFullWidth &&
                           !colPadUid &&
