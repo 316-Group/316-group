@@ -295,9 +295,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
                 }
 
+                const rawBlockId = (props as any).id || (props as any).blockName || 'cb'
+                const rawColId = (col as any).id || index
                 const colPadUid =
                   colPaddingMode === 'none' || colPaddingMode === 'custom'
-                    ? `col-pad-${index}`
+                    ? `col-pad-${rawBlockId}-${rawColId}`.replace(/[^a-zA-Z0-9_-]/g, '')
                     : undefined
 
                 return (

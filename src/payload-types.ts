@@ -8305,6 +8305,92 @@ export interface Page {
           | null;
         paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
         paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-28') | null;
+        /**
+         * Set custom padding to adjust the inner icon grid and content padding independently.
+         */
+        paddingMode?: ('default' | 'none' | 'custom') | null;
+        /**
+         * Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.
+         */
+        paddingSide?: ('both' | 'left' | 'right' | 'split') | null;
+        paddingXDesktop?:
+          | (
+              | '0px'
+              | '8px'
+              | '16px'
+              | '24px'
+              | '32px'
+              | '40px'
+              | '48px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
+          | null;
+        paddingXDesktopCustom?: string | null;
+        paddingXMobile?:
+          | ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | '40px' | '50px' | '60px' | '80px' | '100px' | 'custom')
+          | null;
+        paddingXMobileCustom?: string | null;
+        paddingLeftDesktop?:
+          | (
+              | '0px'
+              | '8px'
+              | '16px'
+              | '24px'
+              | '32px'
+              | '40px'
+              | '48px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
+          | null;
+        paddingLeftDesktopCustom?: string | null;
+        paddingLeftMobile?:
+          | ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | '40px' | '50px' | '60px' | '80px' | '100px' | 'custom')
+          | null;
+        paddingLeftMobileCustom?: string | null;
+        paddingRightDesktop?:
+          | (
+              | '0px'
+              | '8px'
+              | '16px'
+              | '24px'
+              | '32px'
+              | '40px'
+              | '48px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
+          | null;
+        paddingRightDesktopCustom?: string | null;
+        paddingRightMobile?:
+          | ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | '40px' | '50px' | '60px' | '80px' | '100px' | 'custom')
+          | null;
+        paddingRightMobileCustom?: string | null;
         headingGroup?: {
           /**
            * Supports inline styles such as <style="color:#0256FF">50+ Connectors</style> or <strong>bold</strong>.
@@ -51595,6 +51681,131 @@ export interface ContentBlock {
                   | null;
                 paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
                 paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-28') | null;
+                /**
+                 * Set custom padding to adjust the inner icon grid and content padding independently.
+                 */
+                paddingMode?: ('default' | 'none' | 'custom') | null;
+                /**
+                 * Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.
+                 */
+                paddingSide?: ('both' | 'left' | 'right' | 'split') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingXDesktopCustom?: string | null;
+                paddingXMobile?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '20px'
+                      | '24px'
+                      | '30px'
+                      | '40px'
+                      | '50px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingXMobileCustom?: string | null;
+                paddingLeftDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingLeftDesktopCustom?: string | null;
+                paddingLeftMobile?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '20px'
+                      | '24px'
+                      | '30px'
+                      | '40px'
+                      | '50px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingLeftMobileCustom?: string | null;
+                paddingRightDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingRightDesktopCustom?: string | null;
+                paddingRightMobile?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '20px'
+                      | '24px'
+                      | '30px'
+                      | '40px'
+                      | '50px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingRightMobileCustom?: string | null;
                 headingGroup?: {
                   /**
                    * Supports inline styles such as <style="color:#0256FF">50+ Connectors</style> or <strong>bold</strong>.
@@ -157931,6 +158142,20 @@ export interface PagesSelect<T extends boolean = true> {
               sectionBgColor?: T;
               paddingTop?: T;
               paddingBottom?: T;
+              paddingMode?: T;
+              paddingSide?: T;
+              paddingXDesktop?: T;
+              paddingXDesktopCustom?: T;
+              paddingXMobile?: T;
+              paddingXMobileCustom?: T;
+              paddingLeftDesktop?: T;
+              paddingLeftDesktopCustom?: T;
+              paddingLeftMobile?: T;
+              paddingLeftMobileCustom?: T;
+              paddingRightDesktop?: T;
+              paddingRightDesktopCustom?: T;
+              paddingRightMobile?: T;
+              paddingRightMobileCustom?: T;
               headingGroup?:
                 | T
                 | {
@@ -158895,6 +159120,20 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     sectionBgColor?: T;
                     paddingTop?: T;
                     paddingBottom?: T;
+                    paddingMode?: T;
+                    paddingSide?: T;
+                    paddingXDesktop?: T;
+                    paddingXDesktopCustom?: T;
+                    paddingXMobile?: T;
+                    paddingXMobileCustom?: T;
+                    paddingLeftDesktop?: T;
+                    paddingLeftDesktopCustom?: T;
+                    paddingLeftMobile?: T;
+                    paddingLeftMobileCustom?: T;
+                    paddingRightDesktop?: T;
+                    paddingRightDesktopCustom?: T;
+                    paddingRightMobile?: T;
+                    paddingRightMobileCustom?: T;
                     headingGroup?:
                       | T
                       | {

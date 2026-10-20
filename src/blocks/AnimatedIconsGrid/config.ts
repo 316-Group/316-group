@@ -12,6 +12,41 @@ const alignmentOptions = [
   { label: 'Right', value: 'right' },
 ]
 
+const desktopPaddingOptions = [
+  { label: '0px (Full Bleed)', value: '0px' },
+  { label: '8px', value: '8px' },
+  { label: '16px', value: '16px' },
+  { label: '24px', value: '24px' },
+  { label: '32px', value: '32px' },
+  { label: '40px', value: '40px' },
+  { label: '48px (Default)', value: '48px' },
+  { label: '60px', value: '60px' },
+  { label: '80px', value: '80px' },
+  { label: '100px', value: '100px' },
+  { label: '120px', value: '120px' },
+  { label: '150px', value: '150px' },
+  { label: '180px', value: '180px' },
+  { label: '200px', value: '200px' },
+  { label: '250px', value: '250px' },
+  { label: '300px', value: '300px' },
+  { label: 'Custom Value', value: 'custom' },
+]
+
+const mobilePaddingOptions = [
+  { label: '0px (Full Bleed)', value: '0px' },
+  { label: '8px', value: '8px' },
+  { label: '16px (Default)', value: '16px' },
+  { label: '20px', value: '20px' },
+  { label: '24px', value: '24px' },
+  { label: '30px', value: '30px' },
+  { label: '40px', value: '40px' },
+  { label: '50px', value: '50px' },
+  { label: '60px', value: '60px' },
+  { label: '80px', value: '80px' },
+  { label: '100px', value: '100px' },
+  { label: 'Custom Value', value: 'custom' },
+]
+
 export const animatedIconsGridFields: Field[] = [
   // ─── 1. Section Spacing & Background ─────────────────────────────────────
   {
@@ -55,6 +90,222 @@ export const animatedIconsGridFields: Field[] = [
           { label: 'Large (pb-20 - Default)', value: 'pb-20' },
           { label: 'Extra Large (pb-28)', value: 'pb-28' },
         ],
+      },
+    ],
+  },
+
+  // ─── Horizontal Padding Controls ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'paddingMode',
+        type: 'select',
+        label: 'Horizontal Padding Mode',
+        defaultValue: 'default',
+        validate: allowAnySelect,
+        options: [
+          { label: 'Default Padding (Responsive 16px - 48px, Max-Width 1720px)', value: 'default' },
+          { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
+          { label: 'Custom Horizontal Padding', value: 'custom' },
+        ],
+        admin: {
+          width: '50%',
+          description: 'Set custom padding to adjust the inner icon grid and content padding independently.',
+        },
+      },
+      {
+        name: 'paddingSide',
+        type: 'select',
+        label: 'Padding Target Side',
+        defaultValue: 'both',
+        validate: allowAnySelect,
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+          description:
+            'Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.',
+        },
+        options: [
+          { label: 'Both Sides (Left & Right Together)', value: 'both' },
+          { label: 'Left Side Only', value: 'left' },
+          { label: 'Right Side Only', value: 'right' },
+          { label: 'Separate Left & Right', value: 'split' },
+        ],
+      },
+    ],
+  },
+
+  // ─── Both Sides (Left & Right Together) ──────────────────────────────────
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (!siblingData?.paddingSide || siblingData?.paddingSide === 'both'),
+    },
+    fields: [
+      {
+        name: 'paddingXDesktop',
+        type: 'select',
+        label: 'Desktop Padding (Left & Right)',
+        defaultValue: '48px',
+        validate: allowAnySelect,
+        options: desktopPaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingXDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding (e.g. 50px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (!siblingData?.paddingSide || siblingData?.paddingSide === 'both'),
+    },
+    fields: [
+      {
+        name: 'paddingXMobile',
+        type: 'select',
+        label: 'Mobile Padding (Left & Right)',
+        defaultValue: '16px',
+        validate: allowAnySelect,
+        options: mobilePaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingXMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+        },
+      },
+    ],
+  },
+
+  // ─── Left Side (For 'left' or 'split') ────────────────────────────────────
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (siblingData?.paddingSide === 'left' || siblingData?.paddingSide === 'split'),
+    },
+    fields: [
+      {
+        name: 'paddingLeftDesktop',
+        type: 'select',
+        label: 'Desktop Padding Left',
+        defaultValue: '48px',
+        validate: allowAnySelect,
+        options: desktopPaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingLeftDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding Left (e.g. 75px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingLeftDesktop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (siblingData?.paddingSide === 'left' || siblingData?.paddingSide === 'split'),
+    },
+    fields: [
+      {
+        name: 'paddingLeftMobile',
+        type: 'select',
+        label: 'Mobile Padding Left',
+        defaultValue: '16px',
+        validate: allowAnySelect,
+        options: mobilePaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingLeftMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding Left (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingLeftMobile === 'custom',
+        },
+      },
+    ],
+  },
+
+  // ─── Right Side (For 'right' or 'split') ───────────────────────────────────
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (siblingData?.paddingSide === 'right' || siblingData?.paddingSide === 'split'),
+    },
+    fields: [
+      {
+        name: 'paddingRightDesktop',
+        type: 'select',
+        label: 'Desktop Padding Right',
+        defaultValue: '48px',
+        validate: allowAnySelect,
+        options: desktopPaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingRightDesktopCustom',
+        type: 'text',
+        label: 'Custom Desktop Padding Right (e.g. 75px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingRightDesktop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) =>
+        siblingData?.paddingMode === 'custom' &&
+        (siblingData?.paddingSide === 'right' || siblingData?.paddingSide === 'split'),
+    },
+    fields: [
+      {
+        name: 'paddingRightMobile',
+        type: 'select',
+        label: 'Mobile Padding Right',
+        defaultValue: '16px',
+        validate: allowAnySelect,
+        options: mobilePaddingOptions,
+        admin: { width: '50%' },
+      },
+      {
+        name: 'paddingRightMobileCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding Right (e.g. 12px)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.paddingRightMobile === 'custom',
+        },
       },
     ],
   },

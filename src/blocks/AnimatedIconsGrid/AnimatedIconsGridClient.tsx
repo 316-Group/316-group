@@ -31,6 +31,22 @@ export interface AnimatedIconsGridProps {
   paddingTop?: string | null
   paddingBottom?: string | null
 
+  // Horizontal Padding Controls
+  paddingMode?: 'default' | 'none' | 'custom' | null
+  paddingSide?: 'both' | 'left' | 'right' | 'split' | null
+  paddingXDesktop?: string | null
+  paddingXDesktopCustom?: string | null
+  paddingXMobile?: string | null
+  paddingXMobileCustom?: string | null
+  paddingLeftDesktop?: string | null
+  paddingLeftDesktopCustom?: string | null
+  paddingLeftMobile?: string | null
+  paddingLeftMobileCustom?: string | null
+  paddingRightDesktop?: string | null
+  paddingRightDesktopCustom?: string | null
+  paddingRightMobile?: string | null
+  paddingRightMobileCustom?: string | null
+
   headingGroup?: {
     heading?: string | null
     headingColor?: string | null
@@ -105,6 +121,20 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   sectionBgColor = 'bg-[#F4F6FB]',
   paddingTop = 'pt-20',
   paddingBottom = 'pb-20',
+  paddingMode = 'default',
+  paddingSide = 'both',
+  paddingXDesktop,
+  paddingXDesktopCustom,
+  paddingXMobile,
+  paddingXMobileCustom,
+  paddingLeftDesktop,
+  paddingLeftDesktopCustom,
+  paddingLeftMobile,
+  paddingLeftMobileCustom,
+  paddingRightDesktop,
+  paddingRightDesktopCustom,
+  paddingRightMobile,
+  paddingRightMobileCustom,
   headingGroup,
   descriptionGroup,
   buttonGroup,
@@ -112,6 +142,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   cards,
   className,
 }) => {
+  const uid = React.useId().replace(/:/g, '')
   const sectionRef = useRef<HTMLElement>(null)
   const [isInView, setIsInView] = useState<boolean>(false)
 
@@ -399,6 +430,55 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     )
   }
 
+  // ─── Layout & Padding Resolution ───────────────────────────────────────────
+  const padUid = `aig-pad-${uid}`
+
+  const resolvePadVal = (
+    sel?: string | null,
+    custom?: string | null,
+    fallback = '0px',
+  ) => {
+    if (sel === 'custom') return custom || fallback
+    return sel || fallback
+  }
+
+  let resolvedDesktopPadLeft = '0px'
+  let resolvedDesktopPadRight = '0px'
+  let resolvedMobilePadLeft = '0px'
+  let resolvedMobilePadRight = '0px'
+
+  if (paddingMode === 'none') {
+    resolvedDesktopPadLeft = '0px'
+    resolvedDesktopPadRight = '0px'
+    resolvedMobilePadLeft = '0px'
+    resolvedMobilePadRight = '0px'
+  } else if (paddingMode === 'custom') {
+    if (paddingSide === 'left') {
+      resolvedDesktopPadLeft = resolvePadVal(paddingLeftDesktop, paddingLeftDesktopCustom, '48px')
+      resolvedMobilePadLeft = resolvePadVal(paddingLeftMobile, paddingLeftMobileCustom, '16px')
+      resolvedDesktopPadRight = '0px'
+      resolvedMobilePadRight = '0px'
+    } else if (paddingSide === 'right') {
+      resolvedDesktopPadLeft = '0px'
+      resolvedMobilePadLeft = '0px'
+      resolvedDesktopPadRight = resolvePadVal(paddingRightDesktop, paddingRightDesktopCustom, '48px')
+      resolvedMobilePadRight = resolvePadVal(paddingRightMobile, paddingRightMobileCustom, '16px')
+    } else if (paddingSide === 'split') {
+      resolvedDesktopPadLeft = resolvePadVal(paddingLeftDesktop, paddingLeftDesktopCustom, '48px')
+      resolvedDesktopPadRight = resolvePadVal(paddingRightDesktop, paddingRightDesktopCustom, '48px')
+      resolvedMobilePadLeft = resolvePadVal(paddingLeftMobile, paddingLeftMobileCustom, '16px')
+      resolvedMobilePadRight = resolvePadVal(paddingRightMobile, paddingRightMobileCustom, '16px')
+    } else {
+      // 'both' (default)
+      const dVal = resolvePadVal(paddingXDesktop, paddingXDesktopCustom, '48px')
+      const mVal = resolvePadVal(paddingXMobile, paddingXMobileCustom, '16px')
+      resolvedDesktopPadLeft = dVal
+      resolvedDesktopPadRight = dVal
+      resolvedMobilePadLeft = mVal
+      resolvedMobilePadRight = mVal
+    }
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -410,7 +490,29 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
         className,
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1720px] relative">
+      {(paddingMode === 'custom' || paddingMode === 'none') && (
+        <style>{`
+          .${padUid} {
+            padding-left: ${resolvedMobilePadLeft} !important;
+            padding-right: ${resolvedMobilePadRight} !important;
+          }
+          @media (min-width: 1024px) {
+            .${padUid} {
+              padding-left: ${resolvedDesktopPadLeft} !important;
+              padding-right: ${resolvedDesktopPadRight} !important;
+            }
+          }
+        `}</style>
+      )}
+      <div
+        className={cn(
+          'w-full relative',
+          (!paddingMode || paddingMode === 'default') &&
+            'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1720px]',
+          paddingMode === 'none' && cn('w-full max-w-none px-0', padUid),
+          paddingMode === 'custom' && cn('w-full max-w-none', padUid),
+        )}
+      >
         {/* ─── DESKTOP VIEW (9 Columns × 4 Rows) ─────────────────────────────── */}
         <div className="hidden lg:grid grid-cols-9 gap-4 xl:gap-5 items-stretch relative min-h-[580px] xl:min-h-[640px]">
           {/* Top Row Center (5 Cards: T1..T5, cols 3..7 of Row 1) */}
