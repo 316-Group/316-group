@@ -346,7 +346,7 @@ export const GridColBlock: React.FC<GridColProps> = ({
 
         {/* ─── Top Main Heading ──────────────────────────────────────────────── */}
         {headingText && (
-          <div className={cn('w-full mb-12 md:mb-16 lg:mb-20', textAlignClasses[headingAlign])}>
+          <div className={cn('w-full mb-8 sm:mb-10 lg:mb-20', textAlignClasses[headingAlign])}>
             <HeadingTag
               className={cn(
                 'tracking-tight leading-[1.08] max-w-5xl transition-colors',
@@ -358,6 +358,24 @@ export const GridColBlock: React.FC<GridColProps> = ({
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
             />
+          </div>
+        )}
+
+        {/* ─── MOBILE ONLY: Feature Image directly below Top Main Heading (Scaled Down) ─── */}
+        {image && typeof image === 'object' && (
+          <div className="block lg:hidden w-full mb-8 sm:mb-10 flex justify-center">
+            <div
+              className={cn(
+                'relative w-full max-w-md sm:max-w-lg overflow-hidden shadow-xl transition-all duration-500 aspect-[16/10] sm:aspect-[16/9]',
+                imageRounded,
+              )}
+            >
+              <Media
+                resource={image}
+                fill
+                imgClassName={cn('w-full h-full transform transition-transform duration-700 hover:scale-105', imageFit)}
+              />
+            </div>
           </div>
         )}
 
@@ -522,10 +540,10 @@ export const GridColBlock: React.FC<GridColProps> = ({
             )}
           </div>
 
-          {/* Image Column */}
+          {/* Image Column: Desktop only (on mobile it appears scaled down directly below Top Main Heading) */}
           <div
             className={cn(
-              'lg:col-span-6 w-full flex justify-center',
+              'hidden lg:flex lg:col-span-6 w-full justify-center',
               reverseLayout ? 'lg:order-1' : 'lg:order-2',
             )}
           >

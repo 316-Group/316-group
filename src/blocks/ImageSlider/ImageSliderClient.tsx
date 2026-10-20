@@ -72,10 +72,19 @@ export interface ImageSliderProps {
 
   // Horizontal Padding Mode
   paddingMode?: 'default' | 'none' | 'custom' | null
+  paddingSide?: 'both' | 'left' | 'right' | 'split' | null
   paddingXDesktop?: string | null
   paddingXMobile?: string | null
   paddingXDesktopCustom?: string | null
   paddingXMobileCustom?: string | null
+  paddingLeftDesktop?: string | null
+  paddingLeftDesktopCustom?: string | null
+  paddingRightDesktop?: string | null
+  paddingRightDesktopCustom?: string | null
+  paddingLeftMobile?: string | null
+  paddingLeftMobileCustom?: string | null
+  paddingRightMobile?: string | null
+  paddingRightMobileCustom?: string | null
 
   // Slider Settings
   enableSlider?: boolean | null
@@ -97,10 +106,19 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
   paddingTop = 'pt-8',
   paddingBottom = 'pb-16',
   paddingMode = 'default',
+  paddingSide = 'both',
   paddingXDesktop = '48px',
   paddingXMobile = '16px',
   paddingXDesktopCustom,
   paddingXMobileCustom,
+  paddingLeftDesktop,
+  paddingLeftDesktopCustom,
+  paddingRightDesktop,
+  paddingRightDesktopCustom,
+  paddingLeftMobile,
+  paddingLeftMobileCustom,
+  paddingRightMobile,
+  paddingRightMobileCustom,
   enableSlider = true,
   sliderSettings,
   cards,
@@ -117,23 +135,47 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
   }
 
   // ─── Layout & Spacing Resolution ───────────────────────────────────────────
-  const resolvedDesktopPad =
-    paddingMode === 'none'
-      ? '0px'
-      : paddingMode === 'custom'
-        ? paddingXDesktop === 'custom'
-          ? paddingXDesktopCustom || '48px'
-          : paddingXDesktop || '48px'
-        : undefined
+  const resolvePadVal = (sel?: string | null, custom?: string | null, fallback = '0px') => {
+    if (sel === 'custom') return custom || fallback
+    return sel || fallback
+  }
 
-  const resolvedMobilePad =
-    paddingMode === 'none'
-      ? '0px'
-      : paddingMode === 'custom'
-        ? paddingXMobile === 'custom'
-          ? paddingXMobileCustom || '16px'
-          : paddingXMobile || '16px'
-        : undefined
+  let resolvedDesktopPadLeft = '0px'
+  let resolvedDesktopPadRight = '0px'
+  let resolvedMobilePadLeft = '0px'
+  let resolvedMobilePadRight = '0px'
+
+  if (paddingMode === 'none') {
+    resolvedDesktopPadLeft = '0px'
+    resolvedDesktopPadRight = '0px'
+    resolvedMobilePadLeft = '0px'
+    resolvedMobilePadRight = '0px'
+  } else if (paddingMode === 'custom') {
+    if (paddingSide === 'left') {
+      resolvedDesktopPadLeft = resolvePadVal(paddingLeftDesktop, paddingLeftDesktopCustom, '48px')
+      resolvedMobilePadLeft = resolvePadVal(paddingLeftMobile, paddingLeftMobileCustom, '16px')
+      resolvedDesktopPadRight = '0px'
+      resolvedMobilePadRight = '0px'
+    } else if (paddingSide === 'right') {
+      resolvedDesktopPadLeft = '0px'
+      resolvedMobilePadLeft = '0px'
+      resolvedDesktopPadRight = resolvePadVal(paddingRightDesktop, paddingRightDesktopCustom, '48px')
+      resolvedMobilePadRight = resolvePadVal(paddingRightMobile, paddingRightMobileCustom, '16px')
+    } else if (paddingSide === 'split') {
+      resolvedDesktopPadLeft = resolvePadVal(paddingLeftDesktop, paddingLeftDesktopCustom, '48px')
+      resolvedDesktopPadRight = resolvePadVal(paddingRightDesktop, paddingRightDesktopCustom, '48px')
+      resolvedMobilePadLeft = resolvePadVal(paddingLeftMobile, paddingLeftMobileCustom, '16px')
+      resolvedMobilePadRight = resolvePadVal(paddingRightMobile, paddingRightMobileCustom, '16px')
+    } else {
+      // 'both' (default)
+      const dVal = resolvePadVal(paddingXDesktop, paddingXDesktopCustom, '48px')
+      const mVal = resolvePadVal(paddingXMobile, paddingXMobileCustom, '16px')
+      resolvedDesktopPadLeft = dVal
+      resolvedDesktopPadRight = dVal
+      resolvedMobilePadLeft = mVal
+      resolvedMobilePadRight = mVal
+    }
+  }
 
   const padClassName =
     paddingMode === 'custom' || paddingMode === 'none' ? `imageslider-pad-${uid}` : ''
@@ -320,15 +362,15 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
       {(paddingMode === 'custom' || paddingMode === 'none') && (
         <style>{`
           .${padClassName} {
-            padding-left: ${resolvedMobilePad} !important;
-            padding-right: ${resolvedMobilePad} !important;
+            padding-left: ${resolvedMobilePadLeft} !important;
+            padding-right: ${resolvedMobilePadRight} !important;
             max-width: 100% !important;
             width: 100% !important;
           }
           @media (min-width: 1024px) {
             .${padClassName} {
-              padding-left: ${resolvedDesktopPad} !important;
-              padding-right: ${resolvedDesktopPad} !important;
+              padding-left: ${resolvedDesktopPadLeft} !important;
+              padding-right: ${resolvedDesktopPadRight} !important;
             }
           }
         `}</style>

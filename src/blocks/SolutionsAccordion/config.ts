@@ -47,6 +47,10 @@ export const solutionsAccordionLayoutFields: Field[] = [
           { label: '100px', value: '100px' },
           { label: '120px', value: '120px' },
           { label: '150px', value: '150px' },
+          { label: '180px', value: '180px' },
+          { label: '200px', value: '200px' },
+          { label: '250px', value: '250px' },
+          { label: '300px', value: '300px' },
           { label: 'Custom Value', value: 'custom' },
         ],
         admin: {

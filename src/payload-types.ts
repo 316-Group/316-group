@@ -10369,7 +10369,25 @@ export interface Page {
          */
         paddingMode?: ('default' | 'none' | 'custom') | null;
         paddingXDesktop?:
-          | ('0px' | '10px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+          | (
+              | '0px'
+              | '10px'
+              | '16px'
+              | '24px'
+              | '32px'
+              | '40px'
+              | '48px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
           | null;
         paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
         paddingXDesktopCustom?: string | null;
@@ -12017,11 +12035,18 @@ export interface ContentBlock {
          * Adjust or remove horizontal (left & right) padding for the content in this column.
          */
         paddingMode?: ('default' | 'none' | 'custom') | null;
+        /**
+         * Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.
+         */
+        paddingSide?: ('both' | 'left' | 'right' | 'split') | null;
         paddingXDesktop?:
           | (
               | '0px'
+              | '8px'
               | '10px'
+              | '16px'
               | '20px'
+              | '24px'
               | '30px'
               | '40px'
               | '50px'
@@ -12030,12 +12055,116 @@ export interface ContentBlock {
               | '100px'
               | '120px'
               | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
               | 'custom'
             )
           | null;
         paddingXDesktopCustom?: string | null;
-        paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+        paddingXMobile?:
+          | (
+              | '0px'
+              | '8px'
+              | '10px'
+              | '16px'
+              | '20px'
+              | '24px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | 'custom'
+            )
+          | null;
         paddingXMobileCustom?: string | null;
+        paddingLeftDesktop?:
+          | (
+              | '0px'
+              | '8px'
+              | '10px'
+              | '16px'
+              | '20px'
+              | '24px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
+          | null;
+        paddingLeftDesktopCustom?: string | null;
+        paddingLeftMobile?:
+          | (
+              | '0px'
+              | '8px'
+              | '10px'
+              | '16px'
+              | '20px'
+              | '24px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | 'custom'
+            )
+          | null;
+        paddingLeftMobileCustom?: string | null;
+        paddingRightDesktop?:
+          | (
+              | '0px'
+              | '8px'
+              | '10px'
+              | '16px'
+              | '20px'
+              | '24px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | '120px'
+              | '150px'
+              | '180px'
+              | '200px'
+              | '250px'
+              | '300px'
+              | 'custom'
+            )
+          | null;
+        paddingRightDesktopCustom?: string | null;
+        paddingRightMobile?:
+          | (
+              | '0px'
+              | '8px'
+              | '10px'
+              | '16px'
+              | '20px'
+              | '24px'
+              | '30px'
+              | '40px'
+              | '50px'
+              | '60px'
+              | '80px'
+              | '100px'
+              | 'custom'
+            )
+          | null;
+        paddingRightMobileCustom?: string | null;
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
         mobileOrder?: number | null;
         alignment?: ('left' | 'center') | null;
@@ -37557,6 +37686,10 @@ export interface ContentBlock {
                       | '100px'
                       | '120px'
                       | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
                       | 'custom'
                     )
                   | null;
@@ -45069,7 +45202,27 @@ export interface ContentBlock {
                  * Set to "No Padding" to let cards fill the 100% full width of the column.
                  */
                 paddingMode?: ('default' | 'none' | 'custom') | null;
-                paddingXDesktop?: ('0px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | 'custom') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
                 paddingXMobile?: ('0px' | '8px' | '16px' | '24px' | 'custom') | null;
                 paddingXDesktopCustom?: string | null;
                 paddingXMobileCustom?: string | null;
@@ -47838,11 +47991,17 @@ export interface ContentBlock {
                       | '16px'
                       | '24px'
                       | '32px'
+                      | '40px'
                       | '48px'
                       | '60px'
                       | '80px'
                       | '100px'
                       | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
                       | 'custom'
                     )
                   | null;
@@ -53503,11 +53662,17 @@ export interface ContentBlock {
                       | '16px'
                       | '24px'
                       | '32px'
+                      | '40px'
                       | '48px'
                       | '60px'
                       | '80px'
                       | '100px'
                       | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
                       | 'custom'
                     )
                   | null;
@@ -57016,7 +57181,27 @@ export interface ContentBlock {
                  * Set to "No Padding" to let this split text block occupy the full width of the column.
                  */
                 paddingMode?: ('default' | 'none' | 'custom') | null;
-                paddingXDesktop?: ('0px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | 'custom') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
                 paddingXMobile?: ('0px' | '8px' | '16px' | '24px' | 'custom') | null;
                 paddingXDesktopCustom?: string | null;
                 paddingXMobileCustom?: string | null;
@@ -58466,10 +58651,84 @@ export interface ContentBlock {
                  * Set to "No Padding" to let the slider occupy the full width of the column.
                  */
                 paddingMode?: ('default' | 'none' | 'custom') | null;
-                paddingXDesktop?: ('0px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | 'custom') | null;
-                paddingXMobile?: ('0px' | '8px' | '16px' | '24px' | 'custom') | null;
+                /**
+                 * Choose whether padding applies to both sides together, left only, right only, or set separate left & right values.
+                 */
+                paddingSide?: ('both' | 'left' | 'right' | 'split') | null;
+                paddingXDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
                 paddingXDesktopCustom?: string | null;
+                paddingXMobile?:
+                  | ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | '40px' | '50px' | '60px' | '80px' | 'custom')
+                  | null;
                 paddingXMobileCustom?: string | null;
+                paddingLeftDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingLeftDesktopCustom?: string | null;
+                paddingLeftMobile?: ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+                paddingLeftMobileCustom?: string | null;
+                paddingRightDesktop?:
+                  | (
+                      | '0px'
+                      | '8px'
+                      | '16px'
+                      | '24px'
+                      | '32px'
+                      | '40px'
+                      | '48px'
+                      | '60px'
+                      | '80px'
+                      | '100px'
+                      | '120px'
+                      | '150px'
+                      | '180px'
+                      | '200px'
+                      | '250px'
+                      | '300px'
+                      | 'custom'
+                    )
+                  | null;
+                paddingRightDesktopCustom?: string | null;
+                paddingRightMobile?: ('0px' | '8px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
+                paddingRightMobileCustom?: string | null;
                 /**
                  * When enabled, image cards display as an animated slider. When disabled, cards are scrollable along the x-axis.
                  */
@@ -140015,7 +140274,24 @@ export interface SolutionsAccordionBlock {
    */
   paddingMode?: ('default' | 'none' | 'custom') | null;
   paddingXDesktop?:
-    | ('0px' | '10px' | '20px' | '30px' | '40px' | '50px' | '60px' | '80px' | '100px' | '120px' | '150px' | 'custom')
+    | (
+        | '0px'
+        | '10px'
+        | '20px'
+        | '30px'
+        | '40px'
+        | '50px'
+        | '60px'
+        | '80px'
+        | '100px'
+        | '120px'
+        | '150px'
+        | '180px'
+        | '200px'
+        | '250px'
+        | '300px'
+        | 'custom'
+      )
     | null;
   paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '30px' | 'custom') | null;
   paddingXDesktopCustom?: string | null;
@@ -146361,7 +146637,27 @@ export interface ClickExpandBlock {
    * Set to "No Padding" to let cards fill the 100% full width of the column.
    */
   paddingMode?: ('default' | 'none' | 'custom') | null;
-  paddingXDesktop?: ('0px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | 'custom') | null;
+  paddingXDesktop?:
+    | (
+        | '0px'
+        | '8px'
+        | '16px'
+        | '24px'
+        | '32px'
+        | '40px'
+        | '48px'
+        | '60px'
+        | '80px'
+        | '100px'
+        | '120px'
+        | '150px'
+        | '180px'
+        | '200px'
+        | '250px'
+        | '300px'
+        | 'custom'
+      )
+    | null;
   paddingXMobile?: ('0px' | '8px' | '16px' | '24px' | 'custom') | null;
   paddingXDesktopCustom?: string | null;
   paddingXMobileCustom?: string | null;
@@ -149080,7 +149376,25 @@ export interface GridColBlock {
    */
   paddingMode?: ('default' | 'none' | 'custom') | null;
   paddingXDesktop?:
-    | ('0px' | '10px' | '16px' | '24px' | '32px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+    | (
+        | '0px'
+        | '10px'
+        | '16px'
+        | '24px'
+        | '32px'
+        | '40px'
+        | '48px'
+        | '60px'
+        | '80px'
+        | '100px'
+        | '120px'
+        | '150px'
+        | '180px'
+        | '200px'
+        | '250px'
+        | '300px'
+        | 'custom'
+      )
     | null;
   paddingXMobile?: ('0px' | '8px' | '10px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
   paddingXDesktopCustom?: string | null;
@@ -157862,10 +158176,19 @@ export interface ContentBlockSelect<T extends boolean = true> {
         matchHeaderPillWidth?: T;
         widthMode?: T;
         paddingMode?: T;
+        paddingSide?: T;
         paddingXDesktop?: T;
         paddingXDesktopCustom?: T;
         paddingXMobile?: T;
         paddingXMobileCustom?: T;
+        paddingLeftDesktop?: T;
+        paddingLeftDesktopCustom?: T;
+        paddingLeftMobile?: T;
+        paddingLeftMobileCustom?: T;
+        paddingRightDesktop?: T;
+        paddingRightDesktopCustom?: T;
+        paddingRightMobile?: T;
+        paddingRightMobileCustom?: T;
         size?: T;
         mobileOrder?: T;
         alignment?: T;
@@ -158804,10 +159127,19 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     paddingTop?: T;
                     paddingBottom?: T;
                     paddingMode?: T;
+                    paddingSide?: T;
                     paddingXDesktop?: T;
-                    paddingXMobile?: T;
                     paddingXDesktopCustom?: T;
+                    paddingXMobile?: T;
                     paddingXMobileCustom?: T;
+                    paddingLeftDesktop?: T;
+                    paddingLeftDesktopCustom?: T;
+                    paddingLeftMobile?: T;
+                    paddingLeftMobileCustom?: T;
+                    paddingRightDesktop?: T;
+                    paddingRightDesktopCustom?: T;
+                    paddingRightMobile?: T;
+                    paddingRightMobileCustom?: T;
                     enableSlider?: T;
                     sliderSettings?:
                       | T

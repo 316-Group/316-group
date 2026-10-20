@@ -207,22 +207,93 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
                 // Column padding resolution
                 const colPaddingMode = (col as any).paddingMode || 'default'
-                const colDesktopPad =
-                  colPaddingMode === 'none'
-                    ? '0px'
-                    : colPaddingMode === 'custom'
-                      ? (col as any).paddingXDesktop === 'custom'
-                        ? (col as any).paddingXDesktopCustom || '50px'
-                        : (col as any).paddingXDesktop || '50px'
-                      : undefined
-                const colMobilePad =
-                  colPaddingMode === 'none'
-                    ? '0px'
-                    : colPaddingMode === 'custom'
-                      ? (col as any).paddingXMobile === 'custom'
-                        ? (col as any).paddingXMobileCustom || '16px'
-                        : (col as any).paddingXMobile || '16px'
-                      : undefined
+                const colPaddingSide = (col as any).paddingSide || 'both'
+
+                const resolvePadVal = (
+                  sel?: string | null,
+                  custom?: string | null,
+                  fallback = '0px',
+                ) => {
+                  if (sel === 'custom') return custom || fallback
+                  return sel || fallback
+                }
+
+                let colPadLeftDesktop = '0px'
+                let colPadRightDesktop = '0px'
+                let colPadLeftMobile = '0px'
+                let colPadRightMobile = '0px'
+
+                if (colPaddingMode === 'none') {
+                  colPadLeftDesktop = '0px'
+                  colPadRightDesktop = '0px'
+                  colPadLeftMobile = '0px'
+                  colPadRightMobile = '0px'
+                } else if (colPaddingMode === 'custom') {
+                  if (colPaddingSide === 'left') {
+                    colPadLeftDesktop = resolvePadVal(
+                      (col as any).paddingLeftDesktop,
+                      (col as any).paddingLeftDesktopCustom,
+                      '50px',
+                    )
+                    colPadLeftMobile = resolvePadVal(
+                      (col as any).paddingLeftMobile,
+                      (col as any).paddingLeftMobileCustom,
+                      '16px',
+                    )
+                    colPadRightDesktop = '0px'
+                    colPadRightMobile = '0px'
+                  } else if (colPaddingSide === 'right') {
+                    colPadLeftDesktop = '0px'
+                    colPadLeftMobile = '0px'
+                    colPadRightDesktop = resolvePadVal(
+                      (col as any).paddingRightDesktop,
+                      (col as any).paddingRightDesktopCustom,
+                      '50px',
+                    )
+                    colPadRightMobile = resolvePadVal(
+                      (col as any).paddingRightMobile,
+                      (col as any).paddingRightMobileCustom,
+                      '16px',
+                    )
+                  } else if (colPaddingSide === 'split') {
+                    colPadLeftDesktop = resolvePadVal(
+                      (col as any).paddingLeftDesktop,
+                      (col as any).paddingLeftDesktopCustom,
+                      '50px',
+                    )
+                    colPadRightDesktop = resolvePadVal(
+                      (col as any).paddingRightDesktop,
+                      (col as any).paddingRightDesktopCustom,
+                      '50px',
+                    )
+                    colPadLeftMobile = resolvePadVal(
+                      (col as any).paddingLeftMobile,
+                      (col as any).paddingLeftMobileCustom,
+                      '16px',
+                    )
+                    colPadRightMobile = resolvePadVal(
+                      (col as any).paddingRightMobile,
+                      (col as any).paddingRightMobileCustom,
+                      '16px',
+                    )
+                  } else {
+                    // 'both' (default)
+                    const dVal = resolvePadVal(
+                      (col as any).paddingXDesktop,
+                      (col as any).paddingXDesktopCustom,
+                      '50px',
+                    )
+                    const mVal = resolvePadVal(
+                      (col as any).paddingXMobile,
+                      (col as any).paddingXMobileCustom,
+                      '16px',
+                    )
+                    colPadLeftDesktop = dVal
+                    colPadRightDesktop = dVal
+                    colPadLeftMobile = mVal
+                    colPadRightMobile = mVal
+                  }
+                }
 
                 const colPadUid =
                   colPaddingMode === 'none' || colPaddingMode === 'custom'
@@ -234,13 +305,13 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     {colPadUid && (
                       <style>{`
                         .${colPadUid} {
-                          padding-left: ${colMobilePad || '0px'};
-                          padding-right: ${colMobilePad || '0px'};
+                          padding-left: ${colPadLeftMobile};
+                          padding-right: ${colPadRightMobile};
                         }
                         @media (min-width: 768px) {
                           .${colPadUid} {
-                            padding-left: ${colDesktopPad || '0px'};
-                            padding-right: ${colDesktopPad || '0px'};
+                            padding-left: ${colPadLeftDesktop};
+                            padding-right: ${colPadRightDesktop};
                           }
                         }
                       `}</style>
