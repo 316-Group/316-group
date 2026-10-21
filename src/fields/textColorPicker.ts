@@ -27,6 +27,7 @@ export const textColorPickerAll: textColorType = ({
       { label: 'Light Sky Blue (#ADE2FF)', value: 'text-light-sky' },
       { label: 'Teal Cyan (#52B5D8)', value: 'text-[#52B5D8]' },
       { label: 'Neon Cyan (#10EBFF)', value: 'text-cyan-neon' },
+      { label: 'Vibrant Cyan (#00E5FF)', value: 'text-[#00E5FF]' },
       { label: 'Custom Blue (#0256FF)', value: 'text-blue-custom' },
       { label: 'Brand Blue (#0256FF)', value: 'text-[#0256FF]' },
       { label: 'Brand Royal Blue (#1D4ED8)', value: 'text-[#1D4ED8]' },

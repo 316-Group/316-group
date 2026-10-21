@@ -476,6 +476,7 @@ export const missionVisionColumnFields: Field[] = getMissionVisionFields({ isCol
 
 export const MissionVision: Block = {
   slug: 'missionVision',
+  interfaceName: 'MissionVisionBlock',
   labels: {
     singular: 'Mission & Vision',
     plural: 'Mission & Vision Blocks',
