@@ -657,6 +657,16 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                     {officeItems.map((item, idx) => {
                       const itemImg = item.image
                       const itemLabel = item.label?.trim() || ''
+                      const imgUrl =
+                        typeof itemImg === 'object' && itemImg !== null
+                          ? (itemImg as any).url
+                          : typeof itemImg === 'string'
+                            ? itemImg
+                            : null
+                      const imgAlt =
+                        (typeof itemImg === 'object' && itemImg !== null ? (itemImg as any).alt : null) ||
+                        itemLabel ||
+                        'Office'
                       const itemCol = item.labelColor || 'text-gray-950'
                       const itemTypography = resolveTypography(
                         item.labelFontSize,
@@ -670,22 +680,24 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                       return (
                         <div key={item.id || idx} className="flex flex-col items-start gap-2">
                           {itemImg && (
-                            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-sm border border-black/5 dark:border-white/10">
-                              {typeof itemImg === 'object' ? (
+                            <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 shadow-sm border border-black/5 dark:border-white/10 bg-slate-100 dark:bg-slate-800">
+                              {imgUrl ? (
+                                <img
+                                  src={imgUrl}
+                                  alt={imgAlt}
+                                  className="w-full h-full object-cover object-center block"
+                                  loading="lazy"
+                                />
+                              ) : typeof itemImg === 'object' ? (
                                 <Media
                                   resource={itemImg}
-                                  imgClassName="w-full h-full object-cover"
+                                  fill
+                                  className="w-full h-full relative"
+                                  imgClassName="w-full h-full object-cover object-center"
                                   priority={false}
                                   loading="lazy"
                                 />
-                              ) : (
-                                <img
-                                  src={itemImg}
-                                  alt={itemLabel || 'Office'}
-                                  className="w-full h-full object-cover"
-                                  loading="lazy"
-                                />
-                              )}
+                              ) : null}
                             </div>
                           )}
                           {itemLabel && (
