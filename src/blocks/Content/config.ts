@@ -46,6 +46,7 @@ import { numberedGridFields, numberedGridColumnFields } from '../NumberedGrid/co
 import { missionVisionFields, missionVisionColumnFields } from '../MissionVision/config'
 import { timelineAccordionFields, timelineAccordionColumnFields } from '../TimelineAccordion/config'
 import { imageTextSplitColumnFields } from '../ImageTextSplit/config'
+import { centeredButtonColumnFields } from '../CenteredButton/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -620,6 +621,7 @@ const columnFields: Field[] = [
           { label: 'Numbered Grid', value: 'numberedGrid' },
           { label: 'Mission & Vision', value: 'missionVision' },
           { label: 'Timeline Accordion', value: 'timelineAccordion' },
+          { label: 'Centered Button', value: 'centeredButton' },
         ],
       },
       {
@@ -2182,6 +2184,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'centeredContent',
         },
         fields: centeredContentFields,
+      },
+
+      // ─── Centered Button ───────────────────────────────────────────────────
+      {
+        name: 'centeredButton',
+        type: 'group',
+        label: 'Centered Button',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'centeredButton',
+        },
+        fields: centeredButtonColumnFields,
       },
 
       // ─── Click Expand Cards ────────────────────────────────────────────────

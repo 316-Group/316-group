@@ -35,6 +35,7 @@ import { WhoWeAreBlock } from '../WhoWeAre/Component'
 import { NumberedGridBlock } from '../NumberedGrid/Component'
 import { MissionVisionBlock } from '../MissionVision/Component'
 import { TimelineAccordionBlock } from '../TimelineAccordion/Component'
+import { CenteredButtonBlock } from '../CenteredButton/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1041,6 +1042,29 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <CenteredContentComponent
                         key={index}
                         {...(content as any).centeredContent}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'centeredButton' && (content as any).centeredButton) {
+                    const btnData = { ...(content as any).centeredButton }
+                    if (btnData.sectionBgColor === undefined || btnData.sectionBgColor === null) {
+                      btnData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (btnData.paddingTop === undefined || btnData.paddingTop === null) {
+                      btnData.paddingTop = 'pt-0'
+                    }
+                    if (btnData.paddingBottom === undefined || btnData.paddingBottom === null) {
+                      btnData.paddingBottom = 'pb-0'
+                    }
+                    return (
+                      <CenteredButtonBlock
+                        key={index}
+                        {...btnData}
+                        className={cn(
+                          btnData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
