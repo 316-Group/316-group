@@ -42,6 +42,7 @@ import { imageSliderFields } from '../ImageSlider/config'
 import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
 import { readyToGrowFields } from '../ReadyToGrow/config'
 import { whoWeAreFields } from '../WhoWeAre/config'
+import { numberedGridFields } from '../NumberedGrid/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -310,6 +311,93 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'verticalPaddingMode',
+    type: 'select',
+    label: 'Column Content Vertical Padding / Margins',
+    defaultValue: 'default',
+    options: [
+      { label: 'Default Spacing', value: 'default' },
+      { label: 'No Top or Bottom Padding (0px)', value: 'none' },
+      { label: 'Custom Vertical Padding / Margins', value: 'custom' },
+    ],
+    admin: {
+      description:
+        'Adjust or remove top and bottom padding/margins for the content in this column.',
+    },
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.verticalPaddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'columnPaddingTop',
+        type: 'select',
+        label: 'Column Padding Top',
+        defaultValue: 'pt-0',
+        options: [
+          { label: '0px (None)', value: 'pt-0' },
+          { label: '8px (pt-2)', value: 'pt-2' },
+          { label: '16px (pt-4)', value: 'pt-4' },
+          { label: '24px (pt-6)', value: 'pt-6' },
+          { label: '32px (pt-8)', value: 'pt-8' },
+          { label: '40px (pt-10)', value: 'pt-10' },
+          { label: '48px (pt-12)', value: 'pt-12' },
+          { label: '64px (pt-16)', value: 'pt-16' },
+          { label: '80px (pt-20)', value: 'pt-20' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'columnPaddingTopCustom',
+        type: 'text',
+        label: 'Custom Column Padding Top (e.g. 15px, 2rem)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnPaddingTop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.verticalPaddingMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'columnPaddingBottom',
+        type: 'select',
+        label: 'Column Padding Bottom',
+        defaultValue: 'pb-0',
+        options: [
+          { label: '0px (None)', value: 'pb-0' },
+          { label: '8px (pb-2)', value: 'pb-2' },
+          { label: '16px (pb-4)', value: 'pb-4' },
+          { label: '24px (pb-6)', value: 'pb-6' },
+          { label: '32px (pb-8)', value: 'pb-8' },
+          { label: '40px (pb-10)', value: 'pb-10' },
+          { label: '48px (pb-12)', value: 'pb-12' },
+          { label: '64px (pb-16)', value: 'pb-16' },
+          { label: '80px (pb-20)', value: 'pb-20' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'columnPaddingBottomCustom',
+        type: 'text',
+        label: 'Custom Column Padding Bottom (e.g. 15px, 2rem)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnPaddingBottom === 'custom',
+        },
+      },
+    ],
+  },
+  {
     name: 'size',
     type: 'select',
     defaultValue: 'full',
@@ -409,6 +497,7 @@ const columnFields: Field[] = [
           { label: 'Blog Post Updated', value: 'blogPostUpdated' },
           { label: 'Ready to Grow', value: 'readyToGrow' },
           { label: 'Who We Are', value: 'whoWeAre' },
+          { label: 'Numbered Grid', value: 'numberedGrid' },
         ],
       },
       {
@@ -2182,6 +2271,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'whoWeAre',
         },
         fields: whoWeAreFields,
+      },
+
+      // ─── Numbered Grid ───────────────────────────────────────────────────────
+      {
+        name: 'numberedGrid',
+        type: 'group',
+        label: 'Numbered Grid',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'numberedGrid',
+        },
+        fields: numberedGridFields,
       },
     ],
   },

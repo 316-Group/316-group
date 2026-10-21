@@ -32,6 +32,7 @@ import { ImageSliderBlock } from '../ImageSlider/Component'
 import { BlogPostUpdatedBlock } from '../BlogPostUpdated/Component'
 import { ReadyToGrowBlock } from '../ReadyToGrow/Component'
 import { WhoWeAreBlock } from '../WhoWeAre/Component'
+import { NumberedGridBlock } from '../NumberedGrid/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -304,6 +305,32 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     ? `col-pad-${rawBlockId}-${rawColId}`.replace(/[^a-zA-Z0-9_-]/g, '')
                     : undefined
 
+                // Column vertical padding resolution
+                const colVerticalMode = (col as any).verticalPaddingMode || 'default'
+                let colPtClass = ''
+                let colPbClass = ''
+                let colCustomPt: string | undefined = undefined
+                let colCustomPb: string | undefined = undefined
+
+                if (colVerticalMode === 'none') {
+                  colPtClass = 'pt-0'
+                  colPbClass = 'pb-0'
+                } else if (colVerticalMode === 'custom') {
+                  const pt = (col as any).columnPaddingTop || 'pt-0'
+                  if (pt === 'custom' && (col as any).columnPaddingTopCustom) {
+                    colCustomPt = (col as any).columnPaddingTopCustom
+                  } else if (pt.startsWith('pt-')) {
+                    colPtClass = pt
+                  }
+
+                  const pb = (col as any).columnPaddingBottom || 'pb-0'
+                  if (pb === 'custom' && (col as any).columnPaddingBottomCustom) {
+                    colCustomPb = (col as any).columnPaddingBottomCustom
+                  } else if (pb.startsWith('pb-')) {
+                    colPbClass = pb
+                  }
+                }
+
                 return (
                   <React.Fragment key={index}>
                     {colPadUid && (
@@ -326,6 +353,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         orderClass, // Mobile order
                         mdOrderClass, // Reset order on desktop
                         colPadUid,
+                        colPtClass,
+                        colPbClass,
                         col.alignment === 'center' &&
                           'text-center flex flex-col items-center justify-center',
                         colBg && colBg !== 'bg-transparent' && colBg,
@@ -335,6 +364,10 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                           !colPadUid &&
                           'max-w-screen-2xl mx-auto px-4 md:px-8',
                       )}
+                      style={{
+                        ...(colCustomPt ? { paddingTop: colCustomPt } : {}),
+                        ...(colCustomPb ? { paddingBottom: colCustomPb } : {}),
+                      }}
                     >
                       {col.columnContent?.map((content, index) => {
                   const {
@@ -1029,6 +1062,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <WhoWeAreBlock
                         key={index}
                         {...(content as any).whoWeAre}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'numberedGrid' && (content as any).numberedGrid) {
+                    return (
+                      <NumberedGridBlock
+                        key={index}
+                        {...(content as any).numberedGrid}
                       />
                     )
                   }

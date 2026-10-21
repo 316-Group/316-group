@@ -30,6 +30,15 @@ export default {
     'bg-[#F7F8F4]',
     'text-[#F7F8F4]',
     'text-[#52B5D8]',
+    'bg-[#0256FF]',
+    'text-[#0256FF]',
+    'bg-white/10',
+    'bg-white/15',
+    'bg-white/20',
+    'bg-white/30',
+    'border-[#EFF1F8]',
+    'border-white/20',
+    'border-white/40',
   ],
   theme: {
     container: {

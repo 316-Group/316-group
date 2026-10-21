@@ -44,6 +44,7 @@ import { FeatureCardsBlock } from './FeatureCards/Component'
 import { FeatureCardsV2Block } from './FeatureCardsV2/Component'
 import { VerticalCTAv2Block } from './VerticalCTAv2/Component'
 import { WhoWeAreBlock } from './WhoWeAre/Component'
+import { NumberedGridBlock } from './NumberedGrid/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -87,6 +88,7 @@ const blockComponents = {
   featureCardsV2: FeatureCardsV2Block,
   verticalCTAv2: VerticalCTAv2Block,
   whoWeAre: WhoWeAreBlock,
+  numberedGrid: NumberedGridBlock,
 }
 
 export const RenderBlocks: React.FC<{
