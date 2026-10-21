@@ -41,6 +41,7 @@ import { splitTextFields } from '../SplitText/config'
 import { imageSliderFields } from '../ImageSlider/config'
 import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
 import { readyToGrowFields } from '../ReadyToGrow/config'
+import { whoWeAreFields } from '../WhoWeAre/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -407,6 +408,7 @@ const columnFields: Field[] = [
           { label: 'Image Slider', value: 'imageSlider' },
           { label: 'Blog Post Updated', value: 'blogPostUpdated' },
           { label: 'Ready to Grow', value: 'readyToGrow' },
+          { label: 'Who We Are', value: 'whoWeAre' },
         ],
       },
       {
@@ -2169,6 +2171,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'readyToGrow',
         },
         fields: readyToGrowFields,
+      },
+
+      // ─── Who We Are ──────────────────────────────────────────────────────────
+      {
+        name: 'whoWeAre',
+        type: 'group',
+        label: 'Who We Are',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'whoWeAre',
+        },
+        fields: whoWeAreFields,
       },
     ],
   },

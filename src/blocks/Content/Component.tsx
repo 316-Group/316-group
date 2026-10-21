@@ -31,6 +31,7 @@ import { SplitTextBlock } from '../SplitText/Component'
 import { ImageSliderBlock } from '../ImageSlider/Component'
 import { BlogPostUpdatedBlock } from '../BlogPostUpdated/Component'
 import { ReadyToGrowBlock } from '../ReadyToGrow/Component'
+import { WhoWeAreBlock } from '../WhoWeAre/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1019,6 +1020,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <ReadyToGrowBlock
                         key={index}
                         {...(content as any).readyToGrow}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'whoWeAre' && (content as any).whoWeAre) {
+                    return (
+                      <WhoWeAreBlock
+                        key={index}
+                        {...(content as any).whoWeAre}
                       />
                     )
                   }

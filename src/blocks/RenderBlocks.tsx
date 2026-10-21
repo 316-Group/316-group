@@ -43,6 +43,7 @@ import { AnimatedIconsGridBlock } from './AnimatedIconsGrid/Component'
 import { FeatureCardsBlock } from './FeatureCards/Component'
 import { FeatureCardsV2Block } from './FeatureCardsV2/Component'
 import { VerticalCTAv2Block } from './VerticalCTAv2/Component'
+import { WhoWeAreBlock } from './WhoWeAre/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -85,6 +86,7 @@ const blockComponents = {
   featureCards: FeatureCardsBlock,
   featureCardsV2: FeatureCardsV2Block,
   verticalCTAv2: VerticalCTAv2Block,
+  whoWeAre: WhoWeAreBlock,
 }
 
 export const RenderBlocks: React.FC<{
