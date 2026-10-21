@@ -22792,9 +22792,9 @@ export interface ContentBlock {
          */
         widthMode?: ('contained' | 'fullWidth') | null;
         /**
-         * Adjust or remove horizontal (left & right) padding for the content in this column.
+         * Adjust horizontal padding, or choose Match Header to perfectly align content width with the site Logo and Navigation across all screen sizes.
          */
-        paddingMode?: ('default' | 'none' | 'custom') | null;
+        paddingMode?: ('default' | 'matchHeader' | 'none' | 'custom') | null;
         /**
          * Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.
          */

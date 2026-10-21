@@ -117,14 +117,16 @@ const columnFields: Field[] = [
     type: 'select',
     label: 'Column Content Horizontal Padding',
     defaultValue: 'default',
+    validate: allowAnySelect,
     options: [
       { label: 'Default Padding', value: 'default' },
+      { label: 'Match Header (Align with Logo & Navigation)', value: 'matchHeader' },
       { label: 'No Padding / Full Width Screen Bleed (0px)', value: 'none' },
       { label: 'Custom Horizontal Padding', value: 'custom' },
     ],
     admin: {
       description:
-        'Adjust or remove horizontal (left & right) padding for the content in this column.',
+        'Adjust horizontal padding, or choose Match Header to perfectly align content width with the site Logo and Navigation across all screen sizes.',
     },
   },
   {

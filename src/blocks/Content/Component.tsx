@@ -248,6 +248,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   colPadRightDesktop = '0px'
                   colPadLeftMobile = '0px'
                   colPadRightMobile = '0px'
+                } else if (colPaddingMode === 'matchHeader') {
+                  colPadLeftDesktop = '32px'
+                  colPadRightDesktop = '32px'
+                  colPadLeftMobile = '16px'
+                  colPadRightMobile = '16px'
                 } else if (colPaddingMode === 'custom') {
                   if (colPaddingSide === 'left') {
                     colPadLeftDesktop = resolvePadVal(
@@ -407,9 +412,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                           'text-center flex flex-col items-center justify-center',
                         colBg && colBg !== 'bg-transparent' && colBg,
                         isMatchHeaderPillWidth && 'w-full max-w-[1472px] mx-auto',
+                        colPaddingMode === 'matchHeader' && 'w-full max-w-screen-2xl mx-auto px-4 md:px-8',
                         hasFullWidthCol &&
                           !isColFullWidth &&
                           !colPadUid &&
+                          colPaddingMode !== 'matchHeader' &&
                           'max-w-screen-2xl mx-auto px-4 md:px-8',
                       )}
                       style={{
@@ -1118,7 +1125,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
                       whoWeAreData.paddingBottom = 'pb-0'
                     }
-                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                    if (
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
                       whoWeAreData.paddingMode = 'none'
                     }
                     return (
@@ -1144,7 +1155,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
                       numGridData.paddingBottom = 'pb-0'
                     }
-                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                    if (
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
                       numGridData.paddingMode = 'none'
                     }
                     return (
@@ -1172,7 +1187,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       mvData.paddingBottomDesktop = '0px'
                       mvData.paddingBottomMobile = '0px'
                     }
-                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                    if (
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
                       mvData.paddingMode = 'none'
                     }
                     return (
@@ -1201,7 +1220,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
                       taData.paddingBottom = 'pb-0'
                     }
-                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                    if (
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
                       taData.paddingMode = 'none'
                     }
                     return (
