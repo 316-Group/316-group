@@ -372,15 +372,6 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
           >
             {accordionItems.length > 0 && (
               <div className="relative pl-8 sm:pl-10">
-                {/* Continuous Vertical Timeline Axis Line */}
-                <div
-                  className={cn(
-                    'absolute left-[9px] sm:left-[11px] top-4 bottom-6 w-[2px] rounded-full transition-colors',
-                    timelineLineColor,
-                  )}
-                  aria-hidden="true"
-                />
-
                 {/* Accordion Items List */}
                 <div className="flex flex-col space-y-6">
                   {accordionItems.map((item, index) => {
@@ -446,21 +437,34 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                         )}
                         style={{ transitionDelay: `${index * 120 + 300}ms` }}
                       >
-                        {/* Timeline Bullet Node */}
+                        {/* Connecting Line to Next Item (starts at circle center, ends at next circle center) */}
+                        {!isLast && (
+                          <div
+                            className="absolute left-0 -ml-8 sm:-ml-10 w-8 sm:w-10 flex justify-center top-[22px] md:top-[24px] bottom-[-46px] md:bottom-[-48px] pointer-events-none z-0"
+                            aria-hidden="true"
+                          >
+                            <div className={cn('w-[2px] h-full transition-colors', timelineLineColor)} />
+                          </div>
+                        )}
+
+                        {/* Timeline Bullet Node - centered to line on all screens, uniform & static as in mockup */}
                         <div
-                          className={cn(
-                            'absolute -left-[27px] sm:-left-[33px] top-1.5 w-4 h-4 rounded-full border-2 border-white shadow-sm transition-transform duration-300 z-10',
-                            timelineDotColor,
-                            isActive && 'scale-110 ring-4 ring-blue-500/20',
-                          )}
+                          className="absolute left-0 -ml-8 sm:-ml-10 w-8 sm:w-10 flex items-center justify-center top-0 h-[44px] md:h-[48px] pointer-events-none z-10"
                           aria-hidden="true"
-                        />
+                        >
+                          <div
+                            className={cn(
+                              'w-4 h-4 rounded-full transition-colors',
+                              timelineDotColor,
+                            )}
+                          />
+                        </div>
 
                         {/* Interactive Accordion Header */}
                         <button
                           type="button"
                           onClick={() => toggleItem(index)}
-                          className="w-full flex items-center justify-between text-left py-2 group focus:outline-none"
+                          className="w-full flex items-center justify-between text-left py-2 min-h-[44px] md:min-h-[48px] group focus:outline-none"
                           aria-expanded={isActive}
                         >
                           <div className="flex items-center space-x-4 sm:space-x-8 flex-1 pr-4">
@@ -478,10 +482,13 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                             )}
 
                             {/* Title (Shows when Active, OR if this is the Last Item!) */}
-                            {showTitle && titleText && (
+                            {titleText && (
                               <span
                                 className={cn(
-                                  'transition-colors duration-300',
+                                  'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden',
+                                  showTitle
+                                    ? 'opacity-100 translate-y-0 max-w-xl'
+                                    : 'opacity-0 translate-y-2 max-w-0 pointer-events-none',
                                   titleTypo.combined,
                                   titleColor,
                                 )}
@@ -492,78 +499,101 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                           </div>
 
                           {/* Plus / Minus Indicator Button */}
-                          <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-transform duration-300">
-                            {isActive ? (
-                              <Minus className="w-6 h-6 text-[#0256FF] transition-transform duration-300" />
-                            ) : (
-                              <Plus className="w-6 h-6 text-[#0256FF] transition-transform duration-300 group-hover:scale-110" />
-                            )}
+                          <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-transform duration-500">
+                            <div
+                              className={cn(
+                                'transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                                isActive && 'rotate-180',
+                              )}
+                            >
+                              {isActive ? (
+                                <Minus className="w-6 h-6 text-[#0256FF] transition-all duration-300" />
+                              ) : (
+                                <Plus className="w-6 h-6 text-[#0256FF] transition-all duration-300 group-hover:scale-110" />
+                              )}
+                            </div>
                           </div>
                         </button>
 
-                        {/* Expandable Active Body */}
-                        {isActive && (
-                          <div className="pt-2 pb-6 transition-all duration-500 ease-out">
-                            {/* Mode A: When endYearOrText is present (linked with vertical line as in end-year.png) */}
-                            {endYear ? (
-                              <div className="flex items-start space-x-6 sm:space-x-8 pt-1">
-                                {/* Left Sub-column: Connector Line & End Year */}
-                                <div className="flex flex-col items-center flex-shrink-0 min-w-[3rem] sm:min-w-[4rem]">
-                                  {/* Vertical Connector Line */}
-                                  <div
-                                    className={cn(
-                                      'w-[2px] h-8 sm:h-10 my-1 rounded-full transition-colors',
-                                      connectorLineColor,
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                  {/* End Year Text */}
-                                  <span
-                                    className={cn(
-                                      'whitespace-nowrap transition-colors select-none',
-                                      endYearTypo.combined,
-                                      endYearColor,
-                                    )}
-                                  >
-                                    {endYear}
-                                  </span>
-                                </div>
+                        {/* Expandable Active Body (Slide-Up with delay on open, Slide-Down on close) */}
+                        <div
+                          className={cn(
+                            'grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                            isActive
+                              ? 'grid-rows-[1fr] opacity-100 pt-2 pb-6'
+                              : 'grid-rows-[0fr] opacity-0 pointer-events-none pt-0 pb-0',
+                          )}
+                        >
+                          <div className="overflow-hidden">
+                            <div
+                              className={cn(
+                                'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                                isActive
+                                  ? 'translate-y-0 opacity-100 delay-150'
+                                  : 'translate-y-4 opacity-0 delay-0',
+                              )}
+                            >
+                              {/* Mode A: When endYearOrText is present (linked with vertical line as in end-year.png) */}
+                              {endYear ? (
+                                <div className="flex items-start space-x-6 sm:space-x-8 pt-1">
+                                  {/* Left Sub-column: Connector Line & End Year */}
+                                  <div className="flex flex-col items-center flex-shrink-0 min-w-[3rem] sm:min-w-[4rem]">
+                                    {/* Vertical Connector Line */}
+                                    <div
+                                      className={cn(
+                                        'w-[2px] h-8 sm:h-10 my-1 rounded-full transition-colors',
+                                        connectorLineColor,
+                                      )}
+                                      aria-hidden="true"
+                                    />
+                                    {/* End Year Text */}
+                                    <span
+                                      className={cn(
+                                        'whitespace-nowrap transition-colors select-none',
+                                        endYearTypo.combined,
+                                        endYearColor,
+                                      )}
+                                    >
+                                      {endYear}
+                                    </span>
+                                  </div>
 
-                                {/* Right Sub-column: Description placed beside the end year */}
-                                {item.description && (
-                                  <div
-                                    className={cn(
-                                      'flex-1 leading-relaxed transition-colors pt-2',
-                                      descTypo.combined,
-                                      descColor,
-                                    )}
-                                  >
-                                    {renderContent(item.description, descTypo.combined)}
-                                  </div>
-                                )}
-                              </div>
-                            ) : (
-                              /* Mode B: Standard Description (no endYear) */
-                              item.description && (
-                                <div className="pl-0 sm:pl-16 md:pl-20 pt-1">
-                                  <div
-                                    className={cn(
-                                      'leading-relaxed transition-colors',
-                                      descTypo.combined,
-                                      descColor,
-                                    )}
-                                  >
-                                    {renderContent(item.description, descTypo.combined)}
-                                  </div>
+                                  {/* Right Sub-column: Description placed beside the end year */}
+                                  {item.description && (
+                                    <div
+                                      className={cn(
+                                        'flex-1 leading-relaxed transition-colors pt-2',
+                                        descTypo.combined,
+                                        descColor,
+                                      )}
+                                    >
+                                      {renderContent(item.description, descTypo.combined)}
+                                    </div>
+                                  )}
                                 </div>
-                              )
-                            )}
+                              ) : (
+                                /* Mode B: Standard Description (no endYear) */
+                                item.description && (
+                                  <div className="pl-0 sm:pl-16 md:pl-20 pt-1">
+                                    <div
+                                      className={cn(
+                                        'leading-relaxed transition-colors',
+                                        descTypo.combined,
+                                        descColor,
+                                      )}
+                                    >
+                                      {renderContent(item.description, descTypo.combined)}
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </div>
                           </div>
-                        )}
+                        </div>
 
                         {/* Divider Line Below Item */}
                         <div
-                          className={cn('w-full mt-4 transition-colors duration-300', hrColor, hrWidth)}
+                          className={cn('w-full mt-4 transition-colors duration-500', hrColor, hrWidth)}
                           aria-hidden="true"
                         />
                       </div>

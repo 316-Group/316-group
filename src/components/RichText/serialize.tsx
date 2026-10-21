@@ -50,38 +50,84 @@ function parseInlineStyle(styleStr: string): React.CSSProperties {
 }
 
 /**
- * Parses user-entered inline style tags like <style="color:red">text</style>
- * or <span style="color:red">text</span> into styled React <span> elements.
+ * Parses user-entered inline style tags and line breaks like:
+ * - <br/>, <br>, <br /> -> <br />
+ * - <style="color:red">text</style> -> <span style="...">text</span>
+ * - <span style="color:red">text</span> -> <span style="...">text</span>
+ * - <span class="text-blue-600">text</span> -> <span className="...">text</span>
  */
 function parseInlineCustomStyles(rawText: string, baseKey: string | number): React.ReactNode {
-  if (!rawText || (!rawText.includes('<style=') && !rawText.includes('<span style='))) {
+  if (!rawText || !rawText.includes('<')) {
     return rawText
   }
 
-  // Regex matching <style="...">(.*?)</style> or <span style="...">(.*?)</span>
-  const regex = /<(?:style|span style)=(["'])(.*?)\1>(.*?)<\/(?:style|span)>/gi
+  // Regex matching line breaks or inline styling tags
+  const tokenRegex =
+    /<br\s*\/?>|<(?:style|span\s+style)=(["'])(.*?)\1>(.*?)<\/(?:style|span)>|<span\s+class(?:Name)?=(["'])(.*?)\4>(.*?)<\/span>|<span\s+style=(["'])(.*?)\7\s+class(?:Name)?=(["'])(.*?)\9>(.*?)<\/span>|<span\s+class(?:Name)?=(["'])(.*?)\11\s+style=(["'])(.*?)\13>(.*?)<\/span>/gi
+
   const elements: React.ReactNode[] = []
   let lastIndex = 0
   let match: RegExpExecArray | null
 
-  while ((match = regex.exec(rawText)) !== null) {
+  while ((match = tokenRegex.exec(rawText)) !== null) {
     if (match.index > lastIndex) {
       elements.push(rawText.substring(lastIndex, match.index))
     }
-    const styleString = match[2]
-    const innerText = match[3]
-    elements.push(
-      <span key={`${baseKey}-inline-${match.index}`} style={parseInlineStyle(styleString)}>
-        {innerText}
-      </span>,
-    )
-    lastIndex = regex.lastIndex
+
+    const fullMatch = match[0]
+    const key = `${baseKey}-inline-${match.index}`
+
+    if (/^<br\s*\/?>$/i.test(fullMatch)) {
+      elements.push(<br key={key} />)
+    } else if (match[1] !== undefined) {
+      // <style="style">innerText</style> or <span style="style">innerText</span>
+      const styleString = match[2]
+      const innerText = match[3]
+      elements.push(
+        <span key={key} style={parseInlineStyle(styleString)}>
+          {parseInlineCustomStyles(innerText, `${key}-inner`)}
+        </span>,
+      )
+    } else if (match[4] !== undefined) {
+      // <span class="className">innerText</span>
+      const classString = match[5]
+      const innerText = match[6]
+      elements.push(
+        <span key={key} className={classString}>
+          {parseInlineCustomStyles(innerText, `${key}-inner`)}
+        </span>,
+      )
+    } else if (match[7] !== undefined) {
+      // <span style="..." class="...">innerText</span>
+      const styleString = match[8]
+      const classString = match[10]
+      const innerText = match[11]
+      elements.push(
+        <span key={key} style={parseInlineStyle(styleString)} className={classString}>
+          {parseInlineCustomStyles(innerText, `${key}-inner`)}
+        </span>,
+      )
+    } else if (match[12] !== undefined) {
+      // <span class="..." style="...">innerText</span>
+      const classString = match[13]
+      const styleString = match[15]
+      const innerText = match[16]
+      elements.push(
+        <span key={key} style={parseInlineStyle(styleString)} className={classString}>
+          {parseInlineCustomStyles(innerText, `${key}-inner`)}
+        </span>,
+      )
+    }
+
+    lastIndex = tokenRegex.lastIndex
   }
 
   if (lastIndex < rawText.length) {
     elements.push(rawText.substring(lastIndex))
   }
 
+  if (elements.length === 0) return rawText
+  if (elements.length === 1 && typeof elements[0] === 'string') return elements[0]
   return elements
 }
 
