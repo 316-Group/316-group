@@ -464,15 +464,15 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                         <button
                           type="button"
                           onClick={() => toggleItem(index)}
-                          className="w-full flex items-center justify-between text-left py-2 min-h-[44px] md:min-h-[48px] group focus:outline-none"
+                          className="w-full flex items-center justify-between text-left py-2 h-11 md:h-12 group focus:outline-none"
                           aria-expanded={isActive}
                         >
-                          <div className="flex items-center space-x-4 sm:space-x-8 flex-1 pr-4">
+                          <div className="flex items-center space-x-4 sm:space-x-8 flex-1 pr-4 min-w-0">
                             {/* Year / Start Text */}
                             {yearText && (
                               <span
                                 className={cn(
-                                  'whitespace-nowrap transition-colors select-none',
+                                  'whitespace-nowrap transition-colors select-none flex-shrink-0',
                                   yearTypo.combined,
                                   yearColor,
                                 )}
@@ -485,10 +485,10 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                             {titleText && (
                               <span
                                 className={cn(
-                                  'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden',
-                                  showTitle
-                                    ? 'opacity-100 translate-y-0 max-w-xl'
-                                    : 'opacity-0 translate-y-2 max-w-0 pointer-events-none',
+                                  'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] whitespace-nowrap overflow-hidden',
+                                  isActive || isLast
+                                    ? 'opacity-100 translate-x-0 max-w-[40rem] delay-150'
+                                    : 'opacity-0 -translate-x-3 max-w-0 delay-0 pointer-events-none',
                                   titleTypo.combined,
                                   titleColor,
                                 )}
@@ -499,38 +499,38 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                           </div>
 
                           {/* Plus / Minus Indicator Button */}
-                          <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-transform duration-500">
+                          <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full">
                             <div
                               className={cn(
-                                'transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
-                                isActive && 'rotate-180',
+                                'transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
+                                isActive ? 'rotate-180' : 'rotate-0',
                               )}
                             >
                               {isActive ? (
-                                <Minus className="w-6 h-6 text-[#0256FF] transition-all duration-300" />
+                                <Minus className="w-6 h-6 text-[#0256FF] transition-colors duration-300" />
                               ) : (
-                                <Plus className="w-6 h-6 text-[#0256FF] transition-all duration-300 group-hover:scale-110" />
+                                <Plus className="w-6 h-6 text-[#0256FF] transition-colors duration-300 group-hover:scale-110" />
                               )}
                             </div>
                           </div>
                         </button>
 
-                        {/* Expandable Active Body (Slide-Up with delay on open, Slide-Down on close) */}
+                        {/* Expandable Active Body (Slide-Up with good delay on open, Slide-Down with smooth transition on close) */}
                         <div
                           className={cn(
-                            'grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                            'grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
                             isActive
-                              ? 'grid-rows-[1fr] opacity-100 pt-2 pb-6'
-                              : 'grid-rows-[0fr] opacity-0 pointer-events-none pt-0 pb-0',
+                              ? 'grid-rows-[1fr] opacity-100 delay-150'
+                              : 'grid-rows-[0fr] opacity-0 delay-0 pointer-events-none',
                           )}
                         >
                           <div className="overflow-hidden">
                             <div
                               className={cn(
-                                'transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]',
+                                'transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] pt-3 pb-6',
                                 isActive
-                                  ? 'translate-y-0 opacity-100 delay-150'
-                                  : 'translate-y-4 opacity-0 delay-0',
+                                  ? 'translate-y-0 opacity-100 delay-300'
+                                  : 'translate-y-6 opacity-0 delay-0',
                               )}
                             >
                               {/* Mode A: When endYearOrText is present (linked with vertical line as in end-year.png) */}
@@ -593,7 +593,11 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
 
                         {/* Divider Line Below Item */}
                         <div
-                          className={cn('w-full mt-4 transition-colors duration-500', hrColor, hrWidth)}
+                          className={cn(
+                            'w-full mt-4 transition-colors duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]',
+                            hrColor,
+                            hrWidth,
+                          )}
                           aria-hidden="true"
                         />
                       </div>

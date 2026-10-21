@@ -841,11 +841,25 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'imageTextSplit' && content.imageTextSplit) {
+                    const splitData = { ...(content.imageTextSplit as any) }
+                    if (splitData.sectionBgColor === undefined || splitData.sectionBgColor === null) {
+                      splitData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (splitData.paddingTop === undefined || splitData.paddingTop === null) {
+                      splitData.paddingTop = 'pt-0'
+                    }
+                    if (splitData.paddingBottom === undefined || splitData.paddingBottom === null) {
+                      splitData.paddingBottom = 'pb-0'
+                    }
                     return (
                       <ImageTextSplitBlock
                         key={index}
                         blockType="imageTextSplit"
-                        {...content.imageTextSplit}
+                        {...splitData}
+                        className={cn(
+                          splitData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
