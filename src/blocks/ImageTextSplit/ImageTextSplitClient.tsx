@@ -105,6 +105,7 @@ export interface ImageTextSplitProps {
   } | null
 
   className?: string
+  isColumn?: boolean
 }
 
 export function formatInlineHtml(content?: string | null): string {
@@ -155,6 +156,7 @@ export const ImageTextSplitClient: React.FC<ImageTextSplitProps> = ({
   descriptionGroup,
   buttonGroup,
   className,
+  isColumn = false,
 }) => {
   const [uid] = useState(() => Math.random().toString(36).substring(2, 9))
 
@@ -292,6 +294,7 @@ export const ImageTextSplitClient: React.FC<ImageTextSplitProps> = ({
     <section
       className={cn(
         'relative w-full overflow-hidden transition-colors duration-300',
+        isColumn && 'h-full flex-1 flex flex-col',
         sectionBgColor,
         isPtClass && resolvedPt,
         isPbClass && resolvedPb,
@@ -316,11 +319,17 @@ export const ImageTextSplitClient: React.FC<ImageTextSplitProps> = ({
         `}</style>
       )}
 
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={cn(
+          'w-full',
+          isColumn ? 'h-full flex-1 flex flex-col' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
+        )}
+      >
         {/* ─── Outer Rounded Card ────────────────────────────────────────────── */}
         <div
           className={cn(
             'w-full flex flex-col lg:flex-row items-stretch overflow-hidden shadow-sm transition-all duration-300',
+            isColumn && 'h-full flex-1',
             cardBgColor,
             cardBorderRadius,
           )}

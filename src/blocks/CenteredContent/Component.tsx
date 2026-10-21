@@ -51,6 +51,7 @@ export interface CenteredContentProps {
   mobilePaddingXCustom?: string | null
 
   className?: string
+  isColumn?: boolean
 }
 
 /**
@@ -80,6 +81,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
   headingTag = 'h2',
   descriptionGroup,
   className,
+  isColumn = false,
 }) => {
   const uid = React.useId().replace(/:/g, '')
   const [isInView, setIsInView] = useState<boolean>(false)
@@ -198,6 +200,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
       ref={sectionRef}
       className={cn(
         'w-full relative transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200',
+        isColumn && 'h-full flex-1 flex flex-col',
         isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
         sectionBgColor || 'bg-white',
         paddingTop || 'pt-16',
@@ -220,18 +223,23 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
       <div
         className={cn(
           'w-full',
-          (!mobileWidthMode || mobileWidthMode === 'default') &&
+          isColumn && 'h-full flex-1 flex flex-col',
+          !isColumn && (!mobileWidthMode || mobileWidthMode === 'default') &&
             'container mx-auto px-4 sm:px-6 lg:px-8',
-          (mobileWidthMode === 'fullWidth' || mobileWidthMode === 'customPadding') &&
+          !isColumn && (mobileWidthMode === 'fullWidth' || mobileWidthMode === 'customPadding') &&
             cn('md:container md:mx-auto md:px-6 lg:px-8', padUid),
+          isColumn && mobileWidthMode === 'default' && 'px-4 sm:px-6',
+          isColumn && mobileWidthMode === 'fullWidth' && 'px-0',
+          isColumn && mobileWidthMode === 'customPadding' && padUid,
         )}
       >
         <div
           className={cn(
             'w-full flex flex-col',
+            isColumn && 'h-full flex-1',
             !mobileWidthMode || mobileWidthMode === 'default'
-              ? maxWidth || 'max-w-4xl'
-              : cn('max-md:max-w-none', maxWidth || 'max-w-4xl'),
+              ? (isColumn && (!maxWidth || maxWidth === 'max-w-4xl') ? 'max-w-full' : (maxWidth || 'max-w-4xl'))
+              : cn('max-md:max-w-none', isColumn && (!maxWidth || maxWidth === 'max-w-4xl') ? 'max-w-full' : (maxWidth || 'max-w-4xl')),
             alignContainerClasses,
           )}
         >
@@ -277,7 +285,8 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
           {descText && (
             <div
               className={cn(
-                'w-full mt-6 md:mt-8 max-w-3xl leading-relaxed transition-colors',
+                'w-full mt-6 md:mt-8 leading-relaxed transition-colors',
+                isColumn || maxWidth === 'max-w-full' ? 'max-w-full' : 'max-w-3xl',
                 descriptionAlignClasses,
                 descColor,
                 descTypography,

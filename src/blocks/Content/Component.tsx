@@ -856,8 +856,10 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <ImageTextSplitBlock
                         key={index}
                         blockType="imageTextSplit"
+                        isColumn={true}
                         {...splitData}
                         className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
                           splitData.className,
                           col.alignment && `text-${col.alignment}`,
                         )}
@@ -1038,10 +1040,26 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'centeredContent' && (content as any).centeredContent) {
+                    const centeredData = { ...(content as any).centeredContent }
+                    if (centeredData.sectionBgColor === undefined || centeredData.sectionBgColor === null) {
+                      centeredData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (centeredData.paddingTop === undefined || centeredData.paddingTop === null) {
+                      centeredData.paddingTop = 'pt-0'
+                    }
+                    if (centeredData.paddingBottom === undefined || centeredData.paddingBottom === null) {
+                      centeredData.paddingBottom = 'pb-0'
+                    }
                     return (
                       <CenteredContentComponent
                         key={index}
-                        {...(content as any).centeredContent}
+                        isColumn={true}
+                        {...centeredData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          centeredData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
@@ -1060,8 +1078,10 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     return (
                       <CenteredButtonBlock
                         key={index}
+                        isColumn={true}
                         {...btnData}
                         className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
                           btnData.className,
                           col.alignment && `text-${col.alignment}`,
                         )}

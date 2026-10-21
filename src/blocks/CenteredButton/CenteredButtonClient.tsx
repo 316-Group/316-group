@@ -81,6 +81,7 @@ export interface CenteredButtonProps {
   } | null
 
   className?: string
+  isColumn?: boolean
 }
 
 export function formatInlineHtml(content?: string | null): string {
@@ -132,6 +133,7 @@ export const CenteredButtonClient: React.FC<CenteredButtonProps> = ({
   descriptionGroup,
   buttonGroup,
   className,
+  isColumn = false,
 }) => {
   const [uid] = useState(() => Math.random().toString(36).substring(2, 9))
   const [isInView, setIsInView] = useState<boolean>(false)
@@ -281,6 +283,7 @@ export const CenteredButtonClient: React.FC<CenteredButtonProps> = ({
       ref={sectionRef}
       className={cn(
         'relative w-full overflow-hidden transition-colors duration-300',
+        isColumn && 'h-full flex-1 flex flex-col',
         sectionBgColor,
         isPtClass && resolvedPt,
         isPbClass && resolvedPb,
@@ -306,12 +309,13 @@ export const CenteredButtonClient: React.FC<CenteredButtonProps> = ({
       <div
         className={cn(
           'w-full flex flex-col',
+          isColumn && 'h-full flex-1',
           alignContainerClasses,
-          maxWidth || 'max-w-4xl',
-          // Mobile Width Mode
-          mobileWidthMode === 'default' && 'px-4 sm:px-6 lg:px-8',
-          mobileWidthMode === 'fullWidth' && 'px-0 sm:px-6 lg:px-8',
-          mobileWidthMode === 'customPadding' && cn(customPaddingClass, 'sm:px-6 lg:px-8'),
+          isColumn && (!maxWidth || maxWidth === 'max-w-4xl') ? 'max-w-full' : (maxWidth || 'max-w-4xl'),
+          // When fullWidth is selected, do NOT force desktop gutters!
+          mobileWidthMode === 'fullWidth' && 'px-0',
+          mobileWidthMode === 'default' && (isColumn ? 'px-4 sm:px-6' : 'px-4 sm:px-6 lg:px-8'),
+          mobileWidthMode === 'customPadding' && cn(customPaddingClass, isColumn ? 'sm:px-6' : 'sm:px-6 lg:px-8'),
         )}
       >
         {/* 1. Pill Badge */}
