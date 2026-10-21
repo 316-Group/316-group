@@ -6,20 +6,25 @@ import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 import { ArrowUpRight } from 'lucide-react'
+import { resolveTypography } from '@/utilities/resolveTypography'
 
 export interface SubCardItem {
   id?: string | null
   title?: string | null
   titleColor?: string | null
   titleFontSize?: string | null
+  titleFontSizeMobile?: string | null
   titleFontWeight?: string | null
+  titleFontWeightMobile?: string | null
   titleAlignment?: 'left' | 'center' | 'right' | null
   spacingBottom?: string | null
   spacingBottomCustom?: string | null
   description?: string | null
   descriptionColor?: string | null
   descriptionFontSize?: string | null
+  descriptionFontSizeMobile?: string | null
   descriptionFontWeight?: string | null
+  descriptionFontWeightMobile?: string | null
   descriptionAlignment?: 'left' | 'center' | 'right' | null
 }
 
@@ -33,22 +38,29 @@ export interface CardItem {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
 
   headingGroup?: {
     heading?: string | null
     headingColor?: string | null
     headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
     headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
     collapsedFontSize?: string | null
+    collapsedFontSizeMobile?: string | null
   } | null
 
   descriptionGroup?: {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
   } | null
 
   subCardsGroup?: {
@@ -65,7 +77,9 @@ export interface CardItem {
     buttonBgColor?: string | null
     buttonTextColor?: string | null
     buttonFontSize?: string | null
+    buttonFontSizeMobile?: string | null
     buttonFontWeight?: string | null
+    buttonFontWeightMobile?: string | null
     iconBgColor?: string | null
     iconColor?: string | null
     buttonLink?: {
@@ -470,24 +484,47 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
         // ─── Kicker config ─────────────────────────────────────────────
         const kickerText = card.kickerGroup?.text || 'Fintech & Payments'
         const kickerColor = card.kickerGroup?.color || 'text-[#52B5D8]'
-        const kickerSize = card.kickerGroup?.fontSize || 'text-base md:text-lg'
-        const kickerWeight = card.kickerGroup?.fontWeight || 'font-semibold'
+        const kickerTypography = resolveTypography(
+          card.kickerGroup?.fontSize,
+          card.kickerGroup?.fontSizeMobile || 'text-[10px]',
+          card.kickerGroup?.fontWeight,
+          card.kickerGroup?.fontWeightMobile,
+          'text-base md:text-lg',
+          'font-semibold',
+        )
 
         // ─── Heading config ────────────────────────────────────────────
         const headingText =
           card.headingGroup?.heading || 'Making everyday finance more connected.'
         const headingColor = card.headingGroup?.headingColor || 'text-white'
-        const headingSize =
-          card.headingGroup?.headingFontSize || 'text-3xl sm:text-4xl md:text-5xl'
-        const headingWeight = card.headingGroup?.headingFontWeight || 'font-bold'
-        const collapsedSize =
-          card.headingGroup?.collapsedFontSize || 'text-xl md:text-2xl'
+        const headingTypography = resolveTypography(
+          card.headingGroup?.headingFontSize,
+          card.headingGroup?.headingFontSizeMobile || 'text-lg sm:text-xl',
+          card.headingGroup?.headingFontWeight,
+          card.headingGroup?.headingFontWeightMobile,
+          'text-3xl sm:text-4xl md:text-5xl',
+          'font-bold',
+        )
+        const collapsedTypography = resolveTypography(
+          card.headingGroup?.collapsedFontSize,
+          card.headingGroup?.collapsedFontSizeMobile || 'text-xs',
+          card.headingGroup?.headingFontWeight,
+          card.headingGroup?.headingFontWeightMobile,
+          'text-xl md:text-2xl',
+          'font-bold',
+        )
 
         // ─── Description config ────────────────────────────────────────
         const descText = card.descriptionGroup?.description
         const descColor = card.descriptionGroup?.descriptionColor || 'text-white/90'
-        const descSize = card.descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
-        const descWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
+        const descTypography = resolveTypography(
+          card.descriptionGroup?.descriptionFontSize,
+          card.descriptionGroup?.descriptionFontSizeMobile || 'text-[11px]',
+          card.descriptionGroup?.descriptionFontWeight,
+          card.descriptionGroup?.descriptionFontWeightMobile,
+          'text-base md:text-lg',
+          'font-normal',
+        )
 
         // ─── Sub-Cards config (Up to 3) ─────────────────────────────────
         const subCardsConfig = card.subCardsGroup
@@ -515,8 +552,14 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
         const buttonText = card.buttonGroup?.buttonText || 'Learn more'
         const buttonBg = card.buttonGroup?.buttonBgColor || 'bg-white/20'
         const buttonTextCol = card.buttonGroup?.buttonTextColor || 'text-white'
-        const buttonSize = card.buttonGroup?.buttonFontSize || 'text-base'
-        const buttonWeight = card.buttonGroup?.buttonFontWeight || 'font-medium'
+        const buttonTypography = resolveTypography(
+          card.buttonGroup?.buttonFontSize,
+          card.buttonGroup?.buttonFontSizeMobile || 'text-xs',
+          card.buttonGroup?.buttonFontWeight,
+          card.buttonGroup?.buttonFontWeightMobile,
+          'text-base',
+          'font-medium',
+        )
         const iconBg = card.buttonGroup?.iconBgColor || 'bg-white'
         const iconCol = card.buttonGroup?.iconColor || 'text-slate-900'
         const buttonHref = getHref(card.buttonGroup?.buttonLink)
@@ -586,11 +629,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {kickerText && (
                     <span
                       className={cn(
-                        'block mb-0.5 sm:mb-2 md:mb-3 tracking-normal transition-all duration-700 max-sm:text-[10px]',
+                        'block mb-0.5 sm:mb-2 md:mb-3 tracking-normal transition-all duration-700',
                         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                        kickerSize,
+                        kickerTypography.combined,
                         kickerColor,
-                        kickerWeight,
                       )}
                       dangerouslySetInnerHTML={{ __html: formatInlineHtml(kickerText) }}
                     />
@@ -599,11 +641,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {/* Main Heading */}
                   <h3
                     className={cn(
-                      'tracking-tight leading-[1.14] transition-all duration-700 delay-100 max-sm:text-lg sm:text-xl',
+                      'tracking-tight leading-[1.14] transition-all duration-700 delay-100',
                       isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                      headingSize,
+                      headingTypography.combined,
                       headingColor,
-                      headingWeight,
                     )}
                     dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
                   />
@@ -612,11 +653,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {descText && (
                     <div
                       className={cn(
-                        'mt-1 sm:mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200 max-sm:text-[11px]',
+                        'mt-1 sm:mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200',
                         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
-                        descSize,
+                        descTypography.combined,
                         descColor,
-                        descWeight,
                       )}
                       dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
                     />
@@ -634,14 +674,26 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                     {subCardsItems.slice(0, 3).map((subCard, subIdx) => {
                       const title = subCard.title || 'Feature'
                       const titleColor = subCard.titleColor || 'text-white'
-                      const titleSize = subCard.titleFontSize || 'text-lg md:text-xl'
-                      const titleWeight = subCard.titleFontWeight || 'font-bold'
+                      const titleTypography = resolveTypography(
+                        subCard.titleFontSize,
+                        subCard.titleFontSizeMobile || 'text-xs',
+                        subCard.titleFontWeight,
+                        subCard.titleFontWeightMobile || (subCard.titleFontWeight ? undefined : 'font-bold'),
+                        'text-lg md:text-xl',
+                        'font-bold',
+                      )
                       const titleAlign = subCard.titleAlignment || 'left'
 
                       const subDesc = subCard.description
                       const descColor = subCard.descriptionColor || 'text-white/80'
-                      const descSize = subCard.descriptionFontSize || 'text-xs md:text-sm'
-                      const descWeight = subCard.descriptionFontWeight || 'font-normal'
+                      const subDescTypography = resolveTypography(
+                        subCard.descriptionFontSize,
+                        subCard.descriptionFontSizeMobile || 'text-[10px]',
+                        subCard.descriptionFontWeight,
+                        subCard.descriptionFontWeightMobile,
+                        'text-xs md:text-sm',
+                        'font-normal',
+                      )
                       const descAlign = subCard.descriptionAlignment || 'left'
 
                       const spacing = resolveSubCardSpacing(
@@ -661,10 +713,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         >
                           <h4
                             className={cn(
-                              'whitespace-pre-line leading-tight tracking-tight max-sm:text-xs max-sm:font-bold',
-                              titleSize,
+                              'whitespace-pre-line leading-tight tracking-tight',
+                              titleTypography.combined,
                               titleColor,
-                              titleWeight,
                               alignmentTextClasses[titleAlign],
                             )}
                             dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
@@ -676,10 +727,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                           {subDesc && (
                             <p
                               className={cn(
-                                'leading-relaxed max-sm:text-[10px] max-sm:leading-tight',
-                                descSize,
+                                'leading-relaxed max-sm:leading-tight',
+                                subDescTypography.combined,
                                 descColor,
-                                descWeight,
                                 alignmentTextClasses[descAlign],
                               )}
                               dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
@@ -705,7 +755,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                       rel={isNewTab ? 'noopener noreferrer' : undefined}
                       className="inline-flex items-center gap-2 sm:gap-3 py-0.5 sm:py-1.5 px-0 bg-transparent border-0 border-transparent shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn"
                     >
-                      <span className={cn('tracking-normal transition-colors max-sm:text-xs', buttonTextCol, buttonSize, buttonWeight)}>
+                      <span className={cn('tracking-normal transition-colors', buttonTextCol, buttonTypography.combined)}>
                         {buttonText}
                       </span>
                       <span
@@ -733,10 +783,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
             >
               <h3
                 className={cn(
-                  'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors max-sm:text-xs',
-                  collapsedSize,
+                  'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors',
+                  collapsedTypography.combined,
                   headingColor,
-                  headingWeight,
                 )}
                 dangerouslySetInnerHTML={{
                   __html: formatInlineHtml(kickerText || headingText),

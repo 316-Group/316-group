@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
+import { resolveTypography } from '@/utilities/resolveTypography'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -21,7 +22,9 @@ export interface ImageSliderCardItem {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -32,7 +35,9 @@ export interface ImageSliderCardItem {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -41,7 +46,9 @@ export interface ImageSliderCardItem {
     text?: string | null
     textColor?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
     iconBgColor?: string | null
     iconColor?: string | null
@@ -208,8 +215,14 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
     const titleText = card.titleGroup?.text?.trim()
     const hasTitle = Boolean(titleText)
     const titleColor = card.titleGroup?.color || 'text-white'
-    const titleSize = card.titleGroup?.fontSize || 'text-2xl md:text-3xl'
-    const titleWeight = card.titleGroup?.fontWeight || 'font-semibold'
+    const titleTypography = resolveTypography(
+      card.titleGroup?.fontSize,
+      card.titleGroup?.fontSizeMobile,
+      card.titleGroup?.fontWeight,
+      card.titleGroup?.fontWeightMobile,
+      'text-2xl md:text-3xl',
+      'font-semibold',
+    )
     const titleAlign = card.titleGroup?.alignment || 'left'
 
     // Spacing bottom between title & description
@@ -223,8 +236,14 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
     const descText = card.descriptionGroup?.text?.trim()
     const hasDesc = Boolean(descText)
     const descColor = card.descriptionGroup?.color || 'text-white/80'
-    const descSize = card.descriptionGroup?.fontSize || 'text-sm md:text-base'
-    const descWeight = card.descriptionGroup?.fontWeight || 'font-normal'
+    const descTypography = resolveTypography(
+      card.descriptionGroup?.fontSize,
+      card.descriptionGroup?.fontSizeMobile,
+      card.descriptionGroup?.fontWeight,
+      card.descriptionGroup?.fontWeightMobile,
+      'text-sm md:text-base',
+      'font-normal',
+    )
     const descAlign = card.descriptionGroup?.alignment || 'left'
 
     // Action Button
@@ -232,8 +251,14 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
     const showBtn = btn?.showButton !== false && Boolean(btn?.text?.trim())
     const btnText = btn?.text?.trim() || 'Learn more'
     const btnTextCol = btn?.textColor || 'text-white'
-    const btnSize = btn?.fontSize || 'text-base'
-    const btnWeight = btn?.fontWeight || 'font-semibold'
+    const btnTypography = resolveTypography(
+      btn?.fontSize,
+      btn?.fontSizeMobile,
+      btn?.fontWeight,
+      btn?.fontWeightMobile,
+      'text-base',
+      'font-semibold',
+    )
     const btnAlign = btn?.alignment || 'left'
     const iconBg = btn?.iconBgColor || 'bg-white'
     const iconCol = btn?.iconColor || 'text-gray-900'
@@ -284,8 +309,7 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
               className={cn(
                 'tracking-tight leading-tight transition-colors',
                 titleColor,
-                titleSize,
-                titleWeight,
+                titleTypography,
                 textAlignClasses[titleAlign],
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(titleText) }}
@@ -303,8 +327,7 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
               className={cn(
                 'leading-relaxed transition-colors',
                 descColor,
-                descSize,
-                descWeight,
+                descTypography,
                 textAlignClasses[descAlign],
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
@@ -331,8 +354,7 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
                   className={cn(
                     'tracking-normal transition-colors duration-200 group-hover/btn:opacity-90',
                     btnTextCol,
-                    btnSize,
-                    btnWeight,
+                    btnTypography,
                   )}
                 >
                   {btnText}

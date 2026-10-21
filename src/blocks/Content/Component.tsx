@@ -33,6 +33,7 @@ import { BlogPostUpdatedBlock } from '../BlogPostUpdated/Component'
 import { ReadyToGrowBlock } from '../ReadyToGrow/Component'
 import { WhoWeAreBlock } from '../WhoWeAre/Component'
 import { NumberedGridBlock } from '../NumberedGrid/Component'
+import { MissionVisionBlock } from '../MissionVision/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1152,6 +1153,34 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col justify-between',
                           numGridData.className,
+                        )}
+                      />
+                    )
+                  }
+
+                  if ((contentType as string) === 'missionVision' && (content as any).missionVision) {
+                    const mvData = { ...(content as any).missionVision }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      mvData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      mvData.paddingTopDesktop = '0px'
+                      mvData.paddingTopMobile = '0px'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      mvData.paddingBottomDesktop = '0px'
+                      mvData.paddingBottomMobile = '0px'
+                    }
+                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                      mvData.paddingMode = 'none'
+                    }
+                    return (
+                      <MissionVisionBlock
+                        key={index}
+                        {...mvData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                          mvData.className,
                         )}
                       />
                     )

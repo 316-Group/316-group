@@ -353,6 +353,39 @@ export const clickExpandFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Kicker Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Kicker Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+            ],
+          },
         ],
       },
 
@@ -419,6 +452,53 @@ export const clickExpandFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'headingFontSizeMobile',
+                type: 'select',
+                label: 'Active Heading Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+              {
+                name: 'headingFontWeightMobile',
+                type: 'select',
+                label: 'Heading Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+              {
+                name: 'collapsedFontSizeMobile',
+                type: 'select',
+                label: 'Collapsed Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '33.33%',
+                },
+              },
+            ],
+          },
         ],
       },
 
@@ -469,6 +549,39 @@ export const clickExpandFields: Field[] = [
                 options: fontWeightOptions,
                 admin: {
                   width: '33.33%',
+                },
+              },
+            ],
+          },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'descriptionFontSizeMobile',
+                type: 'select',
+                label: 'Description Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'descriptionFontWeightMobile',
+                type: 'select',
+                label: 'Description Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
                 },
               },
             ],
@@ -618,6 +731,39 @@ export const clickExpandFields: Field[] = [
                 type: 'row',
                 fields: [
                   {
+                    name: 'titleFontSizeMobile',
+                    type: 'select',
+                    label: 'Heading Font Size (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Auto Responsive', value: '' },
+                      ...fontSizeOptions,
+                    ],
+                    admin: {
+                      width: '50%',
+                    },
+                  },
+                  {
+                    name: 'titleFontWeightMobile',
+                    type: 'select',
+                    label: 'Heading Font Weight (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Default', value: '' },
+                      ...fontWeightOptions,
+                    ],
+                    admin: {
+                      width: '50%',
+                    },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
                     name: 'spacingBottom',
                     type: 'select',
                     label: 'Spacing Between Heading & Description',
@@ -699,6 +845,39 @@ export const clickExpandFields: Field[] = [
                     options: alignmentOptions,
                     admin: {
                       width: '25%',
+                    },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'descriptionFontSizeMobile',
+                    type: 'select',
+                    label: 'Description Font Size (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Auto Responsive', value: '' },
+                      ...fontSizeOptions,
+                    ],
+                    admin: {
+                      width: '50%',
+                    },
+                  },
+                  {
+                    name: 'descriptionFontWeightMobile',
+                    type: 'select',
+                    label: 'Description Font Weight (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Default', value: '' },
+                      ...fontWeightOptions,
+                    ],
+                    admin: {
+                      width: '50%',
                     },
                   },
                 ],
@@ -809,6 +988,42 @@ export const clickExpandFields: Field[] = [
                   },
                 },
               }),
+            ],
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, siblingData) => siblingData?.showButton !== false,
+            },
+            fields: [
+              {
+                name: 'buttonFontSizeMobile',
+                type: 'select',
+                label: 'Button Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'buttonFontWeightMobile',
+                type: 'select',
+                label: 'Button Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
             ],
           },
           link({

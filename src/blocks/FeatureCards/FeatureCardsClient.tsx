@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import type SwiperType from 'swiper'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { resolveTypography } from '@/utilities/resolveTypography'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -26,7 +27,9 @@ export interface FeatureCardItem {
     subtitle?: string | null
     subtitleColor?: string | null
     subtitleFontSize?: string | null
+    subtitleFontSizeMobile?: string | null
     subtitleFontWeight?: string | null
+    subtitleFontWeightMobile?: string | null
     subtitleAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -34,7 +37,9 @@ export interface FeatureCardItem {
     heading: string
     headingColor?: string | null
     headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
     headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
     headingAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -42,7 +47,9 @@ export interface FeatureCardItem {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
     descriptionAlignment?: 'left' | 'center' | 'right' | null
   } | null
 }
@@ -203,20 +210,38 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
 
     const subtitleText = card.subtitleGroup?.subtitle || ''
     const subtitleColor = card.subtitleGroup?.subtitleColor || 'text-gray-950'
-    const subtitleSize = card.subtitleGroup?.subtitleFontSize || 'text-base'
-    const subtitleWeight = card.subtitleGroup?.subtitleFontWeight || 'font-normal'
+    const subtitleTypography = resolveTypography(
+      card.subtitleGroup?.subtitleFontSize,
+      card.subtitleGroup?.subtitleFontSizeMobile,
+      card.subtitleGroup?.subtitleFontWeight,
+      card.subtitleGroup?.subtitleFontWeightMobile,
+      'text-base',
+      'font-normal',
+    )
     const subtitleAlign = card.subtitleGroup?.subtitleAlignment || 'left'
 
     const headingText = card.headingGroup?.heading || ''
     const headingColor = card.headingGroup?.headingColor || 'text-gray-950'
-    const headingSize = card.headingGroup?.headingFontSize || 'text-2xl md:text-[1.65rem]'
-    const headingWeight = card.headingGroup?.headingFontWeight || 'font-bold'
+    const headingTypography = resolveTypography(
+      card.headingGroup?.headingFontSize,
+      card.headingGroup?.headingFontSizeMobile,
+      card.headingGroup?.headingFontWeight,
+      card.headingGroup?.headingFontWeightMobile,
+      'text-2xl md:text-[1.65rem]',
+      'font-bold',
+    )
     const headingAlign = card.headingGroup?.headingAlignment || 'left'
 
     const descText = card.descriptionGroup?.description || ''
     const descColor = card.descriptionGroup?.descriptionColor || 'text-gray-600'
-    const descSize = card.descriptionGroup?.descriptionFontSize || 'text-sm md:text-base'
-    const descWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
+    const descTypography = resolveTypography(
+      card.descriptionGroup?.descriptionFontSize,
+      card.descriptionGroup?.descriptionFontSizeMobile,
+      card.descriptionGroup?.descriptionFontWeight,
+      card.descriptionGroup?.descriptionFontWeightMobile,
+      'text-sm md:text-base',
+      'font-normal',
+    )
     const descAlign = card.descriptionGroup?.descriptionAlignment || 'left'
 
     const staggerDelay = delayClasses[index % 3]
@@ -267,9 +292,8 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
           <div
             className={cn(
               'leading-snug transition-colors mb-2 md:mb-2.5',
-              subtitleSize,
+              subtitleTypography.combined,
               subtitleColor,
-              subtitleWeight,
               textAlignClasses[subtitleAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(subtitleText) }}
@@ -281,9 +305,8 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
           <h3
             className={cn(
               'tracking-tight leading-snug transition-colors mb-3 md:mb-4',
-              headingSize,
+              headingTypography.combined,
               headingColor,
-              headingWeight,
               textAlignClasses[headingAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
@@ -295,9 +318,8 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
           <div
             className={cn(
               'leading-relaxed transition-colors',
-              descSize,
+              descTypography.combined,
               descColor,
-              descWeight,
               textAlignClasses[descAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}

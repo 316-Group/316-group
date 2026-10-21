@@ -13,6 +13,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+import { resolveTypography } from '@/utilities/resolveTypography'
+
 // ─── TYPES ───────────────────────────────────────────────────────────────────
 
 export interface FeatureCardItem {
@@ -29,7 +31,9 @@ export interface FeatureCardItem {
     subtitle?: string | null
     subtitleColor?: string | null
     subtitleFontSize?: string | null
+    subtitleFontSizeMobile?: string | null
     subtitleFontWeight?: string | null
+    subtitleFontWeightMobile?: string | null
     subtitleAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -37,7 +41,9 @@ export interface FeatureCardItem {
     heading: string
     headingColor?: string | null
     headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
     headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
     headingAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -45,7 +51,9 @@ export interface FeatureCardItem {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
     descriptionAlignment?: 'left' | 'center' | 'right' | null
   } | null
 }
@@ -69,12 +77,16 @@ export interface HeaderGroupProps {
   heading?: string | null
   headingColor?: string | null
   headingFontSize?: string | null
+  headingFontSizeMobile?: string | null
   headingFontWeight?: string | null
+  headingFontWeightMobile?: string | null
   headingAlignment?: 'left' | 'center' | 'right' | null
   description?: string | null
   descriptionColor?: string | null
   descriptionFontSize?: string | null
+  descriptionFontSizeMobile?: string | null
   descriptionFontWeight?: string | null
+  descriptionFontWeightMobile?: string | null
   enableButton?: boolean | null
   buttonText?: string | null
   buttonLink?: {
@@ -89,7 +101,9 @@ export interface HeaderGroupProps {
   buttonBgColor?: string | null
   buttonTextColor?: string | null
   buttonFontSize?: string | null
+  buttonFontSizeMobile?: string | null
   buttonFontWeight?: string | null
+  buttonFontWeightMobile?: string | null
   buttonAlignmentDesktop?: 'left' | 'center' | 'right' | null
   buttonAlignmentMobile?: 'left' | 'center' | 'right' | null
   headerSpacingBottom?: string | null
@@ -250,8 +264,14 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
     headerGroup?.heading !== undefined ? headerGroup.heading?.trim() : 'Why 316 group'
   const hasHeading = Boolean(headingText)
   const headingColor = headerGroup?.headingColor || 'text-gray-950'
-  const headingSize = headerGroup?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl'
-  const headingWeight = headerGroup?.headingFontWeight || 'font-bold'
+  const headingTypography = resolveTypography(
+    headerGroup?.headingFontSize,
+    headerGroup?.headingFontSizeMobile,
+    headerGroup?.headingFontWeight,
+    headerGroup?.headingFontWeightMobile,
+    'text-3xl md:text-4xl lg:text-5xl',
+    'font-bold',
+  )
   const headingAlign = headerGroup?.headingAlignment || 'left'
 
   const descText =
@@ -260,16 +280,28 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
       : 'We empower businesses with technology, strategic expertise, and future-ready solutions'
   const hasDesc = Boolean(descText)
   const descColor = headerGroup?.descriptionColor || 'text-gray-600'
-  const descSize = headerGroup?.descriptionFontSize || 'text-base md:text-lg'
-  const descWeight = headerGroup?.descriptionFontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    headerGroup?.descriptionFontSize,
+    headerGroup?.descriptionFontSizeMobile,
+    headerGroup?.descriptionFontWeight,
+    headerGroup?.descriptionFontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
 
   const buttonText =
     headerGroup?.buttonText !== undefined ? headerGroup.buttonText?.trim() : 'Book a session'
   const hasButton = headerGroup?.enableButton !== false && Boolean(buttonText)
   const btnBg = headerGroup?.buttonBgColor || 'bg-[#1D4ED8]'
   const btnTextCol = headerGroup?.buttonTextColor || 'text-white'
-  const btnSize = headerGroup?.buttonFontSize || 'text-sm md:text-base'
-  const btnWeight = headerGroup?.buttonFontWeight || 'font-semibold'
+  const btnTypography = resolveTypography(
+    headerGroup?.buttonFontSize,
+    headerGroup?.buttonFontSizeMobile,
+    headerGroup?.buttonFontWeight,
+    headerGroup?.buttonFontWeightMobile,
+    'text-sm md:text-base',
+    'font-semibold',
+  )
   const btnAlignDesktop = headerGroup?.buttonAlignmentDesktop || 'right'
   const btnAlignMobile = headerGroup?.buttonAlignmentMobile || 'left'
   const headerSpacing = headerGroup?.headerSpacingBottom || 'mb-10 md:mb-14'
@@ -300,8 +332,7 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
       'inline-flex items-center justify-center px-7 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center',
       btnBg,
       btnTextCol,
-      btnSize,
-      btnWeight,
+      btnTypography.combined,
     )
 
     if (btnHref) {
@@ -339,21 +370,38 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
 
     const subtitleText = card.subtitleGroup?.subtitle || ''
     const subtitleColor = card.subtitleGroup?.subtitleColor || 'text-gray-950'
-    const subtitleSize = card.subtitleGroup?.subtitleFontSize || 'text-base'
-    const subtitleWeight = card.subtitleGroup?.subtitleFontWeight || 'font-normal'
+    const subtitleTypography = resolveTypography(
+      card.subtitleGroup?.subtitleFontSize,
+      card.subtitleGroup?.subtitleFontSizeMobile,
+      card.subtitleGroup?.subtitleFontWeight,
+      card.subtitleGroup?.subtitleFontWeightMobile,
+      'text-base',
+      'font-normal',
+    )
     const subtitleAlign = card.subtitleGroup?.subtitleAlignment || 'left'
 
     const headingCardText = card.headingGroup?.heading || ''
     const headingCardColor = card.headingGroup?.headingColor || 'text-gray-950'
-    const headingCardSize =
-      card.headingGroup?.headingFontSize || 'text-2xl md:text-[1.65rem]'
-    const headingCardWeight = card.headingGroup?.headingFontWeight || 'font-bold'
+    const headingCardTypography = resolveTypography(
+      card.headingGroup?.headingFontSize,
+      card.headingGroup?.headingFontSizeMobile,
+      card.headingGroup?.headingFontWeight,
+      card.headingGroup?.headingFontWeightMobile,
+      'text-2xl md:text-[1.65rem]',
+      'font-bold',
+    )
     const headingCardAlign = card.headingGroup?.headingAlignment || 'left'
 
     const cardDescText = card.descriptionGroup?.description || ''
     const cardDescColor = card.descriptionGroup?.descriptionColor || 'text-gray-600'
-    const cardDescSize = card.descriptionGroup?.descriptionFontSize || 'text-sm md:text-base'
-    const cardDescWeight = card.descriptionGroup?.descriptionFontWeight || 'font-normal'
+    const cardDescTypography = resolveTypography(
+      card.descriptionGroup?.descriptionFontSize,
+      card.descriptionGroup?.descriptionFontSizeMobile,
+      card.descriptionGroup?.descriptionFontWeight,
+      card.descriptionGroup?.descriptionFontWeightMobile,
+      'text-sm md:text-base',
+      'font-normal',
+    )
     const cardDescAlign = card.descriptionGroup?.descriptionAlignment || 'left'
 
     const staggerDelay = delayClasses[index % 3]
@@ -404,9 +452,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
           <div
             className={cn(
               'leading-snug transition-colors mb-2 md:mb-2.5',
-              subtitleSize,
+              subtitleTypography.combined,
               subtitleColor,
-              subtitleWeight,
               textAlignClasses[subtitleAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(subtitleText) }}
@@ -418,9 +465,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
           <h3
             className={cn(
               'tracking-tight leading-snug transition-colors mb-3 md:mb-4',
-              headingCardSize,
+              headingCardTypography.combined,
               headingCardColor,
-              headingCardWeight,
               textAlignClasses[headingCardAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingCardText) }}
@@ -432,9 +478,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
           <div
             className={cn(
               'leading-relaxed transition-colors',
-              cardDescSize,
+              cardDescTypography.combined,
               cardDescColor,
-              cardDescWeight,
               textAlignClasses[cardDescAlign],
             )}
             dangerouslySetInnerHTML={{ __html: formatInlineHtml(cardDescText) }}
@@ -496,9 +541,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
                 <h2
                   className={cn(
                     'tracking-tight leading-[1.12] transition-colors',
-                    headingSize,
+                    headingTypography.combined,
                     headingColor,
-                    headingWeight,
                     textAlignClasses[headingAlign],
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
@@ -508,9 +552,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
                 <p
                   className={cn(
                     'mt-3 md:mt-4 leading-relaxed max-w-2xl transition-colors',
-                    descSize,
+                    descTypography.combined,
                     descColor,
-                    descWeight,
                     textAlignClasses[headingAlign],
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}

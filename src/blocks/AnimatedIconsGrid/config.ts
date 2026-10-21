@@ -367,6 +367,41 @@ export const animatedIconsGridFields: Field[] = [
           },
         ],
       },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'headingFontSizeMobile',
+            type: 'select',
+            label: 'Heading Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides heading font size on mobile screens.',
+            },
+          },
+          {
+            name: 'headingFontWeightMobile',
+            type: 'select',
+            label: 'Heading Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides heading font weight on mobile screens.',
+            },
+          },
+        ],
+      },
     ],
   },
 
@@ -421,6 +456,41 @@ export const animatedIconsGridFields: Field[] = [
             validate: allowAnySelect,
             options: alignmentOptions,
             admin: { width: '25%' },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'descriptionFontSizeMobile',
+            type: 'select',
+            label: 'Description Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides description font size on mobile screens.',
+            },
+          },
+          {
+            name: 'descriptionFontWeightMobile',
+            type: 'select',
+            label: 'Description Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides description font weight on mobile screens.',
+            },
           },
         ],
       },
@@ -528,6 +598,42 @@ export const animatedIconsGridFields: Field[] = [
             validate: allowAnySelect,
             options: fontWeightOptions,
             admin: { width: '33.33%' },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        admin: { condition: (_, s) => s?.enableButton !== false },
+        fields: [
+          {
+            name: 'buttonFontSizeMobile',
+            type: 'select',
+            label: 'Button Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides button font size on mobile screens.',
+            },
+          },
+          {
+            name: 'buttonFontWeightMobile',
+            type: 'select',
+            label: 'Button Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: {
+              width: '50%',
+              description: 'Overrides button font weight on mobile screens.',
+            },
           },
         ],
       },

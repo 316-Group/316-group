@@ -215,6 +215,35 @@ export const splitTextFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Badge Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: { width: '50%' },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Badge Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: { width: '50%' },
+              },
+            ],
+          },
         ],
       },
 
@@ -300,6 +329,35 @@ export const splitTextFields: Field[] = [
             ],
           },
           {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Heading Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: { width: '50%' },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Heading Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: { width: '50%' },
+              },
+            ],
+          },
+          {
             name: 'tag',
             type: 'select',
             label: 'HTML Tag',
@@ -359,6 +417,35 @@ export const splitTextFields: Field[] = [
             validate: allowAnySelect,
             options: fontWeightOptions,
             admin: { width: '33.33%' },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'fontSizeMobile',
+            type: 'select',
+            label: 'Description Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: { width: '50%' },
+          },
+          {
+            name: 'fontWeightMobile',
+            type: 'select',
+            label: 'Description Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: { width: '50%' },
           },
         ],
       },

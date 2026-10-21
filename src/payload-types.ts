@@ -8722,6 +8722,46 @@ export interface Page {
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           headingAlignment?: ('left' | 'center' | 'right') | null;
+          /**
+           * Overrides heading font size on mobile screens.
+           */
+          headingFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          /**
+           * Overrides heading font weight on mobile screens.
+           */
+          headingFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
         };
         descriptionGroup?: {
           description?: string | null;
@@ -9021,6 +9061,46 @@ export interface Page {
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           descriptionAlignment?: ('left' | 'center' | 'right') | null;
+          /**
+           * Overrides description font size on mobile screens.
+           */
+          descriptionFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          /**
+           * Overrides description font weight on mobile screens.
+           */
+          descriptionFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
         };
         buttonGroup?: {
           enableButton?: boolean | null;
@@ -10142,6 +10222,46 @@ export interface Page {
             | null;
           buttonFontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          /**
+           * Overrides button font size on mobile screens.
+           */
+          buttonFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          /**
+           * Overrides button font weight on mobile screens.
+           */
+          buttonFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
         };
         /**
@@ -11410,7 +11530,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                subtitleFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 subtitleFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                subtitleFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 subtitleAlignment?: ('left' | 'center' | 'right') | null;
@@ -11712,7 +11865,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                headingFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 headingFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                headingFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -12011,7 +12197,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                descriptionFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 descriptionFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                descriptionFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 descriptionAlignment?: ('left' | 'center' | 'right') | null;
@@ -12669,7 +12888,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          headingFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           headingFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          headingFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -12969,7 +13221,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          descriptionFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           descriptionFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          descriptionFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           enableButton?: boolean | null;
@@ -13565,7 +13850,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          buttonFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           buttonFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          buttonFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           buttonAlignmentDesktop?: ('right' | 'center' | 'left') | null;
@@ -14409,7 +14727,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                subtitleFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 subtitleFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                subtitleFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 subtitleAlignment?: ('left' | 'center' | 'right') | null;
@@ -14711,7 +15062,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                headingFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 headingFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                headingFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -15010,7 +15394,40 @@ export interface Page {
                       | 'text-6xl md:text-7xl lg:text-8xl'
                     )
                   | null;
+                descriptionFontSizeMobile?:
+                  | (
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
                 descriptionFontWeight?:
+                  | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                  | null;
+                descriptionFontWeightMobile?:
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 descriptionAlignment?: ('left' | 'center' | 'right') | null;
@@ -15913,6 +16330,39 @@ export interface Page {
             badgeFontWeight?:
               | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
               | null;
+            badgeFontSizeMobile?:
+              | (
+                  | 'text-xs'
+                  | 'text-sm'
+                  | 'text-base'
+                  | 'text-lg'
+                  | 'text-xl'
+                  | 'text-2xl'
+                  | 'text-3xl'
+                  | 'text-4xl'
+                  | 'text-5xl'
+                  | 'text-6xl'
+                  | 'text-7xl'
+                  | 'text-8xl'
+                  | 'text-xs md:text-sm'
+                  | 'text-sm md:text-base'
+                  | 'text-base md:text-lg'
+                  | 'text-base md:text-lg lg:text-xl'
+                  | 'text-lg md:text-xl'
+                  | 'text-lg md:text-xl lg:text-2xl'
+                  | 'text-xl md:text-2xl'
+                  | 'text-2xl md:text-[1.65rem]'
+                  | 'text-2xl md:text-3xl'
+                  | 'text-3xl md:text-4xl'
+                  | 'text-3xl md:text-4xl lg:text-5xl'
+                  | 'text-4xl md:text-5xl lg:text-6xl'
+                  | 'text-5xl md:text-6xl lg:text-7xl'
+                  | 'text-6xl md:text-7xl lg:text-8xl'
+                )
+              | null;
+            badgeFontWeightMobile?:
+              | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+              | null;
             badgeMarginBottom?: ('mb-2' | 'mb-4 md:mb-6' | 'mb-6 md:mb-8' | 'mb-8 md:mb-12') | null;
           };
           /**
@@ -16212,6 +16662,39 @@ export interface Page {
               )
             | null;
           subHeadingFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          subHeadingFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          subHeadingFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           subHeadingMarginBottom?: ('mb-0' | 'mb-1 md:mb-2' | 'mb-2 md:mb-3' | 'mb-4 md:mb-6') | null;
@@ -16514,6 +16997,39 @@ export interface Page {
           headingFontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
+          headingFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          headingFontWeightMobile?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
           headingMarginBottom?: ('mb-4' | 'mb-6 md:mb-8' | 'mb-8 md:mb-10' | 'mb-12') | null;
           /**
            * Description text below headings. Supports inline styling. Leave blank to hide.
@@ -16812,6 +17328,39 @@ export interface Page {
               )
             | null;
           descriptionFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          descriptionFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          descriptionFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           spacingBelowDescription?: ('mb-6' | 'mb-8 md:mb-10' | 'mb-10 md:mb-12' | 'mb-14 md:mb-16' | 'custom') | null;
@@ -17412,6 +17961,39 @@ export interface Page {
                 )
               | null;
             button1FontWeight?:
+              | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+              | null;
+            button1FontSizeMobile?:
+              | (
+                  | 'text-xs'
+                  | 'text-sm'
+                  | 'text-base'
+                  | 'text-lg'
+                  | 'text-xl'
+                  | 'text-2xl'
+                  | 'text-3xl'
+                  | 'text-4xl'
+                  | 'text-5xl'
+                  | 'text-6xl'
+                  | 'text-7xl'
+                  | 'text-8xl'
+                  | 'text-xs md:text-sm'
+                  | 'text-sm md:text-base'
+                  | 'text-base md:text-lg'
+                  | 'text-base md:text-lg lg:text-xl'
+                  | 'text-lg md:text-xl'
+                  | 'text-lg md:text-xl lg:text-2xl'
+                  | 'text-xl md:text-2xl'
+                  | 'text-2xl md:text-[1.65rem]'
+                  | 'text-2xl md:text-3xl'
+                  | 'text-3xl md:text-4xl'
+                  | 'text-3xl md:text-4xl lg:text-5xl'
+                  | 'text-4xl md:text-5xl lg:text-6xl'
+                  | 'text-5xl md:text-6xl lg:text-7xl'
+                  | 'text-6xl md:text-7xl lg:text-8xl'
+                )
+              | null;
+            button1FontWeightMobile?:
               | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
               | null;
             enableButton2?: boolean | null;
@@ -18269,6 +18851,39 @@ export interface Page {
             button2FontWeight?:
               | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
               | null;
+            button2FontSizeMobile?:
+              | (
+                  | 'text-xs'
+                  | 'text-sm'
+                  | 'text-base'
+                  | 'text-lg'
+                  | 'text-xl'
+                  | 'text-2xl'
+                  | 'text-3xl'
+                  | 'text-4xl'
+                  | 'text-5xl'
+                  | 'text-6xl'
+                  | 'text-7xl'
+                  | 'text-8xl'
+                  | 'text-xs md:text-sm'
+                  | 'text-sm md:text-base'
+                  | 'text-base md:text-lg'
+                  | 'text-base md:text-lg lg:text-xl'
+                  | 'text-lg md:text-xl'
+                  | 'text-lg md:text-xl lg:text-2xl'
+                  | 'text-xl md:text-2xl'
+                  | 'text-2xl md:text-[1.65rem]'
+                  | 'text-2xl md:text-3xl'
+                  | 'text-3xl md:text-4xl'
+                  | 'text-3xl md:text-4xl lg:text-5xl'
+                  | 'text-4xl md:text-5xl lg:text-6xl'
+                  | 'text-5xl md:text-6xl lg:text-7xl'
+                  | 'text-6xl md:text-7xl lg:text-8xl'
+                )
+              | null;
+            button2FontWeightMobile?:
+              | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+              | null;
           };
           officesGroup?: {
             /**
@@ -18568,6 +19183,39 @@ export interface Page {
                 )
               | null;
             officesHeadingFontWeight?:
+              | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+              | null;
+            officesHeadingFontSizeMobile?:
+              | (
+                  | 'text-xs'
+                  | 'text-sm'
+                  | 'text-base'
+                  | 'text-lg'
+                  | 'text-xl'
+                  | 'text-2xl'
+                  | 'text-3xl'
+                  | 'text-4xl'
+                  | 'text-5xl'
+                  | 'text-6xl'
+                  | 'text-7xl'
+                  | 'text-8xl'
+                  | 'text-xs md:text-sm'
+                  | 'text-sm md:text-base'
+                  | 'text-base md:text-lg'
+                  | 'text-base md:text-lg lg:text-xl'
+                  | 'text-lg md:text-xl'
+                  | 'text-lg md:text-xl lg:text-2xl'
+                  | 'text-xl md:text-2xl'
+                  | 'text-2xl md:text-[1.65rem]'
+                  | 'text-2xl md:text-3xl'
+                  | 'text-3xl md:text-4xl'
+                  | 'text-3xl md:text-4xl lg:text-5xl'
+                  | 'text-4xl md:text-5xl lg:text-6xl'
+                  | 'text-5xl md:text-6xl lg:text-7xl'
+                  | 'text-6xl md:text-7xl lg:text-8xl'
+                )
+              | null;
+            officesHeadingFontWeightMobile?:
               | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
               | null;
             officesHeadingMarginBottom?: ('mb-2' | 'mb-4' | 'mb-6') | null;
@@ -18871,6 +19519,39 @@ export interface Page {
                       )
                     | null;
                   labelFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  labelFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  labelFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   id?: string | null;
@@ -19178,6 +19859,39 @@ export interface Page {
           subHeadingFontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
+          subHeadingFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          subHeadingFontWeightMobile?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
           subHeadingMarginBottom?: ('mb-0' | 'mb-2 md:mb-3' | 'mb-4') | null;
           /**
            * Right column description text. Supports inline styling. Leave blank to hide.
@@ -19478,6 +20192,39 @@ export interface Page {
           descriptionFontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
+          descriptionFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          descriptionFontWeightMobile?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
           descriptionMarginBottom?: ('mb-4' | 'mb-6 md:mb-8' | 'mb-10') | null;
           /**
            * Upload the abstract glowing wave graphic (Mockup 1) or dotted world map (Mockup 2). Optional.
@@ -19487,13 +20234,29 @@ export interface Page {
           imageFit?: ('object-cover' | 'object-contain') | null;
         };
         dividerSettings?: {
+          /**
+           * Show or hide the horizontal rule (HR) line in this section.
+           */
           enableDivider?: boolean | null;
+          /**
+           * When enabled, separates the HR line into two distinct lines (one on Left Col and one on Right Col). When disabled, shows one full straight HR line across both columns.
+           */
+          divideHRLine?: boolean | null;
           dividerLayout?: ('full' | 'split') | null;
           dividerColor?:
-            | ('border-white/20' | 'border-white/40' | 'border-gray-200' | 'border-[#EFF1F8]' | 'border-slate-800')
+            | (
+                | 'border-white/20'
+                | 'border-white/40'
+                | 'border-white/70'
+                | 'border-white'
+                | 'border-gray-200'
+                | 'border-[#EFF1F8]'
+                | 'border-slate-800'
+              )
             | null;
-          dividerSpacingTop?: ('mt-8' | 'mt-12 md:mt-16' | 'mt-16 md:mt-20' | 'mt-20 md:mt-28') | null;
-          dividerSpacingBottom?: ('mb-8' | 'mb-12 md:mb-16' | 'mb-16 md:mb-20' | 'mb-20 md:mb-28') | null;
+          dividerThickness?: ('border-t' | 'border-t-2' | 'border-t-4') | null;
+          dividerSpacingTop?: ('mt-0' | 'mt-8' | 'mt-12 md:mt-16' | 'mt-16 md:mt-20' | 'mt-20 md:mt-28') | null;
+          dividerSpacingBottom?: ('mb-0' | 'mb-8' | 'mb-12 md:mb-16' | 'mb-16 md:mb-20' | 'mb-20 md:mb-28') | null;
         };
         statsGroup?: {
           /**
@@ -19799,6 +20562,36 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          statValueFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           statLabelColor?:
             | (
                 | 'text-inherit'
@@ -20062,6 +20855,36 @@ export interface Page {
               )
             | null;
           statLabelFontSize?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          statLabelFontSizeMobile?:
             | (
                 | 'text-xs'
                 | 'text-sm'
@@ -20710,7 +21533,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          numberFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           numberFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          numberFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           numberMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3 md:mb-4' | 'mb-5 md:mb-6') | null;
@@ -21006,7 +21862,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          subHeadingFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           subHeadingFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          subHeadingFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           subHeadingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3 md:mb-4' | 'mb-5 md:mb-6') | null;
@@ -21302,7 +22191,40 @@ export interface Page {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          descriptionFontSizeMobile?:
+            | (
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
           descriptionFontWeight?:
+            | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          descriptionFontWeightMobile?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
         };
@@ -21591,6 +22513,1304 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'numberedGrid';
+      }
+    | {
+        /**
+         * Choose background color for this section (Default: Brand Blue).
+         */
+        sectionBgColor?:
+          | (
+              | 'bg-inherit'
+              | 'bg-current'
+              | 'bg-transparent'
+              | 'bg-black'
+              | 'bg-black/10'
+              | 'bg-black/20'
+              | 'bg-white'
+              | 'bg-white/10'
+              | 'bg-white/15'
+              | 'bg-white/20'
+              | 'bg-white/30'
+              | 'bg-[#F7F8F4]'
+              | 'bg-[#EFF1F8]'
+              | 'bg-[#F4F6FB]'
+              | 'bg-[#EFF2FE]'
+              | 'bg-[#1D4ED8]'
+              | 'bg-[#3F5AC9]'
+              | 'bg-light-sky'
+              | 'bg-[#0256FF]'
+              | 'bg-blue-custom'
+              | 'bg-cyan-neon'
+              | 'bg-slate-50'
+              | 'bg-slate-100'
+              | 'bg-slate-200'
+              | 'bg-slate-300'
+              | 'bg-slate-400'
+              | 'bg-slate-500'
+              | 'bg-slate-600'
+              | 'bg-slate-700'
+              | 'bg-slate-800'
+              | 'bg-slate-900'
+              | 'bg-slate-950'
+              | 'bg-gray-50'
+              | 'bg-gray-100'
+              | 'bg-gray-200'
+              | 'bg-gray-300'
+              | 'bg-gray-400'
+              | 'bg-gray-500'
+              | 'bg-gray-600'
+              | 'bg-gray-700'
+              | 'bg-gray-800'
+              | 'bg-gray-900'
+              | 'bg-gray-950'
+              | 'bg-zinc-50'
+              | 'bg-zinc-100'
+              | 'bg-zinc-200'
+              | 'bg-zinc-300'
+              | 'bg-zinc-400'
+              | 'bg-zinc-500'
+              | 'bg-zinc-600'
+              | 'bg-zinc-700'
+              | 'bg-zinc-800'
+              | 'bg-zinc-900'
+              | 'bg-zinc-950'
+              | 'bg-neutral-50'
+              | 'bg-neutral-100'
+              | 'bg-neutral-200'
+              | 'bg-neutral-300'
+              | 'bg-neutral-400'
+              | 'bg-neutral-500'
+              | 'bg-neutral-600'
+              | 'bg-neutral-700'
+              | 'bg-neutral-800'
+              | 'bg-neutral-900'
+              | 'bg-neutral-950'
+              | 'bg-stone-50'
+              | 'bg-stone-100'
+              | 'bg-stone-200'
+              | 'bg-stone-300'
+              | 'bg-stone-400'
+              | 'bg-stone-500'
+              | 'bg-stone-600'
+              | 'bg-stone-700'
+              | 'bg-stone-800'
+              | 'bg-stone-900'
+              | 'bg-stone-950'
+              | 'bg-red-50'
+              | 'bg-red-100'
+              | 'bg-red-200'
+              | 'bg-red-300'
+              | 'bg-red-400'
+              | 'bg-red-500'
+              | 'bg-red-600'
+              | 'bg-red-700'
+              | 'bg-red-800'
+              | 'bg-red-900'
+              | 'bg-red-950'
+              | 'bg-orange-50'
+              | 'bg-orange-100'
+              | 'bg-orange-200'
+              | 'bg-orange-300'
+              | 'bg-orange-400'
+              | 'bg-orange-500'
+              | 'bg-orange-600'
+              | 'bg-orange-700'
+              | 'bg-orange-800'
+              | 'bg-orange-900'
+              | 'bg-orange-950'
+              | 'bg-amber-50'
+              | 'bg-amber-100'
+              | 'bg-amber-200'
+              | 'bg-amber-300'
+              | 'bg-amber-400'
+              | 'bg-amber-500'
+              | 'bg-amber-600'
+              | 'bg-amber-700'
+              | 'bg-amber-800'
+              | 'bg-amber-900'
+              | 'bg-amber-950'
+              | 'bg-yellow-50'
+              | 'bg-yellow-100'
+              | 'bg-yellow-200'
+              | 'bg-yellow-300'
+              | 'bg-yellow-400'
+              | 'bg-yellow-500'
+              | 'bg-yellow-600'
+              | 'bg-yellow-700'
+              | 'bg-yellow-800'
+              | 'bg-yellow-900'
+              | 'bg-yellow-950'
+              | 'bg-lime-50'
+              | 'bg-lime-100'
+              | 'bg-lime-200'
+              | 'bg-lime-300'
+              | 'bg-lime-400'
+              | 'bg-lime-500'
+              | 'bg-lime-600'
+              | 'bg-lime-700'
+              | 'bg-lime-800'
+              | 'bg-lime-900'
+              | 'bg-lime-950'
+              | 'bg-green-50'
+              | 'bg-green-100'
+              | 'bg-green-200'
+              | 'bg-green-300'
+              | 'bg-green-400'
+              | 'bg-green-500'
+              | 'bg-green-600'
+              | 'bg-green-700'
+              | 'bg-green-800'
+              | 'bg-green-900'
+              | 'bg-green-950'
+              | 'bg-emerald-50'
+              | 'bg-emerald-100'
+              | 'bg-emerald-200'
+              | 'bg-emerald-300'
+              | 'bg-emerald-400'
+              | 'bg-emerald-500'
+              | 'bg-emerald-600'
+              | 'bg-emerald-700'
+              | 'bg-emerald-800'
+              | 'bg-emerald-900'
+              | 'bg-emerald-950'
+              | 'bg-teal-50'
+              | 'bg-teal-100'
+              | 'bg-teal-200'
+              | 'bg-teal-300'
+              | 'bg-teal-400'
+              | 'bg-teal-500'
+              | 'bg-teal-600'
+              | 'bg-teal-700'
+              | 'bg-teal-800'
+              | 'bg-teal-900'
+              | 'bg-teal-950'
+              | 'bg-cyan-50'
+              | 'bg-cyan-100'
+              | 'bg-cyan-200'
+              | 'bg-cyan-300'
+              | 'bg-cyan-400'
+              | 'bg-cyan-500'
+              | 'bg-cyan-600'
+              | 'bg-cyan-700'
+              | 'bg-cyan-800'
+              | 'bg-cyan-900'
+              | 'bg-cyan-950'
+              | 'bg-sky-50'
+              | 'bg-sky-100'
+              | 'bg-sky-200'
+              | 'bg-sky-300'
+              | 'bg-sky-400'
+              | 'bg-sky-500'
+              | 'bg-sky-600'
+              | 'bg-sky-700'
+              | 'bg-sky-800'
+              | 'bg-sky-900'
+              | 'bg-sky-950'
+              | 'bg-blue-50'
+              | 'bg-blue-100'
+              | 'bg-blue-200'
+              | 'bg-blue-300'
+              | 'bg-blue-400'
+              | 'bg-blue-500'
+              | 'bg-blue-600'
+              | 'bg-blue-700'
+              | 'bg-blue-800'
+              | 'bg-blue-900'
+              | 'bg-blue-950'
+              | 'bg-indigo-50'
+              | 'bg-indigo-100'
+              | 'bg-indigo-200'
+              | 'bg-indigo-300'
+              | 'bg-indigo-400'
+              | 'bg-indigo-500'
+              | 'bg-indigo-600'
+              | 'bg-indigo-700'
+              | 'bg-indigo-800'
+              | 'bg-indigo-900'
+              | 'bg-indigo-950'
+              | 'bg-violet-50'
+              | 'bg-violet-100'
+              | 'bg-violet-200'
+              | 'bg-violet-300'
+              | 'bg-violet-400'
+              | 'bg-violet-500'
+              | 'bg-violet-600'
+              | 'bg-violet-700'
+              | 'bg-violet-800'
+              | 'bg-violet-900'
+              | 'bg-violet-950'
+              | 'bg-purple-50'
+              | 'bg-purple-100'
+              | 'bg-purple-200'
+              | 'bg-purple-300'
+              | 'bg-purple-400'
+              | 'bg-purple-500'
+              | 'bg-purple-600'
+              | 'bg-purple-700'
+              | 'bg-purple-800'
+              | 'bg-purple-900'
+              | 'bg-purple-950'
+              | 'bg-fuchsia-50'
+              | 'bg-fuchsia-100'
+              | 'bg-fuchsia-200'
+              | 'bg-fuchsia-300'
+              | 'bg-fuchsia-400'
+              | 'bg-fuchsia-500'
+              | 'bg-fuchsia-600'
+              | 'bg-fuchsia-700'
+              | 'bg-fuchsia-800'
+              | 'bg-fuchsia-900'
+              | 'bg-fuchsia-950'
+              | 'bg-pink-50'
+              | 'bg-pink-100'
+              | 'bg-pink-200'
+              | 'bg-pink-300'
+              | 'bg-pink-400'
+              | 'bg-pink-500'
+              | 'bg-pink-600'
+              | 'bg-pink-700'
+              | 'bg-pink-800'
+              | 'bg-pink-900'
+              | 'bg-pink-950'
+              | 'bg-rose-50'
+              | 'bg-rose-100'
+              | 'bg-rose-200'
+              | 'bg-rose-300'
+              | 'bg-rose-400'
+              | 'bg-rose-500'
+              | 'bg-rose-600'
+              | 'bg-rose-700'
+              | 'bg-rose-800'
+              | 'bg-rose-900'
+              | 'bg-rose-950'
+            )
+          | null;
+        /**
+         * Modify spacing at the top before items show up.
+         */
+        spacingAboveItems?: ('pt-0' | 'pt-4' | 'pt-6' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
+        paddingMode?: ('default' | 'custom' | 'none') | null;
+        paddingTopDesktop?: string | null;
+        paddingBottomDesktop?: string | null;
+        paddingLeftDesktop?: string | null;
+        paddingRightDesktop?: string | null;
+        paddingTopMobile?: string | null;
+        paddingBottomMobile?: string | null;
+        paddingLeftMobile?: string | null;
+        paddingRightMobile?: string | null;
+        items?:
+          | {
+              /**
+               * Supports inline HTML formatting (e.g. <span class="...">word</span> or <em>emphasis</em>).
+               */
+              subHeading?: string | null;
+              /**
+               * Default is Vibrant Cyan (#00E5FF).
+               */
+              subHeadingColor?:
+                | (
+                    | 'text-inherit'
+                    | 'text-current'
+                    | 'text-transparent'
+                    | 'text-black'
+                    | 'text-white'
+                    | 'text-white/90'
+                    | 'text-white/80'
+                    | 'text-white/70'
+                    | 'text-[#3F5AC9]'
+                    | 'text-[#EFF1F8]'
+                    | 'text-light-sky'
+                    | 'text-[#52B5D8]'
+                    | 'text-cyan-neon'
+                    | 'text-blue-custom'
+                    | 'text-[#0256FF]'
+                    | 'text-[#1D4ED8]'
+                    | 'text-slate-50'
+                    | 'text-slate-100'
+                    | 'text-slate-200'
+                    | 'text-slate-300'
+                    | 'text-slate-400'
+                    | 'text-slate-500'
+                    | 'text-slate-600'
+                    | 'text-slate-700'
+                    | 'text-slate-800'
+                    | 'text-slate-900'
+                    | 'text-slate-950'
+                    | 'text-gray-50'
+                    | 'text-gray-100'
+                    | 'text-gray-200'
+                    | 'text-gray-300'
+                    | 'text-gray-400'
+                    | 'text-gray-500'
+                    | 'text-gray-600'
+                    | 'text-gray-700'
+                    | 'text-gray-800'
+                    | 'text-gray-900'
+                    | 'text-gray-950'
+                    | 'text-zinc-50'
+                    | 'text-zinc-100'
+                    | 'text-zinc-200'
+                    | 'text-zinc-300'
+                    | 'text-zinc-400'
+                    | 'text-zinc-500'
+                    | 'text-zinc-600'
+                    | 'text-zinc-700'
+                    | 'text-zinc-800'
+                    | 'text-zinc-900'
+                    | 'text-zinc-950'
+                    | 'text-neutral-50'
+                    | 'text-neutral-100'
+                    | 'text-neutral-200'
+                    | 'text-neutral-300'
+                    | 'text-neutral-400'
+                    | 'text-neutral-500'
+                    | 'text-neutral-600'
+                    | 'text-neutral-700'
+                    | 'text-neutral-800'
+                    | 'text-neutral-900'
+                    | 'text-neutral-950'
+                    | 'text-stone-50'
+                    | 'text-stone-100'
+                    | 'text-stone-200'
+                    | 'text-stone-300'
+                    | 'text-stone-400'
+                    | 'text-stone-500'
+                    | 'text-stone-600'
+                    | 'text-stone-700'
+                    | 'text-stone-800'
+                    | 'text-stone-900'
+                    | 'text-stone-950'
+                    | 'text-red-50'
+                    | 'text-red-100'
+                    | 'text-red-200'
+                    | 'text-red-300'
+                    | 'text-red-400'
+                    | 'text-red-500'
+                    | 'text-red-600'
+                    | 'text-red-700'
+                    | 'text-red-800'
+                    | 'text-red-900'
+                    | 'text-red-950'
+                    | 'text-orange-50'
+                    | 'text-orange-100'
+                    | 'text-orange-200'
+                    | 'text-orange-300'
+                    | 'text-orange-400'
+                    | 'text-orange-500'
+                    | 'text-orange-600'
+                    | 'text-orange-700'
+                    | 'text-orange-800'
+                    | 'text-orange-900'
+                    | 'text-orange-950'
+                    | 'text-amber-50'
+                    | 'text-amber-100'
+                    | 'text-amber-200'
+                    | 'text-amber-300'
+                    | 'text-amber-400'
+                    | 'text-amber-500'
+                    | 'text-amber-600'
+                    | 'text-amber-700'
+                    | 'text-amber-800'
+                    | 'text-amber-900'
+                    | 'text-amber-950'
+                    | 'text-yellow-50'
+                    | 'text-yellow-100'
+                    | 'text-yellow-200'
+                    | 'text-yellow-300'
+                    | 'text-yellow-400'
+                    | 'text-yellow-500'
+                    | 'text-yellow-600'
+                    | 'text-yellow-700'
+                    | 'text-yellow-800'
+                    | 'text-yellow-900'
+                    | 'text-yellow-950'
+                    | 'text-lime-50'
+                    | 'text-lime-100'
+                    | 'text-lime-200'
+                    | 'text-lime-300'
+                    | 'text-lime-400'
+                    | 'text-lime-500'
+                    | 'text-lime-600'
+                    | 'text-lime-700'
+                    | 'text-lime-800'
+                    | 'text-lime-900'
+                    | 'text-lime-950'
+                    | 'text-green-50'
+                    | 'text-green-100'
+                    | 'text-green-200'
+                    | 'text-green-300'
+                    | 'text-green-400'
+                    | 'text-green-500'
+                    | 'text-green-600'
+                    | 'text-green-700'
+                    | 'text-green-800'
+                    | 'text-green-900'
+                    | 'text-green-950'
+                    | 'text-emerald-50'
+                    | 'text-emerald-100'
+                    | 'text-emerald-200'
+                    | 'text-emerald-300'
+                    | 'text-emerald-400'
+                    | 'text-emerald-500'
+                    | 'text-emerald-600'
+                    | 'text-emerald-700'
+                    | 'text-emerald-800'
+                    | 'text-emerald-900'
+                    | 'text-emerald-950'
+                    | 'text-teal-50'
+                    | 'text-teal-100'
+                    | 'text-teal-200'
+                    | 'text-teal-300'
+                    | 'text-teal-400'
+                    | 'text-teal-500'
+                    | 'text-teal-600'
+                    | 'text-teal-700'
+                    | 'text-teal-800'
+                    | 'text-teal-900'
+                    | 'text-teal-950'
+                    | 'text-cyan-50'
+                    | 'text-cyan-100'
+                    | 'text-cyan-200'
+                    | 'text-cyan-300'
+                    | 'text-cyan-400'
+                    | 'text-cyan-500'
+                    | 'text-cyan-600'
+                    | 'text-cyan-700'
+                    | 'text-cyan-800'
+                    | 'text-cyan-900'
+                    | 'text-cyan-950'
+                    | 'text-sky-50'
+                    | 'text-sky-100'
+                    | 'text-sky-200'
+                    | 'text-sky-300'
+                    | 'text-sky-400'
+                    | 'text-sky-500'
+                    | 'text-sky-600'
+                    | 'text-sky-700'
+                    | 'text-sky-800'
+                    | 'text-sky-900'
+                    | 'text-sky-950'
+                    | 'text-blue-50'
+                    | 'text-blue-100'
+                    | 'text-blue-200'
+                    | 'text-blue-300'
+                    | 'text-blue-400'
+                    | 'text-blue-500'
+                    | 'text-blue-600'
+                    | 'text-blue-700'
+                    | 'text-blue-800'
+                    | 'text-blue-900'
+                    | 'text-blue-950'
+                    | 'text-indigo-50'
+                    | 'text-indigo-100'
+                    | 'text-indigo-200'
+                    | 'text-indigo-300'
+                    | 'text-indigo-400'
+                    | 'text-indigo-500'
+                    | 'text-indigo-600'
+                    | 'text-indigo-700'
+                    | 'text-indigo-800'
+                    | 'text-indigo-900'
+                    | 'text-indigo-950'
+                    | 'text-violet-50'
+                    | 'text-violet-100'
+                    | 'text-violet-200'
+                    | 'text-violet-300'
+                    | 'text-violet-400'
+                    | 'text-violet-500'
+                    | 'text-violet-600'
+                    | 'text-violet-700'
+                    | 'text-violet-800'
+                    | 'text-violet-900'
+                    | 'text-violet-950'
+                    | 'text-purple-50'
+                    | 'text-purple-100'
+                    | 'text-purple-200'
+                    | 'text-purple-300'
+                    | 'text-purple-400'
+                    | 'text-purple-500'
+                    | 'text-purple-600'
+                    | 'text-purple-700'
+                    | 'text-purple-800'
+                    | 'text-purple-900'
+                    | 'text-purple-950'
+                    | 'text-fuchsia-50'
+                    | 'text-fuchsia-100'
+                    | 'text-fuchsia-200'
+                    | 'text-fuchsia-300'
+                    | 'text-fuchsia-400'
+                    | 'text-fuchsia-500'
+                    | 'text-fuchsia-600'
+                    | 'text-fuchsia-700'
+                    | 'text-fuchsia-800'
+                    | 'text-fuchsia-900'
+                    | 'text-fuchsia-950'
+                    | 'text-pink-50'
+                    | 'text-pink-100'
+                    | 'text-pink-200'
+                    | 'text-pink-300'
+                    | 'text-pink-400'
+                    | 'text-pink-500'
+                    | 'text-pink-600'
+                    | 'text-pink-700'
+                    | 'text-pink-800'
+                    | 'text-pink-900'
+                    | 'text-pink-950'
+                    | 'text-rose-50'
+                    | 'text-rose-100'
+                    | 'text-rose-200'
+                    | 'text-rose-300'
+                    | 'text-rose-400'
+                    | 'text-rose-500'
+                    | 'text-rose-600'
+                    | 'text-rose-700'
+                    | 'text-rose-800'
+                    | 'text-rose-900'
+                    | 'text-rose-950'
+                  )
+                | null;
+              subHeadingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
+              subHeadingFontSize?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              subHeadingFontWeight?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              subHeadingFontSizeMobile?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              subHeadingFontWeightMobile?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              /**
+               * Supports inline HTML formatting and line breaks.
+               */
+              heading?: string | null;
+              /**
+               * Default is solid white.
+               */
+              headingColor?:
+                | (
+                    | 'text-inherit'
+                    | 'text-current'
+                    | 'text-transparent'
+                    | 'text-black'
+                    | 'text-white'
+                    | 'text-white/90'
+                    | 'text-white/80'
+                    | 'text-white/70'
+                    | 'text-[#3F5AC9]'
+                    | 'text-[#EFF1F8]'
+                    | 'text-light-sky'
+                    | 'text-[#52B5D8]'
+                    | 'text-cyan-neon'
+                    | 'text-blue-custom'
+                    | 'text-[#0256FF]'
+                    | 'text-[#1D4ED8]'
+                    | 'text-slate-50'
+                    | 'text-slate-100'
+                    | 'text-slate-200'
+                    | 'text-slate-300'
+                    | 'text-slate-400'
+                    | 'text-slate-500'
+                    | 'text-slate-600'
+                    | 'text-slate-700'
+                    | 'text-slate-800'
+                    | 'text-slate-900'
+                    | 'text-slate-950'
+                    | 'text-gray-50'
+                    | 'text-gray-100'
+                    | 'text-gray-200'
+                    | 'text-gray-300'
+                    | 'text-gray-400'
+                    | 'text-gray-500'
+                    | 'text-gray-600'
+                    | 'text-gray-700'
+                    | 'text-gray-800'
+                    | 'text-gray-900'
+                    | 'text-gray-950'
+                    | 'text-zinc-50'
+                    | 'text-zinc-100'
+                    | 'text-zinc-200'
+                    | 'text-zinc-300'
+                    | 'text-zinc-400'
+                    | 'text-zinc-500'
+                    | 'text-zinc-600'
+                    | 'text-zinc-700'
+                    | 'text-zinc-800'
+                    | 'text-zinc-900'
+                    | 'text-zinc-950'
+                    | 'text-neutral-50'
+                    | 'text-neutral-100'
+                    | 'text-neutral-200'
+                    | 'text-neutral-300'
+                    | 'text-neutral-400'
+                    | 'text-neutral-500'
+                    | 'text-neutral-600'
+                    | 'text-neutral-700'
+                    | 'text-neutral-800'
+                    | 'text-neutral-900'
+                    | 'text-neutral-950'
+                    | 'text-stone-50'
+                    | 'text-stone-100'
+                    | 'text-stone-200'
+                    | 'text-stone-300'
+                    | 'text-stone-400'
+                    | 'text-stone-500'
+                    | 'text-stone-600'
+                    | 'text-stone-700'
+                    | 'text-stone-800'
+                    | 'text-stone-900'
+                    | 'text-stone-950'
+                    | 'text-red-50'
+                    | 'text-red-100'
+                    | 'text-red-200'
+                    | 'text-red-300'
+                    | 'text-red-400'
+                    | 'text-red-500'
+                    | 'text-red-600'
+                    | 'text-red-700'
+                    | 'text-red-800'
+                    | 'text-red-900'
+                    | 'text-red-950'
+                    | 'text-orange-50'
+                    | 'text-orange-100'
+                    | 'text-orange-200'
+                    | 'text-orange-300'
+                    | 'text-orange-400'
+                    | 'text-orange-500'
+                    | 'text-orange-600'
+                    | 'text-orange-700'
+                    | 'text-orange-800'
+                    | 'text-orange-900'
+                    | 'text-orange-950'
+                    | 'text-amber-50'
+                    | 'text-amber-100'
+                    | 'text-amber-200'
+                    | 'text-amber-300'
+                    | 'text-amber-400'
+                    | 'text-amber-500'
+                    | 'text-amber-600'
+                    | 'text-amber-700'
+                    | 'text-amber-800'
+                    | 'text-amber-900'
+                    | 'text-amber-950'
+                    | 'text-yellow-50'
+                    | 'text-yellow-100'
+                    | 'text-yellow-200'
+                    | 'text-yellow-300'
+                    | 'text-yellow-400'
+                    | 'text-yellow-500'
+                    | 'text-yellow-600'
+                    | 'text-yellow-700'
+                    | 'text-yellow-800'
+                    | 'text-yellow-900'
+                    | 'text-yellow-950'
+                    | 'text-lime-50'
+                    | 'text-lime-100'
+                    | 'text-lime-200'
+                    | 'text-lime-300'
+                    | 'text-lime-400'
+                    | 'text-lime-500'
+                    | 'text-lime-600'
+                    | 'text-lime-700'
+                    | 'text-lime-800'
+                    | 'text-lime-900'
+                    | 'text-lime-950'
+                    | 'text-green-50'
+                    | 'text-green-100'
+                    | 'text-green-200'
+                    | 'text-green-300'
+                    | 'text-green-400'
+                    | 'text-green-500'
+                    | 'text-green-600'
+                    | 'text-green-700'
+                    | 'text-green-800'
+                    | 'text-green-900'
+                    | 'text-green-950'
+                    | 'text-emerald-50'
+                    | 'text-emerald-100'
+                    | 'text-emerald-200'
+                    | 'text-emerald-300'
+                    | 'text-emerald-400'
+                    | 'text-emerald-500'
+                    | 'text-emerald-600'
+                    | 'text-emerald-700'
+                    | 'text-emerald-800'
+                    | 'text-emerald-900'
+                    | 'text-emerald-950'
+                    | 'text-teal-50'
+                    | 'text-teal-100'
+                    | 'text-teal-200'
+                    | 'text-teal-300'
+                    | 'text-teal-400'
+                    | 'text-teal-500'
+                    | 'text-teal-600'
+                    | 'text-teal-700'
+                    | 'text-teal-800'
+                    | 'text-teal-900'
+                    | 'text-teal-950'
+                    | 'text-cyan-50'
+                    | 'text-cyan-100'
+                    | 'text-cyan-200'
+                    | 'text-cyan-300'
+                    | 'text-cyan-400'
+                    | 'text-cyan-500'
+                    | 'text-cyan-600'
+                    | 'text-cyan-700'
+                    | 'text-cyan-800'
+                    | 'text-cyan-900'
+                    | 'text-cyan-950'
+                    | 'text-sky-50'
+                    | 'text-sky-100'
+                    | 'text-sky-200'
+                    | 'text-sky-300'
+                    | 'text-sky-400'
+                    | 'text-sky-500'
+                    | 'text-sky-600'
+                    | 'text-sky-700'
+                    | 'text-sky-800'
+                    | 'text-sky-900'
+                    | 'text-sky-950'
+                    | 'text-blue-50'
+                    | 'text-blue-100'
+                    | 'text-blue-200'
+                    | 'text-blue-300'
+                    | 'text-blue-400'
+                    | 'text-blue-500'
+                    | 'text-blue-600'
+                    | 'text-blue-700'
+                    | 'text-blue-800'
+                    | 'text-blue-900'
+                    | 'text-blue-950'
+                    | 'text-indigo-50'
+                    | 'text-indigo-100'
+                    | 'text-indigo-200'
+                    | 'text-indigo-300'
+                    | 'text-indigo-400'
+                    | 'text-indigo-500'
+                    | 'text-indigo-600'
+                    | 'text-indigo-700'
+                    | 'text-indigo-800'
+                    | 'text-indigo-900'
+                    | 'text-indigo-950'
+                    | 'text-violet-50'
+                    | 'text-violet-100'
+                    | 'text-violet-200'
+                    | 'text-violet-300'
+                    | 'text-violet-400'
+                    | 'text-violet-500'
+                    | 'text-violet-600'
+                    | 'text-violet-700'
+                    | 'text-violet-800'
+                    | 'text-violet-900'
+                    | 'text-violet-950'
+                    | 'text-purple-50'
+                    | 'text-purple-100'
+                    | 'text-purple-200'
+                    | 'text-purple-300'
+                    | 'text-purple-400'
+                    | 'text-purple-500'
+                    | 'text-purple-600'
+                    | 'text-purple-700'
+                    | 'text-purple-800'
+                    | 'text-purple-900'
+                    | 'text-purple-950'
+                    | 'text-fuchsia-50'
+                    | 'text-fuchsia-100'
+                    | 'text-fuchsia-200'
+                    | 'text-fuchsia-300'
+                    | 'text-fuchsia-400'
+                    | 'text-fuchsia-500'
+                    | 'text-fuchsia-600'
+                    | 'text-fuchsia-700'
+                    | 'text-fuchsia-800'
+                    | 'text-fuchsia-900'
+                    | 'text-fuchsia-950'
+                    | 'text-pink-50'
+                    | 'text-pink-100'
+                    | 'text-pink-200'
+                    | 'text-pink-300'
+                    | 'text-pink-400'
+                    | 'text-pink-500'
+                    | 'text-pink-600'
+                    | 'text-pink-700'
+                    | 'text-pink-800'
+                    | 'text-pink-900'
+                    | 'text-pink-950'
+                    | 'text-rose-50'
+                    | 'text-rose-100'
+                    | 'text-rose-200'
+                    | 'text-rose-300'
+                    | 'text-rose-400'
+                    | 'text-rose-500'
+                    | 'text-rose-600'
+                    | 'text-rose-700'
+                    | 'text-rose-800'
+                    | 'text-rose-900'
+                    | 'text-rose-950'
+                  )
+                | null;
+              headingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
+              headingFontSize?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              headingFontWeight?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              headingFontSizeMobile?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              headingFontWeightMobile?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              /**
+               * Supports inline HTML formatting and custom styling.
+               */
+              description?: string | null;
+              descriptionColor?:
+                | (
+                    | 'text-inherit'
+                    | 'text-current'
+                    | 'text-transparent'
+                    | 'text-black'
+                    | 'text-white'
+                    | 'text-white/90'
+                    | 'text-white/80'
+                    | 'text-white/70'
+                    | 'text-[#3F5AC9]'
+                    | 'text-[#EFF1F8]'
+                    | 'text-light-sky'
+                    | 'text-[#52B5D8]'
+                    | 'text-cyan-neon'
+                    | 'text-blue-custom'
+                    | 'text-[#0256FF]'
+                    | 'text-[#1D4ED8]'
+                    | 'text-slate-50'
+                    | 'text-slate-100'
+                    | 'text-slate-200'
+                    | 'text-slate-300'
+                    | 'text-slate-400'
+                    | 'text-slate-500'
+                    | 'text-slate-600'
+                    | 'text-slate-700'
+                    | 'text-slate-800'
+                    | 'text-slate-900'
+                    | 'text-slate-950'
+                    | 'text-gray-50'
+                    | 'text-gray-100'
+                    | 'text-gray-200'
+                    | 'text-gray-300'
+                    | 'text-gray-400'
+                    | 'text-gray-500'
+                    | 'text-gray-600'
+                    | 'text-gray-700'
+                    | 'text-gray-800'
+                    | 'text-gray-900'
+                    | 'text-gray-950'
+                    | 'text-zinc-50'
+                    | 'text-zinc-100'
+                    | 'text-zinc-200'
+                    | 'text-zinc-300'
+                    | 'text-zinc-400'
+                    | 'text-zinc-500'
+                    | 'text-zinc-600'
+                    | 'text-zinc-700'
+                    | 'text-zinc-800'
+                    | 'text-zinc-900'
+                    | 'text-zinc-950'
+                    | 'text-neutral-50'
+                    | 'text-neutral-100'
+                    | 'text-neutral-200'
+                    | 'text-neutral-300'
+                    | 'text-neutral-400'
+                    | 'text-neutral-500'
+                    | 'text-neutral-600'
+                    | 'text-neutral-700'
+                    | 'text-neutral-800'
+                    | 'text-neutral-900'
+                    | 'text-neutral-950'
+                    | 'text-stone-50'
+                    | 'text-stone-100'
+                    | 'text-stone-200'
+                    | 'text-stone-300'
+                    | 'text-stone-400'
+                    | 'text-stone-500'
+                    | 'text-stone-600'
+                    | 'text-stone-700'
+                    | 'text-stone-800'
+                    | 'text-stone-900'
+                    | 'text-stone-950'
+                    | 'text-red-50'
+                    | 'text-red-100'
+                    | 'text-red-200'
+                    | 'text-red-300'
+                    | 'text-red-400'
+                    | 'text-red-500'
+                    | 'text-red-600'
+                    | 'text-red-700'
+                    | 'text-red-800'
+                    | 'text-red-900'
+                    | 'text-red-950'
+                    | 'text-orange-50'
+                    | 'text-orange-100'
+                    | 'text-orange-200'
+                    | 'text-orange-300'
+                    | 'text-orange-400'
+                    | 'text-orange-500'
+                    | 'text-orange-600'
+                    | 'text-orange-700'
+                    | 'text-orange-800'
+                    | 'text-orange-900'
+                    | 'text-orange-950'
+                    | 'text-amber-50'
+                    | 'text-amber-100'
+                    | 'text-amber-200'
+                    | 'text-amber-300'
+                    | 'text-amber-400'
+                    | 'text-amber-500'
+                    | 'text-amber-600'
+                    | 'text-amber-700'
+                    | 'text-amber-800'
+                    | 'text-amber-900'
+                    | 'text-amber-950'
+                    | 'text-yellow-50'
+                    | 'text-yellow-100'
+                    | 'text-yellow-200'
+                    | 'text-yellow-300'
+                    | 'text-yellow-400'
+                    | 'text-yellow-500'
+                    | 'text-yellow-600'
+                    | 'text-yellow-700'
+                    | 'text-yellow-800'
+                    | 'text-yellow-900'
+                    | 'text-yellow-950'
+                    | 'text-lime-50'
+                    | 'text-lime-100'
+                    | 'text-lime-200'
+                    | 'text-lime-300'
+                    | 'text-lime-400'
+                    | 'text-lime-500'
+                    | 'text-lime-600'
+                    | 'text-lime-700'
+                    | 'text-lime-800'
+                    | 'text-lime-900'
+                    | 'text-lime-950'
+                    | 'text-green-50'
+                    | 'text-green-100'
+                    | 'text-green-200'
+                    | 'text-green-300'
+                    | 'text-green-400'
+                    | 'text-green-500'
+                    | 'text-green-600'
+                    | 'text-green-700'
+                    | 'text-green-800'
+                    | 'text-green-900'
+                    | 'text-green-950'
+                    | 'text-emerald-50'
+                    | 'text-emerald-100'
+                    | 'text-emerald-200'
+                    | 'text-emerald-300'
+                    | 'text-emerald-400'
+                    | 'text-emerald-500'
+                    | 'text-emerald-600'
+                    | 'text-emerald-700'
+                    | 'text-emerald-800'
+                    | 'text-emerald-900'
+                    | 'text-emerald-950'
+                    | 'text-teal-50'
+                    | 'text-teal-100'
+                    | 'text-teal-200'
+                    | 'text-teal-300'
+                    | 'text-teal-400'
+                    | 'text-teal-500'
+                    | 'text-teal-600'
+                    | 'text-teal-700'
+                    | 'text-teal-800'
+                    | 'text-teal-900'
+                    | 'text-teal-950'
+                    | 'text-cyan-50'
+                    | 'text-cyan-100'
+                    | 'text-cyan-200'
+                    | 'text-cyan-300'
+                    | 'text-cyan-400'
+                    | 'text-cyan-500'
+                    | 'text-cyan-600'
+                    | 'text-cyan-700'
+                    | 'text-cyan-800'
+                    | 'text-cyan-900'
+                    | 'text-cyan-950'
+                    | 'text-sky-50'
+                    | 'text-sky-100'
+                    | 'text-sky-200'
+                    | 'text-sky-300'
+                    | 'text-sky-400'
+                    | 'text-sky-500'
+                    | 'text-sky-600'
+                    | 'text-sky-700'
+                    | 'text-sky-800'
+                    | 'text-sky-900'
+                    | 'text-sky-950'
+                    | 'text-blue-50'
+                    | 'text-blue-100'
+                    | 'text-blue-200'
+                    | 'text-blue-300'
+                    | 'text-blue-400'
+                    | 'text-blue-500'
+                    | 'text-blue-600'
+                    | 'text-blue-700'
+                    | 'text-blue-800'
+                    | 'text-blue-900'
+                    | 'text-blue-950'
+                    | 'text-indigo-50'
+                    | 'text-indigo-100'
+                    | 'text-indigo-200'
+                    | 'text-indigo-300'
+                    | 'text-indigo-400'
+                    | 'text-indigo-500'
+                    | 'text-indigo-600'
+                    | 'text-indigo-700'
+                    | 'text-indigo-800'
+                    | 'text-indigo-900'
+                    | 'text-indigo-950'
+                    | 'text-violet-50'
+                    | 'text-violet-100'
+                    | 'text-violet-200'
+                    | 'text-violet-300'
+                    | 'text-violet-400'
+                    | 'text-violet-500'
+                    | 'text-violet-600'
+                    | 'text-violet-700'
+                    | 'text-violet-800'
+                    | 'text-violet-900'
+                    | 'text-violet-950'
+                    | 'text-purple-50'
+                    | 'text-purple-100'
+                    | 'text-purple-200'
+                    | 'text-purple-300'
+                    | 'text-purple-400'
+                    | 'text-purple-500'
+                    | 'text-purple-600'
+                    | 'text-purple-700'
+                    | 'text-purple-800'
+                    | 'text-purple-900'
+                    | 'text-purple-950'
+                    | 'text-fuchsia-50'
+                    | 'text-fuchsia-100'
+                    | 'text-fuchsia-200'
+                    | 'text-fuchsia-300'
+                    | 'text-fuchsia-400'
+                    | 'text-fuchsia-500'
+                    | 'text-fuchsia-600'
+                    | 'text-fuchsia-700'
+                    | 'text-fuchsia-800'
+                    | 'text-fuchsia-900'
+                    | 'text-fuchsia-950'
+                    | 'text-pink-50'
+                    | 'text-pink-100'
+                    | 'text-pink-200'
+                    | 'text-pink-300'
+                    | 'text-pink-400'
+                    | 'text-pink-500'
+                    | 'text-pink-600'
+                    | 'text-pink-700'
+                    | 'text-pink-800'
+                    | 'text-pink-900'
+                    | 'text-pink-950'
+                    | 'text-rose-50'
+                    | 'text-rose-100'
+                    | 'text-rose-200'
+                    | 'text-rose-300'
+                    | 'text-rose-400'
+                    | 'text-rose-500'
+                    | 'text-rose-600'
+                    | 'text-rose-700'
+                    | 'text-rose-800'
+                    | 'text-rose-900'
+                    | 'text-rose-950'
+                  )
+                | null;
+              descriptionMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
+              descriptionFontSize?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              descriptionFontWeight?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              descriptionFontSizeMobile?:
+                | (
+                    | 'text-xs'
+                    | 'text-sm'
+                    | 'text-base'
+                    | 'text-lg'
+                    | 'text-xl'
+                    | 'text-2xl'
+                    | 'text-3xl'
+                    | 'text-4xl'
+                    | 'text-5xl'
+                    | 'text-6xl'
+                    | 'text-7xl'
+                    | 'text-8xl'
+                    | 'text-xs md:text-sm'
+                    | 'text-sm md:text-base'
+                    | 'text-base md:text-lg'
+                    | 'text-base md:text-lg lg:text-xl'
+                    | 'text-lg md:text-xl'
+                    | 'text-lg md:text-xl lg:text-2xl'
+                    | 'text-xl md:text-2xl'
+                    | 'text-2xl md:text-[1.65rem]'
+                    | 'text-2xl md:text-3xl'
+                    | 'text-3xl md:text-4xl'
+                    | 'text-3xl md:text-4xl lg:text-5xl'
+                    | 'text-4xl md:text-5xl lg:text-6xl'
+                    | 'text-5xl md:text-6xl lg:text-7xl'
+                    | 'text-6xl md:text-7xl lg:text-8xl'
+                  )
+                | null;
+              descriptionFontWeightMobile?:
+                | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'missionVision';
       }
   )[];
   meta?: {
@@ -22221,7 +24441,8 @@ export interface ContentBlock {
                 | 'blogPostUpdated'
                 | 'readyToGrow'
                 | 'whoWeAre'
-                | 'numberedGrid';
+                | 'numberedGrid'
+                | 'missionVision';
               spacer?: {
                 spacing: (
                   | 'pb-0'
@@ -53932,7 +56153,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  badgeFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   badgeFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  badgeFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -54230,7 +56484,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   fontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -54528,7 +56815,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   fontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -54827,7 +57147,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   fontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -55461,6 +57814,48 @@ export interface ContentBlock {
                               | 'font-extrabold'
                             )
                           | null;
+                        fontSizeMobile?:
+                          | (
+                              | ''
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
+                        fontWeightMobile?:
+                          | (
+                              | ''
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
                       };
                       headingGroup?: {
                         heading?: string | null;
@@ -55799,6 +58194,79 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        headingFontSizeMobile?:
+                          | (
+                              | ''
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
+                        headingFontWeightMobile?:
+                          | (
+                              | ''
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        collapsedFontSizeMobile?:
+                          | (
+                              | ''
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                       };
                       descriptionGroup?: {
                         description?: string | null;
@@ -56096,6 +58564,48 @@ export interface ContentBlock {
                           | null;
                         descriptionFontWeight?:
                           | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        descriptionFontSizeMobile?:
+                          | (
+                              | ''
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
+                        descriptionFontWeightMobile?:
+                          | (
+                              | ''
                               | 'font-light'
                               | 'font-normal'
                               | 'font-medium'
@@ -56435,6 +58945,48 @@ export interface ContentBlock {
                                   )
                                 | null;
                               titleAlignment?: ('left' | 'center' | 'right') | null;
+                              titleFontSizeMobile?:
+                                | (
+                                    | ''
+                                    | 'text-xs'
+                                    | 'text-sm'
+                                    | 'text-base'
+                                    | 'text-lg'
+                                    | 'text-xl'
+                                    | 'text-2xl'
+                                    | 'text-3xl'
+                                    | 'text-4xl'
+                                    | 'text-5xl'
+                                    | 'text-6xl'
+                                    | 'text-7xl'
+                                    | 'text-8xl'
+                                    | 'text-xs md:text-sm'
+                                    | 'text-sm md:text-base'
+                                    | 'text-base md:text-lg'
+                                    | 'text-base md:text-lg lg:text-xl'
+                                    | 'text-lg md:text-xl'
+                                    | 'text-lg md:text-xl lg:text-2xl'
+                                    | 'text-xl md:text-2xl'
+                                    | 'text-2xl md:text-[1.65rem]'
+                                    | 'text-2xl md:text-3xl'
+                                    | 'text-3xl md:text-4xl'
+                                    | 'text-3xl md:text-4xl lg:text-5xl'
+                                    | 'text-4xl md:text-5xl lg:text-6xl'
+                                    | 'text-5xl md:text-6xl lg:text-7xl'
+                                    | 'text-6xl md:text-7xl lg:text-8xl'
+                                  )
+                                | null;
+                              titleFontWeightMobile?:
+                                | (
+                                    | ''
+                                    | 'font-light'
+                                    | 'font-normal'
+                                    | 'font-medium'
+                                    | 'font-semibold'
+                                    | 'font-bold'
+                                    | 'font-extrabold'
+                                  )
+                                | null;
                               spacingBottom?:
                                 | ('0px' | '6px' | '8px' | '10px' | '12px' | '16px' | '20px' | 'custom')
                                 | null;
@@ -56743,6 +59295,48 @@ export interface ContentBlock {
                                   )
                                 | null;
                               descriptionAlignment?: ('left' | 'center' | 'right') | null;
+                              descriptionFontSizeMobile?:
+                                | (
+                                    | ''
+                                    | 'text-xs'
+                                    | 'text-sm'
+                                    | 'text-base'
+                                    | 'text-lg'
+                                    | 'text-xl'
+                                    | 'text-2xl'
+                                    | 'text-3xl'
+                                    | 'text-4xl'
+                                    | 'text-5xl'
+                                    | 'text-6xl'
+                                    | 'text-7xl'
+                                    | 'text-8xl'
+                                    | 'text-xs md:text-sm'
+                                    | 'text-sm md:text-base'
+                                    | 'text-base md:text-lg'
+                                    | 'text-base md:text-lg lg:text-xl'
+                                    | 'text-lg md:text-xl'
+                                    | 'text-lg md:text-xl lg:text-2xl'
+                                    | 'text-xl md:text-2xl'
+                                    | 'text-2xl md:text-[1.65rem]'
+                                    | 'text-2xl md:text-3xl'
+                                    | 'text-3xl md:text-4xl'
+                                    | 'text-3xl md:text-4xl lg:text-5xl'
+                                    | 'text-4xl md:text-5xl lg:text-6xl'
+                                    | 'text-5xl md:text-6xl lg:text-7xl'
+                                    | 'text-6xl md:text-7xl lg:text-8xl'
+                                  )
+                                | null;
+                              descriptionFontWeightMobile?:
+                                | (
+                                    | ''
+                                    | 'font-light'
+                                    | 'font-normal'
+                                    | 'font-medium'
+                                    | 'font-semibold'
+                                    | 'font-bold'
+                                    | 'font-extrabold'
+                                  )
+                                | null;
                               id?: string | null;
                             }[]
                           | null;
@@ -57593,6 +60187,48 @@ export interface ContentBlock {
                               | 'text-rose-800'
                               | 'text-rose-900'
                               | 'text-rose-950'
+                            )
+                          | null;
+                        buttonFontSizeMobile?:
+                          | (
+                              | ''
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
+                        buttonFontWeightMobile?:
+                          | (
+                              | ''
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
                             )
                           | null;
                         buttonLink?: {
@@ -58514,6 +61150,48 @@ export interface ContentBlock {
                   badgeFontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
+                  badgeFontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  badgeFontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
+                    | null;
                 };
                 mainHeadingGroup?: {
                   headingText?: string | null;
@@ -58813,6 +61491,48 @@ export interface ContentBlock {
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   headingAlignment?: ('left' | 'center' | 'right') | null;
+                  headingFontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  headingFontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
+                    | null;
                   headingTag?: ('h1' | 'h2' | 'h3' | 'div') | null;
                 };
                 contentColumn?: {
@@ -59121,6 +61841,48 @@ export interface ContentBlock {
                         )
                       | null;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                   };
                   headingGroup?: {
                     text?: string | null;
@@ -59427,6 +62189,48 @@ export interface ContentBlock {
                         )
                       | null;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                   };
                   descriptionGroup?: {
                     text?: string | null;
@@ -59733,6 +62537,48 @@ export interface ContentBlock {
                         )
                       | null;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                   };
                   featuresSection?: {
                     title?: string | null;
@@ -60039,6 +62885,48 @@ export interface ContentBlock {
                         )
                       | null;
                     titleAlignment?: ('left' | 'center' | 'right') | null;
+                    titleFontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    titleFontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                     items?:
                       | {
                           text?: string | null;
@@ -60336,6 +63224,48 @@ export interface ContentBlock {
                             | null;
                           fontWeight?:
                             | (
+                                | 'font-light'
+                                | 'font-normal'
+                                | 'font-medium'
+                                | 'font-semibold'
+                                | 'font-bold'
+                                | 'font-extrabold'
+                              )
+                            | null;
+                          fontSizeMobile?:
+                            | (
+                                | ''
+                                | 'text-xs'
+                                | 'text-sm'
+                                | 'text-base'
+                                | 'text-lg'
+                                | 'text-xl'
+                                | 'text-2xl'
+                                | 'text-3xl'
+                                | 'text-4xl'
+                                | 'text-5xl'
+                                | 'text-6xl'
+                                | 'text-7xl'
+                                | 'text-8xl'
+                                | 'text-xs md:text-sm'
+                                | 'text-sm md:text-base'
+                                | 'text-base md:text-lg'
+                                | 'text-base md:text-lg lg:text-xl'
+                                | 'text-lg md:text-xl'
+                                | 'text-lg md:text-xl lg:text-2xl'
+                                | 'text-xl md:text-2xl'
+                                | 'text-2xl md:text-[1.65rem]'
+                                | 'text-2xl md:text-3xl'
+                                | 'text-3xl md:text-4xl'
+                                | 'text-3xl md:text-4xl lg:text-5xl'
+                                | 'text-4xl md:text-5xl lg:text-6xl'
+                                | 'text-5xl md:text-6xl lg:text-7xl'
+                                | 'text-6xl md:text-7xl lg:text-8xl'
+                              )
+                            | null;
+                          fontWeightMobile?:
+                            | (
+                                | ''
                                 | 'font-light'
                                 | 'font-normal'
                                 | 'font-medium'
@@ -60680,6 +63610,48 @@ export interface ContentBlock {
                         )
                       | null;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                     iconBgColor?:
                       | (
                           | 'bg-inherit'
@@ -61955,6 +64927,54 @@ export interface ContentBlock {
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   headingAlignment?: ('left' | 'center' | 'right') | null;
+                  /**
+                   * Overrides heading font size on mobile screens.
+                   */
+                  headingFontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  /**
+                   * Overrides heading font weight on mobile screens.
+                   */
+                  headingFontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
+                    | null;
                 };
                 descriptionGroup?: {
                   description?: string | null;
@@ -62254,6 +65274,54 @@ export interface ContentBlock {
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   descriptionAlignment?: ('left' | 'center' | 'right') | null;
+                  /**
+                   * Overrides description font size on mobile screens.
+                   */
+                  descriptionFontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  /**
+                   * Overrides description font weight on mobile screens.
+                   */
+                  descriptionFontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
+                    | null;
                 };
                 buttonGroup?: {
                   enableButton?: boolean | null;
@@ -63375,6 +66443,54 @@ export interface ContentBlock {
                     | null;
                   buttonFontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  /**
+                   * Overrides button font size on mobile screens.
+                   */
+                  buttonFontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  /**
+                   * Overrides button font weight on mobile screens.
+                   */
+                  buttonFontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
                     | null;
                 };
                 /**
@@ -64640,7 +67756,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        subtitleFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         subtitleFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        subtitleFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -64949,7 +68105,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        headingFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         headingFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        headingFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -65255,7 +68451,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        descriptionFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         descriptionFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        descriptionFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -65917,7 +69153,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  headingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   headingFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  headingFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -66217,7 +69486,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  descriptionFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   descriptionFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  descriptionFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   enableButton?: boolean | null;
@@ -66813,7 +70115,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  buttonFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   buttonFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  buttonFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   buttonAlignmentDesktop?: ('right' | 'center' | 'left') | null;
@@ -67659,7 +70994,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        subtitleFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         subtitleFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        subtitleFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -67968,7 +71343,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        headingFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         headingFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        headingFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -68274,7 +71689,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        descriptionFontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         descriptionFontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        descriptionFontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -68857,7 +72312,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  headingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   headingFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  headingFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -69159,7 +72647,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  descriptionFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   descriptionFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  descriptionFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   descriptionAlignment?: ('left' | 'center' | 'right') | null;
@@ -70015,7 +73536,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  buttonFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   buttonFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  buttonFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -70903,6 +74457,48 @@ export interface ContentBlock {
                           | 'font-extrabold'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                   };
                   /**
                    * Spacing between top badge and heading below it. Choose 0px to remove.
@@ -71213,6 +74809,48 @@ export interface ContentBlock {
                           | 'font-extrabold'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | ''
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    fontWeightMobile?:
+                      | (
+                          | ''
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                     tag?: ('h1' | 'h2' | 'h3' | 'div') | null;
                   };
                 };
@@ -71512,6 +75150,48 @@ export interface ContentBlock {
                     | null;
                   fontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontSizeMobile?:
+                    | (
+                        | ''
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  fontWeightMobile?:
+                    | (
+                        | ''
+                        | 'font-light'
+                        | 'font-normal'
+                        | 'font-medium'
+                        | 'font-semibold'
+                        | 'font-bold'
+                        | 'font-extrabold'
+                      )
                     | null;
                 };
               };
@@ -72193,7 +75873,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        fontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         fontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        fontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -72504,7 +76224,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        fontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         fontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        fontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -72811,7 +76571,47 @@ export interface ContentBlock {
                               | 'text-6xl md:text-7xl lg:text-8xl'
                             )
                           | null;
+                        fontSizeMobile?:
+                          | (
+                              | 'text-xs'
+                              | 'text-sm'
+                              | 'text-base'
+                              | 'text-lg'
+                              | 'text-xl'
+                              | 'text-2xl'
+                              | 'text-3xl'
+                              | 'text-4xl'
+                              | 'text-5xl'
+                              | 'text-6xl'
+                              | 'text-7xl'
+                              | 'text-8xl'
+                              | 'text-xs md:text-sm'
+                              | 'text-sm md:text-base'
+                              | 'text-base md:text-lg'
+                              | 'text-base md:text-lg lg:text-xl'
+                              | 'text-lg md:text-xl'
+                              | 'text-lg md:text-xl lg:text-2xl'
+                              | 'text-xl md:text-2xl'
+                              | 'text-2xl md:text-[1.65rem]'
+                              | 'text-2xl md:text-3xl'
+                              | 'text-3xl md:text-4xl'
+                              | 'text-3xl md:text-4xl lg:text-5xl'
+                              | 'text-4xl md:text-5xl lg:text-6xl'
+                              | 'text-5xl md:text-6xl lg:text-7xl'
+                              | 'text-6xl md:text-7xl lg:text-8xl'
+                            )
+                          | null;
                         fontWeight?:
+                          | (
+                              | 'font-light'
+                              | 'font-normal'
+                              | 'font-medium'
+                              | 'font-semibold'
+                              | 'font-bold'
+                              | 'font-extrabold'
+                            )
+                          | null;
+                        fontWeightMobile?:
                           | (
                               | 'font-light'
                               | 'font-normal'
@@ -73993,7 +77793,47 @@ export interface ContentBlock {
                           | 'text-6xl md:text-7xl lg:text-8xl'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
                     fontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    fontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -74300,7 +78140,47 @@ export interface ContentBlock {
                           | 'text-6xl md:text-7xl lg:text-8xl'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
                     fontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    fontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -74610,7 +78490,47 @@ export interface ContentBlock {
                           | 'text-6xl md:text-7xl lg:text-8xl'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
                     fontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    fontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -74916,7 +78836,47 @@ export interface ContentBlock {
                           | 'text-6xl md:text-7xl lg:text-8xl'
                         )
                       | null;
+                    fontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
                     fontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    fontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -76300,6 +80260,36 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   alignment?: ('center' | 'left' | 'right') | null;
                   spacingBottom?:
                     | ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | '40px' | '48px' | 'custom')
@@ -76603,7 +80593,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   fontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   alignment?: ('center' | 'left' | 'right') | null;
@@ -76906,7 +80929,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  fontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   fontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  fontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   alignment?: ('center' | 'left' | 'right') | null;
@@ -77473,6 +81529,36 @@ export interface ContentBlock {
                       )
                     | null;
                   fontSize?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  fontSizeMobile?:
                     | (
                         | 'text-xs'
                         | 'text-sm'
@@ -78983,6 +83069,46 @@ export interface ContentBlock {
                           | 'font-extrabold'
                         )
                       | null;
+                    badgeFontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    badgeFontWeightMobile?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                     badgeMarginBottom?: ('mb-2' | 'mb-4 md:mb-6' | 'mb-6 md:mb-8' | 'mb-8 md:mb-12') | null;
                   };
                   /**
@@ -79282,6 +83408,39 @@ export interface ContentBlock {
                       )
                     | null;
                   subHeadingFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  subHeadingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  subHeadingFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   subHeadingMarginBottom?: ('mb-0' | 'mb-1 md:mb-2' | 'mb-2 md:mb-3' | 'mb-4 md:mb-6') | null;
@@ -79584,6 +83743,39 @@ export interface ContentBlock {
                   headingFontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
+                  headingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  headingFontWeightMobile?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
                   headingMarginBottom?: ('mb-4' | 'mb-6 md:mb-8' | 'mb-8 md:mb-10' | 'mb-12') | null;
                   /**
                    * Description text below headings. Supports inline styling. Leave blank to hide.
@@ -79882,6 +84074,39 @@ export interface ContentBlock {
                       )
                     | null;
                   descriptionFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  descriptionFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  descriptionFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   spacingBelowDescription?:
@@ -80484,6 +84709,46 @@ export interface ContentBlock {
                         )
                       | null;
                     button1FontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    button1FontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    button1FontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -81355,6 +85620,46 @@ export interface ContentBlock {
                           | 'font-extrabold'
                         )
                       | null;
+                    button2FontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    button2FontWeightMobile?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
                   };
                   officesGroup?: {
                     /**
@@ -81654,6 +85959,46 @@ export interface ContentBlock {
                         )
                       | null;
                     officesHeadingFontWeight?:
+                      | (
+                          | 'font-light'
+                          | 'font-normal'
+                          | 'font-medium'
+                          | 'font-semibold'
+                          | 'font-bold'
+                          | 'font-extrabold'
+                        )
+                      | null;
+                    officesHeadingFontSizeMobile?:
+                      | (
+                          | 'text-xs'
+                          | 'text-sm'
+                          | 'text-base'
+                          | 'text-lg'
+                          | 'text-xl'
+                          | 'text-2xl'
+                          | 'text-3xl'
+                          | 'text-4xl'
+                          | 'text-5xl'
+                          | 'text-6xl'
+                          | 'text-7xl'
+                          | 'text-8xl'
+                          | 'text-xs md:text-sm'
+                          | 'text-sm md:text-base'
+                          | 'text-base md:text-lg'
+                          | 'text-base md:text-lg lg:text-xl'
+                          | 'text-lg md:text-xl'
+                          | 'text-lg md:text-xl lg:text-2xl'
+                          | 'text-xl md:text-2xl'
+                          | 'text-2xl md:text-[1.65rem]'
+                          | 'text-2xl md:text-3xl'
+                          | 'text-3xl md:text-4xl'
+                          | 'text-3xl md:text-4xl lg:text-5xl'
+                          | 'text-4xl md:text-5xl lg:text-6xl'
+                          | 'text-5xl md:text-6xl lg:text-7xl'
+                          | 'text-6xl md:text-7xl lg:text-8xl'
+                        )
+                      | null;
+                    officesHeadingFontWeightMobile?:
                       | (
                           | 'font-light'
                           | 'font-normal'
@@ -81973,6 +86318,46 @@ export interface ContentBlock {
                                 | 'font-extrabold'
                               )
                             | null;
+                          labelFontSizeMobile?:
+                            | (
+                                | 'text-xs'
+                                | 'text-sm'
+                                | 'text-base'
+                                | 'text-lg'
+                                | 'text-xl'
+                                | 'text-2xl'
+                                | 'text-3xl'
+                                | 'text-4xl'
+                                | 'text-5xl'
+                                | 'text-6xl'
+                                | 'text-7xl'
+                                | 'text-8xl'
+                                | 'text-xs md:text-sm'
+                                | 'text-sm md:text-base'
+                                | 'text-base md:text-lg'
+                                | 'text-base md:text-lg lg:text-xl'
+                                | 'text-lg md:text-xl'
+                                | 'text-lg md:text-xl lg:text-2xl'
+                                | 'text-xl md:text-2xl'
+                                | 'text-2xl md:text-[1.65rem]'
+                                | 'text-2xl md:text-3xl'
+                                | 'text-3xl md:text-4xl'
+                                | 'text-3xl md:text-4xl lg:text-5xl'
+                                | 'text-4xl md:text-5xl lg:text-6xl'
+                                | 'text-5xl md:text-6xl lg:text-7xl'
+                                | 'text-6xl md:text-7xl lg:text-8xl'
+                              )
+                            | null;
+                          labelFontWeightMobile?:
+                            | (
+                                | 'font-light'
+                                | 'font-normal'
+                                | 'font-medium'
+                                | 'font-semibold'
+                                | 'font-bold'
+                                | 'font-extrabold'
+                              )
+                            | null;
                           id?: string | null;
                         }[]
                       | null;
@@ -82278,6 +86663,39 @@ export interface ContentBlock {
                   subHeadingFontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
+                  subHeadingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  subHeadingFontWeightMobile?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
                   subHeadingMarginBottom?: ('mb-0' | 'mb-2 md:mb-3' | 'mb-4') | null;
                   /**
                    * Right column description text. Supports inline styling. Leave blank to hide.
@@ -82578,6 +86996,39 @@ export interface ContentBlock {
                   descriptionFontWeight?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
+                  descriptionFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  descriptionFontWeightMobile?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
                   descriptionMarginBottom?: ('mb-4' | 'mb-6 md:mb-8' | 'mb-10') | null;
                   /**
                    * Upload the abstract glowing wave graphic (Mockup 1) or dotted world map (Mockup 2). Optional.
@@ -82587,19 +87038,31 @@ export interface ContentBlock {
                   imageFit?: ('object-cover' | 'object-contain') | null;
                 };
                 dividerSettings?: {
+                  /**
+                   * Show or hide the horizontal rule (HR) line in this section.
+                   */
                   enableDivider?: boolean | null;
+                  /**
+                   * When enabled, separates the HR line into two distinct lines (one on Left Col and one on Right Col). When disabled, shows one full straight HR line across both columns.
+                   */
+                  divideHRLine?: boolean | null;
                   dividerLayout?: ('full' | 'split') | null;
                   dividerColor?:
                     | (
                         | 'border-white/20'
                         | 'border-white/40'
+                        | 'border-white/70'
+                        | 'border-white'
                         | 'border-gray-200'
                         | 'border-[#EFF1F8]'
                         | 'border-slate-800'
                       )
                     | null;
-                  dividerSpacingTop?: ('mt-8' | 'mt-12 md:mt-16' | 'mt-16 md:mt-20' | 'mt-20 md:mt-28') | null;
-                  dividerSpacingBottom?: ('mb-8' | 'mb-12 md:mb-16' | 'mb-16 md:mb-20' | 'mb-20 md:mb-28') | null;
+                  dividerThickness?: ('border-t' | 'border-t-2' | 'border-t-4') | null;
+                  dividerSpacingTop?: ('mt-0' | 'mt-8' | 'mt-12 md:mt-16' | 'mt-16 md:mt-20' | 'mt-20 md:mt-28') | null;
+                  dividerSpacingBottom?:
+                    | ('mb-0' | 'mb-8' | 'mb-12 md:mb-16' | 'mb-16 md:mb-20' | 'mb-20 md:mb-28')
+                    | null;
                 };
                 statsGroup?: {
                   /**
@@ -82905,6 +87368,36 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  statValueFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   statLabelColor?:
                     | (
                         | 'text-inherit'
@@ -83168,6 +87661,36 @@ export interface ContentBlock {
                       )
                     | null;
                   statLabelFontSize?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
+                  statLabelFontSizeMobile?:
                     | (
                         | 'text-xs'
                         | 'text-sm'
@@ -83825,7 +88348,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  numberFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   numberFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  numberFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   numberMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3 md:mb-4' | 'mb-5 md:mb-6') | null;
@@ -84121,7 +88677,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  subHeadingFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   subHeadingFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  subHeadingFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                   subHeadingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3 md:mb-4' | 'mb-5 md:mb-6') | null;
@@ -84417,7 +89006,40 @@ export interface ContentBlock {
                         | 'text-6xl md:text-7xl lg:text-8xl'
                       )
                     | null;
+                  descriptionFontSizeMobile?:
+                    | (
+                        | 'text-xs'
+                        | 'text-sm'
+                        | 'text-base'
+                        | 'text-lg'
+                        | 'text-xl'
+                        | 'text-2xl'
+                        | 'text-3xl'
+                        | 'text-4xl'
+                        | 'text-5xl'
+                        | 'text-6xl'
+                        | 'text-7xl'
+                        | 'text-8xl'
+                        | 'text-xs md:text-sm'
+                        | 'text-sm md:text-base'
+                        | 'text-base md:text-lg'
+                        | 'text-base md:text-lg lg:text-xl'
+                        | 'text-lg md:text-xl'
+                        | 'text-lg md:text-xl lg:text-2xl'
+                        | 'text-xl md:text-2xl'
+                        | 'text-2xl md:text-[1.65rem]'
+                        | 'text-2xl md:text-3xl'
+                        | 'text-3xl md:text-4xl'
+                        | 'text-3xl md:text-4xl lg:text-5xl'
+                        | 'text-4xl md:text-5xl lg:text-6xl'
+                        | 'text-5xl md:text-6xl lg:text-7xl'
+                        | 'text-6xl md:text-7xl lg:text-8xl'
+                      )
+                    | null;
                   descriptionFontWeight?:
+                    | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+                    | null;
+                  descriptionFontWeightMobile?:
                     | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                     | null;
                 };
@@ -84700,6 +89322,1349 @@ export interface ContentBlock {
                        * Description paragraph. Supports inline HTML/CSS. Leave blank to hide.
                        */
                       description?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              missionVision?: {
+                /**
+                 * Defaults to "Transparent" to use parent column background.
+                 */
+                sectionBgColor?:
+                  | (
+                      | 'bg-inherit'
+                      | 'bg-current'
+                      | 'bg-transparent'
+                      | 'bg-black'
+                      | 'bg-black/10'
+                      | 'bg-black/20'
+                      | 'bg-white'
+                      | 'bg-white/10'
+                      | 'bg-white/15'
+                      | 'bg-white/20'
+                      | 'bg-white/30'
+                      | 'bg-[#F7F8F4]'
+                      | 'bg-[#EFF1F8]'
+                      | 'bg-[#F4F6FB]'
+                      | 'bg-[#EFF2FE]'
+                      | 'bg-[#1D4ED8]'
+                      | 'bg-[#3F5AC9]'
+                      | 'bg-light-sky'
+                      | 'bg-[#0256FF]'
+                      | 'bg-blue-custom'
+                      | 'bg-cyan-neon'
+                      | 'bg-slate-50'
+                      | 'bg-slate-100'
+                      | 'bg-slate-200'
+                      | 'bg-slate-300'
+                      | 'bg-slate-400'
+                      | 'bg-slate-500'
+                      | 'bg-slate-600'
+                      | 'bg-slate-700'
+                      | 'bg-slate-800'
+                      | 'bg-slate-900'
+                      | 'bg-slate-950'
+                      | 'bg-gray-50'
+                      | 'bg-gray-100'
+                      | 'bg-gray-200'
+                      | 'bg-gray-300'
+                      | 'bg-gray-400'
+                      | 'bg-gray-500'
+                      | 'bg-gray-600'
+                      | 'bg-gray-700'
+                      | 'bg-gray-800'
+                      | 'bg-gray-900'
+                      | 'bg-gray-950'
+                      | 'bg-zinc-50'
+                      | 'bg-zinc-100'
+                      | 'bg-zinc-200'
+                      | 'bg-zinc-300'
+                      | 'bg-zinc-400'
+                      | 'bg-zinc-500'
+                      | 'bg-zinc-600'
+                      | 'bg-zinc-700'
+                      | 'bg-zinc-800'
+                      | 'bg-zinc-900'
+                      | 'bg-zinc-950'
+                      | 'bg-neutral-50'
+                      | 'bg-neutral-100'
+                      | 'bg-neutral-200'
+                      | 'bg-neutral-300'
+                      | 'bg-neutral-400'
+                      | 'bg-neutral-500'
+                      | 'bg-neutral-600'
+                      | 'bg-neutral-700'
+                      | 'bg-neutral-800'
+                      | 'bg-neutral-900'
+                      | 'bg-neutral-950'
+                      | 'bg-stone-50'
+                      | 'bg-stone-100'
+                      | 'bg-stone-200'
+                      | 'bg-stone-300'
+                      | 'bg-stone-400'
+                      | 'bg-stone-500'
+                      | 'bg-stone-600'
+                      | 'bg-stone-700'
+                      | 'bg-stone-800'
+                      | 'bg-stone-900'
+                      | 'bg-stone-950'
+                      | 'bg-red-50'
+                      | 'bg-red-100'
+                      | 'bg-red-200'
+                      | 'bg-red-300'
+                      | 'bg-red-400'
+                      | 'bg-red-500'
+                      | 'bg-red-600'
+                      | 'bg-red-700'
+                      | 'bg-red-800'
+                      | 'bg-red-900'
+                      | 'bg-red-950'
+                      | 'bg-orange-50'
+                      | 'bg-orange-100'
+                      | 'bg-orange-200'
+                      | 'bg-orange-300'
+                      | 'bg-orange-400'
+                      | 'bg-orange-500'
+                      | 'bg-orange-600'
+                      | 'bg-orange-700'
+                      | 'bg-orange-800'
+                      | 'bg-orange-900'
+                      | 'bg-orange-950'
+                      | 'bg-amber-50'
+                      | 'bg-amber-100'
+                      | 'bg-amber-200'
+                      | 'bg-amber-300'
+                      | 'bg-amber-400'
+                      | 'bg-amber-500'
+                      | 'bg-amber-600'
+                      | 'bg-amber-700'
+                      | 'bg-amber-800'
+                      | 'bg-amber-900'
+                      | 'bg-amber-950'
+                      | 'bg-yellow-50'
+                      | 'bg-yellow-100'
+                      | 'bg-yellow-200'
+                      | 'bg-yellow-300'
+                      | 'bg-yellow-400'
+                      | 'bg-yellow-500'
+                      | 'bg-yellow-600'
+                      | 'bg-yellow-700'
+                      | 'bg-yellow-800'
+                      | 'bg-yellow-900'
+                      | 'bg-yellow-950'
+                      | 'bg-lime-50'
+                      | 'bg-lime-100'
+                      | 'bg-lime-200'
+                      | 'bg-lime-300'
+                      | 'bg-lime-400'
+                      | 'bg-lime-500'
+                      | 'bg-lime-600'
+                      | 'bg-lime-700'
+                      | 'bg-lime-800'
+                      | 'bg-lime-900'
+                      | 'bg-lime-950'
+                      | 'bg-green-50'
+                      | 'bg-green-100'
+                      | 'bg-green-200'
+                      | 'bg-green-300'
+                      | 'bg-green-400'
+                      | 'bg-green-500'
+                      | 'bg-green-600'
+                      | 'bg-green-700'
+                      | 'bg-green-800'
+                      | 'bg-green-900'
+                      | 'bg-green-950'
+                      | 'bg-emerald-50'
+                      | 'bg-emerald-100'
+                      | 'bg-emerald-200'
+                      | 'bg-emerald-300'
+                      | 'bg-emerald-400'
+                      | 'bg-emerald-500'
+                      | 'bg-emerald-600'
+                      | 'bg-emerald-700'
+                      | 'bg-emerald-800'
+                      | 'bg-emerald-900'
+                      | 'bg-emerald-950'
+                      | 'bg-teal-50'
+                      | 'bg-teal-100'
+                      | 'bg-teal-200'
+                      | 'bg-teal-300'
+                      | 'bg-teal-400'
+                      | 'bg-teal-500'
+                      | 'bg-teal-600'
+                      | 'bg-teal-700'
+                      | 'bg-teal-800'
+                      | 'bg-teal-900'
+                      | 'bg-teal-950'
+                      | 'bg-cyan-50'
+                      | 'bg-cyan-100'
+                      | 'bg-cyan-200'
+                      | 'bg-cyan-300'
+                      | 'bg-cyan-400'
+                      | 'bg-cyan-500'
+                      | 'bg-cyan-600'
+                      | 'bg-cyan-700'
+                      | 'bg-cyan-800'
+                      | 'bg-cyan-900'
+                      | 'bg-cyan-950'
+                      | 'bg-sky-50'
+                      | 'bg-sky-100'
+                      | 'bg-sky-200'
+                      | 'bg-sky-300'
+                      | 'bg-sky-400'
+                      | 'bg-sky-500'
+                      | 'bg-sky-600'
+                      | 'bg-sky-700'
+                      | 'bg-sky-800'
+                      | 'bg-sky-900'
+                      | 'bg-sky-950'
+                      | 'bg-blue-50'
+                      | 'bg-blue-100'
+                      | 'bg-blue-200'
+                      | 'bg-blue-300'
+                      | 'bg-blue-400'
+                      | 'bg-blue-500'
+                      | 'bg-blue-600'
+                      | 'bg-blue-700'
+                      | 'bg-blue-800'
+                      | 'bg-blue-900'
+                      | 'bg-blue-950'
+                      | 'bg-indigo-50'
+                      | 'bg-indigo-100'
+                      | 'bg-indigo-200'
+                      | 'bg-indigo-300'
+                      | 'bg-indigo-400'
+                      | 'bg-indigo-500'
+                      | 'bg-indigo-600'
+                      | 'bg-indigo-700'
+                      | 'bg-indigo-800'
+                      | 'bg-indigo-900'
+                      | 'bg-indigo-950'
+                      | 'bg-violet-50'
+                      | 'bg-violet-100'
+                      | 'bg-violet-200'
+                      | 'bg-violet-300'
+                      | 'bg-violet-400'
+                      | 'bg-violet-500'
+                      | 'bg-violet-600'
+                      | 'bg-violet-700'
+                      | 'bg-violet-800'
+                      | 'bg-violet-900'
+                      | 'bg-violet-950'
+                      | 'bg-purple-50'
+                      | 'bg-purple-100'
+                      | 'bg-purple-200'
+                      | 'bg-purple-300'
+                      | 'bg-purple-400'
+                      | 'bg-purple-500'
+                      | 'bg-purple-600'
+                      | 'bg-purple-700'
+                      | 'bg-purple-800'
+                      | 'bg-purple-900'
+                      | 'bg-purple-950'
+                      | 'bg-fuchsia-50'
+                      | 'bg-fuchsia-100'
+                      | 'bg-fuchsia-200'
+                      | 'bg-fuchsia-300'
+                      | 'bg-fuchsia-400'
+                      | 'bg-fuchsia-500'
+                      | 'bg-fuchsia-600'
+                      | 'bg-fuchsia-700'
+                      | 'bg-fuchsia-800'
+                      | 'bg-fuchsia-900'
+                      | 'bg-fuchsia-950'
+                      | 'bg-pink-50'
+                      | 'bg-pink-100'
+                      | 'bg-pink-200'
+                      | 'bg-pink-300'
+                      | 'bg-pink-400'
+                      | 'bg-pink-500'
+                      | 'bg-pink-600'
+                      | 'bg-pink-700'
+                      | 'bg-pink-800'
+                      | 'bg-pink-900'
+                      | 'bg-pink-950'
+                      | 'bg-rose-50'
+                      | 'bg-rose-100'
+                      | 'bg-rose-200'
+                      | 'bg-rose-300'
+                      | 'bg-rose-400'
+                      | 'bg-rose-500'
+                      | 'bg-rose-600'
+                      | 'bg-rose-700'
+                      | 'bg-rose-800'
+                      | 'bg-rose-900'
+                      | 'bg-rose-950'
+                    )
+                  | null;
+                /**
+                 * Modify spacing at the top before items show up.
+                 */
+                spacingAboveItems?: ('pt-0' | 'pt-4' | 'pt-6' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
+                paddingMode?: ('default' | 'custom' | 'none') | null;
+                paddingTopDesktop?: string | null;
+                paddingBottomDesktop?: string | null;
+                paddingLeftDesktop?: string | null;
+                paddingRightDesktop?: string | null;
+                paddingTopMobile?: string | null;
+                paddingBottomMobile?: string | null;
+                paddingLeftMobile?: string | null;
+                paddingRightMobile?: string | null;
+                items?:
+                  | {
+                      /**
+                       * Supports inline HTML formatting (e.g. <span class="...">word</span> or <em>emphasis</em>).
+                       */
+                      subHeading?: string | null;
+                      /**
+                       * Default is Vibrant Cyan (#00E5FF).
+                       */
+                      subHeadingColor?:
+                        | (
+                            | 'text-inherit'
+                            | 'text-current'
+                            | 'text-transparent'
+                            | 'text-black'
+                            | 'text-white'
+                            | 'text-white/90'
+                            | 'text-white/80'
+                            | 'text-white/70'
+                            | 'text-[#3F5AC9]'
+                            | 'text-[#EFF1F8]'
+                            | 'text-light-sky'
+                            | 'text-[#52B5D8]'
+                            | 'text-cyan-neon'
+                            | 'text-blue-custom'
+                            | 'text-[#0256FF]'
+                            | 'text-[#1D4ED8]'
+                            | 'text-slate-50'
+                            | 'text-slate-100'
+                            | 'text-slate-200'
+                            | 'text-slate-300'
+                            | 'text-slate-400'
+                            | 'text-slate-500'
+                            | 'text-slate-600'
+                            | 'text-slate-700'
+                            | 'text-slate-800'
+                            | 'text-slate-900'
+                            | 'text-slate-950'
+                            | 'text-gray-50'
+                            | 'text-gray-100'
+                            | 'text-gray-200'
+                            | 'text-gray-300'
+                            | 'text-gray-400'
+                            | 'text-gray-500'
+                            | 'text-gray-600'
+                            | 'text-gray-700'
+                            | 'text-gray-800'
+                            | 'text-gray-900'
+                            | 'text-gray-950'
+                            | 'text-zinc-50'
+                            | 'text-zinc-100'
+                            | 'text-zinc-200'
+                            | 'text-zinc-300'
+                            | 'text-zinc-400'
+                            | 'text-zinc-500'
+                            | 'text-zinc-600'
+                            | 'text-zinc-700'
+                            | 'text-zinc-800'
+                            | 'text-zinc-900'
+                            | 'text-zinc-950'
+                            | 'text-neutral-50'
+                            | 'text-neutral-100'
+                            | 'text-neutral-200'
+                            | 'text-neutral-300'
+                            | 'text-neutral-400'
+                            | 'text-neutral-500'
+                            | 'text-neutral-600'
+                            | 'text-neutral-700'
+                            | 'text-neutral-800'
+                            | 'text-neutral-900'
+                            | 'text-neutral-950'
+                            | 'text-stone-50'
+                            | 'text-stone-100'
+                            | 'text-stone-200'
+                            | 'text-stone-300'
+                            | 'text-stone-400'
+                            | 'text-stone-500'
+                            | 'text-stone-600'
+                            | 'text-stone-700'
+                            | 'text-stone-800'
+                            | 'text-stone-900'
+                            | 'text-stone-950'
+                            | 'text-red-50'
+                            | 'text-red-100'
+                            | 'text-red-200'
+                            | 'text-red-300'
+                            | 'text-red-400'
+                            | 'text-red-500'
+                            | 'text-red-600'
+                            | 'text-red-700'
+                            | 'text-red-800'
+                            | 'text-red-900'
+                            | 'text-red-950'
+                            | 'text-orange-50'
+                            | 'text-orange-100'
+                            | 'text-orange-200'
+                            | 'text-orange-300'
+                            | 'text-orange-400'
+                            | 'text-orange-500'
+                            | 'text-orange-600'
+                            | 'text-orange-700'
+                            | 'text-orange-800'
+                            | 'text-orange-900'
+                            | 'text-orange-950'
+                            | 'text-amber-50'
+                            | 'text-amber-100'
+                            | 'text-amber-200'
+                            | 'text-amber-300'
+                            | 'text-amber-400'
+                            | 'text-amber-500'
+                            | 'text-amber-600'
+                            | 'text-amber-700'
+                            | 'text-amber-800'
+                            | 'text-amber-900'
+                            | 'text-amber-950'
+                            | 'text-yellow-50'
+                            | 'text-yellow-100'
+                            | 'text-yellow-200'
+                            | 'text-yellow-300'
+                            | 'text-yellow-400'
+                            | 'text-yellow-500'
+                            | 'text-yellow-600'
+                            | 'text-yellow-700'
+                            | 'text-yellow-800'
+                            | 'text-yellow-900'
+                            | 'text-yellow-950'
+                            | 'text-lime-50'
+                            | 'text-lime-100'
+                            | 'text-lime-200'
+                            | 'text-lime-300'
+                            | 'text-lime-400'
+                            | 'text-lime-500'
+                            | 'text-lime-600'
+                            | 'text-lime-700'
+                            | 'text-lime-800'
+                            | 'text-lime-900'
+                            | 'text-lime-950'
+                            | 'text-green-50'
+                            | 'text-green-100'
+                            | 'text-green-200'
+                            | 'text-green-300'
+                            | 'text-green-400'
+                            | 'text-green-500'
+                            | 'text-green-600'
+                            | 'text-green-700'
+                            | 'text-green-800'
+                            | 'text-green-900'
+                            | 'text-green-950'
+                            | 'text-emerald-50'
+                            | 'text-emerald-100'
+                            | 'text-emerald-200'
+                            | 'text-emerald-300'
+                            | 'text-emerald-400'
+                            | 'text-emerald-500'
+                            | 'text-emerald-600'
+                            | 'text-emerald-700'
+                            | 'text-emerald-800'
+                            | 'text-emerald-900'
+                            | 'text-emerald-950'
+                            | 'text-teal-50'
+                            | 'text-teal-100'
+                            | 'text-teal-200'
+                            | 'text-teal-300'
+                            | 'text-teal-400'
+                            | 'text-teal-500'
+                            | 'text-teal-600'
+                            | 'text-teal-700'
+                            | 'text-teal-800'
+                            | 'text-teal-900'
+                            | 'text-teal-950'
+                            | 'text-cyan-50'
+                            | 'text-cyan-100'
+                            | 'text-cyan-200'
+                            | 'text-cyan-300'
+                            | 'text-cyan-400'
+                            | 'text-cyan-500'
+                            | 'text-cyan-600'
+                            | 'text-cyan-700'
+                            | 'text-cyan-800'
+                            | 'text-cyan-900'
+                            | 'text-cyan-950'
+                            | 'text-sky-50'
+                            | 'text-sky-100'
+                            | 'text-sky-200'
+                            | 'text-sky-300'
+                            | 'text-sky-400'
+                            | 'text-sky-500'
+                            | 'text-sky-600'
+                            | 'text-sky-700'
+                            | 'text-sky-800'
+                            | 'text-sky-900'
+                            | 'text-sky-950'
+                            | 'text-blue-50'
+                            | 'text-blue-100'
+                            | 'text-blue-200'
+                            | 'text-blue-300'
+                            | 'text-blue-400'
+                            | 'text-blue-500'
+                            | 'text-blue-600'
+                            | 'text-blue-700'
+                            | 'text-blue-800'
+                            | 'text-blue-900'
+                            | 'text-blue-950'
+                            | 'text-indigo-50'
+                            | 'text-indigo-100'
+                            | 'text-indigo-200'
+                            | 'text-indigo-300'
+                            | 'text-indigo-400'
+                            | 'text-indigo-500'
+                            | 'text-indigo-600'
+                            | 'text-indigo-700'
+                            | 'text-indigo-800'
+                            | 'text-indigo-900'
+                            | 'text-indigo-950'
+                            | 'text-violet-50'
+                            | 'text-violet-100'
+                            | 'text-violet-200'
+                            | 'text-violet-300'
+                            | 'text-violet-400'
+                            | 'text-violet-500'
+                            | 'text-violet-600'
+                            | 'text-violet-700'
+                            | 'text-violet-800'
+                            | 'text-violet-900'
+                            | 'text-violet-950'
+                            | 'text-purple-50'
+                            | 'text-purple-100'
+                            | 'text-purple-200'
+                            | 'text-purple-300'
+                            | 'text-purple-400'
+                            | 'text-purple-500'
+                            | 'text-purple-600'
+                            | 'text-purple-700'
+                            | 'text-purple-800'
+                            | 'text-purple-900'
+                            | 'text-purple-950'
+                            | 'text-fuchsia-50'
+                            | 'text-fuchsia-100'
+                            | 'text-fuchsia-200'
+                            | 'text-fuchsia-300'
+                            | 'text-fuchsia-400'
+                            | 'text-fuchsia-500'
+                            | 'text-fuchsia-600'
+                            | 'text-fuchsia-700'
+                            | 'text-fuchsia-800'
+                            | 'text-fuchsia-900'
+                            | 'text-fuchsia-950'
+                            | 'text-pink-50'
+                            | 'text-pink-100'
+                            | 'text-pink-200'
+                            | 'text-pink-300'
+                            | 'text-pink-400'
+                            | 'text-pink-500'
+                            | 'text-pink-600'
+                            | 'text-pink-700'
+                            | 'text-pink-800'
+                            | 'text-pink-900'
+                            | 'text-pink-950'
+                            | 'text-rose-50'
+                            | 'text-rose-100'
+                            | 'text-rose-200'
+                            | 'text-rose-300'
+                            | 'text-rose-400'
+                            | 'text-rose-500'
+                            | 'text-rose-600'
+                            | 'text-rose-700'
+                            | 'text-rose-800'
+                            | 'text-rose-900'
+                            | 'text-rose-950'
+                          )
+                        | null;
+                      subHeadingMarginBottom?:
+                        | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10')
+                        | null;
+                      subHeadingFontSize?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      subHeadingFontWeight?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
+                      subHeadingFontSizeMobile?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      subHeadingFontWeightMobile?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
+                      /**
+                       * Supports inline HTML formatting and line breaks.
+                       */
+                      heading?: string | null;
+                      /**
+                       * Default is solid white.
+                       */
+                      headingColor?:
+                        | (
+                            | 'text-inherit'
+                            | 'text-current'
+                            | 'text-transparent'
+                            | 'text-black'
+                            | 'text-white'
+                            | 'text-white/90'
+                            | 'text-white/80'
+                            | 'text-white/70'
+                            | 'text-[#3F5AC9]'
+                            | 'text-[#EFF1F8]'
+                            | 'text-light-sky'
+                            | 'text-[#52B5D8]'
+                            | 'text-cyan-neon'
+                            | 'text-blue-custom'
+                            | 'text-[#0256FF]'
+                            | 'text-[#1D4ED8]'
+                            | 'text-slate-50'
+                            | 'text-slate-100'
+                            | 'text-slate-200'
+                            | 'text-slate-300'
+                            | 'text-slate-400'
+                            | 'text-slate-500'
+                            | 'text-slate-600'
+                            | 'text-slate-700'
+                            | 'text-slate-800'
+                            | 'text-slate-900'
+                            | 'text-slate-950'
+                            | 'text-gray-50'
+                            | 'text-gray-100'
+                            | 'text-gray-200'
+                            | 'text-gray-300'
+                            | 'text-gray-400'
+                            | 'text-gray-500'
+                            | 'text-gray-600'
+                            | 'text-gray-700'
+                            | 'text-gray-800'
+                            | 'text-gray-900'
+                            | 'text-gray-950'
+                            | 'text-zinc-50'
+                            | 'text-zinc-100'
+                            | 'text-zinc-200'
+                            | 'text-zinc-300'
+                            | 'text-zinc-400'
+                            | 'text-zinc-500'
+                            | 'text-zinc-600'
+                            | 'text-zinc-700'
+                            | 'text-zinc-800'
+                            | 'text-zinc-900'
+                            | 'text-zinc-950'
+                            | 'text-neutral-50'
+                            | 'text-neutral-100'
+                            | 'text-neutral-200'
+                            | 'text-neutral-300'
+                            | 'text-neutral-400'
+                            | 'text-neutral-500'
+                            | 'text-neutral-600'
+                            | 'text-neutral-700'
+                            | 'text-neutral-800'
+                            | 'text-neutral-900'
+                            | 'text-neutral-950'
+                            | 'text-stone-50'
+                            | 'text-stone-100'
+                            | 'text-stone-200'
+                            | 'text-stone-300'
+                            | 'text-stone-400'
+                            | 'text-stone-500'
+                            | 'text-stone-600'
+                            | 'text-stone-700'
+                            | 'text-stone-800'
+                            | 'text-stone-900'
+                            | 'text-stone-950'
+                            | 'text-red-50'
+                            | 'text-red-100'
+                            | 'text-red-200'
+                            | 'text-red-300'
+                            | 'text-red-400'
+                            | 'text-red-500'
+                            | 'text-red-600'
+                            | 'text-red-700'
+                            | 'text-red-800'
+                            | 'text-red-900'
+                            | 'text-red-950'
+                            | 'text-orange-50'
+                            | 'text-orange-100'
+                            | 'text-orange-200'
+                            | 'text-orange-300'
+                            | 'text-orange-400'
+                            | 'text-orange-500'
+                            | 'text-orange-600'
+                            | 'text-orange-700'
+                            | 'text-orange-800'
+                            | 'text-orange-900'
+                            | 'text-orange-950'
+                            | 'text-amber-50'
+                            | 'text-amber-100'
+                            | 'text-amber-200'
+                            | 'text-amber-300'
+                            | 'text-amber-400'
+                            | 'text-amber-500'
+                            | 'text-amber-600'
+                            | 'text-amber-700'
+                            | 'text-amber-800'
+                            | 'text-amber-900'
+                            | 'text-amber-950'
+                            | 'text-yellow-50'
+                            | 'text-yellow-100'
+                            | 'text-yellow-200'
+                            | 'text-yellow-300'
+                            | 'text-yellow-400'
+                            | 'text-yellow-500'
+                            | 'text-yellow-600'
+                            | 'text-yellow-700'
+                            | 'text-yellow-800'
+                            | 'text-yellow-900'
+                            | 'text-yellow-950'
+                            | 'text-lime-50'
+                            | 'text-lime-100'
+                            | 'text-lime-200'
+                            | 'text-lime-300'
+                            | 'text-lime-400'
+                            | 'text-lime-500'
+                            | 'text-lime-600'
+                            | 'text-lime-700'
+                            | 'text-lime-800'
+                            | 'text-lime-900'
+                            | 'text-lime-950'
+                            | 'text-green-50'
+                            | 'text-green-100'
+                            | 'text-green-200'
+                            | 'text-green-300'
+                            | 'text-green-400'
+                            | 'text-green-500'
+                            | 'text-green-600'
+                            | 'text-green-700'
+                            | 'text-green-800'
+                            | 'text-green-900'
+                            | 'text-green-950'
+                            | 'text-emerald-50'
+                            | 'text-emerald-100'
+                            | 'text-emerald-200'
+                            | 'text-emerald-300'
+                            | 'text-emerald-400'
+                            | 'text-emerald-500'
+                            | 'text-emerald-600'
+                            | 'text-emerald-700'
+                            | 'text-emerald-800'
+                            | 'text-emerald-900'
+                            | 'text-emerald-950'
+                            | 'text-teal-50'
+                            | 'text-teal-100'
+                            | 'text-teal-200'
+                            | 'text-teal-300'
+                            | 'text-teal-400'
+                            | 'text-teal-500'
+                            | 'text-teal-600'
+                            | 'text-teal-700'
+                            | 'text-teal-800'
+                            | 'text-teal-900'
+                            | 'text-teal-950'
+                            | 'text-cyan-50'
+                            | 'text-cyan-100'
+                            | 'text-cyan-200'
+                            | 'text-cyan-300'
+                            | 'text-cyan-400'
+                            | 'text-cyan-500'
+                            | 'text-cyan-600'
+                            | 'text-cyan-700'
+                            | 'text-cyan-800'
+                            | 'text-cyan-900'
+                            | 'text-cyan-950'
+                            | 'text-sky-50'
+                            | 'text-sky-100'
+                            | 'text-sky-200'
+                            | 'text-sky-300'
+                            | 'text-sky-400'
+                            | 'text-sky-500'
+                            | 'text-sky-600'
+                            | 'text-sky-700'
+                            | 'text-sky-800'
+                            | 'text-sky-900'
+                            | 'text-sky-950'
+                            | 'text-blue-50'
+                            | 'text-blue-100'
+                            | 'text-blue-200'
+                            | 'text-blue-300'
+                            | 'text-blue-400'
+                            | 'text-blue-500'
+                            | 'text-blue-600'
+                            | 'text-blue-700'
+                            | 'text-blue-800'
+                            | 'text-blue-900'
+                            | 'text-blue-950'
+                            | 'text-indigo-50'
+                            | 'text-indigo-100'
+                            | 'text-indigo-200'
+                            | 'text-indigo-300'
+                            | 'text-indigo-400'
+                            | 'text-indigo-500'
+                            | 'text-indigo-600'
+                            | 'text-indigo-700'
+                            | 'text-indigo-800'
+                            | 'text-indigo-900'
+                            | 'text-indigo-950'
+                            | 'text-violet-50'
+                            | 'text-violet-100'
+                            | 'text-violet-200'
+                            | 'text-violet-300'
+                            | 'text-violet-400'
+                            | 'text-violet-500'
+                            | 'text-violet-600'
+                            | 'text-violet-700'
+                            | 'text-violet-800'
+                            | 'text-violet-900'
+                            | 'text-violet-950'
+                            | 'text-purple-50'
+                            | 'text-purple-100'
+                            | 'text-purple-200'
+                            | 'text-purple-300'
+                            | 'text-purple-400'
+                            | 'text-purple-500'
+                            | 'text-purple-600'
+                            | 'text-purple-700'
+                            | 'text-purple-800'
+                            | 'text-purple-900'
+                            | 'text-purple-950'
+                            | 'text-fuchsia-50'
+                            | 'text-fuchsia-100'
+                            | 'text-fuchsia-200'
+                            | 'text-fuchsia-300'
+                            | 'text-fuchsia-400'
+                            | 'text-fuchsia-500'
+                            | 'text-fuchsia-600'
+                            | 'text-fuchsia-700'
+                            | 'text-fuchsia-800'
+                            | 'text-fuchsia-900'
+                            | 'text-fuchsia-950'
+                            | 'text-pink-50'
+                            | 'text-pink-100'
+                            | 'text-pink-200'
+                            | 'text-pink-300'
+                            | 'text-pink-400'
+                            | 'text-pink-500'
+                            | 'text-pink-600'
+                            | 'text-pink-700'
+                            | 'text-pink-800'
+                            | 'text-pink-900'
+                            | 'text-pink-950'
+                            | 'text-rose-50'
+                            | 'text-rose-100'
+                            | 'text-rose-200'
+                            | 'text-rose-300'
+                            | 'text-rose-400'
+                            | 'text-rose-500'
+                            | 'text-rose-600'
+                            | 'text-rose-700'
+                            | 'text-rose-800'
+                            | 'text-rose-900'
+                            | 'text-rose-950'
+                          )
+                        | null;
+                      headingMarginBottom?:
+                        | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10')
+                        | null;
+                      headingFontSize?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      headingFontWeight?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
+                      headingFontSizeMobile?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      headingFontWeightMobile?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
+                      /**
+                       * Supports inline HTML formatting and custom styling.
+                       */
+                      description?: string | null;
+                      descriptionColor?:
+                        | (
+                            | 'text-inherit'
+                            | 'text-current'
+                            | 'text-transparent'
+                            | 'text-black'
+                            | 'text-white'
+                            | 'text-white/90'
+                            | 'text-white/80'
+                            | 'text-white/70'
+                            | 'text-[#3F5AC9]'
+                            | 'text-[#EFF1F8]'
+                            | 'text-light-sky'
+                            | 'text-[#52B5D8]'
+                            | 'text-cyan-neon'
+                            | 'text-blue-custom'
+                            | 'text-[#0256FF]'
+                            | 'text-[#1D4ED8]'
+                            | 'text-slate-50'
+                            | 'text-slate-100'
+                            | 'text-slate-200'
+                            | 'text-slate-300'
+                            | 'text-slate-400'
+                            | 'text-slate-500'
+                            | 'text-slate-600'
+                            | 'text-slate-700'
+                            | 'text-slate-800'
+                            | 'text-slate-900'
+                            | 'text-slate-950'
+                            | 'text-gray-50'
+                            | 'text-gray-100'
+                            | 'text-gray-200'
+                            | 'text-gray-300'
+                            | 'text-gray-400'
+                            | 'text-gray-500'
+                            | 'text-gray-600'
+                            | 'text-gray-700'
+                            | 'text-gray-800'
+                            | 'text-gray-900'
+                            | 'text-gray-950'
+                            | 'text-zinc-50'
+                            | 'text-zinc-100'
+                            | 'text-zinc-200'
+                            | 'text-zinc-300'
+                            | 'text-zinc-400'
+                            | 'text-zinc-500'
+                            | 'text-zinc-600'
+                            | 'text-zinc-700'
+                            | 'text-zinc-800'
+                            | 'text-zinc-900'
+                            | 'text-zinc-950'
+                            | 'text-neutral-50'
+                            | 'text-neutral-100'
+                            | 'text-neutral-200'
+                            | 'text-neutral-300'
+                            | 'text-neutral-400'
+                            | 'text-neutral-500'
+                            | 'text-neutral-600'
+                            | 'text-neutral-700'
+                            | 'text-neutral-800'
+                            | 'text-neutral-900'
+                            | 'text-neutral-950'
+                            | 'text-stone-50'
+                            | 'text-stone-100'
+                            | 'text-stone-200'
+                            | 'text-stone-300'
+                            | 'text-stone-400'
+                            | 'text-stone-500'
+                            | 'text-stone-600'
+                            | 'text-stone-700'
+                            | 'text-stone-800'
+                            | 'text-stone-900'
+                            | 'text-stone-950'
+                            | 'text-red-50'
+                            | 'text-red-100'
+                            | 'text-red-200'
+                            | 'text-red-300'
+                            | 'text-red-400'
+                            | 'text-red-500'
+                            | 'text-red-600'
+                            | 'text-red-700'
+                            | 'text-red-800'
+                            | 'text-red-900'
+                            | 'text-red-950'
+                            | 'text-orange-50'
+                            | 'text-orange-100'
+                            | 'text-orange-200'
+                            | 'text-orange-300'
+                            | 'text-orange-400'
+                            | 'text-orange-500'
+                            | 'text-orange-600'
+                            | 'text-orange-700'
+                            | 'text-orange-800'
+                            | 'text-orange-900'
+                            | 'text-orange-950'
+                            | 'text-amber-50'
+                            | 'text-amber-100'
+                            | 'text-amber-200'
+                            | 'text-amber-300'
+                            | 'text-amber-400'
+                            | 'text-amber-500'
+                            | 'text-amber-600'
+                            | 'text-amber-700'
+                            | 'text-amber-800'
+                            | 'text-amber-900'
+                            | 'text-amber-950'
+                            | 'text-yellow-50'
+                            | 'text-yellow-100'
+                            | 'text-yellow-200'
+                            | 'text-yellow-300'
+                            | 'text-yellow-400'
+                            | 'text-yellow-500'
+                            | 'text-yellow-600'
+                            | 'text-yellow-700'
+                            | 'text-yellow-800'
+                            | 'text-yellow-900'
+                            | 'text-yellow-950'
+                            | 'text-lime-50'
+                            | 'text-lime-100'
+                            | 'text-lime-200'
+                            | 'text-lime-300'
+                            | 'text-lime-400'
+                            | 'text-lime-500'
+                            | 'text-lime-600'
+                            | 'text-lime-700'
+                            | 'text-lime-800'
+                            | 'text-lime-900'
+                            | 'text-lime-950'
+                            | 'text-green-50'
+                            | 'text-green-100'
+                            | 'text-green-200'
+                            | 'text-green-300'
+                            | 'text-green-400'
+                            | 'text-green-500'
+                            | 'text-green-600'
+                            | 'text-green-700'
+                            | 'text-green-800'
+                            | 'text-green-900'
+                            | 'text-green-950'
+                            | 'text-emerald-50'
+                            | 'text-emerald-100'
+                            | 'text-emerald-200'
+                            | 'text-emerald-300'
+                            | 'text-emerald-400'
+                            | 'text-emerald-500'
+                            | 'text-emerald-600'
+                            | 'text-emerald-700'
+                            | 'text-emerald-800'
+                            | 'text-emerald-900'
+                            | 'text-emerald-950'
+                            | 'text-teal-50'
+                            | 'text-teal-100'
+                            | 'text-teal-200'
+                            | 'text-teal-300'
+                            | 'text-teal-400'
+                            | 'text-teal-500'
+                            | 'text-teal-600'
+                            | 'text-teal-700'
+                            | 'text-teal-800'
+                            | 'text-teal-900'
+                            | 'text-teal-950'
+                            | 'text-cyan-50'
+                            | 'text-cyan-100'
+                            | 'text-cyan-200'
+                            | 'text-cyan-300'
+                            | 'text-cyan-400'
+                            | 'text-cyan-500'
+                            | 'text-cyan-600'
+                            | 'text-cyan-700'
+                            | 'text-cyan-800'
+                            | 'text-cyan-900'
+                            | 'text-cyan-950'
+                            | 'text-sky-50'
+                            | 'text-sky-100'
+                            | 'text-sky-200'
+                            | 'text-sky-300'
+                            | 'text-sky-400'
+                            | 'text-sky-500'
+                            | 'text-sky-600'
+                            | 'text-sky-700'
+                            | 'text-sky-800'
+                            | 'text-sky-900'
+                            | 'text-sky-950'
+                            | 'text-blue-50'
+                            | 'text-blue-100'
+                            | 'text-blue-200'
+                            | 'text-blue-300'
+                            | 'text-blue-400'
+                            | 'text-blue-500'
+                            | 'text-blue-600'
+                            | 'text-blue-700'
+                            | 'text-blue-800'
+                            | 'text-blue-900'
+                            | 'text-blue-950'
+                            | 'text-indigo-50'
+                            | 'text-indigo-100'
+                            | 'text-indigo-200'
+                            | 'text-indigo-300'
+                            | 'text-indigo-400'
+                            | 'text-indigo-500'
+                            | 'text-indigo-600'
+                            | 'text-indigo-700'
+                            | 'text-indigo-800'
+                            | 'text-indigo-900'
+                            | 'text-indigo-950'
+                            | 'text-violet-50'
+                            | 'text-violet-100'
+                            | 'text-violet-200'
+                            | 'text-violet-300'
+                            | 'text-violet-400'
+                            | 'text-violet-500'
+                            | 'text-violet-600'
+                            | 'text-violet-700'
+                            | 'text-violet-800'
+                            | 'text-violet-900'
+                            | 'text-violet-950'
+                            | 'text-purple-50'
+                            | 'text-purple-100'
+                            | 'text-purple-200'
+                            | 'text-purple-300'
+                            | 'text-purple-400'
+                            | 'text-purple-500'
+                            | 'text-purple-600'
+                            | 'text-purple-700'
+                            | 'text-purple-800'
+                            | 'text-purple-900'
+                            | 'text-purple-950'
+                            | 'text-fuchsia-50'
+                            | 'text-fuchsia-100'
+                            | 'text-fuchsia-200'
+                            | 'text-fuchsia-300'
+                            | 'text-fuchsia-400'
+                            | 'text-fuchsia-500'
+                            | 'text-fuchsia-600'
+                            | 'text-fuchsia-700'
+                            | 'text-fuchsia-800'
+                            | 'text-fuchsia-900'
+                            | 'text-fuchsia-950'
+                            | 'text-pink-50'
+                            | 'text-pink-100'
+                            | 'text-pink-200'
+                            | 'text-pink-300'
+                            | 'text-pink-400'
+                            | 'text-pink-500'
+                            | 'text-pink-600'
+                            | 'text-pink-700'
+                            | 'text-pink-800'
+                            | 'text-pink-900'
+                            | 'text-pink-950'
+                            | 'text-rose-50'
+                            | 'text-rose-100'
+                            | 'text-rose-200'
+                            | 'text-rose-300'
+                            | 'text-rose-400'
+                            | 'text-rose-500'
+                            | 'text-rose-600'
+                            | 'text-rose-700'
+                            | 'text-rose-800'
+                            | 'text-rose-900'
+                            | 'text-rose-950'
+                          )
+                        | null;
+                      descriptionMarginBottom?:
+                        | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10')
+                        | null;
+                      descriptionFontSize?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      descriptionFontWeight?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
+                      descriptionFontSizeMobile?:
+                        | (
+                            | 'text-xs'
+                            | 'text-sm'
+                            | 'text-base'
+                            | 'text-lg'
+                            | 'text-xl'
+                            | 'text-2xl'
+                            | 'text-3xl'
+                            | 'text-4xl'
+                            | 'text-5xl'
+                            | 'text-6xl'
+                            | 'text-7xl'
+                            | 'text-8xl'
+                            | 'text-xs md:text-sm'
+                            | 'text-sm md:text-base'
+                            | 'text-base md:text-lg'
+                            | 'text-base md:text-lg lg:text-xl'
+                            | 'text-lg md:text-xl'
+                            | 'text-lg md:text-xl lg:text-2xl'
+                            | 'text-xl md:text-2xl'
+                            | 'text-2xl md:text-[1.65rem]'
+                            | 'text-2xl md:text-3xl'
+                            | 'text-3xl md:text-4xl'
+                            | 'text-3xl md:text-4xl lg:text-5xl'
+                            | 'text-4xl md:text-5xl lg:text-6xl'
+                            | 'text-5xl md:text-6xl lg:text-7xl'
+                            | 'text-6xl md:text-7xl lg:text-8xl'
+                          )
+                        | null;
+                      descriptionFontWeightMobile?:
+                        | (
+                            | 'font-light'
+                            | 'font-normal'
+                            | 'font-medium'
+                            | 'font-semibold'
+                            | 'font-bold'
+                            | 'font-extrabold'
+                          )
+                        | null;
                       id?: string | null;
                     }[]
                   | null;
@@ -165537,7 +171502,40 @@ export interface CenteredContentBlock {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    badgeFontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     badgeFontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    badgeFontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
   };
@@ -165835,7 +171833,40 @@ export interface CenteredContentBlock {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    fontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     fontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    fontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
   };
@@ -166133,7 +172164,40 @@ export interface CenteredContentBlock {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    fontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     fontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    fontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
   };
@@ -166432,7 +172496,40 @@ export interface CenteredContentBlock {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    fontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     fontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    fontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
   };
@@ -167066,6 +173163,40 @@ export interface ClickExpandBlock {
           fontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
+          fontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          fontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
         };
         headingGroup?: {
           heading?: string | null;
@@ -167397,6 +173528,71 @@ export interface ClickExpandBlock {
                 | 'text-6xl md:text-7xl lg:text-8xl'
               )
             | null;
+          headingFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          headingFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          collapsedFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
         };
         descriptionGroup?: {
           description?: string | null;
@@ -167694,6 +173890,40 @@ export interface ClickExpandBlock {
             | null;
           descriptionFontWeight?:
             | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+            | null;
+          descriptionFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          descriptionFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
         };
         subCardsGroup?: {
@@ -168012,6 +174242,48 @@ export interface ClickExpandBlock {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 titleAlignment?: ('left' | 'center' | 'right') | null;
+                titleFontSizeMobile?:
+                  | (
+                      | ''
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
+                titleFontWeightMobile?:
+                  | (
+                      | ''
+                      | 'font-light'
+                      | 'font-normal'
+                      | 'font-medium'
+                      | 'font-semibold'
+                      | 'font-bold'
+                      | 'font-extrabold'
+                    )
+                  | null;
                 spacingBottom?: ('0px' | '6px' | '8px' | '10px' | '12px' | '16px' | '20px' | 'custom') | null;
                 spacingBottomCustom?: string | null;
                 description?: string | null;
@@ -168311,6 +174583,48 @@ export interface ClickExpandBlock {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 descriptionAlignment?: ('left' | 'center' | 'right') | null;
+                descriptionFontSizeMobile?:
+                  | (
+                      | ''
+                      | 'text-xs'
+                      | 'text-sm'
+                      | 'text-base'
+                      | 'text-lg'
+                      | 'text-xl'
+                      | 'text-2xl'
+                      | 'text-3xl'
+                      | 'text-4xl'
+                      | 'text-5xl'
+                      | 'text-6xl'
+                      | 'text-7xl'
+                      | 'text-8xl'
+                      | 'text-xs md:text-sm'
+                      | 'text-sm md:text-base'
+                      | 'text-base md:text-lg'
+                      | 'text-base md:text-lg lg:text-xl'
+                      | 'text-lg md:text-xl'
+                      | 'text-lg md:text-xl lg:text-2xl'
+                      | 'text-xl md:text-2xl'
+                      | 'text-2xl md:text-[1.65rem]'
+                      | 'text-2xl md:text-3xl'
+                      | 'text-3xl md:text-4xl'
+                      | 'text-3xl md:text-4xl lg:text-5xl'
+                      | 'text-4xl md:text-5xl lg:text-6xl'
+                      | 'text-5xl md:text-6xl lg:text-7xl'
+                      | 'text-6xl md:text-7xl lg:text-8xl'
+                    )
+                  | null;
+                descriptionFontWeightMobile?:
+                  | (
+                      | ''
+                      | 'font-light'
+                      | 'font-normal'
+                      | 'font-medium'
+                      | 'font-semibold'
+                      | 'font-bold'
+                      | 'font-extrabold'
+                    )
+                  | null;
                 id?: string | null;
               }[]
             | null;
@@ -169155,6 +175469,40 @@ export interface ClickExpandBlock {
                 | 'text-rose-900'
                 | 'text-rose-950'
               )
+            | null;
+          buttonFontSizeMobile?:
+            | (
+                | ''
+                | 'text-xs'
+                | 'text-sm'
+                | 'text-base'
+                | 'text-lg'
+                | 'text-xl'
+                | 'text-2xl'
+                | 'text-3xl'
+                | 'text-4xl'
+                | 'text-5xl'
+                | 'text-6xl'
+                | 'text-7xl'
+                | 'text-8xl'
+                | 'text-xs md:text-sm'
+                | 'text-sm md:text-base'
+                | 'text-base md:text-lg'
+                | 'text-base md:text-lg lg:text-xl'
+                | 'text-lg md:text-xl'
+                | 'text-lg md:text-xl lg:text-2xl'
+                | 'text-xl md:text-2xl'
+                | 'text-2xl md:text-[1.65rem]'
+                | 'text-2xl md:text-3xl'
+                | 'text-3xl md:text-4xl'
+                | 'text-3xl md:text-4xl lg:text-5xl'
+                | 'text-4xl md:text-5xl lg:text-6xl'
+                | 'text-5xl md:text-6xl lg:text-7xl'
+                | 'text-6xl md:text-7xl lg:text-8xl'
+              )
+            | null;
+          buttonFontWeightMobile?:
+            | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
             | null;
           buttonLink?: {
             type?: ('reference' | 'custom') | null;
@@ -170069,6 +176417,40 @@ export interface GridColBlock {
     badgeFontWeight?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
+    badgeFontSizeMobile?:
+      | (
+          | ''
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
+    badgeFontWeightMobile?:
+      | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
   };
   mainHeadingGroup?: {
     headingText?: string | null;
@@ -170368,6 +176750,40 @@ export interface GridColBlock {
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
     headingAlignment?: ('left' | 'center' | 'right') | null;
+    headingFontSizeMobile?:
+      | (
+          | ''
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
+    headingFontWeightMobile?:
+      | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
     headingTag?: ('h1' | 'h2' | 'h3' | 'div') | null;
   };
   contentColumn?: {
@@ -170669,6 +177085,40 @@ export interface GridColBlock {
         | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
         | null;
       alignment?: ('left' | 'center' | 'right') | null;
+      fontSizeMobile?:
+        | (
+            | ''
+            | 'text-xs'
+            | 'text-sm'
+            | 'text-base'
+            | 'text-lg'
+            | 'text-xl'
+            | 'text-2xl'
+            | 'text-3xl'
+            | 'text-4xl'
+            | 'text-5xl'
+            | 'text-6xl'
+            | 'text-7xl'
+            | 'text-8xl'
+            | 'text-xs md:text-sm'
+            | 'text-sm md:text-base'
+            | 'text-base md:text-lg'
+            | 'text-base md:text-lg lg:text-xl'
+            | 'text-lg md:text-xl'
+            | 'text-lg md:text-xl lg:text-2xl'
+            | 'text-xl md:text-2xl'
+            | 'text-2xl md:text-[1.65rem]'
+            | 'text-2xl md:text-3xl'
+            | 'text-3xl md:text-4xl'
+            | 'text-3xl md:text-4xl lg:text-5xl'
+            | 'text-4xl md:text-5xl lg:text-6xl'
+            | 'text-5xl md:text-6xl lg:text-7xl'
+            | 'text-6xl md:text-7xl lg:text-8xl'
+          )
+        | null;
+      fontWeightMobile?:
+        | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+        | null;
     };
     headingGroup?: {
       text?: string | null;
@@ -170968,6 +177418,40 @@ export interface GridColBlock {
         | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
         | null;
       alignment?: ('left' | 'center' | 'right') | null;
+      fontSizeMobile?:
+        | (
+            | ''
+            | 'text-xs'
+            | 'text-sm'
+            | 'text-base'
+            | 'text-lg'
+            | 'text-xl'
+            | 'text-2xl'
+            | 'text-3xl'
+            | 'text-4xl'
+            | 'text-5xl'
+            | 'text-6xl'
+            | 'text-7xl'
+            | 'text-8xl'
+            | 'text-xs md:text-sm'
+            | 'text-sm md:text-base'
+            | 'text-base md:text-lg'
+            | 'text-base md:text-lg lg:text-xl'
+            | 'text-lg md:text-xl'
+            | 'text-lg md:text-xl lg:text-2xl'
+            | 'text-xl md:text-2xl'
+            | 'text-2xl md:text-[1.65rem]'
+            | 'text-2xl md:text-3xl'
+            | 'text-3xl md:text-4xl'
+            | 'text-3xl md:text-4xl lg:text-5xl'
+            | 'text-4xl md:text-5xl lg:text-6xl'
+            | 'text-5xl md:text-6xl lg:text-7xl'
+            | 'text-6xl md:text-7xl lg:text-8xl'
+          )
+        | null;
+      fontWeightMobile?:
+        | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+        | null;
     };
     descriptionGroup?: {
       text?: string | null;
@@ -171267,6 +177751,40 @@ export interface GridColBlock {
         | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
         | null;
       alignment?: ('left' | 'center' | 'right') | null;
+      fontSizeMobile?:
+        | (
+            | ''
+            | 'text-xs'
+            | 'text-sm'
+            | 'text-base'
+            | 'text-lg'
+            | 'text-xl'
+            | 'text-2xl'
+            | 'text-3xl'
+            | 'text-4xl'
+            | 'text-5xl'
+            | 'text-6xl'
+            | 'text-7xl'
+            | 'text-8xl'
+            | 'text-xs md:text-sm'
+            | 'text-sm md:text-base'
+            | 'text-base md:text-lg'
+            | 'text-base md:text-lg lg:text-xl'
+            | 'text-lg md:text-xl'
+            | 'text-lg md:text-xl lg:text-2xl'
+            | 'text-xl md:text-2xl'
+            | 'text-2xl md:text-[1.65rem]'
+            | 'text-2xl md:text-3xl'
+            | 'text-3xl md:text-4xl'
+            | 'text-3xl md:text-4xl lg:text-5xl'
+            | 'text-4xl md:text-5xl lg:text-6xl'
+            | 'text-5xl md:text-6xl lg:text-7xl'
+            | 'text-6xl md:text-7xl lg:text-8xl'
+          )
+        | null;
+      fontWeightMobile?:
+        | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+        | null;
     };
     featuresSection?: {
       title?: string | null;
@@ -171566,6 +178084,40 @@ export interface GridColBlock {
         | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
         | null;
       titleAlignment?: ('left' | 'center' | 'right') | null;
+      titleFontSizeMobile?:
+        | (
+            | ''
+            | 'text-xs'
+            | 'text-sm'
+            | 'text-base'
+            | 'text-lg'
+            | 'text-xl'
+            | 'text-2xl'
+            | 'text-3xl'
+            | 'text-4xl'
+            | 'text-5xl'
+            | 'text-6xl'
+            | 'text-7xl'
+            | 'text-8xl'
+            | 'text-xs md:text-sm'
+            | 'text-sm md:text-base'
+            | 'text-base md:text-lg'
+            | 'text-base md:text-lg lg:text-xl'
+            | 'text-lg md:text-xl'
+            | 'text-lg md:text-xl lg:text-2xl'
+            | 'text-xl md:text-2xl'
+            | 'text-2xl md:text-[1.65rem]'
+            | 'text-2xl md:text-3xl'
+            | 'text-3xl md:text-4xl'
+            | 'text-3xl md:text-4xl lg:text-5xl'
+            | 'text-4xl md:text-5xl lg:text-6xl'
+            | 'text-5xl md:text-6xl lg:text-7xl'
+            | 'text-6xl md:text-7xl lg:text-8xl'
+          )
+        | null;
+      titleFontWeightMobile?:
+        | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+        | null;
       items?:
         | {
             text?: string | null;
@@ -171863,6 +178415,40 @@ export interface GridColBlock {
               | null;
             fontWeight?:
               | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+              | null;
+            fontSizeMobile?:
+              | (
+                  | ''
+                  | 'text-xs'
+                  | 'text-sm'
+                  | 'text-base'
+                  | 'text-lg'
+                  | 'text-xl'
+                  | 'text-2xl'
+                  | 'text-3xl'
+                  | 'text-4xl'
+                  | 'text-5xl'
+                  | 'text-6xl'
+                  | 'text-7xl'
+                  | 'text-8xl'
+                  | 'text-xs md:text-sm'
+                  | 'text-sm md:text-base'
+                  | 'text-base md:text-lg'
+                  | 'text-base md:text-lg lg:text-xl'
+                  | 'text-lg md:text-xl'
+                  | 'text-lg md:text-xl lg:text-2xl'
+                  | 'text-xl md:text-2xl'
+                  | 'text-2xl md:text-[1.65rem]'
+                  | 'text-2xl md:text-3xl'
+                  | 'text-3xl md:text-4xl'
+                  | 'text-3xl md:text-4xl lg:text-5xl'
+                  | 'text-4xl md:text-5xl lg:text-6xl'
+                  | 'text-5xl md:text-6xl lg:text-7xl'
+                  | 'text-6xl md:text-7xl lg:text-8xl'
+                )
+              | null;
+            fontWeightMobile?:
+              | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
               | null;
             itemLink?: {
               type?: ('reference' | 'custom') | null;
@@ -172193,6 +178779,40 @@ export interface GridColBlock {
         | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
         | null;
       alignment?: ('left' | 'center' | 'right') | null;
+      fontSizeMobile?:
+        | (
+            | ''
+            | 'text-xs'
+            | 'text-sm'
+            | 'text-base'
+            | 'text-lg'
+            | 'text-xl'
+            | 'text-2xl'
+            | 'text-3xl'
+            | 'text-4xl'
+            | 'text-5xl'
+            | 'text-6xl'
+            | 'text-7xl'
+            | 'text-8xl'
+            | 'text-xs md:text-sm'
+            | 'text-sm md:text-base'
+            | 'text-base md:text-lg'
+            | 'text-base md:text-lg lg:text-xl'
+            | 'text-lg md:text-xl'
+            | 'text-lg md:text-xl lg:text-2xl'
+            | 'text-xl md:text-2xl'
+            | 'text-2xl md:text-[1.65rem]'
+            | 'text-2xl md:text-3xl'
+            | 'text-3xl md:text-4xl'
+            | 'text-3xl md:text-4xl lg:text-5xl'
+            | 'text-4xl md:text-5xl lg:text-6xl'
+            | 'text-5xl md:text-6xl lg:text-7xl'
+            | 'text-6xl md:text-7xl lg:text-8xl'
+          )
+        | null;
+      fontWeightMobile?:
+        | ('' | 'font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+        | null;
       iconBgColor?:
         | (
             | 'bg-inherit'
@@ -173339,7 +179959,40 @@ export interface VerticalCTAv2Block {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    headingFontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     headingFontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    headingFontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
     headingAlignment?: ('left' | 'center' | 'right') | null;
@@ -173641,7 +180294,40 @@ export interface VerticalCTAv2Block {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    descriptionFontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     descriptionFontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    descriptionFontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
     descriptionAlignment?: ('left' | 'center' | 'right') | null;
@@ -174497,7 +181183,40 @@ export interface VerticalCTAv2Block {
           | 'text-6xl md:text-7xl lg:text-8xl'
         )
       | null;
+    buttonFontSizeMobile?:
+      | (
+          | 'text-xs'
+          | 'text-sm'
+          | 'text-base'
+          | 'text-lg'
+          | 'text-xl'
+          | 'text-2xl'
+          | 'text-3xl'
+          | 'text-4xl'
+          | 'text-5xl'
+          | 'text-6xl'
+          | 'text-7xl'
+          | 'text-8xl'
+          | 'text-xs md:text-sm'
+          | 'text-sm md:text-base'
+          | 'text-base md:text-lg'
+          | 'text-base md:text-lg lg:text-xl'
+          | 'text-lg md:text-xl'
+          | 'text-lg md:text-xl lg:text-2xl'
+          | 'text-xl md:text-2xl'
+          | 'text-2xl md:text-[1.65rem]'
+          | 'text-2xl md:text-3xl'
+          | 'text-3xl md:text-4xl'
+          | 'text-3xl md:text-4xl lg:text-5xl'
+          | 'text-4xl md:text-5xl lg:text-6xl'
+          | 'text-5xl md:text-6xl lg:text-7xl'
+          | 'text-6xl md:text-7xl lg:text-8xl'
+        )
+      | null;
     buttonFontWeight?:
+      | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
+      | null;
+    buttonFontWeightMobile?:
       | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
       | null;
   };
@@ -178070,6 +184789,8 @@ export interface PagesSelect<T extends boolean = true> {
                     headingFontSize?: T;
                     headingFontWeight?: T;
                     headingAlignment?: T;
+                    headingFontSizeMobile?: T;
+                    headingFontWeightMobile?: T;
                   };
               descriptionGroup?:
                 | T
@@ -178079,6 +184800,8 @@ export interface PagesSelect<T extends boolean = true> {
                     descriptionFontSize?: T;
                     descriptionFontWeight?: T;
                     descriptionAlignment?: T;
+                    descriptionFontSizeMobile?: T;
+                    descriptionFontWeightMobile?: T;
                   };
               buttonGroup?:
                 | T
@@ -178100,6 +184823,8 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonAlignment?: T;
                     buttonFontSize?: T;
                     buttonFontWeight?: T;
+                    buttonFontSizeMobile?: T;
+                    buttonFontWeightMobile?: T;
                   };
               animationSettings?:
                 | T
@@ -178169,7 +184894,9 @@ export interface PagesSelect<T extends boolean = true> {
                           subtitle?: T;
                           subtitleColor?: T;
                           subtitleFontSize?: T;
+                          subtitleFontSizeMobile?: T;
                           subtitleFontWeight?: T;
+                          subtitleFontWeightMobile?: T;
                           subtitleAlignment?: T;
                         };
                     headingGroup?:
@@ -178178,7 +184905,9 @@ export interface PagesSelect<T extends boolean = true> {
                           heading?: T;
                           headingColor?: T;
                           headingFontSize?: T;
+                          headingFontSizeMobile?: T;
                           headingFontWeight?: T;
+                          headingFontWeightMobile?: T;
                           headingAlignment?: T;
                         };
                     descriptionGroup?:
@@ -178187,7 +184916,9 @@ export interface PagesSelect<T extends boolean = true> {
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
+                          descriptionFontSizeMobile?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontWeightMobile?: T;
                           descriptionAlignment?: T;
                         };
                     id?: T;
@@ -178229,12 +184960,16 @@ export interface PagesSelect<T extends boolean = true> {
                     heading?: T;
                     headingColor?: T;
                     headingFontSize?: T;
+                    headingFontSizeMobile?: T;
                     headingFontWeight?: T;
+                    headingFontWeightMobile?: T;
                     headingAlignment?: T;
                     description?: T;
                     descriptionColor?: T;
                     descriptionFontSize?: T;
+                    descriptionFontSizeMobile?: T;
                     descriptionFontWeight?: T;
+                    descriptionFontWeightMobile?: T;
                     enableButton?: T;
                     buttonText?: T;
                     buttonLink?:
@@ -178248,7 +184983,9 @@ export interface PagesSelect<T extends boolean = true> {
                     buttonBgColor?: T;
                     buttonTextColor?: T;
                     buttonFontSize?: T;
+                    buttonFontSizeMobile?: T;
                     buttonFontWeight?: T;
+                    buttonFontWeightMobile?: T;
                     buttonAlignmentDesktop?: T;
                     buttonAlignmentMobile?: T;
                     headerSpacingBottom?: T;
@@ -178270,7 +185007,9 @@ export interface PagesSelect<T extends boolean = true> {
                           subtitle?: T;
                           subtitleColor?: T;
                           subtitleFontSize?: T;
+                          subtitleFontSizeMobile?: T;
                           subtitleFontWeight?: T;
+                          subtitleFontWeightMobile?: T;
                           subtitleAlignment?: T;
                         };
                     headingGroup?:
@@ -178279,7 +185018,9 @@ export interface PagesSelect<T extends boolean = true> {
                           heading?: T;
                           headingColor?: T;
                           headingFontSize?: T;
+                          headingFontSizeMobile?: T;
                           headingFontWeight?: T;
+                          headingFontWeightMobile?: T;
                           headingAlignment?: T;
                         };
                     descriptionGroup?:
@@ -178288,7 +185029,9 @@ export interface PagesSelect<T extends boolean = true> {
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
+                          descriptionFontSizeMobile?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontWeightMobile?: T;
                           descriptionAlignment?: T;
                         };
                     id?: T;
@@ -178323,22 +185066,30 @@ export interface PagesSelect<T extends boolean = true> {
                           badgeTextColor?: T;
                           badgeFontSize?: T;
                           badgeFontWeight?: T;
+                          badgeFontSizeMobile?: T;
+                          badgeFontWeightMobile?: T;
                           badgeMarginBottom?: T;
                         };
                     subHeading?: T;
                     subHeadingColor?: T;
                     subHeadingFontSize?: T;
                     subHeadingFontWeight?: T;
+                    subHeadingFontSizeMobile?: T;
+                    subHeadingFontWeightMobile?: T;
                     subHeadingMarginBottom?: T;
                     heading?: T;
                     headingColor?: T;
                     headingFontSize?: T;
                     headingFontWeight?: T;
+                    headingFontSizeMobile?: T;
+                    headingFontWeightMobile?: T;
                     headingMarginBottom?: T;
                     description?: T;
                     descriptionColor?: T;
                     descriptionFontSize?: T;
                     descriptionFontWeight?: T;
+                    descriptionFontSizeMobile?: T;
+                    descriptionFontWeightMobile?: T;
                     spacingBelowDescription?: T;
                     spacingBelowDescriptionCustom?: T;
                     bottomContentMode?: T;
@@ -178359,6 +185110,8 @@ export interface PagesSelect<T extends boolean = true> {
                               };
                           button1FontSize?: T;
                           button1FontWeight?: T;
+                          button1FontSizeMobile?: T;
+                          button1FontWeightMobile?: T;
                           enableButton2?: T;
                           button2Text?: T;
                           button2TextColor?: T;
@@ -178374,6 +185127,8 @@ export interface PagesSelect<T extends boolean = true> {
                           button2IconColor?: T;
                           button2FontSize?: T;
                           button2FontWeight?: T;
+                          button2FontSizeMobile?: T;
+                          button2FontWeightMobile?: T;
                         };
                     officesGroup?:
                       | T
@@ -178382,6 +185137,8 @@ export interface PagesSelect<T extends boolean = true> {
                           officesHeadingColor?: T;
                           officesHeadingFontSize?: T;
                           officesHeadingFontWeight?: T;
+                          officesHeadingFontSizeMobile?: T;
+                          officesHeadingFontWeightMobile?: T;
                           officesHeadingMarginBottom?: T;
                           officeItems?:
                             | T
@@ -178391,6 +185148,8 @@ export interface PagesSelect<T extends boolean = true> {
                                 labelColor?: T;
                                 labelFontSize?: T;
                                 labelFontWeight?: T;
+                                labelFontSizeMobile?: T;
+                                labelFontWeightMobile?: T;
                                 id?: T;
                               };
                         };
@@ -178402,11 +185161,15 @@ export interface PagesSelect<T extends boolean = true> {
                     subHeadingColor?: T;
                     subHeadingFontSize?: T;
                     subHeadingFontWeight?: T;
+                    subHeadingFontSizeMobile?: T;
+                    subHeadingFontWeightMobile?: T;
                     subHeadingMarginBottom?: T;
                     description?: T;
                     descriptionColor?: T;
                     descriptionFontSize?: T;
                     descriptionFontWeight?: T;
+                    descriptionFontSizeMobile?: T;
+                    descriptionFontWeightMobile?: T;
                     descriptionMarginBottom?: T;
                     image?: T;
                     imageRadius?: T;
@@ -178416,8 +185179,10 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     enableDivider?: T;
+                    divideHRLine?: T;
                     dividerLayout?: T;
                     dividerColor?: T;
+                    dividerThickness?: T;
                     dividerSpacingTop?: T;
                     dividerSpacingBottom?: T;
                   };
@@ -178434,8 +185199,10 @@ export interface PagesSelect<T extends boolean = true> {
                         };
                     statValueColor?: T;
                     statValueFontSize?: T;
+                    statValueFontSizeMobile?: T;
                     statLabelColor?: T;
                     statLabelFontSize?: T;
+                    statLabelFontSizeMobile?: T;
                   };
               id?: T;
               blockName?: T;
@@ -178459,15 +185226,21 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     numberColor?: T;
                     numberFontSize?: T;
+                    numberFontSizeMobile?: T;
                     numberFontWeight?: T;
+                    numberFontWeightMobile?: T;
                     numberMarginBottom?: T;
                     subHeadingColor?: T;
                     subHeadingFontSize?: T;
+                    subHeadingFontSizeMobile?: T;
                     subHeadingFontWeight?: T;
+                    subHeadingFontWeightMobile?: T;
                     subHeadingMarginBottom?: T;
                     descriptionColor?: T;
                     descriptionFontSize?: T;
+                    descriptionFontSizeMobile?: T;
                     descriptionFontWeight?: T;
+                    descriptionFontWeightMobile?: T;
                   };
               items?:
                 | T
@@ -178476,6 +185249,49 @@ export interface PagesSelect<T extends boolean = true> {
                     customNumberColor?: T;
                     subHeading?: T;
                     description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        missionVision?:
+          | T
+          | {
+              sectionBgColor?: T;
+              spacingAboveItems?: T;
+              paddingMode?: T;
+              paddingTopDesktop?: T;
+              paddingBottomDesktop?: T;
+              paddingLeftDesktop?: T;
+              paddingRightDesktop?: T;
+              paddingTopMobile?: T;
+              paddingBottomMobile?: T;
+              paddingLeftMobile?: T;
+              paddingRightMobile?: T;
+              items?:
+                | T
+                | {
+                    subHeading?: T;
+                    subHeadingColor?: T;
+                    subHeadingMarginBottom?: T;
+                    subHeadingFontSize?: T;
+                    subHeadingFontWeight?: T;
+                    subHeadingFontSizeMobile?: T;
+                    subHeadingFontWeightMobile?: T;
+                    heading?: T;
+                    headingColor?: T;
+                    headingMarginBottom?: T;
+                    headingFontSize?: T;
+                    headingFontWeight?: T;
+                    headingFontSizeMobile?: T;
+                    headingFontWeightMobile?: T;
+                    description?: T;
+                    descriptionColor?: T;
+                    descriptionMarginBottom?: T;
+                    descriptionFontSize?: T;
+                    descriptionFontWeight?: T;
+                    descriptionFontSizeMobile?: T;
+                    descriptionFontWeightMobile?: T;
                     id?: T;
                   };
               id?: T;
@@ -179079,7 +185895,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           badgeBgColor?: T;
                           badgeTextColor?: T;
                           badgeFontSize?: T;
+                          badgeFontSizeMobile?: T;
                           badgeFontWeight?: T;
+                          badgeFontWeightMobile?: T;
                         };
                     heading1?:
                       | T
@@ -179087,7 +185905,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           text?: T;
                           color?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           fontWeight?: T;
+                          fontWeightMobile?: T;
                         };
                     heading2?:
                       | T
@@ -179095,7 +185915,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           text?: T;
                           color?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           fontWeight?: T;
+                          fontWeightMobile?: T;
                         };
                     headingTag?: T;
                     descriptionGroup?:
@@ -179104,7 +185926,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           description?: T;
                           color?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           fontWeight?: T;
+                          fontWeightMobile?: T;
                         };
                   };
               clickExpand?:
@@ -179134,6 +185958,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 color?: T;
                                 fontSize?: T;
                                 fontWeight?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                               };
                           headingGroup?:
                             | T
@@ -179143,6 +185969,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 headingFontSize?: T;
                                 headingFontWeight?: T;
                                 collapsedFontSize?: T;
+                                headingFontSizeMobile?: T;
+                                headingFontWeightMobile?: T;
+                                collapsedFontSizeMobile?: T;
                               };
                           descriptionGroup?:
                             | T
@@ -179151,6 +185980,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 descriptionColor?: T;
                                 descriptionFontSize?: T;
                                 descriptionFontWeight?: T;
+                                descriptionFontSizeMobile?: T;
+                                descriptionFontWeightMobile?: T;
                               };
                           subCardsGroup?:
                             | T
@@ -179167,6 +185998,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       titleFontSize?: T;
                                       titleFontWeight?: T;
                                       titleAlignment?: T;
+                                      titleFontSizeMobile?: T;
+                                      titleFontWeightMobile?: T;
                                       spacingBottom?: T;
                                       spacingBottomCustom?: T;
                                       description?: T;
@@ -179174,6 +186007,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       descriptionFontSize?: T;
                                       descriptionFontWeight?: T;
                                       descriptionAlignment?: T;
+                                      descriptionFontSizeMobile?: T;
+                                      descriptionFontWeightMobile?: T;
                                       id?: T;
                                     };
                               };
@@ -179188,6 +186023,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 buttonFontWeight?: T;
                                 iconBgColor?: T;
                                 iconColor?: T;
+                                buttonFontSizeMobile?: T;
+                                buttonFontWeightMobile?: T;
                                 buttonLink?:
                                   | T
                                   | {
@@ -179224,6 +186061,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           badgeAlignment?: T;
                           badgeFontSize?: T;
                           badgeFontWeight?: T;
+                          badgeFontSizeMobile?: T;
+                          badgeFontWeightMobile?: T;
                         };
                     mainHeadingGroup?:
                       | T
@@ -179233,6 +186072,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           headingFontSize?: T;
                           headingFontWeight?: T;
                           headingAlignment?: T;
+                          headingFontSizeMobile?: T;
+                          headingFontWeightMobile?: T;
                           headingTag?: T;
                         };
                     contentColumn?:
@@ -179246,6 +186087,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 fontSize?: T;
                                 fontWeight?: T;
                                 alignment?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                               };
                           headingGroup?:
                             | T
@@ -179255,6 +186098,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 fontSize?: T;
                                 fontWeight?: T;
                                 alignment?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                               };
                           descriptionGroup?:
                             | T
@@ -179264,6 +186109,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 fontSize?: T;
                                 fontWeight?: T;
                                 alignment?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                               };
                           featuresSection?:
                             | T
@@ -179273,6 +186120,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 titleFontSize?: T;
                                 titleFontWeight?: T;
                                 titleAlignment?: T;
+                                titleFontSizeMobile?: T;
+                                titleFontWeightMobile?: T;
                                 items?:
                                   | T
                                   | {
@@ -179280,6 +186129,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       textColor?: T;
                                       fontSize?: T;
                                       fontWeight?: T;
+                                      fontSizeMobile?: T;
+                                      fontWeightMobile?: T;
                                       itemLink?:
                                         | T
                                         | {
@@ -179300,6 +186151,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 fontSize?: T;
                                 fontWeight?: T;
                                 alignment?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                                 iconBgColor?: T;
                                 iconColor?: T;
                                 link?:
@@ -179348,6 +186201,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           headingFontSize?: T;
                           headingFontWeight?: T;
                           headingAlignment?: T;
+                          headingFontSizeMobile?: T;
+                          headingFontWeightMobile?: T;
                         };
                     descriptionGroup?:
                       | T
@@ -179357,6 +186212,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           descriptionFontSize?: T;
                           descriptionFontWeight?: T;
                           descriptionAlignment?: T;
+                          descriptionFontSizeMobile?: T;
+                          descriptionFontWeightMobile?: T;
                         };
                     buttonGroup?:
                       | T
@@ -179378,6 +186235,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           buttonAlignment?: T;
                           buttonFontSize?: T;
                           buttonFontWeight?: T;
+                          buttonFontSizeMobile?: T;
+                          buttonFontWeightMobile?: T;
                         };
                     animationSettings?:
                       | T
@@ -179445,7 +186304,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 subtitle?: T;
                                 subtitleColor?: T;
                                 subtitleFontSize?: T;
+                                subtitleFontSizeMobile?: T;
                                 subtitleFontWeight?: T;
+                                subtitleFontWeightMobile?: T;
                                 subtitleAlignment?: T;
                               };
                           headingGroup?:
@@ -179454,7 +186315,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 heading?: T;
                                 headingColor?: T;
                                 headingFontSize?: T;
+                                headingFontSizeMobile?: T;
                                 headingFontWeight?: T;
+                                headingFontWeightMobile?: T;
                                 headingAlignment?: T;
                               };
                           descriptionGroup?:
@@ -179463,7 +186326,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 description?: T;
                                 descriptionColor?: T;
                                 descriptionFontSize?: T;
+                                descriptionFontSizeMobile?: T;
                                 descriptionFontWeight?: T;
+                                descriptionFontWeightMobile?: T;
                                 descriptionAlignment?: T;
                               };
                           id?: T;
@@ -179503,12 +186368,16 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           heading?: T;
                           headingColor?: T;
                           headingFontSize?: T;
+                          headingFontSizeMobile?: T;
                           headingFontWeight?: T;
+                          headingFontWeightMobile?: T;
                           headingAlignment?: T;
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
+                          descriptionFontSizeMobile?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontWeightMobile?: T;
                           enableButton?: T;
                           buttonText?: T;
                           buttonLink?:
@@ -179522,7 +186391,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           buttonBgColor?: T;
                           buttonTextColor?: T;
                           buttonFontSize?: T;
+                          buttonFontSizeMobile?: T;
                           buttonFontWeight?: T;
+                          buttonFontWeightMobile?: T;
                           buttonAlignmentDesktop?: T;
                           buttonAlignmentMobile?: T;
                           headerSpacingBottom?: T;
@@ -179544,7 +186415,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 subtitle?: T;
                                 subtitleColor?: T;
                                 subtitleFontSize?: T;
+                                subtitleFontSizeMobile?: T;
                                 subtitleFontWeight?: T;
+                                subtitleFontWeightMobile?: T;
                                 subtitleAlignment?: T;
                               };
                           headingGroup?:
@@ -179553,7 +186426,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 heading?: T;
                                 headingColor?: T;
                                 headingFontSize?: T;
+                                headingFontSizeMobile?: T;
                                 headingFontWeight?: T;
+                                headingFontWeightMobile?: T;
                                 headingAlignment?: T;
                               };
                           descriptionGroup?:
@@ -179562,7 +186437,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 description?: T;
                                 descriptionColor?: T;
                                 descriptionFontSize?: T;
+                                descriptionFontSizeMobile?: T;
                                 descriptionFontWeight?: T;
+                                descriptionFontWeightMobile?: T;
                                 descriptionAlignment?: T;
                               };
                           id?: T;
@@ -179580,7 +186457,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           heading?: T;
                           headingColor?: T;
                           headingFontSize?: T;
+                          headingFontSizeMobile?: T;
                           headingFontWeight?: T;
+                          headingFontWeightMobile?: T;
                           headingAlignment?: T;
                         };
                     descriptionGroup?:
@@ -179589,7 +186468,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
+                          descriptionFontSizeMobile?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontWeightMobile?: T;
                           descriptionAlignment?: T;
                         };
                     buttonGroup?:
@@ -179610,7 +186491,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           iconColor?: T;
                           buttonAlignment?: T;
                           buttonFontSize?: T;
+                          buttonFontSizeMobile?: T;
                           buttonFontWeight?: T;
+                          buttonFontWeightMobile?: T;
                         };
                     dividerGroup?:
                       | T
@@ -179642,6 +186525,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 textColor?: T;
                                 fontSize?: T;
                                 fontWeight?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                               };
                           spacingBeforeHeading?: T;
                           spacingBeforeHeadingCustom?: T;
@@ -179652,6 +186537,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 color?: T;
                                 fontSize?: T;
                                 fontWeight?: T;
+                                fontSizeMobile?: T;
+                                fontWeightMobile?: T;
                                 tag?: T;
                               };
                         };
@@ -179662,6 +186549,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           color?: T;
                           fontSize?: T;
                           fontWeight?: T;
+                          fontSizeMobile?: T;
+                          fontWeightMobile?: T;
                         };
                   };
               imageSlider?:
@@ -179704,7 +186593,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 text?: T;
                                 color?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                               };
                           titleSpacingBottom?: T;
@@ -179715,7 +186606,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 text?: T;
                                 color?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                               };
                           buttonGroup?:
@@ -179725,7 +186618,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 text?: T;
                                 textColor?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                                 iconBgColor?: T;
                                 iconColor?: T;
@@ -179777,7 +186672,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 spacingBottomCustom?: T;
                                 color?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                               };
                           titleGroup?:
@@ -179787,7 +186684,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 spacingBottomCustom?: T;
                                 color?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                               };
                           descriptionGroup?:
@@ -179797,7 +186696,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 spacingBottom?: T;
                                 color?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                               };
                           buttonGroup?:
@@ -179806,7 +186707,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 text?: T;
                                 textColor?: T;
                                 fontSize?: T;
+                                fontSizeMobile?: T;
                                 fontWeight?: T;
+                                fontWeightMobile?: T;
                                 alignment?: T;
                                 iconBgColor?: T;
                                 iconColor?: T;
@@ -179830,6 +186733,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           bgColor?: T;
                           textColor?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           alignment?: T;
                           spacingBottom?: T;
                           spacingBottomCustom?: T;
@@ -179840,7 +186744,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           text?: T;
                           color?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           fontWeight?: T;
+                          fontWeightMobile?: T;
                           alignment?: T;
                           spacingBottom?: T;
                           spacingBottomCustom?: T;
@@ -179851,7 +186757,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           text?: T;
                           color?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           fontWeight?: T;
+                          fontWeightMobile?: T;
                           alignment?: T;
                           spacingBottom?: T;
                           spacingBottomCustom?: T;
@@ -179871,6 +186779,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           bgColor?: T;
                           textColor?: T;
                           fontSize?: T;
+                          fontSizeMobile?: T;
                           alignment?: T;
                           iconCircleBg?: T;
                           iconColor?: T;
@@ -179914,22 +186823,30 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 badgeTextColor?: T;
                                 badgeFontSize?: T;
                                 badgeFontWeight?: T;
+                                badgeFontSizeMobile?: T;
+                                badgeFontWeightMobile?: T;
                                 badgeMarginBottom?: T;
                               };
                           subHeading?: T;
                           subHeadingColor?: T;
                           subHeadingFontSize?: T;
                           subHeadingFontWeight?: T;
+                          subHeadingFontSizeMobile?: T;
+                          subHeadingFontWeightMobile?: T;
                           subHeadingMarginBottom?: T;
                           heading?: T;
                           headingColor?: T;
                           headingFontSize?: T;
                           headingFontWeight?: T;
+                          headingFontSizeMobile?: T;
+                          headingFontWeightMobile?: T;
                           headingMarginBottom?: T;
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontSizeMobile?: T;
+                          descriptionFontWeightMobile?: T;
                           spacingBelowDescription?: T;
                           spacingBelowDescriptionCustom?: T;
                           bottomContentMode?: T;
@@ -179950,6 +186867,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                     };
                                 button1FontSize?: T;
                                 button1FontWeight?: T;
+                                button1FontSizeMobile?: T;
+                                button1FontWeightMobile?: T;
                                 enableButton2?: T;
                                 button2Text?: T;
                                 button2TextColor?: T;
@@ -179965,6 +186884,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 button2IconColor?: T;
                                 button2FontSize?: T;
                                 button2FontWeight?: T;
+                                button2FontSizeMobile?: T;
+                                button2FontWeightMobile?: T;
                               };
                           officesGroup?:
                             | T
@@ -179973,6 +186894,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                 officesHeadingColor?: T;
                                 officesHeadingFontSize?: T;
                                 officesHeadingFontWeight?: T;
+                                officesHeadingFontSizeMobile?: T;
+                                officesHeadingFontWeightMobile?: T;
                                 officesHeadingMarginBottom?: T;
                                 officeItems?:
                                   | T
@@ -179982,6 +186905,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
                                       labelColor?: T;
                                       labelFontSize?: T;
                                       labelFontWeight?: T;
+                                      labelFontSizeMobile?: T;
+                                      labelFontWeightMobile?: T;
                                       id?: T;
                                     };
                               };
@@ -179993,11 +186918,15 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           subHeadingColor?: T;
                           subHeadingFontSize?: T;
                           subHeadingFontWeight?: T;
+                          subHeadingFontSizeMobile?: T;
+                          subHeadingFontWeightMobile?: T;
                           subHeadingMarginBottom?: T;
                           description?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontSizeMobile?: T;
+                          descriptionFontWeightMobile?: T;
                           descriptionMarginBottom?: T;
                           image?: T;
                           imageRadius?: T;
@@ -180007,8 +186936,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
                       | T
                       | {
                           enableDivider?: T;
+                          divideHRLine?: T;
                           dividerLayout?: T;
                           dividerColor?: T;
+                          dividerThickness?: T;
                           dividerSpacingTop?: T;
                           dividerSpacingBottom?: T;
                         };
@@ -180025,8 +186956,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
                               };
                           statValueColor?: T;
                           statValueFontSize?: T;
+                          statValueFontSizeMobile?: T;
                           statLabelColor?: T;
                           statLabelFontSize?: T;
+                          statLabelFontSizeMobile?: T;
                         };
                   };
               numberedGrid?:
@@ -180048,15 +186981,21 @@ export interface ContentBlockSelect<T extends boolean = true> {
                       | {
                           numberColor?: T;
                           numberFontSize?: T;
+                          numberFontSizeMobile?: T;
                           numberFontWeight?: T;
+                          numberFontWeightMobile?: T;
                           numberMarginBottom?: T;
                           subHeadingColor?: T;
                           subHeadingFontSize?: T;
+                          subHeadingFontSizeMobile?: T;
                           subHeadingFontWeight?: T;
+                          subHeadingFontWeightMobile?: T;
                           subHeadingMarginBottom?: T;
                           descriptionColor?: T;
                           descriptionFontSize?: T;
+                          descriptionFontSizeMobile?: T;
                           descriptionFontWeight?: T;
+                          descriptionFontWeightMobile?: T;
                         };
                     items?:
                       | T
@@ -180065,6 +187004,47 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           customNumberColor?: T;
                           subHeading?: T;
                           description?: T;
+                          id?: T;
+                        };
+                  };
+              missionVision?:
+                | T
+                | {
+                    sectionBgColor?: T;
+                    spacingAboveItems?: T;
+                    paddingMode?: T;
+                    paddingTopDesktop?: T;
+                    paddingBottomDesktop?: T;
+                    paddingLeftDesktop?: T;
+                    paddingRightDesktop?: T;
+                    paddingTopMobile?: T;
+                    paddingBottomMobile?: T;
+                    paddingLeftMobile?: T;
+                    paddingRightMobile?: T;
+                    items?:
+                      | T
+                      | {
+                          subHeading?: T;
+                          subHeadingColor?: T;
+                          subHeadingMarginBottom?: T;
+                          subHeadingFontSize?: T;
+                          subHeadingFontWeight?: T;
+                          subHeadingFontSizeMobile?: T;
+                          subHeadingFontWeightMobile?: T;
+                          heading?: T;
+                          headingColor?: T;
+                          headingMarginBottom?: T;
+                          headingFontSize?: T;
+                          headingFontWeight?: T;
+                          headingFontSizeMobile?: T;
+                          headingFontWeightMobile?: T;
+                          description?: T;
+                          descriptionColor?: T;
+                          descriptionMarginBottom?: T;
+                          descriptionFontSize?: T;
+                          descriptionFontWeight?: T;
+                          descriptionFontSizeMobile?: T;
+                          descriptionFontWeightMobile?: T;
                           id?: T;
                         };
                   };
@@ -181076,7 +188056,9 @@ export interface CenteredContentBlockSelect<T extends boolean = true> {
         badgeBgColor?: T;
         badgeTextColor?: T;
         badgeFontSize?: T;
+        badgeFontSizeMobile?: T;
         badgeFontWeight?: T;
+        badgeFontWeightMobile?: T;
       };
   heading1?:
     | T
@@ -181084,7 +188066,9 @@ export interface CenteredContentBlockSelect<T extends boolean = true> {
         text?: T;
         color?: T;
         fontSize?: T;
+        fontSizeMobile?: T;
         fontWeight?: T;
+        fontWeightMobile?: T;
       };
   heading2?:
     | T
@@ -181092,7 +188076,9 @@ export interface CenteredContentBlockSelect<T extends boolean = true> {
         text?: T;
         color?: T;
         fontSize?: T;
+        fontSizeMobile?: T;
         fontWeight?: T;
+        fontWeightMobile?: T;
       };
   headingTag?: T;
   descriptionGroup?:
@@ -181101,7 +188087,9 @@ export interface CenteredContentBlockSelect<T extends boolean = true> {
         description?: T;
         color?: T;
         fontSize?: T;
+        fontSizeMobile?: T;
         fontWeight?: T;
+        fontWeightMobile?: T;
       };
   id?: T;
   blockName?: T;
@@ -181135,6 +188123,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
               color?: T;
               fontSize?: T;
               fontWeight?: T;
+              fontSizeMobile?: T;
+              fontWeightMobile?: T;
             };
         headingGroup?:
           | T
@@ -181144,6 +188134,9 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
               headingFontSize?: T;
               headingFontWeight?: T;
               collapsedFontSize?: T;
+              headingFontSizeMobile?: T;
+              headingFontWeightMobile?: T;
+              collapsedFontSizeMobile?: T;
             };
         descriptionGroup?:
           | T
@@ -181152,6 +188145,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
               descriptionColor?: T;
               descriptionFontSize?: T;
               descriptionFontWeight?: T;
+              descriptionFontSizeMobile?: T;
+              descriptionFontWeightMobile?: T;
             };
         subCardsGroup?:
           | T
@@ -181168,6 +188163,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
                     titleFontSize?: T;
                     titleFontWeight?: T;
                     titleAlignment?: T;
+                    titleFontSizeMobile?: T;
+                    titleFontWeightMobile?: T;
                     spacingBottom?: T;
                     spacingBottomCustom?: T;
                     description?: T;
@@ -181175,6 +188172,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
                     descriptionFontSize?: T;
                     descriptionFontWeight?: T;
                     descriptionAlignment?: T;
+                    descriptionFontSizeMobile?: T;
+                    descriptionFontWeightMobile?: T;
                     id?: T;
                   };
             };
@@ -181189,6 +188188,8 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
               buttonFontWeight?: T;
               iconBgColor?: T;
               iconColor?: T;
+              buttonFontSizeMobile?: T;
+              buttonFontWeightMobile?: T;
               buttonLink?:
                 | T
                 | {
@@ -181229,6 +188230,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
         badgeAlignment?: T;
         badgeFontSize?: T;
         badgeFontWeight?: T;
+        badgeFontSizeMobile?: T;
+        badgeFontWeightMobile?: T;
       };
   mainHeadingGroup?:
     | T
@@ -181238,6 +188241,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
         headingFontSize?: T;
         headingFontWeight?: T;
         headingAlignment?: T;
+        headingFontSizeMobile?: T;
+        headingFontWeightMobile?: T;
         headingTag?: T;
       };
   contentColumn?:
@@ -181251,6 +188256,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
               fontSize?: T;
               fontWeight?: T;
               alignment?: T;
+              fontSizeMobile?: T;
+              fontWeightMobile?: T;
             };
         headingGroup?:
           | T
@@ -181260,6 +188267,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
               fontSize?: T;
               fontWeight?: T;
               alignment?: T;
+              fontSizeMobile?: T;
+              fontWeightMobile?: T;
             };
         descriptionGroup?:
           | T
@@ -181269,6 +188278,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
               fontSize?: T;
               fontWeight?: T;
               alignment?: T;
+              fontSizeMobile?: T;
+              fontWeightMobile?: T;
             };
         featuresSection?:
           | T
@@ -181278,6 +188289,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
               titleFontSize?: T;
               titleFontWeight?: T;
               titleAlignment?: T;
+              titleFontSizeMobile?: T;
+              titleFontWeightMobile?: T;
               items?:
                 | T
                 | {
@@ -181285,6 +188298,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
                     textColor?: T;
                     fontSize?: T;
                     fontWeight?: T;
+                    fontSizeMobile?: T;
+                    fontWeightMobile?: T;
                     itemLink?:
                       | T
                       | {
@@ -181305,6 +188320,8 @@ export interface GridColBlockSelect<T extends boolean = true> {
               fontSize?: T;
               fontWeight?: T;
               alignment?: T;
+              fontSizeMobile?: T;
+              fontWeightMobile?: T;
               iconBgColor?: T;
               iconColor?: T;
               link?:
@@ -181341,7 +188358,9 @@ export interface VerticalCTAv2BlockSelect<T extends boolean = true> {
         heading?: T;
         headingColor?: T;
         headingFontSize?: T;
+        headingFontSizeMobile?: T;
         headingFontWeight?: T;
+        headingFontWeightMobile?: T;
         headingAlignment?: T;
       };
   descriptionGroup?:
@@ -181350,7 +188369,9 @@ export interface VerticalCTAv2BlockSelect<T extends boolean = true> {
         description?: T;
         descriptionColor?: T;
         descriptionFontSize?: T;
+        descriptionFontSizeMobile?: T;
         descriptionFontWeight?: T;
+        descriptionFontWeightMobile?: T;
         descriptionAlignment?: T;
       };
   buttonGroup?:
@@ -181371,7 +188392,9 @@ export interface VerticalCTAv2BlockSelect<T extends boolean = true> {
         iconColor?: T;
         buttonAlignment?: T;
         buttonFontSize?: T;
+        buttonFontSizeMobile?: T;
         buttonFontWeight?: T;
+        buttonFontWeightMobile?: T;
       };
   dividerGroup?:
     | T

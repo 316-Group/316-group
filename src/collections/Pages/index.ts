@@ -57,6 +57,7 @@ import { FeatureCardsV2 } from '@/blocks/FeatureCardsV2/config'
 import { VerticalCTAv2 } from '@/blocks/VerticalCTAv2/config'
 import { WhoWeAre } from '@/blocks/WhoWeAre/config'
 import { NumberedGrid } from '@/blocks/NumberedGrid/config'
+import { MissionVision } from '@/blocks/MissionVision/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -156,6 +157,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 VerticalCTAv2,
                 WhoWeAre,
                 NumberedGrid,
+                MissionVision,
               ],
               required: true,
             },

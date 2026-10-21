@@ -43,6 +43,7 @@ import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
 import { readyToGrowFields } from '../ReadyToGrow/config'
 import { whoWeAreFields, whoWeAreColumnFields } from '../WhoWeAre/config'
 import { numberedGridFields, numberedGridColumnFields } from '../NumberedGrid/config'
+import { missionVisionFields, missionVisionColumnFields } from '../MissionVision/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -606,6 +607,7 @@ const columnFields: Field[] = [
           { label: 'Ready to Grow', value: 'readyToGrow' },
           { label: 'Who We Are', value: 'whoWeAre' },
           { label: 'Numbered Grid', value: 'numberedGrid' },
+          { label: 'Mission & Vision', value: 'missionVision' },
         ],
       },
       {
@@ -2390,6 +2392,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'numberedGrid',
         },
         fields: numberedGridColumnFields,
+      },
+
+      // ─── Mission & Vision ─────────────────────────────────────────────────────
+      {
+        name: 'missionVision',
+        type: 'group',
+        label: 'Mission & Vision',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'missionVision',
+        },
+        fields: missionVisionColumnFields,
       },
     ],
   },

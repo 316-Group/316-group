@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '@/utilities/cn'
+import { resolveTypography } from '@/utilities/resolveTypography'
 
 export interface CenteredContentProps {
   alignment?: 'center' | 'left' | 'right' | 'justify' | null
@@ -15,26 +16,34 @@ export interface CenteredContentProps {
     badgeBgColor?: string | null
     badgeTextColor?: string | null
     badgeFontSize?: string | null
+    badgeFontSizeMobile?: string | null
     badgeFontWeight?: string | null
+    badgeFontWeightMobile?: string | null
   } | null
   heading1?: {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
   heading2?: {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
   headingTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div' | null
   descriptionGroup?: {
     description?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
   // Mobile Width & Padding
   mobileWidthMode?: 'default' | 'fullWidth' | 'customPadding' | null
@@ -127,26 +136,50 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
   const badgeText = badge?.badgeText || 'Industries'
   const badgeBg = badge?.badgeBgColor || 'bg-[#EFF1F8]'
   const badgeTextCol = badge?.badgeTextColor || 'text-[#3F5AC9]'
-  const badgeSize = badge?.badgeFontSize || 'text-sm'
-  const badgeWeight = badge?.badgeFontWeight || 'font-medium'
+  const badgeTypography = resolveTypography(
+    badge?.badgeFontSize,
+    badge?.badgeFontSizeMobile,
+    badge?.badgeFontWeight,
+    badge?.badgeFontWeightMobile,
+    'text-sm',
+    'font-medium',
+  )
 
   // Heading 1 config
   const h1Text = heading1?.text
   const h1Color = heading1?.color || 'text-gray-900'
-  const h1Size = heading1?.fontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const h1Weight = heading1?.fontWeight || 'font-normal'
+  const h1Typography = resolveTypography(
+    heading1?.fontSize,
+    heading1?.fontSizeMobile,
+    heading1?.fontWeight,
+    heading1?.fontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-normal',
+  )
 
   // Heading 2 config
   const h2Text = heading2?.text
   const h2Color = heading2?.color || 'text-gray-900'
-  const h2Size = heading2?.fontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const h2Weight = heading2?.fontWeight || 'font-normal'
+  const h2Typography = resolveTypography(
+    heading2?.fontSize,
+    heading2?.fontSizeMobile,
+    heading2?.fontWeight,
+    heading2?.fontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-normal',
+  )
 
   // Description config
   const descText = descriptionGroup?.description
   const descColor = descriptionGroup?.color || 'text-gray-700'
-  const descSize = descriptionGroup?.fontSize || 'text-base md:text-lg lg:text-xl'
-  const descWeight = descriptionGroup?.fontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    descriptionGroup?.fontSize,
+    descriptionGroup?.fontSizeMobile,
+    descriptionGroup?.fontWeight,
+    descriptionGroup?.fontWeightMobile,
+    'text-base md:text-lg lg:text-xl',
+    'font-normal',
+  )
 
   const HeadingTag = (headingTag as keyof React.JSX.IntrinsicElements) || 'h2'
 
@@ -210,8 +243,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
                   'inline-flex items-center justify-center px-6 py-1.5 md:py-2 rounded-full tracking-wide transition-all shadow-sm',
                   badgeBg,
                   badgeTextCol,
-                  badgeSize,
-                  badgeWeight,
+                  badgeTypography,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(badgeText) }}
               />
@@ -223,7 +255,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
             <HeadingTag className={cn('w-full tracking-tight leading-[1.15]', headingAlignClasses)}>
               {h1Text && (
                 <span
-                  className={cn('block transition-colors', h1Size, h1Color, h1Weight)}
+                  className={cn('block transition-colors', h1Color, h1Typography)}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(h1Text) }}
                 />
               )}
@@ -231,9 +263,8 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
                 <span
                   className={cn(
                     'block transition-colors',
-                    h2Size,
                     h2Color,
-                    h2Weight,
+                    h2Typography,
                     h1Text && 'mt-1.5 md:mt-2.5',
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(h2Text) }}
@@ -248,9 +279,8 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
               className={cn(
                 'w-full mt-6 md:mt-8 max-w-3xl leading-relaxed transition-colors',
                 descriptionAlignClasses,
-                descSize,
                 descColor,
-                descWeight,
+                descTypography,
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
             />

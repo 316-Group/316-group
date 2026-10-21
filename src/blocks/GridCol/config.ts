@@ -10,6 +10,8 @@ const alignmentOptions = [
   { label: 'Right', value: 'right' },
 ]
 
+const allowAnySelect = (() => true as const) as any
+
 export const gridColFields: Field[] = [
   // ─── Section Background & Spacing ──────────────────────────────────────────
   {
@@ -301,6 +303,42 @@ export const gridColFields: Field[] = [
           },
         ],
       },
+      {
+        type: 'row',
+        admin: {
+          condition: (_, siblingData) => siblingData?.enableBadge !== false,
+        },
+        fields: [
+          {
+            name: 'badgeFontSizeMobile',
+            type: 'select',
+            label: 'Badge Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: {
+              width: '50%',
+            },
+          },
+          {
+            name: 'badgeFontWeightMobile',
+            type: 'select',
+            label: 'Badge Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: {
+              width: '50%',
+            },
+          },
+        ],
+      },
     ],
   },
 
@@ -357,6 +395,39 @@ export const gridColFields: Field[] = [
             options: alignmentOptions,
             admin: {
               width: '25%',
+            },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'headingFontSizeMobile',
+            type: 'select',
+            label: 'Heading Font Size (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Auto Responsive', value: '' },
+              ...fontSizeOptions,
+            ],
+            admin: {
+              width: '50%',
+            },
+          },
+          {
+            name: 'headingFontWeightMobile',
+            type: 'select',
+            label: 'Heading Font Weight (Mobile < 768px)',
+            defaultValue: '',
+            validate: allowAnySelect,
+            options: [
+              { label: 'Inherit / Default', value: '' },
+              ...fontWeightOptions,
+            ],
+            admin: {
+              width: '50%',
             },
           },
         ],
@@ -439,6 +510,39 @@ export const gridColFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Subheader Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Subheader Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+            ],
+          },
         ],
       },
 
@@ -495,6 +599,39 @@ export const gridColFields: Field[] = [
                 options: alignmentOptions,
                 admin: {
                   width: '25%',
+                },
+              },
+            ],
+          },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Heading Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Heading Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
                 },
               },
             ],
@@ -560,6 +697,39 @@ export const gridColFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Description Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Description Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+            ],
+          },
         ],
       },
 
@@ -620,6 +790,39 @@ export const gridColFields: Field[] = [
               },
             ],
           },
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'titleFontSizeMobile',
+                type: 'select',
+                label: 'Title Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'titleFontWeightMobile',
+                type: 'select',
+                label: 'Title Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+            ],
+          },
           // Feature items array
           {
             name: 'items',
@@ -670,6 +873,39 @@ export const gridColFields: Field[] = [
                     options: fontWeightOptions,
                     admin: {
                       width: '33.33%',
+                    },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Item Font Size (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Auto Responsive', value: '' },
+                      ...fontSizeOptions,
+                    ],
+                    admin: {
+                      width: '50%',
+                    },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Item Font Weight (Mobile < 768px)',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Inherit / Default', value: '' },
+                      ...fontWeightOptions,
+                    ],
+                    admin: {
+                      width: '50%',
                     },
                   },
                 ],
@@ -753,6 +989,42 @@ export const gridColFields: Field[] = [
                 options: alignmentOptions,
                 admin: {
                   width: '25%',
+                },
+              },
+            ],
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, siblingData) => siblingData?.showButton !== false,
+            },
+            fields: [
+              {
+                name: 'fontSizeMobile',
+                type: 'select',
+                label: 'Button Font Size (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
+                admin: {
+                  width: '50%',
+                },
+              },
+              {
+                name: 'fontWeightMobile',
+                type: 'select',
+                label: 'Button Font Weight (Mobile < 768px)',
+                defaultValue: '',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
+                admin: {
+                  width: '50%',
                 },
               },
             ],

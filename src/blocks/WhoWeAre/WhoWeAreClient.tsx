@@ -7,6 +7,8 @@ import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
 
+import { resolveTypography } from '@/utilities/resolveTypography'
+
 export interface OfficeItem {
   id?: string | null
   image?: MediaType | string | null
@@ -14,6 +16,8 @@ export interface OfficeItem {
   labelColor?: string | null
   labelFontSize?: string | null
   labelFontWeight?: string | null
+  labelFontSizeMobile?: string | null
+  labelFontWeightMobile?: string | null
 }
 
 export interface StatItem {
@@ -57,6 +61,8 @@ export interface WhoWeAreProps {
       badgeTextColor?: string | null
       badgeFontSize?: string | null
       badgeFontWeight?: string | null
+      badgeFontSizeMobile?: string | null
+      badgeFontWeightMobile?: string | null
       badgeMarginBottom?: string | null
     } | null
 
@@ -64,18 +70,24 @@ export interface WhoWeAreProps {
     subHeadingColor?: string | null
     subHeadingFontSize?: string | null
     subHeadingFontWeight?: string | null
+    subHeadingFontSizeMobile?: string | null
+    subHeadingFontWeightMobile?: string | null
     subHeadingMarginBottom?: string | null
 
     heading?: string | null
     headingColor?: string | null
     headingFontSize?: string | null
     headingFontWeight?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeightMobile?: string | null
     headingMarginBottom?: string | null
 
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeightMobile?: string | null
 
     spacingBelowDescription?: string | null
     spacingBelowDescriptionCustom?: string | null
@@ -90,6 +102,8 @@ export interface WhoWeAreProps {
       button1TextColor?: string | null
       button1FontSize?: string | null
       button1FontWeight?: string | null
+      button1FontSizeMobile?: string | null
+      button1FontWeightMobile?: string | null
 
       enableButton2?: boolean | null
       button2Text?: string | null
@@ -97,6 +111,8 @@ export interface WhoWeAreProps {
       button2TextColor?: string | null
       button2FontSize?: string | null
       button2FontWeight?: string | null
+      button2FontSizeMobile?: string | null
+      button2FontWeightMobile?: string | null
       button2IconBgColor?: string | null
       button2IconColor?: string | null
     } | null
@@ -106,6 +122,8 @@ export interface WhoWeAreProps {
       officesHeadingColor?: string | null
       officesHeadingFontSize?: string | null
       officesHeadingFontWeight?: string | null
+      officesHeadingFontSizeMobile?: string | null
+      officesHeadingFontWeightMobile?: string | null
       officesHeadingMarginBottom?: string | null
       officeItems?: OfficeItem[] | null
     } | null
@@ -117,12 +135,16 @@ export interface WhoWeAreProps {
     subHeadingColor?: string | null
     subHeadingFontSize?: string | null
     subHeadingFontWeight?: string | null
+    subHeadingFontSizeMobile?: string | null
+    subHeadingFontWeightMobile?: string | null
     subHeadingMarginBottom?: string | null
 
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeightMobile?: string | null
     descriptionMarginBottom?: string | null
 
     image?: MediaType | string | null
@@ -133,8 +155,10 @@ export interface WhoWeAreProps {
   // Divider / HR Line
   dividerSettings?: {
     enableDivider?: boolean | null
+    divideHRLine?: boolean | null
     dividerLayout?: 'full' | 'split' | null
     dividerColor?: string | null
+    dividerThickness?: string | null
     dividerSpacingTop?: string | null
     dividerSpacingBottom?: string | null
   } | null
@@ -146,8 +170,11 @@ export interface WhoWeAreProps {
     statValueColor?: string | null
     statValueFontSize?: string | null
     statValueFontWeight?: string | null
+    statValueFontSizeMobile?: string | null
+    statValueFontWeightMobile?: string | null
     statLabelColor?: string | null
     statLabelFontSize?: string | null
+    statLabelFontSizeMobile?: string | null
   } | null
 
   className?: string
@@ -238,26 +265,50 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const badgeText = badge?.badgeText?.trim() || ''
   const badgeBg = badge?.badgeBgColor || 'bg-white/10'
   const badgeTextColor = badge?.badgeTextColor || 'text-white'
-  const badgeFontSize = badge?.badgeFontSize || 'text-xs md:text-sm'
-  const badgeFontWeight = badge?.badgeFontWeight || 'font-medium'
+  const badgeTypography = resolveTypography(
+    badge?.badgeFontSize,
+    badge?.badgeFontSizeMobile,
+    badge?.badgeFontWeight,
+    badge?.badgeFontWeightMobile,
+    'text-xs md:text-sm',
+    'font-medium',
+  )
   const badgeMb = badge?.badgeMarginBottom || 'mb-4 md:mb-6'
 
   const subHeading = leftColumn?.subHeading?.trim() || ''
   const subHeadingColor = leftColumn?.subHeadingColor || 'text-white'
-  const subHeadingSize = leftColumn?.subHeadingFontSize || 'text-3xl md:text-4xl lg:text-5xl'
-  const subHeadingWeight = leftColumn?.subHeadingFontWeight || 'font-bold'
+  const subHeadingTypography = resolveTypography(
+    leftColumn?.subHeadingFontSize,
+    leftColumn?.subHeadingFontSizeMobile,
+    leftColumn?.subHeadingFontWeight,
+    leftColumn?.subHeadingFontWeightMobile,
+    'text-3xl md:text-4xl lg:text-5xl',
+    'font-bold',
+  )
   const subHeadingMb = leftColumn?.subHeadingMarginBottom || 'mb-1 md:mb-2'
 
   const heading = leftColumn?.heading?.trim() || ''
   const headingColor = leftColumn?.headingColor || 'text-white'
-  const headingSize = leftColumn?.headingFontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const headingWeight = leftColumn?.headingFontWeight || 'font-extrabold'
+  const headingTypography = resolveTypography(
+    leftColumn?.headingFontSize,
+    leftColumn?.headingFontSizeMobile,
+    leftColumn?.headingFontWeight,
+    leftColumn?.headingFontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-extrabold',
+  )
   const headingMb = leftColumn?.headingMarginBottom || 'mb-6 md:mb-8'
 
   const description = leftColumn?.description?.trim() || ''
   const descColor = leftColumn?.descriptionColor || 'text-white/80'
-  const descSize = leftColumn?.descriptionFontSize || 'text-base md:text-lg'
-  const descWeight = leftColumn?.descriptionFontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    leftColumn?.descriptionFontSize,
+    leftColumn?.descriptionFontSizeMobile,
+    leftColumn?.descriptionFontWeight,
+    leftColumn?.descriptionFontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
 
   const spacingBelowDesc =
     leftColumn?.spacingBelowDescription === 'custom' && leftColumn?.spacingBelowDescriptionCustom
@@ -276,8 +327,14 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const isBtn1NewTab = Boolean(buttonsGroup?.button1Link?.newTab)
   const btn1Bg = buttonsGroup?.button1BgColor || 'bg-white'
   const btn1TextCol = buttonsGroup?.button1TextColor || 'text-[#0256FF]'
-  const btn1Size = buttonsGroup?.button1FontSize || 'text-sm md:text-base'
-  const btn1Weight = buttonsGroup?.button1FontWeight || 'font-semibold'
+  const btn1Typography = resolveTypography(
+    buttonsGroup?.button1FontSize,
+    buttonsGroup?.button1FontSizeMobile,
+    buttonsGroup?.button1FontWeight,
+    buttonsGroup?.button1FontWeightMobile,
+    'text-sm md:text-base',
+    'font-semibold',
+  )
 
   const enableBtn2 = buttonsGroup?.enableButton2 !== false
   const btn2Text = buttonsGroup?.button2Text?.trim() || ''
@@ -285,8 +342,14 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const btn2Href = resolveHref(buttonsGroup?.button2Link)
   const isBtn2NewTab = Boolean(buttonsGroup?.button2Link?.newTab)
   const btn2TextCol = buttonsGroup?.button2TextColor || 'text-white'
-  const btn2Size = buttonsGroup?.button2FontSize || 'text-sm md:text-base'
-  const btn2Weight = buttonsGroup?.button2FontWeight || 'font-semibold'
+  const btn2Typography = resolveTypography(
+    buttonsGroup?.button2FontSize,
+    buttonsGroup?.button2FontSizeMobile,
+    buttonsGroup?.button2FontWeight,
+    buttonsGroup?.button2FontWeightMobile,
+    'text-sm md:text-base',
+    'font-semibold',
+  )
   const btn2IconBg = buttonsGroup?.button2IconBgColor || 'bg-white'
   const btn2IconCol = buttonsGroup?.button2IconColor || 'text-[#0256FF]'
 
@@ -294,22 +357,40 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const officesGroup = leftColumn?.officesGroup
   const officesHeading = officesGroup?.officesHeading?.trim() || ''
   const officesHeadingCol = officesGroup?.officesHeadingColor || 'text-[#0256FF]'
-  const officesHeadingSize = officesGroup?.officesHeadingFontSize || 'text-base md:text-lg'
-  const officesHeadingWeight = officesGroup?.officesHeadingFontWeight || 'font-bold'
+  const officesHeadingTypography = resolveTypography(
+    officesGroup?.officesHeadingFontSize,
+    officesGroup?.officesHeadingFontSizeMobile,
+    officesGroup?.officesHeadingFontWeight,
+    officesGroup?.officesHeadingFontWeightMobile,
+    'text-base md:text-lg',
+    'font-bold',
+  )
   const officesHeadingMb = officesGroup?.officesHeadingMarginBottom || 'mb-4'
   const officeItems = Array.isArray(officesGroup?.officeItems) ? officesGroup.officeItems : []
 
   // ─── Right Column Data ─────────────────────────────────────────────────────
   const rightSubHeading = rightColumn?.subHeading?.trim() || ''
   const rightSubHeadingCol = rightColumn?.subHeadingColor || 'text-white'
-  const rightSubHeadingSize = rightColumn?.subHeadingFontSize || 'text-lg md:text-xl'
-  const rightSubHeadingWeight = rightColumn?.subHeadingFontWeight || 'font-semibold'
+  const rightSubHeadingTypography = resolveTypography(
+    rightColumn?.subHeadingFontSize,
+    rightColumn?.subHeadingFontSizeMobile,
+    rightColumn?.subHeadingFontWeight,
+    rightColumn?.subHeadingFontWeightMobile,
+    'text-lg md:text-xl',
+    'font-semibold',
+  )
   const rightSubHeadingMb = rightColumn?.subHeadingMarginBottom || 'mb-2 md:mb-3'
 
   const rightDescription = rightColumn?.description?.trim() || ''
   const rightDescCol = rightColumn?.descriptionColor || 'text-white'
-  const rightDescSize = rightColumn?.descriptionFontSize || 'text-base md:text-lg'
-  const rightDescWeight = rightColumn?.descriptionFontWeight || 'font-normal'
+  const rightDescTypography = resolveTypography(
+    rightColumn?.descriptionFontSize,
+    rightColumn?.descriptionFontSizeMobile,
+    rightColumn?.descriptionFontWeight,
+    rightColumn?.descriptionFontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
   const rightDescMb = rightColumn?.descriptionMarginBottom || 'mb-6 md:mb-8'
 
   const rightImage = rightColumn?.image
@@ -317,9 +398,12 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const rightImageFit = rightColumn?.imageFit || 'object-cover'
 
   // ─── Divider Data ──────────────────────────────────────────────────────────
-  const enableDivider = Boolean(dividerSettings?.enableDivider ?? true)
-  const dividerLayout = dividerSettings?.dividerLayout || 'full'
+  const enableDivider = dividerSettings?.enableDivider !== false
+  const isDivided = Boolean(
+    dividerSettings?.divideHRLine ?? (dividerSettings?.dividerLayout === 'split'),
+  )
   const dividerColor = dividerSettings?.dividerColor || 'border-white/20'
+  const dividerThickness = dividerSettings?.dividerThickness || 'border-t'
   const dividerMt = dividerSettings?.dividerSpacingTop || 'mt-12 md:mt-16'
   const dividerMb = dividerSettings?.dividerSpacingBottom || 'mb-12 md:mb-16'
 
@@ -327,10 +411,23 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const enableStats = Boolean(statsGroup?.enableStats)
   const statItems = Array.isArray(statsGroup?.stats) ? statsGroup.stats : []
   const statValCol = statsGroup?.statValueColor || 'text-gray-950'
-  const statValSize = statsGroup?.statValueFontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const statValWeight = statsGroup?.statValueFontWeight || 'font-bold'
+  const statValTypography = resolveTypography(
+    statsGroup?.statValueFontSize,
+    statsGroup?.statValueFontSizeMobile,
+    statsGroup?.statValueFontWeight,
+    statsGroup?.statValueFontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-bold',
+  )
   const statLblCol = statsGroup?.statLabelColor || 'text-gray-700'
-  const statLblSize = statsGroup?.statLabelFontSize || 'text-sm md:text-base'
+  const statLblTypography = resolveTypography(
+    statsGroup?.statLabelFontSize,
+    statsGroup?.statLabelFontSizeMobile,
+    null,
+    null,
+    'text-sm md:text-base',
+    'font-normal',
+  )
 
   return (
     <section
@@ -384,7 +481,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
         )}
       >
         {/* ─── 2-COLUMN MAIN CONTENT GRID ────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start w-full flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-12 lg:gap-16 items-start w-full flex-1">
           {/* ── Left Column ── */}
           <div className="flex flex-col items-start w-full">
             {/* Pill Badge */}
@@ -395,8 +492,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                     'inline-flex items-center px-4 py-1.5 rounded-full backdrop-blur-sm transition-all',
                     badgeBg,
                     badgeTextColor,
-                    badgeFontSize,
-                    badgeFontWeight,
+                    badgeTypography.combined,
                   )}
                 >
                   {badgeText}
@@ -409,9 +505,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
               <p
                 className={cn(
                   'tracking-tight leading-snug transition-colors',
-                  subHeadingSize,
+                  subHeadingTypography.combined,
                   subHeadingColor,
-                  subHeadingWeight,
                   subHeadingMb,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(subHeading) }}
@@ -423,9 +518,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
               <h2
                 className={cn(
                   'tracking-tight leading-[1.08] transition-colors',
-                  headingSize,
+                  headingTypography.combined,
                   headingColor,
-                  headingWeight,
                   headingMb,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(heading) }}
@@ -437,9 +531,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
               <div
                 className={cn(
                   'leading-relaxed transition-colors max-w-xl',
-                  descSize,
+                  descTypography.combined,
                   descColor,
-                  descWeight,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(description) }}
               />
@@ -466,8 +559,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                         'inline-flex items-center justify-center px-7 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center',
                         btn1Bg,
                         btn1TextCol,
-                        btn1Size,
-                        btn1Weight,
+                        btn1Typography.combined,
                       )}
                     >
                       {btn1Text}
@@ -480,8 +572,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                         'inline-flex items-center justify-center px-7 py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center',
                         btn1Bg,
                         btn1TextCol,
-                        btn1Size,
-                        btn1Weight,
+                        btn1Typography.combined,
                       )}
                     >
                       {btn1Text}
@@ -497,7 +588,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                       rel={isBtn2NewTab ? 'noopener noreferrer' : undefined}
                       className="inline-flex items-center gap-3 py-2 px-1 bg-transparent border-0 shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn cursor-pointer"
                     >
-                      <span className={cn('transition-colors', btn2TextCol, btn2Size, btn2Weight)}>
+                      <span className={cn('transition-colors', btn2TextCol, btn2Typography.combined)}>
                         {btn2Text}
                       </span>
                       <span
@@ -515,7 +606,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                       onClick={(e) => e.preventDefault()}
                       className="inline-flex items-center gap-3 py-2 px-1 bg-transparent border-0 shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn cursor-pointer"
                     >
-                      <span className={cn('transition-colors', btn2TextCol, btn2Size, btn2Weight)}>
+                      <span className={cn('transition-colors', btn2TextCol, btn2Typography.combined)}>
                         {btn2Text}
                       </span>
                       <span
@@ -537,9 +628,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                   <h4
                     className={cn(
                       'tracking-tight leading-snug transition-colors',
-                      officesHeadingSize,
+                      officesHeadingTypography.combined,
                       officesHeadingCol,
-                      officesHeadingWeight,
                       officesHeadingMb,
                     )}
                     dangerouslySetInnerHTML={{ __html: formatInlineHtml(officesHeading) }}
@@ -552,8 +642,14 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                       const itemImg = item.image
                       const itemLabel = item.label?.trim() || ''
                       const itemCol = item.labelColor || 'text-gray-950'
-                      const itemSize = item.labelFontSize || 'text-xs md:text-sm'
-                      const itemWeight = item.labelFontWeight || 'font-semibold'
+                      const itemTypography = resolveTypography(
+                        item.labelFontSize,
+                        item.labelFontSizeMobile,
+                        item.labelFontWeight,
+                        item.labelFontWeightMobile,
+                        'text-xs md:text-sm',
+                        'font-semibold',
+                      )
 
                       return (
                         <div key={item.id || idx} className="flex flex-col items-start gap-2">
@@ -577,7 +673,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                             </div>
                           )}
                           {itemLabel && (
-                            <span className={cn('leading-tight transition-colors', itemCol, itemSize, itemWeight)}>
+                            <span className={cn('leading-tight transition-colors', itemCol, itemTypography.combined)}>
                               {itemLabel}
                             </span>
                           )}
@@ -588,6 +684,10 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                 )}
               </div>
             )}
+            {/* Mobile Divider for Left Column (when divided) */}
+            {enableDivider && isDivided && (
+              <hr className={cn('w-full md:hidden mt-8 transition-colors', dividerThickness, dividerColor)} />
+            )}
           </div>
 
           {/* ── Right Column ── */}
@@ -597,9 +697,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
               <p
                 className={cn(
                   'tracking-tight leading-snug transition-colors',
-                  rightSubHeadingSize,
+                  rightSubHeadingTypography.combined,
                   rightSubHeadingCol,
-                  rightSubHeadingWeight,
                   rightSubHeadingMb,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(rightSubHeading) }}
@@ -611,9 +710,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
               <div
                 className={cn(
                   'leading-relaxed transition-colors max-w-xl',
-                  rightDescSize,
+                  rightDescTypography.combined,
                   rightDescCol,
-                  rightDescWeight,
                   rightDescMb,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(rightDescription) }}
@@ -645,19 +743,24 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
                 )}
               </div>
             )}
+
+            {/* Mobile Divider for Right Column (when divided) */}
+            {enableDivider && isDivided && (
+              <hr className={cn('w-full md:hidden mt-8 transition-colors', dividerThickness, dividerColor)} />
+            )}
           </div>
         </div>
 
-        {/* ─── DIVIDER / HR LINE ─────────────────────────────────────────────── */}
+        {/* ─── DIVIDER / HR LINE (Desktop 2-Col or Full Width for Both) ───────── */}
         {enableDivider && (
-          <div className={cn('w-full', dividerMt, dividerMb)}>
-            {dividerLayout === 'split' ? (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 w-full">
-                <hr className={cn('border-t transition-colors', dividerColor)} />
-                <hr className={cn('border-t transition-colors', dividerColor)} />
+          <div className={cn('w-full', isDivided && 'hidden md:block', dividerMt, dividerMb)}>
+            {isDivided ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-12 lg:gap-16 w-full">
+                <hr className={cn('w-full transition-colors', dividerThickness, dividerColor)} />
+                <hr className={cn('w-full transition-colors', dividerThickness, dividerColor)} />
               </div>
             ) : (
-              <hr className={cn('border-t w-full transition-colors', dividerColor)} />
+              <hr className={cn('w-full transition-colors', dividerThickness, dividerColor)} />
             )}
           </div>
         )}
@@ -668,12 +771,12 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
             {statItems.map((item, i) => (
               <div key={item.id || i} className="flex flex-col gap-2">
                 {item.statValue && (
-                  <span className={cn('leading-none transition-colors', statValSize, statValCol, statValWeight)}>
+                  <span className={cn('leading-none transition-colors', statValTypography.combined, statValCol)}>
                     {item.statValue}
                   </span>
                 )}
                 {item.statLabel && (
-                  <span className={cn('leading-relaxed transition-colors', statLblSize, statLblCol)}>
+                  <span className={cn('leading-relaxed transition-colors', statLblTypography.combined, statLblCol)}>
                     {item.statLabel}
                   </span>
                 )}

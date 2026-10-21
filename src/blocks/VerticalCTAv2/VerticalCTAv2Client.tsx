@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/utilities/cn'
 
+import { resolveTypography } from '@/utilities/resolveTypography'
+
 export interface VerticalCTAv2Props {
   sectionBgColor?: string | null
   paddingTop?: string | null
@@ -14,7 +16,9 @@ export interface VerticalCTAv2Props {
     heading?: string | null
     headingColor?: string | null
     headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
     headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
     headingAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -22,7 +26,9 @@ export interface VerticalCTAv2Props {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
     descriptionAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -43,7 +49,9 @@ export interface VerticalCTAv2Props {
     iconColor?: string | null
     buttonAlignment?: 'left' | 'center' | 'right' | null
     buttonFontSize?: string | null
+    buttonFontSizeMobile?: string | null
     buttonFontWeight?: string | null
+    buttonFontWeightMobile?: string | null
   } | null
 
   dividerGroup?: {
@@ -124,8 +132,14 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
   // Heading config
   const headingText = headingGroup?.heading ?? 'Technology that moves businesses forward'
   const headingColor = headingGroup?.headingColor || 'text-gray-950'
-  const headingSize = headingGroup?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl'
-  const headingWeight = headingGroup?.headingFontWeight || 'font-bold'
+  const headingTypography = resolveTypography(
+    headingGroup?.headingFontSize,
+    headingGroup?.headingFontSizeMobile,
+    headingGroup?.headingFontWeight,
+    headingGroup?.headingFontWeightMobile,
+    'text-3xl md:text-4xl lg:text-5xl',
+    'font-bold',
+  )
   const headingAlign = headingGroup?.headingAlignment || 'left'
 
   // Description config
@@ -133,8 +147,14 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
     descriptionGroup?.description ??
     "316 Group's Digital Advisory service helps businesses navigate the complexities of the digital economy. Whether you're scaling a startup, transforming your operations, or exploring new revenue streams by leveraging technology and AI, our experts provide the insights and direction to turn your vision into reality."
   const descColor = descriptionGroup?.descriptionColor || 'text-gray-800'
-  const descSize = descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
-  const descWeight = descriptionGroup?.descriptionFontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    descriptionGroup?.descriptionFontSize,
+    descriptionGroup?.descriptionFontSizeMobile,
+    descriptionGroup?.descriptionFontWeight,
+    descriptionGroup?.descriptionFontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
   const descAlign = descriptionGroup?.descriptionAlignment || 'left'
 
   // Button config
@@ -143,8 +163,14 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
   const btnHref = resolveHref(buttonGroup?.buttonLink)
   const isNewTab = Boolean(buttonGroup?.buttonLink?.newTab)
   const btnTextCol = buttonGroup?.buttonTextColor || 'text-gray-950'
-  const btnSize = buttonGroup?.buttonFontSize || 'text-lg md:text-xl lg:text-2xl'
-  const btnWeight = buttonGroup?.buttonFontWeight || 'font-bold'
+  const btnTypography = resolveTypography(
+    buttonGroup?.buttonFontSize,
+    buttonGroup?.buttonFontSizeMobile,
+    buttonGroup?.buttonFontWeight,
+    buttonGroup?.buttonFontWeightMobile,
+    'text-lg md:text-xl lg:text-2xl',
+    'font-bold',
+  )
   const btnAlign = buttonGroup?.buttonAlignment || 'left'
   const iconCircleBg = buttonGroup?.iconCircleBg || 'bg-[#1D4ED8]'
   const iconCol = buttonGroup?.iconColor || 'text-white'
@@ -170,9 +196,8 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
         <h2
           className={cn(
             'w-full tracking-tight leading-[1.15] transition-all',
-            headingSize,
+            headingTypography.combined,
             headingColor,
-            headingWeight,
             textAlignClasses[headingAlign],
             isInView
               ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150'
@@ -187,9 +212,8 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
         <p
           className={cn(
             'w-full mt-4 md:mt-6 leading-relaxed max-w-4xl transition-all',
-            descSize,
+            descTypography.combined,
             descColor,
-            descWeight,
             textAlignClasses[descAlign],
             isInView
               ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300'
@@ -223,8 +247,7 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
               className={cn(
                 'tracking-tight transition-all duration-300 group-hover/vcta2:opacity-80',
                 btnTextCol,
-                btnSize,
-                btnWeight,
+                btnTypography.combined,
               )}
             >
               {btnText}

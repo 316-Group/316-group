@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/utilities/cn'
+import { resolveTypography } from '@/utilities/resolveTypography'
 
 export interface SplitTextProps {
   sectionBgColor?: string | null
@@ -20,7 +21,9 @@ export interface SplitTextProps {
       bgColor?: string | null
       textColor?: string | null
       fontSize?: string | null
+      fontSizeMobile?: string | null
       fontWeight?: string | null
+      fontWeightMobile?: string | null
     } | null
     spacingBeforeHeading?: string | null
     spacingBeforeHeadingCustom?: string | null
@@ -28,7 +31,9 @@ export interface SplitTextProps {
       text?: string | null
       color?: string | null
       fontSize?: string | null
+      fontSizeMobile?: string | null
       fontWeight?: string | null
+      fontWeightMobile?: string | null
       tag?: 'h1' | 'h2' | 'h3' | 'div' | null
     } | null
   } | null
@@ -38,7 +43,9 @@ export interface SplitTextProps {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
 
   className?: string
@@ -93,8 +100,14 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
   const hasBadgeText = Boolean(badgeText)
   const badgeBg = leftColumn?.badgeGroup?.bgColor || 'bg-[#EFF1F8]'
   const badgeTextCol = leftColumn?.badgeGroup?.textColor || 'text-[#3F5AC9]'
-  const badgeSize = leftColumn?.badgeGroup?.fontSize || 'text-sm'
-  const badgeWeight = leftColumn?.badgeGroup?.fontWeight || 'font-medium'
+  const badgeTypography = resolveTypography(
+    leftColumn?.badgeGroup?.fontSize,
+    leftColumn?.badgeGroup?.fontSizeMobile,
+    leftColumn?.badgeGroup?.fontWeight,
+    leftColumn?.badgeGroup?.fontWeightMobile,
+    'text-sm',
+    'font-medium',
+  )
 
   // Spacing Before Heading
   const spacingSelect = leftColumn?.spacingBeforeHeading || '16px'
@@ -107,17 +120,28 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
   const headingText = leftColumn?.headingGroup?.text?.trim()
   const hasHeadingText = Boolean(headingText)
   const headingColor = leftColumn?.headingGroup?.color || 'text-gray-950'
-  const headingSize =
-    leftColumn?.headingGroup?.fontSize || 'text-3xl md:text-4xl lg:text-5xl'
-  const headingWeight = leftColumn?.headingGroup?.fontWeight || 'font-semibold'
+  const headingTypography = resolveTypography(
+    leftColumn?.headingGroup?.fontSize,
+    leftColumn?.headingGroup?.fontSizeMobile,
+    leftColumn?.headingGroup?.fontWeight,
+    leftColumn?.headingGroup?.fontWeightMobile,
+    'text-3xl md:text-4xl lg:text-5xl',
+    'font-semibold',
+  )
   const HeadingTag = (leftColumn?.headingGroup?.tag as keyof React.JSX.IntrinsicElements) || 'h2'
 
   // ─── Right Column: Description ────────────────────────────────────────────
   const descText = rightColumn?.text?.trim()
   const hasDescText = Boolean(descText)
   const descColor = rightColumn?.color || 'text-gray-600'
-  const descSize = rightColumn?.fontSize || 'text-base md:text-lg'
-  const descWeight = rightColumn?.fontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    rightColumn?.fontSize,
+    rightColumn?.fontSizeMobile,
+    rightColumn?.fontWeight,
+    rightColumn?.fontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
 
   // If nothing is provided, return null cleanly
   if (!hasBadgeText && !hasHeadingText && !hasDescText) {
@@ -166,8 +190,7 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
                     'inline-flex items-center px-4 py-1.5 rounded-full border border-black/5 dark:border-white/10 transition-colors',
                     badgeBg,
                     badgeTextCol,
-                    badgeSize,
-                    badgeWeight,
+                    badgeTypography.combined,
                   )}
                 >
                   {badgeText}
@@ -191,8 +214,7 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
                 className={cn(
                   'tracking-tight leading-[1.12] transition-colors',
                   headingColor,
-                  headingSize,
-                  headingWeight,
+                  headingTypography.combined,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
               />
@@ -214,7 +236,7 @@ export const SplitTextBlock: React.FC<SplitTextProps> = ({
 
             {hasDescText && (
               <div
-                className={cn('leading-relaxed transition-colors', descColor, descSize, descWeight)}
+                className={cn('leading-relaxed transition-colors', descColor, descTypography.combined)}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
               />
             )}

@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/utilities/cn'
+import { resolveTypography } from '@/utilities/resolveTypography'
 import { Media } from '@/components/Media'
 import type { Post } from '@/payload-types'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -32,7 +33,9 @@ export interface CardStyling {
     spacingBottomCustom?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -41,7 +44,9 @@ export interface CardStyling {
     spacingBottomCustom?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -51,7 +56,9 @@ export interface CardStyling {
     spacingBottomCustom?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -59,7 +66,9 @@ export interface CardStyling {
     text?: string | null
     textColor?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'left' | 'center' | 'right' | null
     iconBgColor?: string | null
     iconColor?: string | null
@@ -191,25 +200,49 @@ export const BlogPostUpdatedClient: React.FC<BlogPostUpdatedProps> = ({
 
   // ─── Typography & Color Resolutions ────────────────────────────────────────
   const categoryColor = cardStyling?.categoryGroup?.color || 'text-gray-900'
-  const categorySize = cardStyling?.categoryGroup?.fontSize || 'text-sm md:text-base'
-  const categoryWeight = cardStyling?.categoryGroup?.fontWeight || 'font-normal'
+  const categoryTypography = resolveTypography(
+    cardStyling?.categoryGroup?.fontSize,
+    cardStyling?.categoryGroup?.fontSizeMobile,
+    cardStyling?.categoryGroup?.fontWeight,
+    cardStyling?.categoryGroup?.fontWeightMobile,
+    'text-sm md:text-base',
+    'font-normal',
+  )
   const categoryAlign = cardStyling?.categoryGroup?.alignment || 'left'
 
   const titleColor = cardStyling?.titleGroup?.color || 'text-gray-950'
-  const titleSize = cardStyling?.titleGroup?.fontSize || 'text-2xl md:text-3xl'
-  const titleWeight = cardStyling?.titleGroup?.fontWeight || 'font-semibold'
+  const titleTypography = resolveTypography(
+    cardStyling?.titleGroup?.fontSize,
+    cardStyling?.titleGroup?.fontSizeMobile,
+    cardStyling?.titleGroup?.fontWeight,
+    cardStyling?.titleGroup?.fontWeightMobile,
+    'text-2xl md:text-3xl',
+    'font-semibold',
+  )
   const titleAlign = cardStyling?.titleGroup?.alignment || 'left'
 
   const maxChars = cardStyling?.descriptionGroup?.maxCharacters ?? 160
   const descColor = cardStyling?.descriptionGroup?.color || 'text-gray-600'
-  const descSize = cardStyling?.descriptionGroup?.fontSize || 'text-sm md:text-base'
-  const descWeight = cardStyling?.descriptionGroup?.fontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    cardStyling?.descriptionGroup?.fontSize,
+    cardStyling?.descriptionGroup?.fontSizeMobile,
+    cardStyling?.descriptionGroup?.fontWeight,
+    cardStyling?.descriptionGroup?.fontWeightMobile,
+    'text-sm md:text-base',
+    'font-normal',
+  )
   const descAlign = cardStyling?.descriptionGroup?.alignment || 'left'
 
   const btnText = cardStyling?.buttonGroup?.text?.trim() || 'Learn more'
   const btnTextCol = cardStyling?.buttonGroup?.textColor || 'text-gray-950'
-  const btnSize = cardStyling?.buttonGroup?.fontSize || 'text-base'
-  const btnWeight = cardStyling?.buttonGroup?.fontWeight || 'font-semibold'
+  const btnTypography = resolveTypography(
+    cardStyling?.buttonGroup?.fontSize,
+    cardStyling?.buttonGroup?.fontSizeMobile,
+    cardStyling?.buttonGroup?.fontWeight,
+    cardStyling?.buttonGroup?.fontWeightMobile,
+    'text-base',
+    'font-semibold',
+  )
   const btnAlign = cardStyling?.buttonGroup?.alignment || 'left'
   const iconBg = cardStyling?.buttonGroup?.iconBgColor || 'bg-blue-custom'
   const iconCol = cardStyling?.buttonGroup?.iconColor || 'text-white'
@@ -266,8 +299,7 @@ export const BlogPostUpdatedClient: React.FC<BlogPostUpdatedProps> = ({
             className={cn(
               'block transition-colors',
               categoryColor,
-              categorySize,
-              categoryWeight,
+              categoryTypography,
               textAlignClasses[categoryAlign],
             )}
           >
@@ -282,8 +314,7 @@ export const BlogPostUpdatedClient: React.FC<BlogPostUpdatedProps> = ({
             className={cn(
               'tracking-tight leading-snug transition-colors line-clamp-2',
               titleColor,
-              titleSize,
-              titleWeight,
+              titleTypography,
               textAlignClasses[titleAlign],
             )}
           >
@@ -299,8 +330,7 @@ export const BlogPostUpdatedClient: React.FC<BlogPostUpdatedProps> = ({
               className={cn(
                 'leading-relaxed transition-colors',
                 descColor,
-                descSize,
-                descWeight,
+                descTypography,
                 textAlignClasses[descAlign],
               )}
             >
@@ -329,8 +359,7 @@ export const BlogPostUpdatedClient: React.FC<BlogPostUpdatedProps> = ({
               className={cn(
                 'tracking-normal transition-colors duration-200 group-hover/btn:opacity-90',
                 btnTextCol,
-                btnSize,
-                btnWeight,
+                btnTypography,
               )}
             >
               {btnText}

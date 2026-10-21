@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { cn } from '@/utilities/cn'
 
+import { resolveTypography } from '@/utilities/resolveTypography'
+
 export interface NumberedGridItem {
   id?: string | null
   number?: string | null
@@ -32,16 +34,22 @@ export interface NumberedGridProps {
     numberColor?: string | null
     numberFontSize?: string | null
     numberFontWeight?: string | null
+    numberFontSizeMobile?: string | null
+    numberFontWeightMobile?: string | null
     numberMarginBottom?: string | null
 
     subHeadingColor?: string | null
     subHeadingFontSize?: string | null
     subHeadingFontWeight?: string | null
+    subHeadingFontSizeMobile?: string | null
+    subHeadingFontWeightMobile?: string | null
     subHeadingMarginBottom?: string | null
 
     descriptionColor?: string | null
     descriptionFontSize?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeightMobile?: string | null
   } | null
 
   // Items
@@ -133,18 +141,36 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
 
   // ─── Global Styling Defaults ──────────────────────────────────────────────
   const globalNumberColor = styling?.numberColor || 'text-[#0256FF]'
-  const globalNumberSize = styling?.numberFontSize || 'text-5xl md:text-6xl lg:text-7xl'
-  const globalNumberWeight = styling?.numberFontWeight || 'font-bold'
+  const numberTypography = resolveTypography(
+    styling?.numberFontSize,
+    styling?.numberFontSizeMobile,
+    styling?.numberFontWeight,
+    styling?.numberFontWeightMobile,
+    'text-5xl md:text-6xl lg:text-7xl',
+    'font-bold',
+  )
   const globalNumberMb = styling?.numberMarginBottom || 'mb-3 md:mb-4'
 
   const globalSubHeadingColor = styling?.subHeadingColor || 'text-gray-950'
-  const globalSubHeadingSize = styling?.subHeadingFontSize || 'text-xl md:text-2xl'
-  const globalSubHeadingWeight = styling?.subHeadingFontWeight || 'font-bold'
+  const subHeadingTypography = resolveTypography(
+    styling?.subHeadingFontSize,
+    styling?.subHeadingFontSizeMobile,
+    styling?.subHeadingFontWeight,
+    styling?.subHeadingFontWeightMobile,
+    'text-xl md:text-2xl',
+    'font-bold',
+  )
   const globalSubHeadingMb = styling?.subHeadingMarginBottom || 'mb-3 md:mb-4'
 
   const globalDescColor = styling?.descriptionColor || 'text-gray-600'
-  const globalDescSize = styling?.descriptionFontSize || 'text-sm md:text-base'
-  const globalDescWeight = styling?.descriptionFontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    styling?.descriptionFontSize,
+    styling?.descriptionFontSizeMobile,
+    styling?.descriptionFontWeight,
+    styling?.descriptionFontWeightMobile,
+    'text-sm md:text-base',
+    'font-normal',
+  )
 
   const gridItems = Array.isArray(items) ? items : []
 
@@ -235,8 +261,7 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
                     className={cn(
                       'leading-none tracking-tight block transition-colors',
                       itemNumberColor,
-                      globalNumberSize,
-                      globalNumberWeight,
+                      numberTypography.combined,
                       globalNumberMb,
                     )}
                   >
@@ -250,8 +275,7 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
                     className={cn(
                       'tracking-tight leading-snug transition-colors',
                       globalSubHeadingColor,
-                      globalSubHeadingSize,
-                      globalSubHeadingWeight,
+                      subHeadingTypography.combined,
                       globalSubHeadingMb,
                     )}
                     dangerouslySetInnerHTML={{ __html: formatInlineHtml(subHeadingText) }}
@@ -264,8 +288,7 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
                     className={cn(
                       'leading-relaxed transition-colors',
                       globalDescColor,
-                      globalDescSize,
-                      globalDescWeight,
+                      descTypography.combined,
                     )}
                     dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
                   />

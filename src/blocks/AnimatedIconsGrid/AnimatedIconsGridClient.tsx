@@ -6,6 +6,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
+import { resolveTypography } from '@/utilities/resolveTypography'
 
 export interface CardItem {
   id?: string | null
@@ -51,7 +52,9 @@ export interface AnimatedIconsGridProps {
     heading?: string | null
     headingColor?: string | null
     headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
     headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
     headingAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -59,7 +62,9 @@ export interface AnimatedIconsGridProps {
     description?: string | null
     descriptionColor?: string | null
     descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
     descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
     descriptionAlignment?: 'left' | 'center' | 'right' | null
   } | null
 
@@ -81,7 +86,9 @@ export interface AnimatedIconsGridProps {
     iconColor?: string | null
     buttonAlignment?: 'left' | 'center' | 'right' | null
     buttonFontSize?: string | null
+    buttonFontSizeMobile?: string | null
     buttonFontWeight?: string | null
+    buttonFontWeightMobile?: string | null
   } | null
 
   animationSettings?: AnimationSettings | null
@@ -346,8 +353,14 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   // Heading config
   const headingText = headingGroup?.heading ?? 'Access <style="color:#0256FF">50+ Connectors</style>'
   const headingColor = headingGroup?.headingColor || 'text-gray-950'
-  const headingSize = headingGroup?.headingFontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const headingWeight = headingGroup?.headingFontWeight || 'font-bold'
+  const headingTypography = resolveTypography(
+    headingGroup?.headingFontSize,
+    headingGroup?.headingFontSizeMobile,
+    headingGroup?.headingFontWeight,
+    headingGroup?.headingFontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-bold',
+  )
   const headingAlign = headingGroup?.headingAlignment || 'center'
 
   // Description config
@@ -355,8 +368,14 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     descriptionGroup?.description ??
     "Fintech Connect ships with pre-built connectors to the world's leading banking, payments, compliance, and crypto infrastructure providers."
   const descColor = descriptionGroup?.descriptionColor || 'text-gray-700'
-  const descSize = descriptionGroup?.descriptionFontSize || 'text-base md:text-lg'
-  const descWeight = descriptionGroup?.descriptionFontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    descriptionGroup?.descriptionFontSize,
+    descriptionGroup?.descriptionFontSizeMobile,
+    descriptionGroup?.descriptionFontWeight,
+    descriptionGroup?.descriptionFontWeightMobile,
+    'text-base md:text-lg',
+    'font-normal',
+  )
   const descAlign = descriptionGroup?.descriptionAlignment || 'center'
 
   // Button config
@@ -366,8 +385,14 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   const isNewTab = Boolean(buttonGroup?.buttonLink?.newTab)
   const btnBg = buttonGroup?.buttonBgColor || 'bg-[#1D4ED8]'
   const btnTextCol = buttonGroup?.buttonTextColor || 'text-white'
-  const btnSize = buttonGroup?.buttonFontSize || 'text-sm md:text-base'
-  const btnWeight = buttonGroup?.buttonFontWeight || 'font-semibold'
+  const btnTypography = resolveTypography(
+    buttonGroup?.buttonFontSize,
+    buttonGroup?.buttonFontSizeMobile,
+    buttonGroup?.buttonFontWeight,
+    buttonGroup?.buttonFontWeightMobile,
+    'text-sm md:text-base',
+    'font-semibold',
+  )
   const btnAlign = buttonGroup?.buttonAlignment || 'center'
   const iconCircleBg = buttonGroup?.iconCircleBg || 'bg-white'
   const iconCol = buttonGroup?.iconColor || 'text-[#1D4ED8]'
@@ -537,9 +562,8 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               <h2
                 className={cn(
                   'w-full tracking-tight leading-[1.12] transition-all',
-                  headingSize,
+                  headingTypography.combined,
                   headingColor,
-                  headingWeight,
                   textAlignClasses[headingAlign],
                   isInView
                     ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150'
@@ -554,9 +578,8 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               <p
                 className={cn(
                   'w-full mt-4 md:mt-6 leading-relaxed max-w-2xl transition-all',
-                  descSize,
+                  descTypography.combined,
                   descColor,
-                  descWeight,
                   textAlignClasses[descAlign],
                   isInView
                     ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300'
@@ -586,7 +609,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
                     btnBg,
                   )}
                 >
-                  <span className={cn('tracking-normal', btnTextCol, btnSize, btnWeight)}>
+                  <span className={cn('tracking-normal', btnTextCol, btnTypography.combined)}>
                     {btnText}
                   </span>
                   <span
@@ -627,9 +650,9 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               <h2
                 className={cn(
                   'w-full tracking-tight leading-tight transition-all',
-                  'text-xl sm:text-2xl md:text-3xl',
+                  headingGroup?.headingFontSizeMobile || 'text-xl sm:text-2xl md:text-3xl',
+                  headingGroup?.headingFontWeightMobile || headingTypography.weightClass,
                   headingColor,
-                  headingWeight,
                   textAlignClasses[headingAlign],
                   isInView
                     ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150'
@@ -642,9 +665,10 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
             {descText && (
               <p
                 className={cn(
-                  'w-full mt-2.5 sm:mt-3 leading-relaxed transition-all text-xs sm:text-sm',
+                  'w-full mt-2.5 sm:mt-3 leading-relaxed transition-all',
+                  descriptionGroup?.descriptionFontSizeMobile || 'text-xs sm:text-sm',
+                  descriptionGroup?.descriptionFontWeightMobile || descTypography.weightClass,
                   descColor,
-                  descWeight,
                   textAlignClasses[descAlign],
                   isInView
                     ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300'
@@ -673,7 +697,14 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
                     btnBg,
                   )}
                 >
-                  <span className={cn('tracking-normal text-xs sm:text-sm', btnTextCol, btnWeight)}>
+                  <span
+                    className={cn(
+                      'tracking-normal',
+                      buttonGroup?.buttonFontSizeMobile || 'text-xs sm:text-sm',
+                      buttonGroup?.buttonFontWeightMobile || btnTypography.weightClass,
+                      btnTextCol,
+                    )}
+                  >
                     {btnText}
                   </span>
                   <span

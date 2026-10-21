@@ -253,7 +253,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'text-sm',
             options: fontSizeOptions,
             admin: {
-              width: '50%',
+              width: '25%',
+            },
+          },
+          {
+            name: 'badgeFontSizeMobile',
+            type: 'select',
+            label: 'Badge Font Size (Mobile)',
+            defaultValue: 'text-sm',
+            options: fontSizeOptions,
+            admin: {
+              width: '25%',
             },
           },
           {
@@ -263,7 +273,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'font-medium',
             options: fontWeightOptions,
             admin: {
-              width: '50%',
+              width: '25%',
+            },
+          },
+          {
+            name: 'badgeFontWeightMobile',
+            type: 'select',
+            label: 'Badge Font Weight (Mobile)',
+            defaultValue: 'font-medium',
+            options: fontWeightOptions,
+            admin: {
+              width: '25%',
             },
           },
         ],
@@ -292,7 +312,7 @@ export const centeredContentFields: Field[] = [
               label: 'Line 1 Color',
               defaultValue: 'text-gray-900',
               admin: {
-                width: '33.33%',
+                width: '20%',
               },
             },
           }),
@@ -303,7 +323,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'text-4xl md:text-5xl lg:text-6xl',
             options: fontSizeOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontSizeMobile',
+            type: 'select',
+            label: 'Line 1 Font Size (Mobile)',
+            defaultValue: 'text-4xl',
+            options: fontSizeOptions,
+            admin: {
+              width: '20%',
             },
           },
           {
@@ -313,7 +343,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'font-normal',
             options: fontWeightOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontWeightMobile',
+            type: 'select',
+            label: 'Line 1 Font Weight (Mobile)',
+            defaultValue: 'font-normal',
+            options: fontWeightOptions,
+            admin: {
+              width: '20%',
             },
           },
         ],
@@ -342,7 +382,7 @@ export const centeredContentFields: Field[] = [
               label: 'Line 2 Color',
               defaultValue: 'text-gray-900',
               admin: {
-                width: '33.33%',
+                width: '20%',
               },
             },
           }),
@@ -353,7 +393,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'text-4xl md:text-5xl lg:text-6xl',
             options: fontSizeOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontSizeMobile',
+            type: 'select',
+            label: 'Line 2 Font Size (Mobile)',
+            defaultValue: 'text-4xl',
+            options: fontSizeOptions,
+            admin: {
+              width: '20%',
             },
           },
           {
@@ -363,7 +413,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'font-normal',
             options: fontWeightOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontWeightMobile',
+            type: 'select',
+            label: 'Line 2 Font Weight (Mobile)',
+            defaultValue: 'font-normal',
+            options: fontWeightOptions,
+            admin: {
+              width: '20%',
             },
           },
         ],
@@ -409,7 +469,7 @@ export const centeredContentFields: Field[] = [
               label: 'Description Color',
               defaultValue: 'text-gray-700',
               admin: {
-                width: '33.33%',
+                width: '20%',
               },
             },
           }),
@@ -420,7 +480,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'text-base md:text-lg lg:text-xl',
             options: fontSizeOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontSizeMobile',
+            type: 'select',
+            label: 'Description Font Size (Mobile)',
+            defaultValue: 'text-base',
+            options: fontSizeOptions,
+            admin: {
+              width: '20%',
             },
           },
           {
@@ -430,7 +500,17 @@ export const centeredContentFields: Field[] = [
             defaultValue: 'font-normal',
             options: fontWeightOptions,
             admin: {
-              width: '33.33%',
+              width: '20%',
+            },
+          },
+          {
+            name: 'fontWeightMobile',
+            type: 'select',
+            label: 'Description Font Weight (Mobile)',
+            defaultValue: 'font-normal',
+            options: fontWeightOptions,
+            admin: {
+              width: '20%',
             },
           },
         ],

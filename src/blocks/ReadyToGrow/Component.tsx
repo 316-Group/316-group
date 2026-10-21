@@ -5,6 +5,8 @@ import { Media } from '@/components/Media'
 import { ArrowUpRight } from 'lucide-react'
 import type { Media as MediaType, Page, Post, CaseStudy, EbooksAndGuide, Brand } from '@/payload-types'
 
+import { resolveTypography } from '@/utilities/resolveTypography'
+
 export interface ReadyToGrowProps {
   sectionBgColor?: string | null
   paddingTop?: string | null
@@ -19,6 +21,7 @@ export interface ReadyToGrowProps {
     bgColor?: string | null
     textColor?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     alignment?: 'center' | 'left' | 'right' | null
     spacingBottom?: string | null
     spacingBottomCustom?: string | null
@@ -28,7 +31,9 @@ export interface ReadyToGrowProps {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'center' | 'left' | 'right' | null
     spacingBottom?: string | null
     spacingBottomCustom?: string | null
@@ -38,7 +43,9 @@ export interface ReadyToGrowProps {
     text?: string | null
     color?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     fontWeight?: string | null
+    fontWeightMobile?: string | null
     alignment?: 'center' | 'left' | 'right' | null
     spacingBottom?: string | null
     spacingBottomCustom?: string | null
@@ -58,6 +65,7 @@ export interface ReadyToGrowProps {
     bgColor?: string | null
     textColor?: string | null
     fontSize?: string | null
+    fontSizeMobile?: string | null
     alignment?: 'center' | 'left' | 'right' | null
     iconCircleBg?: string | null
     iconColor?: string | null
@@ -146,15 +154,28 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
   const badgeText = badgeGroup?.text?.trim() ?? 'Ready to grow?'
   const badgeBg = badgeGroup?.bgColor || 'bg-blue-700'
   const badgeTextCol = badgeGroup?.textColor || 'text-white'
-  const badgeSize = badgeGroup?.fontSize || 'text-sm md:text-base'
+  const badgeTypography = resolveTypography(
+    badgeGroup?.fontSize,
+    badgeGroup?.fontSizeMobile,
+    null,
+    null,
+    'text-sm md:text-base',
+    'font-medium',
+  )
   const badgeAlign = badgeGroup?.alignment || 'center'
   const badgeSpacing = resolveSpacing(badgeGroup?.spacingBottom, badgeGroup?.spacingBottomCustom, '24px')
 
   // ─── 2. Heading Settings ────────────────────────────────────────────────────
   const headingText = headingGroup?.text?.trim() ?? "Let's build what comes next, together."
   const headingColor = headingGroup?.color || 'text-white'
-  const headingSize = headingGroup?.fontSize || 'text-4xl md:text-5xl lg:text-6xl'
-  const headingWeight = headingGroup?.fontWeight || 'font-bold'
+  const headingTypography = resolveTypography(
+    headingGroup?.fontSize,
+    headingGroup?.fontSizeMobile,
+    headingGroup?.fontWeight,
+    headingGroup?.fontWeightMobile,
+    'text-4xl md:text-5xl lg:text-6xl',
+    'font-bold',
+  )
   const headingAlign = headingGroup?.alignment || 'center'
   const headingSpacing = resolveSpacing(headingGroup?.spacingBottom, headingGroup?.spacingBottomCustom, '20px')
 
@@ -163,8 +184,14 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
     descriptionGroup?.text?.trim() ??
     'Explore solutions, discuss partnerships or connect with one of our specialist businesses.'
   const descColor = descriptionGroup?.color || 'text-white'
-  const descSize = descriptionGroup?.fontSize || 'text-base md:text-lg lg:text-xl'
-  const descWeight = descriptionGroup?.fontWeight || 'font-normal'
+  const descTypography = resolveTypography(
+    descriptionGroup?.fontSize,
+    descriptionGroup?.fontSizeMobile,
+    descriptionGroup?.fontWeight,
+    descriptionGroup?.fontWeightMobile,
+    'text-base md:text-lg lg:text-xl',
+    'font-normal',
+  )
   const descAlign = descriptionGroup?.alignment || 'center'
   const descSpacing = resolveSpacing(
     descriptionGroup?.spacingBottom,
@@ -176,7 +203,14 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
   const btnText = buttonGroup?.text?.trim() ?? 'Talk to our experts'
   const btnBg = buttonGroup?.bgColor || 'bg-white'
   const btnTextCol = buttonGroup?.textColor || 'text-gray-950'
-  const btnSize = buttonGroup?.fontSize || 'text-sm md:text-base'
+  const btnTypography = resolveTypography(
+    buttonGroup?.fontSize,
+    buttonGroup?.fontSizeMobile,
+    null,
+    null,
+    'text-sm md:text-base',
+    'font-semibold',
+  )
   const btnAlign = buttonGroup?.alignment || 'center'
   const iconCircleBg = buttonGroup?.iconCircleBg || 'bg-blue-600'
   const iconCol = buttonGroup?.iconColor || 'text-white'
@@ -277,7 +311,7 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
                     'inline-flex items-center px-6 py-2 rounded-full border border-white/10 shadow-sm transition-colors',
                     badgeBg,
                     badgeTextCol,
-                    badgeSize,
+                    badgeTypography.combined,
                   )}
                 >
                   {badgeText}
@@ -294,8 +328,7 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
                 className={cn(
                   'w-full tracking-tight leading-[1.12] transition-colors',
                   headingColor,
-                  headingSize,
-                  headingWeight,
+                  headingTypography.combined,
                   textAlignClasses[headingAlign],
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
@@ -311,8 +344,7 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
                 className={cn(
                   'w-full max-w-2xl leading-relaxed transition-colors opacity-95',
                   descColor,
-                  descSize,
-                  descWeight,
+                  descTypography.combined,
                   textAlignClasses[descAlign],
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
@@ -331,10 +363,10 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
                   'inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full shadow-md transition-all group/btn hover:shadow-lg hover:scale-102 cursor-pointer',
                   btnBg,
                   btnTextCol,
-                  btnSize,
+                  btnTypography.combined,
                 )}
               >
-                <span className="font-semibold">{btnText}</span>
+                <span>{btnText}</span>
                 <span
                   className={cn(
                     'w-9 h-9 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
