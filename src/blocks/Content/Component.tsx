@@ -323,7 +323,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 const rawBlockId = (props as any).id || (props as any).blockName || 'cb'
                 const rawColId = (col as any).id || index
                 const colPadUid =
-                  colPaddingMode === 'none' || colPaddingMode === 'custom'
+                  !isMatchHeaderPillWidth &&
+                  (colPaddingMode === 'none' || colPaddingMode === 'custom')
                     ? `col-pad-${rawBlockId}-${rawColId}`.replace(/[^a-zA-Z0-9_-]/g, '')
                     : undefined
 
@@ -411,11 +412,17 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         col.alignment === 'center' &&
                           'text-center flex flex-col items-center justify-center',
                         colBg && colBg !== 'bg-transparent' && colBg,
-                        isMatchHeaderPillWidth && 'w-full max-w-[1472px] mx-auto',
-                        colPaddingMode === 'matchHeader' && 'w-full max-w-screen-2xl mx-auto px-4 md:px-8',
+                        isMatchHeaderPillWidth &&
+                          (hasFullWidthCol || paddingType === 'noPadding'
+                            ? 'w-full max-w-screen-2xl mx-auto px-4 md:px-8'
+                            : 'w-full max-w-[1472px] mx-auto'),
+                        !isMatchHeaderPillWidth &&
+                          colPaddingMode === 'matchHeader' &&
+                          'w-full max-w-screen-2xl mx-auto px-4 md:px-8',
                         hasFullWidthCol &&
                           !isColFullWidth &&
                           !colPadUid &&
+                          !isMatchHeaderPillWidth &&
                           colPaddingMode !== 'matchHeader' &&
                           'max-w-screen-2xl mx-auto px-4 md:px-8',
                       )}
@@ -1126,6 +1133,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       whoWeAreData.paddingBottom = 'pb-0'
                     }
                     if (
+                      isMatchHeaderPillWidth ||
                       colPaddingMode === 'none' ||
                       colPaddingMode === 'custom' ||
                       colPaddingMode === 'matchHeader'
@@ -1156,6 +1164,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       numGridData.paddingBottom = 'pb-0'
                     }
                     if (
+                      isMatchHeaderPillWidth ||
                       colPaddingMode === 'none' ||
                       colPaddingMode === 'custom' ||
                       colPaddingMode === 'matchHeader'
@@ -1188,6 +1197,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       mvData.paddingBottomMobile = '0px'
                     }
                     if (
+                      isMatchHeaderPillWidth ||
                       colPaddingMode === 'none' ||
                       colPaddingMode === 'custom' ||
                       colPaddingMode === 'matchHeader'
@@ -1221,6 +1231,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       taData.paddingBottom = 'pb-0'
                     }
                     if (
+                      isMatchHeaderPillWidth ||
                       colPaddingMode === 'none' ||
                       colPaddingMode === 'custom' ||
                       colPaddingMode === 'matchHeader'

@@ -90,11 +90,11 @@ const columnFields: Field[] = [
   {
     name: 'matchHeaderPillWidth',
     type: 'checkbox',
-    label: 'Match Header Pill Width (Home Hero V2)',
+    label: 'Match Header Pill Width',
     defaultValue: false,
     admin: {
       description:
-        'Toggle ON to make this column width equivalent to the Group Home Hero V2 header pill (max 1,472px container, centered).',
+        'Toggle ON to make this column width match the site header (Logo to Navigation, max 1,472px container, centered).',
     },
   },
   {
@@ -125,6 +125,7 @@ const columnFields: Field[] = [
       { label: 'Custom Horizontal Padding', value: 'custom' },
     ],
     admin: {
+      condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
       description:
         'Adjust horizontal padding, or choose Match Header to perfectly align content width with the site Logo and Navigation across all screen sizes.',
     },
@@ -135,7 +136,7 @@ const columnFields: Field[] = [
     label: 'Padding Target Side',
     defaultValue: 'both',
     admin: {
-      condition: (_, siblingData) => siblingData?.paddingMode === 'custom',
+      condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth && siblingData?.paddingMode === 'custom',
       description:
         'Choose whether to apply padding to both sides together, left only, right only, or set separate left & right values.',
     },
@@ -152,6 +153,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (!siblingData?.paddingSide || siblingData?.paddingSide === 'both'),
     },
@@ -179,6 +181,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (!siblingData?.paddingSide || siblingData?.paddingSide === 'both'),
     },
@@ -208,6 +211,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (siblingData?.paddingSide === 'left' || siblingData?.paddingSide === 'split'),
     },
@@ -235,6 +239,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (siblingData?.paddingSide === 'left' || siblingData?.paddingSide === 'split'),
     },
@@ -264,6 +269,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (siblingData?.paddingSide === 'right' || siblingData?.paddingSide === 'split'),
     },
@@ -291,6 +297,7 @@ const columnFields: Field[] = [
     type: 'row',
     admin: {
       condition: (_, siblingData) =>
+        !siblingData?.matchHeaderPillWidth &&
         siblingData?.paddingMode === 'custom' &&
         (siblingData?.paddingSide === 'right' || siblingData?.paddingSide === 'split'),
     },

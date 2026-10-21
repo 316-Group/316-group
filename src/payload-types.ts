@@ -22784,7 +22784,7 @@ export interface ContentBlock {
   columns?:
     | {
         /**
-         * Toggle ON to make this column width equivalent to the Group Home Hero V2 header pill (max 1,472px container, centered).
+         * Toggle ON to make this column width match the site header (Logo to Navigation, max 1,472px container, centered).
          */
         matchHeaderPillWidth?: boolean | null;
         /**
