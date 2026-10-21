@@ -123,6 +123,7 @@ function resolveHref(linkObj?: AnimatedIconsGridProps['buttonGroup'] extends { b
 }
 
 const TOTAL_DESKTOP_SLOTS = 21
+const TOTAL_SLOTS = 24
 
 export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   sectionBgColor = 'bg-[#F4F6FB]',
@@ -153,9 +154,9 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   const sectionRef = useRef<HTMLElement>(null)
   const [isInView, setIsInView] = useState<boolean>(false)
 
-  // Map individual fade-out state for all 21 slots
+  // Map individual fade-out state for all 24 slots (21 on desktop, 24 on mobile)
   const [fadedOutSlots, setFadedOutSlots] = useState<boolean[]>(() =>
-    Array(TOTAL_DESKTOP_SLOTS).fill(false),
+    Array(TOTAL_SLOTS).fill(false),
   )
 
   // ─── Animation Timing Resolution ───────────────────────────────────────────
@@ -246,7 +247,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
   // Randomized Asynchronous Fade-In / Fade-Out Engine
   useEffect(() => {
     if (!isInView) {
-      setFadedOutSlots(Array(TOTAL_DESKTOP_SLOTS).fill(false))
+      setFadedOutSlots(Array(TOTAL_SLOTS).fill(false))
       return
     }
 
@@ -254,8 +255,8 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     const visibleSpread = Math.max(0, visibleMax - visibleMin)
     const hiddenSpread = Math.max(0, hiddenMax - hiddenMin)
 
-    // Launch an independent animation loop for each card slot
-    for (let i = 0; i < TOTAL_DESKTOP_SLOTS; i++) {
+    // Launch an independent animation loop for each card slot (1..24)
+    for (let i = 0; i < TOTAL_SLOTS; i++) {
       let isFaded = false
 
       const runStep = () => {
@@ -289,17 +290,17 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     }
   }, [isInView, transitionDuration, visibleMin, visibleMax, hiddenMin, hiddenMax, initialStagger])
 
-  // Normalized cards array mapped directly to 21 discrete slots
+  // Normalized cards array mapped directly to discrete slots (up to 24 slots)
   const slotMap = useMemo(() => {
     const rawList = Array.isArray(cards) ? cards : []
-    const mapped: (CardItem | null)[] = Array(TOTAL_DESKTOP_SLOTS).fill(null)
+    const mapped: (CardItem | null)[] = Array(TOTAL_SLOTS).fill(null)
     const unassigned: CardItem[] = []
 
-    // Pass 1: Place cards with an explicit slotNumber (1..21)
+    // Pass 1: Place cards with an explicit slotNumber (1..24)
     for (const card of rawList) {
       if (!card) continue
       const slotNum = card.slotNumber ? parseInt(card.slotNumber, 10) : NaN
-      if (!isNaN(slotNum) && slotNum >= 1 && slotNum <= TOTAL_DESKTOP_SLOTS) {
+      if (!isNaN(slotNum) && slotNum >= 1 && slotNum <= TOTAL_SLOTS) {
         mapped[slotNum - 1] = card
       } else {
         unassigned.push(card)
@@ -309,10 +310,10 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     // Pass 2: Place unassigned or 'auto' cards into remaining empty slots
     let emptyIdx = 0
     for (const card of unassigned) {
-      while (emptyIdx < TOTAL_DESKTOP_SLOTS && mapped[emptyIdx] !== null) {
+      while (emptyIdx < TOTAL_SLOTS && mapped[emptyIdx] !== null) {
         emptyIdx++
       }
-      if (emptyIdx < TOTAL_DESKTOP_SLOTS) {
+      if (emptyIdx < TOTAL_SLOTS) {
         mapped[emptyIdx] = card
         emptyIdx++
       }
@@ -626,105 +627,94 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           </div>
         </div>
 
-        {/* ─── MOBILE & TABLET VIEW (7 Columns: 1 Left + 5 Center + 1 Right = 7 on Top Row) ─ */}
-        <div className="block lg:hidden relative grid grid-cols-7 gap-2 sm:gap-3.5 items-stretch min-h-[460px] sm:min-h-[520px]">
-          {/* Top Row: Exactly 7 Cards on the same horizontal line (Left 1, TopCenter 5, Right 1) */}
-          <div className="col-start-1 col-span-7 grid grid-cols-7 gap-2 sm:gap-3.5">
-            {renderCard(leftWingCards[0], 0, 'w-full aspect-square')}
-            {topCenterCards.map((card, i) =>
-              renderCard(card, 8 + i, 'w-full aspect-square'),
-            )}
-            {renderCard(rightWingCards[0], 13, 'w-full aspect-square')}
-          </div>
-
-          {/* Left Wing Column: 3 Cards stacked (Rows 2..4) */}
-          <div className="col-start-1 col-span-1 flex flex-col justify-between gap-2 sm:gap-3.5 mt-2 sm:mt-3.5">
-            {leftWingCards.slice(1, 4).map((card, i) =>
-              renderCard(card, 1 + i, 'w-full aspect-square'),
+        {/* ─── MOBILE & TABLET VIEW (6 Columns × 4 Rows = 24 Cards + Centered Overlay) ─── */}
+        <div className="block lg:hidden relative w-full overflow-hidden">
+          {/* Layer 1: Continuous 6 Columns × 4 Rows Grid (Z-0) */}
+          <div className="grid grid-cols-6 gap-2 sm:gap-3 w-full relative z-0">
+            {slotMap.slice(0, 24).map((card, i) =>
+              renderCard(card, i, 'w-full aspect-square'),
             )}
           </div>
 
-          {/* Center Stage Content: cols 2..6 (spanning 5 columns, below the 5 top cards) */}
-          <div className="col-start-2 col-span-5 flex flex-col justify-center items-center px-1.5 sm:px-3 text-center my-auto py-3">
-            {headingText && (
-              <h2
-                className={cn(
-                  'w-full tracking-tight leading-tight transition-all',
-                  headingGroup?.headingFontSizeMobile || 'text-xl sm:text-2xl md:text-3xl',
-                  headingGroup?.headingFontWeightMobile || headingTypography.weightClass,
-                  headingColor,
-                  textAlignClasses[headingAlign],
-                  isInView
-                    ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150'
-                    : 'opacity-0 translate-y-8 duration-700 ease-in delay-300',
-                )}
-                dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
-              />
-            )}
-
-            {descText && (
-              <p
-                className={cn(
-                  'w-full mt-2.5 sm:mt-3 leading-relaxed transition-all',
-                  descriptionGroup?.descriptionFontSizeMobile || 'text-xs sm:text-sm',
-                  descriptionGroup?.descriptionFontWeightMobile || descTypography.weightClass,
-                  descColor,
-                  textAlignClasses[descAlign],
-                  isInView
-                    ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300'
-                    : 'opacity-0 translate-y-8 duration-700 ease-in delay-150',
-                )}
-                dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
-              />
-            )}
-
-            {showBtn && (
-              <div
-                className={cn(
-                  'w-full mt-4 sm:mt-5 flex transition-all',
-                  btnAlignClasses[btnAlign],
-                  isInView
-                    ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-450'
-                    : 'opacity-0 translate-y-8 duration-700 ease-in delay-0',
-                )}
-              >
-                <Link
-                  href={btnHref}
-                  target={isNewTab ? '_blank' : undefined}
-                  rel={isNewTab ? 'noopener noreferrer' : undefined}
+          {/* Layer 2: Floating Centered Content Overlay (Z-10) */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-center px-2 sm:px-6 pointer-events-none">
+            <div className="flex flex-col items-center justify-center max-w-[320px] sm:max-w-md mx-auto">
+              {/* Heading */}
+              {headingText && (
+                <h2
                   className={cn(
-                    'group/btn inline-flex items-center gap-2 pl-4 pr-2 py-1.5 sm:pl-5 sm:pr-2.5 sm:py-2 rounded-full shadow-md transition-all',
-                    btnBg,
+                    'w-full tracking-tight leading-[1.12] transition-all',
+                    headingGroup?.headingFontSizeMobile || 'text-xl sm:text-2xl md:text-3xl',
+                    headingGroup?.headingFontWeightMobile || headingTypography.weightClass,
+                    headingColor,
+                    textAlignClasses[headingAlign],
+                    isInView
+                      ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150'
+                      : 'opacity-0 translate-y-8 duration-700 ease-in delay-300',
+                  )}
+                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(headingText) }}
+                />
+              )}
+
+              {/* Description */}
+              {descText && (
+                <p
+                  className={cn(
+                    'w-full mt-2 sm:mt-2.5 leading-relaxed transition-all',
+                    descriptionGroup?.descriptionFontSizeMobile || 'text-xs sm:text-sm',
+                    descriptionGroup?.descriptionFontWeightMobile || descTypography.weightClass,
+                    descColor,
+                    textAlignClasses[descAlign],
+                    isInView
+                      ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300'
+                      : 'opacity-0 translate-y-8 duration-700 ease-in delay-150',
+                  )}
+                  dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
+                />
+              )}
+
+              {/* CTA Button */}
+              {showBtn && (
+                <div
+                  className={cn(
+                    'w-full mt-3 sm:mt-4 flex transition-all pointer-events-auto',
+                    btnAlignClasses[btnAlign],
+                    isInView
+                      ? 'opacity-100 translate-y-0 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-450'
+                      : 'opacity-0 translate-y-8 duration-700 ease-in delay-0',
                   )}
                 >
-                  <span
+                  <Link
+                    href={btnHref}
+                    target={isNewTab ? '_blank' : undefined}
+                    rel={isNewTab ? 'noopener noreferrer' : undefined}
                     className={cn(
-                      'tracking-normal',
-                      buttonGroup?.buttonFontSizeMobile || 'text-xs sm:text-sm',
-                      buttonGroup?.buttonFontWeightMobile || btnTypography.weightClass,
-                      btnTextCol,
+                      'group/btn inline-flex items-center gap-2 pl-4 pr-2 py-1.5 sm:pl-5 sm:pr-2.5 sm:py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]',
+                      btnBg,
                     )}
                   >
-                    {btnText}
-                  </span>
-                  <span
-                    className={cn(
-                      'w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm',
-                      iconCircleBg,
-                    )}
-                  >
-                    <ArrowUpRight className={cn('w-3 h-3 sm:w-3.5 sm:h-3.5', iconCol)} />
-                  </span>
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Right Wing Column: 3 Cards stacked (Rows 2..4) */}
-          <div className="col-start-7 col-span-1 flex flex-col justify-between gap-2 sm:gap-3.5 mt-2 sm:mt-3.5">
-            {rightWingCards.slice(1, 4).map((card, i) =>
-              renderCard(card, 14 + i, 'w-full aspect-square'),
-            )}
+                    <span
+                      className={cn(
+                        'tracking-normal',
+                        buttonGroup?.buttonFontSizeMobile || 'text-xs sm:text-sm',
+                        buttonGroup?.buttonFontWeightMobile || btnTypography.weightClass,
+                        btnTextCol,
+                      )}
+                    >
+                      {btnText}
+                    </span>
+                    <span
+                      className={cn(
+                        'w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
+                        iconCircleBg,
+                      )}
+                    >
+                      <ArrowUpRight className={cn('w-3 h-3 sm:w-3.5 sm:h-3.5 transition-colors', iconCol)} />
+                    </span>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
