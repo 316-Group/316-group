@@ -313,16 +313,16 @@ const columnFields: Field[] = [
   {
     name: 'verticalPaddingMode',
     type: 'select',
-    label: 'Column Content Vertical Padding / Margins',
+    label: 'Column Content Vertical Padding',
     defaultValue: 'default',
     options: [
-      { label: 'Default Spacing', value: 'default' },
-      { label: 'No Top or Bottom Padding (0px)', value: 'none' },
-      { label: 'Custom Vertical Padding / Margins', value: 'custom' },
+      { label: 'Default Padding', value: 'default' },
+      { label: 'No Padding (0px Top & Bottom)', value: 'none' },
+      { label: 'Custom Vertical Padding', value: 'custom' },
     ],
     admin: {
       description:
-        'Adjust or remove top and bottom padding/margins for the content in this column.',
+        'Adjust or remove top and bottom padding for the content in this column.',
     },
   },
   {
@@ -393,6 +393,92 @@ const columnFields: Field[] = [
         admin: {
           width: '50%',
           condition: (_, siblingData) => siblingData?.columnPaddingBottom === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    name: 'verticalMarginMode',
+    type: 'select',
+    label: 'Column Content Vertical Margin',
+    defaultValue: 'none',
+    options: [
+      { label: 'No Margin (0px Top & Bottom)', value: 'none' },
+      { label: 'Custom Vertical Margin', value: 'custom' },
+    ],
+    admin: {
+      description:
+        'Adjust top and bottom margin (outer space) for this column.',
+    },
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.verticalMarginMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'columnMarginTop',
+        type: 'select',
+        label: 'Column Margin Top',
+        defaultValue: 'mt-0',
+        options: [
+          { label: '0px (None)', value: 'mt-0' },
+          { label: '8px (mt-2)', value: 'mt-2' },
+          { label: '16px (mt-4)', value: 'mt-4' },
+          { label: '24px (mt-6)', value: 'mt-6' },
+          { label: '32px (mt-8)', value: 'mt-8' },
+          { label: '40px (mt-10)', value: 'mt-10' },
+          { label: '48px (mt-12)', value: 'mt-12' },
+          { label: '64px (mt-16)', value: 'mt-16' },
+          { label: '80px (mt-20)', value: 'mt-20' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'columnMarginTopCustom',
+        type: 'text',
+        label: 'Custom Column Margin Top (e.g. 15px, 2rem)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnMarginTop === 'custom',
+        },
+      },
+    ],
+  },
+  {
+    type: 'row',
+    admin: {
+      condition: (_, siblingData) => siblingData?.verticalMarginMode === 'custom',
+    },
+    fields: [
+      {
+        name: 'columnMarginBottom',
+        type: 'select',
+        label: 'Column Margin Bottom',
+        defaultValue: 'mb-0',
+        options: [
+          { label: '0px (None)', value: 'mb-0' },
+          { label: '8px (mb-2)', value: 'mb-2' },
+          { label: '16px (mb-4)', value: 'mb-4' },
+          { label: '24px (mb-6)', value: 'mb-6' },
+          { label: '32px (mb-8)', value: 'mb-8' },
+          { label: '40px (mb-10)', value: 'mb-10' },
+          { label: '48px (mb-12)', value: 'mb-12' },
+          { label: '64px (mb-16)', value: 'mb-16' },
+          { label: '80px (mb-20)', value: 'mb-20' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: { width: '50%' },
+      },
+      {
+        name: 'columnMarginBottomCustom',
+        type: 'text',
+        label: 'Custom Column Margin Bottom (e.g. 15px, 2rem)',
+        admin: {
+          width: '50%',
+          condition: (_, siblingData) => siblingData?.columnMarginBottom === 'custom',
         },
       },
     ],
@@ -2334,7 +2420,8 @@ export const Content: Block = {
       defaultValue: 'default',
       options: [
         { label: 'Default', value: 'default' },
-        { label: 'No Padding', value: 'noPadding' },
+        { label: 'No Padding (0px)', value: 'noPadding' },
+        { label: 'Custom Padding (Specify Values)', value: 'custom' },
         { label: 'Padding Both Added', value: 'paddingAdded' },
         { label: 'Padding Top Only', value: 'paddingTopOnly' },
         { label: 'Padding Bottom Only', value: 'paddingBottomOnly' },
@@ -2342,6 +2429,32 @@ export const Content: Block = {
         { label: 'Padding Bottom Only Added', value: 'paddingBottomOnlyAdded' },
         { label: 'Padding Top Added', value: 'paddingTopAdded' },
         { label: 'Padding Bottom Added', value: 'paddingBottomAdded' },
+      ],
+    },
+    {
+      type: 'row',
+      admin: {
+        condition: (_, siblingData) => siblingData?.paddingType === 'custom',
+      },
+      fields: [
+        {
+          name: 'sectionPaddingTop',
+          type: 'text',
+          label: 'Section Padding Top (e.g. 10px, 2rem)',
+          admin: { width: '33.33%' },
+        },
+        {
+          name: 'sectionPaddingBottom',
+          type: 'text',
+          label: 'Section Padding Bottom (e.g. 10px, 2rem)',
+          admin: { width: '33.33%' },
+        },
+        {
+          name: 'sectionPaddingX',
+          type: 'text',
+          label: 'Section Padding Left & Right (e.g. 10px, 2rem)',
+          admin: { width: '33.33%' },
+        },
       ],
     },
     bgColorPickerAll({

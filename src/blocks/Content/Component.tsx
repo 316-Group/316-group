@@ -163,12 +163,21 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     }
   }
 
+  const sectionPaddingTop = (props as any).sectionPaddingTop
+  const sectionPaddingBottom = (props as any).sectionPaddingBottom
+  const sectionPaddingX = (props as any).sectionPaddingX
+
   return (
     <div
-      style={gradientStyle}
+      style={{
+        ...gradientStyle,
+        ...(paddingType === 'custom' && sectionPaddingTop ? { paddingTop: sectionPaddingTop } : {}),
+        ...(paddingType === 'custom' && sectionPaddingBottom ? { paddingBottom: sectionPaddingBottom } : {}),
+        ...(paddingType === 'custom' && sectionPaddingX ? { paddingLeft: sectionPaddingX, paddingRight: sectionPaddingX } : {}),
+      }}
       className={cn(
         'w-full relative overflow-hidden',
-        paddingGenerator(paddingType),
+        paddingType !== 'custom' && paddingGenerator(paddingType),
         backgroundType === 'color' && sectionBackgroundColor,
         backgroundType === 'color' && getBestContrastTextColor(sectionBackgroundColor),
         backgroundType === 'media' && 'text-white',
@@ -191,7 +200,13 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
           (c) => (c as any).widthMode === 'fullWidth' && !(c as any).matchHeaderPillWidth,
         )
         return (
-          <div className={cn(hasFullWidthCol ? 'w-full' : 'container max-w-screen-2xl', 'z-5')}>
+          <div
+            className={cn(
+              hasFullWidthCol ? 'w-full' : 'container max-w-screen-2xl',
+              paddingType === 'noPadding' && 'px-0',
+              'z-5',
+            )}
+          >
             <div
               className={cn(
                 'mobile-only:flex mobile-only:flex-col gap-8 md:grid lg:grid-cols-12 md:grid-cols-4 lg:gap-y-12',
@@ -331,6 +346,31 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
                 }
 
+                // Column vertical margin resolution
+                const colMarginMode = (col as any).verticalMarginMode || 'none'
+                let colMtClass = ''
+                let colMbClass = ''
+                let colCustomMt: string | undefined = undefined
+                let colCustomMb: string | undefined = undefined
+
+                if (colMarginMode === 'none') {
+                  colMtClass = 'my-0'
+                } else if (colMarginMode === 'custom') {
+                  const mt = (col as any).columnMarginTop || 'mt-0'
+                  if (mt === 'custom' && (col as any).columnMarginTopCustom) {
+                    colCustomMt = (col as any).columnMarginTopCustom
+                  } else if (mt.startsWith('mt-')) {
+                    colMtClass = mt
+                  }
+
+                  const mb = (col as any).columnMarginBottom || 'mb-0'
+                  if (mb === 'custom' && (col as any).columnMarginBottomCustom) {
+                    colCustomMb = (col as any).columnMarginBottomCustom
+                  } else if (mb.startsWith('mb-')) {
+                    colMbClass = mb
+                  }
+                }
+
                 const stretchContent = (col as any).stretchContentHeight !== false
                 const applyBg = (col as any).applyBgToContent !== false
 
@@ -358,6 +398,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         colPadUid,
                         colPtClass,
                         colPbClass,
+                        colMtClass,
+                        colMbClass,
                         stretchContent && 'h-full flex flex-col',
                         col.alignment === 'center' &&
                           'text-center flex flex-col items-center justify-center',
@@ -371,6 +413,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       style={{
                         ...(colCustomPt ? { paddingTop: colCustomPt } : {}),
                         ...(colCustomPb ? { paddingBottom: colCustomPb } : {}),
+                        ...(colCustomMt ? { marginTop: colCustomMt } : {}),
+                        ...(colCustomMb ? { marginBottom: colCustomMb } : {}),
                       }}
                     >
                       {col.columnContent?.map((content, index) => {
@@ -1066,6 +1110,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     if (applyBg && colBg && colBg !== 'bg-transparent') {
                       whoWeAreData.sectionBgColor = 'bg-transparent'
                     }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      whoWeAreData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      whoWeAreData.paddingBottom = 'pb-0'
+                    }
+                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                      whoWeAreData.paddingMode = 'none'
+                    }
                     return (
                       <WhoWeAreBlock
                         key={index}
@@ -1082,6 +1135,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     const numGridData = { ...(content as any).numberedGrid }
                     if (applyBg && colBg && colBg !== 'bg-transparent') {
                       numGridData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      numGridData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      numGridData.paddingBottom = 'pb-0'
+                    }
+                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                      numGridData.paddingMode = 'none'
                     }
                     return (
                       <NumberedGridBlock

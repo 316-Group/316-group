@@ -101,13 +101,13 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
 
   // ─── Resolve Custom Spacing ───────────────────────────────────────────────
   const resolvedPt =
-    paddingTop === 'custom' && paddingTopCustom ? paddingTopCustom : paddingTop || 'pt-20'
+    paddingTop === 'custom' && paddingTopCustom ? paddingTopCustom : (paddingTop ?? 'pt-0')
   const isPtClass = resolvedPt.startsWith('pt-')
 
   const resolvedPb =
     paddingBottom === 'custom' && paddingBottomCustom
       ? paddingBottomCustom
-      : paddingBottom || 'pb-20'
+      : (paddingBottom ?? 'pb-0')
   const isPbClass = resolvedPb.startsWith('pb-')
 
   // ─── Horizontal Padding Resolution ─────────────────────────────────────────

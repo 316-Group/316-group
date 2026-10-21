@@ -21880,7 +21880,7 @@ export interface ContentBlock {
           | null;
         paddingRightMobileCustom?: string | null;
         /**
-         * Adjust or remove top and bottom padding/margins for the content in this column.
+         * Adjust or remove top and bottom padding for the content in this column.
          */
         verticalPaddingMode?: ('default' | 'none' | 'custom') | null;
         columnPaddingTop?:
@@ -21891,6 +21891,18 @@ export interface ContentBlock {
           | ('pb-0' | 'pb-2' | 'pb-4' | 'pb-6' | 'pb-8' | 'pb-10' | 'pb-12' | 'pb-16' | 'pb-20' | 'custom')
           | null;
         columnPaddingBottomCustom?: string | null;
+        /**
+         * Adjust top and bottom margin (outer space) for this column.
+         */
+        verticalMarginMode?: ('none' | 'custom') | null;
+        columnMarginTop?:
+          | ('mt-0' | 'mt-2' | 'mt-4' | 'mt-6' | 'mt-8' | 'mt-10' | 'mt-12' | 'mt-16' | 'mt-20' | 'custom')
+          | null;
+        columnMarginTopCustom?: string | null;
+        columnMarginBottom?:
+          | ('mb-0' | 'mb-2' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12' | 'mb-16' | 'mb-20' | 'custom')
+          | null;
+        columnMarginBottomCustom?: string | null;
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
         mobileOrder?: number | null;
         alignment?: ('left' | 'center') | null;
@@ -84703,6 +84715,7 @@ export interface ContentBlock {
     | (
         | 'default'
         | 'noPadding'
+        | 'custom'
         | 'paddingAdded'
         | 'paddingTopOnly'
         | 'paddingBottomOnly'
@@ -84712,6 +84725,9 @@ export interface ContentBlock {
         | 'paddingBottomAdded'
       )
     | null;
+  sectionPaddingTop?: string | null;
+  sectionPaddingBottom?: string | null;
+  sectionPaddingX?: string | null;
   sectionBackgroundColor?:
     | (
         | 'bg-inherit'
@@ -178594,6 +178610,11 @@ export interface ContentBlockSelect<T extends boolean = true> {
         columnPaddingTopCustom?: T;
         columnPaddingBottom?: T;
         columnPaddingBottomCustom?: T;
+        verticalMarginMode?: T;
+        columnMarginTop?: T;
+        columnMarginTopCustom?: T;
+        columnMarginBottom?: T;
+        columnMarginBottomCustom?: T;
         size?: T;
         mobileOrder?: T;
         alignment?: T;
@@ -180053,6 +180074,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
       };
   backgroundType?: T;
   paddingType?: T;
+  sectionPaddingTop?: T;
+  sectionPaddingBottom?: T;
+  sectionPaddingX?: T;
   sectionBackgroundColor?: T;
   gradientSettings?:
     | T
