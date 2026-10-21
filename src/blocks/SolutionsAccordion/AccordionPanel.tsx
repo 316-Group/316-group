@@ -36,6 +36,7 @@ interface Props {
   paddingXMobileCustom?: string | null
   columnGap?: string | null
   columnGapCustom?: string | null
+  className?: string
 }
 
 export const AccordionPanel: React.FC<Props> = ({
@@ -51,6 +52,7 @@ export const AccordionPanel: React.FC<Props> = ({
   paddingXMobileCustom,
   columnGap,
   columnGapCustom,
+  className,
 }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isInView, setIsInView] = useState<boolean>(false)
@@ -163,6 +165,7 @@ export const AccordionPanel: React.FC<Props> = ({
           padClassName,
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
           sectionBgColor ?? 'bg-white',
+          className,
         )}
         style={{
           gap: resolvedGap !== '0px' ? resolvedGap : undefined,

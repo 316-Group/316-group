@@ -1006,35 +1006,27 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'solutionsAccordion' && content.solutionsAccordion) {
-                    const {
-                      leftPanel,
-                      accordionItems,
-                      rightBgColor,
-                      sectionBgColor,
-                      scrollAnimation,
-                      paddingMode,
-                      paddingXDesktop,
-                      paddingXDesktopCustom,
-                      paddingXMobile,
-                      paddingXMobileCustom,
-                      columnGap,
-                      columnGapCustom,
-                    } = content.solutionsAccordion as any
+                    const solData = { ...(content.solutionsAccordion as any) }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      solData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      solData.paddingMode = 'none'
+                    }
                     return (
                       <AccordionPanel
                         key={index}
-                        leftPanel={leftPanel}
-                        accordionItems={accordionItems}
-                        rightBgColor={rightBgColor}
-                        sectionBgColor={sectionBgColor}
-                        scrollAnimation={scrollAnimation}
-                        paddingMode={paddingMode}
-                        paddingXDesktop={paddingXDesktop}
-                        paddingXDesktopCustom={paddingXDesktopCustom}
-                        paddingXMobile={paddingXMobile}
-                        paddingXMobileCustom={paddingXMobileCustom}
-                        columnGap={columnGap}
-                        columnGapCustom={columnGapCustom}
+                        {...solData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          solData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
@@ -1090,91 +1082,314 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'clickExpand' && (content as any).clickExpand) {
+                    const blockData = { ...(content as any).clickExpand }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <ClickExpandBlock
                         key={index}
-                        {...(content as any).clickExpand}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'gridCol' && (content as any).gridCol) {
+                    const blockData = { ...(content as any).gridCol }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <GridColBlock
                         key={index}
-                        {...(content as any).gridCol}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'animatedIconsGrid' && (content as any).animatedIconsGrid) {
+                    const blockData = { ...(content as any).animatedIconsGrid }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <AnimatedIconsGridBlock
                         key={index}
-                        {...(content as any).animatedIconsGrid}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'featureCards' && (content as any).featureCards) {
+                    const blockData = { ...(content as any).featureCards }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <FeatureCardsBlock
                         key={index}
-                        {...(content as any).featureCards}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'featureCardsV2' && (content as any).featureCardsV2) {
+                    const blockData = { ...(content as any).featureCardsV2 }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <FeatureCardsV2Block
                         key={index}
-                        {...(content as any).featureCardsV2}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'verticalCTAv2' && (content as any).verticalCTAv2) {
+                    const blockData = { ...(content as any).verticalCTAv2 }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
                     return (
                       <VerticalCTAv2Component
                         key={index}
-                        {...(content as any).verticalCTAv2}
+                        isColumn={true}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'splitText' && (content as any).splitText) {
+                    const blockData = { ...(content as any).splitText }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <SplitTextBlock
                         key={index}
-                        {...(content as any).splitText}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'imageSlider' && (content as any).imageSlider) {
+                    const blockData = { ...(content as any).imageSlider }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <ImageSliderBlock
                         key={index}
-                        {...(content as any).imageSlider}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'blogPostUpdated' && (content as any).blogPostUpdated) {
+                    const blockData = { ...(content as any).blogPostUpdated }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <BlogPostUpdatedBlock
                         key={index}
-                        {...(content as any).blogPostUpdated}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'readyToGrow' && (content as any).readyToGrow) {
+                    const blockData = { ...(content as any).readyToGrow }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      blockData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      blockData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      blockData.paddingBottom = 'pb-0'
+                    }
+                    if (
+                      isMatchHeaderPillWidth ||
+                      colPaddingMode === 'none' ||
+                      colPaddingMode === 'custom' ||
+                      colPaddingMode === 'matchHeader'
+                    ) {
+                      blockData.paddingMode = 'none'
+                    }
                     return (
                       <ReadyToGrowBlock
                         key={index}
-                        {...(content as any).readyToGrow}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          blockData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
                       />
                     )
                   }

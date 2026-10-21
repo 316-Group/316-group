@@ -301,7 +301,12 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
         )}
       >
         {/* ─── Center Stack Content ────────────────────────────────────────────── */}
-        <div className="w-full max-w-4xl flex flex-col items-center">
+        <div
+          className={cn(
+            'w-full flex flex-col items-center',
+            paddingMode === 'none' ? 'max-w-full' : 'max-w-4xl',
+          )}
+        >
           {/* Badge */}
           {Boolean(badgeText) && (
             <>
@@ -342,7 +347,8 @@ export const ReadyToGrowBlock: React.FC<ReadyToGrowProps> = ({
             <>
               <p
                 className={cn(
-                  'w-full max-w-2xl leading-relaxed transition-colors opacity-95',
+                  'w-full leading-relaxed transition-colors opacity-95',
+                  paddingMode === 'none' ? 'max-w-full' : 'max-w-2xl',
                   descColor,
                   descTypography.combined,
                   textAlignClasses[descAlign],

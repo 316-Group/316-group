@@ -61,6 +61,7 @@ export interface VerticalCTAv2Props {
   } | null
 
   className?: string
+  isColumn?: boolean
 }
 
 /**
@@ -97,6 +98,7 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
   buttonGroup,
   dividerGroup,
   className,
+  isColumn = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isInView, setIsInView] = useState<boolean>(false)
@@ -211,7 +213,8 @@ export const VerticalCTAv2Client: React.FC<VerticalCTAv2Props> = ({
       {descText && (
         <p
           className={cn(
-            'w-full mt-4 md:mt-6 leading-relaxed max-w-4xl transition-all',
+            'w-full mt-4 md:mt-6 leading-relaxed transition-all',
+            isColumn ? 'max-w-full' : 'max-w-4xl',
             descTypography.combined,
             descColor,
             textAlignClasses[descAlign],
