@@ -44,6 +44,7 @@ import { readyToGrowFields } from '../ReadyToGrow/config'
 import { whoWeAreFields, whoWeAreColumnFields } from '../WhoWeAre/config'
 import { numberedGridFields, numberedGridColumnFields } from '../NumberedGrid/config'
 import { missionVisionFields, missionVisionColumnFields } from '../MissionVision/config'
+import { timelineAccordionFields, timelineAccordionColumnFields } from '../TimelineAccordion/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -608,6 +609,7 @@ const columnFields: Field[] = [
           { label: 'Who We Are', value: 'whoWeAre' },
           { label: 'Numbered Grid', value: 'numberedGrid' },
           { label: 'Mission & Vision', value: 'missionVision' },
+          { label: 'Timeline Accordion', value: 'timelineAccordion' },
         ],
       },
       {
@@ -2403,6 +2405,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'missionVision',
         },
         fields: missionVisionColumnFields,
+      },
+
+      // ─── Timeline Accordion ───────────────────────────────────────────────────
+      {
+        name: 'timelineAccordion',
+        type: 'group',
+        label: 'Timeline Accordion',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'timelineAccordion',
+        },
+        fields: timelineAccordionColumnFields,
       },
     ],
   },

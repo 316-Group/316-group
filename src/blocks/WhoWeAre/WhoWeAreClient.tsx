@@ -149,6 +149,7 @@ export interface WhoWeAreProps {
 
     image?: MediaType | string | null
     imageRadius?: string | null
+    imageShadow?: string | null
     imageFit?: 'object-cover' | 'object-contain' | null
   } | null
 
@@ -160,7 +161,9 @@ export interface WhoWeAreProps {
     dividerColor?: string | null
     dividerThickness?: string | null
     dividerSpacingTop?: string | null
+    dividerSpacingTopCustom?: string | null
     dividerSpacingBottom?: string | null
+    dividerSpacingBottomCustom?: string | null
   } | null
 
   // Stat Items
@@ -394,7 +397,11 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   const rightDescMb = rightColumn?.descriptionMarginBottom || 'mb-6 md:mb-8'
 
   const rightImage = rightColumn?.image
-  const rightImageRadius = rightColumn?.imageRadius || 'rounded-2xl'
+  const rightImageRadius = rightColumn?.imageRadius || 'rounded-none'
+  const rightImageShadow =
+    rightColumn?.imageShadow && rightColumn.imageShadow !== 'none'
+      ? rightColumn.imageShadow
+      : ''
   const rightImageFit = rightColumn?.imageFit || 'object-cover'
 
   // ─── Divider Data ──────────────────────────────────────────────────────────
@@ -404,8 +411,17 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   )
   const dividerColor = dividerSettings?.dividerColor || 'border-white/20'
   const dividerThickness = dividerSettings?.dividerThickness || 'border-t'
-  const dividerMt = dividerSettings?.dividerSpacingTop || 'mt-12 md:mt-16'
-  const dividerMb = dividerSettings?.dividerSpacingBottom || 'mb-12 md:mb-16'
+  const rawDividerMt =
+    dividerSettings?.dividerSpacingTop === 'custom' && dividerSettings?.dividerSpacingTopCustom
+      ? dividerSettings.dividerSpacingTopCustom
+      : dividerSettings?.dividerSpacingTop || 'mt-12 md:mt-16'
+  const isDividerMtClass = rawDividerMt.startsWith('mt-')
+
+  const rawDividerMb =
+    dividerSettings?.dividerSpacingBottom === 'custom' && dividerSettings?.dividerSpacingBottomCustom
+      ? dividerSettings.dividerSpacingBottomCustom
+      : dividerSettings?.dividerSpacingBottom || 'mb-12 md:mb-16'
+  const isDividerMbClass = rawDividerMb.startsWith('mb-')
 
   // ─── Stats Data ────────────────────────────────────────────────────────────
   const enableStats = Boolean(statsGroup?.enableStats)
@@ -416,7 +432,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
     statsGroup?.statValueFontSizeMobile,
     statsGroup?.statValueFontWeight,
     statsGroup?.statValueFontWeightMobile,
-    'text-4xl md:text-5xl lg:text-6xl',
+    'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
     'font-bold',
   )
   const statLblCol = statsGroup?.statLabelColor || 'text-gray-700'
@@ -425,7 +441,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
     statsGroup?.statLabelFontSizeMobile,
     null,
     null,
-    'text-sm md:text-base',
+    'text-xs sm:text-sm md:text-base',
     'font-normal',
   )
 
@@ -722,8 +738,11 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
             {rightImage && (
               <div
                 className={cn(
-                  'w-full overflow-hidden shadow-lg transition-transform duration-500 hover:scale-[1.01]',
-                  rightImageRadius,
+                  'w-full transition-all duration-300',
+                  rightImageRadius &&
+                    rightImageRadius !== 'rounded-none' &&
+                    cn('overflow-hidden', rightImageRadius),
+                  rightImageShadow,
                 )}
               >
                 {typeof rightImage === 'object' ? (
@@ -753,7 +772,18 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
 
         {/* ─── DIVIDER / HR LINE (Desktop 2-Col or Full Width for Both) ───────── */}
         {enableDivider && (
-          <div className={cn('w-full', isDivided && 'hidden md:block', dividerMt, dividerMb)}>
+          <div
+            className={cn(
+              'w-full',
+              isDivided && 'hidden md:block',
+              isDividerMtClass && rawDividerMt,
+              isDividerMbClass && rawDividerMb,
+            )}
+            style={{
+              ...(!isDividerMtClass ? { marginTop: rawDividerMt } : {}),
+              ...(!isDividerMbClass ? { marginBottom: rawDividerMb } : {}),
+            }}
+          >
             {isDivided ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-12 lg:gap-16 w-full">
                 <hr className={cn('w-full transition-colors', dividerThickness, dividerColor)} />
@@ -767,16 +797,28 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
 
         {/* ─── STAT ITEMS SECTION (Below Divider) ───────────────────────────── */}
         {enableStats && statItems.length > 0 && (
-          <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-between gap-x-6 sm:gap-x-8 md:gap-x-0 gap-y-8 w-full pt-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:flex lg:flex-wrap lg:justify-between gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-6 sm:gap-y-8 w-full">
             {statItems.map((item, i) => (
-              <div key={item.id || i} className="flex flex-col gap-2">
+              <div key={item.id || i} className="flex flex-col gap-1 sm:gap-2">
                 {item.statValue && (
-                  <span className={cn('leading-none transition-colors', statValTypography.combined, statValCol)}>
+                  <span
+                    className={cn(
+                      'leading-none transition-colors tracking-tight break-words',
+                      statValTypography.combined,
+                      statValCol,
+                    )}
+                  >
                     {item.statValue}
                   </span>
                 )}
                 {item.statLabel && (
-                  <span className={cn('leading-relaxed transition-colors', statLblTypography.combined, statLblCol)}>
+                  <span
+                    className={cn(
+                      'leading-snug transition-colors break-words max-w-[150px] sm:max-w-none',
+                      statLblTypography.combined,
+                      statLblCol,
+                    )}
+                  >
                     {item.statLabel}
                   </span>
                 )}

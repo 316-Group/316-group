@@ -58,6 +58,7 @@ import { VerticalCTAv2 } from '@/blocks/VerticalCTAv2/config'
 import { WhoWeAre } from '@/blocks/WhoWeAre/config'
 import { NumberedGrid } from '@/blocks/NumberedGrid/config'
 import { MissionVision } from '@/blocks/MissionVision/config'
+import { TimelineAccordion } from '@/blocks/TimelineAccordion/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -158,6 +159,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 WhoWeAre,
                 NumberedGrid,
                 MissionVision,
+                TimelineAccordion,
               ],
               required: true,
             },

@@ -34,6 +34,7 @@ import { ReadyToGrowBlock } from '../ReadyToGrow/Component'
 import { WhoWeAreBlock } from '../WhoWeAre/Component'
 import { NumberedGridBlock } from '../NumberedGrid/Component'
 import { MissionVisionBlock } from '../MissionVision/Component'
+import { TimelineAccordionBlock } from '../TimelineAccordion/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1181,6 +1182,35 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col justify-between',
                           mvData.className,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (
+                    (contentType as string) === 'timelineAccordion' &&
+                    (content as any).timelineAccordion
+                  ) {
+                    const taData = { ...(content as any).timelineAccordion }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      taData.sectionBgColor = 'bg-transparent'
+                    }
+                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                      taData.paddingTop = 'pt-0'
+                    }
+                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                      taData.paddingBottom = 'pb-0'
+                    }
+                    if (colPaddingMode === 'none' || colPaddingMode === 'custom') {
+                      taData.paddingMode = 'none'
+                    }
+                    return (
+                      <TimelineAccordionBlock
+                        key={index}
+                        {...taData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                          taData.className,
                         )}
                       />
                     )

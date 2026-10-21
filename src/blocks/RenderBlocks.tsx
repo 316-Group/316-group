@@ -46,6 +46,7 @@ import { VerticalCTAv2Block } from './VerticalCTAv2/Component'
 import { WhoWeAreBlock } from './WhoWeAre/Component'
 import { NumberedGridBlock } from './NumberedGrid/Component'
 import { MissionVisionBlock } from './MissionVision/Component'
+import { TimelineAccordionBlock } from './TimelineAccordion/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -91,6 +92,7 @@ const blockComponents = {
   whoWeAre: WhoWeAreBlock,
   numberedGrid: NumberedGridBlock,
   missionVision: MissionVisionBlock,
+  timelineAccordion: TimelineAccordionBlock,
 }
 
 export const RenderBlocks: React.FC<{
