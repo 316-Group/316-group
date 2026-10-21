@@ -34,6 +34,7 @@ import { clickExpandFields } from '../ClickExpand/config'
 import { gridColFields } from '../GridCol/config'
 import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
+import { featureCardsV2Fields } from '../FeatureCardsV2/config'
 import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
 import { solutionsAccordionLayoutFields } from '../SolutionsAccordion/config'
 import { splitTextFields } from '../SplitText/config'
@@ -400,6 +401,7 @@ const columnFields: Field[] = [
           { label: 'Grid Col Feature', value: 'gridCol' },
           { label: 'Animated Icons Grid', value: 'animatedIconsGrid' },
           { label: 'Feature Cards', value: 'featureCards' },
+          { label: 'Feature Cards V2', value: 'featureCardsV2' },
           { label: 'Vertical CTA v2', value: 'verticalCTAv2' },
           { label: 'Split Text', value: 'splitText' },
           { label: 'Image Slider', value: 'imageSlider' },
@@ -2101,6 +2103,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'featureCards',
         },
         fields: featureCardsFields,
+      },
+
+      // ─── Feature Cards V2 ──────────────────────────────────────────────────
+      {
+        name: 'featureCardsV2',
+        type: 'group',
+        label: 'Feature Cards V2',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'featureCardsV2',
+        },
+        fields: featureCardsV2Fields,
       },
 
       // ─── Vertical CTA v2 ──────────────────────────────────────────────────

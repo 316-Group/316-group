@@ -536,8 +536,8 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               cardHeight || 'h-[580px] md:h-[680px] lg:h-[720px]',
               // Active card expands fully (60%), inactive cards collapse (13%)
               isActive
-                ? 'w-[88vw] sm:w-[540px] md:w-[620px] lg:flex-[0_0_60%] lg:w-[60%]'
-                : 'w-[130px] sm:w-[150px] md:w-[170px] lg:flex-[0_0_13%] lg:w-[13%] hover:brightness-105',
+                ? 'w-[74vw] sm:w-[540px] md:w-[620px] lg:flex-[0_0_60%] lg:w-[60%]'
+                : 'w-[22vw] min-w-[78px] sm:w-[150px] md:w-[170px] lg:flex-[0_0_13%] lg:w-[13%] hover:brightness-105',
             )}
           >
             {/* Background Image with Active Blur effect */}
@@ -576,8 +576,8 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               <div
                 className={cn(
                   'min-h-full flex flex-col justify-center my-auto',
-                  'gap-3.5 sm:gap-6 md:gap-7',
-                  'py-6 sm:py-10 md:py-14 lg:py-16 px-4 sm:px-8 md:px-12 lg:px-14 xl:px-16',
+                  'gap-2 sm:gap-6 md:gap-7',
+                  'py-4 sm:py-10 md:py-14 lg:py-16 px-3.5 sm:px-8 md:px-12 lg:px-14 xl:px-16',
                 )}
               >
                 {/* Top Group: Kicker + Heading + Description */}
@@ -586,7 +586,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {kickerText && (
                     <span
                       className={cn(
-                        'block mb-1 sm:mb-2 md:mb-3 tracking-normal transition-all duration-700 max-sm:text-xs',
+                        'block mb-0.5 sm:mb-2 md:mb-3 tracking-normal transition-all duration-700 max-sm:text-[10px]',
                         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
                         kickerSize,
                         kickerColor,
@@ -599,7 +599,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {/* Main Heading */}
                   <h3
                     className={cn(
-                      'tracking-tight leading-[1.14] transition-all duration-700 delay-100 max-sm:text-2xl',
+                      'tracking-tight leading-[1.14] transition-all duration-700 delay-100 max-sm:text-lg sm:text-xl',
                       isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
                       headingSize,
                       headingColor,
@@ -612,7 +612,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                   {descText && (
                     <div
                       className={cn(
-                        'mt-2 sm:mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200 max-sm:text-xs',
+                        'mt-1 sm:mt-3 md:mt-4 leading-relaxed max-w-2xl transition-all duration-700 delay-200 max-sm:text-[11px]',
                         isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2',
                         descSize,
                         descColor,
@@ -653,7 +653,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         <div
                           key={subIdx}
                           className={cn(
-                            'p-3.5 sm:p-5 md:p-6 flex flex-col justify-start transition-transform duration-300 hover:scale-[1.02]',
+                            'p-2.5 sm:p-5 md:p-6 flex flex-col justify-start transition-transform duration-300 hover:scale-[1.02] max-sm:rounded-xl max-sm:gap-1.5',
                             subCardsBg,
                             subCardsRounded,
                             subCardsBorder,
@@ -661,7 +661,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                         >
                           <h4
                             className={cn(
-                              'whitespace-pre-line leading-tight tracking-tight max-sm:text-sm',
+                              'whitespace-pre-line leading-tight tracking-tight max-sm:text-xs max-sm:font-bold',
                               titleSize,
                               titleColor,
                               titleWeight,
@@ -671,12 +671,12 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                           />
 
                           {/* Configurable Spacing between Heading and Description */}
-                          <div style={{ height: spacing }} className="max-sm:!h-1.5" aria-hidden="true" />
+                          <div style={{ height: spacing }} className="max-sm:!h-1" aria-hidden="true" />
 
                           {subDesc && (
                             <p
                               className={cn(
-                                'leading-relaxed max-sm:text-[11px]',
+                                'leading-relaxed max-sm:text-[10px] max-sm:leading-tight',
                                 descSize,
                                 descColor,
                                 descWeight,
@@ -703,18 +703,18 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
                       href={buttonHref}
                       target={isNewTab ? '_blank' : undefined}
                       rel={isNewTab ? 'noopener noreferrer' : undefined}
-                      className="inline-flex items-center gap-3 py-1.5 px-0 bg-transparent border-0 border-transparent shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn"
+                      className="inline-flex items-center gap-2 sm:gap-3 py-0.5 sm:py-1.5 px-0 bg-transparent border-0 border-transparent shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn"
                     >
-                      <span className={cn('tracking-normal transition-colors', buttonTextCol, buttonSize, buttonWeight)}>
+                      <span className={cn('tracking-normal transition-colors max-sm:text-xs', buttonTextCol, buttonSize, buttonWeight)}>
                         {buttonText}
                       </span>
                       <span
                         className={cn(
-                          'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
+                          'w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:scale-110 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5',
                           iconBg,
                         )}
                       >
-                        <ArrowUpRight className={cn('w-4 h-4', iconCol)} />
+                        <ArrowUpRight className={cn('w-3 h-3 sm:w-4 sm:h-4', iconCol)} />
                       </span>
                     </Link>
                   </div>
@@ -725,7 +725,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
             {/* ─── INACTIVE COLLAPSED PREVIEW ─── */}
             <div
               className={cn(
-                'absolute inset-0 z-20 flex flex-col justify-end p-5 md:p-6 transition-all duration-500 ease-out',
+                'absolute inset-0 z-20 flex flex-col justify-end p-3 sm:p-5 md:p-6 transition-all duration-500 ease-out',
                 !isActive
                   ? 'opacity-100 pointer-events-auto'
                   : 'opacity-0 pointer-events-none',
@@ -733,7 +733,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
             >
               <h3
                 className={cn(
-                  'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors',
+                  'leading-tight tracking-tight drop-shadow-md line-clamp-3 transition-colors max-sm:text-xs',
                   collapsedSize,
                   headingColor,
                   headingWeight,

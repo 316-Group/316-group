@@ -36,6 +36,11 @@ export interface CenteredContentProps {
     fontSize?: string | null
     fontWeight?: string | null
   } | null
+  // Mobile Width & Padding
+  mobileWidthMode?: 'default' | 'fullWidth' | 'customPadding' | null
+  mobilePaddingX?: string | null
+  mobilePaddingXCustom?: string | null
+
   className?: string
 }
 
@@ -57,6 +62,9 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
   sectionBgColor = 'bg-white',
   paddingTop = 'pt-16',
   paddingBottom = 'pb-16',
+  mobileWidthMode = 'default',
+  mobilePaddingX = '16px',
+  mobilePaddingXCustom,
   badge,
   heading1,
   heading2,
@@ -64,6 +72,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
   descriptionGroup,
   className,
 }) => {
+  const uid = React.useId().replace(/:/g, '')
   const [isInView, setIsInView] = useState<boolean>(false)
   const sectionRef = useRef<HTMLElement>(null)
 
@@ -141,6 +150,16 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
 
   const HeadingTag = (headingTag as keyof React.JSX.IntrinsicElements) || 'h2'
 
+  const padUid = `cc-mob-pad-${uid}`
+  const resolvedMobilePad =
+    mobileWidthMode === 'fullWidth'
+      ? '0px'
+      : mobileWidthMode === 'customPadding'
+        ? mobilePaddingX === 'custom'
+          ? mobilePaddingXCustom || '16px'
+          : mobilePaddingX || '16px'
+        : '16px'
+
   return (
     <section
       ref={sectionRef}
@@ -153,8 +172,36 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
         className,
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={cn('w-full flex flex-col', maxWidth || 'max-w-4xl', alignContainerClasses)}>
+      {(mobileWidthMode === 'fullWidth' || mobileWidthMode === 'customPadding') && (
+        <style>{`
+          @media (max-width: 767px) {
+            .${padUid} {
+              padding-left: ${resolvedMobilePad} !important;
+              padding-right: ${resolvedMobilePad} !important;
+              width: 100% !important;
+              max-width: 100% !important;
+            }
+          }
+        `}</style>
+      )}
+      <div
+        className={cn(
+          'w-full',
+          (!mobileWidthMode || mobileWidthMode === 'default') &&
+            'container mx-auto px-4 sm:px-6 lg:px-8',
+          (mobileWidthMode === 'fullWidth' || mobileWidthMode === 'customPadding') &&
+            cn('md:container md:mx-auto md:px-6 lg:px-8', padUid),
+        )}
+      >
+        <div
+          className={cn(
+            'w-full flex flex-col',
+            !mobileWidthMode || mobileWidthMode === 'default'
+              ? maxWidth || 'max-w-4xl'
+              : cn('max-md:max-w-none', maxWidth || 'max-w-4xl'),
+            alignContainerClasses,
+          )}
+        >
           {/* Badge */}
           {showBadge && (
             <div className={cn('w-full mb-6 md:mb-8', badgeWrapperClasses)}>

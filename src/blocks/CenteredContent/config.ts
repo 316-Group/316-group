@@ -63,7 +63,7 @@ export const centeredContentFields: Field[] = [
       {
         name: 'maxWidth',
         type: 'select',
-        label: 'Max Container Width',
+        label: 'Max Container Width (Desktop & Tablet)',
         defaultValue: 'max-w-4xl',
         options: [
           { label: 'Narrow (max-w-2xl)', value: 'max-w-2xl' },
@@ -76,6 +76,61 @@ export const centeredContentFields: Field[] = [
         ],
         admin: {
           width: '50%',
+          description: 'Maximum width constraint for desktop and tablet screens.',
+        },
+      },
+    ],
+  },
+
+  // ─── Mobile View Width & Padding ──────────────────────────────────────────
+  {
+    type: 'row',
+    fields: [
+      {
+        name: 'mobileWidthMode',
+        type: 'select',
+        label: 'Mobile View Width Mode',
+        defaultValue: 'default',
+        options: [
+          { label: 'Default Mobile Container (Standard 16px Padding)', value: 'default' },
+          { label: 'Full Width (0px Screen Bleed)', value: 'fullWidth' },
+          { label: 'Custom Mobile Horizontal Padding', value: 'customPadding' },
+        ],
+        admin: {
+          width: '50%',
+          description: 'Choose whether centered content on mobile takes standard margins, spans full edge-to-edge width, or uses custom padding.',
+        },
+      },
+      {
+        name: 'mobilePaddingX',
+        type: 'select',
+        label: 'Mobile Horizontal Padding',
+        defaultValue: '16px',
+        options: [
+          { label: '0px (Full Bleed)', value: '0px' },
+          { label: '8px', value: '8px' },
+          { label: '12px', value: '12px' },
+          { label: '16px (Default Mobile)', value: '16px' },
+          { label: '20px', value: '20px' },
+          { label: '24px', value: '24px' },
+          { label: '32px', value: '32px' },
+          { label: '40px', value: '40px' },
+          { label: 'Custom Value', value: 'custom' },
+        ],
+        admin: {
+          width: '25%',
+          condition: (_, siblingData) => siblingData?.mobileWidthMode === 'customPadding',
+        },
+      },
+      {
+        name: 'mobilePaddingXCustom',
+        type: 'text',
+        label: 'Custom Mobile Padding (e.g. 14px)',
+        admin: {
+          width: '25%',
+          condition: (_, siblingData) =>
+            siblingData?.mobileWidthMode === 'customPadding' &&
+            siblingData?.mobilePaddingX === 'custom',
         },
       },
     ],

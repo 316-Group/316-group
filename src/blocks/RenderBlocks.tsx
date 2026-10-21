@@ -41,6 +41,7 @@ import { ClickExpandBlock } from './ClickExpand/Component'
 import { GridColBlock } from './GridCol/Component'
 import { AnimatedIconsGridBlock } from './AnimatedIconsGrid/Component'
 import { FeatureCardsBlock } from './FeatureCards/Component'
+import { FeatureCardsV2Block } from './FeatureCardsV2/Component'
 import { VerticalCTAv2Block } from './VerticalCTAv2/Component'
 
 const blockComponents = {
@@ -82,6 +83,7 @@ const blockComponents = {
   gridCol: GridColBlock,
   animatedIconsGrid: AnimatedIconsGridBlock,
   featureCards: FeatureCardsBlock,
+  featureCardsV2: FeatureCardsV2Block,
   verticalCTAv2: VerticalCTAv2Block,
 }
 

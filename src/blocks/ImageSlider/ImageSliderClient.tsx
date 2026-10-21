@@ -424,8 +424,8 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
                 prevEl: prevRef.current,
                 nextEl: nextRef.current,
               }}
-              spaceBetween={20}
-              slidesPerView={1}
+              spaceBetween={16}
+              slidesPerView={1.18}
               slidesPerGroup={1}
               loop={items.length > 3}
               autoplay={

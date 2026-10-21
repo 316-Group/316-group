@@ -53,6 +53,7 @@ import { ClickExpand } from '@/blocks/ClickExpand/config'
 import { GridCol } from '@/blocks/GridCol/config'
 import { AnimatedIconsGrid } from '@/blocks/AnimatedIconsGrid/config'
 import { FeatureCards } from '@/blocks/FeatureCards/config'
+import { FeatureCardsV2 } from '@/blocks/FeatureCardsV2/config'
 import { VerticalCTAv2 } from '@/blocks/VerticalCTAv2/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
@@ -149,6 +150,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 GridCol,
                 AnimatedIconsGrid,
                 FeatureCards,
+                FeatureCardsV2,
                 VerticalCTAv2,
               ],
               required: true,

@@ -25,6 +25,7 @@ import { ClickExpandBlock } from '../ClickExpand/Component'
 import { GridColBlock } from '../GridCol/Component'
 import { AnimatedIconsGridBlock } from '../AnimatedIconsGrid/Component'
 import { FeatureCardsBlock } from '../FeatureCards/Component'
+import { FeatureCardsV2Block } from '../FeatureCardsV2/Component'
 import { VerticalCTAv2Component } from '../VerticalCTAv2/Component'
 import { SplitTextBlock } from '../SplitText/Component'
 import { ImageSliderBlock } from '../ImageSlider/Component'
@@ -964,6 +965,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       <FeatureCardsBlock
                         key={index}
                         {...(content as any).featureCards}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'featureCardsV2' && (content as any).featureCardsV2) {
+                    return (
+                      <FeatureCardsV2Block
+                        key={index}
+                        {...(content as any).featureCardsV2}
                       />
                     )
                   }
