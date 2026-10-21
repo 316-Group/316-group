@@ -15024,6 +15024,9 @@ export interface Page {
       }
     | VerticalCTAv2Block
     | {
+        /**
+         * Choose background color for this section.
+         */
         sectionBgColor?:
           | (
               | 'bg-inherit'
@@ -20094,6 +20097,9 @@ export interface Page {
         blockType: 'whoWeAre';
       }
     | {
+        /**
+         * Choose background color for this section.
+         */
         sectionBgColor?:
           | (
               | 'bg-inherit'
@@ -22158,6 +22164,14 @@ export interface ContentBlock {
               | 'bg-rose-950'
             )
           | null;
+        /**
+         * When checked, the column background color will automatically apply to content blocks inside this column (overriding their inner background color).
+         */
+        applyBgToContent?: boolean | null;
+        /**
+         * When checked, content blocks inside this column expand to take 100% of the column height, eliminating dead space at the top or bottom.
+         */
+        stretchContentHeight?: boolean | null;
         columnContent?:
           | {
               contentType:
@@ -78049,6 +78063,9 @@ export interface ContentBlock {
                 };
               };
               whoWeAre?: {
+                /**
+                 * Defaults to "Transparent" so it automatically uses the Column Background Color.
+                 */
                 sectionBgColor?:
                   | (
                       | 'bg-inherit'
@@ -83171,6 +83188,9 @@ export interface ContentBlock {
                 };
               };
               numberedGrid?: {
+                /**
+                 * Defaults to "Transparent" so it automatically uses the Column Background Color.
+                 */
                 sectionBgColor?:
                   | (
                       | 'bg-inherit'
@@ -178578,6 +178598,8 @@ export interface ContentBlockSelect<T extends boolean = true> {
         mobileOrder?: T;
         alignment?: T;
         columnBgColor?: T;
+        applyBgToContent?: T;
+        stretchContentHeight?: T;
         columnContent?:
           | T
           | {

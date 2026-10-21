@@ -41,8 +41,8 @@ import { splitTextFields } from '../SplitText/config'
 import { imageSliderFields } from '../ImageSlider/config'
 import { blogPostUpdatedFields } from '../BlogPostUpdated/config'
 import { readyToGrowFields } from '../ReadyToGrow/config'
-import { whoWeAreFields } from '../WhoWeAre/config'
-import { numberedGridFields } from '../NumberedGrid/config'
+import { whoWeAreFields, whoWeAreColumnFields } from '../WhoWeAre/config'
+import { numberedGridFields, numberedGridColumnFields } from '../NumberedGrid/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -452,6 +452,28 @@ const columnFields: Field[] = [
       },
     },
   }),
+  {
+    name: 'applyBgToContent',
+    type: 'checkbox',
+    label: 'Apply Column Background Color to Content Types',
+    defaultValue: true,
+    admin: {
+      condition: (_, siblingData) =>
+        Boolean(siblingData?.columnBgColor && siblingData.columnBgColor !== 'bg-transparent'),
+      description:
+        'When checked, the column background color will automatically apply to content blocks inside this column (overriding their inner background color).',
+    },
+  },
+  {
+    name: 'stretchContentHeight',
+    type: 'checkbox',
+    label: 'Stretch Content to Full Column Height (Equal Height Columns)',
+    defaultValue: true,
+    admin: {
+      description:
+        'When checked, content blocks inside this column expand to take 100% of the column height, eliminating dead space at the top or bottom.',
+    },
+  },
   {
     name: 'columnContent',
     type: 'array',
@@ -2270,7 +2292,7 @@ const columnFields: Field[] = [
         admin: {
           condition: (_, { contentType }) => contentType === 'whoWeAre',
         },
-        fields: whoWeAreFields,
+        fields: whoWeAreColumnFields,
       },
 
       // ─── Numbered Grid ───────────────────────────────────────────────────────
@@ -2281,7 +2303,7 @@ const columnFields: Field[] = [
         admin: {
           condition: (_, { contentType }) => contentType === 'numberedGrid',
         },
-        fields: numberedGridFields,
+        fields: numberedGridColumnFields,
       },
     ],
   },

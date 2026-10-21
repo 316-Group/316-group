@@ -156,8 +156,8 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
     <section
       ref={sectionRef}
       className={cn(
-        'w-full relative transition-colors duration-200',
-        sectionBgColor || 'bg-white',
+        'w-full h-full flex-1 flex flex-col justify-between relative transition-colors duration-200',
+        sectionBgColor === 'bg-transparent' ? 'bg-transparent' : (sectionBgColor || 'bg-white'),
         isPtClass && resolvedPt,
         isPbClass && resolvedPb,
         className,
@@ -197,6 +197,7 @@ export const NumberedGridClient: React.FC<NumberedGridProps> = ({
 
       <div
         className={cn(
+          'w-full flex-1 flex flex-col justify-between',
           (!paddingMode || paddingMode === 'default') &&
             'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl',
           paddingMode === 'none' && 'w-full max-w-none px-0',

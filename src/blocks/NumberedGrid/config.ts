@@ -5,7 +5,7 @@ import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
 
 const allowAnySelect = (() => true as const) as any
 
-export const numberedGridFields: Field[] = [
+export const getNumberedGridFields = ({ isColumn = false }: { isColumn?: boolean } = {}): Field[] => [
   // ─── 1. Section Spacing & Background ─────────────────────────────────────
   {
     type: 'row',
@@ -13,17 +13,22 @@ export const numberedGridFields: Field[] = [
       bgColorPickerAll({
         overrides: {
           name: 'sectionBgColor',
-          label: 'Section Background Color',
-          defaultValue: 'bg-white',
+          label: isColumn ? 'Content Background Color' : 'Section Background Color',
+          defaultValue: isColumn ? 'bg-transparent' : 'bg-white',
           validate: allowAnySelect,
-          admin: { width: '33.33%' },
+          admin: {
+            width: '33.33%',
+            description: isColumn
+              ? 'Defaults to "Transparent" so it automatically uses the Column Background Color.'
+              : 'Choose background color for this section.',
+          },
         },
       }),
       {
         name: 'paddingTop',
         type: 'select',
         label: 'Padding Top',
-        defaultValue: 'pt-20',
+        defaultValue: isColumn ? 'pt-0' : 'pt-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -46,7 +51,7 @@ export const numberedGridFields: Field[] = [
         name: 'paddingBottom',
         type: 'select',
         label: 'Padding Bottom',
-        defaultValue: 'pb-20',
+        defaultValue: isColumn ? 'pb-0' : 'pb-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -436,6 +441,9 @@ export const numberedGridFields: Field[] = [
     ],
   },
 ]
+
+export const numberedGridFields: Field[] = getNumberedGridFields({ isColumn: false })
+export const numberedGridColumnFields: Field[] = getNumberedGridFields({ isColumn: true })
 
 export const NumberedGrid: Block = {
   slug: 'numberedGrid',

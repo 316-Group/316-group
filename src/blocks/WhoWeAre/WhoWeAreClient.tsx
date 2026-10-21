@@ -335,8 +335,8 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
   return (
     <section
       className={cn(
-        'w-full relative transition-colors duration-200',
-        sectionBgColor || 'bg-[#0256FF]',
+        'w-full h-full flex-1 flex flex-col justify-between relative transition-colors duration-200',
+        sectionBgColor === 'bg-transparent' ? 'bg-transparent' : (sectionBgColor || 'bg-[#0256FF]'),
         isPtClass && resolvedPt,
         isPbClass && resolvedPb,
         className,
@@ -376,6 +376,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
 
       <div
         className={cn(
+          'w-full flex-1 flex flex-col justify-between',
           (!paddingMode || paddingMode === 'default') &&
             'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl',
           paddingMode === 'none' && 'w-full max-w-none px-0',
@@ -383,7 +384,7 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
         )}
       >
         {/* ─── 2-COLUMN MAIN CONTENT GRID ────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start w-full flex-1">
           {/* ── Left Column ── */}
           <div className="flex flex-col items-start w-full">
             {/* Pill Badge */}

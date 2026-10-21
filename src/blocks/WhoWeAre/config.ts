@@ -12,7 +12,7 @@ const alignmentOptions = [
   { label: 'Right', value: 'right' },
 ]
 
-export const whoWeAreFields: Field[] = [
+export const getWhoWeAreFields = ({ isColumn = false }: { isColumn?: boolean } = {}): Field[] => [
   // ─── 1. Section Spacing & Background ─────────────────────────────────────
   {
     type: 'row',
@@ -20,17 +20,22 @@ export const whoWeAreFields: Field[] = [
       bgColorPickerAll({
         overrides: {
           name: 'sectionBgColor',
-          label: 'Section Background Color',
-          defaultValue: 'bg-[#0256FF]',
+          label: isColumn ? 'Content Background Color' : 'Section Background Color',
+          defaultValue: isColumn ? 'bg-transparent' : 'bg-[#0256FF]',
           validate: allowAnySelect,
-          admin: { width: '33.33%' },
+          admin: {
+            width: '33.33%',
+            description: isColumn
+              ? 'Defaults to "Transparent" so it automatically uses the Column Background Color.'
+              : 'Choose background color for this section.',
+          },
         },
       }),
       {
         name: 'paddingTop',
         type: 'select',
         label: 'Padding Top',
-        defaultValue: 'pt-20',
+        defaultValue: isColumn ? 'pt-0' : 'pt-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -53,7 +58,7 @@ export const whoWeAreFields: Field[] = [
         name: 'paddingBottom',
         type: 'select',
         label: 'Padding Bottom',
-        defaultValue: 'pb-20',
+        defaultValue: isColumn ? 'pb-0' : 'pb-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -1173,6 +1178,9 @@ export const whoWeAreFields: Field[] = [
     ],
   },
 ]
+
+export const whoWeAreFields: Field[] = getWhoWeAreFields({ isColumn: false })
+export const whoWeAreColumnFields: Field[] = getWhoWeAreFields({ isColumn: true })
 
 export const WhoWeAre: Block = {
   slug: 'whoWeAre',

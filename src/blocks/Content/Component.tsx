@@ -331,6 +331,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
                 }
 
+                const stretchContent = (col as any).stretchContentHeight !== false
+                const applyBg = (col as any).applyBgToContent !== false
+
                 return (
                   <React.Fragment key={index}>
                     {colPadUid && (
@@ -355,6 +358,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         colPadUid,
                         colPtClass,
                         colPbClass,
+                        stretchContent && 'h-full flex flex-col',
                         col.alignment === 'center' &&
                           'text-center flex flex-col items-center justify-center',
                         colBg && colBg !== 'bg-transparent' && colBg,
@@ -1058,19 +1062,35 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                   }
 
                   if (contentType === 'whoWeAre' && (content as any).whoWeAre) {
+                    const whoWeAreData = { ...(content as any).whoWeAre }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      whoWeAreData.sectionBgColor = 'bg-transparent'
+                    }
                     return (
                       <WhoWeAreBlock
                         key={index}
-                        {...(content as any).whoWeAre}
+                        {...whoWeAreData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                          whoWeAreData.className,
+                        )}
                       />
                     )
                   }
 
                   if (contentType === 'numberedGrid' && (content as any).numberedGrid) {
+                    const numGridData = { ...(content as any).numberedGrid }
+                    if (applyBg && colBg && colBg !== 'bg-transparent') {
+                      numGridData.sectionBgColor = 'bg-transparent'
+                    }
                     return (
                       <NumberedGridBlock
                         key={index}
-                        {...(content as any).numberedGrid}
+                        {...numGridData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                          numGridData.className,
+                        )}
                       />
                     )
                   }
