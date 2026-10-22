@@ -63,6 +63,9 @@ import { CenteredButton } from '@/blocks/CenteredButton/config'
 import { EventHero } from '@/blocks/EventHero/config'
 import { EventSharedPurpose } from '@/blocks/EventSharedPurpose/config'
 import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
+import { EventAgendaOverview } from '@/blocks/EventAgendaOverview/config'
+import { EventMeetingFormats } from '@/blocks/EventMeetingFormats/config'
+import { EventMadridVenue } from '@/blocks/EventMadridVenue/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -168,6 +171,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 EventHero,
                 EventSharedPurpose,
                 EventWhyConnect,
+                EventAgendaOverview,
+                EventMeetingFormats,
+                EventMadridVenue,
               ],
               required: true,
             },

@@ -51,6 +51,9 @@ import { CenteredButtonBlock } from './CenteredButton/Component'
 import { EventHeroBlock } from './EventHero/Component'
 import { EventSharedPurposeBlock } from './EventSharedPurpose/Component'
 import { EventWhyConnectBlock } from './EventWhyConnect/Component'
+import { EventAgendaOverviewBlock } from './EventAgendaOverview/Component'
+import { EventMeetingFormatsBlock } from './EventMeetingFormats/Component'
+import { EventMadridVenueBlock } from './EventMadridVenue/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -101,6 +104,9 @@ const blockComponents = {
   eventHero: EventHeroBlock,
   eventSharedPurpose: EventSharedPurposeBlock,
   eventWhyConnect: EventWhyConnectBlock,
+  eventAgendaOverview: EventAgendaOverviewBlock,
+  eventMeetingFormats: EventMeetingFormatsBlock,
+  eventMadridVenue: EventMadridVenueBlock,
 }
 
 export const RenderBlocks: React.FC<{

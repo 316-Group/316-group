@@ -25,8 +25,11 @@ export const fontSizeOptions = [
   { label: 'Responsive 2XL to 1.65rem', value: 'text-2xl md:text-[1.65rem]' },
   { label: 'Responsive 2XL to 3XL', value: 'text-2xl md:text-3xl' },
   { label: 'Responsive 3XL to 4XL', value: 'text-3xl md:text-4xl' },
+  { label: 'Responsive Subheading 11px to XS', value: 'text-[11px] md:text-xs' },
   { label: 'Responsive 3XL to 5XL', value: 'text-3xl md:text-4xl lg:text-5xl' },
+  { label: 'Responsive 3XL to 5XL (sm:text-4xl)', value: 'text-3xl sm:text-4xl lg:text-5xl' },
   { label: 'Responsive 4XL to 6XL (Display)', value: 'text-4xl md:text-5xl lg:text-6xl' },
+  { label: 'Responsive 4XL to 6XL (sm:text-5xl)', value: 'text-4xl sm:text-5xl lg:text-6xl' },
   { label: 'Responsive 5XL to 7XL (Hero)', value: 'text-5xl md:text-6xl lg:text-7xl' },
   { label: 'Responsive 6XL to 8XL (Giant)', value: 'text-6xl md:text-7xl lg:text-8xl' },
 ]
