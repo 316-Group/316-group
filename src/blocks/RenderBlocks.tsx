@@ -49,6 +49,8 @@ import { MissionVisionBlock } from './MissionVision/Component'
 import { TimelineAccordionBlock } from './TimelineAccordion/Component'
 import { CenteredButtonBlock } from './CenteredButton/Component'
 import { EventHeroBlock } from './EventHero/Component'
+import { EventSharedPurposeBlock } from './EventSharedPurpose/Component'
+import { EventWhyConnectBlock } from './EventWhyConnect/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -97,6 +99,8 @@ const blockComponents = {
   timelineAccordion: TimelineAccordionBlock,
   centeredButton: CenteredButtonBlock,
   eventHero: EventHeroBlock,
+  eventSharedPurpose: EventSharedPurposeBlock,
+  eventWhyConnect: EventWhyConnectBlock,
 }
 
 export const RenderBlocks: React.FC<{

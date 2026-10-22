@@ -61,6 +61,8 @@ import { MissionVision } from '@/blocks/MissionVision/config'
 import { TimelineAccordion } from '@/blocks/TimelineAccordion/config'
 import { CenteredButton } from '@/blocks/CenteredButton/config'
 import { EventHero } from '@/blocks/EventHero/config'
+import { EventSharedPurpose } from '@/blocks/EventSharedPurpose/config'
+import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -164,6 +166,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 TimelineAccordion,
                 CenteredButton,
                 EventHero,
+                EventSharedPurpose,
+                EventWhyConnect,
               ],
               required: true,
             },

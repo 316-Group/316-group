@@ -3,6 +3,8 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { EventHero } from '@/blocks/EventHero/config'
+import { EventSharedPurpose } from '@/blocks/EventSharedPurpose/config'
+import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
@@ -32,7 +34,8 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 
-const defaultEventHeroLayout = [
+const defaultEventTemplateLayout = [
+  // Block 1: Event Hero (Phase 1)
   {
     blockType: 'eventHero',
     matchHeaderPillWidth: true,
@@ -130,6 +133,117 @@ const defaultEventHeroLayout = [
       ],
     },
   },
+
+  // Block 2: A Shared Purpose (Phase 2 - Section 1)
+  {
+    blockType: 'eventSharedPurpose',
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-white',
+    paddingTop: 'pt-20 md:pt-28',
+    paddingBottom: 'pb-20 md:pb-28',
+    imageColumn: {
+      imageFit: 'cover',
+      imageRounded: 'rounded-none',
+      showCalloutBadge: true,
+      calloutText: 'Progress starts with connection.',
+      calloutBgColor: 'bg-[#00D2FF]',
+      calloutTextColor: 'text-[#002B49]',
+      showDotGrid: true,
+      dotGridColor: 'bg-[#0000FF]',
+    },
+    contentStack: {
+      kickerGroup: {
+        showKicker: true,
+        squareColor: 'bg-[#0000FF]',
+        squareSize: 'w-2.5 h-2.5',
+        text: 'A SHARED PURPOSE',
+        textColor: 'text-[#0000FF]',
+        fontSize: 'text-xs md:text-sm',
+        fontWeight: 'font-semibold',
+        marginBottom: 'mb-4 md:mb-5',
+      },
+      headingGroup: {
+        heading: 'Better healthcare is a team effort.',
+        headingColor: 'text-gray-950',
+        headingFontSize: 'text-3xl sm:text-4xl lg:text-5xl',
+        headingFontWeight: 'font-bold',
+        marginBottom: 'mb-6 md:mb-8',
+      },
+      descriptionGroup: {
+        description:
+          'ESMO brings the oncology community together to exchange ideas and look ahead. It’s a chance to connect different perspectives around a common goal: better care for people.\n\nAt 316 Group, we believe meaningful progress begins with listening. We’re inviting conversations with healthcare, research and life-sciences teams about the challenges that matter to them.',
+        descriptionColor: 'text-gray-600',
+        descriptionFontSize: 'text-base md:text-lg',
+        descriptionFontWeight: 'font-normal',
+        marginBottom: 'mb-8 md:mb-10',
+      },
+      buttonGroup: {
+        showButton: true,
+        text: 'Bring your perspective to the conversation',
+        textColor: 'text-[#0256FF]',
+        fontSize: 'text-sm md:text-base',
+        fontWeight: 'font-semibold',
+      },
+    },
+  },
+
+  // Block 3: Why Connect With Us (Phase 2 - Section 2)
+  {
+    blockType: 'eventWhyConnect',
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-[#0000FF]',
+    paddingTop: 'pt-20 md:pt-28',
+    paddingBottom: 'pb-24 md:pb-32',
+    topGrid: {
+      kickerGroup: {
+        showKicker: true,
+        squareColor: 'bg-white',
+        squareSize: 'w-2.5 h-2.5',
+        text: 'WHY CONNECT WITH US',
+        textColor: 'text-white',
+        fontSize: 'text-xs md:text-sm',
+        fontWeight: 'font-semibold',
+        marginBottom: 'mb-4',
+      },
+      headingGroup: {
+        heading: 'Different perspectives.\nMore possibilities.',
+        headingColor: 'text-white',
+        headingFontSize: 'text-3xl sm:text-4xl lg:text-5xl',
+        headingFontWeight: 'font-bold',
+      },
+      descriptionGroup: {
+        description:
+          'Make space in a busy congress week for a focused exchange about your priorities — and where we might go together.',
+        descriptionColor: 'text-white/90',
+        descriptionFontSize: 'text-base md:text-lg lg:text-xl',
+        descriptionFontWeight: 'font-normal',
+      },
+      gridBottomSpacing: 'mb-12 md:mb-16',
+    },
+    items: [
+      {
+        iconType: 'messageSquare',
+        numberText: '01',
+        heading: 'Exchange ideas',
+        description:
+          'Share the questions shaping your work and hear a fresh perspective on healthcare’s evolving needs.',
+      },
+      {
+        iconType: 'network',
+        numberText: '02',
+        heading: 'Find common ground',
+        description:
+          'Explore where people, data and technology can come together to support more connected care.',
+      },
+      {
+        iconType: 'arrowUpRight',
+        numberText: '03',
+        heading: 'Explore what’s next',
+        description:
+          'Discuss a challenge, consider a collaboration and identify a practical next step beyond the congress.',
+      },
+    ],
+  },
 ]
 
 export const Events: CollectionConfig = {
@@ -183,6 +297,8 @@ export const Events: CollectionConfig = {
               type: 'blocks',
               blocks: [
                 EventHero,
+                EventSharedPurpose,
+                EventWhyConnect,
                 Content,
                 MediaBlock,
                 CallToAction,
@@ -198,7 +314,7 @@ export const Events: CollectionConfig = {
                 BrandSlider,
                 CenteredButton,
               ],
-              defaultValue: defaultEventHeroLayout,
+              defaultValue: defaultEventTemplateLayout,
               required: false,
             },
           ],
