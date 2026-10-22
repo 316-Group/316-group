@@ -8,7 +8,7 @@ import React, { cache } from 'react'
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import { defaultEventTemplateLayout } from '@/collections/Events'
-import { EventLivePreview } from './page.client'
+import PageClient from './page.client'
 import type { Event } from '@/payload-types'
 
 export async function generateStaticParams() {
@@ -50,16 +50,21 @@ export default async function EventPage({ params: paramsPromise }: Args) {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       } as any
-    } else {
-      return <PayloadRedirects url={url} />
     }
   }
 
+  if (!event) {
+    return <PayloadRedirects url={url} />
+  }
+
+  const { layout } = event
+
   return (
-    <>
+    <article>
+      <PageClient />
       <PayloadRedirects disableNotFound url={url} />
-      <EventLivePreview initialEvent={event!} />
-    </>
+      {layout && <RenderBlocks blocks={layout as any} />}
+    </article>
   )
 }
 
