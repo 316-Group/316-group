@@ -89,6 +89,8 @@ export const animatedIconsGridFields: Field[] = [
           { label: 'Medium (pb-16)', value: 'pb-16' },
           { label: 'Large (pb-20 - Default)', value: 'pb-20' },
           { label: 'Extra Large (pb-28)', value: 'pb-28' },
+          { label: '2X Large (pb-32)', value: 'pb-32' },
+          { label: '3X Large (pb-40)', value: 'pb-40' },
         ],
       },
     ],

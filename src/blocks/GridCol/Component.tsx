@@ -423,7 +423,7 @@ export const GridColBlock: React.FC<GridColProps> = ({
           <div className="block lg:hidden w-full mb-8 sm:mb-10 flex justify-center">
             <div
               className={cn(
-                'relative w-full max-w-md sm:max-w-lg overflow-hidden shadow-xl transition-all duration-500 aspect-[16/10] sm:aspect-[16/9]',
+                'relative w-full max-w-md sm:max-w-lg overflow-hidden shadow-xl transition-all duration-500 min-h-[360px] sm:min-h-[440px] aspect-[4/3] sm:aspect-[1/1]',
                 imageRounded,
               )}
             >

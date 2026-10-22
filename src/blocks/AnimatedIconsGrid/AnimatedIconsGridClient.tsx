@@ -509,7 +509,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     <section
       ref={sectionRef}
       className={cn(
-        'w-full relative overflow-hidden select-none',
+        'w-full relative overflow-visible select-none',
         sectionBgColor || 'bg-[#F4F6FB]',
         paddingTop || 'pt-20',
         paddingBottom || 'pb-20',
@@ -547,12 +547,12 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           </div>
 
           {/* Left Wing (8 Cards: 4 rows × 2 cols, col-start-1 col-span-2 row-start-1 row-span-4) */}
-          <div className="col-start-1 col-span-2 row-start-1 row-span-4 grid grid-cols-2 grid-rows-4 gap-4 xl:gap-5 z-0">
+          <div className="col-start-1 col-span-2 row-start-1 row-span-4 grid grid-cols-2 gap-4 xl:gap-5 z-0 h-fit">
             {leftWingCards.map((card, i) => renderCard(card, i))}
           </div>
 
           {/* Right Wing (8 Cards: 4 rows × 2 cols, col-start-8 col-span-2 row-start-1 row-span-4) */}
-          <div className="col-start-8 col-span-2 row-start-1 row-span-4 grid grid-cols-2 grid-rows-4 gap-4 xl:gap-5 z-0">
+          <div className="col-start-8 col-span-2 row-start-1 row-span-4 grid grid-cols-2 gap-4 xl:gap-5 z-0 h-fit">
             {rightWingCards.map((card, i) => renderCard(card, 13 + i))}
           </div>
 
