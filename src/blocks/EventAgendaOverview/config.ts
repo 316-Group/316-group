@@ -65,138 +65,18 @@ const dividerColorOptions = [
 ]
 
 export const eventAgendaOverviewFields: Field[] = [
-  // ─── 1. Layout & Header Width Alignment ──────────────────────────────────
   {
-    type: 'row',
-    fields: [
+    type: 'tabs',
+    tabs: [
       {
-        name: 'matchHeaderPillWidth',
-        type: 'checkbox',
-        label: 'Match Header Width (Align with Logo & Nav, Max 1472px)',
-        defaultValue: true,
-        admin: {
-          width: '50%',
-          description:
-            'Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.',
-        },
-      },
-      {
-        name: 'paddingMode',
-        type: 'select',
-        label: 'Horizontal Padding Mode',
-        defaultValue: 'default',
-        validate: allowAnySelect,
-        options: [
-          { label: 'Default Responsive Padding', value: 'default' },
-          { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
-          { label: 'Custom Horizontal Padding', value: 'custom' },
-        ],
-        admin: {
-          width: '50%',
-          condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
-        },
-      },
-    ],
-  },
-  {
-    type: 'row',
-    admin: {
-      condition: (_, siblingData) =>
-        !siblingData?.matchHeaderPillWidth && siblingData?.paddingMode === 'custom',
-    },
-    fields: [
-      {
-        name: 'paddingXDesktop',
-        type: 'select',
-        label: 'Desktop Lateral Padding',
-        defaultValue: '48px',
-        validate: allowAnySelect,
-        options: desktopPaddingOptions,
-        admin: { width: '25%' },
-      },
-      {
-        name: 'paddingXDesktopCustom',
-        type: 'text',
-        label: 'Custom Desktop Padding (e.g. 50px)',
-        admin: {
-          width: '25%',
-          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
-        },
-      },
-      {
-        name: 'paddingXMobile',
-        type: 'select',
-        label: 'Mobile Lateral Padding',
-        defaultValue: '16px',
-        validate: allowAnySelect,
-        options: mobilePaddingOptions,
-        admin: { width: '25%' },
-      },
-      {
-        name: 'paddingXMobileCustom',
-        type: 'text',
-        label: 'Custom Mobile Padding (e.g. 16px)',
-        admin: {
-          width: '25%',
-          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
-        },
-      },
-    ],
-  },
-
-  // ─── 2. Section Background & Vertical Paddings ───────────────────────────
-  {
-    type: 'row',
-    fields: [
-      bgColorPickerAll({
-        overrides: {
-          name: 'sectionBgColor',
-          label: 'Section Background Color',
-          defaultValue: 'bg-white',
-          admin: { width: '33.33%' },
-        },
-      }),
-      {
-        name: 'paddingTop',
-        type: 'select',
-        label: 'Top Padding',
-        defaultValue: 'pt-20 md:pt-28',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pt-0' },
-          { label: 'Small (pt-12)', value: 'pt-12' },
-          { label: 'Medium (pt-16)', value: 'pt-16' },
-          { label: 'Standard (pt-20 md:pt-28 - Default)', value: 'pt-20 md:pt-28' },
-          { label: 'Large (pt-24 md:pt-32)', value: 'pt-24 md:pt-32' },
-          { label: 'Extra Large (pt-32 md:pt-40)', value: 'pt-32 md:pt-40' },
-        ],
-        admin: { width: '33.33%' },
-      },
-      {
-        name: 'paddingBottom',
-        type: 'select',
-        label: 'Bottom Padding',
-        defaultValue: 'pb-20 md:pb-28',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pb-0' },
-          { label: 'Small (pb-12)', value: 'pb-12' },
-          { label: 'Medium (pb-16)', value: 'pb-16' },
-          { label: 'Standard (pb-20 md:pb-28 - Default)', value: 'pb-20 md:pb-28' },
-          { label: 'Large (pb-24 md:pb-32)', value: 'pb-24 md:pb-32' },
-          { label: 'Extra Large (pb-32 md:pb-40)', value: 'pb-32 md:pb-40' },
-        ],
-        admin: { width: '33.33%' },
-      },
-    ],
-  },
-
-  // ─── 3. Left Column: Context & Action Stack ──────────────────────────────
-  {
-    name: 'leftColumn',
-    type: 'group',
-    label: 'Left Column: Context & Action Stack',
-    fields: [
+        label: '📝 Content & Media',
+        fields: [
+          // ─── 3. Left Column: Context & Action Stack ──────────────────────────────
+          {
+            name: 'leftColumn',
+            type: 'group',
+            label: 'Left Column: Context & Action Stack',
+            fields: [
       // Kicker Group
       {
         name: 'kickerGroup',
@@ -1108,6 +988,140 @@ export const eventAgendaOverviewFields: Field[] = [
                 validate: allowAnySelect,
                 options: dividerColorOptions,
                 admin: { width: '25%' },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+        ],
+      },
+      {
+        label: '⚙️ Advanced Styling & Layout',
+        fields: [
+          // ─── 1. Layout & Header Width Alignment ──────────────────────────────────
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'matchHeaderPillWidth',
+                type: 'checkbox',
+                label: 'Match Header Width (Align with Logo & Nav, Max 1472px)',
+                defaultValue: true,
+                admin: {
+                  width: '50%',
+                  description:
+                    'Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.',
+                },
+              },
+              {
+                name: 'paddingMode',
+                type: 'select',
+                label: 'Horizontal Padding Mode',
+                defaultValue: 'default',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Default Responsive Padding', value: 'default' },
+                  { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
+                  { label: 'Custom Horizontal Padding', value: 'custom' },
+                ],
+                admin: {
+                  width: '50%',
+                  condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
+                },
+              },
+            ],
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, siblingData) =>
+                !siblingData?.matchHeaderPillWidth && siblingData?.paddingMode === 'custom',
+            },
+            fields: [
+              {
+                name: 'paddingXDesktop',
+                type: 'select',
+                label: 'Desktop Lateral Padding',
+                defaultValue: '48px',
+                validate: allowAnySelect,
+                options: desktopPaddingOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'paddingXDesktopCustom',
+                type: 'text',
+                label: 'Custom Desktop Padding (e.g. 50px)',
+                admin: {
+                  width: '25%',
+                  condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+                },
+              },
+              {
+                name: 'paddingXMobile',
+                type: 'select',
+                label: 'Mobile Lateral Padding',
+                defaultValue: '16px',
+                validate: allowAnySelect,
+                options: mobilePaddingOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'paddingXMobileCustom',
+                type: 'text',
+                label: 'Custom Mobile Padding (e.g. 16px)',
+                admin: {
+                  width: '25%',
+                  condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+                },
+              },
+            ],
+          },
+
+          // ─── 2. Section Background & Vertical Paddings ───────────────────────────
+          {
+            type: 'row',
+            fields: [
+              bgColorPickerAll({
+                overrides: {
+                  name: 'sectionBgColor',
+                  label: 'Section Background Color',
+                  defaultValue: 'bg-white',
+                  admin: { width: '33.33%' },
+                },
+              }),
+              {
+                name: 'paddingTop',
+                type: 'select',
+                label: 'Top Padding',
+                defaultValue: 'pt-20 md:pt-28',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pt-0' },
+                  { label: 'Small (pt-12)', value: 'pt-12' },
+                  { label: 'Medium (pt-16)', value: 'pt-16' },
+                  { label: 'Standard (pt-20 md:pt-28 - Default)', value: 'pt-20 md:pt-28' },
+                  { label: 'Large (pt-24 md:pt-32)', value: 'pt-24 md:pt-32' },
+                  { label: 'Extra Large (pt-32 md:pt-40)', value: 'pt-32 md:pt-40' },
+                ],
+                admin: { width: '33.33%' },
+              },
+              {
+                name: 'paddingBottom',
+                type: 'select',
+                label: 'Bottom Padding',
+                defaultValue: 'pb-20 md:pb-28',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pb-0' },
+                  { label: 'Small (pb-12)', value: 'pb-12' },
+                  { label: 'Medium (pb-16)', value: 'pb-16' },
+                  { label: 'Standard (pb-20 md:pb-28 - Default)', value: 'pb-20 md:pb-28' },
+                  { label: 'Large (pb-24 md:pb-32)', value: 'pb-24 md:pb-32' },
+                  { label: 'Extra Large (pb-32 md:pb-40)', value: 'pb-32 md:pb-40' },
+                ],
+                admin: { width: '33.33%' },
               },
             ],
           },

@@ -28,6 +28,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateEvent } from './hooks/revalidateEvent'
+import { populateEventSEO } from './hooks/populateEventSEO'
 import { getServerSideURL } from '@/utilities/getURL'
 
 import {
@@ -848,8 +849,74 @@ export const Events: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Template & Layout',
+          label: 'Template & Content',
           fields: [
+            {
+              type: 'group',
+              name: 'schedule',
+              label: 'Event Operational Schedule (Required to Publish)',
+              admin: {
+                description:
+                  'Backend dates used for event status filtering (Active, Upcoming, Ended) and gating meeting request form submissions. These dates are stored in the backend and do not alter the visual styling on the Hero section.',
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'startDate',
+                      type: 'date',
+                      label: 'Event Start Date',
+                      required: false,
+                      validate: (value: any, { siblingData, req }: any) => {
+                        const status = (req as any)?.data?._status || siblingData?._status
+                        if (status === 'published' && !value) {
+                          return 'Event Start Date is required to publish this event.'
+                        }
+                        return true
+                      },
+                      admin: {
+                        width: '50%',
+                        date: {
+                          pickerAppearance: 'dayAndTime',
+                          displayFormat: 'd MMM yyyy, HH:mm',
+                        },
+                        description: 'Exact date and time the event begins.',
+                      },
+                    },
+                    {
+                      name: 'endDate',
+                      type: 'date',
+                      label: 'Event End Date',
+                      required: false,
+                      validate: (value: any, { siblingData, req }: any) => {
+                        const status = (req as any)?.data?._status || siblingData?._status
+                        if (status === 'published' && !value) {
+                          return 'Event End Date is required to publish this event.'
+                        }
+                        if (
+                          value &&
+                          siblingData?.startDate &&
+                          new Date(value) < new Date(siblingData.startDate)
+                        ) {
+                          return 'Event End Date must be after the Start Date.'
+                        }
+                        return true
+                      },
+                      admin: {
+                        width: '50%',
+                        date: {
+                          pickerAppearance: 'dayAndTime',
+                          displayFormat: 'd MMM yyyy, HH:mm',
+                        },
+                        description:
+                          'Exact date and time the event concludes. After this date, meeting requests are blocked.',
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
             {
               name: 'layout',
               type: 'blocks',
@@ -917,7 +984,7 @@ export const Events: CollectionConfig = {
   ],
   hooks: {
     afterChange: [revalidateEvent],
-    beforeChange: [populatePublishedAt],
+    beforeChange: [populatePublishedAt, populateEventSEO],
   },
   versions: {
     drafts: {

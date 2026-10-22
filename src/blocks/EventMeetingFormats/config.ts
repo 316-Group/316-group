@@ -32,34 +32,18 @@ const rightPaddingOptions = [
 ]
 
 export const eventMeetingFormatsFields: Field[] = [
-  // ─── 1. Section Background ───────────────────────────────────────────────
   {
-    type: 'row',
-    fields: [
-      bgColorPickerAll({
-        overrides: {
-          name: 'sectionBgColor',
-          label: 'Section Background Color',
-          defaultValue: 'bg-white',
-          admin: { width: '50%' },
-        },
-      }),
+    type: 'tabs',
+    tabs: [
       {
-        name: 'reverseColumns',
-        type: 'checkbox',
-        label: 'Reverse Column Order (Content on Left, Image on Right)',
-        defaultValue: false,
-        admin: { width: '50%' },
-      },
-    ],
-  },
-
-  // ─── 2. Left Column: Full-Bleed Image & Cyan Badge ────────────────────────
-  {
-    name: 'leftColumn',
-    type: 'group',
-    label: 'Left Column: Image & Badge',
-    fields: [
+        label: '📝 Content & Media',
+        fields: [
+          // ─── 2. Left Column: Full-Bleed Image & Cyan Badge ────────────────────────
+          {
+            name: 'leftColumn',
+            type: 'group',
+            label: 'Left Column: Image & Badge',
+            fields: [
       {
         name: 'image',
         type: 'upload',
@@ -753,6 +737,36 @@ export const eventMeetingFormatsFields: Field[] = [
                 type: 'select',
                 label: 'Mobile Font Weight',
                 options: fontWeightOptions,
+                admin: { width: '50%' },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+        ],
+      },
+      {
+        label: '⚙️ Advanced Styling & Layout',
+        fields: [
+          // ─── 1. Section Background & Column Layout ────────────────────────────────
+          {
+            type: 'row',
+            fields: [
+              bgColorPickerAll({
+                overrides: {
+                  name: 'sectionBgColor',
+                  label: 'Section Background Color',
+                  defaultValue: 'bg-white',
+                  admin: { width: '50%' },
+                },
+              }),
+              {
+                name: 'reverseColumns',
+                type: 'checkbox',
+                label: 'Reverse Column Order (Content on Left, Image on Right)',
+                defaultValue: false,
                 admin: { width: '50%' },
               },
             ],

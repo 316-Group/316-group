@@ -39,230 +39,18 @@ const mobilePaddingOptions = [
 ]
 
 export const eventHeroFields: Field[] = [
-  // ─── 1. Layout & Header Width Matching ─────────────────────────────────────
   {
-    type: 'row',
-    fields: [
+    type: 'tabs',
+    tabs: [
       {
-        name: 'matchHeaderPillWidth',
-        type: 'checkbox',
-        label: 'Match Header Width (Align with Logo & Nav, Max 1472px)',
-        defaultValue: true,
-        admin: {
-          width: '50%',
-          description:
-            'Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.',
-        },
-      },
-      {
-        name: 'paddingMode',
-        type: 'select',
-        label: 'Horizontal Padding Mode',
-        defaultValue: 'default',
-        validate: allowAnySelect,
-        options: [
-          { label: 'Default Responsive Padding', value: 'default' },
-          { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
-          { label: 'Custom Horizontal Padding', value: 'custom' },
-        ],
-        admin: {
-          width: '50%',
-          condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
-        },
-      },
-    ],
-  },
-  {
-    type: 'row',
-    admin: {
-      condition: (_, siblingData) =>
-        !siblingData?.matchHeaderPillWidth && siblingData?.paddingMode === 'custom',
-    },
-    fields: [
-      {
-        name: 'paddingXDesktop',
-        type: 'select',
-        label: 'Desktop Lateral Padding',
-        defaultValue: '48px',
-        validate: allowAnySelect,
-        options: desktopPaddingOptions,
-        admin: { width: '25%' },
-      },
-      {
-        name: 'paddingXDesktopCustom',
-        type: 'text',
-        label: 'Custom Desktop Padding (e.g. 50px)',
-        admin: {
-          width: '25%',
-          condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
-        },
-      },
-      {
-        name: 'paddingXMobile',
-        type: 'select',
-        label: 'Mobile Lateral Padding',
-        defaultValue: '16px',
-        validate: allowAnySelect,
-        options: mobilePaddingOptions,
-        admin: { width: '25%' },
-      },
-      {
-        name: 'paddingXMobileCustom',
-        type: 'text',
-        label: 'Custom Mobile Padding (e.g. 16px)',
-        admin: {
-          width: '25%',
-          condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
-        },
-      },
-    ],
-  },
-
-  // ─── 2. Vertical Padding Controls ──────────────────────────────────────────
-  {
-    type: 'row',
-    fields: [
-      {
-        name: 'paddingTop',
-        type: 'select',
-        label: 'Body Top Padding',
-        defaultValue: 'pt-16',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pt-0' },
-          { label: 'Small (pt-8)', value: 'pt-8' },
-          { label: 'Medium (pt-12)', value: 'pt-12' },
-          { label: 'Standard (pt-16 - Default)', value: 'pt-16' },
-          { label: 'Large (pt-20)', value: 'pt-20' },
-          { label: 'Extra Large (pt-24)', value: 'pt-24' },
-          { label: '2X Large (pt-32)', value: 'pt-32' },
-        ],
-        admin: { width: '25%' },
-      },
-      {
-        name: 'bodyPaddingBottom',
-        type: 'select',
-        label: 'Body Bottom Padding',
-        defaultValue: 'pb-16',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pb-0' },
-          { label: 'Small (pb-8)', value: 'pb-8' },
-          { label: 'Medium (pb-12)', value: 'pb-12' },
-          { label: 'Standard (pb-16 - Default)', value: 'pb-16' },
-          { label: 'Large (pb-20)', value: 'pb-20' },
-          { label: 'Extra Large (pb-24)', value: 'pb-24' },
-          { label: '2X Large (pb-32)', value: 'pb-32' },
-        ],
-        admin: { width: '25%' },
-      },
-      {
-        name: 'footerPaddingTop',
-        type: 'select',
-        label: 'Footer Top Padding',
-        defaultValue: 'pt-6',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pt-0' },
-          { label: 'Small (pt-4)', value: 'pt-4' },
-          { label: 'Standard (pt-6 - Default)', value: 'pt-6' },
-          { label: 'Medium (pt-8)', value: 'pt-8' },
-          { label: 'Large (pt-10)', value: 'pt-10' },
-          { label: 'Extra Large (pt-12)', value: 'pt-12' },
-        ],
-        admin: { width: '25%' },
-      },
-      {
-        name: 'footerPaddingBottom',
-        type: 'select',
-        label: 'Footer Bottom Padding',
-        defaultValue: 'pb-6',
-        validate: allowAnySelect,
-        options: [
-          { label: 'None (0)', value: 'pb-0' },
-          { label: 'Small (pb-4)', value: 'pb-4' },
-          { label: 'Standard (pb-6 - Default)', value: 'pb-6' },
-          { label: 'Medium (pb-8)', value: 'pb-8' },
-          { label: 'Large (pb-10)', value: 'pb-10' },
-          { label: 'Extra Large (pb-12)', value: 'pb-12' },
-        ],
-        admin: { width: '25%' },
-      },
-    ],
-  },
-
-  // ─── 3. Background Controls (Body & Footer) ────────────────────────────────
-  {
-    type: 'row',
-    fields: [
-      {
-        name: 'backgroundType',
-        type: 'select',
-        label: 'Body Background Type',
-        defaultValue: 'color',
-        options: [
-          { label: 'Solid Color (Default)', value: 'color' },
-          { label: 'Media / Image', value: 'media' },
-        ],
-        admin: { width: '33.33%' },
-      },
-      bgColorPickerAll({
-        overrides: {
-          name: 'bodyBgColor',
-          label: 'Body Background Color',
-          defaultValue: 'bg-[#0000FF]',
-          admin: {
-            width: '33.33%',
-            condition: (_, { backgroundType }) => backgroundType === 'color',
-          },
-        },
-      }),
-      bgColorPickerAll({
-        overrides: {
-          name: 'footerBgColor',
-          label: 'Footer Background Color',
-          defaultValue: 'bg-[#F4F6F9]',
-          admin: { width: '33.33%' },
-        },
-      }),
-    ],
-  },
-  {
-    type: 'row',
-    admin: {
-      condition: (_, { backgroundType }) => backgroundType === 'media',
-    },
-    fields: [
-      {
-        name: 'bodyBgMedia',
-        type: 'upload',
-        relationTo: 'media',
-        label: 'Body Background Image',
-        admin: { width: '50%' },
-      },
-      {
-        name: 'bodyBgOverlay',
-        type: 'select',
-        label: 'Background Overlay',
-        defaultValue: 'medium',
-        options: [
-          { label: 'Vignette', value: 'vignette' },
-          { label: 'Subtle (30%)', value: 'subtle' },
-          { label: 'Medium (50% - Default)', value: 'medium' },
-          { label: 'Heavy (75%)', value: 'heavy' },
-          { label: 'None', value: 'none' },
-        ],
-        admin: { width: '50%' },
-      },
-    ],
-  },
-
-  // ─── 4. Left Column Content Stack (All Optional) ───────────────────────────
-  {
-    name: 'kickerGroup',
-    type: 'group',
-    label: '1. Kicker / Subheading Tag (Square Accent + Text)',
-    fields: [
+        label: '📝 Content & Media',
+        fields: [
+          // ─── 4. Left Column Content Stack (All Optional) ───────────────────────────
+          {
+            name: 'kickerGroup',
+            type: 'group',
+            label: '1. Kicker / Subheading Tag (Square Accent + Text)',
+            fields: [
       {
         name: 'showKicker',
         type: 'checkbox',
@@ -1161,6 +949,232 @@ export const eventHeroFields: Field[] = [
             admin: {
               condition: (_, siblingData) => siblingData?.iconType === 'customMedia',
             },
+          },
+        ],
+      },
+    ],
+  },
+        ],
+      },
+      {
+        label: '⚙️ Advanced Styling & Layout',
+        fields: [
+          // ─── 1. Layout & Header Width Matching ─────────────────────────────────────
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'matchHeaderPillWidth',
+                type: 'checkbox',
+                label: 'Match Header Width (Align with Logo & Nav, Max 1472px)',
+                defaultValue: true,
+                admin: {
+                  width: '50%',
+                  description:
+                    'Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.',
+                },
+              },
+              {
+                name: 'paddingMode',
+                type: 'select',
+                label: 'Horizontal Padding Mode',
+                defaultValue: 'default',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'Default Responsive Padding', value: 'default' },
+                  { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
+                  { label: 'Custom Horizontal Padding', value: 'custom' },
+                ],
+                admin: {
+                  width: '50%',
+                  condition: (_, siblingData) => !siblingData?.matchHeaderPillWidth,
+                },
+              },
+            ],
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, siblingData) =>
+                !siblingData?.matchHeaderPillWidth && siblingData?.paddingMode === 'custom',
+            },
+            fields: [
+              {
+                name: 'paddingXDesktop',
+                type: 'select',
+                label: 'Desktop Lateral Padding',
+                defaultValue: '48px',
+                validate: allowAnySelect,
+                options: desktopPaddingOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'paddingXDesktopCustom',
+                type: 'text',
+                label: 'Custom Desktop Padding (e.g. 50px)',
+                admin: {
+                  width: '25%',
+                  condition: (_, siblingData) => siblingData?.paddingXDesktop === 'custom',
+                },
+              },
+              {
+                name: 'paddingXMobile',
+                type: 'select',
+                label: 'Mobile Lateral Padding',
+                defaultValue: '16px',
+                validate: allowAnySelect,
+                options: mobilePaddingOptions,
+                admin: { width: '25%' },
+              },
+              {
+                name: 'paddingXMobileCustom',
+                type: 'text',
+                label: 'Custom Mobile Padding (e.g. 16px)',
+                admin: {
+                  width: '25%',
+                  condition: (_, siblingData) => siblingData?.paddingXMobile === 'custom',
+                },
+              },
+            ],
+          },
+
+          // ─── 2. Vertical Padding Controls ──────────────────────────────────────────
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'paddingTop',
+                type: 'select',
+                label: 'Body Top Padding',
+                defaultValue: 'pt-16',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pt-0' },
+                  { label: 'Small (pt-8)', value: 'pt-8' },
+                  { label: 'Medium (pt-12)', value: 'pt-12' },
+                  { label: 'Standard (pt-16 - Default)', value: 'pt-16' },
+                  { label: 'Large (pt-20)', value: 'pt-20' },
+                  { label: 'Extra Large (pt-24)', value: 'pt-24' },
+                  { label: '2X Large (pt-32)', value: 'pt-32' },
+                ],
+                admin: { width: '25%' },
+              },
+              {
+                name: 'bodyPaddingBottom',
+                type: 'select',
+                label: 'Body Bottom Padding',
+                defaultValue: 'pb-16',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pb-0' },
+                  { label: 'Small (pb-8)', value: 'pb-8' },
+                  { label: 'Medium (pb-12)', value: 'pb-12' },
+                  { label: 'Standard (pb-16 - Default)', value: 'pb-16' },
+                  { label: 'Large (pb-20)', value: 'pb-20' },
+                  { label: 'Extra Large (pb-24)', value: 'pb-24' },
+                  { label: '2X Large (pb-32)', value: 'pb-32' },
+                ],
+                admin: { width: '25%' },
+              },
+              {
+                name: 'footerPaddingTop',
+                type: 'select',
+                label: 'Footer Top Padding',
+                defaultValue: 'pt-6',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pt-0' },
+                  { label: 'Small (pt-4)', value: 'pt-4' },
+                  { label: 'Standard (pt-6 - Default)', value: 'pt-6' },
+                  { label: 'Medium (pt-8)', value: 'pt-8' },
+                  { label: 'Large (pt-10)', value: 'pt-10' },
+                  { label: 'Extra Large (pt-12)', value: 'pt-12' },
+                ],
+                admin: { width: '25%' },
+              },
+              {
+                name: 'footerPaddingBottom',
+                type: 'select',
+                label: 'Footer Bottom Padding',
+                defaultValue: 'pb-6',
+                validate: allowAnySelect,
+                options: [
+                  { label: 'None (0)', value: 'pb-0' },
+                  { label: 'Small (pb-4)', value: 'pb-4' },
+                  { label: 'Standard (pb-6 - Default)', value: 'pb-6' },
+                  { label: 'Medium (pb-8)', value: 'pb-8' },
+                  { label: 'Large (pb-10)', value: 'pb-10' },
+                  { label: 'Extra Large (pb-12)', value: 'pb-12' },
+                ],
+                admin: { width: '25%' },
+              },
+            ],
+          },
+
+          // ─── 3. Background Controls (Body & Footer) ────────────────────────────────
+          {
+            type: 'row',
+            fields: [
+              {
+                name: 'backgroundType',
+                type: 'select',
+                label: 'Body Background Type',
+                defaultValue: 'color',
+                options: [
+                  { label: 'Solid Color (Default)', value: 'color' },
+                  { label: 'Media / Image', value: 'media' },
+                ],
+                admin: { width: '33.33%' },
+              },
+              bgColorPickerAll({
+                overrides: {
+                  name: 'bodyBgColor',
+                  label: 'Body Background Color',
+                  defaultValue: 'bg-[#0000FF]',
+                  admin: {
+                    width: '33.33%',
+                    condition: (_, { backgroundType }) => backgroundType === 'color',
+                  },
+                },
+              }),
+              bgColorPickerAll({
+                overrides: {
+                  name: 'footerBgColor',
+                  label: 'Footer Background Color',
+                  defaultValue: 'bg-[#F4F6F9]',
+                  admin: { width: '33.33%' },
+                },
+              }),
+            ],
+          },
+          {
+            type: 'row',
+            admin: {
+              condition: (_, { backgroundType }) => backgroundType === 'media',
+            },
+            fields: [
+              {
+                name: 'bodyBgMedia',
+                type: 'upload',
+                relationTo: 'media',
+                label: 'Body Background Image',
+                admin: { width: '50%' },
+              },
+              {
+                name: 'bodyBgOverlay',
+                type: 'select',
+                label: 'Background Overlay',
+                defaultValue: 'medium',
+                options: [
+                  { label: 'Vignette', value: 'vignette' },
+                  { label: 'Subtle (30%)', value: 'subtle' },
+                  { label: 'Medium (50% - Default)', value: 'medium' },
+                  { label: 'Heavy (75%)', value: 'heavy' },
+                  { label: 'None', value: 'none' },
+                ],
+                admin: { width: '50%' },
+              },
+            ],
           },
         ],
       },

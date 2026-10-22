@@ -197131,574 +197131,6 @@ export interface CenteredButtonBlock {
  * via the `definition` "EventHeroBlock".
  */
 export interface EventHeroBlock {
-  /**
-   * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
-   */
-  matchHeaderPillWidth?: boolean | null;
-  paddingMode?: ('default' | 'none' | 'custom') | null;
-  paddingXDesktop?:
-    | ('0px' | '8px' | '16px' | '24px' | '32px' | '40px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
-    | null;
-  paddingXDesktopCustom?: string | null;
-  paddingXMobile?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
-  paddingXMobileCustom?: string | null;
-  paddingTop?: ('pt-0' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-24' | 'pt-32') | null;
-  bodyPaddingBottom?: ('pb-0' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
-  footerPaddingTop?: ('pt-0' | 'pt-4' | 'pt-6' | 'pt-8' | 'pt-10' | 'pt-12') | null;
-  footerPaddingBottom?: ('pb-0' | 'pb-4' | 'pb-6' | 'pb-8' | 'pb-10' | 'pb-12') | null;
-  backgroundType?: ('color' | 'media') | null;
-  bodyBgColor?:
-    | (
-        | 'bg-inherit'
-        | 'bg-current'
-        | 'bg-transparent'
-        | 'bg-black'
-        | 'bg-black/10'
-        | 'bg-black/20'
-        | 'bg-white'
-        | 'bg-white/10'
-        | 'bg-white/15'
-        | 'bg-white/20'
-        | 'bg-white/30'
-        | 'bg-[#F7F8F4]'
-        | 'bg-[#EFF1F8]'
-        | 'bg-[#F4F6FB]'
-        | 'bg-[#EFF2FE]'
-        | 'bg-[#1D4ED8]'
-        | 'bg-[#3F5AC9]'
-        | 'bg-light-sky'
-        | 'bg-[#0256FF]'
-        | 'bg-[#0000FF]'
-        | 'bg-[#F4F6F9]'
-        | 'bg-[#00D2FF]'
-        | 'bg-[#0256FF]/10'
-        | 'bg-[#0256FF]/5'
-        | 'bg-blue-custom'
-        | 'bg-cyan-neon'
-        | 'bg-[#00E5FF]'
-        | 'bg-[#F0F5FF]'
-        | 'bg-[#F8FAFC]'
-        | 'bg-slate-50'
-        | 'bg-slate-100'
-        | 'bg-slate-200'
-        | 'bg-slate-300'
-        | 'bg-slate-400'
-        | 'bg-slate-500'
-        | 'bg-slate-600'
-        | 'bg-slate-700'
-        | 'bg-slate-800'
-        | 'bg-slate-900'
-        | 'bg-slate-950'
-        | 'bg-gray-50'
-        | 'bg-gray-100'
-        | 'bg-gray-200'
-        | 'bg-gray-300'
-        | 'bg-gray-400'
-        | 'bg-gray-500'
-        | 'bg-gray-600'
-        | 'bg-gray-700'
-        | 'bg-gray-800'
-        | 'bg-gray-900'
-        | 'bg-gray-950'
-        | 'bg-zinc-50'
-        | 'bg-zinc-100'
-        | 'bg-zinc-200'
-        | 'bg-zinc-300'
-        | 'bg-zinc-400'
-        | 'bg-zinc-500'
-        | 'bg-zinc-600'
-        | 'bg-zinc-700'
-        | 'bg-zinc-800'
-        | 'bg-zinc-900'
-        | 'bg-zinc-950'
-        | 'bg-neutral-50'
-        | 'bg-neutral-100'
-        | 'bg-neutral-200'
-        | 'bg-neutral-300'
-        | 'bg-neutral-400'
-        | 'bg-neutral-500'
-        | 'bg-neutral-600'
-        | 'bg-neutral-700'
-        | 'bg-neutral-800'
-        | 'bg-neutral-900'
-        | 'bg-neutral-950'
-        | 'bg-stone-50'
-        | 'bg-stone-100'
-        | 'bg-stone-200'
-        | 'bg-stone-300'
-        | 'bg-stone-400'
-        | 'bg-stone-500'
-        | 'bg-stone-600'
-        | 'bg-stone-700'
-        | 'bg-stone-800'
-        | 'bg-stone-900'
-        | 'bg-stone-950'
-        | 'bg-red-50'
-        | 'bg-red-100'
-        | 'bg-red-200'
-        | 'bg-red-300'
-        | 'bg-red-400'
-        | 'bg-red-500'
-        | 'bg-red-600'
-        | 'bg-red-700'
-        | 'bg-red-800'
-        | 'bg-red-900'
-        | 'bg-red-950'
-        | 'bg-orange-50'
-        | 'bg-orange-100'
-        | 'bg-orange-200'
-        | 'bg-orange-300'
-        | 'bg-orange-400'
-        | 'bg-orange-500'
-        | 'bg-orange-600'
-        | 'bg-orange-700'
-        | 'bg-orange-800'
-        | 'bg-orange-900'
-        | 'bg-orange-950'
-        | 'bg-amber-50'
-        | 'bg-amber-100'
-        | 'bg-amber-200'
-        | 'bg-amber-300'
-        | 'bg-amber-400'
-        | 'bg-amber-500'
-        | 'bg-amber-600'
-        | 'bg-amber-700'
-        | 'bg-amber-800'
-        | 'bg-amber-900'
-        | 'bg-amber-950'
-        | 'bg-yellow-50'
-        | 'bg-yellow-100'
-        | 'bg-yellow-200'
-        | 'bg-yellow-300'
-        | 'bg-yellow-400'
-        | 'bg-yellow-500'
-        | 'bg-yellow-600'
-        | 'bg-yellow-700'
-        | 'bg-yellow-800'
-        | 'bg-yellow-900'
-        | 'bg-yellow-950'
-        | 'bg-lime-50'
-        | 'bg-lime-100'
-        | 'bg-lime-200'
-        | 'bg-lime-300'
-        | 'bg-lime-400'
-        | 'bg-lime-500'
-        | 'bg-lime-600'
-        | 'bg-lime-700'
-        | 'bg-lime-800'
-        | 'bg-lime-900'
-        | 'bg-lime-950'
-        | 'bg-green-50'
-        | 'bg-green-100'
-        | 'bg-green-200'
-        | 'bg-green-300'
-        | 'bg-green-400'
-        | 'bg-green-500'
-        | 'bg-green-600'
-        | 'bg-green-700'
-        | 'bg-green-800'
-        | 'bg-green-900'
-        | 'bg-green-950'
-        | 'bg-emerald-50'
-        | 'bg-emerald-100'
-        | 'bg-emerald-200'
-        | 'bg-emerald-300'
-        | 'bg-emerald-400'
-        | 'bg-emerald-500'
-        | 'bg-emerald-600'
-        | 'bg-emerald-700'
-        | 'bg-emerald-800'
-        | 'bg-emerald-900'
-        | 'bg-emerald-950'
-        | 'bg-teal-50'
-        | 'bg-teal-100'
-        | 'bg-teal-200'
-        | 'bg-teal-300'
-        | 'bg-teal-400'
-        | 'bg-teal-500'
-        | 'bg-teal-600'
-        | 'bg-teal-700'
-        | 'bg-teal-800'
-        | 'bg-teal-900'
-        | 'bg-teal-950'
-        | 'bg-cyan-50'
-        | 'bg-cyan-100'
-        | 'bg-cyan-200'
-        | 'bg-cyan-300'
-        | 'bg-cyan-400'
-        | 'bg-cyan-500'
-        | 'bg-cyan-600'
-        | 'bg-cyan-700'
-        | 'bg-cyan-800'
-        | 'bg-cyan-900'
-        | 'bg-cyan-950'
-        | 'bg-sky-50'
-        | 'bg-sky-100'
-        | 'bg-sky-200'
-        | 'bg-sky-300'
-        | 'bg-sky-400'
-        | 'bg-sky-500'
-        | 'bg-sky-600'
-        | 'bg-sky-700'
-        | 'bg-sky-800'
-        | 'bg-sky-900'
-        | 'bg-sky-950'
-        | 'bg-blue-50'
-        | 'bg-blue-100'
-        | 'bg-blue-200'
-        | 'bg-blue-300'
-        | 'bg-blue-400'
-        | 'bg-blue-500'
-        | 'bg-blue-600'
-        | 'bg-blue-700'
-        | 'bg-blue-800'
-        | 'bg-blue-900'
-        | 'bg-blue-950'
-        | 'bg-indigo-50'
-        | 'bg-indigo-100'
-        | 'bg-indigo-200'
-        | 'bg-indigo-300'
-        | 'bg-indigo-400'
-        | 'bg-indigo-500'
-        | 'bg-indigo-600'
-        | 'bg-indigo-700'
-        | 'bg-indigo-800'
-        | 'bg-indigo-900'
-        | 'bg-indigo-950'
-        | 'bg-violet-50'
-        | 'bg-violet-100'
-        | 'bg-violet-200'
-        | 'bg-violet-300'
-        | 'bg-violet-400'
-        | 'bg-violet-500'
-        | 'bg-violet-600'
-        | 'bg-violet-700'
-        | 'bg-violet-800'
-        | 'bg-violet-900'
-        | 'bg-violet-950'
-        | 'bg-purple-50'
-        | 'bg-purple-100'
-        | 'bg-purple-200'
-        | 'bg-purple-300'
-        | 'bg-purple-400'
-        | 'bg-purple-500'
-        | 'bg-purple-600'
-        | 'bg-purple-700'
-        | 'bg-purple-800'
-        | 'bg-purple-900'
-        | 'bg-purple-950'
-        | 'bg-fuchsia-50'
-        | 'bg-fuchsia-100'
-        | 'bg-fuchsia-200'
-        | 'bg-fuchsia-300'
-        | 'bg-fuchsia-400'
-        | 'bg-fuchsia-500'
-        | 'bg-fuchsia-600'
-        | 'bg-fuchsia-700'
-        | 'bg-fuchsia-800'
-        | 'bg-fuchsia-900'
-        | 'bg-fuchsia-950'
-        | 'bg-pink-50'
-        | 'bg-pink-100'
-        | 'bg-pink-200'
-        | 'bg-pink-300'
-        | 'bg-pink-400'
-        | 'bg-pink-500'
-        | 'bg-pink-600'
-        | 'bg-pink-700'
-        | 'bg-pink-800'
-        | 'bg-pink-900'
-        | 'bg-pink-950'
-        | 'bg-rose-50'
-        | 'bg-rose-100'
-        | 'bg-rose-200'
-        | 'bg-rose-300'
-        | 'bg-rose-400'
-        | 'bg-rose-500'
-        | 'bg-rose-600'
-        | 'bg-rose-700'
-        | 'bg-rose-800'
-        | 'bg-rose-900'
-        | 'bg-rose-950'
-      )
-    | null;
-  footerBgColor?:
-    | (
-        | 'bg-inherit'
-        | 'bg-current'
-        | 'bg-transparent'
-        | 'bg-black'
-        | 'bg-black/10'
-        | 'bg-black/20'
-        | 'bg-white'
-        | 'bg-white/10'
-        | 'bg-white/15'
-        | 'bg-white/20'
-        | 'bg-white/30'
-        | 'bg-[#F7F8F4]'
-        | 'bg-[#EFF1F8]'
-        | 'bg-[#F4F6FB]'
-        | 'bg-[#EFF2FE]'
-        | 'bg-[#1D4ED8]'
-        | 'bg-[#3F5AC9]'
-        | 'bg-light-sky'
-        | 'bg-[#0256FF]'
-        | 'bg-[#0000FF]'
-        | 'bg-[#F4F6F9]'
-        | 'bg-[#00D2FF]'
-        | 'bg-[#0256FF]/10'
-        | 'bg-[#0256FF]/5'
-        | 'bg-blue-custom'
-        | 'bg-cyan-neon'
-        | 'bg-[#00E5FF]'
-        | 'bg-[#F0F5FF]'
-        | 'bg-[#F8FAFC]'
-        | 'bg-slate-50'
-        | 'bg-slate-100'
-        | 'bg-slate-200'
-        | 'bg-slate-300'
-        | 'bg-slate-400'
-        | 'bg-slate-500'
-        | 'bg-slate-600'
-        | 'bg-slate-700'
-        | 'bg-slate-800'
-        | 'bg-slate-900'
-        | 'bg-slate-950'
-        | 'bg-gray-50'
-        | 'bg-gray-100'
-        | 'bg-gray-200'
-        | 'bg-gray-300'
-        | 'bg-gray-400'
-        | 'bg-gray-500'
-        | 'bg-gray-600'
-        | 'bg-gray-700'
-        | 'bg-gray-800'
-        | 'bg-gray-900'
-        | 'bg-gray-950'
-        | 'bg-zinc-50'
-        | 'bg-zinc-100'
-        | 'bg-zinc-200'
-        | 'bg-zinc-300'
-        | 'bg-zinc-400'
-        | 'bg-zinc-500'
-        | 'bg-zinc-600'
-        | 'bg-zinc-700'
-        | 'bg-zinc-800'
-        | 'bg-zinc-900'
-        | 'bg-zinc-950'
-        | 'bg-neutral-50'
-        | 'bg-neutral-100'
-        | 'bg-neutral-200'
-        | 'bg-neutral-300'
-        | 'bg-neutral-400'
-        | 'bg-neutral-500'
-        | 'bg-neutral-600'
-        | 'bg-neutral-700'
-        | 'bg-neutral-800'
-        | 'bg-neutral-900'
-        | 'bg-neutral-950'
-        | 'bg-stone-50'
-        | 'bg-stone-100'
-        | 'bg-stone-200'
-        | 'bg-stone-300'
-        | 'bg-stone-400'
-        | 'bg-stone-500'
-        | 'bg-stone-600'
-        | 'bg-stone-700'
-        | 'bg-stone-800'
-        | 'bg-stone-900'
-        | 'bg-stone-950'
-        | 'bg-red-50'
-        | 'bg-red-100'
-        | 'bg-red-200'
-        | 'bg-red-300'
-        | 'bg-red-400'
-        | 'bg-red-500'
-        | 'bg-red-600'
-        | 'bg-red-700'
-        | 'bg-red-800'
-        | 'bg-red-900'
-        | 'bg-red-950'
-        | 'bg-orange-50'
-        | 'bg-orange-100'
-        | 'bg-orange-200'
-        | 'bg-orange-300'
-        | 'bg-orange-400'
-        | 'bg-orange-500'
-        | 'bg-orange-600'
-        | 'bg-orange-700'
-        | 'bg-orange-800'
-        | 'bg-orange-900'
-        | 'bg-orange-950'
-        | 'bg-amber-50'
-        | 'bg-amber-100'
-        | 'bg-amber-200'
-        | 'bg-amber-300'
-        | 'bg-amber-400'
-        | 'bg-amber-500'
-        | 'bg-amber-600'
-        | 'bg-amber-700'
-        | 'bg-amber-800'
-        | 'bg-amber-900'
-        | 'bg-amber-950'
-        | 'bg-yellow-50'
-        | 'bg-yellow-100'
-        | 'bg-yellow-200'
-        | 'bg-yellow-300'
-        | 'bg-yellow-400'
-        | 'bg-yellow-500'
-        | 'bg-yellow-600'
-        | 'bg-yellow-700'
-        | 'bg-yellow-800'
-        | 'bg-yellow-900'
-        | 'bg-yellow-950'
-        | 'bg-lime-50'
-        | 'bg-lime-100'
-        | 'bg-lime-200'
-        | 'bg-lime-300'
-        | 'bg-lime-400'
-        | 'bg-lime-500'
-        | 'bg-lime-600'
-        | 'bg-lime-700'
-        | 'bg-lime-800'
-        | 'bg-lime-900'
-        | 'bg-lime-950'
-        | 'bg-green-50'
-        | 'bg-green-100'
-        | 'bg-green-200'
-        | 'bg-green-300'
-        | 'bg-green-400'
-        | 'bg-green-500'
-        | 'bg-green-600'
-        | 'bg-green-700'
-        | 'bg-green-800'
-        | 'bg-green-900'
-        | 'bg-green-950'
-        | 'bg-emerald-50'
-        | 'bg-emerald-100'
-        | 'bg-emerald-200'
-        | 'bg-emerald-300'
-        | 'bg-emerald-400'
-        | 'bg-emerald-500'
-        | 'bg-emerald-600'
-        | 'bg-emerald-700'
-        | 'bg-emerald-800'
-        | 'bg-emerald-900'
-        | 'bg-emerald-950'
-        | 'bg-teal-50'
-        | 'bg-teal-100'
-        | 'bg-teal-200'
-        | 'bg-teal-300'
-        | 'bg-teal-400'
-        | 'bg-teal-500'
-        | 'bg-teal-600'
-        | 'bg-teal-700'
-        | 'bg-teal-800'
-        | 'bg-teal-900'
-        | 'bg-teal-950'
-        | 'bg-cyan-50'
-        | 'bg-cyan-100'
-        | 'bg-cyan-200'
-        | 'bg-cyan-300'
-        | 'bg-cyan-400'
-        | 'bg-cyan-500'
-        | 'bg-cyan-600'
-        | 'bg-cyan-700'
-        | 'bg-cyan-800'
-        | 'bg-cyan-900'
-        | 'bg-cyan-950'
-        | 'bg-sky-50'
-        | 'bg-sky-100'
-        | 'bg-sky-200'
-        | 'bg-sky-300'
-        | 'bg-sky-400'
-        | 'bg-sky-500'
-        | 'bg-sky-600'
-        | 'bg-sky-700'
-        | 'bg-sky-800'
-        | 'bg-sky-900'
-        | 'bg-sky-950'
-        | 'bg-blue-50'
-        | 'bg-blue-100'
-        | 'bg-blue-200'
-        | 'bg-blue-300'
-        | 'bg-blue-400'
-        | 'bg-blue-500'
-        | 'bg-blue-600'
-        | 'bg-blue-700'
-        | 'bg-blue-800'
-        | 'bg-blue-900'
-        | 'bg-blue-950'
-        | 'bg-indigo-50'
-        | 'bg-indigo-100'
-        | 'bg-indigo-200'
-        | 'bg-indigo-300'
-        | 'bg-indigo-400'
-        | 'bg-indigo-500'
-        | 'bg-indigo-600'
-        | 'bg-indigo-700'
-        | 'bg-indigo-800'
-        | 'bg-indigo-900'
-        | 'bg-indigo-950'
-        | 'bg-violet-50'
-        | 'bg-violet-100'
-        | 'bg-violet-200'
-        | 'bg-violet-300'
-        | 'bg-violet-400'
-        | 'bg-violet-500'
-        | 'bg-violet-600'
-        | 'bg-violet-700'
-        | 'bg-violet-800'
-        | 'bg-violet-900'
-        | 'bg-violet-950'
-        | 'bg-purple-50'
-        | 'bg-purple-100'
-        | 'bg-purple-200'
-        | 'bg-purple-300'
-        | 'bg-purple-400'
-        | 'bg-purple-500'
-        | 'bg-purple-600'
-        | 'bg-purple-700'
-        | 'bg-purple-800'
-        | 'bg-purple-900'
-        | 'bg-purple-950'
-        | 'bg-fuchsia-50'
-        | 'bg-fuchsia-100'
-        | 'bg-fuchsia-200'
-        | 'bg-fuchsia-300'
-        | 'bg-fuchsia-400'
-        | 'bg-fuchsia-500'
-        | 'bg-fuchsia-600'
-        | 'bg-fuchsia-700'
-        | 'bg-fuchsia-800'
-        | 'bg-fuchsia-900'
-        | 'bg-fuchsia-950'
-        | 'bg-pink-50'
-        | 'bg-pink-100'
-        | 'bg-pink-200'
-        | 'bg-pink-300'
-        | 'bg-pink-400'
-        | 'bg-pink-500'
-        | 'bg-pink-600'
-        | 'bg-pink-700'
-        | 'bg-pink-800'
-        | 'bg-pink-900'
-        | 'bg-pink-950'
-        | 'bg-rose-50'
-        | 'bg-rose-100'
-        | 'bg-rose-200'
-        | 'bg-rose-300'
-        | 'bg-rose-400'
-        | 'bg-rose-500'
-        | 'bg-rose-600'
-        | 'bg-rose-700'
-        | 'bg-rose-800'
-        | 'bg-rose-900'
-        | 'bg-rose-950'
-      )
-    | null;
-  bodyBgMedia?: (string | null) | Media;
-  bodyBgOverlay?: ('vignette' | 'subtle' | 'medium' | 'heavy' | 'none') | null;
   kickerGroup?: {
     showKicker?: boolean | null;
     squareColor?: string | null;
@@ -201601,15 +201033,6 @@ export interface EventHeroBlock {
         }[]
       | null;
   };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventHero';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventSharedPurposeBlock".
- */
-export interface EventSharedPurposeBlock {
   /**
    * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
    */
@@ -201621,7 +201044,12 @@ export interface EventSharedPurposeBlock {
   paddingXDesktopCustom?: string | null;
   paddingXMobile?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
   paddingXMobileCustom?: string | null;
-  sectionBgColor?:
+  paddingTop?: ('pt-0' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-24' | 'pt-32') | null;
+  bodyPaddingBottom?: ('pb-0' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-32') | null;
+  footerPaddingTop?: ('pt-0' | 'pt-4' | 'pt-6' | 'pt-8' | 'pt-10' | 'pt-12') | null;
+  footerPaddingBottom?: ('pb-0' | 'pb-4' | 'pb-6' | 'pb-8' | 'pb-10' | 'pb-12') | null;
+  backgroundType?: ('color' | 'media') | null;
+  bodyBgColor?:
     | (
         | 'bg-inherit'
         | 'bg-current'
@@ -201896,8 +201324,292 @@ export interface EventSharedPurposeBlock {
         | 'bg-rose-950'
       )
     | null;
-  paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
-  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  footerBgColor?:
+    | (
+        | 'bg-inherit'
+        | 'bg-current'
+        | 'bg-transparent'
+        | 'bg-black'
+        | 'bg-black/10'
+        | 'bg-black/20'
+        | 'bg-white'
+        | 'bg-white/10'
+        | 'bg-white/15'
+        | 'bg-white/20'
+        | 'bg-white/30'
+        | 'bg-[#F7F8F4]'
+        | 'bg-[#EFF1F8]'
+        | 'bg-[#F4F6FB]'
+        | 'bg-[#EFF2FE]'
+        | 'bg-[#1D4ED8]'
+        | 'bg-[#3F5AC9]'
+        | 'bg-light-sky'
+        | 'bg-[#0256FF]'
+        | 'bg-[#0000FF]'
+        | 'bg-[#F4F6F9]'
+        | 'bg-[#00D2FF]'
+        | 'bg-[#0256FF]/10'
+        | 'bg-[#0256FF]/5'
+        | 'bg-blue-custom'
+        | 'bg-cyan-neon'
+        | 'bg-[#00E5FF]'
+        | 'bg-[#F0F5FF]'
+        | 'bg-[#F8FAFC]'
+        | 'bg-slate-50'
+        | 'bg-slate-100'
+        | 'bg-slate-200'
+        | 'bg-slate-300'
+        | 'bg-slate-400'
+        | 'bg-slate-500'
+        | 'bg-slate-600'
+        | 'bg-slate-700'
+        | 'bg-slate-800'
+        | 'bg-slate-900'
+        | 'bg-slate-950'
+        | 'bg-gray-50'
+        | 'bg-gray-100'
+        | 'bg-gray-200'
+        | 'bg-gray-300'
+        | 'bg-gray-400'
+        | 'bg-gray-500'
+        | 'bg-gray-600'
+        | 'bg-gray-700'
+        | 'bg-gray-800'
+        | 'bg-gray-900'
+        | 'bg-gray-950'
+        | 'bg-zinc-50'
+        | 'bg-zinc-100'
+        | 'bg-zinc-200'
+        | 'bg-zinc-300'
+        | 'bg-zinc-400'
+        | 'bg-zinc-500'
+        | 'bg-zinc-600'
+        | 'bg-zinc-700'
+        | 'bg-zinc-800'
+        | 'bg-zinc-900'
+        | 'bg-zinc-950'
+        | 'bg-neutral-50'
+        | 'bg-neutral-100'
+        | 'bg-neutral-200'
+        | 'bg-neutral-300'
+        | 'bg-neutral-400'
+        | 'bg-neutral-500'
+        | 'bg-neutral-600'
+        | 'bg-neutral-700'
+        | 'bg-neutral-800'
+        | 'bg-neutral-900'
+        | 'bg-neutral-950'
+        | 'bg-stone-50'
+        | 'bg-stone-100'
+        | 'bg-stone-200'
+        | 'bg-stone-300'
+        | 'bg-stone-400'
+        | 'bg-stone-500'
+        | 'bg-stone-600'
+        | 'bg-stone-700'
+        | 'bg-stone-800'
+        | 'bg-stone-900'
+        | 'bg-stone-950'
+        | 'bg-red-50'
+        | 'bg-red-100'
+        | 'bg-red-200'
+        | 'bg-red-300'
+        | 'bg-red-400'
+        | 'bg-red-500'
+        | 'bg-red-600'
+        | 'bg-red-700'
+        | 'bg-red-800'
+        | 'bg-red-900'
+        | 'bg-red-950'
+        | 'bg-orange-50'
+        | 'bg-orange-100'
+        | 'bg-orange-200'
+        | 'bg-orange-300'
+        | 'bg-orange-400'
+        | 'bg-orange-500'
+        | 'bg-orange-600'
+        | 'bg-orange-700'
+        | 'bg-orange-800'
+        | 'bg-orange-900'
+        | 'bg-orange-950'
+        | 'bg-amber-50'
+        | 'bg-amber-100'
+        | 'bg-amber-200'
+        | 'bg-amber-300'
+        | 'bg-amber-400'
+        | 'bg-amber-500'
+        | 'bg-amber-600'
+        | 'bg-amber-700'
+        | 'bg-amber-800'
+        | 'bg-amber-900'
+        | 'bg-amber-950'
+        | 'bg-yellow-50'
+        | 'bg-yellow-100'
+        | 'bg-yellow-200'
+        | 'bg-yellow-300'
+        | 'bg-yellow-400'
+        | 'bg-yellow-500'
+        | 'bg-yellow-600'
+        | 'bg-yellow-700'
+        | 'bg-yellow-800'
+        | 'bg-yellow-900'
+        | 'bg-yellow-950'
+        | 'bg-lime-50'
+        | 'bg-lime-100'
+        | 'bg-lime-200'
+        | 'bg-lime-300'
+        | 'bg-lime-400'
+        | 'bg-lime-500'
+        | 'bg-lime-600'
+        | 'bg-lime-700'
+        | 'bg-lime-800'
+        | 'bg-lime-900'
+        | 'bg-lime-950'
+        | 'bg-green-50'
+        | 'bg-green-100'
+        | 'bg-green-200'
+        | 'bg-green-300'
+        | 'bg-green-400'
+        | 'bg-green-500'
+        | 'bg-green-600'
+        | 'bg-green-700'
+        | 'bg-green-800'
+        | 'bg-green-900'
+        | 'bg-green-950'
+        | 'bg-emerald-50'
+        | 'bg-emerald-100'
+        | 'bg-emerald-200'
+        | 'bg-emerald-300'
+        | 'bg-emerald-400'
+        | 'bg-emerald-500'
+        | 'bg-emerald-600'
+        | 'bg-emerald-700'
+        | 'bg-emerald-800'
+        | 'bg-emerald-900'
+        | 'bg-emerald-950'
+        | 'bg-teal-50'
+        | 'bg-teal-100'
+        | 'bg-teal-200'
+        | 'bg-teal-300'
+        | 'bg-teal-400'
+        | 'bg-teal-500'
+        | 'bg-teal-600'
+        | 'bg-teal-700'
+        | 'bg-teal-800'
+        | 'bg-teal-900'
+        | 'bg-teal-950'
+        | 'bg-cyan-50'
+        | 'bg-cyan-100'
+        | 'bg-cyan-200'
+        | 'bg-cyan-300'
+        | 'bg-cyan-400'
+        | 'bg-cyan-500'
+        | 'bg-cyan-600'
+        | 'bg-cyan-700'
+        | 'bg-cyan-800'
+        | 'bg-cyan-900'
+        | 'bg-cyan-950'
+        | 'bg-sky-50'
+        | 'bg-sky-100'
+        | 'bg-sky-200'
+        | 'bg-sky-300'
+        | 'bg-sky-400'
+        | 'bg-sky-500'
+        | 'bg-sky-600'
+        | 'bg-sky-700'
+        | 'bg-sky-800'
+        | 'bg-sky-900'
+        | 'bg-sky-950'
+        | 'bg-blue-50'
+        | 'bg-blue-100'
+        | 'bg-blue-200'
+        | 'bg-blue-300'
+        | 'bg-blue-400'
+        | 'bg-blue-500'
+        | 'bg-blue-600'
+        | 'bg-blue-700'
+        | 'bg-blue-800'
+        | 'bg-blue-900'
+        | 'bg-blue-950'
+        | 'bg-indigo-50'
+        | 'bg-indigo-100'
+        | 'bg-indigo-200'
+        | 'bg-indigo-300'
+        | 'bg-indigo-400'
+        | 'bg-indigo-500'
+        | 'bg-indigo-600'
+        | 'bg-indigo-700'
+        | 'bg-indigo-800'
+        | 'bg-indigo-900'
+        | 'bg-indigo-950'
+        | 'bg-violet-50'
+        | 'bg-violet-100'
+        | 'bg-violet-200'
+        | 'bg-violet-300'
+        | 'bg-violet-400'
+        | 'bg-violet-500'
+        | 'bg-violet-600'
+        | 'bg-violet-700'
+        | 'bg-violet-800'
+        | 'bg-violet-900'
+        | 'bg-violet-950'
+        | 'bg-purple-50'
+        | 'bg-purple-100'
+        | 'bg-purple-200'
+        | 'bg-purple-300'
+        | 'bg-purple-400'
+        | 'bg-purple-500'
+        | 'bg-purple-600'
+        | 'bg-purple-700'
+        | 'bg-purple-800'
+        | 'bg-purple-900'
+        | 'bg-purple-950'
+        | 'bg-fuchsia-50'
+        | 'bg-fuchsia-100'
+        | 'bg-fuchsia-200'
+        | 'bg-fuchsia-300'
+        | 'bg-fuchsia-400'
+        | 'bg-fuchsia-500'
+        | 'bg-fuchsia-600'
+        | 'bg-fuchsia-700'
+        | 'bg-fuchsia-800'
+        | 'bg-fuchsia-900'
+        | 'bg-fuchsia-950'
+        | 'bg-pink-50'
+        | 'bg-pink-100'
+        | 'bg-pink-200'
+        | 'bg-pink-300'
+        | 'bg-pink-400'
+        | 'bg-pink-500'
+        | 'bg-pink-600'
+        | 'bg-pink-700'
+        | 'bg-pink-800'
+        | 'bg-pink-900'
+        | 'bg-pink-950'
+        | 'bg-rose-50'
+        | 'bg-rose-100'
+        | 'bg-rose-200'
+        | 'bg-rose-300'
+        | 'bg-rose-400'
+        | 'bg-rose-500'
+        | 'bg-rose-600'
+        | 'bg-rose-700'
+        | 'bg-rose-800'
+        | 'bg-rose-900'
+        | 'bg-rose-950'
+      )
+    | null;
+  bodyBgMedia?: (string | null) | Media;
+  bodyBgOverlay?: ('vignette' | 'subtle' | 'medium' | 'heavy' | 'none') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventSharedPurposeBlock".
+ */
+export interface EventSharedPurposeBlock {
   imageColumn?: {
     /**
      * Upload your image. Per specification, this image renders without border or box-shadow.
@@ -203319,15 +203031,6 @@ export interface EventSharedPurposeBlock {
       };
     };
   };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventSharedPurpose';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventWhyConnectBlock".
- */
-export interface EventWhyConnectBlock {
   /**
    * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
    */
@@ -203615,7 +203318,16 @@ export interface EventWhyConnectBlock {
       )
     | null;
   paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
-  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventSharedPurpose';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventWhyConnectBlock".
+ */
+export interface EventWhyConnectBlock {
   topGrid?: {
     kickerGroup?: {
       showKicker?: boolean | null;
@@ -205580,15 +205292,6 @@ export interface EventWhyConnectBlock {
         id?: string | null;
       }[]
     | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventWhyConnect';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventAgendaOverviewBlock".
- */
-export interface EventAgendaOverviewBlock {
   /**
    * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
    */
@@ -205876,7 +205579,16 @@ export interface EventAgendaOverviewBlock {
       )
     | null;
   paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
-  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventWhyConnect';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventAgendaOverviewBlock".
+ */
+export interface EventAgendaOverviewBlock {
   leftColumn?: {
     kickerGroup?: {
       showKicker?: boolean | null;
@@ -210099,15 +209811,17 @@ export interface EventAgendaOverviewBlock {
         }[]
       | null;
   };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventAgendaOverview';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventMeetingFormatsBlock".
- */
-export interface EventMeetingFormatsBlock {
+  /**
+   * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
+   */
+  matchHeaderPillWidth?: boolean | null;
+  paddingMode?: ('default' | 'none' | 'custom') | null;
+  paddingXDesktop?:
+    | ('0px' | '8px' | '16px' | '24px' | '32px' | '40px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+    | null;
+  paddingXDesktopCustom?: string | null;
+  paddingXMobile?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+  paddingXMobileCustom?: string | null;
   sectionBgColor?:
     | (
         | 'bg-inherit'
@@ -210383,7 +210097,17 @@ export interface EventMeetingFormatsBlock {
         | 'bg-rose-950'
       )
     | null;
-  reverseColumns?: boolean | null;
+  paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
+  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventAgendaOverview';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventMeetingFormatsBlock".
+ */
+export interface EventMeetingFormatsBlock {
   leftColumn?: {
     image?: (string | null) | Media;
     imageFit?: ('cover' | 'contain') | null;
@@ -214292,26 +214016,6 @@ export interface EventMeetingFormatsBlock {
         | null;
     };
   };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventMeetingFormats';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventMadridVenueBlock".
- */
-export interface EventMadridVenueBlock {
-  /**
-   * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
-   */
-  matchHeaderPillWidth?: boolean | null;
-  paddingMode?: ('default' | 'none' | 'custom') | null;
-  paddingXDesktop?:
-    | ('0px' | '8px' | '16px' | '24px' | '32px' | '40px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
-    | null;
-  paddingXDesktopCustom?: string | null;
-  paddingXMobile?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
-  paddingXMobileCustom?: string | null;
   sectionBgColor?:
     | (
         | 'bg-inherit'
@@ -214587,8 +214291,16 @@ export interface EventMadridVenueBlock {
         | 'bg-rose-950'
       )
     | null;
-  paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
-  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  reverseColumns?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventMeetingFormats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventMadridVenueBlock".
+ */
+export interface EventMadridVenueBlock {
   leftColumn?: {
     kickerGroup?: {
       showKicker?: boolean | null;
@@ -217389,15 +217101,6 @@ export interface EventMadridVenueBlock {
     imageFit?: ('cover' | 'contain') | null;
     imageRounded?: ('rounded-none' | 'rounded-lg' | 'rounded-2xl') | null;
   };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'eventMadridVenue';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventConversationFormBlock".
- */
-export interface EventConversationFormBlock {
   /**
    * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
    */
@@ -217686,6 +217389,15 @@ export interface EventConversationFormBlock {
     | null;
   paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
   paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventMadridVenue';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventConversationFormBlock".
+ */
+export interface EventConversationFormBlock {
   leftColumn?: {
     kickerGroup?: {
       showKicker?: boolean | null;
@@ -221572,6 +221284,294 @@ export interface EventConversationFormBlock {
         | null;
     };
   };
+  /**
+   * Locks inner content to 1,472px (max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8) matching the site header logo and nav.
+   */
+  matchHeaderPillWidth?: boolean | null;
+  paddingMode?: ('default' | 'none' | 'custom') | null;
+  paddingXDesktop?:
+    | ('0px' | '8px' | '16px' | '24px' | '32px' | '40px' | '48px' | '60px' | '80px' | '100px' | '120px' | 'custom')
+    | null;
+  paddingXDesktopCustom?: string | null;
+  paddingXMobile?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | '32px' | 'custom') | null;
+  paddingXMobileCustom?: string | null;
+  sectionBgColor?:
+    | (
+        | 'bg-inherit'
+        | 'bg-current'
+        | 'bg-transparent'
+        | 'bg-black'
+        | 'bg-black/10'
+        | 'bg-black/20'
+        | 'bg-white'
+        | 'bg-white/10'
+        | 'bg-white/15'
+        | 'bg-white/20'
+        | 'bg-white/30'
+        | 'bg-[#F7F8F4]'
+        | 'bg-[#EFF1F8]'
+        | 'bg-[#F4F6FB]'
+        | 'bg-[#EFF2FE]'
+        | 'bg-[#1D4ED8]'
+        | 'bg-[#3F5AC9]'
+        | 'bg-light-sky'
+        | 'bg-[#0256FF]'
+        | 'bg-[#0000FF]'
+        | 'bg-[#F4F6F9]'
+        | 'bg-[#00D2FF]'
+        | 'bg-[#0256FF]/10'
+        | 'bg-[#0256FF]/5'
+        | 'bg-blue-custom'
+        | 'bg-cyan-neon'
+        | 'bg-[#00E5FF]'
+        | 'bg-[#F0F5FF]'
+        | 'bg-[#F8FAFC]'
+        | 'bg-slate-50'
+        | 'bg-slate-100'
+        | 'bg-slate-200'
+        | 'bg-slate-300'
+        | 'bg-slate-400'
+        | 'bg-slate-500'
+        | 'bg-slate-600'
+        | 'bg-slate-700'
+        | 'bg-slate-800'
+        | 'bg-slate-900'
+        | 'bg-slate-950'
+        | 'bg-gray-50'
+        | 'bg-gray-100'
+        | 'bg-gray-200'
+        | 'bg-gray-300'
+        | 'bg-gray-400'
+        | 'bg-gray-500'
+        | 'bg-gray-600'
+        | 'bg-gray-700'
+        | 'bg-gray-800'
+        | 'bg-gray-900'
+        | 'bg-gray-950'
+        | 'bg-zinc-50'
+        | 'bg-zinc-100'
+        | 'bg-zinc-200'
+        | 'bg-zinc-300'
+        | 'bg-zinc-400'
+        | 'bg-zinc-500'
+        | 'bg-zinc-600'
+        | 'bg-zinc-700'
+        | 'bg-zinc-800'
+        | 'bg-zinc-900'
+        | 'bg-zinc-950'
+        | 'bg-neutral-50'
+        | 'bg-neutral-100'
+        | 'bg-neutral-200'
+        | 'bg-neutral-300'
+        | 'bg-neutral-400'
+        | 'bg-neutral-500'
+        | 'bg-neutral-600'
+        | 'bg-neutral-700'
+        | 'bg-neutral-800'
+        | 'bg-neutral-900'
+        | 'bg-neutral-950'
+        | 'bg-stone-50'
+        | 'bg-stone-100'
+        | 'bg-stone-200'
+        | 'bg-stone-300'
+        | 'bg-stone-400'
+        | 'bg-stone-500'
+        | 'bg-stone-600'
+        | 'bg-stone-700'
+        | 'bg-stone-800'
+        | 'bg-stone-900'
+        | 'bg-stone-950'
+        | 'bg-red-50'
+        | 'bg-red-100'
+        | 'bg-red-200'
+        | 'bg-red-300'
+        | 'bg-red-400'
+        | 'bg-red-500'
+        | 'bg-red-600'
+        | 'bg-red-700'
+        | 'bg-red-800'
+        | 'bg-red-900'
+        | 'bg-red-950'
+        | 'bg-orange-50'
+        | 'bg-orange-100'
+        | 'bg-orange-200'
+        | 'bg-orange-300'
+        | 'bg-orange-400'
+        | 'bg-orange-500'
+        | 'bg-orange-600'
+        | 'bg-orange-700'
+        | 'bg-orange-800'
+        | 'bg-orange-900'
+        | 'bg-orange-950'
+        | 'bg-amber-50'
+        | 'bg-amber-100'
+        | 'bg-amber-200'
+        | 'bg-amber-300'
+        | 'bg-amber-400'
+        | 'bg-amber-500'
+        | 'bg-amber-600'
+        | 'bg-amber-700'
+        | 'bg-amber-800'
+        | 'bg-amber-900'
+        | 'bg-amber-950'
+        | 'bg-yellow-50'
+        | 'bg-yellow-100'
+        | 'bg-yellow-200'
+        | 'bg-yellow-300'
+        | 'bg-yellow-400'
+        | 'bg-yellow-500'
+        | 'bg-yellow-600'
+        | 'bg-yellow-700'
+        | 'bg-yellow-800'
+        | 'bg-yellow-900'
+        | 'bg-yellow-950'
+        | 'bg-lime-50'
+        | 'bg-lime-100'
+        | 'bg-lime-200'
+        | 'bg-lime-300'
+        | 'bg-lime-400'
+        | 'bg-lime-500'
+        | 'bg-lime-600'
+        | 'bg-lime-700'
+        | 'bg-lime-800'
+        | 'bg-lime-900'
+        | 'bg-lime-950'
+        | 'bg-green-50'
+        | 'bg-green-100'
+        | 'bg-green-200'
+        | 'bg-green-300'
+        | 'bg-green-400'
+        | 'bg-green-500'
+        | 'bg-green-600'
+        | 'bg-green-700'
+        | 'bg-green-800'
+        | 'bg-green-900'
+        | 'bg-green-950'
+        | 'bg-emerald-50'
+        | 'bg-emerald-100'
+        | 'bg-emerald-200'
+        | 'bg-emerald-300'
+        | 'bg-emerald-400'
+        | 'bg-emerald-500'
+        | 'bg-emerald-600'
+        | 'bg-emerald-700'
+        | 'bg-emerald-800'
+        | 'bg-emerald-900'
+        | 'bg-emerald-950'
+        | 'bg-teal-50'
+        | 'bg-teal-100'
+        | 'bg-teal-200'
+        | 'bg-teal-300'
+        | 'bg-teal-400'
+        | 'bg-teal-500'
+        | 'bg-teal-600'
+        | 'bg-teal-700'
+        | 'bg-teal-800'
+        | 'bg-teal-900'
+        | 'bg-teal-950'
+        | 'bg-cyan-50'
+        | 'bg-cyan-100'
+        | 'bg-cyan-200'
+        | 'bg-cyan-300'
+        | 'bg-cyan-400'
+        | 'bg-cyan-500'
+        | 'bg-cyan-600'
+        | 'bg-cyan-700'
+        | 'bg-cyan-800'
+        | 'bg-cyan-900'
+        | 'bg-cyan-950'
+        | 'bg-sky-50'
+        | 'bg-sky-100'
+        | 'bg-sky-200'
+        | 'bg-sky-300'
+        | 'bg-sky-400'
+        | 'bg-sky-500'
+        | 'bg-sky-600'
+        | 'bg-sky-700'
+        | 'bg-sky-800'
+        | 'bg-sky-900'
+        | 'bg-sky-950'
+        | 'bg-blue-50'
+        | 'bg-blue-100'
+        | 'bg-blue-200'
+        | 'bg-blue-300'
+        | 'bg-blue-400'
+        | 'bg-blue-500'
+        | 'bg-blue-600'
+        | 'bg-blue-700'
+        | 'bg-blue-800'
+        | 'bg-blue-900'
+        | 'bg-blue-950'
+        | 'bg-indigo-50'
+        | 'bg-indigo-100'
+        | 'bg-indigo-200'
+        | 'bg-indigo-300'
+        | 'bg-indigo-400'
+        | 'bg-indigo-500'
+        | 'bg-indigo-600'
+        | 'bg-indigo-700'
+        | 'bg-indigo-800'
+        | 'bg-indigo-900'
+        | 'bg-indigo-950'
+        | 'bg-violet-50'
+        | 'bg-violet-100'
+        | 'bg-violet-200'
+        | 'bg-violet-300'
+        | 'bg-violet-400'
+        | 'bg-violet-500'
+        | 'bg-violet-600'
+        | 'bg-violet-700'
+        | 'bg-violet-800'
+        | 'bg-violet-900'
+        | 'bg-violet-950'
+        | 'bg-purple-50'
+        | 'bg-purple-100'
+        | 'bg-purple-200'
+        | 'bg-purple-300'
+        | 'bg-purple-400'
+        | 'bg-purple-500'
+        | 'bg-purple-600'
+        | 'bg-purple-700'
+        | 'bg-purple-800'
+        | 'bg-purple-900'
+        | 'bg-purple-950'
+        | 'bg-fuchsia-50'
+        | 'bg-fuchsia-100'
+        | 'bg-fuchsia-200'
+        | 'bg-fuchsia-300'
+        | 'bg-fuchsia-400'
+        | 'bg-fuchsia-500'
+        | 'bg-fuchsia-600'
+        | 'bg-fuchsia-700'
+        | 'bg-fuchsia-800'
+        | 'bg-fuchsia-900'
+        | 'bg-fuchsia-950'
+        | 'bg-pink-50'
+        | 'bg-pink-100'
+        | 'bg-pink-200'
+        | 'bg-pink-300'
+        | 'bg-pink-400'
+        | 'bg-pink-500'
+        | 'bg-pink-600'
+        | 'bg-pink-700'
+        | 'bg-pink-800'
+        | 'bg-pink-900'
+        | 'bg-pink-950'
+        | 'bg-rose-50'
+        | 'bg-rose-100'
+        | 'bg-rose-200'
+        | 'bg-rose-300'
+        | 'bg-rose-400'
+        | 'bg-rose-500'
+        | 'bg-rose-600'
+        | 'bg-rose-700'
+        | 'bg-rose-800'
+        | 'bg-rose-900'
+        | 'bg-rose-950'
+      )
+    | null;
+  paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20 md:pt-28' | 'pt-24 md:pt-32' | 'pt-32 md:pt-40') | null;
+  paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20 md:pb-28' | 'pb-24 md:pb-32' | 'pb-32 md:pb-40') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'eventConversationForm';
@@ -224760,6 +224760,19 @@ export interface DownloadTracking {
 export interface Event {
   id: string;
   title: string;
+  /**
+   * Backend dates used for event status filtering (Active, Upcoming, Ended) and gating meeting request form submissions. These dates are stored in the backend and do not alter the visual styling on the Hero section.
+   */
+  schedule?: {
+    /**
+     * Exact date and time the event begins.
+     */
+    startDate?: string | null;
+    /**
+     * Exact date and time the event concludes. After this date, meeting requests are blocked.
+     */
+    endDate?: string | null;
+  };
   layout?:
     | (
         | EventHeroBlock
@@ -237012,21 +237025,6 @@ export interface CenteredButtonBlockSelect<T extends boolean = true> {
  * via the `definition` "EventHeroBlock_select".
  */
 export interface EventHeroBlockSelect<T extends boolean = true> {
-  matchHeaderPillWidth?: T;
-  paddingMode?: T;
-  paddingXDesktop?: T;
-  paddingXDesktopCustom?: T;
-  paddingXMobile?: T;
-  paddingXMobileCustom?: T;
-  paddingTop?: T;
-  bodyPaddingBottom?: T;
-  footerPaddingTop?: T;
-  footerPaddingBottom?: T;
-  backgroundType?: T;
-  bodyBgColor?: T;
-  footerBgColor?: T;
-  bodyBgMedia?: T;
-  bodyBgOverlay?: T;
   kickerGroup?:
     | T
     | {
@@ -237161,6 +237159,21 @@ export interface EventHeroBlockSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  matchHeaderPillWidth?: T;
+  paddingMode?: T;
+  paddingXDesktop?: T;
+  paddingXDesktopCustom?: T;
+  paddingXMobile?: T;
+  paddingXMobileCustom?: T;
+  paddingTop?: T;
+  bodyPaddingBottom?: T;
+  footerPaddingTop?: T;
+  footerPaddingBottom?: T;
+  backgroundType?: T;
+  bodyBgColor?: T;
+  footerBgColor?: T;
+  bodyBgMedia?: T;
+  bodyBgOverlay?: T;
   id?: T;
   blockName?: T;
 }
@@ -237169,15 +237182,6 @@ export interface EventHeroBlockSelect<T extends boolean = true> {
  * via the `definition` "EventSharedPurposeBlock_select".
  */
 export interface EventSharedPurposeBlockSelect<T extends boolean = true> {
-  matchHeaderPillWidth?: T;
-  paddingMode?: T;
-  paddingXDesktop?: T;
-  paddingXDesktopCustom?: T;
-  paddingXMobile?: T;
-  paddingXMobileCustom?: T;
-  sectionBgColor?: T;
-  paddingTop?: T;
-  paddingBottom?: T;
   imageColumn?:
     | T
     | {
@@ -237255,14 +237259,6 @@ export interface EventSharedPurposeBlockSelect<T extends boolean = true> {
                   };
             };
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventWhyConnectBlock_select".
- */
-export interface EventWhyConnectBlockSelect<T extends boolean = true> {
   matchHeaderPillWidth?: T;
   paddingMode?: T;
   paddingXDesktop?: T;
@@ -237272,6 +237268,14 @@ export interface EventWhyConnectBlockSelect<T extends boolean = true> {
   sectionBgColor?: T;
   paddingTop?: T;
   paddingBottom?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventWhyConnectBlock_select".
+ */
+export interface EventWhyConnectBlockSelect<T extends boolean = true> {
   topGrid?:
     | T
     | {
@@ -237336,14 +237340,6 @@ export interface EventWhyConnectBlockSelect<T extends boolean = true> {
         descriptionFontWeight?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventAgendaOverviewBlock_select".
- */
-export interface EventAgendaOverviewBlockSelect<T extends boolean = true> {
   matchHeaderPillWidth?: T;
   paddingMode?: T;
   paddingXDesktop?: T;
@@ -237353,6 +237349,14 @@ export interface EventAgendaOverviewBlockSelect<T extends boolean = true> {
   sectionBgColor?: T;
   paddingTop?: T;
   paddingBottom?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventAgendaOverviewBlock_select".
+ */
+export interface EventAgendaOverviewBlockSelect<T extends boolean = true> {
   leftColumn?:
     | T
     | {
@@ -237484,6 +237488,15 @@ export interface EventAgendaOverviewBlockSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  matchHeaderPillWidth?: T;
+  paddingMode?: T;
+  paddingXDesktop?: T;
+  paddingXDesktopCustom?: T;
+  paddingXMobile?: T;
+  paddingXMobileCustom?: T;
+  sectionBgColor?: T;
+  paddingTop?: T;
+  paddingBottom?: T;
   id?: T;
   blockName?: T;
 }
@@ -237492,8 +237505,6 @@ export interface EventAgendaOverviewBlockSelect<T extends boolean = true> {
  * via the `definition` "EventMeetingFormatsBlock_select".
  */
 export interface EventMeetingFormatsBlockSelect<T extends boolean = true> {
-  sectionBgColor?: T;
-  reverseColumns?: T;
   leftColumn?:
     | T
     | {
@@ -237602,6 +237613,8 @@ export interface EventMeetingFormatsBlockSelect<T extends boolean = true> {
               fontWeightMobile?: T;
             };
       };
+  sectionBgColor?: T;
+  reverseColumns?: T;
   id?: T;
   blockName?: T;
 }
@@ -237610,15 +237623,6 @@ export interface EventMeetingFormatsBlockSelect<T extends boolean = true> {
  * via the `definition` "EventMadridVenueBlock_select".
  */
 export interface EventMadridVenueBlockSelect<T extends boolean = true> {
-  matchHeaderPillWidth?: T;
-  paddingMode?: T;
-  paddingXDesktop?: T;
-  paddingXDesktopCustom?: T;
-  paddingXMobile?: T;
-  paddingXMobileCustom?: T;
-  sectionBgColor?: T;
-  paddingTop?: T;
-  paddingBottom?: T;
   leftColumn?:
     | T
     | {
@@ -237717,14 +237721,6 @@ export interface EventMadridVenueBlockSelect<T extends boolean = true> {
         imageFit?: T;
         imageRounded?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "EventConversationFormBlock_select".
- */
-export interface EventConversationFormBlockSelect<T extends boolean = true> {
   matchHeaderPillWidth?: T;
   paddingMode?: T;
   paddingXDesktop?: T;
@@ -237734,6 +237730,14 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
   sectionBgColor?: T;
   paddingTop?: T;
   paddingBottom?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventConversationFormBlock_select".
+ */
+export interface EventConversationFormBlockSelect<T extends boolean = true> {
   leftColumn?:
     | T
     | {
@@ -237876,6 +237880,15 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
               disclaimerTextColor?: T;
             };
       };
+  matchHeaderPillWidth?: T;
+  paddingMode?: T;
+  paddingXDesktop?: T;
+  paddingXDesktopCustom?: T;
+  paddingXMobile?: T;
+  paddingXMobileCustom?: T;
+  sectionBgColor?: T;
+  paddingTop?: T;
+  paddingBottom?: T;
   id?: T;
   blockName?: T;
 }
@@ -238491,6 +238504,12 @@ export interface BrandsSelect<T extends boolean = true> {
  */
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
+  schedule?:
+    | T
+    | {
+        startDate?: T;
+        endDate?: T;
+      };
   layout?:
     | T
     | {

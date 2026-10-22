@@ -42,9 +42,37 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // 2. Check if the event has concluded
+    if (sourceEventSlug) {
+      try {
+        const sourceEvent = await payload.find({
+          collection: 'events',
+          where: { slug: { equals: sourceEventSlug } },
+          depth: 0,
+          limit: 1,
+        })
+        const eventDoc: any = sourceEvent.docs?.[0]
+        if (eventDoc?.schedule?.endDate) {
+          const now = new Date()
+          const eventEnd = new Date(eventDoc.schedule.endDate)
+          if (now > eventEnd) {
+            return NextResponse.json(
+              {
+                error:
+                  'This event has concluded. We are no longer accepting meeting requests for this event.',
+              },
+              { status: 409 },
+            )
+          }
+        }
+      } catch (err) {
+        // Non-blocking query error
+      }
+    }
+
     const serverUrl = getServerSideURL()
 
-    // 2. Persist in EventInquiries collection
+    // 3. Persist in EventInquiries collection
     const inquiry = await payload.create({
       collection: 'event-inquiries',
       data: {

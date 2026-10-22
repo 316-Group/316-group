@@ -290,8 +290,11 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
           meetingFormat: formData.meetingFormat,
           notes: formData.notes,
           consentAccepted: formData.consentAccepted,
-          sourceEventTitle: '316 Group at ESMO 2026',
-          sourceEventSlug: 'esmo-2026',
+          sourceEventTitle: '316 Group Event',
+          sourceEventSlug:
+            typeof window !== 'undefined'
+              ? window.location.pathname.split('/').filter(Boolean).pop() || 'esmo-2026'
+              : 'esmo-2026',
         }),
       })
 
