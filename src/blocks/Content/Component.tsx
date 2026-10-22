@@ -200,7 +200,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       {backgroundType === 'media' && renderBackgroundMedia()}
       {(() => {
         const hasFullWidthCol = columns?.some(
-          (c) => (c as any).widthMode === 'fullWidth' && !(c as any).matchHeaderPillWidth,
+          (c) => (c as any).widthMode === 'fullWidth' || Boolean((c as any).matchHeaderPillWidth),
         )
         return (
           <div
@@ -1010,13 +1010,15 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     if (applyBg && colBg && colBg !== 'bg-transparent') {
                       solData.sectionBgColor = 'bg-transparent'
                     }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      solData.paddingMode = 'none'
+                    if (!solData.paddingMode || solData.paddingMode === 'default') {
+                      if (
+                        isMatchHeaderPillWidth ||
+                        colPaddingMode === 'none' ||
+                        colPaddingMode === 'custom' ||
+                        colPaddingMode === 'matchHeader'
+                      ) {
+                        solData.paddingMode = 'none'
+                      }
                     }
                     return (
                       <AccordionPanel

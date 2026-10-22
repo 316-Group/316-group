@@ -251,7 +251,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
                   'inline-flex items-center justify-center px-6 py-1.5 md:py-2 rounded-full tracking-wide transition-all shadow-sm',
                   badgeBg,
                   badgeTextCol,
-                  badgeTypography,
+                  badgeTypography.combined,
                 )}
                 dangerouslySetInnerHTML={{ __html: formatInlineHtml(badgeText) }}
               />
@@ -260,10 +260,10 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
 
           {/* Headings */}
           {(h1Text || h2Text) && (
-            <HeadingTag className={cn('w-full tracking-tight leading-[1.15]', headingAlignClasses)}>
+            <HeadingTag className={cn('w-full tracking-tight leading-[1.15] [&_strong]:font-bold', headingAlignClasses)}>
               {h1Text && (
                 <span
-                  className={cn('block transition-colors', h1Color, h1Typography)}
+                  className={cn('block transition-colors', h1Color, h1Typography.combined)}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(h1Text) }}
                 />
               )}
@@ -272,7 +272,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
                   className={cn(
                     'block transition-colors',
                     h2Color,
-                    h2Typography,
+                    h2Typography.combined,
                     h1Text && 'mt-1.5 md:mt-2.5',
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(h2Text) }}
@@ -289,7 +289,7 @@ export const CenteredContentComponent: React.FC<CenteredContentProps> = ({
                 isColumn || maxWidth === 'max-w-full' ? 'max-w-full' : 'max-w-3xl',
                 descriptionAlignClasses,
                 descColor,
-                descTypography,
+                descTypography.combined,
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
             />
