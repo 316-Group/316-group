@@ -72,6 +72,7 @@ export interface EventAgendaOverviewProps {
     } | null
 
     disclaimerGroup?: {
+      showDisclaimer?: boolean | null
       text?: string | null
       textColor?: string | null
       fontSize?: string | null
@@ -132,6 +133,98 @@ export interface EventAgendaOverviewProps {
     }> | null
   } | null
 
+  // Tab 2 Individual Styling Groups
+  kickerStyles?: {
+    boxBgColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  buttonStyles?: {
+    bgColor?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  disclaimerStyles?: {
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+  } | null
+
+  agendaRowStyles?: {
+    showTopDivider?: boolean | null
+    topDividerColor?: string | null
+    topDividerWidth?: string | null
+    topDividerMarginBottom?: string | null
+    topDividerMarginBottomMobile?: string | null
+    showNumbers?: boolean | null
+    showCategory?: boolean | null
+    showArrow?: boolean | null
+    showDivider?: boolean | null
+    numberColor?: string | null
+    numberFontSize?: string | null
+    numberFontSizeMobile?: string | null
+    numberFontWeight?: string | null
+    numberFontWeightMobile?: string | null
+    categoryColor?: string | null
+    categoryFontSize?: string | null
+    categoryFontSizeMobile?: string | null
+    categoryFontWeight?: string | null
+    categoryFontWeightMobile?: string | null
+    categoryMarginBottom?: string | null
+    categoryMarginBottomMobile?: string | null
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    headingMarginBottom?: string | null
+    headingMarginBottomMobile?: string | null
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    descriptionMarginBottom?: string | null
+    descriptionMarginBottomMobile?: string | null
+    arrowColor?: string | null
+    dividerColor?: string | null
+  } | null
+
   className?: string
 }
 
@@ -172,6 +265,12 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
     paddingBottom = 'pb-20 md:pb-28',
     leftColumn,
     rightColumn,
+    kickerStyles,
+    headingStyles,
+    descriptionStyles,
+    buttonStyles,
+    disclaimerStyles,
+    agendaRowStyles,
     className,
   } = props
 
@@ -204,44 +303,45 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
   const cta = leftColumn?.ctaButton
   const disclaimer = leftColumn?.disclaimerGroup
 
-  // Left Typography Resolvers
+  // Left Typography Resolvers with Fallback Cascades
   const kickerTypo = resolveTypography(
-    kicker?.fontSize || 'text-xs md:text-sm',
-    kicker?.fontSizeMobile,
-    kicker?.fontWeight || 'font-semibold',
-    kicker?.fontWeightMobile,
+    kickerStyles?.fontSize || kicker?.fontSize || 'text-xs md:text-sm',
+    kickerStyles?.fontSizeMobile || kicker?.fontSizeMobile,
+    kickerStyles?.fontWeight || kicker?.fontWeight || 'font-semibold',
+    kickerStyles?.fontWeightMobile || kicker?.fontWeightMobile,
   )
 
   const headingTypo = resolveTypography(
-    heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
-    heading?.headingFontSizeMobile,
-    heading?.headingFontWeight || 'font-bold',
-    heading?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
+    headingStyles?.headingFontSizeMobile || heading?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || heading?.headingFontWeight || 'font-bold',
+    headingStyles?.headingFontWeightMobile || heading?.headingFontWeightMobile,
   )
 
   const descTypo = resolveTypography(
-    description?.descriptionFontSize || 'text-base md:text-lg',
-    description?.descriptionFontSizeMobile,
-    description?.descriptionFontWeight || 'font-normal',
-    description?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || description?.descriptionFontSize || 'text-base md:text-lg',
+    descriptionStyles?.descriptionFontSizeMobile || description?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || description?.descriptionFontWeight || 'font-normal',
+    descriptionStyles?.descriptionFontWeightMobile || description?.descriptionFontWeightMobile,
   )
 
   const ctaTypo = resolveTypography(
-    cta?.fontSize || 'text-sm md:text-base',
-    cta?.fontSizeMobile,
-    cta?.fontWeight || 'font-semibold',
-    cta?.fontWeightMobile,
+    buttonStyles?.fontSize || cta?.fontSize || 'text-sm md:text-base',
+    buttonStyles?.fontSizeMobile || cta?.fontSizeMobile,
+    buttonStyles?.fontWeight || cta?.fontWeight || 'font-semibold',
+    buttonStyles?.fontWeightMobile || cta?.fontWeightMobile,
   )
 
   const disclaimerTypo = resolveTypography(
-    disclaimer?.fontSize || 'text-xs md:text-sm',
-    disclaimer?.fontSizeMobile,
-    disclaimer?.fontWeight || 'font-normal',
-    disclaimer?.fontWeightMobile,
+    disclaimerStyles?.fontSize || disclaimer?.fontSize || 'text-xs md:text-sm',
+    disclaimerStyles?.fontSizeMobile || disclaimer?.fontSizeMobile,
+    disclaimerStyles?.fontWeight || disclaimer?.fontWeight || 'font-normal',
+    disclaimerStyles?.fontWeightMobile || disclaimer?.fontWeightMobile,
   )
 
   // Top Divider on Right Column
   const topDivider = rightColumn?.topDivider
+  const showTopDivider = agendaRowStyles?.showTopDivider ?? (topDivider?.showTopDivider !== false)
   const items = rightColumn?.items || []
 
   return (
@@ -261,22 +361,23 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                 <div
                   className={cn(
                     'flex items-center gap-2.5',
-                    kicker.marginBottom || 'mb-4 md:mb-6',
-                    kicker.marginBottomMobile && `max-md:${kicker.marginBottomMobile}`,
+                    kickerStyles?.marginBottom || kicker.marginBottom || 'mb-4 md:mb-6',
+                    (kickerStyles?.marginBottomMobile || kicker.marginBottomMobile) &&
+                      `max-md:${kickerStyles?.marginBottomMobile || kicker.marginBottomMobile}`,
                   )}
                 >
                   <span
                     className={cn(
                       'inline-block flex-shrink-0',
-                      kicker.squareSize || 'w-2.5 h-2.5',
-                      kicker.boxBgColor || 'bg-[#0256FF]',
+                      kickerStyles?.squareSize || kicker.squareSize || 'w-2.5 h-2.5',
+                      kickerStyles?.boxBgColor || kicker.boxBgColor || 'bg-[#0256FF]',
                     )}
                   />
                   <span
                     className={cn(
                       'uppercase tracking-wider',
                       kickerTypo.combined,
-                      kicker.textColor || 'text-[#0256FF]',
+                      kickerStyles?.textColor || kicker.textColor || 'text-[#0256FF]',
                     )}
                   >
                     {kicker.text}
@@ -290,9 +391,10 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                   className={cn(
                     'leading-[1.15] tracking-tight',
                     headingTypo.combined,
-                    heading.headingColor || 'text-black',
-                    heading.marginBottom || 'mb-6 md:mb-8',
-                    heading.marginBottomMobile && `max-md:${heading.marginBottomMobile}`,
+                    headingStyles?.headingColor || heading.headingColor || 'text-black',
+                    headingStyles?.marginBottom || heading.marginBottom || 'mb-6 md:mb-8',
+                    (headingStyles?.marginBottomMobile || heading.marginBottomMobile) &&
+                      `max-md:${headingStyles?.marginBottomMobile || heading.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(heading.heading) }}
                 />
@@ -304,9 +406,10 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                   className={cn(
                     'leading-relaxed',
                     descTypo.combined,
-                    description.descriptionColor || 'text-slate-600',
-                    description.marginBottom || 'mb-8 md:mb-10',
-                    description.marginBottomMobile && `max-md:${description.marginBottomMobile}`,
+                    descriptionStyles?.descriptionColor || description.descriptionColor || 'text-slate-600',
+                    descriptionStyles?.marginBottom || description.marginBottom || 'mb-8 md:mb-10',
+                    (descriptionStyles?.marginBottomMobile || description.marginBottomMobile) &&
+                      `max-md:${descriptionStyles?.marginBottomMobile || description.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(description.description) }}
                 />
@@ -317,23 +420,24 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                 <div
                   className={cn(
                     'inline-block',
-                    cta.marginBottom || 'mb-3 md:mb-4',
-                    cta.marginBottomMobile && `max-md:${cta.marginBottomMobile}`,
+                    buttonStyles?.marginBottom || cta.marginBottom || 'mb-3 md:mb-4',
+                    (buttonStyles?.marginBottomMobile || cta.marginBottomMobile) &&
+                      `max-md:${buttonStyles?.marginBottomMobile || cta.marginBottomMobile}`,
                   )}
                 >
                   <Link
                     href={resolveHref(cta.link)}
                     className={cn(
                       'inline-flex items-center gap-2 px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm hover:opacity-90 hover:scale-[1.01] active:scale-[0.99]',
-                      cta.bgColor || 'bg-[#0256FF]',
-                      cta.textColor || 'text-white',
+                      buttonStyles?.bgColor || cta.bgColor || 'bg-[#0256FF]',
+                      buttonStyles?.textColor || cta.textColor || 'text-white',
                       ctaTypo.combined,
                     )}
                   >
                     <span>{cta.text}</span>
                     {cta.showArrow !== false && (
                       <ArrowUpRight
-                        className={cn('w-4 h-4 flex-shrink-0', cta.arrowColor || 'text-white')}
+                        className={cn('w-4 h-4 flex-shrink-0', buttonStyles?.textColor || cta.arrowColor || 'text-white')}
                       />
                     )}
                   </Link>
@@ -341,12 +445,12 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
               )}
 
               {/* Disclaimer */}
-              {disclaimer?.text && (
+              {disclaimer?.showDisclaimer !== false && disclaimer?.text && (
                 <p
                   className={cn(
                     'block leading-relaxed',
                     disclaimerTypo.combined,
-                    disclaimer.textColor || 'text-slate-400',
+                    disclaimerStyles?.textColor || disclaimer.textColor || 'text-slate-400',
                   )}
                 >
                   {disclaimer.text}
@@ -357,14 +461,15 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
             {/* ─── RIGHT COLUMN: NUMBERED AGENDA ITEMS ─── */}
             <div className="lg:col-span-7 flex flex-col">
               {/* Top Divider */}
-              {topDivider?.showTopDivider !== false && (
+              {showTopDivider && (
                 <hr
                   className={cn(
                     'w-full border-0',
-                    topDivider?.borderWidth || 'border-t',
-                    topDivider?.borderColor || 'border-slate-200',
-                    topDivider?.marginBottom || 'mb-6 md:mb-8',
-                    topDivider?.marginBottomMobile && `max-md:${topDivider.marginBottomMobile}`,
+                    agendaRowStyles?.topDividerWidth || topDivider?.borderWidth || 'border-t',
+                    agendaRowStyles?.topDividerColor || topDivider?.borderColor || 'border-slate-200',
+                    agendaRowStyles?.topDividerMarginBottom || topDivider?.marginBottom || 'mb-6 md:mb-8',
+                    (agendaRowStyles?.topDividerMarginBottomMobile || topDivider?.marginBottomMobile) &&
+                      `max-md:${agendaRowStyles?.topDividerMarginBottomMobile || topDivider?.marginBottomMobile}`,
                   )}
                 />
               )}
@@ -378,36 +483,37 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                       : String(index + 1).padStart(2, '0')
 
                   const numberTypo = resolveTypography(
-                    item.numberFontSize || 'text-base md:text-lg',
-                    item.numberFontSizeMobile,
-                    item.numberFontWeight || 'font-semibold',
-                    item.numberFontWeightMobile,
+                    agendaRowStyles?.numberFontSize || item.numberFontSize || 'text-base md:text-lg',
+                    agendaRowStyles?.numberFontSizeMobile || item.numberFontSizeMobile,
+                    agendaRowStyles?.numberFontWeight || item.numberFontWeight || 'font-semibold',
+                    agendaRowStyles?.numberFontWeightMobile || item.numberFontWeightMobile,
                   )
 
                   const categoryTypo = resolveTypography(
-                    item.categoryFontSize || 'text-xs md:text-sm',
-                    item.categoryFontSizeMobile,
-                    item.categoryFontWeight || 'font-semibold',
-                    item.categoryFontWeightMobile,
+                    agendaRowStyles?.categoryFontSize || item.categoryFontSize || 'text-xs md:text-sm',
+                    agendaRowStyles?.categoryFontSizeMobile || item.categoryFontSizeMobile,
+                    agendaRowStyles?.categoryFontWeight || item.categoryFontWeight || 'font-semibold',
+                    agendaRowStyles?.categoryFontWeightMobile || item.categoryFontWeightMobile,
                   )
 
                   const itemHeadingTypo = resolveTypography(
-                    item.headingFontSize || 'text-xl md:text-2xl',
-                    item.headingFontSizeMobile,
-                    item.headingFontWeight || 'font-bold',
-                    item.headingFontWeightMobile,
+                    agendaRowStyles?.headingFontSize || item.headingFontSize || 'text-xl md:text-2xl',
+                    agendaRowStyles?.headingFontSizeMobile || item.headingFontSizeMobile,
+                    agendaRowStyles?.headingFontWeight || item.headingFontWeight || 'font-bold',
+                    agendaRowStyles?.headingFontWeightMobile || item.headingFontWeightMobile,
                   )
 
                   const itemDescTypo = resolveTypography(
-                    item.descriptionFontSize || 'text-sm md:text-base',
-                    item.descriptionFontSizeMobile,
-                    item.descriptionFontWeight || 'font-normal',
-                    item.descriptionFontWeightMobile,
+                    agendaRowStyles?.descriptionFontSize || item.descriptionFontSize || 'text-sm md:text-base',
+                    agendaRowStyles?.descriptionFontSizeMobile || item.descriptionFontSizeMobile,
+                    agendaRowStyles?.descriptionFontWeight || item.descriptionFontWeight || 'font-normal',
+                    agendaRowStyles?.descriptionFontWeightMobile || item.descriptionFontWeightMobile,
                   )
 
-                  const showNumbers = rightColumn?.showNumbers !== false
-                  const showCategory = rightColumn?.showCategory !== false
-                  const showArrow = item.showArrow !== false
+                  const showNumbers = agendaRowStyles?.showNumbers ?? (rightColumn?.showNumbers !== false)
+                  const showCategory = agendaRowStyles?.showCategory ?? (rightColumn?.showCategory !== false)
+                  const showArrow = agendaRowStyles?.showArrow ?? (item.showArrow !== false)
+                  const showDivider = agendaRowStyles?.showDivider ?? (item.showDivider !== false)
 
                   return (
                     <div key={item.id || index} className="flex flex-col group">
@@ -426,7 +532,7 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                             className={cn(
                               'select-none flex-shrink-0 tabular-nums min-w-[28px] sm:min-w-[36px]',
                               numberTypo.combined,
-                              item.numberColor || 'text-slate-400',
+                              agendaRowStyles?.numberColor || item.numberColor || 'text-slate-400',
                             )}
                           >
                             {numberStr}
@@ -441,71 +547,68 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                               className={cn(
                                 'uppercase tracking-wider',
                                 categoryTypo.combined,
-                                item.categoryColor || 'text-slate-500',
-                                item.categoryMarginBottom || 'mb-2 md:mb-3',
-                                item.categoryMarginBottomMobile &&
-                                  `max-md:${item.categoryMarginBottomMobile}`,
+                                agendaRowStyles?.categoryColor || item.categoryColor || 'text-slate-500',
+                                agendaRowStyles?.categoryMarginBottom || item.categoryMarginBottom || 'mb-2 md:mb-3',
+                                (agendaRowStyles?.categoryMarginBottomMobile || item.categoryMarginBottomMobile) &&
+                                  `max-md:${agendaRowStyles?.categoryMarginBottomMobile || item.categoryMarginBottomMobile}`,
                               )}
                             >
                               {item.category}
                             </div>
                           )}
 
-                          {/* Heading */}
+                          {/* Item Heading */}
                           {item.heading && (
                             <h3
                               className={cn(
-                                'leading-snug tracking-tight transition-colors duration-200',
+                                'leading-snug tracking-tight transition-colors duration-200 group-hover:text-[#0256FF]',
                                 itemHeadingTypo.combined,
-                                item.headingColor || 'text-black',
-                                item.headingMarginBottom || 'mb-3 md:mb-4',
-                                item.headingMarginBottomMobile &&
-                                  `max-md:${item.headingMarginBottomMobile}`,
+                                agendaRowStyles?.headingColor || item.headingColor || 'text-black',
+                                agendaRowStyles?.headingMarginBottom || item.headingMarginBottom || 'mb-3 md:mb-4',
+                                (agendaRowStyles?.headingMarginBottomMobile || item.headingMarginBottomMobile) &&
+                                  `max-md:${agendaRowStyles?.headingMarginBottomMobile || item.headingMarginBottomMobile}`,
                               )}
-                              dangerouslySetInnerHTML={{
-                                __html: formatInlineHtml(item.heading),
-                              }}
+                              dangerouslySetInnerHTML={{ __html: formatInlineHtml(item.heading) }}
                             />
                           )}
 
-                          {/* Description */}
+                          {/* Item Description */}
                           {item.description && (
                             <div
                               className={cn(
                                 'leading-relaxed',
                                 itemDescTypo.combined,
-                                item.descriptionColor || 'text-slate-600',
-                                item.descriptionMarginBottom || 'mb-2',
-                                item.descriptionMarginBottomMobile &&
-                                  `max-md:${item.descriptionMarginBottomMobile}`,
+                                agendaRowStyles?.descriptionColor || item.descriptionColor || 'text-slate-600',
+                                agendaRowStyles?.descriptionMarginBottom || item.descriptionMarginBottom || 'mb-2',
+                                (agendaRowStyles?.descriptionMarginBottomMobile || item.descriptionMarginBottomMobile) &&
+                                  `max-md:${agendaRowStyles?.descriptionMarginBottomMobile || item.descriptionMarginBottomMobile}`,
                               )}
-                              dangerouslySetInnerHTML={{
-                                __html: formatInlineHtml(item.description),
-                              }}
+                              dangerouslySetInnerHTML={{ __html: formatInlineHtml(item.description) }}
                             />
                           )}
                         </div>
 
-                        {/* 3. Right Top Arrow */}
+                        {/* 3. Right Arrow (↗) */}
                         {showArrow && (
                           <div className="flex-shrink-0 pt-1">
-                            <ArrowUpRight
+                            <span
                               className={cn(
-                                'w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
-                                item.arrowColor || 'text-slate-400',
+                                'inline-flex items-center justify-center w-8 h-8 rounded-full border border-slate-200 text-slate-400 group-hover:border-[#0256FF] group-hover:text-[#0256FF] group-hover:bg-blue-50/50 transition-all duration-200',
+                                agendaRowStyles?.arrowColor || item.arrowColor,
                               )}
-                            />
+                            >
+                              <ArrowUpRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </span>
                           </div>
                         )}
                       </div>
 
                       {/* Bottom Item Divider */}
-                      {item.showDivider !== false && (
+                      {showDivider && (
                         <hr
                           className={cn(
-                            'w-full border-0',
-                            item.dividerWidth || 'border-t',
-                            item.dividerColor || 'border-slate-200',
+                            'w-full border-0 border-t',
+                            agendaRowStyles?.dividerColor || item.dividerColor || 'border-slate-200',
                           )}
                         />
                       )}

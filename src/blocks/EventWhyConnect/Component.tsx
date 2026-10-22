@@ -66,7 +66,7 @@ export interface EventWhyConnectProps {
   paddingTop?: string | null
   paddingBottom?: string | null
 
-  // Top 2-Column Header Grid
+  // Top 2-Column Header Grid (Content)
   topGrid?: {
     kickerGroup?: {
       showKicker?: boolean | null
@@ -103,8 +103,58 @@ export interface EventWhyConnectProps {
     gridBottomSpacing?: string | null
   } | null
 
-  // Feature Items (Max 3)
+  // Feature Items (Content)
   items?: EventWhyConnectItem[] | null
+
+  // Tab 2 Individual Styling Groups
+  kickerStyles?: {
+    squareColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+  } | null
+
+  headerGridStyles?: {
+    gridBottomSpacing?: string | null
+  } | null
+
+  featureCardStyles?: {
+    iconColor?: string | null
+    iconSize?: string | null
+    numberColor?: string | null
+    numberFontSize?: string | null
+    headerMarginBottom?: string | null
+    hrColor?: string | null
+    hrMarginBottom?: string | null
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontWeight?: string | null
+    headingMarginBottom?: string | null
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontWeight?: string | null
+  } | null
 
   className?: string
 }
@@ -143,6 +193,11 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
 
   topGrid,
   items,
+  kickerStyles,
+  headingStyles,
+  descriptionStyles,
+  headerGridStyles,
+  featureCardStyles,
   className,
 }) => {
   // ── 1. Horizontal Padding Resolution ───────────────────────────────────────
@@ -172,27 +227,30 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
   // ── 2. Top Grid Resolution ─────────────────────────────────────────────────
   const kicker = topGrid?.kickerGroup
   const showKicker = kicker?.showKicker !== false && Boolean(kicker?.text)
-  const squareColor = kicker?.squareColor || 'bg-white'
-  const squareSize = kicker?.squareSize || 'w-2.5 h-2.5'
-  const kickerTextColor = kicker?.textColor || 'text-white'
+  const squareColor = kickerStyles?.squareColor || kicker?.squareColor || 'bg-white'
+  const squareSize = kickerStyles?.squareSize || kicker?.squareSize || 'w-2.5 h-2.5'
+  const kickerTextColor = kickerStyles?.textColor || kicker?.textColor || 'text-white'
   const kickerTypography = resolveTypography(
-    kicker?.fontSize,
-    kicker?.fontSizeMobile,
-    kicker?.fontWeight,
-    kicker?.fontWeightMobile,
+    kickerStyles?.fontSize || kicker?.fontSize,
+    kickerStyles?.fontSizeMobile || kicker?.fontSizeMobile,
+    kickerStyles?.fontWeight || kicker?.fontWeight,
+    kickerStyles?.fontWeightMobile || kicker?.fontWeightMobile,
     'text-xs md:text-sm',
     'font-semibold',
   )
-  const kickerMargin = cn(kicker?.marginBottom || 'mb-4', kicker?.marginBottomMobile)
+  const kickerMargin = cn(
+    kickerStyles?.marginBottom || kicker?.marginBottom || 'mb-4',
+    kickerStyles?.marginBottomMobile || kicker?.marginBottomMobile,
+  )
 
   const headingGroup = topGrid?.headingGroup
   const headingText = headingGroup?.heading || 'Different perspectives.\nMore possibilities.'
-  const headingColor = headingGroup?.headingColor || 'text-white'
+  const headingColor = headingStyles?.headingColor || headingGroup?.headingColor || 'text-white'
   const headingTypography = resolveTypography(
-    headingGroup?.headingFontSize,
-    headingGroup?.headingFontSizeMobile,
-    headingGroup?.headingFontWeight,
-    headingGroup?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || headingGroup?.headingFontSize,
+    headingStyles?.headingFontSizeMobile || headingGroup?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || headingGroup?.headingFontWeight,
+    headingStyles?.headingFontWeightMobile || headingGroup?.headingFontWeightMobile,
     'text-3xl sm:text-4xl lg:text-5xl',
     'font-bold',
   )
@@ -201,17 +259,18 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
   const descText =
     descGroup?.description ||
     'Make space in a busy congress week for a focused exchange about your priorities — and where we might go together.'
-  const descColor = descGroup?.descriptionColor || 'text-white/90'
+  const descColor = descriptionStyles?.descriptionColor || descGroup?.descriptionColor || 'text-white/90'
   const descTypography = resolveTypography(
-    descGroup?.descriptionFontSize,
-    descGroup?.descriptionFontSizeMobile,
-    descGroup?.descriptionFontWeight,
-    descGroup?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || descGroup?.descriptionFontSize,
+    descriptionStyles?.descriptionFontSizeMobile || descGroup?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || descGroup?.descriptionFontWeight,
+    descriptionStyles?.descriptionFontWeightMobile || descGroup?.descriptionFontWeightMobile,
     'text-base md:text-lg lg:text-xl',
     'font-normal',
   )
 
-  const gridBottomSpacing = topGrid?.gridBottomSpacing || 'mb-12 md:mb-16'
+  const gridBottomSpacing =
+    headerGridStyles?.gridBottomSpacing || topGrid?.gridBottomSpacing || 'mb-12 md:mb-16'
 
   // ── 3. Feature Items Resolution ────────────────────────────────────────────
   const featureItems =
@@ -288,27 +347,35 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
                 : MessageSquare
 
             const isCustomMedia = item.iconType === 'customMedia' && item.customIconMedia
-            const iconSize = item.iconSize || 'w-6 h-6'
-            const iconColor = item.iconColor || 'text-white'
+            const iconSize = featureCardStyles?.iconSize || item.iconSize || 'w-6 h-6'
+            const iconColor = featureCardStyles?.iconColor || item.iconColor || 'text-white'
 
             const numberText = item.numberText ?? `0${idx + 1}`
-            const numberColor = item.numberColor || 'text-white/80'
-            const numberTypography = item.numberFontSize || 'text-sm md:text-base font-medium'
+            const numberColor = featureCardStyles?.numberColor || item.numberColor || 'text-white/80'
+            const numberTypography =
+              featureCardStyles?.numberFontSize || item.numberFontSize || 'text-sm md:text-base font-medium'
 
-            const headerMargin = item.headerMarginBottom || 'mb-4 md:mb-5'
-            const hrColor = item.hrColor || 'border-white/30'
-            const hrMargin = item.hrMarginBottom || 'mb-6 md:mb-8'
+            const headerMargin =
+              featureCardStyles?.headerMarginBottom || item.headerMarginBottom || 'mb-4 md:mb-5'
+            const hrColor = featureCardStyles?.hrColor || item.hrColor || 'border-white/30'
+            const hrMargin = featureCardStyles?.hrMarginBottom || item.hrMarginBottom || 'mb-6 md:mb-8'
 
             const headingTextItem = item.heading || ''
-            const headingColorItem = item.headingColor || 'text-white'
-            const headingFontSizeItem = item.headingFontSize || 'text-xl md:text-2xl'
-            const headingFontWeightItem = item.headingFontWeight || 'font-bold'
-            const headingMarginItem = item.headingMarginBottom || 'mb-3 md:mb-4'
+            const headingColorItem = featureCardStyles?.headingColor || item.headingColor || 'text-white'
+            const headingFontSizeItem =
+              featureCardStyles?.headingFontSize || item.headingFontSize || 'text-xl md:text-2xl'
+            const headingFontWeightItem =
+              featureCardStyles?.headingFontWeight || item.headingFontWeight || 'font-bold'
+            const headingMarginItem =
+              featureCardStyles?.headingMarginBottom || item.headingMarginBottom || 'mb-3 md:mb-4'
 
             const descTextItem = item.description || ''
-            const descColorItem = item.descriptionColor || 'text-white/80'
-            const descFontSizeItem = item.descriptionFontSize || 'text-sm md:text-base'
-            const descFontWeightItem = item.descriptionFontWeight || 'font-normal'
+            const descColorItem =
+              featureCardStyles?.descriptionColor || item.descriptionColor || 'text-white/80'
+            const descFontSizeItem =
+              featureCardStyles?.descriptionFontSize || item.descriptionFontSize || 'text-sm md:text-base'
+            const descFontWeightItem =
+              featureCardStyles?.descriptionFontWeight || item.descriptionFontWeight || 'font-normal'
 
             return (
               <div key={idx} className="flex flex-col">

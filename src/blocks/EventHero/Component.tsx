@@ -160,6 +160,83 @@ export interface EventHeroProps {
     items?: EventHeroFooterItem[] | null
   } | null
 
+  // Element Styling Groups (Tab 2)
+  kickerStyles?: {
+    showKicker?: boolean | null
+    squareColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  metadataStyles?: {
+    textColor?: string | null
+    dividerColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  buttonStyles?: {
+    button1BgColor?: string | null
+    button1TextColor?: string | null
+    button1IconColor?: string | null
+    button1BorderRadius?: string | null
+    button1FontSize?: string | null
+    button1FontWeight?: string | null
+    button2TextColor?: string | null
+    button2IconColor?: string | null
+    button2FontSize?: string | null
+    button2FontWeight?: string | null
+  } | null
+
+  imageStyles?: {
+    imageFit?: 'cover' | 'contain' | null
+    imageRounded?: string | null
+    gridBottomSpacing?: string | null
+  } | null
+
+  footerStyles?: {
+    iconColor?: string | null
+    iconSize?: string | null
+    iconTextGap?: string | null
+    subheadingHeadingGap?: string | null
+    subheadingColor?: string | null
+    subheadingFontSize?: string | null
+    subheadingFontWeight?: string | null
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontWeight?: string | null
+  } | null
+
   className?: string
 }
 
@@ -234,6 +311,14 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
   imageColumn,
   footerBar,
 
+  kickerStyles,
+  headingStyles,
+  descriptionStyles,
+  metadataStyles,
+  buttonStyles,
+  imageStyles,
+  footerStyles,
+
   className,
 }) => {
   const uid = React.useId().replace(/:/g, '')
@@ -277,73 +362,73 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
   )
 
   // ─── Left Column Typography & Content ─────────────────────────────────────
-  const showKicker = kickerGroup?.showKicker !== false
+  const showKicker = kickerStyles?.showKicker ?? kickerGroup?.showKicker !== false
   const kickerText = kickerGroup?.text || ''
-  const kickerSquareColor = kickerGroup?.squareColor || 'bg-[#00D2FF]'
-  const kickerSquareSize = kickerGroup?.squareSize || 'w-2.5 h-2.5'
-  const kickerTextColor = kickerGroup?.textColor || 'text-white'
+  const kickerSquareColor = kickerStyles?.squareColor || kickerGroup?.squareColor || 'bg-[#00D2FF]'
+  const kickerSquareSize = kickerStyles?.squareSize || kickerGroup?.squareSize || 'w-2.5 h-2.5'
+  const kickerTextColor = kickerStyles?.textColor || kickerGroup?.textColor || 'text-white'
   const kickerTypography = resolveTypography(
-    kickerGroup?.fontSize,
-    kickerGroup?.fontSizeMobile,
-    kickerGroup?.fontWeight,
-    kickerGroup?.fontWeightMobile,
+    kickerStyles?.fontSize || kickerGroup?.fontSize,
+    kickerStyles?.fontSizeMobile || kickerGroup?.fontSizeMobile,
+    kickerStyles?.fontWeight || kickerGroup?.fontWeight,
+    kickerStyles?.fontWeightMobile || kickerGroup?.fontWeightMobile,
     'text-xs md:text-sm',
     'font-semibold',
   )
-  const kickerMb = kickerGroup?.marginBottom || 'mb-4'
+  const kickerMb = kickerStyles?.marginBottom || kickerGroup?.marginBottom || 'mb-4'
 
   const headingText = headingGroup?.heading || ''
-  const headingTextColor = headingGroup?.headingColor || 'text-white'
+  const headingTextColor = headingStyles?.headingColor || headingGroup?.headingColor || 'text-white'
   const headingTypography = resolveTypography(
-    headingGroup?.headingFontSize,
-    headingGroup?.headingFontSizeMobile,
-    headingGroup?.headingFontWeight,
-    headingGroup?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || headingGroup?.headingFontSize,
+    headingStyles?.headingFontSizeMobile || headingGroup?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || headingGroup?.headingFontWeight,
+    headingStyles?.headingFontWeightMobile || headingGroup?.headingFontWeightMobile,
     'text-4xl sm:text-5xl lg:text-6xl',
     'font-bold',
   )
-  const headingMb = headingGroup?.marginBottom || 'mb-6 md:mb-8'
+  const headingMb = headingStyles?.marginBottom || headingGroup?.marginBottom || 'mb-6 md:mb-8'
 
   const descText = descriptionGroup?.description || ''
-  const descTextColor = descriptionGroup?.descriptionColor || 'text-white/90'
+  const descTextColor = descriptionStyles?.descriptionColor || descriptionGroup?.descriptionColor || 'text-white/90'
   const descTypography = resolveTypography(
-    descriptionGroup?.descriptionFontSize,
-    descriptionGroup?.descriptionFontSizeMobile,
-    descriptionGroup?.descriptionFontWeight,
-    descriptionGroup?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || descriptionGroup?.descriptionFontSize,
+    descriptionStyles?.descriptionFontSizeMobile || descriptionGroup?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || descriptionGroup?.descriptionFontWeight,
+    descriptionStyles?.descriptionFontWeightMobile || descriptionGroup?.descriptionFontWeightMobile,
     'text-base md:text-lg lg:text-xl',
     'font-normal',
   )
-  const descMb = descriptionGroup?.marginBottom || 'mb-8 md:mb-10'
+  const descMb = descriptionStyles?.marginBottom || descriptionGroup?.marginBottom || 'mb-8 md:mb-10'
 
   // Metadata
   const dateText = metadataGroup?.dateText || ''
   const locationText = metadataGroup?.locationText || ''
-  const dividerColor = metadataGroup?.dividerColor || 'bg-white/40'
-  const metaTextColor = metadataGroup?.textColor || 'text-white'
+  const dividerColor = metadataStyles?.dividerColor || metadataGroup?.dividerColor || 'bg-white/40'
+  const metaTextColor = metadataStyles?.textColor || metadataGroup?.textColor || 'text-white'
   const metaTypography = resolveTypography(
-    metadataGroup?.fontSize,
-    metadataGroup?.fontSizeMobile,
-    metadataGroup?.fontWeight,
-    metadataGroup?.fontWeightMobile,
+    metadataStyles?.fontSize || metadataGroup?.fontSize,
+    metadataStyles?.fontSizeMobile || metadataGroup?.fontSizeMobile,
+    metadataStyles?.fontWeight || metadataGroup?.fontWeight,
+    metadataStyles?.fontWeightMobile || metadataGroup?.fontWeightMobile,
     'text-sm md:text-base',
     'font-medium',
   )
-  const metaMb = metadataGroup?.marginBottom || 'mb-8 md:mb-10'
+  const metaMb = metadataStyles?.marginBottom || metadataGroup?.marginBottom || 'mb-8 md:mb-10'
 
   // Buttons
   const btn1 = buttonsGroup?.button1
   const btn1Text = btn1?.text
   const btn1Href = resolveHref(btn1?.link)
   const btn1NewTab = btn1?.link?.newTab
-  const btn1Bg = btn1?.bgColor || 'bg-white'
-  const btn1TextColor = btn1?.textColor || 'text-[#0256FF]'
-  const btn1IconColor = btn1?.iconColor || 'text-[#0256FF]'
-  const btn1Radius = btn1?.borderRadius || 'rounded-lg'
+  const btn1Bg = buttonStyles?.button1BgColor || btn1?.bgColor || 'bg-white'
+  const btn1TextColor = buttonStyles?.button1TextColor || btn1?.textColor || 'text-[#0256FF]'
+  const btn1IconColor = buttonStyles?.button1IconColor || btn1?.iconColor || 'text-[#0256FF]'
+  const btn1Radius = buttonStyles?.button1BorderRadius || btn1?.borderRadius || 'rounded-lg'
   const btn1Typography = resolveTypography(
-    btn1?.fontSize,
+    buttonStyles?.button1FontSize || btn1?.fontSize,
     btn1?.fontSizeMobile,
-    btn1?.fontWeight,
+    buttonStyles?.button1FontWeight || btn1?.fontWeight,
     btn1?.fontWeightMobile,
     'text-sm md:text-base',
     'font-semibold',
@@ -353,12 +438,12 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
   const btn2Text = btn2?.text
   const btn2Href = resolveHref(btn2?.link)
   const btn2NewTab = btn2?.link?.newTab
-  const btn2TextColor = btn2?.textColor || 'text-white'
-  const btn2IconColor = btn2?.iconColor || 'text-white'
+  const btn2TextColor = buttonStyles?.button2TextColor || btn2?.textColor || 'text-white'
+  const btn2IconColor = buttonStyles?.button2IconColor || btn2?.iconColor || 'text-white'
   const btn2Typography = resolveTypography(
-    btn2?.fontSize,
+    buttonStyles?.button2FontSize || btn2?.fontSize,
     btn2?.fontSizeMobile,
-    btn2?.fontWeight,
+    buttonStyles?.button2FontWeight || btn2?.fontWeight,
     btn2?.fontWeightMobile,
     'text-sm md:text-base',
     'font-medium',
@@ -368,32 +453,32 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
 
   // ─── Right Column Image ───────────────────────────────────────────────────
   const featureImage = imageColumn?.image
-  const imageFit = imageColumn?.imageFit || 'cover'
-  const imageRounded = imageColumn?.imageRounded || 'rounded-none'
-  const gridBottomSpacing = imageColumn?.gridBottomSpacing || 'mb-0'
+  const imageFit = imageStyles?.imageFit || imageColumn?.imageFit || 'cover'
+  const imageRounded = imageStyles?.imageRounded || imageColumn?.imageRounded || 'rounded-none'
+  const gridBottomSpacing = imageStyles?.gridBottomSpacing || imageColumn?.gridBottomSpacing || 'mb-0'
 
   // ─── Footer Items ─────────────────────────────────────────────────────────
   const footerItems = footerBar?.items && Array.isArray(footerBar.items) ? footerBar.items : []
-  const footerIconColor = footerBar?.iconColor || 'text-[#0256FF]'
-  const footerIconSize = footerBar?.iconSize || 'w-6 h-6'
-  const footerIconTextGap = footerBar?.iconTextGap || 'gap-3 md:gap-4'
-  const footerSubheadingHeadingGap = footerBar?.subheadingHeadingGap || 'gap-0.5'
+  const footerIconColor = footerStyles?.iconColor || footerBar?.iconColor || 'text-[#0256FF]'
+  const footerIconSize = footerStyles?.iconSize || footerBar?.iconSize || 'w-6 h-6'
+  const footerIconTextGap = footerStyles?.iconTextGap || footerBar?.iconTextGap || 'gap-3 md:gap-4'
+  const footerSubheadingHeadingGap = footerStyles?.subheadingHeadingGap || footerBar?.subheadingHeadingGap || 'gap-0.5'
 
-  const footerSubheadingColor = footerBar?.subheadingColor || 'text-gray-500'
+  const footerSubheadingColor = footerStyles?.subheadingColor || footerBar?.subheadingColor || 'text-gray-500'
   const footerSubheadingTypography = resolveTypography(
-    footerBar?.subheadingFontSize,
+    footerStyles?.subheadingFontSize || footerBar?.subheadingFontSize,
     footerBar?.subheadingFontSizeMobile,
-    footerBar?.subheadingFontWeight,
+    footerStyles?.subheadingFontWeight || footerBar?.subheadingFontWeight,
     undefined,
     'text-[11px] md:text-xs',
     'font-medium',
   )
 
-  const footerHeadingColor = footerBar?.headingColor || 'text-gray-950'
+  const footerHeadingColor = footerStyles?.headingColor || footerBar?.headingColor || 'text-gray-950'
   const footerHeadingTypography = resolveTypography(
-    footerBar?.headingFontSize,
+    footerStyles?.headingFontSize || footerBar?.headingFontSize,
     footerBar?.headingFontSizeMobile,
-    footerBar?.headingFontWeight,
+    footerStyles?.headingFontWeight || footerBar?.headingFontWeight,
     undefined,
     'text-base md:text-lg',
     'font-semibold',

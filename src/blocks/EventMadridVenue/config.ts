@@ -52,653 +52,737 @@ export const eventMadridVenueFields: Field[] = [
   {
     type: 'tabs',
     tabs: [
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 1: 📝 CONTENT & MEDIA (Non-technical users - Zero Styling Controls)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
         label: '📝 Content & Media',
         fields: [
-          // ─── 3. Left Column: Venue Details Stack ─────────────────────────────────
+          // ─── Left Column: Venue Details Stack ───────────────────────────────
           {
             name: 'leftColumn',
             type: 'group',
             label: 'Left Column: Venue Details & Action',
             fields: [
-      // Kicker
-      {
-        name: 'kickerGroup',
-        type: 'group',
-        label: 'Subheading (Kicker)',
-        fields: [
-          {
-            type: 'row',
-            fields: [
+              // Kicker
               {
-                name: 'showKicker',
-                type: 'checkbox',
-                label: 'Show Subheading',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-              bgColorPickerAll({
-                overrides: {
-                  name: 'boxBgColor',
-                  label: 'Square Accent Color',
-                  defaultValue: 'bg-[#0256FF]',
-                  admin: { width: '35%' },
-                },
-              }),
-              {
-                name: 'squareSize',
-                type: 'select',
-                label: 'Square Size',
-                defaultValue: 'w-2.5 h-2.5',
-                validate: allowAnySelect,
-                options: [
-                  { label: 'Small (w-2 h-2)', value: 'w-2 h-2' },
-                  { label: 'Medium (w-2.5 h-2.5 - Default)', value: 'w-2.5 h-2.5' },
-                  { label: 'Large (w-3 h-3)', value: 'w-3 h-3' },
+                name: 'kickerGroup',
+                type: 'group',
+                label: '1. Kicker / Subheading Tag',
+                fields: [
+                  {
+                    name: 'showKicker',
+                    type: 'checkbox',
+                    label: 'Show Subheading',
+                    defaultValue: true,
+                  },
+                  {
+                    name: 'text',
+                    type: 'text',
+                    label: 'Subheading Text',
+                    defaultValue: 'SEE YOU IN MADRID',
+                    admin: {
+                      condition: (_, siblingData) => Boolean(siblingData?.showKicker),
+                    },
+                  },
                 ],
-                admin: { width: '35%' },
               },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'text',
-                type: 'text',
-                label: 'Subheading Text',
-                defaultValue: 'SEE YOU IN MADRID',
-                admin: { width: '50%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-[#0256FF]',
-                  admin: { width: '50%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-xs md:text-sm',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-4 md:mb-6',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
 
-      // Heading Group
-      {
-        name: 'headingGroup',
-        type: 'group',
-        label: 'Heading',
-        fields: [
-          {
-            name: 'heading',
-            type: 'textarea',
-            label: 'Heading (Supports inline styling / HTML)',
-            defaultValue: 'One city.\nA world of perspectives.',
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'headingColor',
-                  label: 'Heading Color',
-                  defaultValue: 'text-black',
-                  admin: { width: '100%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
+              // Heading Group
               {
-                name: 'headingFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-bold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-4 md:mb-6',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
-
-      // Primary Description
-      {
-        name: 'descriptionGroup',
-        type: 'group',
-        label: 'Primary Description',
-        fields: [
-          {
-            name: 'description',
-            type: 'textarea',
-            label: 'Description (Supports inline styling)',
-            defaultValue:
-              "ESMO brings the global oncology community together in one place. We're proud to be part of the conversation.",
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'descriptionColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-slate-600',
-                  admin: { width: '100%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'descriptionFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-base md:text-lg',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-normal',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-6 md:mb-8',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
-
-      // Venue Location Row (Vector Icon + Bold Title)
-      {
-        name: 'venueLocation',
-        type: 'group',
-        label: 'Venue Location Callout (Vector Icon & Name)',
-        fields: [
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'iconType',
-                type: 'select',
-                label: 'Icon Source',
-                defaultValue: 'mapPin',
-                options: [
-                  { label: 'Map Pin Vector Icon (Default)', value: 'mapPin' },
-                  { label: 'Custom Vector Upload', value: 'upload' },
+                name: 'headingGroup',
+                type: 'group',
+                label: '2. Main Heading',
+                fields: [
+                  {
+                    name: 'heading',
+                    type: 'textarea',
+                    label: 'Heading Text (supports inline HTML e.g. <span style="color:#0256FF">, <strong>, <br/>)',
+                    defaultValue: 'One city.\nA world of perspectives.',
+                  },
                 ],
-                admin: { width: '50%' },
               },
-              textColorPickerAll({
-                overrides: {
-                  name: 'iconColor',
-                  label: 'Vector Icon Color',
-                  defaultValue: 'text-[#0256FF]',
-                  admin: { width: '50%' },
-                },
-              }),
+
+              // Primary Description
+              {
+                name: 'descriptionGroup',
+                type: 'group',
+                label: '3. Primary Description Text',
+                fields: [
+                  {
+                    name: 'description',
+                    type: 'textarea',
+                    label: 'Description Text (supports inline HTML)',
+                    defaultValue:
+                      "ESMO brings the global oncology community together in one place. We're proud to be part of the conversation.",
+                  },
+                ],
+              },
+
+              // Venue Location Row
+              {
+                name: 'venueLocation',
+                type: 'group',
+                label: '4. Venue Location Callout',
+                fields: [
+                  {
+                    name: 'venueName',
+                    type: 'text',
+                    label: 'Venue Name',
+                    defaultValue: 'The Westin Palace, Madrid',
+                  },
+                  {
+                    name: 'iconType',
+                    type: 'select',
+                    label: 'Icon Source',
+                    defaultValue: 'mapPin',
+                    options: [
+                      { label: 'Map Pin Vector Icon (Default)', value: 'mapPin' },
+                      { label: 'Custom Vector Upload', value: 'upload' },
+                    ],
+                  },
+                  {
+                    name: 'customIcon',
+                    type: 'upload',
+                    relationTo: 'media',
+                    label: 'Custom Vector / SVG Icon',
+                    admin: {
+                      condition: (_, siblingData) => siblingData?.iconType === 'upload',
+                    },
+                  },
+                ],
+              },
+
+              // Secondary Description
+              {
+                name: 'secondaryDescription',
+                type: 'group',
+                label: '5. Secondary Description / Meeting Note',
+                fields: [
+                  {
+                    name: 'text',
+                    type: 'textarea',
+                    label: 'Note Text (supports inline HTML)',
+                    defaultValue:
+                      "Just minutes from the congress venue. We're hosting meetings throughout ESMO 2026.",
+                  },
+                ],
+              },
+
+              // Transparent Link CTA
+              {
+                name: 'ctaLink',
+                type: 'group',
+                label: '6. Website Link (Transparent CTA with Arrow)',
+                fields: [
+                  {
+                    name: 'showLink',
+                    type: 'checkbox',
+                    label: 'Show Link',
+                    defaultValue: true,
+                  },
+                  {
+                    type: 'row',
+                    admin: {
+                      condition: (_, siblingData) => Boolean(siblingData?.showLink),
+                    },
+                    fields: [
+                      {
+                        name: 'text',
+                        type: 'text',
+                        label: 'Link Text',
+                        defaultValue: 'Visit venue website',
+                        admin: { width: '50%' },
+                      },
+                      {
+                        name: 'showArrow',
+                        type: 'checkbox',
+                        label: 'Show Arrow (↗)',
+                        defaultValue: true,
+                        admin: { width: '50%' },
+                      },
+                    ],
+                  },
+                  link({
+                    appearances: false,
+                    overrides: {
+                      admin: {
+                        condition: (_, siblingData) => Boolean(siblingData?.showLink),
+                        description: 'Destination URL (e.g. hotel or venue website)',
+                      },
+                    },
+                  }),
+                ],
+              },
             ],
           },
+
+          // ─── Right Column: Venue Image ──────────────────────────────────────
           {
-            name: 'customIcon',
-            type: 'upload',
-            relationTo: 'media',
-            label: 'Custom Vector / SVG Icon',
-            admin: {
-              condition: (_, siblingData) => siblingData?.iconType === 'upload',
-            },
-          },
-          {
-            type: 'row',
+            name: 'rightColumn',
+            type: 'group',
+            label: 'Right Column: Venue Facade Image',
             fields: [
               {
-                name: 'venueName',
-                type: 'text',
-                label: 'Venue Name',
-                defaultValue: 'The Westin Palace, Madrid',
-                admin: { width: '50%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'venueColor',
-                  label: 'Venue Text Color',
-                  defaultValue: 'text-black',
-                  admin: { width: '50%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-lg md:text-xl',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-bold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-2 md:mb-3',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                name: 'image',
+                type: 'upload',
+                relationTo: 'media',
+                label: 'Hotel Exterior / Venue Image (Strictly no border, no shadow)',
               },
             ],
           },
         ],
       },
 
-      // Secondary Description
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 2: 🎨 INDIVIDUAL STYLING (Element-by-Element Design Controls)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
-        name: 'secondaryDescription',
-        type: 'group',
-        label: 'Secondary Description / Meeting Note',
+        label: '🎨 Individual Styling',
         fields: [
+          // ─── 1. Kicker / Subheading Tag Styling ────────────────────────────
           {
-            name: 'text',
-            type: 'textarea',
-            label: 'Note Text (Supports inline styling)',
-            defaultValue:
-              "Just minutes from the congress venue. We're hosting meetings throughout ESMO 2026.",
-          },
-          {
-            type: 'row',
+            name: 'kickerStyles',
+            type: 'group',
+            label: '1. Kicker / Subheading Tag Styling',
             fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-slate-600',
-                  admin: { width: '100%' },
-                },
-              }),
+              {
+                type: 'row',
+                fields: [
+                  bgColorPickerAll({
+                    overrides: {
+                      name: 'boxBgColor',
+                      label: 'Square Accent Color',
+                      defaultValue: 'bg-[#0256FF]',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'squareSize',
+                    type: 'select',
+                    label: 'Square Size',
+                    defaultValue: 'w-2.5 h-2.5',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Small (w-2 h-2)', value: 'w-2 h-2' },
+                      { label: 'Medium (w-2.5 h-2.5 - Default)', value: 'w-2.5 h-2.5' },
+                      { label: 'Large (w-3 h-3)', value: 'w-3 h-3' },
+                    ],
+                    admin: { width: '33.33%' },
+                  },
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-[#0256FF]',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-4 md:mb-6',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
             ],
           },
+
+          // ─── 2. Main Heading Styling ──────────────────────────────────────
           {
-            type: 'row',
+            name: 'headingStyles',
+            type: 'group',
+            label: '2. Main Heading Styling',
             fields: [
               {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-sm md:text-base',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'headingColor',
+                      label: 'Heading Color',
+                      defaultValue: 'text-black',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
               },
               {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'headingFontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
               },
               {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-normal',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-4 md:mb-6',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
               },
             ],
           },
+
+          // ─── 3. Primary Description Styling ───────────────────────────────
           {
-            type: 'row',
+            name: 'descriptionStyles',
+            type: 'group',
+            label: '3. Primary Description Styling',
             fields: [
               {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-6 md:mb-8',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'descriptionColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-slate-600',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
               },
               {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'descriptionFontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-base md:text-lg',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-base md:text-lg',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-6 md:mb-8',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 4. Venue Location Callout Styling ────────────────────────────
+          {
+            name: 'venueLocationStyles',
+            type: 'group',
+            label: '4. Venue Location Callout Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'iconColor',
+                      label: 'Vector Icon Color',
+                      defaultValue: 'text-[#0256FF]',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'venueColor',
+                      label: 'Venue Name Text Color',
+                      defaultValue: 'text-black',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-lg md:text-xl',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-2 md:mb-3',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 5. Secondary Note Styling ────────────────────────────────────
+          {
+            name: 'secondaryDescriptionStyles',
+            type: 'group',
+            label: '5. Secondary Note Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-slate-600',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-sm md:text-base',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-6 md:mb-8',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 6. Website Link (CTA) Styling ────────────────────────────────
+          {
+            name: 'linkStyles',
+            type: 'group',
+            label: '6. Website Link (CTA) Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Text & Arrow Color',
+                      defaultValue: 'text-[#0256FF]',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-sm md:text-base',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 7. Venue Image Styling ───────────────────────────────────────
+          {
+            name: 'imageStyles',
+            type: 'group',
+            label: '7. Venue Image Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'imageFit',
+                    type: 'select',
+                    label: 'Image Fit',
+                    defaultValue: 'cover',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Cover (Default)', value: 'cover' },
+                      { label: 'Contain', value: 'contain' },
+                    ],
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'imageRounded',
+                    type: 'select',
+                    label: 'Image Corners',
+                    defaultValue: 'rounded-none',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Square (rounded-none - Default)', value: 'rounded-none' },
+                      { label: 'Rounded Medium (rounded-lg)', value: 'rounded-lg' },
+                      { label: 'Rounded Large (rounded-2xl)', value: 'rounded-2xl' },
+                    ],
+                    admin: { width: '50%' },
+                  },
+                ],
               },
             ],
           },
         ],
       },
 
-      // Transparent Link CTA
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 3: ⚙️ SECTION LAYOUT & SPACING (Global Section Outer Container)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
-        name: 'ctaLink',
-        type: 'group',
-        label: 'Website Link (Transparent button with arrow)',
+        label: '⚙️ Section Layout & Spacing',
         fields: [
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'showLink',
-                type: 'checkbox',
-                label: 'Show Link',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-              {
-                name: 'text',
-                type: 'text',
-                label: 'Link Text',
-                defaultValue: 'Visit venue website',
-                admin: { width: '40%' },
-              },
-              {
-                name: 'showArrow',
-                type: 'checkbox',
-                label: 'Show Arrow (↗)',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-            ],
-          },
-          link({
-            appearances: false,
-            overrides: {
-              admin: {
-                description: 'Destination URL (e.g. hotel or venue website)',
-              },
-            },
-          }),
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Text & Arrow Color',
-                  defaultValue: 'text-[#0256FF]',
-                  admin: { width: '100%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-sm md:text-base',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
-  // ─── 4. Right Column: Venue Image ────────────────────────────────────────
-  {
-    name: 'rightColumn',
-    type: 'group',
-    label: 'Right Column: Venue Facade Image',
-    fields: [
-      {
-        name: 'image',
-        type: 'upload',
-        relationTo: 'media',
-        label: 'Hotel Exterior / Venue Image (Strictly no border, no shadow)',
-      },
-      {
-        type: 'row',
-        fields: [
-          {
-            name: 'imageFit',
-            type: 'select',
-            label: 'Image Fit',
-            defaultValue: 'cover',
-            validate: allowAnySelect,
-            options: [
-              { label: 'Cover (Default)', value: 'cover' },
-              { label: 'Contain', value: 'contain' },
-            ],
-            admin: { width: '50%' },
-          },
-          {
-            name: 'imageRounded',
-            type: 'select',
-            label: 'Image Corners',
-            defaultValue: 'rounded-none',
-            validate: allowAnySelect,
-            options: [
-              { label: 'Square (rounded-none - Default)', value: 'rounded-none' },
-              { label: 'Rounded Medium (rounded-lg)', value: 'rounded-lg' },
-              { label: 'Rounded Large (rounded-2xl)', value: 'rounded-2xl' },
-            ],
-            admin: { width: '50%' },
-          },
-        ],
-      },
-    ],
-  },
-        ],
-      },
-      {
-        label: '⚙️ Advanced Styling & Layout',
-        fields: [
-          // ─── 1. Layout & Header Width Alignment ──────────────────────────────────
+          // ─── 1. Layout & Header Width Alignment ─────────────────────────────
           {
             type: 'row',
             fields: [
@@ -777,7 +861,7 @@ export const eventMadridVenueFields: Field[] = [
             ],
           },
 
-          // ─── 2. Section Background & Vertical Paddings ───────────────────────────
+          // ─── 2. Section Background & Vertical Paddings ──────────────────────
           {
             type: 'row',
             fields: [

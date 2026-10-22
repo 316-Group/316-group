@@ -68,939 +68,875 @@ export const eventAgendaOverviewFields: Field[] = [
   {
     type: 'tabs',
     tabs: [
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 1: 📝 CONTENT & MEDIA (Non-technical users - Zero Styling Controls)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
         label: '📝 Content & Media',
         fields: [
-          // ─── 3. Left Column: Context & Action Stack ──────────────────────────────
+          // ─── Left Column: Context & Action Stack ────────────────────────────
           {
             name: 'leftColumn',
             type: 'group',
             label: 'Left Column: Context & Action Stack',
             fields: [
-      // Kicker Group
-      {
-        name: 'kickerGroup',
-        type: 'group',
-        label: 'Subheading (Kicker)',
-        fields: [
-          {
-            type: 'row',
-            fields: [
+              // Kicker Group
               {
-                name: 'showKicker',
-                type: 'checkbox',
-                label: 'Show Subheading',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-              bgColorPickerAll({
-                overrides: {
-                  name: 'boxBgColor',
-                  label: 'Square Accent Color',
-                  defaultValue: 'bg-[#0256FF]',
-                  admin: { width: '35%' },
-                },
-              }),
-              {
-                name: 'squareSize',
-                type: 'select',
-                label: 'Square Size',
-                defaultValue: 'w-2.5 h-2.5',
-                validate: allowAnySelect,
-                options: [
-                  { label: 'Small (w-2 h-2)', value: 'w-2 h-2' },
-                  { label: 'Medium (w-2.5 h-2.5 - Default)', value: 'w-2.5 h-2.5' },
-                  { label: 'Large (w-3 h-3)', value: 'w-3 h-3' },
+                name: 'kickerGroup',
+                type: 'group',
+                label: '1. Kicker / Subheading Tag',
+                fields: [
+                  {
+                    name: 'showKicker',
+                    type: 'checkbox',
+                    label: 'Show Subheading',
+                    defaultValue: true,
+                  },
+                  {
+                    name: 'text',
+                    type: 'text',
+                    label: 'Subheading Text',
+                    defaultValue: 'ON THE AGENDA',
+                    admin: {
+                      condition: (_, siblingData) => Boolean(siblingData?.showKicker),
+                    },
+                  },
                 ],
-                admin: { width: '35%' },
+              },
+
+              // Heading Group
+              {
+                name: 'headingGroup',
+                type: 'group',
+                label: '2. Main Heading',
+                fields: [
+                  {
+                    name: 'heading',
+                    type: 'textarea',
+                    label: 'Heading Text (supports inline HTML e.g. <span style="color:#0256FF">, <strong>, <br/>)',
+                    defaultValue: 'Big questions.\nOpen conversations.',
+                  },
+                ],
+              },
+
+              // Description Group
+              {
+                name: 'descriptionGroup',
+                type: 'group',
+                label: '3. Description Text',
+                fields: [
+                  {
+                    name: 'description',
+                    type: 'textarea',
+                    label: 'Description Text (supports inline HTML)',
+                    defaultValue:
+                      "Healthcare doesn't change through one-size-fits-all solutions. It changes through focused conversations, shared experience and the courage to look at challenges differently. Here's what we're talking about in Madrid:",
+                  },
+                ],
+              },
+
+              // Action CTA Button
+              {
+                name: 'ctaButton',
+                type: 'group',
+                label: '4. Action Button (CTA)',
+                fields: [
+                  {
+                    name: 'showButton',
+                    type: 'checkbox',
+                    label: 'Show Button',
+                    defaultValue: true,
+                  },
+                  {
+                    type: 'row',
+                    admin: {
+                      condition: (_, siblingData) => Boolean(siblingData?.showButton),
+                    },
+                    fields: [
+                      {
+                        name: 'text',
+                        type: 'text',
+                        label: 'Button Text',
+                        defaultValue: 'Request a meeting',
+                        admin: { width: '50%' },
+                      },
+                      {
+                        name: 'showArrow',
+                        type: 'checkbox',
+                        label: 'Show Arrow Icon (↗)',
+                        defaultValue: true,
+                        admin: { width: '50%' },
+                      },
+                    ],
+                  },
+                  link({
+                    appearances: false,
+                    overrides: {
+                      admin: {
+                        condition: (_, siblingData) => Boolean(siblingData?.showButton),
+                        description: 'Destination URL or internal document link',
+                      },
+                    },
+                  }),
+                ],
+              },
+
+              // Disclaimer Text
+              {
+                name: 'disclaimerGroup',
+                type: 'group',
+                label: '5. Capacity / Disclaimer Text Below Button',
+                fields: [
+                  {
+                    name: 'showDisclaimer',
+                    type: 'checkbox',
+                    label: 'Show Disclaimer Text',
+                    defaultValue: true,
+                  },
+                  {
+                    name: 'text',
+                    type: 'text',
+                    label: 'Disclaimer Text',
+                    defaultValue: '*Advance booking recommended due to limited on-site availability.',
+                    admin: {
+                      condition: (_, siblingData) => Boolean(siblingData?.showDisclaimer),
+                    },
+                  },
+                ],
               },
             ],
           },
+
+          // ─── Right Column: Numbered Agenda Items ────────────────────────────
           {
-            type: 'row',
+            name: 'rightColumn',
+            type: 'group',
+            label: 'Right Column: Numbered Agenda Items',
             fields: [
               {
-                name: 'text',
-                type: 'text',
-                label: 'Subheading Text',
-                defaultValue: 'ON THE AGENDA',
-                admin: { width: '50%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-[#0256FF]',
-                  admin: { width: '50%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-xs md:text-sm',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-4 md:mb-6',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                name: 'items',
+                type: 'array',
+                label: 'Agenda / Details Items',
+                minRows: 1,
+                defaultValue: [
+                  {
+                    numberText: '01',
+                    category: 'INNOVATION & INFRASTRUCTURE',
+                    heading: 'Connecting technology to clinical reality',
+                    description:
+                      'How do we bridge the gap between innovative tools and the complex systems healthcare teams rely on every day?',
+                  },
+                  {
+                    numberText: '02',
+                    category: 'DATA & INTEGRATION',
+                    heading: 'Data that actually serves clinicians',
+                    description:
+                      'From fragmentation to clarity: turning complex health data into actionable insights at the point of care.',
+                  },
+                  {
+                    numberText: '03',
+                    category: 'COLLABORATION',
+                    heading: 'Cross-border learning, local impact',
+                    description:
+                      'What can oncology teams in one market teach another? Lessons from healthcare systems navigating rapid change.',
+                  },
+                  {
+                    numberText: '04',
+                    category: 'FUTURE OF CARE',
+                    heading: "Preparing for what's next in oncology",
+                    description:
+                      'Where the science is going, and the operational capabilities organizations need to keep pace.',
+                  },
+                ],
+                fields: [
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'numberText',
+                        type: 'text',
+                        label: 'Custom Number (e.g. 01)',
+                        admin: { width: '50%' },
+                      },
+                      {
+                        name: 'category',
+                        type: 'text',
+                        label: 'Category Subheading',
+                        defaultValue: 'INNOVATION & INFRASTRUCTURE',
+                        admin: { width: '50%' },
+                      },
+                    ],
+                  },
+                  {
+                    name: 'heading',
+                    type: 'textarea',
+                    label: 'Topic Heading Text',
+                    defaultValue: 'Connecting technology to clinical reality',
+                  },
+                  {
+                    name: 'description',
+                    type: 'textarea',
+                    label: 'Topic Description Text',
+                    defaultValue:
+                      'How do we bridge the gap between innovative tools and the complex systems healthcare teams rely on every day?',
+                  },
+                ],
               },
             ],
           },
         ],
       },
 
-      // Heading Group
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 2: 🎨 INDIVIDUAL STYLING (Element-by-Element Design Controls)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
-        name: 'headingGroup',
-        type: 'group',
-        label: 'Heading',
+        label: '🎨 Individual Styling',
         fields: [
+          // ─── 1. Left Kicker Styling ───────────────────────────────────────
           {
-            name: 'heading',
-            type: 'textarea',
-            label: 'Heading (Supports inline styling / HTML like <span> or <mark>)',
-            defaultValue: 'Big questions.\nOpen conversations.',
-          },
-          {
-            type: 'row',
+            name: 'kickerStyles',
+            type: 'group',
+            label: '1. Left Kicker Styling',
             fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'headingColor',
-                  label: 'Heading Text Color',
-                  defaultValue: 'text-black',
-                  admin: { width: '100%' },
-                },
-              }),
+              {
+                type: 'row',
+                fields: [
+                  bgColorPickerAll({
+                    overrides: {
+                      name: 'boxBgColor',
+                      label: 'Square Accent Color',
+                      defaultValue: 'bg-[#0256FF]',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'squareSize',
+                    type: 'select',
+                    label: 'Square Size',
+                    defaultValue: 'w-2.5 h-2.5',
+                    validate: allowAnySelect,
+                    options: [
+                      { label: 'Small (w-2 h-2)', value: 'w-2 h-2' },
+                      { label: 'Medium (w-2.5 h-2.5 - Default)', value: 'w-2.5 h-2.5' },
+                      { label: 'Large (w-3 h-3)', value: 'w-3 h-3' },
+                    ],
+                    admin: { width: '33.33%' },
+                  },
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-[#0256FF]',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-4 md:mb-6',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
             ],
           },
+
+          // ─── 2. Left Heading Styling ──────────────────────────────────────
           {
-            type: 'row',
+            name: 'headingStyles',
+            type: 'group',
+            label: '2. Left Heading Styling',
             fields: [
               {
-                name: 'headingFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'headingColor',
+                      label: 'Heading Text Color',
+                      defaultValue: 'text-black',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
               },
               {
-                name: 'headingFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'headingFontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-3xl md:text-4xl lg:text-5xl',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'headingFontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
               },
               {
-                name: 'headingFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-bold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-6 md:mb-8',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
               },
             ],
           },
+
+          // ─── 3. Left Description Styling ──────────────────────────────────
           {
-            type: 'row',
+            name: 'descriptionStyles',
+            type: 'group',
+            label: '3. Left Description Styling',
             fields: [
               {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-6 md:mb-8',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'descriptionColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-slate-600',
+                      admin: { width: '100%' },
+                    },
+                  }),
+                ],
               },
               {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
+                type: 'row',
+                fields: [
+                  {
+                    name: 'descriptionFontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-base md:text-lg',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-base md:text-lg',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'descriptionFontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-8 md:mb-10',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 4. Action Button Styling ─────────────────────────────────────
+          {
+            name: 'buttonStyles',
+            type: 'group',
+            label: '4. Action Button Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  bgColorPickerAll({
+                    overrides: {
+                      name: 'bgColor',
+                      label: 'Button Background Color',
+                      defaultValue: 'bg-[#0256FF]',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Button Text Color',
+                      defaultValue: 'text-white',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-sm md:text-base',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-sm md:text-base',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'marginBottom',
+                    type: 'select',
+                    label: 'Desktop Margin Bottom',
+                    defaultValue: 'mb-3 md:mb-4',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'marginBottomMobile',
+                    type: 'select',
+                    label: 'Mobile Margin Bottom',
+                    defaultValue: '',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 5. Disclaimer Text Styling ───────────────────────────────────
+          {
+            name: 'disclaimerStyles',
+            type: 'group',
+            label: '5. Disclaimer Text Styling',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'textColor',
+                      label: 'Text Color',
+                      defaultValue: 'text-slate-400',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                  {
+                    name: 'fontSize',
+                    type: 'select',
+                    label: 'Desktop Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'fontSizeMobile',
+                    type: 'select',
+                    label: 'Mobile Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'fontWeight',
+                    type: 'select',
+                    label: 'Desktop Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '50%' },
+                  },
+                  {
+                    name: 'fontWeightMobile',
+                    type: 'select',
+                    label: 'Mobile Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ─── 6. Agenda Row & List Styling ─────────────────────────────────
+          {
+            name: 'agendaRowStyles',
+            type: 'group',
+            label: '6. Agenda Row & List Styling (Applied to All Items)',
+            fields: [
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'showTopDivider',
+                    type: 'checkbox',
+                    label: 'Show Top Divider (<hr>)',
+                    defaultValue: true,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'topDividerColor',
+                    type: 'select',
+                    label: 'Top Divider Color',
+                    defaultValue: 'border-slate-200',
+                    validate: allowAnySelect,
+                    options: dividerColorOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'topDividerWidth',
+                    type: 'select',
+                    label: 'Top Divider Thickness',
+                    defaultValue: 'border-t',
+                    validate: allowAnySelect,
+                    options: dividerBorderWidthOptions,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'topDividerMarginBottom',
+                    type: 'select',
+                    label: 'Top Divider Margin Bottom',
+                    defaultValue: 'mb-6 md:mb-8',
+                    validate: allowAnySelect,
+                    options: marginBottomOptions,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  {
+                    name: 'showNumbers',
+                    type: 'checkbox',
+                    label: 'Show Number Badges on Items (01, 02...)',
+                    defaultValue: true,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'showCategory',
+                    type: 'checkbox',
+                    label: 'Show Category Subheading on Items',
+                    defaultValue: true,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'showArrow',
+                    type: 'checkbox',
+                    label: 'Show Top Right Arrow (↗)',
+                    defaultValue: true,
+                    admin: { width: '25%' },
+                  },
+                  {
+                    name: 'showDivider',
+                    type: 'checkbox',
+                    label: 'Show Bottom Divider Line (<hr>)',
+                    defaultValue: true,
+                    admin: { width: '25%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'numberColor',
+                      label: 'Number Color',
+                      defaultValue: 'text-slate-400',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'numberFontSize',
+                    type: 'select',
+                    label: 'Number Font Size',
+                    defaultValue: 'text-base md:text-lg',
+                    options: fontSizeOptions,
+                    admin: { width: '33.33%' },
+                  },
+                  {
+                    name: 'numberFontWeight',
+                    type: 'select',
+                    label: 'Number Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '33.33%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'categoryColor',
+                      label: 'Category Text Color',
+                      defaultValue: 'text-slate-500',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'categoryFontSize',
+                    type: 'select',
+                    label: 'Category Font Size',
+                    defaultValue: 'text-xs md:text-sm',
+                    options: fontSizeOptions,
+                    admin: { width: '33.33%' },
+                  },
+                  {
+                    name: 'categoryFontWeight',
+                    type: 'select',
+                    label: 'Category Font Weight',
+                    defaultValue: 'font-semibold',
+                    options: fontWeightOptions,
+                    admin: { width: '33.33%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'headingColor',
+                      label: 'Item Heading Color',
+                      defaultValue: 'text-black',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'headingFontSize',
+                    type: 'select',
+                    label: 'Item Heading Font Size',
+                    defaultValue: 'text-xl md:text-2xl',
+                    options: fontSizeOptions,
+                    admin: { width: '33.33%' },
+                  },
+                  {
+                    name: 'headingFontWeight',
+                    type: 'select',
+                    label: 'Item Heading Font Weight',
+                    defaultValue: 'font-bold',
+                    options: fontWeightOptions,
+                    admin: { width: '33.33%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'descriptionColor',
+                      label: 'Item Description Color',
+                      defaultValue: 'text-slate-600',
+                      admin: { width: '33.33%' },
+                    },
+                  }),
+                  {
+                    name: 'descriptionFontSize',
+                    type: 'select',
+                    label: 'Item Description Font Size',
+                    defaultValue: 'text-sm md:text-base',
+                    options: fontSizeOptions,
+                    admin: { width: '33.33%' },
+                  },
+                  {
+                    name: 'descriptionFontWeight',
+                    type: 'select',
+                    label: 'Item Description Font Weight',
+                    defaultValue: 'font-normal',
+                    options: fontWeightOptions,
+                    admin: { width: '33.33%' },
+                  },
+                ],
+              },
+              {
+                type: 'row',
+                fields: [
+                  textColorPickerAll({
+                    overrides: {
+                      name: 'arrowColor',
+                      label: 'Arrow Color',
+                      defaultValue: 'text-slate-400',
+                      admin: { width: '50%' },
+                    },
+                  }),
+                  {
+                    name: 'dividerColor',
+                    type: 'select',
+                    label: 'Bottom Divider Color',
+                    defaultValue: 'border-slate-200',
+                    validate: allowAnySelect,
+                    options: dividerColorOptions,
+                    admin: { width: '50%' },
+                  },
+                ],
               },
             ],
           },
         ],
       },
 
-      // Description Group
+      // ═══════════════════════════════════════════════════════════════════════════
+      // TAB 3: ⚙️ SECTION LAYOUT & SPACING (Global Section Outer Container)
+      // ═══════════════════════════════════════════════════════════════════════════
       {
-        name: 'descriptionGroup',
-        type: 'group',
-        label: 'Description',
+        label: '⚙️ Section Layout & Spacing',
         fields: [
-          {
-            name: 'description',
-            type: 'textarea',
-            label: 'Description Text (Supports inline styling)',
-            defaultValue:
-              "Healthcare doesn't change through one-size-fits-all solutions. It changes through focused conversations, shared experience and the courage to look at challenges differently. Here's what we're talking about in Madrid:",
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'descriptionColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-slate-600',
-                  admin: { width: '100%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'descriptionFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-base md:text-lg',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-normal',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-8 md:mb-10',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
-
-      // Button (CTA)
-      {
-        name: 'ctaButton',
-        type: 'group',
-        label: 'Action Button (CTA)',
-        fields: [
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'showButton',
-                type: 'checkbox',
-                label: 'Show Button',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-              {
-                name: 'text',
-                type: 'text',
-                label: 'Button Text',
-                defaultValue: 'Request a meeting',
-                admin: { width: '40%' },
-              },
-              {
-                name: 'showArrow',
-                type: 'checkbox',
-                label: 'Show Arrow (↗)',
-                defaultValue: true,
-                admin: { width: '30%' },
-              },
-            ],
-          },
-          link({
-            appearances: false,
-            overrides: {
-              admin: {
-                description: 'Destination URL or internal document link',
-              },
-            },
-          }),
-          {
-            type: 'row',
-            fields: [
-              bgColorPickerAll({
-                overrides: {
-                  name: 'bgColor',
-                  label: 'Button Background Color',
-                  defaultValue: 'bg-[#0256FF]',
-                  admin: { width: '50%' },
-                },
-              }),
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Button Text Color',
-                  defaultValue: 'text-white',
-                  admin: { width: '50%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-sm md:text-base',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-3 md:mb-4',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'marginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
-
-      // Disclaimer Text
-      {
-        name: 'disclaimerGroup',
-        type: 'group',
-        label: 'Disclaimer Text Below Button',
-        fields: [
-          {
-            name: 'text',
-            type: 'text',
-            label: 'Disclaimer Text',
-            defaultValue: '*Advance booking recommended due to limited on-site availability.',
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'textColor',
-                  label: 'Text Color',
-                  defaultValue: 'text-slate-400',
-                  admin: { width: '50%' },
-                },
-              }),
-              {
-                name: 'fontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-xs md:text-sm',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'fontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'fontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-normal',
-                options: fontWeightOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'fontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
-  // ─── 4. Right Column: Numbered Agenda Items ──────────────────────────────
-  {
-    name: 'rightColumn',
-    type: 'group',
-    label: 'Right Column: Numbered Agenda Items',
-    fields: [
-      // Top Divider Line
-      {
-        name: 'topDivider',
-        type: 'group',
-        label: 'Top Divider Line (<hr>)',
-        fields: [
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'showTopDivider',
-                type: 'checkbox',
-                label: 'Show Top Divider',
-                defaultValue: true,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'borderColor',
-                type: 'select',
-                label: 'Border Color',
-                defaultValue: 'border-slate-200',
-                validate: allowAnySelect,
-                options: dividerColorOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'borderWidth',
-                type: 'select',
-                label: 'Border Thickness',
-                defaultValue: 'border-t',
-                validate: allowAnySelect,
-                options: dividerBorderWidthOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'marginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-6 md:mb-8',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            name: 'marginBottomMobile',
-            type: 'select',
-            label: 'Mobile Margin Bottom',
-            validate: allowAnySelect,
-            options: marginBottomOptions,
-            admin: { width: '50%' },
-          },
-        ],
-      },
-
-      {
-        type: 'row',
-        fields: [
-          {
-            name: 'showNumbers',
-            type: 'checkbox',
-            label: 'Show Number Badges on Items (01, 02...)',
-            defaultValue: true,
-            admin: { width: '50%' },
-          },
-          {
-            name: 'showCategory',
-            type: 'checkbox',
-            label: 'Show Category Subheading on Items',
-            defaultValue: true,
-            admin: { width: '50%' },
-          },
-        ],
-      },
-
-      // Items Array
-      {
-        name: 'items',
-        type: 'array',
-        label: 'Agenda / Details Items',
-        minRows: 1,
-        defaultValue: [
-          {
-            numberText: '01',
-            category: 'INNOVATION & INFRASTRUCTURE',
-            heading: 'Connecting technology to clinical reality',
-            description:
-              'How do we bridge the gap between innovative tools and the complex systems healthcare teams rely on every day?',
-          },
-          {
-            numberText: '02',
-            category: 'DATA & INTEGRATION',
-            heading: 'Data that actually serves clinicians',
-            description:
-              'From fragmentation to clarity: turning complex health data into actionable insights at the point of care.',
-          },
-          {
-            numberText: '03',
-            category: 'COLLABORATION',
-            heading: 'Cross-border learning, local impact',
-            description:
-              'What can oncology teams in one market teach another? Lessons from healthcare systems navigating rapid change.',
-          },
-          {
-            numberText: '04',
-            category: 'FUTURE OF CARE',
-            heading: "Preparing for what's next in oncology",
-            description:
-              'Where the science is going, and the operational capabilities organizations need to keep pace.',
-          },
-        ],
-        fields: [
-          // Row 1: Number Controls
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'numberText',
-                type: 'text',
-                label: 'Custom Number (Leave blank to auto-generate: 01, 02...)',
-                admin: { width: '25%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'numberColor',
-                  label: 'Number Color',
-                  defaultValue: 'text-slate-400',
-                  admin: { width: '25%' },
-                },
-              }),
-              {
-                name: 'numberFontSize',
-                type: 'select',
-                label: 'Desktop Number Size',
-                defaultValue: 'text-base md:text-lg',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'numberFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Number Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'numberFontWeight',
-                type: 'select',
-                label: 'Desktop Number Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'numberFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Number Weight',
-                options: fontWeightOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-
-          // Row 2: Category Tag
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'category',
-                type: 'text',
-                label: 'Category Subheading',
-                defaultValue: 'INNOVATION & INFRASTRUCTURE',
-                admin: { width: '50%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'categoryColor',
-                  label: 'Category Text Color',
-                  defaultValue: 'text-slate-500',
-                  admin: { width: '50%' },
-                },
-              }),
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'categoryFontSize',
-                type: 'select',
-                label: 'Desktop Category Size',
-                defaultValue: 'text-xs md:text-sm',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'categoryFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Category Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'categoryFontWeight',
-                type: 'select',
-                label: 'Desktop Category Weight',
-                defaultValue: 'font-semibold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'categoryFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Category Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'categoryMarginBottom',
-                type: 'select',
-                label: 'Desktop Category Margin Bottom',
-                defaultValue: 'mb-2 md:mb-3',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-              {
-                name: 'categoryMarginBottomMobile',
-                type: 'select',
-                label: 'Mobile Category Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '50%' },
-              },
-            ],
-          },
-
-          // Row 3: Heading
-          {
-            name: 'heading',
-            type: 'textarea',
-            label: 'Item Heading (Supports inline styling)',
-            defaultValue: 'Connecting technology to clinical reality',
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'headingColor',
-                  label: 'Heading Color',
-                  defaultValue: 'text-black',
-                  admin: { width: '50%' },
-                },
-              }),
-              {
-                name: 'headingFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-xl md:text-2xl',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'headingFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-bold',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingMarginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-3 md:mb-4',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'headingMarginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-
-          // Row 4: Description
-          {
-            name: 'description',
-            type: 'textarea',
-            label: 'Item Description (Supports inline styling)',
-            defaultValue:
-              'How do we bridge the gap between innovative tools and the complex systems healthcare teams rely on every day?',
-          },
-          {
-            type: 'row',
-            fields: [
-              textColorPickerAll({
-                overrides: {
-                  name: 'descriptionColor',
-                  label: 'Description Color',
-                  defaultValue: 'text-slate-600',
-                  admin: { width: '50%' },
-                },
-              }),
-              {
-                name: 'descriptionFontSize',
-                type: 'select',
-                label: 'Desktop Font Size',
-                defaultValue: 'text-sm md:text-base',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontSizeMobile',
-                type: 'select',
-                label: 'Mobile Font Size',
-                options: fontSizeOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'descriptionFontWeight',
-                type: 'select',
-                label: 'Desktop Font Weight',
-                defaultValue: 'font-normal',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionFontWeightMobile',
-                type: 'select',
-                label: 'Mobile Font Weight',
-                options: fontWeightOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionMarginBottom',
-                type: 'select',
-                label: 'Desktop Margin Bottom',
-                defaultValue: 'mb-6 md:mb-8',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'descriptionMarginBottomMobile',
-                type: 'select',
-                label: 'Mobile Margin Bottom',
-                validate: allowAnySelect,
-                options: marginBottomOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-
-          // Row 5: Arrow & Divider Controls
-          {
-            type: 'row',
-            fields: [
-              {
-                name: 'showArrow',
-                type: 'checkbox',
-                label: 'Show Top Right Arrow (↗)',
-                defaultValue: true,
-                admin: { width: '25%' },
-              },
-              textColorPickerAll({
-                overrides: {
-                  name: 'arrowColor',
-                  label: 'Arrow Color',
-                  defaultValue: 'text-slate-400',
-                  admin: { width: '25%' },
-                },
-              }),
-              {
-                name: 'showDivider',
-                type: 'checkbox',
-                label: 'Show Bottom Divider (<hr>)',
-                defaultValue: true,
-                admin: { width: '25%' },
-              },
-              {
-                name: 'dividerColor',
-                type: 'select',
-                label: 'Bottom Divider Color',
-                defaultValue: 'border-slate-200',
-                validate: allowAnySelect,
-                options: dividerColorOptions,
-                admin: { width: '25%' },
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-        ],
-      },
-      {
-        label: '⚙️ Advanced Styling & Layout',
-        fields: [
-          // ─── 1. Layout & Header Width Alignment ──────────────────────────────────
+          // ─── 1. Layout & Header Width Alignment ─────────────────────────────
           {
             type: 'row',
             fields: [
@@ -1079,7 +1015,7 @@ export const eventAgendaOverviewFields: Field[] = [
             ],
           },
 
-          // ─── 2. Section Background & Vertical Paddings ───────────────────────────
+          // ─── 2. Section Background & Vertical Paddings ──────────────────────
           {
             type: 'row',
             fields: [

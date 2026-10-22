@@ -11,6 +11,8 @@ import { resolveTypography } from '@/utilities/resolveTypography'
 export interface EventMeetingFormatsProps {
   sectionBgColor?: string | null
   reverseColumns?: boolean | null
+  rightPaddingTop?: string | null
+  rightPaddingBottom?: string | null
 
   leftColumn?: {
     image?: MediaType | string | null
@@ -93,6 +95,7 @@ export interface EventMeetingFormatsProps {
     } | null
 
     disclaimerGroup?: {
+      showDisclaimer?: boolean | null
       text?: string | null
       textColor?: string | null
       fontSize?: string | null
@@ -100,6 +103,77 @@ export interface EventMeetingFormatsProps {
       fontWeight?: string | null
       fontWeightMobile?: string | null
     } | null
+  } | null
+
+  // Tab 2 Individual Styling Groups
+  leftImageStyles?: {
+    imageFit?: 'cover' | 'contain' | null
+    minHeight?: string | null
+    badgeBgColor?: string | null
+    dotColor?: string | null
+  } | null
+
+  kickerStyles?: {
+    boxBgColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  pointStyles?: {
+    boxBgColor?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  buttonStyles?: {
+    bgColor?: string | null
+    textColor?: string | null
+    arrowColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  disclaimerStyles?: {
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
   } | null
 
   className?: string
@@ -133,15 +207,24 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
   const {
     sectionBgColor = 'bg-white',
     reverseColumns = false,
+    rightPaddingTop,
+    rightPaddingBottom,
     leftColumn,
     rightColumn,
+    leftImageStyles,
+    kickerStyles,
+    headingStyles,
+    descriptionStyles,
+    pointStyles,
+    buttonStyles,
+    disclaimerStyles,
     className,
   } = props
 
-  // Image & Badge
+  // Image & Badge with Fallback Cascades
   const image = leftColumn?.image
-  const imageFit = leftColumn?.imageFit || 'cover'
-  const minHeight = leftColumn?.minHeight || 'min-h-[540px] lg:min-h-[640px]'
+  const imageFit = leftImageStyles?.imageFit || leftColumn?.imageFit || 'cover'
+  const minHeight = leftImageStyles?.minHeight || leftColumn?.minHeight || 'min-h-[540px] lg:min-h-[640px]'
   const badge = leftColumn?.badge
 
   // Right Column Stack
@@ -152,40 +235,40 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
   const cta = rightColumn?.ctaButton
   const disclaimer = rightColumn?.disclaimerGroup
 
-  // Typography
+  // Typography with Fallback Cascades
   const kickerTypo = resolveTypography(
-    kicker?.fontSize || 'text-xs md:text-sm',
-    kicker?.fontSizeMobile,
-    kicker?.fontWeight || 'font-semibold',
-    kicker?.fontWeightMobile,
+    kickerStyles?.fontSize || kicker?.fontSize || 'text-xs md:text-sm',
+    kickerStyles?.fontSizeMobile || kicker?.fontSizeMobile,
+    kickerStyles?.fontWeight || kicker?.fontWeight || 'font-semibold',
+    kickerStyles?.fontWeightMobile || kicker?.fontWeightMobile,
   )
 
   const headingTypo = resolveTypography(
-    heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
-    heading?.headingFontSizeMobile,
-    heading?.headingFontWeight || 'font-bold',
-    heading?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
+    headingStyles?.headingFontSizeMobile || heading?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || heading?.headingFontWeight || 'font-bold',
+    headingStyles?.headingFontWeightMobile || heading?.headingFontWeightMobile,
   )
 
   const descTypo = resolveTypography(
-    description?.descriptionFontSize || 'text-base md:text-lg',
-    description?.descriptionFontSizeMobile,
-    description?.descriptionFontWeight || 'font-normal',
-    description?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || description?.descriptionFontSize || 'text-base md:text-lg',
+    descriptionStyles?.descriptionFontSizeMobile || description?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || description?.descriptionFontWeight || 'font-normal',
+    descriptionStyles?.descriptionFontWeightMobile || description?.descriptionFontWeightMobile,
   )
 
   const ctaTypo = resolveTypography(
-    cta?.fontSize || 'text-sm md:text-base',
-    cta?.fontSizeMobile,
-    cta?.fontWeight || 'font-semibold',
-    cta?.fontWeightMobile,
+    buttonStyles?.fontSize || cta?.fontSize || 'text-sm md:text-base',
+    buttonStyles?.fontSizeMobile || cta?.fontSizeMobile,
+    buttonStyles?.fontWeight || cta?.fontWeight || 'font-semibold',
+    buttonStyles?.fontWeightMobile || cta?.fontWeightMobile,
   )
 
   const disclaimerTypo = resolveTypography(
-    disclaimer?.fontSize || 'text-xs md:text-sm',
-    disclaimer?.fontSizeMobile,
-    disclaimer?.fontWeight || 'font-normal',
-    disclaimer?.fontWeightMobile,
+    disclaimerStyles?.fontSize || disclaimer?.fontSize || 'text-xs md:text-sm',
+    disclaimerStyles?.fontSizeMobile || disclaimer?.fontSizeMobile,
+    disclaimerStyles?.fontWeight || disclaimer?.fontWeight || 'font-normal',
+    disclaimerStyles?.fontWeightMobile || disclaimer?.fontWeightMobile,
   )
 
   return (
@@ -220,7 +303,7 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
               <div
                 className={cn(
                   'absolute bottom-6 right-6 lg:bottom-10 lg:right-10 z-10 p-4 sm:p-5 flex items-center justify-center shadow-lg',
-                  badge?.badgeBgColor || 'bg-[#00D2FF]',
+                  leftImageStyles?.badgeBgColor || badge?.badgeBgColor || 'bg-[#00D2FF]',
                 )}
               >
                 {/* 3x3 Dot Grid */}
@@ -230,7 +313,7 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                       key={i}
                       className={cn(
                         'w-1.5 h-1.5 rounded-full',
-                        badge?.dotColor || 'bg-[#0256FF]',
+                        leftImageStyles?.dotColor || badge?.dotColor || 'bg-[#0256FF]',
                       )}
                     />
                   ))}
@@ -244,8 +327,8 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
             className={cn(
               'lg:col-span-6 flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24',
               reverseColumns ? 'lg:order-1' : 'lg:order-2',
-              rightColumn?.paddingTop || 'pt-16 md:pt-24',
-              rightColumn?.paddingBottom || 'pb-16 md:pb-24',
+              rightPaddingTop || rightColumn?.paddingTop || 'pt-16 md:pt-24',
+              rightPaddingBottom || rightColumn?.paddingBottom || 'pb-16 md:pb-24',
             )}
           >
             <div className="max-w-xl flex flex-col">
@@ -254,22 +337,23 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                 <div
                   className={cn(
                     'flex items-center gap-2.5',
-                    kicker.marginBottom || 'mb-4 md:mb-6',
-                    kicker.marginBottomMobile && `max-md:${kicker.marginBottomMobile}`,
+                    kickerStyles?.marginBottom || kicker.marginBottom || 'mb-4 md:mb-6',
+                    (kickerStyles?.marginBottomMobile || kicker.marginBottomMobile) &&
+                      `max-md:${kickerStyles?.marginBottomMobile || kicker.marginBottomMobile}`,
                   )}
                 >
                   <span
                     className={cn(
                       'inline-block flex-shrink-0',
-                      kicker.squareSize || 'w-2.5 h-2.5',
-                      kicker.boxBgColor || 'bg-[#0256FF]',
+                      kickerStyles?.squareSize || kicker.squareSize || 'w-2.5 h-2.5',
+                      kickerStyles?.boxBgColor || kicker.boxBgColor || 'bg-[#0256FF]',
                     )}
                   />
                   <span
                     className={cn(
                       'uppercase tracking-wider',
                       kickerTypo.combined,
-                      kicker.textColor || 'text-[#0256FF]',
+                      kickerStyles?.textColor || kicker.textColor || 'text-[#0256FF]',
                     )}
                   >
                     {kicker.text}
@@ -283,9 +367,10 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                   className={cn(
                     'leading-[1.15] tracking-tight',
                     headingTypo.combined,
-                    heading.headingColor || 'text-black',
-                    heading.marginBottom || 'mb-4 md:mb-6',
-                    heading.marginBottomMobile && `max-md:${heading.marginBottomMobile}`,
+                    headingStyles?.headingColor || heading.headingColor || 'text-black',
+                    headingStyles?.marginBottom || heading.marginBottom || 'mb-4 md:mb-6',
+                    (headingStyles?.marginBottomMobile || heading.marginBottomMobile) &&
+                      `max-md:${headingStyles?.marginBottomMobile || heading.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(heading.heading) }}
                 />
@@ -297,9 +382,10 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                   className={cn(
                     'leading-relaxed',
                     descTypo.combined,
-                    description.descriptionColor || 'text-slate-600',
-                    description.marginBottom || 'mb-6 md:mb-8',
-                    description.marginBottomMobile && `max-md:${description.marginBottomMobile}`,
+                    descriptionStyles?.descriptionColor || description.descriptionColor || 'text-slate-600',
+                    descriptionStyles?.marginBottom || description.marginBottom || 'mb-6 md:mb-8',
+                    (descriptionStyles?.marginBottomMobile || description.marginBottomMobile) &&
+                      `max-md:${descriptionStyles?.marginBottomMobile || description.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(description.description) }}
                 />
@@ -310,10 +396,10 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                 <div className="flex flex-col gap-3 mb-8 md:mb-10">
                   {points.map((point, index) => {
                     const pointTypo = resolveTypography(
-                      point.fontSize || 'text-sm md:text-base',
-                      point.fontSizeMobile,
-                      point.fontWeight || 'font-medium',
-                      point.fontWeightMobile,
+                      pointStyles?.fontSize || point.fontSize || 'text-sm md:text-base',
+                      pointStyles?.fontSizeMobile || point.fontSizeMobile,
+                      pointStyles?.fontWeight || point.fontWeight || 'font-medium',
+                      pointStyles?.fontWeightMobile || point.fontWeightMobile,
                     )
 
                     return (
@@ -321,20 +407,21 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                         key={point.id || index}
                         className={cn(
                           'flex items-center gap-3',
-                          point.marginBottom || 'mb-1',
-                          point.marginBottomMobile && `max-md:${point.marginBottomMobile}`,
+                          pointStyles?.marginBottom || point.marginBottom || 'mb-1',
+                          (pointStyles?.marginBottomMobile || point.marginBottomMobile) &&
+                            `max-md:${pointStyles?.marginBottomMobile || point.marginBottomMobile}`,
                         )}
                       >
                         <span
                           className={cn(
                             'w-2 h-2 sm:w-2.5 sm:h-2.5 flex-shrink-0',
-                            point.boxBgColor || 'bg-[#0256FF]',
+                            pointStyles?.boxBgColor || point.boxBgColor || 'bg-[#0256FF]',
                           )}
                         />
                         <span
                           className={cn(
                             pointTypo.combined,
-                            point.textColor || 'text-slate-900',
+                            pointStyles?.textColor || point.textColor || 'text-slate-900',
                           )}
                         >
                           {point.label}
@@ -350,23 +437,27 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
                 <div
                   className={cn(
                     'inline-block',
-                    cta.marginBottom || 'mb-3 md:mb-4',
-                    cta.marginBottomMobile && `max-md:${cta.marginBottomMobile}`,
+                    buttonStyles?.marginBottom || cta.marginBottom || 'mb-3 md:mb-4',
+                    (buttonStyles?.marginBottomMobile || cta.marginBottomMobile) &&
+                      `max-md:${buttonStyles?.marginBottomMobile || cta.marginBottomMobile}`,
                   )}
                 >
                   <Link
                     href={resolveHref(cta.link)}
                     className={cn(
                       'inline-flex items-center gap-2 px-6 py-3.5 rounded-full transition-all duration-200 shadow-sm hover:opacity-90 hover:scale-[1.01] active:scale-[0.99]',
-                      cta.bgColor || 'bg-[#0256FF]',
-                      cta.textColor || 'text-white',
+                      buttonStyles?.bgColor || cta.bgColor || 'bg-[#0256FF]',
+                      buttonStyles?.textColor || cta.textColor || 'text-white',
                       ctaTypo.combined,
                     )}
                   >
                     <span>{cta.text}</span>
                     {cta.showArrow !== false && (
                       <ArrowUpRight
-                        className={cn('w-4 h-4 flex-shrink-0', cta.arrowColor || 'text-white')}
+                        className={cn(
+                          'w-4 h-4 flex-shrink-0',
+                          buttonStyles?.arrowColor || cta.arrowColor || 'text-white',
+                        )}
                       />
                     )}
                   </Link>
@@ -374,12 +465,12 @@ export const EventMeetingFormatsBlock: React.FC<EventMeetingFormatsProps> = (pro
               )}
 
               {/* Disclaimer */}
-              {disclaimer?.text && (
+              {disclaimer?.showDisclaimer !== false && disclaimer?.text && (
                 <p
                   className={cn(
                     'block leading-relaxed',
                     disclaimerTypo.combined,
-                    disclaimer.textColor || 'text-slate-400',
+                    disclaimerStyles?.textColor || disclaimer.textColor || 'text-slate-400',
                   )}
                 >
                   {disclaimer.text}

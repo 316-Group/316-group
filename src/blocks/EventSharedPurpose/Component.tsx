@@ -22,7 +22,7 @@ export interface EventSharedPurposeProps {
   paddingTop?: string | null
   paddingBottom?: string | null
 
-  // Left Column Image & Callout Badge
+  // Left Column Image & Callout Badge (Content)
   imageColumn?: {
     image?: MediaType | string | null
     imageFit?: 'cover' | 'contain' | null
@@ -35,7 +35,7 @@ export interface EventSharedPurposeProps {
     dotGridColor?: string | null
   } | null
 
-  // Right Column Content Stack
+  // Right Column Content Stack (Content)
   contentStack?: {
     kickerGroup?: {
       showKicker?: boolean | null
@@ -85,6 +85,55 @@ export interface EventSharedPurposeProps {
     } | null
   } | null
 
+  // Tab 2 Individual Styling Groups
+  imageStyles?: {
+    imageFit?: 'cover' | 'contain' | null
+    imageRounded?: 'rounded-none' | 'rounded-xl' | 'rounded-2xl' | null
+    calloutBgColor?: string | null
+    calloutTextColor?: string | null
+    dotGridColor?: string | null
+  } | null
+
+  kickerStyles?: {
+    squareColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  buttonStyles?: {
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+  } | null
+
   className?: string
 }
 
@@ -125,6 +174,11 @@ export const EventSharedPurposeBlock: React.FC<EventSharedPurposeProps> = ({
 
   imageColumn,
   contentStack,
+  imageStyles,
+  kickerStyles,
+  headingStyles,
+  descriptionStyles,
+  buttonStyles,
   className,
 }) => {
   // ── 1. Horizontal Padding Resolution ───────────────────────────────────────
@@ -153,47 +207,50 @@ export const EventSharedPurposeBlock: React.FC<EventSharedPurposeProps> = ({
 
   // ── 2. Left Column: Image & Badge Data ─────────────────────────────────────
   const featureImage = imageColumn?.image
-  const imageFit = imageColumn?.imageFit || 'cover'
-  const imageRounded = imageColumn?.imageRounded || 'rounded-none'
+  const imageFit = imageStyles?.imageFit || imageColumn?.imageFit || 'cover'
+  const imageRounded = imageStyles?.imageRounded || imageColumn?.imageRounded || 'rounded-none'
   const showCalloutBadge = imageColumn?.showCalloutBadge !== false
   const calloutText = imageColumn?.calloutText || 'Progress starts with connection.'
-  const calloutBgColor = imageColumn?.calloutBgColor || 'bg-[#00D2FF]'
-  const calloutTextColor = imageColumn?.calloutTextColor || 'text-[#002B49]'
+  const calloutBgColor = imageStyles?.calloutBgColor || imageColumn?.calloutBgColor || 'bg-[#00D2FF]'
+  const calloutTextColor = imageStyles?.calloutTextColor || imageColumn?.calloutTextColor || 'text-[#002B49]'
   const showDotGrid = imageColumn?.showDotGrid !== false
-  const dotGridColor = imageColumn?.dotGridColor || 'bg-[#0000FF]'
+  const dotGridColor = imageStyles?.dotGridColor || imageColumn?.dotGridColor || 'bg-[#0000FF]'
 
   // ── 3. Right Column: Content Stack ─────────────────────────────────────────
   // Kicker
   const kicker = contentStack?.kickerGroup
   const showKicker = kicker?.showKicker !== false && Boolean(kicker?.text)
-  const squareColor = kicker?.squareColor || 'bg-[#0000FF]'
-  const squareSize = kicker?.squareSize || 'w-2.5 h-2.5'
-  const kickerTextColor = kicker?.textColor || 'text-[#0000FF]'
+  const squareColor = kickerStyles?.squareColor || kicker?.squareColor || 'bg-[#0000FF]'
+  const squareSize = kickerStyles?.squareSize || kicker?.squareSize || 'w-2.5 h-2.5'
+  const kickerTextColor = kickerStyles?.textColor || kicker?.textColor || 'text-[#0000FF]'
   const kickerTypography = resolveTypography(
-    kicker?.fontSize,
-    kicker?.fontSizeMobile,
-    kicker?.fontWeight,
-    kicker?.fontWeightMobile,
+    kickerStyles?.fontSize || kicker?.fontSize,
+    kickerStyles?.fontSizeMobile || kicker?.fontSizeMobile,
+    kickerStyles?.fontWeight || kicker?.fontWeight,
+    kickerStyles?.fontWeightMobile || kicker?.fontWeightMobile,
     'text-xs md:text-sm',
     'font-semibold',
   )
-  const kickerMargin = cn(kicker?.marginBottom || 'mb-4 md:mb-5', kicker?.marginBottomMobile)
+  const kickerMargin = cn(
+    kickerStyles?.marginBottom || kicker?.marginBottom || 'mb-4 md:mb-5',
+    kickerStyles?.marginBottomMobile || kicker?.marginBottomMobile,
+  )
 
   // Heading
   const headingGroup = contentStack?.headingGroup
   const headingText = headingGroup?.heading || 'Better healthcare is a team effort.'
-  const headingColor = headingGroup?.headingColor || 'text-gray-950'
+  const headingColor = headingStyles?.headingColor || headingGroup?.headingColor || 'text-gray-950'
   const headingTypography = resolveTypography(
-    headingGroup?.headingFontSize,
-    headingGroup?.headingFontSizeMobile,
-    headingGroup?.headingFontWeight,
-    headingGroup?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || headingGroup?.headingFontSize,
+    headingStyles?.headingFontSizeMobile || headingGroup?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || headingGroup?.headingFontWeight,
+    headingStyles?.headingFontWeightMobile || headingGroup?.headingFontWeightMobile,
     'text-3xl sm:text-4xl lg:text-5xl',
     'font-bold',
   )
   const headingMargin = cn(
-    headingGroup?.marginBottom || 'mb-6 md:mb-8',
-    headingGroup?.marginBottomMobile,
+    headingStyles?.marginBottom || headingGroup?.marginBottom || 'mb-6 md:mb-8',
+    headingStyles?.marginBottomMobile || headingGroup?.marginBottomMobile,
   )
 
   // Description
@@ -201,27 +258,30 @@ export const EventSharedPurposeBlock: React.FC<EventSharedPurposeProps> = ({
   const descText =
     descGroup?.description ||
     'ESMO brings the oncology community together to exchange ideas and look ahead. It’s a chance to connect different perspectives around a common goal: better care for people.\n\nAt 316 Group, we believe meaningful progress begins with listening. We’re inviting conversations with healthcare, research and life-sciences teams about the challenges that matter to them.'
-  const descColor = descGroup?.descriptionColor || 'text-gray-600'
+  const descColor = descriptionStyles?.descriptionColor || descGroup?.descriptionColor || 'text-gray-600'
   const descTypography = resolveTypography(
-    descGroup?.descriptionFontSize,
-    descGroup?.descriptionFontSizeMobile,
-    descGroup?.descriptionFontWeight,
-    descGroup?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || descGroup?.descriptionFontSize,
+    descriptionStyles?.descriptionFontSizeMobile || descGroup?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || descGroup?.descriptionFontWeight,
+    descriptionStyles?.descriptionFontWeightMobile || descGroup?.descriptionFontWeightMobile,
     'text-base md:text-lg',
     'font-normal',
   )
-  const descMargin = cn(descGroup?.marginBottom || 'mb-8 md:mb-10', descGroup?.marginBottomMobile)
+  const descMargin = cn(
+    descriptionStyles?.marginBottom || descGroup?.marginBottom || 'mb-8 md:mb-10',
+    descriptionStyles?.marginBottomMobile || descGroup?.marginBottomMobile,
+  )
 
   // Button
   const btnGroup = contentStack?.buttonGroup
   const showButton = btnGroup?.showButton !== false && Boolean(btnGroup?.text)
   const btnText = btnGroup?.text || 'Bring your perspective to the conversation'
-  const btnTextColor = btnGroup?.textColor || 'text-[#0256FF]'
+  const btnTextColor = buttonStyles?.textColor || btnGroup?.textColor || 'text-[#0256FF]'
   const btnTypography = resolveTypography(
-    btnGroup?.fontSize,
-    btnGroup?.fontSizeMobile,
-    btnGroup?.fontWeight,
-    btnGroup?.fontWeightMobile,
+    buttonStyles?.fontSize || btnGroup?.fontSize,
+    buttonStyles?.fontSizeMobile || btnGroup?.fontSizeMobile,
+    buttonStyles?.fontWeight || btnGroup?.fontWeight,
+    buttonStyles?.fontWeightMobile || btnGroup?.fontWeightMobile,
     'text-sm md:text-base',
     'font-semibold',
   )

@@ -101,6 +101,73 @@ export interface EventMadridVenueProps {
     imageRounded?: 'rounded-none' | 'rounded-lg' | 'rounded-2xl' | null
   } | null
 
+  // Tab 2 Individual Styling Groups
+  kickerStyles?: {
+    boxBgColor?: string | null
+    squareSize?: string | null
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  headingStyles?: {
+    headingColor?: string | null
+    headingFontSize?: string | null
+    headingFontSizeMobile?: string | null
+    headingFontWeight?: string | null
+    headingFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  descriptionStyles?: {
+    descriptionColor?: string | null
+    descriptionFontSize?: string | null
+    descriptionFontSizeMobile?: string | null
+    descriptionFontWeight?: string | null
+    descriptionFontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  venueLocationStyles?: {
+    iconColor?: string | null
+    venueColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  secondaryDescriptionStyles?: {
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+    marginBottom?: string | null
+    marginBottomMobile?: string | null
+  } | null
+
+  linkStyles?: {
+    textColor?: string | null
+    fontSize?: string | null
+    fontSizeMobile?: string | null
+    fontWeight?: string | null
+    fontWeightMobile?: string | null
+  } | null
+
+  imageStyles?: {
+    imageFit?: 'cover' | 'contain' | null
+    imageRounded?: 'rounded-none' | 'rounded-lg' | 'rounded-2xl' | null
+  } | null
+
   className?: string
 }
 
@@ -141,6 +208,13 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
     paddingBottom = 'pb-20 md:pb-28',
     leftColumn,
     rightColumn,
+    kickerStyles,
+    headingStyles,
+    descriptionStyles,
+    venueLocationStyles,
+    secondaryDescriptionStyles,
+    linkStyles,
+    imageStyles,
     className,
   } = props
 
@@ -174,52 +248,52 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
   const secondaryDesc = leftColumn?.secondaryDescription
   const ctaLink = leftColumn?.ctaLink
 
-  // Right Column Image
+  // Right Column Image with Fallback Cascades
   const image = rightColumn?.image
-  const imageFit = rightColumn?.imageFit || 'cover'
-  const imageRounded = rightColumn?.imageRounded || 'rounded-none'
+  const imageFit = imageStyles?.imageFit || rightColumn?.imageFit || 'cover'
+  const imageRounded = imageStyles?.imageRounded || rightColumn?.imageRounded || 'rounded-none'
 
-  // Typography
+  // Typography with Fallback Cascades
   const kickerTypo = resolveTypography(
-    kicker?.fontSize || 'text-xs md:text-sm',
-    kicker?.fontSizeMobile,
-    kicker?.fontWeight || 'font-semibold',
-    kicker?.fontWeightMobile,
+    kickerStyles?.fontSize || kicker?.fontSize || 'text-xs md:text-sm',
+    kickerStyles?.fontSizeMobile || kicker?.fontSizeMobile,
+    kickerStyles?.fontWeight || kicker?.fontWeight || 'font-semibold',
+    kickerStyles?.fontWeightMobile || kicker?.fontWeightMobile,
   )
 
   const headingTypo = resolveTypography(
-    heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
-    heading?.headingFontSizeMobile,
-    heading?.headingFontWeight || 'font-bold',
-    heading?.headingFontWeightMobile,
+    headingStyles?.headingFontSize || heading?.headingFontSize || 'text-3xl md:text-4xl lg:text-5xl',
+    headingStyles?.headingFontSizeMobile || heading?.headingFontSizeMobile,
+    headingStyles?.headingFontWeight || heading?.headingFontWeight || 'font-bold',
+    headingStyles?.headingFontWeightMobile || heading?.headingFontWeightMobile,
   )
 
   const primaryDescTypo = resolveTypography(
-    primaryDesc?.descriptionFontSize || 'text-base md:text-lg',
-    primaryDesc?.descriptionFontSizeMobile,
-    primaryDesc?.descriptionFontWeight || 'font-normal',
-    primaryDesc?.descriptionFontWeightMobile,
+    descriptionStyles?.descriptionFontSize || primaryDesc?.descriptionFontSize || 'text-base md:text-lg',
+    descriptionStyles?.descriptionFontSizeMobile || primaryDesc?.descriptionFontSizeMobile,
+    descriptionStyles?.descriptionFontWeight || primaryDesc?.descriptionFontWeight || 'font-normal',
+    descriptionStyles?.descriptionFontWeightMobile || primaryDesc?.descriptionFontWeightMobile,
   )
 
   const venueTypo = resolveTypography(
-    venueLocation?.fontSize || 'text-lg md:text-xl',
-    venueLocation?.fontSizeMobile,
-    venueLocation?.fontWeight || 'font-bold',
-    venueLocation?.fontWeightMobile,
+    venueLocationStyles?.fontSize || venueLocation?.fontSize || 'text-lg md:text-xl',
+    venueLocationStyles?.fontSizeMobile || venueLocation?.fontSizeMobile,
+    venueLocationStyles?.fontWeight || venueLocation?.fontWeight || 'font-bold',
+    venueLocationStyles?.fontWeightMobile || venueLocation?.fontWeightMobile,
   )
 
   const secondaryDescTypo = resolveTypography(
-    secondaryDesc?.fontSize || 'text-sm md:text-base',
-    secondaryDesc?.fontSizeMobile,
-    secondaryDesc?.fontWeight || 'font-normal',
-    secondaryDesc?.fontWeightMobile,
+    secondaryDescriptionStyles?.fontSize || secondaryDesc?.fontSize || 'text-sm md:text-base',
+    secondaryDescriptionStyles?.fontSizeMobile || secondaryDesc?.fontSizeMobile,
+    secondaryDescriptionStyles?.fontWeight || secondaryDesc?.fontWeight || 'font-normal',
+    secondaryDescriptionStyles?.fontWeightMobile || secondaryDesc?.fontWeightMobile,
   )
 
   const ctaTypo = resolveTypography(
-    ctaLink?.fontSize || 'text-sm md:text-base',
-    ctaLink?.fontSizeMobile,
-    ctaLink?.fontWeight || 'font-semibold',
-    ctaLink?.fontWeightMobile,
+    linkStyles?.fontSize || ctaLink?.fontSize || 'text-sm md:text-base',
+    linkStyles?.fontSizeMobile || ctaLink?.fontSizeMobile,
+    linkStyles?.fontWeight || ctaLink?.fontWeight || 'font-semibold',
+    linkStyles?.fontWeightMobile || ctaLink?.fontWeightMobile,
   )
 
   return (
@@ -239,22 +313,23 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                 <div
                   className={cn(
                     'flex items-center gap-2.5',
-                    kicker.marginBottom || 'mb-4 md:mb-6',
-                    kicker.marginBottomMobile && `max-md:${kicker.marginBottomMobile}`,
+                    kickerStyles?.marginBottom || kicker.marginBottom || 'mb-4 md:mb-6',
+                    (kickerStyles?.marginBottomMobile || kicker.marginBottomMobile) &&
+                      `max-md:${kickerStyles?.marginBottomMobile || kicker.marginBottomMobile}`,
                   )}
                 >
                   <span
                     className={cn(
                       'inline-block flex-shrink-0',
-                      kicker.squareSize || 'w-2.5 h-2.5',
-                      kicker.boxBgColor || 'bg-[#0256FF]',
+                      kickerStyles?.squareSize || kicker.squareSize || 'w-2.5 h-2.5',
+                      kickerStyles?.boxBgColor || kicker.boxBgColor || 'bg-[#0256FF]',
                     )}
                   />
                   <span
                     className={cn(
                       'uppercase tracking-wider',
                       kickerTypo.combined,
-                      kicker.textColor || 'text-[#0256FF]',
+                      kickerStyles?.textColor || kicker.textColor || 'text-[#0256FF]',
                     )}
                   >
                     {kicker.text}
@@ -268,9 +343,10 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                   className={cn(
                     'leading-[1.15] tracking-tight',
                     headingTypo.combined,
-                    heading.headingColor || 'text-black',
-                    heading.marginBottom || 'mb-4 md:mb-6',
-                    heading.marginBottomMobile && `max-md:${heading.marginBottomMobile}`,
+                    headingStyles?.headingColor || heading.headingColor || 'text-black',
+                    headingStyles?.marginBottom || heading.marginBottom || 'mb-4 md:mb-6',
+                    (headingStyles?.marginBottomMobile || heading.marginBottomMobile) &&
+                      `max-md:${headingStyles?.marginBottomMobile || heading.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(heading.heading) }}
                 />
@@ -282,9 +358,10 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                   className={cn(
                     'leading-relaxed',
                     primaryDescTypo.combined,
-                    primaryDesc.descriptionColor || 'text-slate-600',
-                    primaryDesc.marginBottom || 'mb-6 md:mb-8',
-                    primaryDesc.marginBottomMobile && `max-md:${primaryDesc.marginBottomMobile}`,
+                    descriptionStyles?.descriptionColor || primaryDesc.descriptionColor || 'text-slate-600',
+                    descriptionStyles?.marginBottom || primaryDesc.marginBottom || 'mb-6 md:mb-8',
+                    (descriptionStyles?.marginBottomMobile || primaryDesc.marginBottomMobile) &&
+                      `max-md:${descriptionStyles?.marginBottomMobile || primaryDesc.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(primaryDesc.description) }}
                 />
@@ -295,8 +372,9 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                 <div
                   className={cn(
                     'flex items-center gap-3',
-                    venueLocation.marginBottom || 'mb-2 md:mb-3',
-                    venueLocation.marginBottomMobile && `max-md:${venueLocation.marginBottomMobile}`,
+                    venueLocationStyles?.marginBottom || venueLocation.marginBottom || 'mb-2 md:mb-3',
+                    (venueLocationStyles?.marginBottomMobile || venueLocation.marginBottomMobile) &&
+                      `max-md:${venueLocationStyles?.marginBottomMobile || venueLocation.marginBottomMobile}`,
                   )}
                 >
                   {venueLocation.iconType === 'upload' && venueLocation.customIcon ? (
@@ -311,14 +389,14 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                     <MapPin
                       className={cn(
                         'w-5 h-5 flex-shrink-0',
-                        venueLocation.iconColor || 'text-[#0256FF]',
+                        venueLocationStyles?.iconColor || venueLocation.iconColor || 'text-[#0256FF]',
                       )}
                     />
                   )}
                   <span
                     className={cn(
                       venueTypo.combined,
-                      venueLocation.venueColor || 'text-black',
+                      venueLocationStyles?.venueColor || venueLocation.venueColor || 'text-black',
                     )}
                   >
                     {venueLocation.venueName}
@@ -332,9 +410,10 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                   className={cn(
                     'leading-relaxed',
                     secondaryDescTypo.combined,
-                    secondaryDesc.textColor || 'text-slate-600',
-                    secondaryDesc.marginBottom || 'mb-6 md:mb-8',
-                    secondaryDesc.marginBottomMobile && `max-md:${secondaryDesc.marginBottomMobile}`,
+                    secondaryDescriptionStyles?.textColor || secondaryDesc.textColor || 'text-slate-600',
+                    secondaryDescriptionStyles?.marginBottom || secondaryDesc.marginBottom || 'mb-6 md:mb-8',
+                    (secondaryDescriptionStyles?.marginBottomMobile || secondaryDesc.marginBottomMobile) &&
+                      `max-md:${secondaryDescriptionStyles?.marginBottomMobile || secondaryDesc.marginBottomMobile}`,
                   )}
                   dangerouslySetInnerHTML={{ __html: formatInlineHtml(secondaryDesc.text) }}
                 />
@@ -347,7 +426,7 @@ export const EventMadridVenueBlock: React.FC<EventMadridVenueProps> = (props) =>
                     href={resolveHref(ctaLink.link)}
                     className={cn(
                       'inline-flex items-center gap-1.5 transition-all duration-200 group hover:opacity-80 active:opacity-95',
-                      ctaLink.textColor || 'text-[#0256FF]',
+                      linkStyles?.textColor || ctaLink.textColor || 'text-[#0256FF]',
                       ctaTypo.combined,
                     )}
                   >
