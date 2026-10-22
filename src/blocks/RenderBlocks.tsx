@@ -48,6 +48,7 @@ import { NumberedGridBlock } from './NumberedGrid/Component'
 import { MissionVisionBlock } from './MissionVision/Component'
 import { TimelineAccordionBlock } from './TimelineAccordion/Component'
 import { CenteredButtonBlock } from './CenteredButton/Component'
+import { EventHeroBlock } from './EventHero/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -95,6 +96,7 @@ const blockComponents = {
   missionVision: MissionVisionBlock,
   timelineAccordion: TimelineAccordionBlock,
   centeredButton: CenteredButtonBlock,
+  eventHero: EventHeroBlock,
 }
 
 export const RenderBlocks: React.FC<{

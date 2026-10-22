@@ -60,6 +60,7 @@ import { NumberedGrid } from '@/blocks/NumberedGrid/config'
 import { MissionVision } from '@/blocks/MissionVision/config'
 import { TimelineAccordion } from '@/blocks/TimelineAccordion/config'
 import { CenteredButton } from '@/blocks/CenteredButton/config'
+import { EventHero } from '@/blocks/EventHero/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -162,6 +163,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 MissionVision,
                 TimelineAccordion,
                 CenteredButton,
+                EventHero,
               ],
               required: true,
             },

@@ -27,6 +27,7 @@ import { DownloadFormSubmissions } from './collections/DownloadFormSubmissions'
 import { Investors } from './collections/Investors'
 import { DownloadTracking } from './collections/DownloadTracking'
 import { Brands } from './collections/Brands'
+import { Events } from './collections/Events'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -102,6 +103,7 @@ export default buildConfig({
     Investors,
     DownloadTracking,
     Brands,
+    Events,
   ],
   upload: {
     limits: {
