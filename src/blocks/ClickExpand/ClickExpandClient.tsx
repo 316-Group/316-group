@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { cn } from '@/utilities/cn'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import { resolveTypography } from '@/utilities/resolveTypography'
 
 export interface SubCardItem {
@@ -224,6 +224,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
 
   // ─── Multi-Pass Smooth Alignment: Guarantees Active Card is Never Cut Off ──
   const scrollCardIntoView = useCallback((index: number) => {
+    // Only align horizontal track on desktop screens
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return
+
     const align = () => {
       const cardEl = cardRefs.current[index]
       const trackEl = trackRef.current
@@ -363,6 +366,9 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length === 0) return
+      // Allow natural page scrolling on mobile devices without hijacking touch
+      if (typeof window !== 'undefined' && window.innerWidth < 768) return
+
       const targetElement = sectionRef.current || wrapperRef.current
       if (!targetElement) return
 
@@ -817,14 +823,296 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     </div>
   )
 
+  // ─── Mobile View (Vertical Stack: 1 Active Card + Up to 2 Inactive Preview Banners + 'More' Button) ──
+  const activeCard = items[activeIndex] || items[0]
+  const mobilePreviewIndices: number[] = []
+  if (count > 1) {
+    mobilePreviewIndices.push((activeIndex + 1) % count)
+    if (count > 2) {
+      mobilePreviewIndices.push((activeIndex + 2) % count)
+    }
+  }
+  const hasMoreCards = count > 3
+
+  // Active card mobile config
+  const activeOverlay = overlayMap[activeCard.overlayStyle || 'vignette']
+  const activeBlurClass = activeCard.activeBlur || 'blur-[2px]'
+
+  const activeKickerText = activeCard.kickerGroup?.text || ''
+  const activeKickerColor = activeCard.kickerGroup?.color || 'text-[#52B5D8]'
+  const activeKickerTypography = resolveTypography(
+    activeCard.kickerGroup?.fontSize,
+    activeCard.kickerGroup?.fontSizeMobile || 'text-[11px]',
+    activeCard.kickerGroup?.fontWeight,
+    activeCard.kickerGroup?.fontWeightMobile || 'font-semibold',
+    'text-xs',
+    'font-semibold',
+  )
+
+  const activeHeadingText = activeCard.headingGroup?.heading || ''
+  const activeHeadingColor = activeCard.headingGroup?.headingColor || 'text-white'
+  const activeHeadingTypography = resolveTypography(
+    activeCard.headingGroup?.headingFontSize,
+    activeCard.headingGroup?.headingFontSizeMobile || 'text-2xl',
+    activeCard.headingGroup?.headingFontWeight,
+    activeCard.headingGroup?.headingFontWeightMobile || 'font-bold',
+    'text-2xl',
+    'font-bold',
+  )
+
+  const activeDescText = activeCard.descriptionGroup?.description
+  const activeDescColor = activeCard.descriptionGroup?.descriptionColor || 'text-white/85'
+  const activeDescTypography = resolveTypography(
+    activeCard.descriptionGroup?.descriptionFontSize,
+    activeCard.descriptionGroup?.descriptionFontSizeMobile || 'text-xs',
+    activeCard.descriptionGroup?.descriptionFontWeight,
+    activeCard.descriptionGroup?.descriptionFontWeightMobile || 'font-normal',
+    'text-xs',
+    'font-normal',
+  )
+
+  const activeSubCardsConfig = activeCard.subCardsGroup
+  const activeShowSubCards = activeSubCardsConfig?.enableSubCards !== false
+  const activeSubCardsBg = activeSubCardsConfig?.subCardsBgColor || 'bg-white/15 backdrop-blur-md'
+  const activeSubCardsRounded = activeSubCardsConfig?.subCardsRounded || 'rounded-xl'
+  const activeSubCardsBorder = activeSubCardsConfig?.subCardsBorder || 'border border-white/20'
+  const activeSubCardsItems = activeSubCardsConfig?.items || []
+
+  const activeShowButton = activeCard.buttonGroup?.showButton !== false
+  const activeButtonText = activeCard.buttonGroup?.buttonText || 'Learn more'
+  const activeButtonTextCol = activeCard.buttonGroup?.buttonTextColor || 'text-white'
+  const activeButtonTypography = resolveTypography(
+    activeCard.buttonGroup?.buttonFontSize,
+    activeCard.buttonGroup?.buttonFontSizeMobile || 'text-xs',
+    activeCard.buttonGroup?.buttonFontWeight,
+    activeCard.buttonGroup?.buttonFontWeightMobile || 'font-medium',
+    'text-xs',
+    'font-medium',
+  )
+  const activeIconBg = activeCard.buttonGroup?.iconBgColor || 'bg-white'
+  const activeIconCol = activeCard.buttonGroup?.iconColor || 'text-slate-900'
+  const activeButtonHref = getHref(activeCard.buttonGroup?.buttonLink)
+  const activeIsNewTab = activeCard.buttonGroup?.buttonLink?.newTab
+
+  const mobileContent = (
+    <div className="w-full flex flex-col gap-3">
+      {/* ── Active Card: Full width with dedicated height and internal Y-axis scroll fallback ── */}
+      <div
+        key={`mobile-active-${activeIndex}`}
+        className={cn(
+          'relative w-full rounded-[24px] overflow-hidden',
+          'bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0A0F1D]',
+          'min-h-[500px] max-h-[620px] flex flex-col justify-between',
+          'animate-mobile-card-slide-up shadow-xl border border-white/10',
+        )}
+      >
+        {/* Background Image */}
+        {activeCard.image && typeof activeCard.image === 'object' && (
+          <Media
+            resource={activeCard.image}
+            fill
+            imgClassName={cn('object-cover w-full h-full scale-105', activeBlurClass)}
+          />
+        )}
+
+        {/* Overlay */}
+        <div
+          className={cn(
+            'absolute inset-0 pointer-events-none',
+            activeCard.image ? activeOverlay : 'bg-transparent',
+          )}
+        />
+
+        {/* Scrollable Active Card Content (Y-axis scroll fallback if long) */}
+        <div className="relative z-10 h-full w-full overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden p-5 sm:p-6 flex flex-col justify-between gap-4">
+          <div className="flex flex-col">
+            {/* Kicker */}
+            {activeKickerText && (
+              <span
+                className={cn(
+                  'block mb-1 tracking-wider uppercase',
+                  activeKickerTypography.combined,
+                  activeKickerColor,
+                )}
+                dangerouslySetInnerHTML={{ __html: formatInlineHtml(activeKickerText) }}
+              />
+            )}
+
+            {/* Main Heading */}
+            {activeHeadingText && (
+              <h3
+                className={cn(
+                  'tracking-tight leading-snug',
+                  activeHeadingTypography.combined,
+                  activeHeadingColor,
+                )}
+                dangerouslySetInnerHTML={{ __html: formatInlineHtml(activeHeadingText) }}
+              />
+            )}
+
+            {/* Description */}
+            {activeDescText && (
+              <div
+                className={cn(
+                  'mt-2 leading-relaxed max-w-xl',
+                  activeDescTypography.combined,
+                  activeDescColor,
+                )}
+                dangerouslySetInnerHTML={{ __html: formatInlineHtml(activeDescText) }}
+              />
+            )}
+          </div>
+
+          {/* Sub-Cards Row / Stack */}
+          {activeShowSubCards && activeSubCardsItems.length > 0 && (
+            <div className="grid grid-cols-1 gap-2 w-full my-1">
+              {activeSubCardsItems.slice(0, 3).map((subCard, subIdx) => {
+                const title = subCard.title || ''
+                const titleColor = subCard.titleColor || 'text-white'
+                const subDesc = subCard.description
+                const descColor = subCard.descriptionColor || 'text-white/80'
+
+                return (
+                  <div
+                    key={subIdx}
+                    className={cn(
+                      'p-2.5 flex flex-col justify-start rounded-xl',
+                      activeSubCardsBg,
+                      activeSubCardsBorder,
+                    )}
+                  >
+                    {title && (
+                      <h4
+                        className={cn('whitespace-pre-line leading-tight text-xs font-bold', titleColor)}
+                        dangerouslySetInnerHTML={{ __html: formatInlineHtml(title) }}
+                      />
+                    )}
+                    {subDesc && (
+                      <p
+                        className={cn('mt-1 leading-snug text-[11px]', descColor)}
+                        dangerouslySetInnerHTML={{ __html: formatInlineHtml(subDesc) }}
+                      />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+
+          {/* Bottom Action Button */}
+          {activeShowButton && (
+            <div className="pt-1">
+              <Link
+                href={activeButtonHref}
+                target={activeIsNewTab ? '_blank' : undefined}
+                rel={activeIsNewTab ? 'noopener noreferrer' : undefined}
+                className="inline-flex items-center gap-2 py-1 px-0 bg-transparent border-0 border-transparent shadow-none transition-all duration-300 hover:opacity-85 active:scale-95 group/btn"
+              >
+                <span
+                  className={cn(
+                    'tracking-normal',
+                    activeButtonTextCol,
+                    activeButtonTypography.combined,
+                  )}
+                >
+                  {activeButtonText}
+                </span>
+                <span
+                  className={cn(
+                    'w-6 h-6 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-transform duration-300 group-hover/btn:scale-110',
+                    activeIconBg,
+                  )}
+                >
+                  <ArrowUpRight className={cn('w-3.5 h-3.5', activeIconCol)} />
+                </span>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Inactive Collapsed Banners Below (Max 2 cards matching mockup) ── */}
+      {mobilePreviewIndices.map((cardIndex) => {
+        const card = items[cardIndex]
+        if (!card) return null
+        const cardTitle =
+          card.kickerGroup?.text || card.headingGroup?.heading || `Card ${cardIndex + 1}`
+
+        return (
+          <div
+            key={cardIndex}
+            onClick={() => handleCardClick(cardIndex)}
+            role="button"
+            tabIndex={0}
+            aria-label={`Activate ${cardTitle}`}
+            className={cn(
+              'relative w-full h-[96px] sm:h-[108px] rounded-[22px] overflow-hidden cursor-pointer group',
+              'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900',
+              'transition-all duration-300 active:scale-[0.98] select-none shadow-md border border-white/10',
+            )}
+          >
+            {/* Background Image */}
+            {card.image && typeof card.image === 'object' && (
+              <Media
+                resource={card.image}
+                fill
+                imgClassName="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+              />
+            )}
+
+            {/* Gradient Overlay for Text Contrast */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/20 pointer-events-none" />
+
+            {/* Sub-heading / Region Title (Matching Mockup: e.g. 'Asia', 'Latin America') */}
+            <div className="relative z-10 h-full w-full flex items-center px-6">
+              <h4
+                className="text-2xl sm:text-3xl font-bold text-white tracking-tight drop-shadow-md line-clamp-1"
+                dangerouslySetInnerHTML={{ __html: formatInlineHtml(cardTitle) }}
+              />
+            </div>
+          </div>
+        )
+      })}
+
+      {/* ── 'More' Button if total cards > 3 ── */}
+      {hasMoreCards && (
+        <div className="flex justify-center pt-1.5 pb-1">
+          <button
+            type="button"
+            onClick={() => handleCardClick((activeIndex + 1) % count)}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium text-white/85 hover:text-white bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 transition-all duration-200 active:scale-95 cursor-pointer"
+          >
+            <span>More</span>
+            <ChevronDown className="w-3.5 h-3.5 text-white/70" />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+
   return (
     <div
       ref={wrapperRef}
       className={cn('relative w-full transition-colors duration-300', sectionBgColor, className)}
     >
-      {/* Dynamic Custom Horizontal Padding Overrides */}
-      {(paddingMode === 'custom' || paddingMode === 'none') && (
-        <style>{`
+      {/* Dynamic Keyframes & Custom Horizontal Padding Overrides */}
+      <style>{`
+        @keyframes mobileCardSlideUp {
+          0% {
+            opacity: 0.35;
+            transform: translateY(24px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-mobile-card-slide-up {
+          animation: mobileCardSlideUp 420ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        ${
+          paddingMode === 'custom' || paddingMode === 'none'
+            ? `
           .${padClassName} {
             padding-left: ${resolvedMobilePad} !important;
             padding-right: ${resolvedMobilePad} !important;
@@ -837,8 +1125,10 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
               padding-right: ${resolvedDesktopPad} !important;
             }
           }
-        `}</style>
-      )}
+        `
+            : ''
+        }
+      `}</style>
 
       <section
         ref={sectionRef}
@@ -859,8 +1149,16 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
             padClassName,
           )}
         >
-          {trackContent}
-          {indicatorsContent}
+          {/* Desktop Layout (md and above) */}
+          <div className="hidden md:flex md:flex-col w-full">
+            {trackContent}
+            {indicatorsContent}
+          </div>
+
+          {/* Mobile Layout (< md) */}
+          <div className="flex md:hidden flex-col w-full">
+            {mobileContent}
+          </div>
         </div>
       </section>
     </div>
