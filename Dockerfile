@@ -16,6 +16,8 @@ RUN pnpm install --frozen-lockfile
 # Ensure sharp has linux binaries (belt-and-suspenders after install scripts run)
 RUN pnpm rebuild sharp
 
+ENV NODE_OPTIONS="--no-deprecation --max-old-space-size=4096"
+
 RUN pnpm run build
 
 # Production image, copy all the files and run next
