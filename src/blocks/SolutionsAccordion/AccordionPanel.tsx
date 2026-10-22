@@ -178,7 +178,10 @@ export const AccordionPanel: React.FC<Props> = ({
           delay={saLeftDelay}
           trigger="scroll"
           className={cn(
-            'w-full md:w-[45%] md:shrink-0 flex flex-col justify-between p-8 md:p-12 xl:p-16',
+            'w-full md:w-[45%] md:shrink-0 flex flex-col justify-between',
+            paddingMode === 'none'
+              ? 'py-8 px-0 md:py-12 md:pl-0 md:pr-8 xl:py-16 xl:pr-12'
+              : 'p-8 md:p-12 xl:p-16',
             leftPanel?.bgColor ?? 'bg-white',
           )}
         >
@@ -300,7 +303,10 @@ export const AccordionPanel: React.FC<Props> = ({
         delay={saRightDelay}
         trigger="scroll"
         className={cn(
-          'w-full md:flex-1 flex items-start p-6 md:p-10 xl:p-14',
+          'w-full md:flex-1 flex items-start',
+          paddingMode === 'none'
+            ? 'py-6 px-0 md:py-10 md:pr-0 md:pl-8 xl:py-14 xl:pl-12'
+            : 'p-6 md:p-10 xl:p-14',
           rightBgColor ?? 'bg-white',
         )}
       >
