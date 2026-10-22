@@ -66,6 +66,7 @@ import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
 import { EventAgendaOverview } from '@/blocks/EventAgendaOverview/config'
 import { EventMeetingFormats } from '@/blocks/EventMeetingFormats/config'
 import { EventMadridVenue } from '@/blocks/EventMadridVenue/config'
+import { EventConversationForm } from '@/blocks/EventConversationForm/config'
 // import { VerticalCallToAction } from '@/blocks/VerticalCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -174,6 +175,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 EventAgendaOverview,
                 EventMeetingFormats,
                 EventMadridVenue,
+                EventConversationForm,
               ],
               required: true,
             },

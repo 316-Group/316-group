@@ -90,6 +90,8 @@ export interface EventAgendaOverviewProps {
       marginBottomMobile?: string | null
     } | null
 
+    showNumbers?: boolean | null
+    showCategory?: boolean | null
     items?: Array<{
       id?: string | null
       numberText?: string | null
@@ -403,24 +405,38 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                     item.descriptionFontWeightMobile,
                   )
 
+                  const showNumbers = rightColumn?.showNumbers !== false
+                  const showCategory = rightColumn?.showCategory !== false
+                  const showArrow = item.showArrow !== false
+
                   return (
                     <div key={item.id || index} className="flex flex-col group">
-                      <div className="grid grid-cols-[auto_1fr_auto] gap-4 sm:gap-6 lg:gap-8 items-start py-6 sm:py-8">
+                      <div
+                        className={cn(
+                          'grid gap-4 sm:gap-6 lg:gap-8 items-start py-6 sm:py-8',
+                          showNumbers && showArrow && 'grid-cols-[auto_1fr_auto]',
+                          showNumbers && !showArrow && 'grid-cols-[auto_1fr]',
+                          !showNumbers && showArrow && 'grid-cols-[1fr_auto]',
+                          !showNumbers && !showArrow && 'grid-cols-1',
+                        )}
+                      >
                         {/* 1. Left Number */}
-                        <span
-                          className={cn(
-                            'select-none flex-shrink-0 tabular-nums min-w-[28px] sm:min-w-[36px]',
-                            numberTypo.combined,
-                            item.numberColor || 'text-slate-400',
-                          )}
-                        >
-                          {numberStr}
-                        </span>
+                        {showNumbers && (
+                          <span
+                            className={cn(
+                              'select-none flex-shrink-0 tabular-nums min-w-[28px] sm:min-w-[36px]',
+                              numberTypo.combined,
+                              item.numberColor || 'text-slate-400',
+                            )}
+                          >
+                            {numberStr}
+                          </span>
+                        )}
 
                         {/* 2. Middle Content Stack */}
                         <div className="flex flex-col pr-2 sm:pr-4">
                           {/* Category Tag */}
-                          {item.category && (
+                          {showCategory && item.category && (
                             <div
                               className={cn(
                                 'uppercase tracking-wider',
@@ -471,16 +487,16 @@ export const EventAgendaOverviewBlock: React.FC<EventAgendaOverviewProps> = (pro
                         </div>
 
                         {/* 3. Right Top Arrow */}
-                        <div className="flex-shrink-0 pt-1">
-                          {item.showArrow !== false && (
+                        {showArrow && (
+                          <div className="flex-shrink-0 pt-1">
                             <ArrowUpRight
                               className={cn(
                                 'w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5',
                                 item.arrowColor || 'text-slate-400',
                               )}
                             />
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
 
                       {/* Bottom Item Divider */}

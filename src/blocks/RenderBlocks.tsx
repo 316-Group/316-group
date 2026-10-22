@@ -54,6 +54,7 @@ import { EventWhyConnectBlock } from './EventWhyConnect/Component'
 import { EventAgendaOverviewBlock } from './EventAgendaOverview/Component'
 import { EventMeetingFormatsBlock } from './EventMeetingFormats/Component'
 import { EventMadridVenueBlock } from './EventMadridVenue/Component'
+import { EventConversationFormBlock } from './EventConversationForm/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -107,6 +108,7 @@ const blockComponents = {
   eventAgendaOverview: EventAgendaOverviewBlock,
   eventMeetingFormats: EventMeetingFormatsBlock,
   eventMadridVenue: EventMadridVenueBlock,
+  eventConversationForm: EventConversationFormBlock,
 }
 
 export const RenderBlocks: React.FC<{

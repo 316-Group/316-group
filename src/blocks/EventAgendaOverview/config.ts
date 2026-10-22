@@ -735,11 +735,31 @@ export const eventAgendaOverviewFields: Field[] = [
         ],
       },
 
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'showNumbers',
+            type: 'checkbox',
+            label: 'Show Number Badges on Items (01, 02...)',
+            defaultValue: true,
+            admin: { width: '50%' },
+          },
+          {
+            name: 'showCategory',
+            type: 'checkbox',
+            label: 'Show Category Subheading on Items',
+            defaultValue: true,
+            admin: { width: '50%' },
+          },
+        ],
+      },
+
       // Items Array
       {
         name: 'items',
         type: 'array',
-        label: 'Agenda Items (Numbers auto-increment 01, 02, 03...)',
+        label: 'Agenda / Details Items',
         minRows: 1,
         defaultValue: [
           {

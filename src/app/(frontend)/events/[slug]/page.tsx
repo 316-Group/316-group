@@ -7,7 +7,9 @@ import React, { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
+import { defaultEventTemplateLayout } from '@/collections/Events'
+import { EventLivePreview } from './page.client'
+import type { Event } from '@/payload-types'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -34,26 +36,42 @@ export default async function EventPage({ params: paramsPromise }: Args) {
   const { slug = '' } = await paramsPromise
   const url = '/events/' + slug
 
-  const event = await queryEventBySlug({ slug })
+  const { isEnabled: isDraft } = await draftMode()
+
+  let event: Event | null = await queryEventBySlug({ slug })
 
   if (!event) {
-    return <PayloadRedirects url={url} />
+    if (isDraft || slug === 'preview' || !slug) {
+      event = {
+        id: 'preview',
+        title: 'Event Preview',
+        slug: slug || 'preview',
+        layout: defaultEventTemplateLayout as any,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      } as any
+    } else {
+      return <PayloadRedirects url={url} />
+    }
   }
 
-  const { layout } = event
-
   return (
-    <article>
-      <PageClient />
+    <>
       <PayloadRedirects disableNotFound url={url} />
-      {layout && <RenderBlocks blocks={layout as any} />}
-    </article>
+      <EventLivePreview initialEvent={event!} />
+    </>
   )
 }
 
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { slug = '' } = await paramsPromise
   const event = await queryEventBySlug({ slug })
+
+  if (!event) {
+    return {
+      title: 'Event Preview | 316 Group',
+    }
+  }
 
   return generateMeta({ doc: event as any })
 }

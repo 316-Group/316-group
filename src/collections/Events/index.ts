@@ -8,6 +8,7 @@ import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
 import { EventAgendaOverview } from '@/blocks/EventAgendaOverview/config'
 import { EventMeetingFormats } from '@/blocks/EventMeetingFormats/config'
 import { EventMadridVenue } from '@/blocks/EventMadridVenue/config'
+import { EventConversationForm } from '@/blocks/EventConversationForm/config'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
@@ -37,7 +38,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 
-const defaultEventTemplateLayout = [
+export const defaultEventTemplateLayout = [
   // Block 1: Event Hero (Phase 1)
   {
     blockType: 'eventHero',
@@ -561,6 +562,244 @@ const defaultEventTemplateLayout = [
       imageRounded: 'rounded-none',
     },
   },
+
+  // Block 7: Let's Start A Conversation / Form (Phase 4 - Section 6)
+  {
+    blockType: 'eventConversationForm',
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-[#0000FF]',
+    paddingTop: 'pt-20 md:pt-28',
+    paddingBottom: 'pb-20 md:pb-28',
+    leftColumn: {
+      kickerGroup: {
+        showKicker: true,
+        boxBgColor: 'bg-[#00D2FF]',
+        squareSize: 'w-2.5 h-2.5',
+        text: "LET'S START A CONVERSATION",
+        textColor: 'text-white',
+        fontSize: 'text-xs md:text-sm',
+        fontWeight: 'font-semibold',
+        marginBottom: 'mb-4 md:mb-6',
+      },
+      headingGroup: {
+        heading: 'Your next\nconnection starts\nhere.',
+        headingColor: 'text-white',
+        headingFontSize: 'text-4xl md:text-5xl lg:text-6xl',
+        headingFontWeight: 'font-bold',
+        marginBottom: 'mb-6 md:mb-8',
+      },
+      descriptionGroup: {
+        description:
+          "Tell us a little about yourself and what you'd like to discuss. We'll be in touch to explore a suitable time to meet during ESMO 2026.",
+        descriptionColor: 'text-white/90',
+        descriptionFontSize: 'text-base md:text-lg',
+        descriptionFontWeight: 'font-normal',
+        marginBottom: 'mb-8 md:mb-10',
+      },
+      divider: {
+        showDivider: true,
+        borderColor: 'border-white/20',
+        borderWidth: 'border-t',
+        marginBottom: 'mb-6 md:mb-8',
+      },
+      stepsTitle: {
+        text: 'What happens next?',
+        textColor: 'text-white',
+        fontSize: 'text-base md:text-lg',
+        fontWeight: 'font-semibold',
+        marginBottom: 'mb-4 md:mb-6',
+      },
+      steps: [
+        {
+          numberText: '01',
+          numberColor: 'text-[#00D2FF]',
+          text: 'Share your interests and availability.',
+          textColor: 'text-white',
+          fontSize: 'text-sm md:text-base',
+          fontWeight: 'font-normal',
+        },
+        {
+          numberText: '02',
+          numberColor: 'text-[#00D2FF]',
+          text: "We'll follow up to shape the conversation.",
+          textColor: 'text-white',
+          fontSize: 'text-sm md:text-base',
+          fontWeight: 'font-normal',
+        },
+        {
+          numberText: '03',
+          numberColor: 'text-[#00D2FF]',
+          text: 'Confirm a time and place together.',
+          textColor: 'text-white',
+          fontSize: 'text-sm md:text-base',
+          fontWeight: 'font-normal',
+        },
+      ],
+      listMarginBottom: 'mb-10 md:mb-12',
+      bottomIcon: {
+        showBottomIcon: true,
+        iconType: 'matrix3x3',
+        matrixColor: 'bg-[#00D2FF]',
+      },
+    },
+    rightColumn: {
+      formCardBgColor: 'bg-white',
+      formTitle: 'Request a meeting',
+      requiredNote: '* Required fields',
+      fieldsConfig: {
+        firstNameLabel: 'First name',
+        firstNamePlaceholder: 'Your first name',
+        lastNameLabel: 'Last name',
+        lastNamePlaceholder: 'Your last name',
+        emailLabel: 'Work email',
+        emailPlaceholder: 'you@organisation.com',
+        organisationLabel: 'Organisation',
+        organisationPlaceholder: 'Organisation name',
+        jobTitleLabel: 'Job title',
+        jobTitlePlaceholder: 'Your role',
+        discussionTopicLabel: 'What would you like to discuss?',
+        discussionTopicPlaceholder: 'Select a discussion topic',
+        discussionTopicOptions: [
+          { option: 'Connecting technology to clinical reality' },
+          { option: 'Data that actually serves clinicians' },
+          { option: 'Cross-border learning, local impact' },
+          { option: "Preparing for what's next in oncology" },
+          { option: 'Other / General exploratory meeting' },
+        ],
+        preferredDayLabel: 'Preferred day',
+        preferredDayPlaceholder: 'Select 23–27 October',
+        preferredDayOptions: [
+          { option: 'Friday, 23 October 2026' },
+          { option: 'Saturday, 24 October 2026' },
+          { option: 'Sunday, 25 October 2026' },
+          { option: 'Monday, 26 October 2026' },
+          { option: 'Tuesday, 27 October 2026' },
+          { option: 'Flexible / Any day' },
+        ],
+        meetingFormatLabel: 'Meeting format',
+        meetingFormatPlaceholder: 'Select a preference',
+        meetingFormatOptions: [
+          { option: 'One-to-one exchange' },
+          { option: 'Team discussion' },
+          { option: 'Informal coffee chat' },
+          { option: 'Virtual meeting post-congress' },
+        ],
+        notesLabel: "Anything else you'd like us to know?",
+        notesPlaceholder:
+          'Share your priorities or availability. Please do not include patient or sensitive health information.',
+        consentLabel:
+          'I agree that 316 Group may use these details to contact me about this meeting request.',
+        privacyLinkText: 'See our Privacy notice.',
+        privacyLinkUrl: '/privacy-policy',
+        submitButtonText: 'Request a meeting',
+        submitButtonBgColor: 'bg-[#0256FF]',
+        submitButtonTextColor: 'text-white',
+        disclaimerText:
+          'Submitting a request does not confirm a meeting. Your details are used to coordinate your enquiry, not to register you for the congress.',
+        disclaimerTextColor: 'text-slate-500',
+      },
+    },
+  },
+
+  // Block 8: Before We Meet / FAQ (Phase 4 - Section 7)
+  {
+    blockType: 'eventAgendaOverview',
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-white',
+    paddingTop: 'pt-20 md:pt-28',
+    paddingBottom: 'pb-20 md:pb-28',
+    leftColumn: {
+      kickerGroup: {
+        showKicker: true,
+        boxBgColor: 'bg-[#0256FF]',
+        squareSize: 'w-2.5 h-2.5',
+        text: 'BEFORE WE MEET',
+        textColor: 'text-[#0256FF]',
+        fontSize: 'text-xs md:text-sm',
+        fontWeight: 'font-semibold',
+        marginBottom: 'mb-4 md:mb-6',
+      },
+      headingGroup: {
+        heading: 'A few useful\ndetails.',
+        headingColor: 'text-black',
+        headingFontSize: 'text-3xl md:text-4xl lg:text-5xl',
+        headingFontWeight: 'font-bold',
+        marginBottom: 'mb-6 md:mb-8',
+      },
+      descriptionGroup: {
+        description: '',
+      },
+      ctaButton: {
+        showButton: false,
+      },
+      disclaimerGroup: {
+        text: '',
+      },
+    },
+    rightColumn: {
+      showNumbers: false,
+      showCategory: false,
+      topDivider: {
+        showTopDivider: true,
+        borderColor: 'border-slate-200',
+        borderWidth: 'border-t',
+        marginBottom: 'mb-6 md:mb-8',
+      },
+      items: [
+        {
+          heading: 'Is this part of the official ESMO programme?',
+          headingColor: 'text-black',
+          headingFontSize: 'text-xl md:text-2xl',
+          headingFontWeight: 'font-bold',
+          headingMarginBottom: 'mb-3 md:mb-4',
+          description:
+            'These are independent 316 Group meeting opportunities, not official congress sessions. Congress registration is managed separately by ESMO.',
+          descriptionColor: 'text-slate-600',
+          descriptionFontSize: 'text-sm md:text-base',
+          descriptionFontWeight: 'font-normal',
+          descriptionMarginBottom: 'mb-6 md:mb-8',
+          showArrow: false,
+          showDivider: true,
+          dividerColor: 'border-slate-200',
+          dividerWidth: 'border-t',
+        },
+        {
+          heading: 'Where will we meet?',
+          headingColor: 'text-black',
+          headingFontSize: 'text-xl md:text-2xl',
+          headingFontWeight: 'font-bold',
+          headingMarginBottom: 'mb-3 md:mb-4',
+          description:
+            "We'll agree a convenient time and location with you directly. Please wait for confirmation before adding a meeting to your plans.",
+          descriptionColor: 'text-slate-600',
+          descriptionFontSize: 'text-sm md:text-base',
+          descriptionFontWeight: 'font-normal',
+          descriptionMarginBottom: 'mb-6 md:mb-8',
+          showArrow: false,
+          showDivider: true,
+          dividerColor: 'border-slate-200',
+          dividerWidth: 'border-t',
+        },
+        {
+          heading: 'Can I suggest a different topic?',
+          headingColor: 'text-black',
+          headingFontSize: 'text-xl md:text-2xl',
+          headingFontWeight: 'font-bold',
+          headingMarginBottom: 'mb-3 md:mb-4',
+          description:
+            "Absolutely. Use the meeting-request form to tell us what matters to your team and what you'd like to explore together.",
+          descriptionColor: 'text-slate-600',
+          descriptionFontSize: 'text-sm md:text-base',
+          descriptionFontWeight: 'font-normal',
+          descriptionMarginBottom: 'mb-6 md:mb-8',
+          showArrow: false,
+          showDivider: true,
+          dividerColor: 'border-slate-200',
+          dividerWidth: 'border-t',
+        },
+      ],
+    },
+  },
 ]
 
 export const Events: CollectionConfig = {
@@ -579,8 +818,9 @@ export const Events: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
+        const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
         const path = generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
+          slug,
           collection: 'events',
         })
 
@@ -588,8 +828,9 @@ export const Events: CollectionConfig = {
       },
     },
     preview: (data) => {
+      const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
       const path = generatePreviewPath({
-        slug: typeof data?.slug === 'string' ? data.slug : '',
+        slug,
         collection: 'events',
       })
 
@@ -619,6 +860,7 @@ export const Events: CollectionConfig = {
                 EventAgendaOverview,
                 EventMeetingFormats,
                 EventMadridVenue,
+                EventConversationForm,
                 Content,
                 MediaBlock,
                 CallToAction,

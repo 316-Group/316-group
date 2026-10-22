@@ -15,10 +15,11 @@ type Props = {
 }
 
 export const generatePreviewPath = ({ collection, slug }: Props) => {
-  const path = `${collectionPrefixMap[collection]}/${slug}`
+  const safeSlug = slug || (collection === 'events' ? 'preview' : '')
+  const path = `${collectionPrefixMap[collection]}/${safeSlug}`
 
   const params = {
-    slug,
+    slug: safeSlug,
     collection,
     path,
   }

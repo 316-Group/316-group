@@ -28,30 +28,29 @@ export async function GET(
   if (previewSecret) {
     return new Response('You are not allowed to preview this page', { status: 403 })
   } else {
-    if (!path) {
-      return new Response('No path provided', { status: 404 })
-    }
-
-    if (!collection) {
-      return new Response('No path provided', { status: 404 })
-    }
-
-    if (!slug) {
+    if (!path && !collection) {
       return new Response('No path provided', { status: 404 })
     }
 
     if (!token) {
-      new Response('You are not allowed to preview this page', { status: 403 })
+      return new Response('You are not allowed to preview this page', { status: 403 })
     }
 
-    if (!path.startsWith('/')) {
-      new Response('This endpoint can only be used for internal previews', { status: 500 })
+    let targetPath = path || (collection === 'events' ? '/events/preview' : '/')
+    if (targetPath === '/events/' || targetPath === '/events') {
+      targetPath = '/events/preview'
+    }
+
+    if (!targetPath.startsWith('/')) {
+      return new Response('This endpoint can only be used for internal previews', { status: 500 })
     }
 
     let user
 
     try {
-      user = jwt.verify(token, payload.secret)
+      if (token) {
+        user = jwt.verify(token, payload.secret)
+      }
     } catch (error) {
       payload.logger.error('Error verifying token for live preview:', error)
     }
@@ -64,32 +63,39 @@ export async function GET(
       return new Response('You are not allowed to preview this page', { status: 403 })
     }
 
-    // Verify the given slug exists
-    try {
-      const docs = await payload.find({
-        collection,
-        draft: true,
-        limit: 1,
-        // pagination: false reduces overhead if you don't need totalDocs
-        pagination: false,
-        depth: 0,
-        select: {},
-        where: {
-          slug: {
-            equals: slug,
-          },
-        },
-      })
+    const isPreviewOrNewDraft = !slug || slug === 'preview'
 
-      if (!docs.docs.length) {
-        return new Response('Document not found', { status: 404 })
+    // Verify the given slug exists if not a new draft/preview
+    if (!isPreviewOrNewDraft && collection && slug) {
+      try {
+        const docs = await payload.find({
+          collection,
+          draft: true,
+          limit: 1,
+          pagination: false,
+          depth: 0,
+          select: {},
+          where: {
+            slug: {
+              equals: slug,
+            },
+          },
+        })
+
+        if (!docs.docs.length) {
+          // If document is not in DB yet (e.g. user just typed a new slug in admin),
+          // fallback to targetPath or preview rather than failing with 404
+          if (collection === 'events') {
+            targetPath = '/events/preview'
+          }
+        }
+      } catch (error) {
+        payload.logger.error('Error verifying token for live preview:', error)
       }
-    } catch (error) {
-      payload.logger.error('Error verifying token for live preview:', error)
     }
 
     draft.enable()
 
-    redirect(path)
+    redirect(targetPath)
   }
 }
