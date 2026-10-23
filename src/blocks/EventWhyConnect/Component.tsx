@@ -353,7 +353,7 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
             const numberText = item.numberText ?? `0${idx + 1}`
             const numberColor = featureCardStyles?.numberColor || item.numberColor || 'text-white/80'
             const numberTypography =
-              featureCardStyles?.numberFontSize || item.numberFontSize || 'text-sm md:text-base font-medium'
+              featureCardStyles?.numberFontSize || item.numberFontSize || 'text-sm md:text-base'
 
             const headerMargin =
               featureCardStyles?.headerMarginBottom || item.headerMarginBottom || 'mb-4 md:mb-5'
@@ -402,7 +402,7 @@ export const EventWhyConnectBlock: React.FC<EventWhyConnectProps> = ({
 
                   {/* Indicator Number */}
                   {numberText && (
-                    <span className={cn('font-mono tracking-wider', numberColor, numberTypography)}>
+                    <span className={cn('font-mono font-medium tracking-wider', numberColor, numberTypography)}>
                       {numberText}
                     </span>
                   )}

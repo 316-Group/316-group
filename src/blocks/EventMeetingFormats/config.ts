@@ -7,6 +7,7 @@ import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
 const allowAnySelect = (() => true as const) as any
 
 const marginBottomOptions = [
+  { label: 'Inherit / Default', value: '' },
   { label: 'None (0)', value: 'mb-0' },
   { label: 'Extra Small (mb-2)', value: 'mb-2' },
   { label: 'Small (mb-3)', value: 'mb-3' },

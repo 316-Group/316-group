@@ -1077,7 +1077,7 @@ export const hero: Field = {
           name: 'eventHeroHeadingFontSizeDesktop',
           type: 'select',
           label: 'Heading Font Size (Desktop)',
-          defaultValue: 'text-5xl md:text-6xl',
+          defaultValue: 'text-6xl',
           options: fontSizeOptions,
           admin: { width: '50%' },
         },

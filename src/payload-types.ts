@@ -201890,6 +201890,7 @@ export interface EventHeroBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -201907,6 +201908,7 @@ export interface EventHeroBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -202264,6 +202266,7 @@ export interface EventHeroBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -202281,6 +202284,7 @@ export interface EventHeroBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -202638,6 +202642,7 @@ export interface EventHeroBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -202655,6 +202660,7 @@ export interface EventHeroBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -203013,6 +203019,7 @@ export interface EventHeroBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -203030,6 +203037,7 @@ export interface EventHeroBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -204432,6 +204440,7 @@ export interface EventHeroBlock {
     imageRounded?: ('rounded-none' | 'rounded-2xl' | 'rounded-3xl') | null;
     gridBottomSpacing?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -210577,6 +210586,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -210594,6 +210604,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -210951,6 +210962,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -210968,6 +210980,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -211325,6 +211338,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -211342,6 +211356,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -211974,6 +211989,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -211991,6 +212007,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -212363,6 +212380,7 @@ export interface EventAgendaOverviewBlock {
     topDividerWidth?: ('border-t' | 'border-t-2' | 'border-t-4') | null;
     topDividerMarginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -215401,6 +215419,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -215418,6 +215437,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -215775,6 +215795,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -215792,6 +215813,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -216149,6 +216171,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -216166,6 +216189,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -216798,6 +216822,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -216815,6 +216840,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -217713,6 +217739,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -217730,6 +217757,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219048,6 +219076,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219065,6 +219094,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219422,6 +219452,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219439,6 +219470,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219796,6 +219828,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -219813,6 +219846,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -220436,6 +220470,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -220453,6 +220488,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -220810,6 +220846,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -220827,6 +220864,7 @@ export interface EventMadridVenueBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222175,6 +222213,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222193,6 +222232,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222551,6 +222591,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222569,6 +222610,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222927,6 +222969,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222945,6 +222988,7 @@ export interface EventConversationFormBlock {
       | null;
     marginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -222970,6 +223014,7 @@ export interface EventConversationFormBlock {
     borderWidth?: ('border-t' | 'border-t-2' | 'border-t-4') | null;
     dividerMarginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -224133,6 +224178,7 @@ export interface EventConversationFormBlock {
       | null;
     listMarginBottom?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'
@@ -224151,6 +224197,7 @@ export interface EventConversationFormBlock {
       | null;
     listMarginBottomMobile?:
       | (
+          | ''
           | 'mb-0'
           | 'mb-2'
           | 'mb-3'

@@ -41,7 +41,7 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
     eventHeroSubHeaderMarginBottomMobile = 'mb-3',
     eventHeroHeading,
     eventHeroHeadingTextColor = 'text-white',
-    eventHeroHeadingFontSizeDesktop = 'text-5xl md:text-6xl',
+    eventHeroHeadingFontSizeDesktop = 'text-6xl',
     eventHeroHeadingFontSizeMobile = 'text-3xl',
     eventHeroHeadingFontWeightDesktop = 'font-bold',
     eventHeroHeadingFontWeightMobile = 'font-bold',

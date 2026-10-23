@@ -501,7 +501,7 @@ export const eventWhyConnectFields: Field[] = [
                     name: 'numberFontSize',
                     type: 'select',
                     label: 'Number Font Size',
-                    defaultValue: 'text-sm md:text-base font-medium',
+                    defaultValue: 'text-sm md:text-base',
                     validate: allowAnySelect,
                     options: fontSizeOptions,
                     admin: { width: '50%' },
