@@ -31,8 +31,7 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
   const { setHeaderTheme, setHeroOverlay } = useHeaderTheme()
 
   useEffect(() => {
-    // Keep header visible, theme dark so header logo and navigation text are white
-    setHeaderTheme('dark')
+    setHeaderTheme('light')
     setHeroOverlay(false)
 
     return () => {
