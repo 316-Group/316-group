@@ -456,6 +456,15 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
   const imageFit = imageStyles?.imageFit || imageColumn?.imageFit || 'cover'
   const imageRounded = imageStyles?.imageRounded || imageColumn?.imageRounded || 'rounded-none'
   const gridBottomSpacing = imageStyles?.gridBottomSpacing || imageColumn?.gridBottomSpacing || 'mb-0'
+  const isLightHeroBg =
+    typeof bodyBgColor === 'string' &&
+    (bodyBgColor.includes('white') ||
+      bodyBgColor.includes('F7F8F4') ||
+      bodyBgColor.includes('EFF1F8') ||
+      bodyBgColor.includes('slate-50') ||
+      bodyBgColor.includes('gray-50') ||
+      bodyBgColor.includes('slate-100') ||
+      bodyBgColor.includes('gray-100'))
 
   // ─── Footer Items ─────────────────────────────────────────────────────────
   const footerItems = footerBar?.items && Array.isArray(footerBar.items) ? footerBar.items : []
@@ -670,7 +679,7 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
 
             {/* ── Right Column: Featured Event Image (No Border, No Shadow) ─── */}
             <div className="lg:col-span-5 xl:col-span-5 flex justify-center items-center">
-              {featureImage && typeof featureImage === 'object' && (
+              {featureImage && typeof featureImage === 'object' ? (
                 <div className={cn('relative w-full overflow-hidden border-0 shadow-none', imageRounded)}>
                   <Media
                     resource={featureImage}
@@ -679,6 +688,66 @@ export const EventHeroBlock: React.FC<EventHeroProps> = ({
                       imageFit === 'contain' ? 'object-contain' : 'object-cover',
                     )}
                   />
+                </div>
+              ) : isLightHeroBg ? (
+                /* Fallback Placeholder Graphic for light backgrounds */
+                <div
+                  className={cn(
+                    'w-full relative aspect-[4/3] flex items-center justify-center border-0 shadow-none overflow-hidden',
+                    imageRounded,
+                  )}
+                >
+                  <div className="absolute top-0 right-4 w-28 h-28 rounded-full bg-[#00D2FF]/40 z-0" />
+                  <div className="absolute bottom-0 left-6 w-24 h-24 rounded-tl-full bg-[#0256FF]/30 z-0" />
+                  <div className="relative z-10 w-4/5 h-4/5 bg-slate-100/90 border border-slate-200/80 rounded-none flex items-center justify-center p-6 shadow-sm">
+                    <div className="text-center text-slate-700">
+                      <svg
+                        className="w-16 h-16 mx-auto mb-3 opacity-60 text-slate-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                      <span className="text-sm font-semibold tracking-wide">Featured Event Media</span>
+                      <p className="text-xs text-slate-500 mt-1">Upload event image in hero settings</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                /* Fallback Placeholder Graphic matching the composition style in page-event.png */
+                <div
+                  className={cn(
+                    'w-full relative aspect-[4/3] flex items-center justify-center border-0 shadow-none overflow-hidden',
+                    imageRounded,
+                  )}
+                >
+                  <div className="absolute top-0 right-4 w-28 h-28 rounded-full bg-[#00E5FF] opacity-90 z-0" />
+                  <div className="absolute bottom-0 left-6 w-24 h-24 rounded-tl-full bg-[#00D2FF] opacity-80 z-0" />
+                  <div className="relative z-10 w-4/5 h-4/5 bg-white/10 backdrop-blur-sm rounded-none flex items-center justify-center p-6 border-0 shadow-none">
+                    <div className="text-center text-white/90">
+                      <svg
+                        className="w-16 h-16 mx-auto mb-3 opacity-70"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                      <span className="text-sm font-semibold tracking-wide">Featured Event Media</span>
+                      <p className="text-xs text-white/70 mt-1">Upload event image in hero settings</p>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
