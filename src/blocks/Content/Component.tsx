@@ -36,6 +36,8 @@ import { NumberedGridBlock } from '../NumberedGrid/Component'
 import { MissionVisionBlock } from '../MissionVision/Component'
 import { TimelineAccordionBlock } from '../TimelineAccordion/Component'
 import { CenteredButtonBlock } from '../CenteredButton/Component'
+import { EventUpcomingBlock } from '../EventUpcoming/Component'
+import { PastEventBlock } from '../PastEvent/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1077,6 +1079,36 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col',
                           btnData.className,
+                          col.alignment && `text-${col.alignment}`,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'eventUpcoming' && (content as any).eventUpcoming) {
+                    const blockData = { ...(content as any).eventUpcoming }
+                    return (
+                      <EventUpcomingBlock
+                        key={index}
+                        isColumn={true}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          col.alignment && `text-${col.alignment}`,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'pastEvent' && (content as any).pastEvent) {
+                    const blockData = { ...(content as any).pastEvent }
+                    return (
+                      <PastEventBlock
+                        key={index}
+                        isColumn={true}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
                           col.alignment && `text-${col.alignment}`,
                         )}
                       />

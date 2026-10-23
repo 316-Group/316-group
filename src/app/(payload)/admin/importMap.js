@@ -21,6 +21,8 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from '@/fields/slug/SlugComponent'
+import { EventStatusCell as EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a } from '../../../collections/Events/components/EventStatusCell'
+import { EventStatusField as EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884 } from '../../../collections/Events/components/EventStatusField'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { default as default_a8ed57560afaff4535f43ca83a9fecbd } from '@/graphics/Icon'
@@ -54,6 +56,8 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_92cc057d0a2abb4f6cf0307edf59f986,
+  "/collections/Events/components/EventStatusCell#EventStatusCell": EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a,
+  "/collections/Events/components/EventStatusField#EventStatusField": EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/graphics/Icon#default": default_a8ed57560afaff4535f43ca83a9fecbd,

@@ -58,12 +58,24 @@ export default async function EventPage({ params: paramsPromise }: Args) {
   }
 
   const { layout } = event
+  const recapConfig = (event as any)?.recapConfig
+
+  let blocksToRender = layout
+
+  // If this event has an active published recap, render the event hero + recap sections
+  if (recapConfig?.isPublished && Array.isArray(recapConfig?.recapLayout) && recapConfig.recapLayout.length > 0) {
+    const heroBlock = Array.isArray(layout)
+      ? layout.find((b: any) => b?.blockType === 'eventHero')
+      : null
+
+    blocksToRender = [heroBlock, ...recapConfig.recapLayout].filter(Boolean) as any
+  }
 
   return (
     <article>
       <PageClient />
       <PayloadRedirects disableNotFound url={url} />
-      {layout && <RenderBlocks blocks={layout as any} />}
+      {blocksToRender && <RenderBlocks blocks={blocksToRender as any} />}
     </article>
   )
 }

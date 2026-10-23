@@ -55,6 +55,10 @@ import { EventAgendaOverviewBlock } from './EventAgendaOverview/Component'
 import { EventMeetingFormatsBlock } from './EventMeetingFormats/Component'
 import { EventMadridVenueBlock } from './EventMadridVenue/Component'
 import { EventConversationFormBlock } from './EventConversationForm/Component'
+import { EventUpcomingBlock } from './EventUpcoming/Component'
+import { PastEventBlock } from './PastEvent/Component'
+import { EventRecapArticleBlock } from './EventRecapArticle/Component'
+import { EventRecapFeatureBlock } from './EventRecapFeature/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -109,6 +113,10 @@ const blockComponents = {
   eventMeetingFormats: EventMeetingFormatsBlock,
   eventMadridVenue: EventMadridVenueBlock,
   eventConversationForm: EventConversationFormBlock,
+  eventUpcoming: EventUpcomingBlock,
+  pastEvent: PastEventBlock,
+  eventRecapArticle: EventRecapArticleBlock,
+  eventRecapFeature: EventRecapFeatureBlock,
 }
 
 export const RenderBlocks: React.FC<{

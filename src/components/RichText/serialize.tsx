@@ -258,13 +258,15 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
                       : ''
               // Pass through any inline styles set via the Lexical editor
               const inlineStyle = (node as any).style
+              const isEmpty = !serializedChildren
+
               return (
                 <p
-                  className={`col-start-2 ${alignmentClass}`}
+                  className={`col-start-2 mb-6 leading-relaxed last:mb-0 ${alignmentClass}`}
                   key={index}
                   {...(inlineStyle ? { style: parseInlineStyle(inlineStyle) } : {})}
                 >
-                  {serializedChildren}
+                  {isEmpty ? <br /> : serializedChildren}
                 </p>
               )
             }

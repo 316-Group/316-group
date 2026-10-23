@@ -47,6 +47,8 @@ import { missionVisionFields, missionVisionColumnFields } from '../MissionVision
 import { timelineAccordionFields, timelineAccordionColumnFields } from '../TimelineAccordion/config'
 import { imageTextSplitColumnFields } from '../ImageTextSplit/config'
 import { centeredButtonColumnFields } from '../CenteredButton/config'
+import { eventUpcomingColumnFields } from '../EventUpcoming/config'
+import { pastEventColumnFields } from '../PastEvent/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -622,6 +624,8 @@ const columnFields: Field[] = [
           { label: 'Mission & Vision', value: 'missionVision' },
           { label: 'Timeline Accordion', value: 'timelineAccordion' },
           { label: 'Centered Button', value: 'centeredButton' },
+          { label: 'Event Upcoming', value: 'eventUpcoming' },
+          { label: 'Past Event', value: 'pastEvent' },
         ],
       },
       {
@@ -2195,6 +2199,28 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'centeredButton',
         },
         fields: centeredButtonColumnFields,
+      },
+
+      // ─── Event Upcoming ────────────────────────────────────────────────────
+      {
+        name: 'eventUpcoming',
+        type: 'group',
+        label: 'Event Upcoming',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'eventUpcoming',
+        },
+        fields: eventUpcomingColumnFields,
+      },
+
+      // ─── Past Event ────────────────────────────────────────────────────────
+      {
+        name: 'pastEvent',
+        type: 'group',
+        label: 'Past Event',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'pastEvent',
+        },
+        fields: pastEventColumnFields,
       },
 
       // ─── Click Expand Cards ────────────────────────────────────────────────

@@ -12,6 +12,19 @@ import { textClasses } from '@/fields/textClasses'
 import { buttonClasses } from '@/fields/buttonClasses'
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
+import { fontSizeOptions, fontWeightOptions } from '@/blocks/CenteredContent/config'
+
+const eventHeroMarginBottomOptions = [
+  { label: 'None (0)', value: 'mb-0' },
+  { label: 'Extra Small (mb-2)', value: 'mb-2' },
+  { label: 'Small (mb-3)', value: 'mb-3' },
+  { label: 'Small-Medium (mb-4)', value: 'mb-4' },
+  { label: 'Medium (mb-6)', value: 'mb-6' },
+  { label: 'Large (mb-8)', value: 'mb-8' },
+  { label: 'Extra Large (mb-10)', value: 'mb-10' },
+  { label: '2X Large (mb-12)', value: 'mb-12' },
+  { label: 'Custom Value', value: 'custom' },
+]
 
 export const hero: Field = {
   name: 'hero',
@@ -66,6 +79,10 @@ export const hero: Field = {
         {
           label: 'Swiper Hero',
           value: 'swiperHero',
+        },
+        {
+          label: 'Event Hero',
+          value: 'eventHero',
         },
         {
           //no hero
@@ -815,6 +832,415 @@ export const hero: Field = {
           required: true,
         },
       ],
+    },
+
+    // ─── Event Hero Fields ───────────────────────────────────────────────────
+
+    bgColorPickerAll({
+      overrides: {
+        name: 'eventHeroBgColor',
+        label: 'Event Hero Background Color',
+        defaultValue: 'bg-[#0000FF]',
+        admin: {
+          condition: (_, { type }) => type === 'eventHero',
+          description: 'Background color of the full-height Event Hero. Defaults to the royal blue in mockup (#0000FF).',
+        },
+      },
+    }),
+
+    {
+      name: 'eventHeroMatchHeaderPillWidth',
+      type: 'checkbox',
+      label: 'Match Header Pill Width (Container)',
+      defaultValue: true,
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+        description:
+          'When checked, hero content container matches the site header (max 1,472px centered). Uncheck to set custom horizontal padding.',
+      },
+    },
+
+    // Vertical Padding: Top and Bottom individually for desktop & mobile
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+      },
+      fields: [
+        {
+          name: 'eventHeroPaddingTopDesktop',
+          type: 'text',
+          label: 'Desktop Padding Top (e.g. pt-24 or 96px)',
+          defaultValue: 'pt-24',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroPaddingTopMobile',
+          type: 'text',
+          label: 'Mobile Padding Top (e.g. pt-16 or 64px)',
+          defaultValue: 'pt-16',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+      },
+      fields: [
+        {
+          name: 'eventHeroPaddingBottomDesktop',
+          type: 'text',
+          label: 'Desktop Padding Bottom (e.g. pb-24 or 96px)',
+          defaultValue: 'pb-24',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroPaddingBottomMobile',
+          type: 'text',
+          label: 'Mobile Padding Bottom (e.g. pb-16 or 64px)',
+          defaultValue: 'pb-16',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Horizontal Padding: Enabled only if matchHeaderPillWidth is false
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type, eventHeroMatchHeaderPillWidth }) =>
+          type === 'eventHero' && eventHeroMatchHeaderPillWidth === false,
+      },
+      fields: [
+        {
+          name: 'eventHeroPaddingLeftDesktop',
+          type: 'text',
+          label: 'Desktop Padding Left (e.g. pl-12 or 50px)',
+          defaultValue: 'pl-12',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroPaddingLeftMobile',
+          type: 'text',
+          label: 'Mobile Padding Left (e.g. pl-4 or 16px)',
+          defaultValue: 'pl-4',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type, eventHeroMatchHeaderPillWidth }) =>
+          type === 'eventHero' && eventHeroMatchHeaderPillWidth === false,
+      },
+      fields: [
+        {
+          name: 'eventHeroPaddingRightDesktop',
+          type: 'text',
+          label: 'Desktop Padding Right (e.g. pr-12 or 50px)',
+          defaultValue: 'pr-12',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroPaddingRightMobile',
+          type: 'text',
+          label: 'Mobile Padding Right (e.g. pr-4 or 16px)',
+          defaultValue: 'pr-4',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Sub Header
+    {
+      name: 'eventHeroSubHeader',
+      type: 'text',
+      label: 'Sub Header Text',
+      defaultValue: 'EVENTS & CONNECTIONS',
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+      },
+    },
+    textColorPickerAll({
+      overrides: {
+        name: 'eventHeroSubHeaderTextColor',
+        label: 'Sub Header Text Color',
+        defaultValue: 'text-white',
+        admin: {
+          condition: (_, { type }) => type === 'eventHero',
+        },
+      },
+    }),
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroSubHeaderFontSizeDesktop',
+          type: 'select',
+          label: 'Sub Header Font Size (Desktop)',
+          defaultValue: 'text-sm',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroSubHeaderFontSizeMobile',
+          type: 'select',
+          label: 'Sub Header Font Size (Mobile)',
+          defaultValue: 'text-xs',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroSubHeaderFontWeightDesktop',
+          type: 'select',
+          label: 'Sub Header Font Weight (Desktop)',
+          defaultValue: 'font-semibold',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroSubHeaderFontWeightMobile',
+          type: 'select',
+          label: 'Sub Header Font Weight (Mobile)',
+          defaultValue: 'font-semibold',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroSubHeaderMarginBottomDesktop',
+          type: 'select',
+          label: 'Sub Header Margin Bottom (Desktop)',
+          defaultValue: 'mb-4',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroSubHeaderMarginBottomMobile',
+          type: 'select',
+          label: 'Sub Header Margin Bottom (Mobile)',
+          defaultValue: 'mb-3',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Heading
+    {
+      name: 'eventHeroHeading',
+      type: 'richText',
+      label: 'Main Heading (Supports RichText & Inline Styling)',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+        description: 'Main heading for the Event Hero. Supports inline text styling, colors, bolding, and line breaks.',
+      },
+    },
+    textColorPickerAll({
+      overrides: {
+        name: 'eventHeroHeadingTextColor',
+        label: 'Heading Text Color',
+        defaultValue: 'text-white',
+        admin: {
+          condition: (_, { type }) => type === 'eventHero',
+        },
+      },
+    }),
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroHeadingFontSizeDesktop',
+          type: 'select',
+          label: 'Heading Font Size (Desktop)',
+          defaultValue: 'text-5xl md:text-6xl',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroHeadingFontSizeMobile',
+          type: 'select',
+          label: 'Heading Font Size (Mobile)',
+          defaultValue: 'text-3xl',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroHeadingFontWeightDesktop',
+          type: 'select',
+          label: 'Heading Font Weight (Desktop)',
+          defaultValue: 'font-bold',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroHeadingFontWeightMobile',
+          type: 'select',
+          label: 'Heading Font Weight (Mobile)',
+          defaultValue: 'font-bold',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroHeadingMarginBottomDesktop',
+          type: 'select',
+          label: 'Heading Margin Bottom (Desktop)',
+          defaultValue: 'mb-6',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroHeadingMarginBottomMobile',
+          type: 'select',
+          label: 'Heading Margin Bottom (Mobile)',
+          defaultValue: 'mb-4',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Description
+    {
+      name: 'eventHeroDescription',
+      type: 'richText',
+      label: 'Description (Supports RichText & Inline Styling)',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+        description: 'Description paragraph. Supports inline styling and preserves paragraph spacing.',
+      },
+    },
+    textColorPickerAll({
+      overrides: {
+        name: 'eventHeroDescriptionTextColor',
+        label: 'Description Text Color',
+        defaultValue: 'text-white/90',
+        admin: {
+          condition: (_, { type }) => type === 'eventHero',
+        },
+      },
+    }),
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroDescriptionFontSizeDesktop',
+          type: 'select',
+          label: 'Description Font Size (Desktop)',
+          defaultValue: 'text-lg md:text-xl',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroDescriptionFontSizeMobile',
+          type: 'select',
+          label: 'Description Font Size (Mobile)',
+          defaultValue: 'text-base',
+          options: fontSizeOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroDescriptionFontWeightDesktop',
+          type: 'select',
+          label: 'Description Font Weight (Desktop)',
+          defaultValue: 'font-normal',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroDescriptionFontWeightMobile',
+          type: 'select',
+          label: 'Description Font Weight (Mobile)',
+          defaultValue: 'font-normal',
+          options: fontWeightOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'eventHero' },
+      fields: [
+        {
+          name: 'eventHeroDescriptionMarginBottomDesktop',
+          type: 'select',
+          label: 'Description Margin Bottom (Desktop)',
+          defaultValue: 'mb-8',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'eventHeroDescriptionMarginBottomMobile',
+          type: 'select',
+          label: 'Description Margin Bottom (Mobile)',
+          defaultValue: 'mb-6',
+          options: eventHeroMarginBottomOptions,
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Right Column Image
+    {
+      name: 'eventHeroImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Featured Right Column Image',
+      required: false,
+      admin: {
+        condition: (_, { type }) => type === 'eventHero',
+        description: 'Upload right column image. Rendered without borders or shadows. Fallback placeholder used if none uploaded.',
+      },
     },
   ],
 

@@ -23,6 +23,10 @@ import { TimelineAccordion } from '@/blocks/TimelineAccordion/config'
 import { TestimonialSlider } from '@/blocks/TestimonialSlider/config'
 import { BrandSlider } from '@/blocks/BrandSlider/config'
 import { CenteredButton } from '@/blocks/CenteredButton/config'
+import { EventUpcoming } from '@/blocks/EventUpcoming/config'
+import { PastEvent } from '@/blocks/PastEvent/config'
+import { EventRecapArticle } from '@/blocks/EventRecapArticle/config'
+import { EventRecapFeature } from '@/blocks/EventRecapFeature/config'
 
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -816,7 +820,7 @@ export const Events: CollectionConfig = {
     slug: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'eventStatus', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
         const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
@@ -844,6 +848,17 @@ export const Events: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'eventStatus',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Cell: '/collections/Events/components/EventStatusCell#EventStatusCell',
+          Field: '/collections/Events/components/EventStatusField#EventStatusField',
+        },
+      },
     },
     {
       type: 'tabs',
@@ -942,6 +957,10 @@ export const Events: CollectionConfig = {
                 TestimonialSlider,
                 BrandSlider,
                 CenteredButton,
+                EventUpcoming,
+                PastEvent,
+                EventRecapArticle,
+                EventRecapFeature,
               ],
               defaultValue: defaultEventTemplateLayout,
               required: false,
@@ -969,6 +988,49 @@ export const Events: CollectionConfig = {
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
+          ],
+        },
+        {
+          label: '🏁 End Event Recap',
+          fields: [
+            {
+              type: 'group',
+              name: 'recapConfig',
+              label: 'End Event Recap Configuration',
+              admin: {
+                description:
+                  'When this event has concluded and you publish this recap, the public event page will display this recap layout below the hero, and the Past Events list block will display "View recap →".',
+              },
+              fields: [
+                {
+                  name: 'isPublished',
+                  type: 'checkbox',
+                  label: 'Publish End Event Recap',
+                  defaultValue: false,
+                  admin: {
+                    description:
+                      'Check this box and publish the event document to activate the recap on the website.',
+                  },
+                },
+                {
+                  name: 'recapLayout',
+                  type: 'blocks',
+                  label: 'Recap Sections (Sequential layout below Event Hero)',
+                  blocks: [
+                    EventRecapArticle,
+                    EventRecapFeature,
+                    Content,
+                    MediaBlock,
+                    CardGrid,
+                    CenteredContent,
+                  ],
+                  admin: {
+                    description:
+                      'The recap automatically keeps this event\'s Hero at the top, and renders these sections below it.',
+                  },
+                },
+              ],
+            },
           ],
         },
       ],

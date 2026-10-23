@@ -13,6 +13,7 @@ import { ServicesHero } from './ServicesHero'
 import { NoHero } from './NoHero'
 import { SwiperHero } from './SwiperHero'
 import { GroupHeroV2Wrapper } from './GroupHeroV2/GroupHeroV2Wrapper'
+import { EventHero } from './EventHero'
 // import { SwiperHero } from './SwiperHero'
 
 const heroes = {
@@ -26,6 +27,7 @@ const heroes = {
   servicesHero: ServicesHero,
   swiperHero: SwiperHero,
   groupHeroV2: GroupHeroV2Wrapper,
+  eventHero: EventHero,
   noHero: NoHero,
 }
 
