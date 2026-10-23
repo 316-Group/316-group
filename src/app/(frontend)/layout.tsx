@@ -1,12 +1,8 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Inter } from 'next/font/google'
 import { cn } from 'src/utilities/cn'
 import { GeistMono } from 'geist/font/mono'
 import { GeistSans } from 'geist/font/sans'
-import { Urbanist } from 'next/font/google'
-import { Ubuntu } from 'next/font/google'
-import { Jost } from 'next/font/google'
 
 import React from 'react'
 import { Toaster } from 'sonner'
@@ -25,17 +21,6 @@ import 'payloadcms-lexical-ext/client/client.css'
 import '@radix-ui/themes/styles.css'
 
 import { getServerSideURL } from '@/utilities/getURL'
-
-const urbanist = Urbanist({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-})
-
-// Add Inter font
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-})
 
 const lufga = localFont({
   src: [
@@ -132,35 +117,26 @@ const lufga = localFont({
   ],
   variable: '--font-lufga',
 })
-
-const jost = Jost({
-  subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
-
-const ubuntu = Ubuntu({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-})
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
   return (
     <html
       className={cn(
         lufga.variable,
-        urbanist.className,
-        jost.className,
-        ubuntu.className,
         GeistSans.variable,
         GeistMono.variable,
-        inter.className,
       )}
       lang="en"
       suppressHydrationWarning
     >
       <head>
         <InitTheme />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Jost:wght@100..900&family=Ubuntu:wght@300;400;500;700&family=Urbanist:wght@400..900&display=swap"
+          rel="stylesheet"
+        />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
