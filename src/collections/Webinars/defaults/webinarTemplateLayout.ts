@@ -3,10 +3,8 @@
  * Pre-populates Block 1 (WebinarHero) with exact mockup copy from group ui/webinar-hero.png
  */
 
-export const defaultWebinarTemplateLayout = [
-  // ── Block 1: Webinar Hero ─────────────────────────────────────────────────
-  {
-    blockType: 'webinarHero',
+export const defaultWebinarHeroLayout = {
+  blockType: 'webinarHero',
 
     // TAB 3: SECTION LAYOUT & SPACING
     matchHeaderPillWidth: true,
@@ -142,10 +140,10 @@ export const defaultWebinarTemplateLayout = [
       roleFontWeightDesktop: 'font-normal',
       roleFontWeightMobile: 'font-normal',
     },
-  },
+  }
 
   // ── Block 2: About This Webinar (group ui/webinar-2.png) ───────────────────
-  {
+  export const defaultWebinarAboutLayout = {
     blockType: 'webinarAbout',
 
     // TAB 3: SECTION LAYOUT & SPACING
@@ -279,10 +277,10 @@ export const defaultWebinarTemplateLayout = [
       fontWeightDesktop: 'font-normal',
       fontWeightMobile: 'font-normal',
     },
-  },
+  }
 
   // ── Block 3: More Webinars That May Interest You (Mockup: webinar 3.png) ──
-  {
+  export const defaultWebinarMoreLayout = {
     blockType: 'webinarMore',
 
     // TAB 3: SECTION LAYOUT & SPACING
@@ -385,10 +383,10 @@ export const defaultWebinarTemplateLayout = [
       registerTextColor: 'text-[#0056FF]',
       itemGap: 'gap-12 md:gap-16',
     },
-  },
+  }
 
   // ── Block 4: Ready to Grow CTA (Mockup: webinar 4.png) ────────────────────
-  {
+  export const defaultWebinarCTALayout = {
     blockType: 'webinarCTA',
 
     // TAB 3: SECTION LAYOUT & SPACING
@@ -445,5 +443,11 @@ export const defaultWebinarTemplateLayout = [
       iconBgColor: 'bg-[#0000FF]',
       iconColor: 'text-white',
     },
-  },
+  }
+
+export const defaultWebinarTemplateLayout = [
+  defaultWebinarHeroLayout,
+  defaultWebinarAboutLayout,
+  defaultWebinarMoreLayout,
+  defaultWebinarCTALayout,
 ]

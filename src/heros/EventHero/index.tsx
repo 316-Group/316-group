@@ -213,6 +213,32 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
   )
   const descriptionColor = resolveColor(eventHeroDescriptionTextColor, 'text-white/90')
 
+  // Clean heading: filter out empty paragraphs/ghost lines
+  const cleanHeading = React.useMemo(() => {
+    if (!resolvedHeading || typeof resolvedHeading !== 'object' || !('root' in resolvedHeading)) {
+      return resolvedHeading
+    }
+    const root = (resolvedHeading as any).root
+    if (!root || !Array.isArray(root.children)) return resolvedHeading
+    const filtered = root.children.filter((child: any) => {
+      if (child.type === 'paragraph' || child.type === 'heading') {
+        const textContent = (child.children || [])
+          .map((c: any) => c.text || '')
+          .join('')
+          .trim()
+        return textContent.length > 0
+      }
+      return true
+    })
+    return {
+      ...resolvedHeading,
+      root: {
+        ...root,
+        children: filtered.length > 0 ? filtered : root.children,
+      },
+    }
+  }, [resolvedHeading])
+
   return (
     <section
       className={cn(sectionClass, 'w-full relative overflow-hidden', bgClass)}
@@ -286,22 +312,25 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
             )}
 
             {/* Main Heading */}
-            {resolvedHeading && (
+            {cleanHeading && (
               <div
                 className={cn(
-                  'tracking-tight leading-[1.1] [word-spacing:normal] [white-space:normal] break-words',
+                  'tracking-tight [word-spacing:normal] [white-space:normal] break-words',
                   headingColor.className,
                   headingTypo.combined,
+                  'leading-[1.1] md:leading-[1.1]',
+                  '[&_*]:leading-[1.1]',
+                  '[&_p]:!leading-[1.1] [&_h1]:!leading-[1.1] [&_h2]:!leading-[1.1] [&_h3]:!leading-[1.1] [&_h4]:!leading-[1.1]',
+                  '[&_p]:!m-0 [&_h1]:!m-0 [&_h2]:!m-0 [&_h3]:!m-0 [&_h4]:!m-0',
                   resolveMarginBottom(
                     eventHeroHeadingMarginBottomDesktop,
                     eventHeroHeadingMarginBottomMobile,
                     'mb-6',
                   ),
-                  '[&_p]:m-0 [&_h1]:m-0 [&_h2]:m-0 [&_h3]:m-0 [&_h4]:m-0',
                 )}
                 style={headingColor.style}
               >
-                <RichText content={resolvedHeading} enableGutter={false} enableProse={false} />
+                <RichText content={cleanHeading} enableGutter={false} enableProse={false} />
               </div>
             )}
 

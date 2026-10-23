@@ -63,6 +63,8 @@ import { WebinarHeroBlock } from './WebinarHero/Component'
 import { WebinarAboutBlock } from './WebinarAbout/Component'
 import { WebinarMoreBlock } from './WebinarMore/Component'
 import { WebinarCTABlock } from './WebinarCTA/Component'
+import { WebinarRecapAboutBlock } from './WebinarRecapAbout/Component'
+import { WebinarRecapAccessBlock } from './WebinarRecapAccess/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -125,6 +127,8 @@ const blockComponents = {
   webinarAbout: WebinarAboutBlock,
   webinarMore: WebinarMoreBlock,
   webinarCTA: WebinarCTABlock,
+  webinarRecapAbout: WebinarRecapAboutBlock,
+  webinarRecapAccess: WebinarRecapAccessBlock,
 }
 
 export const RenderBlocks: React.FC<{

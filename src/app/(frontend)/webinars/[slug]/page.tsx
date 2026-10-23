@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
+import { draftMode, cookies } from 'next/headers'
 import React, { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
-import { defaultWebinarTemplateLayout } from '@/collections/Webinars'
+import { defaultWebinarTemplateLayout, defaultWebinarRecapLayout } from '@/collections/Webinars'
 import PageClient from './page.client'
+import { WebinarPreviewModeSwitcher } from './PreviewModeSwitcher'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -53,6 +54,10 @@ export default async function WebinarPage({
         title: 'Webinar Preview',
         slug: slug || 'preview',
         layout: defaultWebinarTemplateLayout as any,
+        recapConfig: {
+          isPublished: false,
+          recapLayout: defaultWebinarRecapLayout as any,
+        },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
@@ -64,10 +69,61 @@ export default async function WebinarPage({
   }
 
   const { layout } = webinar
-  const blocksToRender = layout || defaultWebinarTemplateLayout
+  const recapConfig = (webinar as any)?.recapConfig
+
+  const cookieStore = await cookies()
+  const cookieMode = cookieStore.get('webinar_preview_mode')?.value
+
+  // Check if webinar concluded based on operational schedule endDate
+  const isConcluded = webinar?.schedule?.endDate
+    ? new Date(webinar.schedule.endDate) < new Date()
+    : false
+
+  const configuredRecapLayout =
+    Array.isArray(recapConfig?.recapLayout) && recapConfig.recapLayout.length > 0
+      ? recapConfig.recapLayout
+      : defaultWebinarRecapLayout
+
+  const isExplicitRecap =
+    searchParams?.view === 'recap' ||
+    searchParams?.recap === 'true' ||
+    searchParams?.tab === 'recap' ||
+    cookieMode === 'recap'
+
+  const isExplicitActive =
+    searchParams?.view === 'active' ||
+    searchParams?.tab === 'active' ||
+    cookieMode === 'active'
+
+  const shouldRenderRecap = isDraft
+    ? isExplicitActive
+      ? false
+      : isExplicitRecap || Boolean(recapConfig?.isPublished) || isConcluded
+    : Boolean(recapConfig?.isPublished)
+
+  let blocksToRender = layout || defaultWebinarTemplateLayout
+
+  if (
+    shouldRenderRecap &&
+    Array.isArray(configuredRecapLayout) &&
+    configuredRecapLayout.length > 0
+  ) {
+    const heroBlock = Array.isArray(layout)
+      ? layout.find((b: any) => b?.blockType === 'webinarHero')
+      : (defaultWebinarTemplateLayout as any)[0]
+
+    blocksToRender = [heroBlock, ...configuredRecapLayout].filter(Boolean) as any
+  }
 
   return (
     <article>
+      {isDraft && (
+        <WebinarPreviewModeSwitcher
+          currentMode={shouldRenderRecap ? 'recap' : 'active'}
+          isConcluded={isConcluded}
+          isPublished={Boolean(recapConfig?.isPublished)}
+        />
+      )}
       <PageClient />
       <PayloadRedirects disableNotFound url={url} />
       {blocksToRender && <RenderBlocks blocks={blocksToRender as any} />}

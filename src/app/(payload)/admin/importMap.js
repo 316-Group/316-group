@@ -24,6 +24,7 @@ import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from 
 import { EventStatusCell as EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a } from '../../../collections/Events/components/EventStatusCell'
 import { EventStatusField as EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884 } from '../../../collections/Events/components/EventStatusField'
 import { RecapHeroNotice as RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277 } from '../../../collections/Events/components/RecapHeroNotice'
+import { WebinarRecapHeroNotice as WebinarRecapHeroNotice_a2c8e4d5666babfc41c1f0154d13a2fa } from '../../../collections/Webinars/components/WebinarRecapHeroNotice'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { default as default_a8ed57560afaff4535f43ca83a9fecbd } from '@/graphics/Icon'
@@ -60,6 +61,7 @@ export const importMap = {
   "/collections/Events/components/EventStatusCell#EventStatusCell": EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a,
   "/collections/Events/components/EventStatusField#EventStatusField": EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884,
   "/collections/Events/components/RecapHeroNotice#RecapHeroNotice": RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277,
+  "/collections/Webinars/components/WebinarRecapHeroNotice#WebinarRecapHeroNotice": WebinarRecapHeroNotice_a2c8e4d5666babfc41c1f0154d13a2fa,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/graphics/Icon#default": default_a8ed57560afaff4535f43ca83a9fecbd,

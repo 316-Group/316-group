@@ -7,18 +7,25 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateWebinar } from './hooks/revalidateWebinar'
 import { defaultWebinarTemplateLayout } from './defaults/webinarTemplateLayout'
+import { defaultWebinarRecapLayout } from './defaults/webinarRecapLayout'
 
-export { defaultWebinarTemplateLayout }
+export { defaultWebinarTemplateLayout, defaultWebinarRecapLayout }
 
 // Blocks
 import { WebinarHero } from '@/blocks/WebinarHero/config'
 import { WebinarAbout } from '@/blocks/WebinarAbout/config'
 import { WebinarMore } from '@/blocks/WebinarMore/config'
 import { WebinarCTA } from '@/blocks/WebinarCTA/config'
+import { WebinarRecapAbout } from '@/blocks/WebinarRecapAbout/config'
+import { WebinarRecapAccess } from '@/blocks/WebinarRecapAccess/config'
 import {
   ensureWebinarLayoutAfterRead,
   ensureWebinarLayoutBeforeChange,
 } from './hooks/ensureWebinarLayout'
+import {
+  ensureWebinarRecapLayoutAfterRead,
+  ensureWebinarRecapLayoutBeforeChange,
+} from './hooks/ensureWebinarRecapLayout'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
@@ -184,6 +191,65 @@ export const Webinars: CollectionConfig = {
             }),
           ],
         },
+        {
+          label: '🏁 End Webinar Recap',
+          fields: [
+            {
+              type: 'group',
+              name: 'recapConfig',
+              label: 'End Webinar Recap Configuration',
+              admin: {
+                description:
+                  'When this webinar has concluded and you publish this recap, the public webinar page will display this recap layout below the hero, and webinar archive cards will display "View recap →".',
+              },
+              fields: [
+                {
+                  name: 'isPublished',
+                  type: 'checkbox',
+                  label: 'Publish End Webinar Recap',
+                  defaultValue: false,
+                  admin: {
+                    description:
+                      'Check this box and publish the webinar document to activate the recap on the website.',
+                  },
+                },
+                {
+                  name: 'recapHeroNotice',
+                  type: 'ui',
+                  admin: {
+                    components: {
+                      Field:
+                        '/collections/Webinars/components/WebinarRecapHeroNotice#WebinarRecapHeroNotice',
+                    },
+                  },
+                },
+                {
+                  name: 'recapLayout',
+                  type: 'blocks',
+                  label: 'Recap Sections (Sequential layout below Webinar Hero)',
+                  defaultValue: defaultWebinarRecapLayout,
+                  blocks: [
+                    WebinarRecapAbout,
+                    WebinarRecapAccess,
+                    WebinarMore,
+                    WebinarCTA,
+                    Content,
+                    MediaBlock,
+                    CallToAction,
+                    FormBlock,
+                    CardGrid,
+                    CenteredContent,
+                    SpacingBlock,
+                  ],
+                  admin: {
+                    description:
+                      "The recap automatically keeps this webinar's Hero at the top, and renders these sections below it.",
+                  },
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
     ...slugField(),
@@ -196,8 +262,12 @@ export const Webinars: CollectionConfig = {
     },
   ],
   hooks: {
-    afterRead: [ensureWebinarLayoutAfterRead],
-    beforeChange: [ensureWebinarLayoutBeforeChange, populatePublishedAt],
+    afterRead: [ensureWebinarLayoutAfterRead, ensureWebinarRecapLayoutAfterRead],
+    beforeChange: [
+      ensureWebinarLayoutBeforeChange,
+      ensureWebinarRecapLayoutBeforeChange,
+      populatePublishedAt,
+    ],
     afterChange: [revalidateWebinar],
   },
   versions: {
