@@ -7,6 +7,7 @@ const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
   'case-studies': '/case-studies',
   'ebooks-and-guides': '/ebooks-and-guides',
   events: '/events',
+  webinars: '/webinars',
 }
 
 type Props = {
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const generatePreviewPath = ({ collection, slug }: Props) => {
-  const safeSlug = slug || (collection === 'events' ? 'preview' : '')
+  const safeSlug = slug || (collection === 'events' || collection === 'webinars' ? 'preview' : '')
   const path = `${collectionPrefixMap[collection]}/${safeSlug}`
 
   const params = {

@@ -36,9 +36,18 @@ export async function GET(
       return new Response('You are not allowed to preview this page', { status: 403 })
     }
 
-    let targetPath = path || (collection === 'events' ? '/events/preview' : '/')
+    let targetPath =
+      path ||
+      (collection === 'events'
+        ? '/events/preview'
+        : collection === 'webinars'
+          ? '/webinars/preview'
+          : '/')
     if (targetPath === '/events/' || targetPath === '/events') {
       targetPath = '/events/preview'
+    }
+    if (targetPath === '/webinars/' || targetPath === '/webinars') {
+      targetPath = '/webinars/preview'
     }
 
     if (!targetPath.startsWith('/')) {
@@ -87,6 +96,8 @@ export async function GET(
           // fallback to targetPath or preview rather than failing with 404
           if (collection === 'events') {
             targetPath = '/events/preview'
+          } else if (collection === 'webinars') {
+            targetPath = '/webinars/preview'
           }
         }
       } catch (error) {

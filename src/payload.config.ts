@@ -29,6 +29,7 @@ import { DownloadTracking } from './collections/DownloadTracking'
 import { Brands } from './collections/Brands'
 import { Events } from './collections/Events'
 import { EventInquiries } from './collections/EventInquiries'
+import { Webinars } from './collections/Webinars'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -106,6 +107,7 @@ export default buildConfig({
     Brands,
     Events,
     EventInquiries,
+    Webinars,
   ],
   upload: {
     limits: {
