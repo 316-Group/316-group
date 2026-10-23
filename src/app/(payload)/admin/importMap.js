@@ -23,6 +23,7 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from '@/fields/slug/SlugComponent'
 import { EventStatusCell as EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a } from '../../../collections/Events/components/EventStatusCell'
 import { EventStatusField as EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884 } from '../../../collections/Events/components/EventStatusField'
+import { RecapHeroNotice as RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277 } from '../../../collections/Events/components/RecapHeroNotice'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { default as default_a8ed57560afaff4535f43ca83a9fecbd } from '@/graphics/Icon'
@@ -58,6 +59,7 @@ export const importMap = {
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_92cc057d0a2abb4f6cf0307edf59f986,
   "/collections/Events/components/EventStatusCell#EventStatusCell": EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a,
   "/collections/Events/components/EventStatusField#EventStatusField": EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884,
+  "/collections/Events/components/RecapHeroNotice#RecapHeroNotice": RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
   "@/graphics/Icon#default": default_a8ed57560afaff4535f43ca83a9fecbd,

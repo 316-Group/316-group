@@ -280,4 +280,170 @@ export const defaultWebinarTemplateLayout = [
       fontWeightMobile: 'font-normal',
     },
   },
+
+  // ── Block 3: More Webinars That May Interest You (Mockup: webinar 3.png) ──
+  {
+    blockType: 'webinarMore',
+
+    // TAB 3: SECTION LAYOUT & SPACING
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-white',
+    paddingTop: 'pt-16 md:pt-24',
+    paddingBottom: 'pb-16 md:pb-24',
+    paddingLeft: 'pl-6 md:pl-12',
+    paddingRight: 'pr-6 md:pr-12',
+
+    // TAB 1: CONTENT & MEDIA
+    sectionTitle: 'More Webinars that may interest you',
+    emptyStateText: 'No upcoming webinars yet.',
+    maxWebinars: 2,
+
+    fallbackItems: [
+      {
+        kickerText: 'AI',
+        heading: 'Cut through the AI hype and reclaim strategic time',
+        dateText: 'Monday 20th Nov. at 10:30',
+        registerLink: '#register',
+        cardSubText: '316group',
+        cardHeading: 'We back disruptive\nproducts and founders in\nretail',
+        speakers: [
+          {
+            name: 'John Flanery',
+            role: 'Senior Software Engineer',
+            flag: 'uk',
+          },
+          {
+            name: 'John Flanery',
+            role: 'Senior Sales Manager',
+            flag: 'ke',
+          },
+        ],
+      },
+      {
+        kickerText: 'AI',
+        heading: 'Cut through the AI hype and reclaim strategic time',
+        dateText: 'Monday 20th Nov. at 10:30',
+        registerLink: '#register',
+        cardSubText: '316group',
+        cardHeading: 'We back disruptive\nproducts and founders in\nretail',
+        speakers: [
+          {
+            name: 'John Flanery',
+            role: 'Senior Software Engineer',
+            flag: 'uk',
+          },
+          {
+            name: 'John Flanery',
+            role: 'Senior Sales Manager',
+            flag: 'ke',
+          },
+        ],
+      },
+    ],
+
+    // TAB 2: INDIVIDUAL STYLING
+    titleStyles: {
+      textColor: 'text-gray-950',
+      fontSizeDesktop: 'text-2xl md:text-3xl lg:text-4xl',
+      fontSizeMobile: 'text-2xl',
+      fontWeightDesktop: 'font-semibold',
+      fontWeightMobile: 'font-semibold',
+      marginBottomDesktop: 'mb-4 md:mb-6',
+      marginBottomMobile: 'mb-4',
+    },
+
+    hrStyles: {
+      lineColor: 'bg-slate-300',
+      lineHeight: 'h-px',
+      marginBottomDesktop: 'mb-10 md:mb-14',
+      marginBottomMobile: 'mb-8',
+    },
+
+    cardStyles: {
+      cardBgColor: 'bg-[#1C202C]',
+      subTextColor: 'text-white',
+      headingColor: 'text-white',
+      headingFontSizeDesktop: 'text-xl sm:text-2xl',
+      headingFontSizeMobile: 'text-lg sm:text-xl',
+      headingFontWeightDesktop: 'font-bold',
+      headingFontWeightMobile: 'font-bold',
+      speakerNameColor: 'text-white',
+      speakerRoleColor: 'text-slate-400',
+    },
+
+    detailStyles: {
+      squareColor: 'bg-[#0056FF]',
+      kickerColor: 'text-[#0056FF]',
+      headingColor: 'text-gray-950',
+      headingFontSizeDesktop: 'text-2xl sm:text-3xl lg:text-4xl',
+      headingFontSizeMobile: 'text-xl sm:text-2xl',
+      headingFontWeightDesktop: 'font-bold',
+      headingFontWeightMobile: 'font-bold',
+      calendarIconColor: 'text-[#0056FF]',
+      dateColor: 'text-gray-700',
+      dividerColor: 'bg-slate-200',
+      registerTextColor: 'text-[#0056FF]',
+      itemGap: 'gap-12 md:gap-16',
+    },
+  },
+
+  // ── Block 4: Ready to Grow CTA (Mockup: webinar 4.png) ────────────────────
+  {
+    blockType: 'webinarCTA',
+
+    // TAB 3: SECTION LAYOUT & SPACING
+    matchHeaderPillWidth: true,
+    sectionBgColor: 'bg-[#0000FF]',
+    paddingTop: 'pt-20 md:pt-32',
+    paddingBottom: 'pb-20 md:pb-32',
+    paddingLeft: 'pl-6 md:pl-12',
+    paddingRight: 'pr-6 md:pr-12',
+
+    // TAB 1: CONTENT & MEDIA
+    badgeText: 'Ready to grow?',
+    heading: "Let's build what comes next, together.",
+    description:
+      'Explore solutions, discuss partnerships or connect with\none of our specialist businesses.',
+    buttonText: 'Talk to our experts',
+    buttonLink: '/contact',
+
+    // TAB 2: INDIVIDUAL STYLING
+    badgeStyles: {
+      bgColor: 'bg-blue-600/50',
+      textColor: 'text-white',
+      fontSizeDesktop: 'text-xs md:text-sm',
+      fontSizeMobile: 'text-xs',
+      fontWeightDesktop: 'font-semibold',
+      fontWeightMobile: 'font-semibold',
+      marginBottomDesktop: 'mb-6 md:mb-8',
+      marginBottomMobile: 'mb-5',
+    },
+
+    headingStyles: {
+      textColor: 'text-white',
+      fontSizeDesktop: 'text-4xl sm:text-5xl lg:text-6xl',
+      fontSizeMobile: 'text-3xl sm:text-4xl',
+      fontWeightDesktop: 'font-bold',
+      fontWeightMobile: 'font-bold',
+      marginBottomDesktop: 'mb-5 md:mb-6',
+      marginBottomMobile: 'mb-4',
+    },
+
+    descriptionStyles: {
+      textColor: 'text-white/90',
+      fontSizeDesktop: 'text-base sm:text-lg md:text-xl',
+      fontSizeMobile: 'text-base',
+      fontWeightDesktop: 'font-normal',
+      fontWeightMobile: 'font-normal',
+      marginBottomDesktop: 'mb-8 md:mb-10',
+      marginBottomMobile: 'mb-8',
+    },
+
+    buttonStyles: {
+      bgColor: 'bg-white',
+      textColor: 'text-gray-950',
+      iconBgColor: 'bg-[#0000FF]',
+      iconColor: 'text-white',
+    },
+  },
 ]

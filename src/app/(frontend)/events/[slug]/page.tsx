@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { draftMode } from 'next/headers'
+import { draftMode, cookies } from 'next/headers'
 import React, { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 import { defaultEventTemplateLayout, defaultEventRecapLayout } from '@/collections/Events'
 import PageClient from './page.client'
+import { PreviewModeSwitcher } from './PreviewModeSwitcher'
 import type { Event } from '@/payload-types'
 
 export async function generateStaticParams() {
@@ -73,6 +74,9 @@ export default async function EventPage({
 
   let blocksToRender = layout
 
+  const cookieStore = await cookies()
+  const cookieMode = cookieStore.get('event_preview_mode')?.value
+
   // Check if event concluded based on operational schedule endDate
   const isConcluded = event?.schedule?.endDate
     ? new Date(event.schedule.endDate) < new Date()
@@ -82,18 +86,28 @@ export default async function EventPage({
   const configuredRecapLayout =
     Array.isArray(recapConfig?.recapLayout) && recapConfig.recapLayout.length > 0
       ? recapConfig.recapLayout
-      : isDraft
-        ? defaultEventRecapLayout
-        : null
+      : defaultEventRecapLayout
 
   // In production: render recap if recapConfig.isPublished === true
-  // In draft/preview: render recap if published OR if event has concluded OR if explicitly requested via ?recap=true
-  const isPreviewRecapRequested =
-    searchParams?.recap === 'true' || searchParams?.tab === 'recap'
+  // In draft/preview:
+  // - explicit recap requested via searchParams (?view=recap, ?recap=true, ?tab=recap) or cookieMode === 'recap'
+  // - explicit active requested via searchParams (?view=active) or cookieMode === 'active'
+  const isExplicitRecap =
+    searchParams?.view === 'recap' ||
+    searchParams?.recap === 'true' ||
+    searchParams?.tab === 'recap' ||
+    cookieMode === 'recap'
 
-  const shouldRenderRecap =
-    Boolean(recapConfig?.isPublished) ||
-    Boolean(isDraft && (isConcluded || recapConfig?.isPublished || isPreviewRecapRequested))
+  const isExplicitActive =
+    searchParams?.view === 'active' ||
+    searchParams?.tab === 'active' ||
+    cookieMode === 'active'
+
+  const shouldRenderRecap = isDraft
+    ? isExplicitActive
+      ? false
+      : isExplicitRecap || Boolean(recapConfig?.isPublished) || isConcluded
+    : Boolean(recapConfig?.isPublished)
 
   if (shouldRenderRecap && Array.isArray(configuredRecapLayout) && configuredRecapLayout.length > 0) {
     const heroBlock = Array.isArray(layout)
@@ -105,6 +119,13 @@ export default async function EventPage({
 
   return (
     <article>
+      {isDraft && (
+        <PreviewModeSwitcher
+          currentMode={shouldRenderRecap ? 'recap' : 'active'}
+          isConcluded={isConcluded}
+          isPublished={Boolean(recapConfig?.isPublished)}
+        />
+      )}
       <PageClient />
       <PayloadRedirects disableNotFound url={url} />
       {blocksToRender && <RenderBlocks blocks={blocksToRender as any} />}

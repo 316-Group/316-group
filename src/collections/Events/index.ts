@@ -36,6 +36,10 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateEvent } from './hooks/revalidateEvent'
 import { populateEventSEO } from './hooks/populateEventSEO'
+import {
+  ensureRecapLayoutAfterRead,
+  ensureRecapLayoutBeforeChange,
+} from './hooks/ensureRecapLayout'
 import { getServerSideURL } from '@/utilities/getURL'
 
 import {
@@ -1016,6 +1020,15 @@ export const Events: CollectionConfig = {
                   },
                 },
                 {
+                  name: 'recapHeroNotice',
+                  type: 'ui',
+                  admin: {
+                    components: {
+                      Field: '/collections/Events/components/RecapHeroNotice#RecapHeroNotice',
+                    },
+                  },
+                },
+                {
                   name: 'recapLayout',
                   type: 'blocks',
                   label: 'Recap Sections (Sequential layout below Event Hero)',
@@ -1050,7 +1063,8 @@ export const Events: CollectionConfig = {
   ],
   hooks: {
     afterChange: [revalidateEvent],
-    beforeChange: [populatePublishedAt, populateEventSEO],
+    afterRead: [ensureRecapLayoutAfterRead],
+    beforeChange: [ensureRecapLayoutBeforeChange, populatePublishedAt, populateEventSEO],
   },
   versions: {
     drafts: {

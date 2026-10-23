@@ -13,6 +13,12 @@ export { defaultWebinarTemplateLayout }
 // Blocks
 import { WebinarHero } from '@/blocks/WebinarHero/config'
 import { WebinarAbout } from '@/blocks/WebinarAbout/config'
+import { WebinarMore } from '@/blocks/WebinarMore/config'
+import { WebinarCTA } from '@/blocks/WebinarCTA/config'
+import {
+  ensureWebinarLayoutAfterRead,
+  ensureWebinarLayoutBeforeChange,
+} from './hooks/ensureWebinarLayout'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
@@ -142,6 +148,8 @@ export const Webinars: CollectionConfig = {
               blocks: [
                 WebinarHero,
                 WebinarAbout,
+                WebinarMore,
+                WebinarCTA,
                 Content,
                 MediaBlock,
                 CallToAction,
@@ -188,7 +196,8 @@ export const Webinars: CollectionConfig = {
     },
   ],
   hooks: {
-    beforeChange: [populatePublishedAt],
+    afterRead: [ensureWebinarLayoutAfterRead],
+    beforeChange: [ensureWebinarLayoutBeforeChange, populatePublishedAt],
     afterChange: [revalidateWebinar],
   },
   versions: {
