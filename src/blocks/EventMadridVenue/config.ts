@@ -212,6 +212,7 @@ export const eventMadridVenueFields: Field[] = [
                         description: 'Destination URL (e.g. hotel or venue website)',
                       },
                     },
+                    required: false,
                   }),
                 ],
               },

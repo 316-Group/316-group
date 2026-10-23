@@ -184,6 +184,7 @@ export const eventMeetingFormatsFields: Field[] = [
                         description: 'Destination URL or internal document link',
                       },
                     },
+                    required: false,
                   }),
                 ],
               },

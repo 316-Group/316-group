@@ -2,9 +2,31 @@
 import React from 'react'
 
 export const EventStatusCell: React.FC<any> = ({ rowData }) => {
+  const isPublished = rowData?._status === 'published'
+  const startDate = rowData?.schedule?.startDate
   const endDate = rowData?.schedule?.endDate
   const isConcluded = endDate ? new Date(endDate) < new Date() : false
+  const isUpcoming = startDate ? new Date(startDate) > new Date() : false
   const hasPublishedRecap = Boolean(rowData?.recapConfig?.isPublished)
+
+  if (!isPublished) {
+    return (
+      <span
+        style={{
+          backgroundColor: '#fef3c7',
+          color: '#b45309',
+          padding: '2px 8px',
+          borderRadius: '12px',
+          fontSize: '11px',
+          fontWeight: 600,
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+        }}
+      >
+        Pending
+      </span>
+    )
+  }
 
   if (isConcluded) {
     return (
@@ -38,6 +60,25 @@ export const EventStatusCell: React.FC<any> = ({ rowData }) => {
     )
   }
 
+  if (isUpcoming) {
+    return (
+      <span
+        style={{
+          backgroundColor: '#e0e7ff',
+          color: '#4338ca',
+          padding: '2px 8px',
+          borderRadius: '12px',
+          fontSize: '11px',
+          fontWeight: 600,
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+        }}
+      >
+        Upcoming
+      </span>
+    )
+  }
+
   return (
     <span
       style={{
@@ -57,3 +98,4 @@ export const EventStatusCell: React.FC<any> = ({ rowData }) => {
 }
 
 export default EventStatusCell
+

@@ -174,6 +174,7 @@ export const eventSharedPurposeFields: Field[] = [
                         condition: (_, siblingData) => Boolean(siblingData?.showButton),
                       },
                     },
+                    required: false,
                   }),
                 ],
               },

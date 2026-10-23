@@ -178,6 +178,7 @@ export const eventAgendaOverviewFields: Field[] = [
                         description: 'Destination URL or internal document link',
                       },
                     },
+                    required: false,
                   }),
                 ],
               },
