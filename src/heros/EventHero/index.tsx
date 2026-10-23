@@ -6,6 +6,27 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
 
+import { defaultEventHeroHeading, defaultEventHeroDescription } from '../config'
+
+function isRichTextEmpty(content: any): boolean {
+  if (!content) return true
+  if (typeof content === 'string') return content.trim().length === 0
+  if (typeof content === 'object') {
+    if ('root' in content) {
+      const children = content.root?.children
+      if (!Array.isArray(children) || children.length === 0) return true
+      if (
+        children.length === 1 &&
+        children[0]?.type === 'paragraph' &&
+        (!children[0]?.children || children[0]?.children?.length === 0)
+      ) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 export const EventHero: React.FC<Page['hero']> = (props) => {
   const { setHeaderTheme, setHeroOverlay } = useHeaderTheme()
 
@@ -58,6 +79,15 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
     eventHeroImage,
   } = (props as any) || {}
 
+  // Resolve heading & description with mockup default fallbacks
+  const resolvedSubHeader = eventHeroSubHeader?.trim() ? eventHeroSubHeader : 'EVENTS & CONNECTIONS'
+  const resolvedHeading = isRichTextEmpty(eventHeroHeading)
+    ? defaultEventHeroHeading
+    : eventHeroHeading
+  const resolvedDescription = isRichTextEmpty(eventHeroDescription)
+    ? defaultEventHeroDescription
+    : eventHeroDescription
+
   // Determine container width and horizontal padding
   const isMatchHeader = eventHeroMatchHeaderPillWidth !== false
 
@@ -89,7 +119,7 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
           {/* Left Column (Wider, Vertically Centered) */}
           <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
             {/* Sub Header */}
-            {eventHeroSubHeader && (
+            {resolvedSubHeader && (
               <div
                 className={cn(
                   'tracking-wider uppercase',
@@ -102,15 +132,15 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
                   `md:${eventHeroSubHeaderMarginBottomDesktop}`,
                 )}
               >
-                {eventHeroSubHeader}
+                {resolvedSubHeader}
               </div>
             )}
 
             {/* Main Heading */}
-            {eventHeroHeading && (
+            {resolvedHeading && (
               <div
                 className={cn(
-                  'tracking-tight leading-[1.1]',
+                  'tracking-tight leading-[1.1] [word-spacing:normal] [white-space:normal] break-words',
                   eventHeroHeadingTextColor,
                   eventHeroHeadingFontSizeMobile,
                   `md:${eventHeroHeadingFontSizeDesktop}`,
@@ -118,18 +148,18 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
                   `md:${eventHeroHeadingFontWeightDesktop}`,
                   eventHeroHeadingMarginBottomMobile,
                   `md:${eventHeroHeadingMarginBottomDesktop}`,
-                  '[&_p]:m-0 [&_h1]:m-0 [&_h2]:m-0',
+                  '[&_p]:m-0 [&_h1]:m-0 [&_h2]:m-0 [&_h3]:m-0 [&_h4]:m-0',
                 )}
               >
-                <RichText content={eventHeroHeading} enableGutter={false} />
+                <RichText content={resolvedHeading} enableGutter={false} enableProse={false} />
               </div>
             )}
 
             {/* Description */}
-            {eventHeroDescription && (
+            {resolvedDescription && (
               <div
                 className={cn(
-                  'leading-relaxed max-w-2xl',
+                  'leading-relaxed max-w-2xl [word-spacing:normal] [white-space:normal] break-words',
                   eventHeroDescriptionTextColor,
                   eventHeroDescriptionFontSizeMobile,
                   `md:${eventHeroDescriptionFontSizeDesktop}`,
@@ -137,9 +167,10 @@ export const EventHero: React.FC<Page['hero']> = (props) => {
                   `md:${eventHeroDescriptionFontWeightDesktop}`,
                   eventHeroDescriptionMarginBottomMobile,
                   `md:${eventHeroDescriptionMarginBottomDesktop}`,
+                  '[&_p]:m-0',
                 )}
               >
-                <RichText content={eventHeroDescription} enableGutter={false} />
+                <RichText content={resolvedDescription} enableGutter={false} enableProse={false} />
               </div>
             )}
           </div>

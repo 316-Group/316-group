@@ -49,29 +49,54 @@ function parseInlineStyle(styleStr: string): React.CSSProperties {
   return result as React.CSSProperties
 }
 
+function parseAttributes(attrString: string): Record<string, string> {
+  const attrs: Record<string, string> = {}
+  if (!attrString) return attrs
+  const attrRegex = /([a-zA-Z0-9_-]+)\s*=\s*(?:["']([^"']*)["']|([^\s>]+))/g
+  let match: RegExpExecArray | null
+  while ((match = attrRegex.exec(attrString)) !== null) {
+    const name = match[1].toLowerCase()
+    const value = match[2] !== undefined ? match[2] : match[3]
+    attrs[name] = value
+  }
+  return attrs
+}
+
 /**
  * Parses user-entered inline style tags and line breaks like:
  * - <br/>, <br>, <br /> -> <br />
  * - <style="color:red">text</style> -> <span style="...">text</span>
  * - <span style="color:red">text</span> -> <span style="...">text</span>
  * - <span class="text-blue-600">text</span> -> <span className="...">text</span>
+ * - <span class="text-cyan-400" style="color: red">text</span> -> with both class and style
+ * Strictly preserves leading, trailing, and inter-token whitespace so words never collapse together.
  */
-function parseInlineCustomStyles(rawText: string, baseKey: string | number): React.ReactNode {
-  if (!rawText || !rawText.includes('<')) {
+export function parseInlineCustomStyles(rawText: string, baseKey: string | number): React.ReactNode {
+  if (!rawText) {
     return rawText
   }
 
-  // Regex matching line breaks or inline styling tags
-  const tokenRegex =
-    /<br\s*\/?>|<(?:style|span\s+style)=(["'])(.*?)\1>(.*?)<\/(?:style|span)>|<span\s+class(?:Name)?=(["'])(.*?)\4>(.*?)<\/span>|<span\s+style=(["'])(.*?)\7\s+class(?:Name)?=(["'])(.*?)\9>(.*?)<\/span>|<span\s+class(?:Name)?=(["'])(.*?)\11\s+style=(["'])(.*?)\13>(.*?)<\/span>/gi
+  // Normalize non-breaking spaces
+  const normalized = rawText.replace(/&nbsp;/gi, '\u00A0')
+
+  if (!normalized.includes('<')) {
+    return normalized
+  }
+
+  // Matches <br>, legacy <style="...">(.*?)</style>, or inline tags: span, strong, b, em, i, u, mark
+  const inlineTagRegex =
+    /<br\s*\/?>|<(?:style\s*=|span\s+style=)(["'])(.*?)\1>(.*?)<\/(?:style|span)>|<(span|strong|b|em|i|u|mark)\b([^>]*)>(.*?)<\/\4>/gis
 
   const elements: React.ReactNode[] = []
   let lastIndex = 0
   let match: RegExpExecArray | null
 
-  while ((match = tokenRegex.exec(rawText)) !== null) {
+  while ((match = inlineTagRegex.exec(normalized)) !== null) {
     if (match.index > lastIndex) {
-      elements.push(rawText.substring(lastIndex, match.index))
+      let between = normalized.substring(lastIndex, match.index)
+      // Normalize standalone newlines between tags to single spaces so adjacent tags never touch
+      between = between.replace(/\r?\n\s*/g, ' ')
+      elements.push(between)
     }
 
     const fullMatch = match[0]
@@ -80,53 +105,57 @@ function parseInlineCustomStyles(rawText: string, baseKey: string | number): Rea
     if (/^<br\s*\/?>$/i.test(fullMatch)) {
       elements.push(<br key={key} />)
     } else if (match[1] !== undefined) {
-      // <style="style">innerText</style> or <span style="style">innerText</span>
+      // Shorthand <style="style">innerText</style> or <span style="style">innerText</span>
       const styleString = match[2]
       const innerText = match[3]
+      const hasLeading = /^\s/.test(innerText)
+      const hasTrailing = /\s$/.test(innerText)
+      const coreText = innerText.trim()
+
+      if (hasLeading) elements.push(' ')
       elements.push(
         <span key={key} style={parseInlineStyle(styleString)}>
-          {parseInlineCustomStyles(innerText, `${key}-inner`)}
+          {parseInlineCustomStyles(coreText, `${key}-inner`)}
         </span>,
       )
+      if (hasTrailing) elements.push(' ')
     } else if (match[4] !== undefined) {
-      // <span class="className">innerText</span>
-      const classString = match[5]
+      // Standard inline HTML tag (span, strong, em, etc.) with arbitrary attributes
+      const tagName = match[4].toLowerCase()
+      const rawAttrs = match[5]
       const innerText = match[6]
+      const attrs = parseAttributes(rawAttrs)
+
+      const hasLeading = /^\s/.test(innerText)
+      const hasTrailing = /\s$/.test(innerText)
+      const coreText = innerText.trim()
+
+      const className = attrs['class'] || attrs['classname']
+      const styleObj = attrs['style'] ? parseInlineStyle(attrs['style']) : undefined
+
+      const Tag = tagName as any
+
+      if (hasLeading) elements.push(' ')
       elements.push(
-        <span key={key} className={classString}>
-          {parseInlineCustomStyles(innerText, `${key}-inner`)}
-        </span>,
+        <Tag
+          key={key}
+          {...(className ? { className } : {})}
+          {...(styleObj ? { style: styleObj } : {})}
+        >
+          {parseInlineCustomStyles(coreText, `${key}-inner`)}
+        </Tag>,
       )
-    } else if (match[7] !== undefined) {
-      // <span style="..." class="...">innerText</span>
-      const styleString = match[8]
-      const classString = match[10]
-      const innerText = match[11]
-      elements.push(
-        <span key={key} style={parseInlineStyle(styleString)} className={classString}>
-          {parseInlineCustomStyles(innerText, `${key}-inner`)}
-        </span>,
-      )
-    } else if (match[12] !== undefined) {
-      // <span class="..." style="...">innerText</span>
-      const classString = match[13]
-      const styleString = match[15]
-      const innerText = match[16]
-      elements.push(
-        <span key={key} style={parseInlineStyle(styleString)} className={classString}>
-          {parseInlineCustomStyles(innerText, `${key}-inner`)}
-        </span>,
-      )
+      if (hasTrailing) elements.push(' ')
     }
 
-    lastIndex = tokenRegex.lastIndex
+    lastIndex = inlineTagRegex.lastIndex
   }
 
-  if (lastIndex < rawText.length) {
-    elements.push(rawText.substring(lastIndex))
+  if (lastIndex < normalized.length) {
+    elements.push(normalized.substring(lastIndex))
   }
 
-  if (elements.length === 0) return rawText
+  if (elements.length === 0) return normalized
   if (elements.length === 1 && typeof elements[0] === 'string') return elements[0]
   return elements
 }
@@ -140,8 +169,18 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
         }
 
         if (node.type === 'text') {
-          const content = parseInlineCustomStyles(node.text, index)
+          const rawText = node.text
+          if (!rawText) return null
+
+          // Separate boundary whitespace so wrapping inline tags (strong, span, code)
+          // never cause browser whitespace collapsing when adjacent to other inline nodes
+          const hasLeading = /^\s/.test(rawText) && rawText.trim().length > 0
+          const hasTrailing = /\s$/.test(rawText) && rawText.trim().length > 0
+          const coreText = hasLeading || hasTrailing ? rawText.trim() : rawText
+
+          const content = parseInlineCustomStyles(coreText, index)
           let text = <React.Fragment key={index}>{content}</React.Fragment>
+
           if (node.format & IS_BOLD) {
             text = <strong key={index}>{text}</strong>
           }
@@ -163,7 +202,7 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
             )
           }
           if (node.format & IS_CODE) {
-            text = <code key={index}>{node.text}</code>
+            text = <code key={index}>{coreText}</code>
           }
           if (node.format & IS_SUBSCRIPT) {
             text = <sub key={index}>{text}</sub>
@@ -179,6 +218,16 @@ export function serializeLexical({ nodes }: Props): JSX.Element {
               <span key={index} style={parseInlineStyle(nodeStyle)}>
                 {text}
               </span>
+            )
+          }
+
+          if (hasLeading || hasTrailing) {
+            return (
+              <React.Fragment key={index}>
+                {hasLeading && ' '}
+                {text}
+                {hasTrailing && ' '}
+              </React.Fragment>
             )
           }
 

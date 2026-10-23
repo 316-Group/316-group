@@ -1,11 +1,11 @@
 import { cn } from '@/utilities/cn'
 import React from 'react'
 
-import { serializeLexical } from './serialize'
+import { serializeLexical, parseInlineCustomStyles } from './serialize'
 
 type Props = {
   className?: string
-  content: Record<string, any>
+  content: Record<string, any> | string
   enableGutter?: boolean
   enableProse?: boolean
 }
@@ -31,13 +31,16 @@ const RichText: React.FC<Props> = ({
         className,
       )}
     >
-      {content &&
-        !Array.isArray(content) &&
-        typeof content === 'object' &&
-        'root' in content &&
-        serializeLexical({ nodes: content?.root?.children })}
+      {typeof content === 'string'
+        ? parseInlineCustomStyles(content, 'rt-string')
+        : content &&
+          !Array.isArray(content) &&
+          typeof content === 'object' &&
+          'root' in content &&
+          serializeLexical({ nodes: content?.root?.children })}
     </div>
   )
 }
 
 export default RichText
+
