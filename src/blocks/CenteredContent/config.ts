@@ -3,6 +3,7 @@ import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
 
 export const fontSizeOptions = [
+  { label: 'Caption (11px)', value: 'text-[11px]' },
   { label: 'Extra Small (xs - 12px)', value: 'text-xs' },
   { label: 'Small (sm - 14px)', value: 'text-sm' },
   { label: 'Base (base - 16px)', value: 'text-base' },

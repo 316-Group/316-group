@@ -6,7 +6,7 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/cn'
 
-import { defaultEventHeroHeading, defaultEventHeroDescription } from '../config'
+import { defaultEventHeroHeading, defaultEventHeroDescription } from './defaults'
 
 function isRichTextEmpty(content: any): boolean {
   if (!content) return true

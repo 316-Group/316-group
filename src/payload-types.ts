@@ -8656,6 +8656,7 @@ export interface Page {
       | null;
     eventHeroSubHeaderFontSizeDesktop?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -8689,6 +8690,7 @@ export interface Page {
       | null;
     eventHeroSubHeaderFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -9018,6 +9020,7 @@ export interface Page {
       | null;
     eventHeroHeadingFontSizeDesktop?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -9051,6 +9054,7 @@ export interface Page {
       | null;
     eventHeroHeadingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -9380,6 +9384,7 @@ export interface Page {
       | null;
     eventHeroDescriptionFontSizeDesktop?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -9413,6 +9418,7 @@ export interface Page {
       | null;
     eventHeroDescriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -10134,6 +10140,7 @@ export interface Page {
             | null;
           headingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -10175,6 +10182,7 @@ export interface Page {
           headingFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -10483,6 +10491,7 @@ export interface Page {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -10524,6 +10533,7 @@ export interface Page {
           descriptionFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -11676,6 +11686,7 @@ export interface Page {
           buttonAlignment?: ('left' | 'center' | 'right') | null;
           buttonFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -11716,6 +11727,7 @@ export interface Page {
           buttonFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -13023,6 +13035,7 @@ export interface Page {
                   | null;
                 subtitleFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -13056,6 +13069,7 @@ export interface Page {
                   | null;
                 subtitleFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -13368,6 +13382,7 @@ export interface Page {
                   | null;
                 headingFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -13401,6 +13416,7 @@ export interface Page {
                   | null;
                 headingFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -13710,6 +13726,7 @@ export interface Page {
                   | null;
                 descriptionFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -13743,6 +13760,7 @@ export interface Page {
                   | null;
                 descriptionFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -14419,6 +14437,7 @@ export interface Page {
             | null;
           headingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -14452,6 +14471,7 @@ export interface Page {
             | null;
           headingFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -14762,6 +14782,7 @@ export interface Page {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -14795,6 +14816,7 @@ export interface Page {
             | null;
           descriptionFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -15409,6 +15431,7 @@ export interface Page {
             | null;
           buttonFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -15442,6 +15465,7 @@ export interface Page {
             | null;
           buttonFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -16312,6 +16336,7 @@ export interface Page {
                   | null;
                 subtitleFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -16345,6 +16370,7 @@ export interface Page {
                   | null;
                 subtitleFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -16657,6 +16683,7 @@ export interface Page {
                   | null;
                 headingFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -16690,6 +16717,7 @@ export interface Page {
                   | null;
                 headingFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -16999,6 +17027,7 @@ export interface Page {
                   | null;
                 descriptionFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -17032,6 +17061,7 @@ export interface Page {
                   | null;
                 descriptionFontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -17958,6 +17988,7 @@ export interface Page {
               | null;
             badgeFontSize?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -17994,6 +18025,7 @@ export interface Page {
               | null;
             badgeFontSizeMobile?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -18302,6 +18334,7 @@ export interface Page {
             | null;
           subHeadingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -18338,6 +18371,7 @@ export interface Page {
             | null;
           subHeadingFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -18645,6 +18679,7 @@ export interface Page {
             | null;
           headingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -18681,6 +18716,7 @@ export interface Page {
             | null;
           headingFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -18988,6 +19024,7 @@ export interface Page {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -19024,6 +19061,7 @@ export interface Page {
             | null;
           descriptionFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -19639,6 +19677,7 @@ export interface Page {
             };
             button1FontSize?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -19675,6 +19714,7 @@ export interface Page {
               | null;
             button1FontSizeMobile?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -20549,6 +20589,7 @@ export interface Page {
               | null;
             button2FontSize?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -20585,6 +20626,7 @@ export interface Page {
               | null;
             button2FontSizeMobile?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -20893,6 +20935,7 @@ export interface Page {
               | null;
             officesHeadingFontSize?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -20929,6 +20972,7 @@ export interface Page {
               | null;
             officesHeadingFontSizeMobile?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -21239,6 +21283,7 @@ export interface Page {
                     | null;
                   labelFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -21275,6 +21320,7 @@ export interface Page {
                     | null;
                   labelFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -21587,6 +21633,7 @@ export interface Page {
             | null;
           subHeadingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -21623,6 +21670,7 @@ export interface Page {
             | null;
           subHeadingFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -21930,6 +21978,7 @@ export interface Page {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -21966,6 +22015,7 @@ export interface Page {
             | null;
           descriptionFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -22340,6 +22390,7 @@ export interface Page {
             | null;
           statValueFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -22373,6 +22424,7 @@ export interface Page {
             | null;
           statValueFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -22672,6 +22724,7 @@ export interface Page {
             | null;
           statLabelFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -22705,6 +22758,7 @@ export interface Page {
             | null;
           statLabelFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -23339,6 +23393,7 @@ export interface Page {
             | null;
           numberFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -23372,6 +23427,7 @@ export interface Page {
             | null;
           numberFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -23678,6 +23734,7 @@ export interface Page {
             | null;
           subHeadingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -23711,6 +23768,7 @@ export interface Page {
             | null;
           subHeadingFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -24017,6 +24075,7 @@ export interface Page {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -24050,6 +24109,7 @@ export interface Page {
             | null;
           descriptionFontSizeMobile?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -45547,6 +45607,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -45583,6 +45644,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -45921,6 +45983,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -45958,6 +46021,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -46297,6 +46361,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -46333,6 +46398,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -47486,6 +47552,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -47522,6 +47589,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -56762,6 +56830,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -56795,6 +56864,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57103,6 +57173,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57136,6 +57207,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57444,6 +57516,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57477,6 +57550,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57786,6 +57860,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -57819,6 +57894,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -58740,6 +58816,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -58776,6 +58853,7 @@ export interface ContentBlock {
                     | null;
                   badgeFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -59129,6 +59207,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -59166,6 +59245,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -59505,6 +59585,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -59541,6 +59622,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -60694,6 +60776,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -60730,6 +60813,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61037,6 +61121,7 @@ export interface ContentBlock {
                     | null;
                   titleFontSizeDesktop?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61070,6 +61155,7 @@ export interface ContentBlock {
                     | null;
                   titleFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61110,6 +61196,7 @@ export interface ContentBlock {
                   dateRangeColor?: ('text-gray-600' | 'text-gray-500' | 'text-gray-900' | 'text-[#0256FF]') | null;
                   dateRangeFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61437,6 +61524,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeDesktop?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61470,6 +61558,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61786,6 +61875,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeDesktop?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -61819,6 +61909,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -62416,6 +62507,7 @@ export interface ContentBlock {
                     | null;
                   titleFontSizeDesktop?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -62449,6 +62541,7 @@ export interface ContentBlock {
                     | null;
                   titleFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -63326,6 +63419,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeDesktop?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -63359,6 +63453,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -64288,6 +64383,7 @@ export interface ContentBlock {
                           | null;
                         fontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -64332,6 +64428,7 @@ export interface ContentBlock {
                         fontSizeMobile?:
                           | (
                               | ''
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -64645,6 +64742,7 @@ export interface ContentBlock {
                           | null;
                         headingFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -64691,6 +64789,7 @@ export interface ContentBlock {
                          */
                         collapsedFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -64725,6 +64824,7 @@ export interface ContentBlock {
                         headingFontSizeMobile?:
                           | (
                               | ''
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -64770,6 +64870,7 @@ export interface ContentBlock {
                         collapsedFontSizeMobile?:
                           | (
                               | ''
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -65072,6 +65173,7 @@ export interface ContentBlock {
                           | null;
                         descriptionFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -65116,6 +65218,7 @@ export interface ContentBlock {
                         descriptionFontSizeMobile?:
                           | (
                               | ''
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -65454,6 +65557,7 @@ export interface ContentBlock {
                                 | null;
                               titleFontSize?:
                                 | (
+                                    | 'text-[11px]'
                                     | 'text-xs'
                                     | 'text-sm'
                                     | 'text-base'
@@ -65499,6 +65603,7 @@ export interface ContentBlock {
                               titleFontSizeMobile?:
                                 | (
                                     | ''
+                                    | 'text-[11px]'
                                     | 'text-xs'
                                     | 'text-sm'
                                     | 'text-base'
@@ -65814,6 +65919,7 @@ export interface ContentBlock {
                                 | null;
                               descriptionFontSize?:
                                 | (
+                                    | 'text-[11px]'
                                     | 'text-xs'
                                     | 'text-sm'
                                     | 'text-base'
@@ -65859,6 +65965,7 @@ export interface ContentBlock {
                               descriptionFontSizeMobile?:
                                 | (
                                     | ''
+                                    | 'text-[11px]'
                                     | 'text-xs'
                                     | 'text-sm'
                                     | 'text-base'
@@ -66190,6 +66297,7 @@ export interface ContentBlock {
                           | null;
                         buttonFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -66775,6 +66883,7 @@ export interface ContentBlock {
                         buttonFontSizeMobile?:
                           | (
                               | ''
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -67725,6 +67834,7 @@ export interface ContentBlock {
                   badgeAlignment?: ('left' | 'center' | 'right') | null;
                   badgeFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -67762,6 +67872,7 @@ export interface ContentBlock {
                   badgeFontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -68075,6 +68186,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -68113,6 +68225,7 @@ export interface ContentBlock {
                   headingFontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -68428,6 +68541,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -68473,6 +68587,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -68786,6 +68901,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -68831,6 +68947,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -69144,6 +69261,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -69189,6 +69307,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -69502,6 +69621,7 @@ export interface ContentBlock {
                       | null;
                     titleFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -69547,6 +69667,7 @@ export interface ContentBlock {
                     titleFontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -69860,6 +69981,7 @@ export interface ContentBlock {
                             | null;
                           fontSize?:
                             | (
+                                | 'text-[11px]'
                                 | 'text-xs'
                                 | 'text-sm'
                                 | 'text-base'
@@ -69904,6 +70026,7 @@ export interface ContentBlock {
                           fontSizeMobile?:
                             | (
                                 | ''
+                                | 'text-[11px]'
                                 | 'text-xs'
                                 | 'text-sm'
                                 | 'text-base'
@@ -70247,6 +70370,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -70292,6 +70416,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -71601,6 +71726,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -71642,6 +71768,7 @@ export interface ContentBlock {
                   headingFontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -71958,6 +72085,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -71999,6 +72127,7 @@ export interface ContentBlock {
                   descriptionFontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -73159,6 +73288,7 @@ export interface ContentBlock {
                   buttonAlignment?: ('left' | 'center' | 'right') | null;
                   buttonFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -73199,6 +73329,7 @@ export interface ContentBlock {
                   buttonFontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -74511,6 +74642,7 @@ export interface ContentBlock {
                           | null;
                         subtitleFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -74544,6 +74676,7 @@ export interface ContentBlock {
                           | null;
                         subtitleFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -74870,6 +75003,7 @@ export interface ContentBlock {
                           | null;
                         headingFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -74903,6 +75037,7 @@ export interface ContentBlock {
                           | null;
                         headingFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -75226,6 +75361,7 @@ export interface ContentBlock {
                           | null;
                         descriptionFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -75259,6 +75395,7 @@ export interface ContentBlock {
                           | null;
                         descriptionFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -75946,6 +76083,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -75979,6 +76117,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -76289,6 +76428,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -76322,6 +76462,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -76936,6 +77077,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -76969,6 +77111,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -77841,6 +77984,7 @@ export interface ContentBlock {
                           | null;
                         subtitleFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -77874,6 +78018,7 @@ export interface ContentBlock {
                           | null;
                         subtitleFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -78200,6 +78345,7 @@ export interface ContentBlock {
                           | null;
                         headingFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -78233,6 +78379,7 @@ export interface ContentBlock {
                           | null;
                         headingFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -78556,6 +78703,7 @@ export interface ContentBlock {
                           | null;
                         descriptionFontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -78589,6 +78737,7 @@ export interface ContentBlock {
                           | null;
                         descriptionFontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -79197,6 +79346,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -79230,6 +79380,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -79542,6 +79693,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -79575,6 +79727,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -80453,6 +80606,7 @@ export interface ContentBlock {
                   buttonAlignment?: ('left' | 'center' | 'right') | null;
                   buttonFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -80486,6 +80640,7 @@ export interface ContentBlock {
                     | null;
                   buttonFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -81390,6 +81545,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -81434,6 +81590,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -81752,6 +81909,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -81796,6 +81954,7 @@ export interface ContentBlock {
                     fontSizeMobile?:
                       | (
                           | ''
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -82111,6 +82270,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -82148,6 +82308,7 @@ export interface ContentBlock {
                   fontSizeMobile?:
                     | (
                         | ''
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -82854,6 +83015,7 @@ export interface ContentBlock {
                           | null;
                         fontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -82887,6 +83049,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -83215,6 +83378,7 @@ export interface ContentBlock {
                           | null;
                         fontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -83248,6 +83412,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -83572,6 +83737,7 @@ export interface ContentBlock {
                           | null;
                         fontSize?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -83605,6 +83771,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
                               | 'text-base'
@@ -84824,6 +84991,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -84857,6 +85025,7 @@ export interface ContentBlock {
                       | null;
                     fontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85181,6 +85350,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85214,6 +85384,7 @@ export interface ContentBlock {
                       | null;
                     fontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85541,6 +85712,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85574,6 +85746,7 @@ export interface ContentBlock {
                       | null;
                     fontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85897,6 +86070,7 @@ export interface ContentBlock {
                       | null;
                     fontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -85930,6 +86104,7 @@ export interface ContentBlock {
                       | null;
                     fontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -87359,6 +87534,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -87392,6 +87568,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -87702,6 +87879,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -87735,6 +87913,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -88048,6 +88227,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -88081,6 +88261,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -88695,6 +88876,7 @@ export interface ContentBlock {
                     | null;
                   fontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -88728,6 +88910,7 @@ export interface ContentBlock {
                     | null;
                   fontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -90234,6 +90417,7 @@ export interface ContentBlock {
                       | null;
                     badgeFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -90277,6 +90461,7 @@ export interface ContentBlock {
                       | null;
                     badgeFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -90592,6 +90777,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -90628,6 +90814,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -90935,6 +91122,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -90971,6 +91159,7 @@ export interface ContentBlock {
                     | null;
                   headingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -91278,6 +91467,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -91314,6 +91504,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -91931,6 +92122,7 @@ export interface ContentBlock {
                     };
                     button1FontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -91974,6 +92166,7 @@ export interface ContentBlock {
                       | null;
                     button1FontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -92855,6 +93048,7 @@ export interface ContentBlock {
                       | null;
                     button2FontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -92898,6 +93092,7 @@ export interface ContentBlock {
                       | null;
                     button2FontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -93213,6 +93408,7 @@ export interface ContentBlock {
                       | null;
                     officesHeadingFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -93256,6 +93452,7 @@ export interface ContentBlock {
                       | null;
                     officesHeadingFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -93573,6 +93770,7 @@ export interface ContentBlock {
                             | null;
                           labelFontSize?:
                             | (
+                                | 'text-[11px]'
                                 | 'text-xs'
                                 | 'text-sm'
                                 | 'text-base'
@@ -93616,6 +93814,7 @@ export interface ContentBlock {
                             | null;
                           labelFontSizeMobile?:
                             | (
+                                | 'text-[11px]'
                                 | 'text-xs'
                                 | 'text-sm'
                                 | 'text-base'
@@ -93935,6 +94134,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -93971,6 +94171,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -94278,6 +94479,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -94314,6 +94516,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -94688,6 +94891,7 @@ export interface ContentBlock {
                     | null;
                   statValueFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -94721,6 +94925,7 @@ export interface ContentBlock {
                     | null;
                   statValueFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -95020,6 +95225,7 @@ export interface ContentBlock {
                     | null;
                   statLabelFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -95053,6 +95259,7 @@ export interface ContentBlock {
                     | null;
                   statLabelFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -95696,6 +95903,7 @@ export interface ContentBlock {
                     | null;
                   numberFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -95729,6 +95937,7 @@ export interface ContentBlock {
                     | null;
                   numberFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -96035,6 +96244,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -96068,6 +96278,7 @@ export interface ContentBlock {
                     | null;
                   subHeadingFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -96374,6 +96585,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSize?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -96407,6 +96619,7 @@ export interface ContentBlock {
                     | null;
                   descriptionFontSizeMobile?:
                     | (
+                        | 'text-[11px]'
                         | 'text-xs'
                         | 'text-sm'
                         | 'text-base'
@@ -97304,6 +97517,7 @@ export interface ContentBlock {
                         | null;
                       subHeadingFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -97347,6 +97561,7 @@ export interface ContentBlock {
                         | null;
                       subHeadingFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -97666,6 +97881,7 @@ export interface ContentBlock {
                         | null;
                       headingFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -97709,6 +97925,7 @@ export interface ContentBlock {
                         | null;
                       headingFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -98025,6 +98242,7 @@ export interface ContentBlock {
                         | null;
                       descriptionFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -98068,6 +98286,7 @@ export interface ContentBlock {
                         | null;
                       descriptionFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -99046,6 +99265,7 @@ export interface ContentBlock {
                       | null;
                     badgeFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -99089,6 +99309,7 @@ export interface ContentBlock {
                       | null;
                     badgeFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -99420,6 +99641,7 @@ export interface ContentBlock {
                     headingMarginBottom?: ('mb-0' | 'mb-3 md:mb-4' | 'mb-6 md:mb-8' | 'mb-8 md:mb-10' | 'mb-12') | null;
                     headingFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -99463,6 +99685,7 @@ export interface ContentBlock {
                       | null;
                     headingFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -99793,6 +100016,7 @@ export interface ContentBlock {
                     descriptionMarginBottom?: ('mb-0' | 'mb-4' | 'mb-6' | 'mb-8') | null;
                     descriptionFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -99836,6 +100060,7 @@ export interface ContentBlock {
                       | null;
                     descriptionFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -100708,6 +100933,7 @@ export interface ContentBlock {
                         | null;
                       yearFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -100751,6 +100977,7 @@ export interface ContentBlock {
                         | null;
                       yearFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101064,6 +101291,7 @@ export interface ContentBlock {
                         | null;
                       titleFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101107,6 +101335,7 @@ export interface ContentBlock {
                         | null;
                       titleFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101434,6 +101663,7 @@ export interface ContentBlock {
                         | null;
                       descriptionFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101477,6 +101707,7 @@ export interface ContentBlock {
                         | null;
                       descriptionFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101790,6 +102021,7 @@ export interface ContentBlock {
                         | null;
                       endYearFontSize?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -101833,6 +102065,7 @@ export interface ContentBlock {
                         | null;
                       endYearFontSizeMobile?:
                         | (
+                            | 'text-[11px]'
                             | 'text-xs'
                             | 'text-sm'
                             | 'text-base'
@@ -171395,6 +171628,7 @@ export interface ImageTextSplitBlock {
       | null;
     badgeFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -171431,6 +171665,7 @@ export interface ImageTextSplitBlock {
       | null;
     badgeFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -171757,6 +171992,7 @@ export interface ImageTextSplitBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -171794,6 +172030,7 @@ export interface ImageTextSplitBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -172133,6 +172370,7 @@ export interface ImageTextSplitBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -172169,6 +172407,7 @@ export interface ImageTextSplitBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -173322,6 +173561,7 @@ export interface ImageTextSplitBlock {
       | null;
     buttonFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -173358,6 +173598,7 @@ export interface ImageTextSplitBlock {
       | null;
     buttonFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183201,6 +183442,7 @@ export interface CenteredContentBlock {
       | null;
     badgeFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183234,6 +183476,7 @@ export interface CenteredContentBlock {
       | null;
     badgeFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183542,6 +183785,7 @@ export interface CenteredContentBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183575,6 +183819,7 @@ export interface CenteredContentBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183883,6 +184128,7 @@ export interface CenteredContentBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -183916,6 +184162,7 @@ export interface CenteredContentBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -184225,6 +184472,7 @@ export interface CenteredContentBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -184258,6 +184506,7 @@ export interface CenteredContentBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -184907,6 +185156,7 @@ export interface ClickExpandBlock {
             | null;
           fontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -184944,6 +185194,7 @@ export interface ClickExpandBlock {
           fontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185249,6 +185500,7 @@ export interface ClickExpandBlock {
             | null;
           headingFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185288,6 +185540,7 @@ export interface ClickExpandBlock {
            */
           collapsedFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185322,6 +185575,7 @@ export interface ClickExpandBlock {
           headingFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185359,6 +185613,7 @@ export interface ClickExpandBlock {
           collapsedFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185661,6 +185916,7 @@ export interface ClickExpandBlock {
             | null;
           descriptionFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -185698,6 +185954,7 @@ export interface ClickExpandBlock {
           descriptionFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -186021,6 +186278,7 @@ export interface ClickExpandBlock {
                   | null;
                 titleFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -186059,6 +186317,7 @@ export interface ClickExpandBlock {
                 titleFontSizeMobile?:
                   | (
                       | ''
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -186372,6 +186631,7 @@ export interface ClickExpandBlock {
                   | null;
                 descriptionFontSize?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -186410,6 +186670,7 @@ export interface ClickExpandBlock {
                 descriptionFontSizeMobile?:
                   | (
                       | ''
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -186741,6 +187002,7 @@ export interface ClickExpandBlock {
             | null;
           buttonFontSize?:
             | (
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -187319,6 +187581,7 @@ export interface ClickExpandBlock {
           buttonFontSizeMobile?:
             | (
                 | ''
+                | 'text-[11px]'
                 | 'text-xs'
                 | 'text-sm'
                 | 'text-base'
@@ -188255,6 +188518,7 @@ export interface GridColBlock {
     badgeAlignment?: ('left' | 'center' | 'right') | null;
     badgeFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -188292,6 +188556,7 @@ export interface GridColBlock {
     badgeFontSizeMobile?:
       | (
           | ''
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -188597,6 +188862,7 @@ export interface GridColBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -188635,6 +188901,7 @@ export interface GridColBlock {
     headingFontSizeMobile?:
       | (
           | ''
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -188942,6 +189209,7 @@ export interface GridColBlock {
         | null;
       fontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -188980,6 +189248,7 @@ export interface GridColBlock {
       fontSizeMobile?:
         | (
             | ''
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -189285,6 +189554,7 @@ export interface GridColBlock {
         | null;
       fontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -189323,6 +189593,7 @@ export interface GridColBlock {
       fontSizeMobile?:
         | (
             | ''
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -189628,6 +189899,7 @@ export interface GridColBlock {
         | null;
       fontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -189666,6 +189938,7 @@ export interface GridColBlock {
       fontSizeMobile?:
         | (
             | ''
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -189971,6 +190244,7 @@ export interface GridColBlock {
         | null;
       titleFontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -190009,6 +190283,7 @@ export interface GridColBlock {
       titleFontSizeMobile?:
         | (
             | ''
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -190314,6 +190589,7 @@ export interface GridColBlock {
               | null;
             fontSize?:
               | (
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -190351,6 +190627,7 @@ export interface GridColBlock {
             fontSizeMobile?:
               | (
                   | ''
+                  | 'text-[11px]'
                   | 'text-xs'
                   | 'text-sm'
                   | 'text-base'
@@ -190686,6 +190963,7 @@ export interface GridColBlock {
         | null;
       fontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -190724,6 +191002,7 @@ export interface GridColBlock {
       fontSizeMobile?:
         | (
             | ''
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -191900,6 +192179,7 @@ export interface VerticalCTAv2Block {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -191933,6 +192213,7 @@ export interface VerticalCTAv2Block {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -192245,6 +192526,7 @@ export interface VerticalCTAv2Block {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -192278,6 +192560,7 @@ export interface VerticalCTAv2Block {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -193156,6 +193439,7 @@ export interface VerticalCTAv2Block {
     buttonAlignment?: ('left' | 'center' | 'right') | null;
     buttonFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -193189,6 +193473,7 @@ export interface VerticalCTAv2Block {
       | null;
     buttonFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -193818,6 +194103,7 @@ export interface MissionVisionBlock {
         subHeadingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
         subHeadingFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -193854,6 +194140,7 @@ export interface MissionVisionBlock {
           | null;
         subHeadingFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -194164,6 +194451,7 @@ export interface MissionVisionBlock {
         headingMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
         headingFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -194200,6 +194488,7 @@ export interface MissionVisionBlock {
           | null;
         headingFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -194507,6 +194796,7 @@ export interface MissionVisionBlock {
         descriptionMarginBottom?: ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-5' | 'mb-6' | 'mb-8' | 'mb-10') | null;
         descriptionFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -194543,6 +194833,7 @@ export interface MissionVisionBlock {
           | null;
         descriptionFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -195485,6 +195776,7 @@ export interface TimelineAccordionBlock {
         | null;
       badgeFontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -195521,6 +195813,7 @@ export interface TimelineAccordionBlock {
         | null;
       badgeFontSizeMobile?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -195845,6 +196138,7 @@ export interface TimelineAccordionBlock {
       headingMarginBottom?: ('mb-0' | 'mb-3 md:mb-4' | 'mb-6 md:mb-8' | 'mb-8 md:mb-10' | 'mb-12') | null;
       headingFontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -195881,6 +196175,7 @@ export interface TimelineAccordionBlock {
         | null;
       headingFontSizeMobile?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -196204,6 +196499,7 @@ export interface TimelineAccordionBlock {
       descriptionMarginBottom?: ('mb-0' | 'mb-4' | 'mb-6' | 'mb-8') | null;
       descriptionFontSize?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -196240,6 +196536,7 @@ export interface TimelineAccordionBlock {
         | null;
       descriptionFontSizeMobile?:
         | (
+            | 'text-[11px]'
             | 'text-xs'
             | 'text-sm'
             | 'text-base'
@@ -197105,6 +197402,7 @@ export interface TimelineAccordionBlock {
           | null;
         yearFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -197141,6 +197439,7 @@ export interface TimelineAccordionBlock {
           | null;
         yearFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -197447,6 +197746,7 @@ export interface TimelineAccordionBlock {
           | null;
         titleFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -197483,6 +197783,7 @@ export interface TimelineAccordionBlock {
           | null;
         titleFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -197803,6 +198104,7 @@ export interface TimelineAccordionBlock {
           | null;
         descriptionFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -197839,6 +198141,7 @@ export interface TimelineAccordionBlock {
           | null;
         descriptionFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -198145,6 +198448,7 @@ export interface TimelineAccordionBlock {
           | null;
         endYearFontSize?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -198181,6 +198485,7 @@ export interface TimelineAccordionBlock {
           | null;
         endYearFontSizeMobile?:
           | (
+              | 'text-[11px]'
               | 'text-xs'
               | 'text-sm'
               | 'text-base'
@@ -199394,6 +199699,7 @@ export interface CenteredButtonBlock {
       | null;
     badgeFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -199430,6 +199736,7 @@ export interface CenteredButtonBlock {
       | null;
     badgeFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -199771,6 +200078,7 @@ export interface CenteredButtonBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -199808,6 +200116,7 @@ export interface CenteredButtonBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -200147,6 +200456,7 @@ export interface CenteredButtonBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -200183,6 +200493,7 @@ export interface CenteredButtonBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -201336,6 +201647,7 @@ export interface CenteredButtonBlock {
       | null;
     buttonFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -201372,6 +201684,7 @@ export interface CenteredButtonBlock {
       | null;
     buttonFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -201818,6 +202131,7 @@ export interface EventHeroBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -201851,6 +202165,7 @@ export interface EventHeroBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202194,6 +202509,7 @@ export interface EventHeroBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202227,6 +202543,7 @@ export interface EventHeroBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202570,6 +202887,7 @@ export interface EventHeroBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202603,6 +202921,7 @@ export interface EventHeroBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202947,6 +203266,7 @@ export interface EventHeroBlock {
     dividerColor?: string | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -202980,6 +203300,7 @@ export interface EventHeroBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -203865,6 +204186,7 @@ export interface EventHeroBlock {
     button1BorderRadius?: ('rounded-none' | 'rounded-md' | 'rounded-lg' | 'rounded-full') | null;
     button1FontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -204994,6 +205316,7 @@ export interface EventHeroBlock {
       | null;
     subheadingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -205296,6 +205619,7 @@ export interface EventHeroBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206242,6 +206566,7 @@ export interface EventSharedPurposeBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206275,6 +206600,7 @@ export interface EventSharedPurposeBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206584,6 +206910,7 @@ export interface EventSharedPurposeBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206617,6 +206944,7 @@ export interface EventSharedPurposeBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206926,6 +207254,7 @@ export interface EventSharedPurposeBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -206959,6 +207288,7 @@ export interface EventSharedPurposeBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -207268,6 +207598,7 @@ export interface EventSharedPurposeBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -207301,6 +207632,7 @@ export interface EventSharedPurposeBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -207943,6 +208275,7 @@ export interface EventWhyConnectBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -207976,6 +208309,7 @@ export interface EventWhyConnectBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -208285,6 +208619,7 @@ export interface EventWhyConnectBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -208318,6 +208653,7 @@ export interface EventWhyConnectBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -208625,6 +208961,7 @@ export interface EventWhyConnectBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -208658,6 +208995,7 @@ export interface EventWhyConnectBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -208970,6 +209308,7 @@ export interface EventWhyConnectBlock {
       | null;
     numberFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -209272,6 +209611,7 @@ export interface EventWhyConnectBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -209575,6 +209915,7 @@ export interface EventWhyConnectBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -210514,6 +210855,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -210547,6 +210889,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -210890,6 +211233,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -210923,6 +211267,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -211266,6 +211611,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -211299,6 +211645,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -211917,6 +212264,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -211950,6 +212298,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -212293,6 +212642,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -212326,6 +212676,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -212668,6 +213019,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     numberFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -212970,6 +213322,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     categoryFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -213272,6 +213625,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -213574,6 +213928,7 @@ export interface EventAgendaOverviewBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -215347,6 +215702,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -215380,6 +215736,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -215723,6 +216080,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -215756,6 +216114,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -216099,6 +216458,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -216132,6 +216492,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -216750,6 +217111,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -216783,6 +217145,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -217667,6 +218030,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -217700,6 +218064,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -218043,6 +218408,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -218076,6 +218442,7 @@ export interface EventMeetingFormatsBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219004,6 +219371,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219037,6 +219405,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219380,6 +219749,7 @@ export interface EventMadridVenueBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219413,6 +219783,7 @@ export interface EventMadridVenueBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219756,6 +220127,7 @@ export interface EventMadridVenueBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -219789,6 +220161,7 @@ export interface EventMadridVenueBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -220398,6 +220771,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -220431,6 +220805,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -220774,6 +221149,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -220807,6 +221183,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -221150,6 +221527,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -221183,6 +221561,7 @@ export interface EventMadridVenueBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222141,6 +222520,7 @@ export interface EventConversationFormBlock {
       | null;
     fontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222174,6 +222554,7 @@ export interface EventConversationFormBlock {
       | null;
     fontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222519,6 +222900,7 @@ export interface EventConversationFormBlock {
       | null;
     headingFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222552,6 +222934,7 @@ export interface EventConversationFormBlock {
       | null;
     headingFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222897,6 +223280,7 @@ export interface EventConversationFormBlock {
       | null;
     descriptionFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -222930,6 +223314,7 @@ export interface EventConversationFormBlock {
       | null;
     descriptionFontSizeMobile?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -223299,6 +223684,7 @@ export interface EventConversationFormBlock {
       | null;
     stepsTitleFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -224142,6 +224528,7 @@ export interface EventConversationFormBlock {
       | null;
     stepFontSize?:
       | (
+          | 'text-[11px]'
           | 'text-xs'
           | 'text-sm'
           | 'text-base'
@@ -229480,6 +229867,7 @@ export interface Event {
                 | null;
               headingFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -229521,6 +229909,7 @@ export interface Event {
               headingFontSizeMobile?:
                 | (
                     | ''
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -229829,6 +230218,7 @@ export interface Event {
                 | null;
               descriptionFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -229870,6 +230260,7 @@ export interface Event {
               descriptionFontSizeMobile?:
                 | (
                     | ''
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -231022,6 +231413,7 @@ export interface Event {
               buttonAlignment?: ('left' | 'center' | 'right') | null;
               buttonFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -231062,6 +231454,7 @@ export interface Event {
               buttonFontSizeMobile?:
                 | (
                     | ''
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -232369,6 +232762,7 @@ export interface Event {
                       | null;
                     subtitleFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -232402,6 +232796,7 @@ export interface Event {
                       | null;
                     subtitleFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -232728,6 +233123,7 @@ export interface Event {
                       | null;
                     headingFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -232761,6 +233157,7 @@ export interface Event {
                       | null;
                     headingFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -233084,6 +233481,7 @@ export interface Event {
                       | null;
                     descriptionFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -233117,6 +233515,7 @@ export interface Event {
                       | null;
                     descriptionFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -233807,6 +234206,7 @@ export interface Event {
                 | null;
               headingFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -233840,6 +234240,7 @@ export interface Event {
                 | null;
               headingFontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -234150,6 +234551,7 @@ export interface Event {
                 | null;
               descriptionFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -234183,6 +234585,7 @@ export interface Event {
                 | null;
               descriptionFontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -234797,6 +235200,7 @@ export interface Event {
                 | null;
               buttonFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -234830,6 +235234,7 @@ export interface Event {
                 | null;
               buttonFontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -235700,6 +236105,7 @@ export interface Event {
                       | null;
                     subtitleFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -235733,6 +236139,7 @@ export interface Event {
                       | null;
                     subtitleFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -236059,6 +236466,7 @@ export interface Event {
                       | null;
                     headingFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -236092,6 +236500,7 @@ export interface Event {
                       | null;
                     headingFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -236415,6 +236824,7 @@ export interface Event {
                       | null;
                     descriptionFontSize?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -236448,6 +236858,7 @@ export interface Event {
                       | null;
                     descriptionFontSizeMobile?:
                       | (
+                          | 'text-[11px]'
                           | 'text-xs'
                           | 'text-sm'
                           | 'text-base'
@@ -236783,6 +237194,7 @@ export interface Event {
                 | null;
               titleFontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -236816,6 +237228,7 @@ export interface Event {
                 | null;
               titleFontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -236856,6 +237269,7 @@ export interface Event {
               dateRangeColor?: ('text-gray-600' | 'text-gray-500' | 'text-gray-900' | 'text-[#0256FF]') | null;
               dateRangeFontSize?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -237183,6 +237597,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -237216,6 +237631,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -237532,6 +237948,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -237565,6 +237982,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -238165,6 +238583,7 @@ export interface Event {
                 | null;
               titleFontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -238198,6 +238617,7 @@ export interface Event {
                 | null;
               titleFontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -239075,6 +239495,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -239108,6 +239529,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240021,6 +240443,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240054,6 +240477,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240367,6 +240791,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240400,6 +240825,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240713,6 +241139,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -240746,6 +241173,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -241059,6 +241487,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -241092,6 +241521,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -242272,6 +242702,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -242305,6 +242736,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -242618,6 +243050,7 @@ export interface Event {
                 | null;
               fontSizeDesktop?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -242651,6 +243084,7 @@ export interface Event {
                 | null;
               fontSizeMobile?:
                 | (
+                    | 'text-[11px]'
                     | 'text-xs'
                     | 'text-sm'
                     | 'text-base'
@@ -244927,6 +245361,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -244960,6 +245395,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245273,6 +245709,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245306,6 +245743,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245619,6 +246057,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245652,6 +246091,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245965,6 +246405,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -245998,6 +246439,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -247178,6 +247620,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -247211,6 +247654,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -247524,6 +247968,7 @@ export interface Event {
                   | null;
                 fontSizeDesktop?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
@@ -247557,6 +248002,7 @@ export interface Event {
                   | null;
                 fontSizeMobile?:
                   | (
+                      | 'text-[11px]'
                       | 'text-xs'
                       | 'text-sm'
                       | 'text-base'
