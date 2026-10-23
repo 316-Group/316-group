@@ -7,7 +7,7 @@ import React, { cache } from 'react'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
-import { defaultEventTemplateLayout } from '@/collections/Events'
+import { defaultEventTemplateLayout, defaultEventRecapLayout } from '@/collections/Events'
 import PageClient from './page.client'
 import type { Event } from '@/payload-types'
 
@@ -30,10 +30,17 @@ type Args = {
   params: Promise<{
     slug?: string
   }>
+  searchParams?: Promise<{
+    [key: string]: string | string[] | undefined
+  }>
 }
 
-export default async function EventPage({ params: paramsPromise }: Args) {
+export default async function EventPage({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
+}: Args) {
   const { slug = '' } = await paramsPromise
+  const searchParams = searchParamsPromise ? await searchParamsPromise : {}
   const url = '/events/' + slug
 
   const { isEnabled: isDraft } = await draftMode()
@@ -47,6 +54,10 @@ export default async function EventPage({ params: paramsPromise }: Args) {
         title: 'Event Preview',
         slug: slug || 'preview',
         layout: defaultEventTemplateLayout as any,
+        recapConfig: {
+          isPublished: false,
+          recapLayout: defaultEventRecapLayout as any,
+        },
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       } as any
@@ -62,13 +73,34 @@ export default async function EventPage({ params: paramsPromise }: Args) {
 
   let blocksToRender = layout
 
-  // If this event has an active published recap, render the event hero + recap sections
-  if (recapConfig?.isPublished && Array.isArray(recapConfig?.recapLayout) && recapConfig.recapLayout.length > 0) {
+  // Check if event concluded based on operational schedule endDate
+  const isConcluded = event?.schedule?.endDate
+    ? new Date(event.schedule.endDate) < new Date()
+    : false
+
+  // Determine recap layout (custom saved recap blocks or fallback to default template in draft mode)
+  const configuredRecapLayout =
+    Array.isArray(recapConfig?.recapLayout) && recapConfig.recapLayout.length > 0
+      ? recapConfig.recapLayout
+      : isDraft
+        ? defaultEventRecapLayout
+        : null
+
+  // In production: render recap if recapConfig.isPublished === true
+  // In draft/preview: render recap if published OR if event has concluded OR if explicitly requested via ?recap=true
+  const isPreviewRecapRequested =
+    searchParams?.recap === 'true' || searchParams?.tab === 'recap'
+
+  const shouldRenderRecap =
+    Boolean(recapConfig?.isPublished) ||
+    Boolean(isDraft && (isConcluded || recapConfig?.isPublished || isPreviewRecapRequested))
+
+  if (shouldRenderRecap && Array.isArray(configuredRecapLayout) && configuredRecapLayout.length > 0) {
     const heroBlock = Array.isArray(layout)
       ? layout.find((b: any) => b?.blockType === 'eventHero')
-      : null
+      : (defaultEventTemplateLayout as any)[0]
 
-    blocksToRender = [heroBlock, ...recapConfig.recapLayout].filter(Boolean) as any
+    blocksToRender = [heroBlock, ...configuredRecapLayout].filter(Boolean) as any
   }
 
   return (

@@ -27,6 +27,9 @@ import { EventUpcoming } from '@/blocks/EventUpcoming/config'
 import { PastEvent } from '@/blocks/PastEvent/config'
 import { EventRecapArticle } from '@/blocks/EventRecapArticle/config'
 import { EventRecapFeature } from '@/blocks/EventRecapFeature/config'
+import { defaultEventRecapLayout } from './defaults/recapLayout'
+
+export { defaultEventRecapLayout }
 
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -1016,6 +1019,7 @@ export const Events: CollectionConfig = {
                   name: 'recapLayout',
                   type: 'blocks',
                   label: 'Recap Sections (Sequential layout below Event Hero)',
+                  defaultValue: defaultEventRecapLayout,
                   blocks: [
                     EventRecapArticle,
                     EventRecapFeature,

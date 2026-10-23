@@ -201785,7 +201785,7 @@ export interface EventHeroBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
         /**
          * Choose how the link should be rendered.
          */
@@ -201819,7 +201819,7 @@ export interface EventHeroBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
         /**
          * Choose how the link should be rendered.
          */
@@ -206280,7 +206280,7 @@ export interface EventSharedPurposeBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
         /**
          * Choose how the link should be rendered.
          */
@@ -210291,7 +210291,7 @@ export interface EventAgendaOverviewBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
       };
     };
     disclaimerGroup?: {
@@ -214593,7 +214593,7 @@ export interface EventMeetingFormatsBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
       };
     };
     disclaimerGroup?: {
@@ -218819,7 +218819,7 @@ export interface EventMadridVenueBlock {
               value: string | Brand;
             } | null);
         url?: string | null;
-        label: string;
+        label?: string | null;
       };
     };
   };
@@ -221946,7 +221946,7 @@ export interface EventConversationFormBlock {
       discussionTopicPlaceholder?: string | null;
       discussionTopicOptions?:
         | {
-            option: string;
+            option?: string | null;
             id?: string | null;
           }[]
         | null;
@@ -221954,7 +221954,7 @@ export interface EventConversationFormBlock {
       preferredDayPlaceholder?: string | null;
       preferredDayOptions?:
         | {
-            option: string;
+            option?: string | null;
             id?: string | null;
           }[]
         | null;
@@ -221962,7 +221962,7 @@ export interface EventConversationFormBlock {
       meetingFormatPlaceholder?: string | null;
       meetingFormatOptions?:
         | {
-            option: string;
+            option?: string | null;
             id?: string | null;
           }[]
         | null;
