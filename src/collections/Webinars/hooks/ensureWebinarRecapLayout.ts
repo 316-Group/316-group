@@ -21,34 +21,6 @@ export const ensureWebinarRecapLayoutAfterRead: CollectionAfterReadHook = ({ doc
       doc.recapConfig.recapLayout.length === 0
     ) {
       doc.recapConfig.recapLayout = defaultWebinarRecapLayout
-    } else {
-      const hasRecapAbout = doc.recapConfig.recapLayout.some(
-        (b: any) => b?.blockType === 'webinarRecapAbout',
-      )
-      if (!hasRecapAbout && defaultWebinarRecapLayout[0]) {
-        doc.recapConfig.recapLayout = [defaultWebinarRecapLayout[0], ...doc.recapConfig.recapLayout]
-      }
-
-      const hasRecapAccess = doc.recapConfig.recapLayout.some(
-        (b: any) => b?.blockType === 'webinarRecapAccess',
-      )
-      if (!hasRecapAccess && defaultWebinarRecapLayout[1]) {
-        doc.recapConfig.recapLayout = [...doc.recapConfig.recapLayout, defaultWebinarRecapLayout[1]]
-      }
-
-      const hasRecapMore = doc.recapConfig.recapLayout.some(
-        (b: any) => b?.blockType === 'webinarMore',
-      )
-      if (!hasRecapMore && defaultWebinarRecapLayout[2]) {
-        doc.recapConfig.recapLayout = [...doc.recapConfig.recapLayout, defaultWebinarRecapLayout[2]]
-      }
-
-      const hasRecapCTA = doc.recapConfig.recapLayout.some(
-        (b: any) => b?.blockType === 'webinarCTA',
-      )
-      if (!hasRecapCTA && defaultWebinarRecapLayout[3]) {
-        doc.recapConfig.recapLayout = [...doc.recapConfig.recapLayout, defaultWebinarRecapLayout[3]]
-      }
     }
   }
   return doc

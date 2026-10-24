@@ -9,16 +9,6 @@ export const ensureWebinarLayoutAfterRead: CollectionAfterReadHook = ({ doc }) =
   if (doc) {
     if (!Array.isArray(doc.layout) || doc.layout.length === 0) {
       doc.layout = defaultWebinarTemplateLayout
-    } else {
-      // Ensure default template sections are present in layout
-      const hasWebinarMore = doc.layout.some((b: any) => b?.blockType === 'webinarMore')
-      if (!hasWebinarMore && defaultWebinarTemplateLayout[2]) {
-        doc.layout = [...doc.layout, defaultWebinarTemplateLayout[2]]
-      }
-      const hasWebinarCTA = doc.layout.some((b: any) => b?.blockType === 'webinarCTA')
-      if (!hasWebinarCTA && defaultWebinarTemplateLayout[3]) {
-        doc.layout = [...doc.layout, defaultWebinarTemplateLayout[3]]
-      }
     }
   }
   return doc

@@ -5,6 +5,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { getServerSideURL } from '@/utilities/getURL'
 import { revalidateWebinar } from './hooks/revalidateWebinar'
 import { defaultWebinarTemplateLayout } from './defaults/webinarTemplateLayout'
 import { defaultWebinarRecapLayout } from './defaults/webinarRecapLayout'
@@ -58,11 +59,24 @@ export const Webinars: CollectionConfig = {
   admin: {
     defaultColumns: ['title', 'slug', 'webinarStatus', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) =>
-        generatePreviewPath({
-          slug: typeof data?.slug === 'string' ? data.slug : '',
-          collection: 'webinars' as any,
-        }),
+      url: ({ data }) => {
+        const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
+        const path = generatePreviewPath({
+          slug,
+          collection: 'webinars',
+        })
+
+        return `${getServerSideURL()}${path}`
+      },
+    },
+    preview: (data) => {
+      const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
+      const path = generatePreviewPath({
+        slug,
+        collection: 'webinars',
+      })
+
+      return `${getServerSideURL()}${path}`
     },
     useAsTitle: 'title',
   },
@@ -284,7 +298,7 @@ export const Webinars: CollectionConfig = {
   versions: {
     drafts: {
       autosave: {
-        interval: 375,
+        interval: 10000,
       },
       schedulePublish: true,
     },
