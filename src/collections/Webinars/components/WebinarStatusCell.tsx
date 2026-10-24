@@ -46,7 +46,7 @@ export const WebinarStatusCell: React.FC<any> = ({ rowData }) => {
           Ended
         </span>
         <a
-          href={`/admin/collections/webinars/${rowData?.id}`}
+          href={`/admin/collections/webinars/${rowData?.id}?tab=recap`}
           style={{
             color: '#0256FF',
             fontSize: '12px',

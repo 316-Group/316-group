@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useFormFields, useDocumentInfo } from '@payloadcms/ui'
 
 export const EventStatusField: React.FC<any> = () => {
@@ -11,6 +11,92 @@ export const EventStatusField: React.FC<any> = () => {
   const isPublished = formStatus === 'published' || Boolean(docInfo?.hasPublishedDoc)
   const isConcluded = endDate ? new Date(endDate as string) < new Date() : false
   const isUpcoming = startDate ? new Date(startDate as string) > new Date() : false
+
+  // Helper to find and click a tab by name, and sync with live preview iframe
+  const switchToTab = useCallback((tabName: 'recap' | 'active') => {
+    if (typeof document === 'undefined') return
+    const buttons = document.querySelectorAll('button')
+    for (const btn of Array.from(buttons)) {
+      const text = btn.textContent || ''
+      if (tabName === 'recap' && text.includes('End Event Recap')) {
+        btn.click()
+        break
+      } else if (tabName === 'active' && text.includes('Template & Content')) {
+        btn.click()
+        break
+      }
+    }
+
+    // Notify any live preview iframes of tab selection
+    const iframes = document.querySelectorAll('iframe')
+    iframes.forEach((frame) => {
+      try {
+        frame.contentWindow?.postMessage(
+          {
+            type: 'PAYLOAD_TAB_SWITCH',
+            mode: tabName,
+            collection: 'events',
+          },
+          '*',
+        )
+      } catch (err) {
+        // ignore cross-origin restrictions if any
+      }
+    })
+  }, [])
+
+  // Deep-linking: If URL contains ?tab=recap, automatically click the recap tab
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('tab') === 'recap') {
+      const timer = setTimeout(() => {
+        switchToTab('recap')
+      }, 350)
+      return () => clearTimeout(timer)
+    }
+  }, [switchToTab])
+
+  // Attach click listener to tabs to dispatch preview synchronization whenever the user clicks a tab
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest('button')
+      if (!target) return
+      const text = target.textContent || ''
+      let mode: 'recap' | 'active' | null = null
+
+      if (text.includes('End Event Recap')) {
+        mode = 'recap'
+      } else if (text.includes('Template & Content')) {
+        mode = 'active'
+      }
+
+      if (mode) {
+        const iframes = document.querySelectorAll('iframe')
+        iframes.forEach((frame) => {
+          try {
+            frame.contentWindow?.postMessage(
+              {
+                type: 'PAYLOAD_TAB_SWITCH',
+                mode,
+                collection: 'events',
+              },
+              '*',
+            )
+          } catch (err) {
+            // cross-origin safe
+          }
+        })
+      }
+    }
+
+    document.addEventListener('click', handleDocumentClick, true)
+    return () => {
+      document.removeEventListener('click', handleDocumentClick, true)
+    }
+  }, [])
 
   if (!isPublished) {
     return (
@@ -92,6 +178,27 @@ export const EventStatusField: React.FC<any> = () => {
         <p style={{ margin: '8px 0 0 0', fontSize: '12px', color: '#7f1d1d', lineHeight: 1.5 }}>
           This event concluded on the specified end date. Meeting requests are blocked. Configure and publish the <strong>🏁 End Event Recap</strong> tab to present the recap layout on the public site and show the &quot;View recap →&quot; button in past event listings.
         </p>
+        <button
+          type="button"
+          onClick={() => switchToTab('recap')}
+          style={{
+            marginTop: '12px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            backgroundColor: '#dc2626',
+            color: '#ffffff',
+            border: 'none',
+            borderRadius: '6px',
+            padding: '6px 12px',
+            fontSize: '12px',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          <span>Switch to End Event Recap Tab</span>
+          <span>→</span>
+        </button>
       </div>
     )
   }

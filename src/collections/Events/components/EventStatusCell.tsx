@@ -46,7 +46,7 @@ export const EventStatusCell: React.FC<any> = ({ rowData }) => {
           Ended
         </span>
         <a
-          href={`/admin/collections/events/${rowData?.id}`}
+          href={`/admin/collections/events/${rowData?.id}?tab=recap`}
           style={{
             color: '#0256FF',
             fontSize: '12px',

@@ -27,6 +27,7 @@ import {
   ensureWebinarRecapLayoutAfterRead,
   ensureWebinarRecapLayoutBeforeChange,
 } from './hooks/ensureWebinarRecapLayout'
+import { populateWebinarSEO } from './hooks/populateWebinarSEO'
 import { Content } from '@/blocks/Content/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
@@ -292,6 +293,7 @@ export const Webinars: CollectionConfig = {
       ensureWebinarLayoutBeforeChange,
       ensureWebinarRecapLayoutBeforeChange,
       populatePublishedAt,
+      populateWebinarSEO,
     ],
     afterChange: [revalidateWebinar],
   },
