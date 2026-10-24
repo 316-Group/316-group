@@ -60,6 +60,7 @@ import { NumberedGrid } from '@/blocks/NumberedGrid/config'
 import { MissionVision } from '@/blocks/MissionVision/config'
 import { TimelineAccordion } from '@/blocks/TimelineAccordion/config'
 import { CenteredButton } from '@/blocks/CenteredButton/config'
+import { CenteredContentCTA } from '@/blocks/CenteredContentCTA/config'
 import { EventHero } from '@/blocks/EventHero/config'
 import { EventSharedPurpose } from '@/blocks/EventSharedPurpose/config'
 import { EventWhyConnect } from '@/blocks/EventWhyConnect/config'
@@ -169,6 +170,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 MissionVision,
                 TimelineAccordion,
                 CenteredButton,
+                CenteredContentCTA,
                 EventHero,
                 EventSharedPurpose,
                 EventWhyConnect,

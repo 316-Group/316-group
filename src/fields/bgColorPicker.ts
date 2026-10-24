@@ -15,6 +15,7 @@ export const bgColorPickerLight: Field = {
     { label: 'Soft Blue Gray (#EFF1F8)', value: 'bg-[#EFF1F8]' },
     { label: 'Indigo Accent (#3F5AC9)', value: 'bg-[#3F5AC9]' },
     { label: 'Brand Blue (#0256FF)', value: 'bg-[#0256FF]' },
+    { label: 'Event Royal Blue (#0000FF)', value: 'bg-[#0000FF]' },
     { label: 'Brand Blue Translucent (10%)', value: 'bg-[#0256FF]/10' },
     { label: 'Brand Blue Translucent (5%)', value: 'bg-[#0256FF]/5' },
     { label: 'Custom Blue (#0256FF)', value: 'bg-blue-custom' },

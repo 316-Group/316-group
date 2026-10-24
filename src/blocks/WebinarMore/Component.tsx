@@ -110,8 +110,11 @@ export interface WebinarMoreItem {
 export interface WebinarMoreProps {
   sectionTitle?: string
   emptyStateText?: string
+  dataSource?: 'database' | 'manual'
   maxWebinars?: number
   fallbackItems?: WebinarMoreItem[]
+  currentWebinarId?: string
+  currentWebinarSlug?: string
   titleStyles?: {
     textColor?: string
     fontSizeDesktop?: string
@@ -164,9 +167,12 @@ export interface WebinarMoreProps {
 export const WebinarMoreBlock: React.FC<WebinarMoreProps> = async (props) => {
   const {
     sectionTitle = 'More Webinars that may interest you',
-    emptyStateText = 'No upcoming webinars yet.',
+    emptyStateText = 'No active webinars right now.',
+    dataSource = 'database',
     maxWebinars = 2,
     fallbackItems = [],
+    currentWebinarId,
+    currentWebinarSlug,
     titleStyles = {},
     hrStyles = {},
     cardStyles = {},
@@ -182,122 +188,138 @@ export const WebinarMoreBlock: React.FC<WebinarMoreProps> = async (props) => {
 
   const isMatchHeader = matchHeaderPillWidth !== false
 
-  // 1. Query upcoming active webinars from Payload Local API
-  let fetchedItems: WebinarMoreItem[] = []
-  try {
-    const payload = await getPayload({ config: configPromise })
-    const now = new Date().toISOString()
+  // 1. Resolve items to render based on dataSource setting
+  let itemsToRender: WebinarMoreItem[] = []
 
-    const res = await payload.find({
-      collection: 'webinars',
-      where: {
-        and: [
-          { _status: { equals: 'published' } },
-          {
-            or: [
-              { 'schedule.endDate': { greater_than_equal: now } },
-              {
-                and: [
-                  { 'schedule.endDate': { exists: false } },
-                  { 'schedule.startDate': { greater_than_equal: now } },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-      sort: 'schedule.startDate',
-      limit: maxWebinars || 2,
-      depth: 2,
-    })
+  if (dataSource === 'manual') {
+    // If explicitly set to manual, use the author-configured fallback/manual items
+    itemsToRender = Array.isArray(fallbackItems)
+      ? fallbackItems.slice(0, maxWebinars || 2)
+      : []
+  } else {
+    // Default: Query upcoming active, unexpired webinars directly from Payload Local API
+    try {
+      const payload = await getPayload({ config: configPromise })
+      const now = new Date().toISOString()
 
-    if (res?.docs?.length) {
-      fetchedItems = res.docs.map((doc: any) => {
-        // Find hero block from layout if available
-        const heroBlock = Array.isArray(doc.layout)
-          ? doc.layout.find((b: any) => b?.blockType === 'webinarHero')
-          : null
-
-        const kickerText =
-          heroBlock?.leftCol?.kickerText ||
-          heroBlock?.kickerText ||
-          'AI'
-
-        const heading =
-          heroBlock?.leftCol?.heading ||
-          heroBlock?.heading ||
-          doc.title ||
-          'Webinar Title'
-
-        let dateText = heroBlock?.leftCol?.dateText || heroBlock?.dateText
-        if (!dateText && doc.schedule?.startDate) {
-          try {
-            const d = new Date(doc.schedule.startDate)
-            dateText = d.toLocaleDateString('en-GB', {
-              weekday: 'long',
-              day: 'numeric',
-              month: 'short',
-              hour: '2-digit',
-              minute: '2-digit',
-            })
-          } catch {
-            dateText = 'Coming Soon'
-          }
-        }
-
-        const registerLink =
-          heroBlock?.leftCol?.button1Link ||
-          heroBlock?.button1Link ||
-          `/webinars/${doc.slug || ''}`
-
-        const cardSubText =
-          heroBlock?.cardCol?.cardSubText ||
-          heroBlock?.cardSubText ||
-          '316group'
-
-        const cardHeading =
-          heroBlock?.cardCol?.cardHeading ||
-          heroBlock?.cardHeading ||
-          'We back disruptive\nproducts and founders in\nretail'
-
-        const rawSpeakers =
-          heroBlock?.cardCol?.speakers ||
-          heroBlock?.speakers ||
-          []
-
-        const speakers: SpeakerItem[] = (Array.isArray(rawSpeakers) ? rawSpeakers : [])
-          .slice(0, 2)
-          .map((s: any) => ({
-            name: s.name || 'John Flanery',
-            role: s.role || 'Senior Software Engineer',
-            photo: s.image || s.photo,
-            flag: s.flag || 'uk',
-          }))
-
-        return {
-          kickerText,
-          heading,
-          dateText: dateText || 'Monday 20th Nov. at 10:30',
-          registerLink,
-          cardSubText,
-          cardHeading,
-          speakers: speakers.length > 0 ? speakers : [
-            { name: 'John Flanery', role: 'Senior Software Engineer', flag: 'uk' },
-            { name: 'John Flanery', role: 'Senior Sales Manager', flag: 'ke' },
+      const andConditions: any[] = [
+        { _status: { equals: 'published' } },
+        {
+          or: [
+            { 'schedule.endDate': { greater_than_equal: now } },
+            {
+              and: [
+                { 'schedule.endDate': { exists: false } },
+                { 'schedule.startDate': { greater_than_equal: now } },
+              ],
+            },
           ],
-        }
-      })
-    }
-  } catch (err) {
-    console.error('Error fetching webinars in WebinarMore block:', err)
-  }
+        },
+      ]
 
-  // 2. Fallback resolution: If fewer than maxWebinars found in DB, backfill with fallbackItems
-  const itemsToRender: WebinarMoreItem[] = [...fetchedItems]
-  if (itemsToRender.length < (maxWebinars || 2) && Array.isArray(fallbackItems) && fallbackItems.length > 0) {
-    for (const fallback of fallbackItems) {
-      if (itemsToRender.length >= (maxWebinars || 2)) break
-      itemsToRender.push(fallback)
+      if (currentWebinarId) {
+        andConditions.push({ id: { not_equals: currentWebinarId } })
+      } else if (currentWebinarSlug) {
+        andConditions.push({ slug: { not_equals: currentWebinarSlug } })
+      }
+
+      const res = await payload.find({
+        collection: 'webinars',
+        where: {
+          and: andConditions,
+        },
+        sort: 'schedule.startDate',
+        limit: maxWebinars || 2,
+        depth: 2,
+      })
+
+      // In-memory filter as additional guard to ensure the currently viewed webinar is never recommended to itself
+      const candidateDocs = (res?.docs || []).filter((doc: any) => {
+        if (currentWebinarId && String(doc.id) === String(currentWebinarId)) return false
+        if (currentWebinarSlug && doc.slug === currentWebinarSlug) return false
+        return true
+      })
+
+      if (candidateDocs.length) {
+        itemsToRender = candidateDocs.map((doc: any) => {
+          // Find hero block from layout if available
+          const heroBlock = Array.isArray(doc.layout)
+            ? doc.layout.find((b: any) => b?.blockType === 'webinarHero')
+            : null
+
+          const kickerText =
+            heroBlock?.leftCol?.kickerText ||
+            heroBlock?.kickerStyles?.text ||
+            heroBlock?.kickerText ||
+            'AI'
+
+          const heading =
+            heroBlock?.leftCol?.heading ||
+            heroBlock?.heading ||
+            doc.title ||
+            'Webinar Title'
+
+          let dateText = heroBlock?.leftCol?.dateText || heroBlock?.dateText
+          if (!dateText && doc.schedule?.startDate) {
+            try {
+              const d = new Date(doc.schedule.startDate)
+              dateText = d.toLocaleDateString('en-GB', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit',
+              })
+            } catch {
+              dateText = 'Coming Soon'
+            }
+          }
+
+          const registerLink =
+            heroBlock?.leftCol?.button1Link && heroBlock.leftCol.button1Link !== '#register'
+              ? heroBlock.leftCol.button1Link
+              : `/webinars/${doc.slug || ''}`
+
+          const cardSubText =
+            heroBlock?.cardCol?.cardSubText ||
+            heroBlock?.cardSubText ||
+            '316group'
+
+          const cardHeading =
+            heroBlock?.cardCol?.cardHeading ||
+            heroBlock?.cardHeading ||
+            'We back disruptive\nproducts and founders in\nretail'
+
+          const rawSpeakers =
+            heroBlock?.cardCol?.speakers ||
+            heroBlock?.speakers ||
+            []
+
+          const speakers: SpeakerItem[] = (Array.isArray(rawSpeakers) ? rawSpeakers : [])
+            .slice(0, 2)
+            .map((s: any) => ({
+              name: s.name || 'John Flanery',
+              role: s.role || 'Senior Software Engineer',
+              photo: s.image || s.photo,
+              flag: s.flag || 'uk',
+            }))
+
+          return {
+            kickerText,
+            heading,
+            dateText: dateText || 'Monday 20th Nov. at 10:30',
+            registerLink,
+            cardSubText,
+            cardHeading,
+            speakers: speakers.length > 0 ? speakers : [
+              { name: 'John Flanery', role: 'Senior Software Engineer', flag: 'uk' },
+              { name: 'John Flanery', role: 'Senior Sales Manager', flag: 'ke' },
+            ],
+          }
+        })
+      }
+    } catch (err) {
+      console.error('Error fetching webinars in WebinarMore block:', err)
     }
   }
 
@@ -348,10 +370,16 @@ export const WebinarMoreBlock: React.FC<WebinarMoreProps> = async (props) => {
           )}
         />
 
-        {/* ── 3. Webinar Rows List ──────────────────────────────────────── */}
+        {/* ── 3. Webinar Rows List or Clean Empty State ────────────────── */}
         {itemsToRender.length === 0 ? (
-          <div className="w-full py-12 text-center text-gray-500 bg-slate-50/70 rounded-xl border border-dashed border-slate-200">
-            {emptyStateText || 'No upcoming webinars yet.'}
+          <div className="w-full py-16 px-6 text-center bg-slate-50/80 rounded-2xl border border-dashed border-slate-200">
+            <Calendar className="w-8 h-8 text-[#0056FF] mx-auto mb-3 opacity-80" />
+            <p className="text-gray-900 font-semibold text-lg sm:text-xl mb-1">
+              {emptyStateText || 'No active webinars right now.'}
+            </p>
+            <p className="text-gray-500 text-sm max-w-md mx-auto">
+              Check back soon for upcoming sessions, or explore our past webinar recordings.
+            </p>
           </div>
         ) : (
           <div className={cn('flex flex-col', detailStyles.itemGap || 'gap-12 md:gap-16')}>

@@ -293,7 +293,8 @@ export const defaultWebinarHeroLayout = {
 
     // TAB 1: CONTENT & MEDIA
     sectionTitle: 'More Webinars that may interest you',
-    emptyStateText: 'No upcoming webinars yet.',
+    emptyStateText: 'No active webinars right now.',
+    dataSource: 'database',
     maxWebinars: 2,
 
     fallbackItems: [

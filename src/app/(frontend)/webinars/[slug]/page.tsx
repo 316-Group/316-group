@@ -115,6 +115,20 @@ export default async function WebinarPage({
     blocksToRender = [heroBlock, ...configuredRecapLayout].filter(Boolean) as any
   }
 
+  // Inject current webinar context into blocks so blocks like WebinarMore can exclude the current webinar
+  if (Array.isArray(blocksToRender)) {
+    blocksToRender = blocksToRender.map((block: any) => {
+      if (block?.blockType === 'webinarMore') {
+        return {
+          ...block,
+          currentWebinarId: webinar.id,
+          currentWebinarSlug: webinar.slug || slug,
+        }
+      }
+      return block
+    })
+  }
+
   return (
     <article>
       {isDraft && (

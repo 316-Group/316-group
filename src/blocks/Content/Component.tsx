@@ -40,6 +40,7 @@ import { EventUpcomingBlock } from '../EventUpcoming/Component'
 import { PastEventBlock } from '../PastEvent/Component'
 import { FeaturedWebinarBlock } from '../FeaturedWebinar/Component'
 import { PastWebinarBlock } from '../PastWebinar/Component'
+import { CenteredContentCTABlock } from '../CenteredContentCTA/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1584,6 +1585,26 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col justify-between',
                           taData.className,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (
+                    (contentType as string) === 'centeredContentCTA' &&
+                    (content as any).centeredContentCTA
+                  ) {
+                    const ctaData = { ...(content as any).centeredContentCTA }
+                    return (
+                      <CenteredContentCTABlock
+                        key={index}
+                        isColumn={true}
+                        isMatchHeader={isMatchHeaderPillWidth}
+                        {...ctaData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          ctaData.className,
+                          col.alignment && `text-${col.alignment}`,
                         )}
                       />
                     )

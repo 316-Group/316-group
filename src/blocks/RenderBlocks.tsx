@@ -65,6 +65,7 @@ import { WebinarMoreBlock } from './WebinarMore/Component'
 import { WebinarCTABlock } from './WebinarCTA/Component'
 import { WebinarRecapAboutBlock } from './WebinarRecapAbout/Component'
 import { WebinarRecapAccessBlock } from './WebinarRecapAccess/Component'
+import { CenteredContentCTABlock } from './CenteredContentCTA/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -112,6 +113,7 @@ const blockComponents = {
   missionVision: MissionVisionBlock,
   timelineAccordion: TimelineAccordionBlock,
   centeredButton: CenteredButtonBlock,
+  centeredContentCTA: CenteredContentCTABlock,
   eventHero: EventHeroBlock,
   eventSharedPurpose: EventSharedPurposeBlock,
   eventWhyConnect: EventWhyConnectBlock,

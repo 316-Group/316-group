@@ -51,6 +51,7 @@ import { eventUpcomingColumnFields } from '../EventUpcoming/config'
 import { pastEventColumnFields } from '../PastEvent/config'
 import { featuredWebinarColumnFields } from '../FeaturedWebinar/config'
 import { pastWebinarColumnFields } from '../PastWebinar/config'
+import { centeredContentCTAFields } from '../CenteredContentCTA/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -630,6 +631,7 @@ const columnFields: Field[] = [
           { label: 'Past Event', value: 'pastEvent' },
           { label: 'Featured Webinars', value: 'featuredWebinar' },
           { label: 'Past Webinars', value: 'pastWebinar' },
+          { label: 'Centered Content CTA', value: 'centeredContentCTA' },
         ],
       },
       {
@@ -2401,6 +2403,17 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'timelineAccordion',
         },
         fields: timelineAccordionColumnFields,
+      },
+
+      // ─── Centered Content CTA ──────────────────────────────────────────────
+      {
+        name: 'centeredContentCTA',
+        type: 'group',
+        label: 'Centered Content CTA',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'centeredContentCTA',
+        },
+        fields: centeredContentCTAFields,
       },
     ],
   },

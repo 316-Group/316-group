@@ -36,7 +36,20 @@ export const WebinarMore: Block = {
               name: 'emptyStateText',
               type: 'text',
               label: 'Empty State Message (When no webinars found)',
-              defaultValue: 'No upcoming webinars yet.',
+              defaultValue: 'No active webinars right now.',
+            },
+            {
+              name: 'dataSource',
+              type: 'select',
+              label: 'Webinars Source',
+              defaultValue: 'database',
+              options: [
+                { label: 'Dynamic from Database (Active & Upcoming)', value: 'database' },
+                { label: 'Manual Fallback Items Only', value: 'manual' },
+              ],
+              admin: {
+                description: 'By default, queries active, unexpired webinars directly from the database.',
+              },
             },
             {
               name: 'maxWebinars',
@@ -52,10 +65,13 @@ export const WebinarMore: Block = {
             {
               name: 'fallbackItems',
               type: 'array',
-              label: 'Fallback Mockup Items (Used when database has fewer active webinars)',
+              label: 'Manual Mockup Items (Used only when Source is set to Manual)',
+              admin: {
+                condition: (data, siblingData) => siblingData?.dataSource === 'manual',
+              },
               labels: {
-                singular: 'Fallback Webinar Item',
-                plural: 'Fallback Webinar Items',
+                singular: 'Manual Webinar Item',
+                plural: 'Manual Webinar Items',
               },
               defaultValue: [
                 {
