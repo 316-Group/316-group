@@ -56,7 +56,7 @@ export const Webinars: CollectionConfig = {
     schedule: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'webinarStatus', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
         generatePreviewPath({
@@ -72,6 +72,17 @@ export const Webinars: CollectionConfig = {
       type: 'text',
       required: true,
       label: 'Webinar Title',
+    },
+    {
+      name: 'webinarStatus',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Cell: '/collections/Webinars/components/WebinarStatusCell#WebinarStatusCell',
+          Field: '/collections/Webinars/components/WebinarStatusField#WebinarStatusField',
+        },
+      },
     },
     {
       type: 'tabs',

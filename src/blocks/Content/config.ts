@@ -49,6 +49,8 @@ import { imageTextSplitColumnFields } from '../ImageTextSplit/config'
 import { centeredButtonColumnFields } from '../CenteredButton/config'
 import { eventUpcomingColumnFields } from '../EventUpcoming/config'
 import { pastEventColumnFields } from '../PastEvent/config'
+import { featuredWebinarColumnFields } from '../FeaturedWebinar/config'
+import { pastWebinarColumnFields } from '../PastWebinar/config'
 
 const allowAnySelect = (() => true as const) as any
 
@@ -626,6 +628,8 @@ const columnFields: Field[] = [
           { label: 'Centered Button', value: 'centeredButton' },
           { label: 'Event Upcoming', value: 'eventUpcoming' },
           { label: 'Past Event', value: 'pastEvent' },
+          { label: 'Featured Webinars', value: 'featuredWebinar' },
+          { label: 'Past Webinars', value: 'pastWebinar' },
         ],
       },
       {
@@ -2221,6 +2225,28 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'pastEvent',
         },
         fields: pastEventColumnFields,
+      },
+
+      // ─── Featured Webinars ──────────────────────────────────────────────────
+      {
+        name: 'featuredWebinar',
+        type: 'group',
+        label: 'Featured Webinars Block Settings',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'featuredWebinar',
+        },
+        fields: featuredWebinarColumnFields,
+      },
+
+      // ─── Past Webinars ──────────────────────────────────────────────────────
+      {
+        name: 'pastWebinar',
+        type: 'group',
+        label: 'Past Webinars Block Settings',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'pastWebinar',
+        },
+        fields: pastWebinarColumnFields,
       },
 
       // ─── Click Expand Cards ────────────────────────────────────────────────

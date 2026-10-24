@@ -1,22 +1,7 @@
 import { Block } from 'payload'
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
-import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
-
-const spacingOptions = [
-  { label: 'None (0)', value: 'mb-0' },
-  { label: 'Extra Small (mb-1 - 4px)', value: 'mb-1' },
-  { label: 'Small (mb-2 - 8px)', value: 'mb-2' },
-  { label: 'Small-Medium (mb-3 - 12px)', value: 'mb-3' },
-  { label: 'Medium (mb-4 - 16px)', value: 'mb-4' },
-  { label: 'Medium-Large (mb-5 - 20px)', value: 'mb-5' },
-  { label: 'Large (mb-6 - 24px)', value: 'mb-6' },
-  { label: 'Extra Large (mb-8 - 32px)', value: 'mb-8' },
-  { label: '2X Large (mb-10 - 40px)', value: 'mb-10' },
-  { label: '3X Large (mb-12 - 48px)', value: 'mb-12' },
-  { label: '4X Large (mb-14 - 56px)', value: 'mb-14' },
-  { label: '5X Large (mb-16 - 64px)', value: 'mb-16' },
-]
+import { fontSizeOptions, fontWeightOptions, spacingOptions } from '../CenteredContent/config'
 
 export const defaultWebinarRecapAccessLayout = {
   blockType: 'webinarRecapAccess',

@@ -14,6 +14,7 @@ import { NoHero } from './NoHero'
 import { SwiperHero } from './SwiperHero'
 import { GroupHeroV2Wrapper } from './GroupHeroV2/GroupHeroV2Wrapper'
 import { EventHero } from './EventHero'
+import { WebinarHero } from './WebinarHero'
 // import { SwiperHero } from './SwiperHero'
 
 const heroes = {
@@ -28,6 +29,7 @@ const heroes = {
   swiperHero: SwiperHero,
   groupHeroV2: GroupHeroV2Wrapper,
   eventHero: EventHero,
+  webinarHero: WebinarHero,
   noHero: NoHero,
 }
 

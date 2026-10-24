@@ -38,6 +38,8 @@ import { TimelineAccordionBlock } from '../TimelineAccordion/Component'
 import { CenteredButtonBlock } from '../CenteredButton/Component'
 import { EventUpcomingBlock } from '../EventUpcoming/Component'
 import { PastEventBlock } from '../PastEvent/Component'
+import { FeaturedWebinarBlock } from '../FeaturedWebinar/Component'
+import { PastWebinarBlock } from '../PastWebinar/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const {
@@ -1104,6 +1106,36 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     const blockData = { ...(content as any).pastEvent }
                     return (
                       <PastEventBlock
+                        key={index}
+                        isColumn={true}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          col.alignment && `text-${col.alignment}`,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'featuredWebinar' && (content as any).featuredWebinar) {
+                    const blockData = { ...(content as any).featuredWebinar }
+                    return (
+                      <FeaturedWebinarBlock
+                        key={index}
+                        isColumn={true}
+                        {...blockData}
+                        className={cn(
+                          stretchContent && 'h-full flex-1 flex flex-col',
+                          col.alignment && `text-${col.alignment}`,
+                        )}
+                      />
+                    )
+                  }
+
+                  if (contentType === 'pastWebinar' && (content as any).pastWebinar) {
+                    const blockData = { ...(content as any).pastWebinar }
+                    return (
+                      <PastWebinarBlock
                         key={index}
                         isColumn={true}
                         {...blockData}

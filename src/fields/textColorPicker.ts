@@ -30,6 +30,8 @@ export const textColorPickerAll: textColorType = ({
       { label: 'Vibrant Cyan (#00E5FF)', value: 'text-[#00E5FF]' },
       { label: 'Custom Blue (#0256FF)', value: 'text-blue-custom' },
       { label: 'Brand Blue (#0256FF)', value: 'text-[#0256FF]' },
+      { label: 'Brand Blue (#0056FF)', value: 'text-[#0056FF]' },
+      { label: 'Sky Blue Light (#38BDF8)', value: 'text-[#38BDF8]' },
       { label: 'Event Royal Blue (#0000FF)', value: 'text-[#0000FF]' },
       { label: 'Event Cyan (#00D2FF)', value: 'text-[#00D2FF]' },
       { label: 'Event Navy Deep (#002B49)', value: 'text-[#002B49]' },

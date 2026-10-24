@@ -95,6 +95,10 @@ export const hero: Field = {
           value: 'eventHero',
         },
         {
+          label: 'Webinar Hero',
+          value: 'webinarHero',
+        },
+        {
           //no hero
           label: 'No Hero',
           value: 'noHero',
@@ -1252,6 +1256,299 @@ export const hero: Field = {
       admin: {
         condition: (_, { type }) => type === 'eventHero',
         description: 'Upload right column image. Rendered without borders or shadows. Fallback placeholder used if none uploaded.',
+      },
+    },
+
+    // ─── Webinar Hero Fields ──────────────────────────────────────────────────
+    {
+      name: 'webinarHeroDataSource',
+      type: 'select',
+      label: 'Webinar Data Source',
+      defaultValue: 'latestActive',
+      options: [
+        {
+          label: 'Auto (Latest active published webinar, fallback to mockup template)',
+          value: 'latestActive',
+        },
+        {
+          label: 'Manual Content (Custom overrides on this page)',
+          value: 'manual',
+        },
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description:
+          'Choose whether to automatically pull the latest published active webinar, or specify custom text on this page.',
+      },
+    },
+
+    bgColorPickerAll({
+      overrides: {
+        name: 'webinarHeroBgColor',
+        label: 'Webinar Hero Background Color',
+        defaultValue: 'bg-[#0000FF]',
+        admin: {
+          condition: (_, { type }) => type === 'webinarHero',
+          description:
+            'Background color of the full-height Webinar Hero. Defaults to the royal blue in mockup (#0000FF).',
+        },
+      },
+    }),
+
+    {
+      name: 'webinarHeroBgImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Webinar Hero Background Image (Optional)',
+      required: false,
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description: 'Optional full-bleed background image behind the Webinar Hero.',
+      },
+    },
+
+    {
+      name: 'webinarHeroBgOverlay',
+      type: 'select',
+      label: 'Background Image Overlay',
+      defaultValue: 'none',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Subtle Dark (20%)', value: 'subtle' },
+        { label: 'Medium Dark (40%)', value: 'medium' },
+        { label: 'Vignette Gradient', value: 'vignette' },
+      ],
+      admin: {
+        condition: (_, { type, webinarHeroBgImage }) =>
+          type === 'webinarHero' && Boolean(webinarHeroBgImage),
+      },
+    },
+
+    {
+      name: 'webinarHeroMatchHeaderPillWidth',
+      type: 'checkbox',
+      label: 'Match Header Pill Width (Container)',
+      defaultValue: true,
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description:
+          'When checked, hero content container matches the site header (max 1,472px centered). Uncheck to set custom horizontal padding.',
+      },
+    },
+
+    // Vertical Padding: Top and Bottom individually for desktop & mobile
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+      },
+      fields: [
+        {
+          name: 'webinarHeroPaddingTopDesktop',
+          type: 'text',
+          label: 'Desktop Padding Top (e.g. pt-24 or 96px)',
+          defaultValue: 'pt-24',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroPaddingTopMobile',
+          type: 'text',
+          label: 'Mobile Padding Top (e.g. pt-20 or 80px)',
+          defaultValue: 'pt-20',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+      },
+      fields: [
+        {
+          name: 'webinarHeroPaddingBottomDesktop',
+          type: 'text',
+          label: 'Desktop Padding Bottom (e.g. pb-24 or 96px)',
+          defaultValue: 'pb-24',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroPaddingBottomMobile',
+          type: 'text',
+          label: 'Mobile Padding Bottom (e.g. pb-20 or 80px)',
+          defaultValue: 'pb-20',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Horizontal Padding: Enabled only if matchHeaderPillWidth is false
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type, webinarHeroMatchHeaderPillWidth }) =>
+          type === 'webinarHero' && webinarHeroMatchHeaderPillWidth === false,
+      },
+      fields: [
+        {
+          name: 'webinarHeroPaddingLeftDesktop',
+          type: 'text',
+          label: 'Desktop Padding Left (e.g. pl-12 or 48px)',
+          defaultValue: 'pl-12',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroPaddingLeftMobile',
+          type: 'text',
+          label: 'Mobile Padding Left (e.g. pl-4 or 16px)',
+          defaultValue: 'pl-4',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: {
+        condition: (_, { type, webinarHeroMatchHeaderPillWidth }) =>
+          type === 'webinarHero' && webinarHeroMatchHeaderPillWidth === false,
+      },
+      fields: [
+        {
+          name: 'webinarHeroPaddingRightDesktop',
+          type: 'text',
+          label: 'Desktop Padding Right (e.g. pr-12 or 48px)',
+          defaultValue: 'pr-12',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroPaddingRightMobile',
+          type: 'text',
+          label: 'Mobile Padding Right (e.g. pr-4 or 16px)',
+          defaultValue: 'pr-4',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Optional Content Overrides for Left Column
+    {
+      name: 'webinarHeroKickerText',
+      type: 'text',
+      label: 'Kicker Tag (Optional Override)',
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description: 'Leave empty to use active webinar kicker or default mockup kicker.',
+      },
+    },
+    {
+      name: 'webinarHeroHeading',
+      type: 'text',
+      label: 'Main Heading (Optional Override)',
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description:
+          'Supports inline HTML (e.g. <span style="color:#00F0FF">text</span>). Leave empty to use active webinar title.',
+      },
+    },
+    {
+      name: 'webinarHeroDescription',
+      type: 'textarea',
+      label: 'Description Text (Optional Override)',
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description: 'Leave empty to use active webinar description.',
+      },
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'webinarHero' },
+      fields: [
+        {
+          name: 'webinarHeroDateText',
+          type: 'text',
+          label: 'Date Text (Optional Override)',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroLocationText',
+          type: 'text',
+          label: 'Location / Format (Optional Override)',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'webinarHero' },
+      fields: [
+        {
+          name: 'webinarHeroButton1Text',
+          type: 'text',
+          label: 'Primary Button Text (Optional Override)',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroButton1Link',
+          type: 'text',
+          label: 'Primary Button Link (Optional Override)',
+          admin: {
+            width: '50%',
+            description: 'Defaults to active webinar link (/webinars/[slug]) or #meeting.',
+          },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'webinarHero' },
+      fields: [
+        {
+          name: 'webinarHeroButton2Text',
+          type: 'text',
+          label: 'Secondary Button Text (Optional Override)',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'webinarHeroButton2Link',
+          type: 'text',
+          label: 'Secondary Button Link (Optional Override)',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+
+    // Optional Content Overrides for Right Column Showcase Card
+    {
+      type: 'row',
+      admin: { condition: (_, { type }) => type === 'webinarHero' },
+      fields: [
+        {
+          name: 'webinarHeroCardSubText',
+          type: 'text',
+          label: 'Card Brand / Subhead (Optional Override)',
+          admin: { width: '50%', description: 'Defaults to "316group"' },
+        },
+        {
+          name: 'webinarHeroCardHeading',
+          type: 'text',
+          label: 'Card Headline (Optional Override)',
+          admin: {
+            width: '50%',
+            description: 'Defaults to "We back disruptive products and founders in retail"',
+          },
+        },
+      ],
+    },
+    {
+      name: 'webinarHeroCardImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Card Featured Lifestyle Image (Optional Override)',
+      required: false,
+      admin: {
+        condition: (_, { type }) => type === 'webinarHero',
+        description:
+          'Upload lifestyle photo for the right side of the card. Fallback graphic used if none provided.',
       },
     },
   ],

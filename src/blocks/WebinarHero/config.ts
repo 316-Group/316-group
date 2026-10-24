@@ -7,20 +7,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
-import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
-
-const spacingOptions = [
-  { label: 'None (0)', value: 'mb-0' },
-  { label: 'Extra Small (mb-1)', value: 'mb-1' },
-  { label: 'Small (mb-2)', value: 'mb-2' },
-  { label: 'Small-Medium (mb-3)', value: 'mb-3' },
-  { label: 'Medium (mb-4)', value: 'mb-4' },
-  { label: 'Medium-Large (mb-5)', value: 'mb-5' },
-  { label: 'Large (mb-6)', value: 'mb-6' },
-  { label: 'Extra Large (mb-8)', value: 'mb-8' },
-  { label: '2X Large (mb-10)', value: 'mb-10' },
-  { label: '3X Large (mb-12 md:mb-16)', value: 'mb-12 md:mb-16' },
-]
+import { fontSizeOptions, fontWeightOptions, spacingOptions } from '../CenteredContent/config'
 
 export const WebinarHero: Block = {
   slug: 'webinarHero',
