@@ -6,7 +6,7 @@ export const revalidateWebinar: CollectionAfterChangeHook = ({
   previousDoc,
   req: { payload },
 }) => {
-  if (doc._status === 'published') {
+  if (doc?._status === 'published' && doc?.slug) {
     const path = `/webinars/${doc.slug}`
     payload.logger.info(`Revalidating webinar at path: ${path}`)
     try {
@@ -16,7 +16,7 @@ export const revalidateWebinar: CollectionAfterChangeHook = ({
     }
   }
 
-  if (previousDoc?._status === 'published' && doc._status !== 'published') {
+  if (previousDoc?._status === 'published' && doc?._status !== 'published' && previousDoc?.slug) {
     const oldPath = `/webinars/${previousDoc.slug}`
     payload.logger.info(`Revalidating old webinar at path: ${oldPath}`)
     try {

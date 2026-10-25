@@ -825,9 +825,10 @@ export const Events: CollectionConfig = {
   defaultPopulate: {
     title: true,
     slug: true,
+    schedule: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'eventStatus', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
         const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
@@ -862,7 +863,6 @@ export const Events: CollectionConfig = {
       admin: {
         position: 'sidebar',
         components: {
-          Cell: '/collections/Events/components/EventStatusCell#EventStatusCell',
           Field: '/collections/Events/components/EventStatusField#EventStatusField',
         },
       },
@@ -889,14 +889,7 @@ export const Events: CollectionConfig = {
                       name: 'startDate',
                       type: 'date',
                       label: 'Event Start Date',
-                      required: false,
-                      validate: (value: any, { siblingData, req }: any) => {
-                        const status = (req as any)?.data?._status || siblingData?._status
-                        if (status === 'published' && !value) {
-                          return 'Event Start Date is required to publish this event.'
-                        }
-                        return true
-                      },
+                      required: true,
                       admin: {
                         width: '50%',
                         date: {
@@ -910,12 +903,8 @@ export const Events: CollectionConfig = {
                       name: 'endDate',
                       type: 'date',
                       label: 'Event End Date',
-                      required: false,
-                      validate: (value: any, { siblingData, req }: any) => {
-                        const status = (req as any)?.data?._status || siblingData?._status
-                        if (status === 'published' && !value) {
-                          return 'Event End Date is required to publish this event.'
-                        }
+                      required: true,
+                      validate: (value: any, { siblingData }: any) => {
                         if (
                           value &&
                           siblingData?.startDate &&

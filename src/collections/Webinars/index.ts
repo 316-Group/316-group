@@ -58,7 +58,7 @@ export const Webinars: CollectionConfig = {
     schedule: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'webinarStatus', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
         const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
@@ -94,7 +94,6 @@ export const Webinars: CollectionConfig = {
       admin: {
         position: 'sidebar',
         components: {
-          Cell: '/collections/Webinars/components/WebinarStatusCell#WebinarStatusCell',
           Field: '/collections/Webinars/components/WebinarStatusField#WebinarStatusField',
         },
       },
@@ -122,14 +121,7 @@ export const Webinars: CollectionConfig = {
                       name: 'startDate',
                       type: 'date',
                       label: 'Webinar Start Date & Time',
-                      required: false,
-                      validate: (value: any, { siblingData, req }: any) => {
-                        const status = (req as any)?.data?._status || siblingData?._status
-                        if (status === 'published' && !value) {
-                          return 'Webinar Start Date is required to publish this webinar.'
-                        }
-                        return true
-                      },
+                      required: true,
                       admin: {
                         width: '50%',
                         date: {
@@ -143,12 +135,8 @@ export const Webinars: CollectionConfig = {
                       name: 'endDate',
                       type: 'date',
                       label: 'Webinar End Date & Time',
-                      required: false,
-                      validate: (value: any, { siblingData, req }: any) => {
-                        const status = (req as any)?.data?._status || siblingData?._status
-                        if (status === 'published' && !value) {
-                          return 'Webinar End Date is required to publish this webinar.'
-                        }
+                      required: true,
+                      validate: (value: any, { siblingData }: any) => {
                         if (
                           value &&
                           siblingData?.startDate &&

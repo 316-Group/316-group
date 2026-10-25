@@ -130910,7 +130910,7 @@ export interface EbooksAndGuidesArchiveBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
-  form: string | Form;
+  form?: (string | null) | Form;
   enableIntro?: boolean | null;
   introContent?: {
     root: {
@@ -130939,7 +130939,7 @@ export interface FormBlock {
 export interface MediaBlock {
   layout?: ('default' | 'fullWidth') | null;
   borderRadius?: ('none' | 'sm' | 'default' | 'lg' | 'xl' | '2xl' | '3xl' | 'full') | null;
-  media: string | Media;
+  media?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -243004,15 +243004,15 @@ export interface Event {
   /**
    * Backend dates used for event status filtering (Active, Upcoming, Ended) and gating meeting request form submissions. These dates are stored in the backend and do not alter the visual styling on the Hero section.
    */
-  schedule?: {
+  schedule: {
     /**
      * Exact date and time the event begins.
      */
-    startDate?: string | null;
+    startDate: string;
     /**
      * Exact date and time the event concludes. After this date, meeting requests are blocked.
      */
-    endDate?: string | null;
+    endDate: string;
   };
   layout?:
     | (
@@ -264410,15 +264410,15 @@ export interface Webinar {
   /**
    * Backend dates used for filtering active vs completed webinars and registration forms.
    */
-  schedule?: {
+  schedule: {
     /**
      * Exact date and time the webinar begins.
      */
-    startDate?: string | null;
+    startDate: string;
     /**
      * Exact date and time the webinar concludes.
      */
-    endDate?: string | null;
+    endDate: string;
   };
   layout?:
     | (
@@ -270056,7 +270056,7 @@ export interface Webinar {
                      * Bold text shown at start of item (e.g. "How FintecConnect works.")
                      */
                     boldPrefix?: string | null;
-                    text: string;
+                    text?: string | null;
                     id?: string | null;
                   }[]
                 | null;
@@ -287561,7 +287561,7 @@ export interface Webinar {
                   helperText?: string | null;
                   options?:
                     | {
-                        label: string;
+                        label?: string | null;
                         id?: string | null;
                       }[]
                     | null;
@@ -287573,7 +287573,7 @@ export interface Webinar {
                   placeholder?: string | null;
                   options?:
                     | {
-                        label: string;
+                        label?: string | null;
                         id?: string | null;
                       }[]
                     | null;
@@ -287585,7 +287585,7 @@ export interface Webinar {
                   placeholder?: string | null;
                   options?:
                     | {
-                        label: string;
+                        label?: string | null;
                         id?: string | null;
                       }[]
                     | null;
@@ -287597,7 +287597,7 @@ export interface Webinar {
                   placeholder?: string | null;
                   options?:
                     | {
-                        label: string;
+                        label?: string | null;
                         id?: string | null;
                       }[]
                     | null;

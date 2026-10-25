@@ -6,7 +6,7 @@ export const revalidateEvent: CollectionAfterChangeHook = ({
   previousDoc,
   req: { payload },
 }) => {
-  if (doc._status === 'published') {
+  if (doc?._status === 'published' && doc?.slug) {
     const path = `/events/${doc.slug}`
     payload.logger.info(`Revalidating event at path: ${path}`)
     try {
@@ -16,7 +16,7 @@ export const revalidateEvent: CollectionAfterChangeHook = ({
     }
   }
 
-  if (previousDoc?._status === 'published' && doc._status !== 'published') {
+  if (previousDoc?._status === 'published' && doc?._status !== 'published' && previousDoc?.slug) {
     const oldPath = `/events/${previousDoc.slug}`
     payload.logger.info(`Revalidating old event at path: ${oldPath}`)
     try {

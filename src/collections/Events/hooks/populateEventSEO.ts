@@ -40,8 +40,10 @@ export const populateEventSEO: CollectionBeforeChangeHook = async ({ data }) => 
   if (!data.meta.title) {
     if (heroHeading) {
       data.meta.title = `${heroHeading} | 316 Group`
-    } else if (data.title) {
+    } else if (data?.title) {
       data.meta.title = `${data.title} | 316 Group`
+    } else {
+      data.meta.title = 'Event | 316 Group'
     }
   }
 

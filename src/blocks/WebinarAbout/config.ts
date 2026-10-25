@@ -122,7 +122,7 @@ export const WebinarAbout: Block = {
                       name: 'text',
                       type: 'textarea',
                       label: 'Item Body Copy',
-                      required: true,
+                      required: false,
                     },
                   ],
                 },

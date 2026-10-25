@@ -16,7 +16,7 @@ export const FormBlock: Block = {
       name: 'form',
       type: 'relationship',
       relationTo: 'forms',
-      required: true,
+      required: false,
     },
     {
       name: 'enableIntro',
