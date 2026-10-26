@@ -56,9 +56,11 @@ export const Webinars: CollectionConfig = {
     title: true,
     slug: true,
     schedule: true,
+    recapConfig: true,
+    _status: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'webinarStatus', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
         const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
@@ -91,9 +93,11 @@ export const Webinars: CollectionConfig = {
     {
       name: 'webinarStatus',
       type: 'ui',
+      label: 'Webinar Status',
       admin: {
         position: 'sidebar',
         components: {
+          Cell: '/collections/Webinars/components/WebinarStatusCell#WebinarStatusCell',
           Field: '/collections/Webinars/components/WebinarStatusField#WebinarStatusField',
         },
       },

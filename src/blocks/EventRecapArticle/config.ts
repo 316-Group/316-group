@@ -7,18 +7,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 import { bgColorPickerAll } from '@/fields/bgColorPicker'
 import { textColorPickerAll } from '@/fields/textColorPicker'
-import { fontSizeOptions, fontWeightOptions } from '../CenteredContent/config'
-
-const spacingOptions = [
-  { label: 'None (0)', value: 'mb-0' },
-  { label: 'Extra Small (mb-2)', value: 'mb-2' },
-  { label: 'Small (mb-3)', value: 'mb-3' },
-  { label: 'Small-Medium (mb-4)', value: 'mb-4' },
-  { label: 'Medium (mb-6)', value: 'mb-6' },
-  { label: 'Large (mb-8)', value: 'mb-8' },
-  { label: 'Extra Large (mb-10)', value: 'mb-10' },
-  { label: '2X Large (mb-12 md:mb-16)', value: 'mb-12 md:mb-16' },
-]
+import { fontSizeOptions, fontWeightOptions, spacingOptions } from '../CenteredContent/config'
 
 export const EventRecapArticle: Block = {
   slug: 'eventRecapArticle',

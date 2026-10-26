@@ -2,6 +2,8 @@
 import React from 'react'
 
 export const EventStatusCell: React.FC<any> = ({ rowData }) => {
+  if (!rowData) return null
+
   const isPublished = rowData?._status === 'published'
   const startDate = rowData?.schedule?.startDate
   const endDate = rowData?.schedule?.endDate
@@ -45,17 +47,23 @@ export const EventStatusCell: React.FC<any> = ({ rowData }) => {
         >
           Ended
         </span>
-        <a
-          href={`/admin/collections/events/${rowData?.id}?tab=recap`}
-          style={{
-            color: '#0256FF',
-            fontSize: '12px',
-            fontWeight: 600,
-            textDecoration: 'underline',
-          }}
-        >
-          {hasPublishedRecap ? 'Recap Configured' : 'Configure End'}
-        </a>
+        {rowData?.id && (
+          <a
+            href={`/admin/collections/events/${rowData.id}?tab=recap`}
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+            style={{
+              color: '#0256FF',
+              fontSize: '12px',
+              fontWeight: 600,
+              textDecoration: 'underline',
+              cursor: 'pointer',
+            }}
+          >
+            {hasPublishedRecap ? 'Recap Configured' : 'Configure Recap'}
+          </a>
+        )}
       </div>
     )
   }

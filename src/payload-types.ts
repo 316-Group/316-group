@@ -254869,10 +254869,62 @@ export interface Event {
                 | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             headingStyles?: {
@@ -255241,10 +255293,62 @@ export interface Event {
                 | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             descriptionStyles?: {
@@ -255613,10 +255717,62 @@ export interface Event {
                 | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             buttonStyles?: {
@@ -256864,10 +257020,62 @@ export interface Event {
                   )
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             headingStyles?: {
@@ -257236,10 +257444,62 @@ export interface Event {
                 | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             descriptionStyles?: {
@@ -257608,10 +257868,62 @@ export interface Event {
                 | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                 | null;
               marginBottomDesktop?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
               marginBottomMobile?:
-                | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                | (
+                    | 'mb-0'
+                    | 'mb-0.5'
+                    | 'mb-1'
+                    | 'mb-2'
+                    | 'mb-3'
+                    | 'mb-4'
+                    | 'mb-5'
+                    | 'mb-6'
+                    | 'mb-7'
+                    | 'mb-8'
+                    | 'mb-10'
+                    | 'mb-12'
+                    | 'mb-14'
+                    | 'mb-16'
+                    | 'mb-3 md:mb-4'
+                    | 'mb-4 md:mb-5'
+                    | 'mb-4 md:mb-6'
+                    | 'mb-5 md:mb-6'
+                    | 'mb-5 md:mb-7'
+                    | 'mb-6 md:mb-8'
+                    | 'mb-8 md:mb-10'
+                    | 'mb-8 md:mb-12'
+                    | 'mb-10 md:mb-14'
+                    | 'mb-12 md:mb-16'
+                    | 'custom'
+                  )
                 | null;
             };
             button1Styles?: {
@@ -259966,10 +260278,62 @@ export interface Event {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               headingStyles?: {
@@ -260338,10 +260702,62 @@ export interface Event {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               descriptionStyles?: {
@@ -260710,10 +261126,62 @@ export interface Event {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               buttonStyles?: {
@@ -261961,10 +262429,62 @@ export interface Event {
                     )
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               headingStyles?: {
@@ -262333,10 +262853,62 @@ export interface Event {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               descriptionStyles?: {
@@ -262705,10 +263277,62 @@ export interface Event {
                   | ('font-light' | 'font-normal' | 'font-medium' | 'font-semibold' | 'font-bold' | 'font-extrabold')
                   | null;
                 marginBottomDesktop?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
                 marginBottomMobile?:
-                  | ('mb-0' | 'mb-2' | 'mb-3' | 'mb-4' | 'mb-6' | 'mb-8' | 'mb-10' | 'mb-12 md:mb-16')
+                  | (
+                      | 'mb-0'
+                      | 'mb-0.5'
+                      | 'mb-1'
+                      | 'mb-2'
+                      | 'mb-3'
+                      | 'mb-4'
+                      | 'mb-5'
+                      | 'mb-6'
+                      | 'mb-7'
+                      | 'mb-8'
+                      | 'mb-10'
+                      | 'mb-12'
+                      | 'mb-14'
+                      | 'mb-16'
+                      | 'mb-3 md:mb-4'
+                      | 'mb-4 md:mb-5'
+                      | 'mb-4 md:mb-6'
+                      | 'mb-5 md:mb-6'
+                      | 'mb-5 md:mb-7'
+                      | 'mb-6 md:mb-8'
+                      | 'mb-8 md:mb-10'
+                      | 'mb-8 md:mb-12'
+                      | 'mb-10 md:mb-14'
+                      | 'mb-12 md:mb-16'
+                      | 'custom'
+                    )
                   | null;
               };
               button1Styles?: {

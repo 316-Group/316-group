@@ -21,8 +21,10 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { SlugComponent as SlugComponent_92cc057d0a2abb4f6cf0307edf59f986 } from '@/fields/slug/SlugComponent'
+import { EventStatusCell as EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a } from '../../../collections/Events/components/EventStatusCell'
 import { EventStatusField as EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884 } from '../../../collections/Events/components/EventStatusField'
 import { RecapHeroNotice as RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277 } from '../../../collections/Events/components/RecapHeroNotice'
+import { WebinarStatusCell as WebinarStatusCell_0398624122c633736463ebc4d8a7eafd } from '../../../collections/Webinars/components/WebinarStatusCell'
 import { WebinarStatusField as WebinarStatusField_82e1af7cab1f121884dda6ee660a937c } from '../../../collections/Webinars/components/WebinarStatusField'
 import { WebinarRecapHeroNotice as WebinarRecapHeroNotice_a2c8e4d5666babfc41c1f0154d13a2fa } from '../../../collections/Webinars/components/WebinarRecapHeroNotice'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
@@ -58,8 +60,10 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@/fields/slug/SlugComponent#SlugComponent": SlugComponent_92cc057d0a2abb4f6cf0307edf59f986,
+  "/collections/Events/components/EventStatusCell#EventStatusCell": EventStatusCell_5daa1f5bca78ea55b8924efd5cae774a,
   "/collections/Events/components/EventStatusField#EventStatusField": EventStatusField_ca98be5ed18bd2fcfd66fd86b8f79884,
   "/collections/Events/components/RecapHeroNotice#RecapHeroNotice": RecapHeroNotice_a02e2b639a648bdadfa2b44f82852277,
+  "/collections/Webinars/components/WebinarStatusCell#WebinarStatusCell": WebinarStatusCell_0398624122c633736463ebc4d8a7eafd,
   "/collections/Webinars/components/WebinarStatusField#WebinarStatusField": WebinarStatusField_82e1af7cab1f121884dda6ee660a937c,
   "/collections/Webinars/components/WebinarRecapHeroNotice#WebinarRecapHeroNotice": WebinarRecapHeroNotice_a2c8e4d5666babfc41c1f0154d13a2fa,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,

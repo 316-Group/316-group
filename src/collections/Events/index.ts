@@ -826,9 +826,11 @@ export const Events: CollectionConfig = {
     title: true,
     slug: true,
     schedule: true,
+    recapConfig: true,
+    _status: true,
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'eventStatus', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
         const slug = typeof data?.slug === 'string' && data.slug.trim() ? data.slug : 'preview'
@@ -860,9 +862,11 @@ export const Events: CollectionConfig = {
     {
       name: 'eventStatus',
       type: 'ui',
+      label: 'Event Status',
       admin: {
         position: 'sidebar',
         components: {
+          Cell: '/collections/Events/components/EventStatusCell#EventStatusCell',
           Field: '/collections/Events/components/EventStatusField#EventStatusField',
         },
       },
