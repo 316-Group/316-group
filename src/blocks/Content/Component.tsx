@@ -407,6 +407,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                     <div
                       className={cn(
                         colWidth, // Responsive column spans
+                        'min-w-0', // Prevents CSS grid child blowout
                         orderClass, // Mobile order
                         mdOrderClass, // Reset order on desktop
                         colPadUid,

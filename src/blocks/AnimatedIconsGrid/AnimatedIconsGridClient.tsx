@@ -509,7 +509,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     <section
       ref={sectionRef}
       className={cn(
-        'w-full relative overflow-visible select-none',
+        'w-full relative overflow-hidden select-none',
         sectionBgColor || 'bg-[#F4F6FB]',
         paddingTop || 'pt-20',
         paddingBottom || 'pb-20',
