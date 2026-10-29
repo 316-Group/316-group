@@ -29,6 +29,12 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '25mb',
+    },
+    largePageDataBytes: 25 * 1024 * 1024,
+  },
 }
 
 export default withPayload(nextConfig)

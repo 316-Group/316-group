@@ -73,6 +73,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         loading={loading}
         sizes={sizes}
         src={src}
+        unoptimized={typeof src === 'string' && src.toLowerCase().includes('.gif')}
         width={!fill ? width : undefined}
       />
     </picture>

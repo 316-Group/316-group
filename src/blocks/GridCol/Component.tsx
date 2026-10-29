@@ -420,7 +420,7 @@ export const GridColBlock: React.FC<GridColProps> = ({
 
         {/* ─── MOBILE ONLY: Feature Image directly below Top Main Heading (Scaled Down) ─── */}
         {image && typeof image === 'object' && (
-          <div className="flex lg:hidden w-full mb-8 sm:mb-10 justify-center">
+          <div className="flex lg:hidden lg:!hidden w-full mb-8 sm:mb-10 justify-center">
             <div
               className={cn(
                 'relative w-full max-w-md sm:max-w-lg overflow-hidden shadow-xl transition-all duration-500 min-h-[360px] sm:min-h-[440px] aspect-[4/3] sm:aspect-[1/1]',

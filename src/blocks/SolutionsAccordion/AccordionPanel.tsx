@@ -161,7 +161,7 @@ export const AccordionPanel: React.FC<Props> = ({
       <div
         ref={sectionRef}
         className={cn(
-          'w-full flex flex-col md:flex-row min-h-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
+          'w-full max-w-full overflow-hidden flex flex-col md:flex-row min-h-[600px] transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-150',
           padClassName,
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10',
           sectionBgColor ?? 'bg-white',
@@ -178,7 +178,7 @@ export const AccordionPanel: React.FC<Props> = ({
           delay={saLeftDelay}
           trigger="scroll"
           className={cn(
-            'w-full md:w-[45%] md:shrink-0 flex flex-col justify-between',
+            'w-full md:w-[45%] md:shrink-0 min-w-0 flex flex-col justify-start gap-8',
             paddingMode === 'none'
               ? 'py-8 px-0 md:py-12 md:pl-0 md:pr-8 xl:py-16 xl:pr-12'
               : 'p-8 md:p-12 xl:p-16',
@@ -241,7 +241,7 @@ export const AccordionPanel: React.FC<Props> = ({
         </div>
 
         {/* DESKTOP ONLY: Image — transitions when activeIndex changes */}
-        <div className="mt-8 relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md hidden md:block">
+        <div className="relative rounded-2xl overflow-hidden aspect-[4/3] w-full max-w-md hidden md:block">
           {items.map((item, i) => {
             const { badges, badgeBg, badgeTextCol } = getItemBadges(item)
 
@@ -303,7 +303,7 @@ export const AccordionPanel: React.FC<Props> = ({
         delay={saRightDelay}
         trigger="scroll"
         className={cn(
-          'w-full md:flex-1 flex items-start',
+          'w-full md:flex-1 min-w-0 flex items-start',
           paddingMode === 'none'
             ? 'py-6 px-0 md:py-10 md:pr-0 md:pl-8 xl:py-14 xl:pl-12'
             : 'p-6 md:p-10 xl:p-14',

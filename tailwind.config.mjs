@@ -1,3 +1,6 @@
+import tailwindcssAnimate from 'tailwindcss-animate'
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -8,7 +11,7 @@ export default {
     './src/**/*.{ts,tsx}',
   ],
   darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [tailwindcssAnimate, typography],
   prefix: '',
   safelist: [
     'lg:col-span-4',

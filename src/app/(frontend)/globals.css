@@ -239,3 +239,27 @@ html[data-theme='light'] {
     transform: none !important;
   }
 }
+
+/* ─── Robust Responsive Display Overrides ─── */
+/* Prevents external packages (e.g. lexical .flex{display:flex}) from overriding responsive hidden classes */
+.hidden {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .md\:hidden {
+    display: none !important;
+  }
+  .md\:flex {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:hidden {
+    display: none !important;
+  }
+  .lg\:flex {
+    display: flex !important;
+  }
+}

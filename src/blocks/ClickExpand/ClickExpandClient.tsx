@@ -1150,13 +1150,13 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
           )}
         >
           {/* Desktop Layout (md and above) */}
-          <div className="hidden md:flex md:flex-col w-full">
+          <div className="hidden md:flex md:flex-col w-full min-w-0">
             {trackContent}
             {indicatorsContent}
           </div>
 
           {/* Mobile Layout (< md) */}
-          <div className="flex md:hidden flex-col w-full">
+          <div className="flex md:hidden md:!hidden flex-col w-full">
             {mobileContent}
           </div>
         </div>
