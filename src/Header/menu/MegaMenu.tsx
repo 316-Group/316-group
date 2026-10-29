@@ -94,7 +94,11 @@ export const MegaMenu = ({
 
   const getMegaMenuItems = (title: string) => {
     if (!header.navItems) return []
-    return header.navItems.find((item) => item.title === title)?.megaMenuItems || []
+    return (
+      header.navItems.find(
+        (item) => (item.title || item.link?.label) === title,
+      )?.megaMenuItems || []
+    )
   }
 
   return (
@@ -113,15 +117,14 @@ export const MegaMenu = ({
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </button>
 
-
       {/* Desktop Navigation */}
       <nav className="hidden lg:flex items-center space-x-6">
         {header.navItems?.map((section, index) => {
           // Detect if this is the last item and labelled "Contact" (or only item with no mega menu)
-          const isContact = !section.hasMegaMenu && (
-            section.link?.label?.toLowerCase() === 'contact' ||
-            section.title?.toLowerCase() === 'contact'
-          )
+          const isContact =
+            !section.hasMegaMenu &&
+            (section.link?.label?.toLowerCase() === 'contact' ||
+              section.title?.toLowerCase() === 'contact')
           if (pillMode && isContact) {
             return (
               <Link
@@ -134,6 +137,10 @@ export const MegaMenu = ({
               </Link>
             )
           }
+          const sectionTitle =
+            (section.hasMegaMenu
+              ? section.title
+              : section.title || section.link?.label) || ''
           return (
             <MenuItem
               className={cn(
@@ -142,15 +149,14 @@ export const MegaMenu = ({
               )}
               isMobile={isMobile}
               key={index}
-              title={section.hasMegaMenu ? section.title : section.link?.label}
-              href={getHref(section.link)}
-              hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-              isActive={activeSection === section.title}
+              title={sectionTitle}
+              href={section.hasMegaMenu ? undefined : getHref(section.link)}
+              hasMegaMenu={Boolean(section.hasMegaMenu)}
+              isActive={Boolean(activeSection && activeSection === sectionTitle)}
               onClick={() => {
-                if (section.hasMegaMenu !== true) {
-                } else
-                  section.title &&
-                    setActiveSection(activeSection === section.title ? null : section.title)
+                if (section.hasMegaMenu) {
+                  setActiveSection(activeSection === sectionTitle ? null : sectionTitle)
+                }
               }}
             />
           )
@@ -196,27 +202,45 @@ export const MegaMenu = ({
               }}
             >
               <div className="p-8">
-                {/* Menu Items at Top */}
-                <div className="flex gap-6 justify-start mb-8 pb-4">
-                  {header.navItems?.map((section, index) => (
-                    <MenuItem
-                      className={cn('font-normal justify-start text-xl text-gray-900 dark:text-gray-100')}
-                      isMobile={isMobile}
-                      key={index}
-                      href={getHref(section.link)}
-                      title={section.title}
-                      hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-                      isActive={activeSection === section.title}
-                      onClick={() => {
-                        if (section.hasMegaMenu !== true) {
-                          setIsOpen(false)
-                          setActiveSection(null)
-                        } else
-                          section.title &&
-                            setActiveSection(activeSection === section.title ? null : section.title)
-                      }}
-                    />
-                  ))}
+                {/* Header with Menu Items at Top and Close Button */}
+                <div className="flex items-center justify-between mb-8 pb-4">
+                  <div className="flex gap-6 justify-start items-center">
+                    {header.navItems?.map((section, index) => {
+                      const sectionTitle =
+                        (section.hasMegaMenu
+                          ? section.title
+                          : section.title || section.link?.label) || ''
+                      return (
+                        <MenuItem
+                          className={cn('font-normal justify-start text-xl text-gray-900 dark:text-gray-100')}
+                          isMobile={isMobile}
+                          key={index}
+                          href={section.hasMegaMenu ? undefined : getHref(section.link)}
+                          title={sectionTitle}
+                          hasMegaMenu={Boolean(section.hasMegaMenu)}
+                          isActive={Boolean(activeSection && activeSection === sectionTitle)}
+                          onClick={() => {
+                            if (section.hasMegaMenu !== true) {
+                              setIsOpen(false)
+                              setActiveSection(null)
+                            } else {
+                              setActiveSection(activeSection === sectionTitle ? null : sectionTitle)
+                            }
+                          }}
+                        />
+                      )
+                    })}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setIsOpen(false)
+                      setActiveSection(null)
+                    }}
+                    className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-700 dark:text-gray-300"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
                 </div>
 
                 {/* Active Section Content */}
@@ -280,25 +304,31 @@ export const MegaMenu = ({
                 </div>
               ) : (
                 <div className="p-1 space-y-8">
-                  {header.navItems?.map((section) => (
-                    <MenuItem
-                      className={cn('font-normal text-2xl justify-between w-[100%] text-gray-900 dark:text-gray-100')}
-                      key={section.title}
-                      title={section.title}
-                      hasMegaMenu={section.hasMegaMenu ? section.hasMegaMenu : false}
-                      isActive={false}
-                      href={getHref(section.link)}
-                      onClick={() => {
-                        if (section.hasMegaMenu !== true) {
-                          setIsOpen(false)
-                          setActiveSection(null)
-                        } else
-                          section.title &&
-                            setActiveSection(activeSection === section.title ? null : section.title)
-                      }}
-                      isMobile={isMobile}
-                    />
-                  ))}
+                  {header.navItems?.map((section, index) => {
+                    const sectionTitle =
+                      (section.hasMegaMenu
+                        ? section.title
+                        : section.title || section.link?.label) || ''
+                    return (
+                      <MenuItem
+                        className={cn('font-normal text-2xl justify-between w-[100%] text-gray-900 dark:text-gray-100')}
+                        key={section.title || index}
+                        title={sectionTitle}
+                        hasMegaMenu={Boolean(section.hasMegaMenu)}
+                        isActive={false}
+                        href={section.hasMegaMenu ? undefined : getHref(section.link)}
+                        onClick={() => {
+                          if (section.hasMegaMenu !== true) {
+                            setIsOpen(false)
+                            setActiveSection(null)
+                          } else {
+                            setActiveSection(activeSection === sectionTitle ? null : sectionTitle)
+                          }
+                        }}
+                        isMobile={isMobile}
+                      />
+                    )
+                  })}
                 </div>
               )}
             </div>
