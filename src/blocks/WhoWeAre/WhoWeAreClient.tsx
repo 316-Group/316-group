@@ -720,6 +720,38 @@ export const WhoWeAreClient: React.FC<WhoWeAreProps> = ({
 
           {/* ── Right Column ── */}
           <div className="flex flex-col items-start w-full">
+            {/* Desktop Spacer: Aligns Right Description with Left Main Heading on desktop when Right Sub-Heading is empty */}
+            {!rightSubHeading && (showBadge || Boolean(subHeading)) && (
+              <div
+                className="hidden md:flex flex-col items-start w-full invisible pointer-events-none select-none"
+                aria-hidden="true"
+              >
+                {showBadge && (
+                  <div className={cn('inline-flex', badgeMb)}>
+                    <span
+                      className={cn(
+                        'inline-flex items-center px-4 py-1.5 rounded-full',
+                        badgeTypography.combined,
+                      )}
+                    >
+                      {badgeText}
+                    </span>
+                  </div>
+                )}
+
+                {subHeading && (
+                  <p
+                    className={cn(
+                      'tracking-tight leading-snug',
+                      subHeadingTypography.combined,
+                      subHeadingMb,
+                    )}
+                    dangerouslySetInnerHTML={{ __html: formatInlineHtml(subHeading) }}
+                  />
+                )}
+              </div>
+            )}
+
             {/* Right Sub-Heading (Optional) */}
             {rightSubHeading && (
               <p
