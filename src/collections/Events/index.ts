@@ -659,16 +659,38 @@ export const defaultEventTemplateLayout = [
       formTitle: 'Request a meeting',
       requiredNote: '* Required fields',
       fieldsConfig: {
+        showFirstName: true,
+        firstNameRequired: true,
         firstNameLabel: 'First name',
         firstNamePlaceholder: 'Your first name',
+
+        showLastName: true,
+        lastNameRequired: true,
         lastNameLabel: 'Last name',
         lastNamePlaceholder: 'Your last name',
+
+        showEmail: true,
+        emailRequired: true,
         emailLabel: 'Work email',
         emailPlaceholder: 'you@organisation.com',
+
+        showPhone: false,
+        phoneRequired: false,
+        phoneLabel: 'Phone number',
+        phonePlaceholder: '+1 (555) 000-0000',
+
+        showOrganisation: true,
+        organisationRequired: true,
         organisationLabel: 'Organisation',
         organisationPlaceholder: 'Organisation name',
+
+        showJobTitle: true,
+        jobTitleRequired: false,
         jobTitleLabel: 'Job title',
         jobTitlePlaceholder: 'Your role',
+
+        showDiscussionTopic: true,
+        discussionTopicRequired: true,
         discussionTopicLabel: 'What would you like to discuss?',
         discussionTopicPlaceholder: 'Select a discussion topic',
         discussionTopicOptions: [
@@ -678,6 +700,9 @@ export const defaultEventTemplateLayout = [
           { option: "Preparing for what's next in oncology" },
           { option: 'Other / General exploratory meeting' },
         ],
+
+        showPreferredDay: true,
+        preferredDayRequired: false,
         preferredDayLabel: 'Preferred day',
         preferredDayPlaceholder: 'Select 23–27 October',
         preferredDayOptions: [
@@ -688,6 +713,9 @@ export const defaultEventTemplateLayout = [
           { option: 'Tuesday, 27 October 2026' },
           { option: 'Flexible / Any day' },
         ],
+
+        showMeetingFormat: true,
+        meetingFormatRequired: false,
         meetingFormatLabel: 'Meeting format',
         meetingFormatPlaceholder: 'Select a preference',
         meetingFormatOptions: [
@@ -696,9 +724,15 @@ export const defaultEventTemplateLayout = [
           { option: 'Informal coffee chat' },
           { option: 'Virtual meeting post-congress' },
         ],
+
+        showNotes: true,
+        notesRequired: false,
         notesLabel: "Anything else you'd like us to know?",
         notesPlaceholder:
           'Share your priorities or availability. Please do not include patient or sensitive health information.',
+
+        showConsent: true,
+        consentRequired: true,
         consentLabel:
           'I agree that 316 Group may use these details to contact me about this meeting request.',
         privacyLinkText: 'See our Privacy notice.',

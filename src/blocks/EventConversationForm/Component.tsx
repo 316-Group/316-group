@@ -105,34 +105,61 @@ export interface EventConversationFormProps {
     requiredNote?: string | null
 
     fieldsConfig?: {
+      showFirstName?: boolean | null
+      firstNameRequired?: boolean | null
       firstNameLabel?: string | null
       firstNamePlaceholder?: string | null
+
+      showLastName?: boolean | null
+      lastNameRequired?: boolean | null
       lastNameLabel?: string | null
       lastNamePlaceholder?: string | null
 
+      showEmail?: boolean | null
+      emailRequired?: boolean | null
       emailLabel?: string | null
       emailPlaceholder?: string | null
 
+      showPhone?: boolean | null
+      phoneRequired?: boolean | null
+      phoneLabel?: string | null
+      phonePlaceholder?: string | null
+
+      showOrganisation?: boolean | null
+      organisationRequired?: boolean | null
       organisationLabel?: string | null
       organisationPlaceholder?: string | null
+
+      showJobTitle?: boolean | null
+      jobTitleRequired?: boolean | null
       jobTitleLabel?: string | null
       jobTitlePlaceholder?: string | null
 
+      showDiscussionTopic?: boolean | null
+      discussionTopicRequired?: boolean | null
       discussionTopicLabel?: string | null
       discussionTopicPlaceholder?: string | null
       discussionTopicOptions?: Array<{ id?: string | null; option: string }> | null
 
+      showPreferredDay?: boolean | null
+      preferredDayRequired?: boolean | null
       preferredDayLabel?: string | null
       preferredDayPlaceholder?: string | null
       preferredDayOptions?: Array<{ id?: string | null; option: string }> | null
 
+      showMeetingFormat?: boolean | null
+      meetingFormatRequired?: boolean | null
       meetingFormatLabel?: string | null
       meetingFormatPlaceholder?: string | null
       meetingFormatOptions?: Array<{ id?: string | null; option: string }> | null
 
+      showNotes?: boolean | null
+      notesRequired?: boolean | null
       notesLabel?: string | null
       notesPlaceholder?: string | null
 
+      showConsent?: boolean | null
+      consentRequired?: boolean | null
       consentLabel?: string | null
       privacyLinkText?: string | null
       privacyLinkUrl?: string | null
@@ -248,6 +275,7 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
     firstName: '',
     lastName: '',
     workEmail: '',
+    phone: '',
     organisation: '',
     jobTitle: '',
     discussionTopic: '',
@@ -298,6 +326,32 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
   const requiredNote = rightColumn?.requiredNote || '* Required fields'
   const fields = rightColumn?.fieldsConfig
 
+  // Dynamic Field Visibility Controls (Preserving current display as default)
+  const showFirstName = fields?.showFirstName !== false
+  const showLastName = fields?.showLastName !== false
+  const showEmail = fields?.showEmail !== false
+  const showPhone = Boolean(fields?.showPhone) // Default: NOT available
+  const showOrg = fields?.showOrganisation !== false
+  const showJob = fields?.showJobTitle !== false
+  const showTopic = fields?.showDiscussionTopic !== false
+  const showDay = fields?.showPreferredDay !== false
+  const showFormat = fields?.showMeetingFormat !== false
+  const showNotes = fields?.showNotes !== false
+  const showConsent = fields?.showConsent !== false
+
+  // Dynamic Field Required Flags (Preserving current requirements as default)
+  const isFirstNameReq = showFirstName && fields?.firstNameRequired !== false
+  const isLastNameReq = showLastName && fields?.lastNameRequired !== false
+  const isEmailReq = showEmail && fields?.emailRequired !== false
+  const isPhoneReq = showPhone && Boolean(fields?.phoneRequired)
+  const isOrgReq = showOrg && fields?.organisationRequired !== false
+  const isJobReq = showJob && Boolean(fields?.jobTitleRequired)
+  const isTopicReq = showTopic && fields?.discussionTopicRequired !== false
+  const isDayReq = showDay && Boolean(fields?.preferredDayRequired)
+  const isFormatReq = showFormat && Boolean(fields?.meetingFormatRequired)
+  const isNotesReq = showNotes && Boolean(fields?.notesRequired)
+  const isConsentReq = showConsent && fields?.consentRequired !== false
+
   // Left Column Typography with Fallback Cascades
   const kickerTypo = resolveTypography(
     kickerStyles?.fontSize || kicker?.fontSize || 'text-xs md:text-sm',
@@ -332,18 +386,24 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
     e.preventDefault()
     setErrorMessage(null)
 
-    if (
-      !formData.firstName.trim() ||
-      !formData.lastName.trim() ||
-      !formData.workEmail.trim() ||
-      !formData.organisation.trim() ||
-      !formData.discussionTopic.trim()
-    ) {
-      setErrorMessage('Please fill in all required fields indicated with an asterisk (*).')
+    const missingFields: string[] = []
+    if (isFirstNameReq && !formData.firstName.trim()) missingFields.push(fields?.firstNameLabel || 'First name')
+    if (isLastNameReq && !formData.lastName.trim()) missingFields.push(fields?.lastNameLabel || 'Last name')
+    if (isEmailReq && !formData.workEmail.trim()) missingFields.push(fields?.emailLabel || 'Work email')
+    if (isPhoneReq && !formData.phone.trim()) missingFields.push(fields?.phoneLabel || 'Phone number')
+    if (isOrgReq && !formData.organisation.trim()) missingFields.push(fields?.organisationLabel || 'Organisation')
+    if (isJobReq && !formData.jobTitle.trim()) missingFields.push(fields?.jobTitleLabel || 'Job title')
+    if (isTopicReq && !formData.discussionTopic.trim()) missingFields.push(fields?.discussionTopicLabel || 'Discussion topic')
+    if (isDayReq && !formData.preferredDay.trim()) missingFields.push(fields?.preferredDayLabel || 'Preferred day')
+    if (isFormatReq && !formData.meetingFormat.trim()) missingFields.push(fields?.meetingFormatLabel || 'Meeting format')
+    if (isNotesReq && !formData.notes.trim()) missingFields.push(fields?.notesLabel || 'Notes')
+
+    if (missingFields.length > 0) {
+      setErrorMessage(`Please fill in all required fields: ${missingFields.join(', ')}.`)
       return
     }
 
-    if (!formData.consentAccepted) {
+    if (isConsentReq && !formData.consentAccepted) {
       setErrorMessage('Please accept the privacy policy to submit your meeting request.')
       return
     }
@@ -358,6 +418,7 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
           firstName: formData.firstName,
           lastName: formData.lastName,
           workEmail: formData.workEmail,
+          phone: formData.phone,
           organisation: formData.organisation,
           jobTitle: formData.jobTitle,
           discussionTopic: formData.discussionTopic,
@@ -593,6 +654,7 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
                           firstName: '',
                           lastName: '',
                           workEmail: '',
+                          phone: '',
                           organisation: '',
                           jobTitle: '',
                           discussionTopic: '',
@@ -627,186 +689,241 @@ export const EventConversationFormBlock: React.FC<EventConversationFormProps> = 
                     )}
 
                     {/* Row 1: First & Last Name */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.firstNameLabel || 'First name'}{' '}
-                          <span className="text-[#0256FF]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.firstName}
-                          onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                          placeholder={fields?.firstNamePlaceholder || 'Your first name'}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        />
+                    {(showFirstName || showLastName) && (
+                      <div className={cn('grid gap-4 sm:gap-5', showFirstName && showLastName ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1')}>
+                        {showFirstName && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.firstNameLabel || 'First name'}{' '}
+                              {isFirstNameReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="text"
+                              required={isFirstNameReq}
+                              value={formData.firstName}
+                              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                              placeholder={fields?.firstNamePlaceholder || 'Your first name'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
+                        {showLastName && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.lastNameLabel || 'Last name'}{' '}
+                              {isLastNameReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="text"
+                              required={isLastNameReq}
+                              value={formData.lastName}
+                              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                              placeholder={fields?.lastNamePlaceholder || 'Your last name'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
                       </div>
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.lastNameLabel || 'Last name'}{' '}
-                          <span className="text-[#0256FF]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.lastName}
-                          onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                          placeholder={fields?.lastNamePlaceholder || 'Your last name'}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        />
-                      </div>
-                    </div>
+                    )}
 
-                    {/* Row 2: Work Email */}
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                        {fields?.emailLabel || 'Work email'}{' '}
-                        <span className="text-[#0256FF]">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.workEmail}
-                        onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
-                        placeholder={fields?.emailPlaceholder || 'you@organisation.com'}
-                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                      />
-                    </div>
+                    {/* Row 2: Work Email & Phone Number */}
+                    {(showEmail || showPhone) && (
+                      <div className={cn('grid gap-4 sm:gap-5', showEmail && showPhone ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1')}>
+                        {showEmail && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.emailLabel || 'Work email'}{' '}
+                              {isEmailReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="email"
+                              required={isEmailReq}
+                              value={formData.workEmail}
+                              onChange={(e) => setFormData({ ...formData, workEmail: e.target.value })}
+                              placeholder={fields?.emailPlaceholder || 'you@organisation.com'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
+                        {showPhone && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.phoneLabel || 'Phone number'}{' '}
+                              {isPhoneReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="tel"
+                              required={isPhoneReq}
+                              value={formData.phone}
+                              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                              placeholder={fields?.phonePlaceholder || '+1 (555) 000-0000'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     {/* Row 3: Organisation & Role */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.organisationLabel || 'Organisation'}{' '}
-                          <span className="text-[#0256FF]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.organisation}
-                          onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
-                          placeholder={fields?.organisationPlaceholder || 'Organisation name'}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        />
+                    {(showOrg || showJob) && (
+                      <div className={cn('grid gap-4 sm:gap-5', showOrg && showJob ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1')}>
+                        {showOrg && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.organisationLabel || 'Organisation'}{' '}
+                              {isOrgReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="text"
+                              required={isOrgReq}
+                              value={formData.organisation}
+                              onChange={(e) => setFormData({ ...formData, organisation: e.target.value })}
+                              placeholder={fields?.organisationPlaceholder || 'Organisation name'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
+                        {showJob && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.jobTitleLabel || 'Job title'}{' '}
+                              {isJobReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <input
+                              type="text"
+                              required={isJobReq}
+                              value={formData.jobTitle}
+                              onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
+                              placeholder={fields?.jobTitlePlaceholder || 'Your role'}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            />
+                          </div>
+                        )}
                       </div>
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.jobTitleLabel || 'Job title'}
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.jobTitle}
-                          onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
-                          placeholder={fields?.jobTitlePlaceholder || 'Your role'}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        />
-                      </div>
-                    </div>
+                    )}
 
                     {/* Row 4: Discussion Topic */}
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                        {fields?.discussionTopicLabel || 'What would you like to discuss?'}{' '}
-                        <span className="text-[#0256FF]">*</span>
-                      </label>
-                      <select
-                        required
-                        value={formData.discussionTopic}
-                        onChange={(e) => setFormData({ ...formData, discussionTopic: e.target.value })}
-                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                      >
-                        <option value="">
-                          {fields?.discussionTopicPlaceholder || 'Select a discussion topic'}
-                        </option>
-                        {fields?.discussionTopicOptions?.map((item, idx) => (
-                          <option key={item.id || idx} value={item.option}>
-                            {item.option}
+                    {showTopic && (
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                          {fields?.discussionTopicLabel || 'What would you like to discuss?'}{' '}
+                          {isTopicReq && <span className="text-[#0256FF]">*</span>}
+                        </label>
+                        <select
+                          required={isTopicReq}
+                          value={formData.discussionTopic}
+                          onChange={(e) => setFormData({ ...formData, discussionTopic: e.target.value })}
+                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                        >
+                          <option value="">
+                            {fields?.discussionTopicPlaceholder || 'Select a discussion topic'}
                           </option>
-                        ))}
-                      </select>
-                    </div>
+                          {fields?.discussionTopicOptions?.map((item, idx) => (
+                            <option key={item.id || idx} value={item.option}>
+                              {item.option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
 
                     {/* Row 5: Preferred Day & Format */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.preferredDayLabel || 'Preferred day'}
-                        </label>
-                        <select
-                          value={formData.preferredDay}
-                          onChange={(e) => setFormData({ ...formData, preferredDay: e.target.value })}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        >
-                          <option value="">
-                            {fields?.preferredDayPlaceholder || 'Select 23–27 October'}
-                          </option>
-                          {fields?.preferredDayOptions?.map((item, idx) => (
-                            <option key={item.id || idx} value={item.option}>
-                              {item.option}
-                            </option>
-                          ))}
-                        </select>
+                    {(showDay || showFormat) && (
+                      <div className={cn('grid gap-4 sm:gap-5', showDay && showFormat ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1')}>
+                        {showDay && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.preferredDayLabel || 'Preferred day'}{' '}
+                              {isDayReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <select
+                              required={isDayReq}
+                              value={formData.preferredDay}
+                              onChange={(e) => setFormData({ ...formData, preferredDay: e.target.value })}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            >
+                              <option value="">
+                                {fields?.preferredDayPlaceholder || 'Select 23–27 October'}
+                              </option>
+                              {fields?.preferredDayOptions?.map((item, idx) => (
+                                <option key={item.id || idx} value={item.option}>
+                                  {item.option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                        {showFormat && (
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                              {fields?.meetingFormatLabel || 'Meeting format'}{' '}
+                              {isFormatReq && <span className="text-[#0256FF]">*</span>}
+                            </label>
+                            <select
+                              required={isFormatReq}
+                              value={formData.meetingFormat}
+                              onChange={(e) => setFormData({ ...formData, meetingFormat: e.target.value })}
+                              className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
+                            >
+                              <option value="">
+                                {fields?.meetingFormatPlaceholder || 'Select a preference'}
+                              </option>
+                              {fields?.meetingFormatOptions?.map((item, idx) => (
+                                <option key={item.id || idx} value={item.option}>
+                                  {item.option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
                       </div>
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                          {fields?.meetingFormatLabel || 'Meeting format'}
-                        </label>
-                        <select
-                          value={formData.meetingFormat}
-                          onChange={(e) => setFormData({ ...formData, meetingFormat: e.target.value })}
-                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all"
-                        >
-                          <option value="">
-                            {fields?.meetingFormatPlaceholder || 'Select a preference'}
-                          </option>
-                          {fields?.meetingFormatOptions?.map((item, idx) => (
-                            <option key={item.id || idx} value={item.option}>
-                              {item.option}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
+                    )}
 
                     {/* Row 6: Additional Information */}
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-xs sm:text-sm font-semibold text-slate-900">
-                        {fields?.notesLabel || "Anything else you'd like us to know?"}
-                      </label>
-                      <textarea
-                        rows={3}
-                        value={formData.notes}
-                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        placeholder={
-                          fields?.notesPlaceholder ||
-                          'Share your priorities or availability. Please do not include patient or sensitive health information.'
-                        }
-                        className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all resize-none"
-                      />
-                    </div>
+                    {showNotes && (
+                      <div className="flex flex-col gap-1.5">
+                        <label className="text-xs sm:text-sm font-semibold text-slate-900">
+                          {fields?.notesLabel || "Anything else you'd like us to know?"}{' '}
+                          {isNotesReq && <span className="text-[#0256FF]">*</span>}
+                        </label>
+                        <textarea
+                          rows={3}
+                          required={isNotesReq}
+                          value={formData.notes}
+                          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                          placeholder={
+                            fields?.notesPlaceholder ||
+                            'Share your priorities or availability. Please do not include patient or sensitive health information.'
+                          }
+                          className="w-full px-3.5 py-2.5 sm:py-3 rounded-lg border border-slate-200 text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-[#0256FF] focus:border-transparent transition-all resize-none"
+                        />
+                      </div>
+                    )}
 
                     {/* Row 7: Consent Checkbox */}
-                    <div className="flex items-start gap-3 pt-1">
-                      <input
-                        type="checkbox"
-                        id="consent-checkbox"
-                        required
-                        checked={formData.consentAccepted}
-                        onChange={(e) => setFormData({ ...formData, consentAccepted: e.target.checked })}
-                        className="mt-1 w-4 h-4 rounded border-slate-300 text-[#0256FF] focus:ring-[#0256FF]"
-                      />
-                      <label htmlFor="consent-checkbox" className="text-xs sm:text-sm text-slate-600 leading-normal">
-                        {fields?.consentLabel ||
-                          'I agree that 316 Group may use these details to contact me about this meeting request.'}{' '}
-                        <Link
-                          href={fields?.privacyLinkUrl || '/privacy-policy'}
-                          className="text-[#0256FF] underline font-medium hover:opacity-80"
-                        >
-                          {fields?.privacyLinkText || 'See our Privacy notice.'}
-                        </Link>
-                      </label>
-                    </div>
+                    {showConsent && (
+                      <div className="flex items-start gap-3 pt-1">
+                        <input
+                          type="checkbox"
+                          id="consent-checkbox"
+                          required={isConsentReq}
+                          checked={formData.consentAccepted}
+                          onChange={(e) => setFormData({ ...formData, consentAccepted: e.target.checked })}
+                          className="mt-1 w-4 h-4 rounded border-slate-300 text-[#0256FF] focus:ring-[#0256FF]"
+                        />
+                        <label htmlFor="consent-checkbox" className="text-xs sm:text-sm text-slate-600 leading-normal">
+                          {fields?.consentLabel ||
+                            'I agree that 316 Group may use these details to contact me about this meeting request.'}{' '}
+                          {isConsentReq && <span className="text-[#0256FF] mr-1">*</span>}
+                          <Link
+                            href={fields?.privacyLinkUrl || '/privacy-policy'}
+                            className="text-[#0256FF] underline font-medium hover:opacity-80"
+                          >
+                            {fields?.privacyLinkText || 'See our Privacy notice.'}
+                          </Link>
+                        </label>
+                      </div>
+                    )}
 
                     {/* Row 8: Submit CTA Button */}
                     <div className="pt-2">

@@ -35,22 +35,34 @@ export const EventInquiries: CollectionConfig = {
         {
           name: 'firstName',
           type: 'text',
-          required: true,
+          required: false,
           admin: { width: '50%' },
         },
         {
           name: 'lastName',
           type: 'text',
-          required: true,
+          required: false,
           admin: { width: '50%' },
         },
       ],
     },
     {
-      name: 'workEmail',
-      type: 'email',
-      required: true,
-      index: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'workEmail',
+          type: 'email',
+          required: true,
+          index: true,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'phone',
+          type: 'text',
+          label: 'Phone Number',
+          admin: { width: '50%' },
+        },
+      ],
     },
     {
       type: 'row',
@@ -58,7 +70,7 @@ export const EventInquiries: CollectionConfig = {
         {
           name: 'organisation',
           type: 'text',
-          required: true,
+          required: false,
           admin: { width: '50%' },
         },
         {
@@ -71,7 +83,7 @@ export const EventInquiries: CollectionConfig = {
     {
       name: 'discussionTopic',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       type: 'row',

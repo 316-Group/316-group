@@ -235642,16 +235642,32 @@ export interface EventConversationFormBlock {
     formTitle?: string | null;
     requiredNote?: string | null;
     fieldsConfig?: {
+      showFirstName?: boolean | null;
+      firstNameRequired?: boolean | null;
       firstNameLabel?: string | null;
       firstNamePlaceholder?: string | null;
+      showLastName?: boolean | null;
+      lastNameRequired?: boolean | null;
       lastNameLabel?: string | null;
       lastNamePlaceholder?: string | null;
+      showEmail?: boolean | null;
+      emailRequired?: boolean | null;
       emailLabel?: string | null;
       emailPlaceholder?: string | null;
+      showPhone?: boolean | null;
+      phoneRequired?: boolean | null;
+      phoneLabel?: string | null;
+      phonePlaceholder?: string | null;
+      showOrganisation?: boolean | null;
+      organisationRequired?: boolean | null;
       organisationLabel?: string | null;
       organisationPlaceholder?: string | null;
+      showJobTitle?: boolean | null;
+      jobTitleRequired?: boolean | null;
       jobTitleLabel?: string | null;
       jobTitlePlaceholder?: string | null;
+      showDiscussionTopic?: boolean | null;
+      discussionTopicRequired?: boolean | null;
       discussionTopicLabel?: string | null;
       discussionTopicPlaceholder?: string | null;
       discussionTopicOptions?:
@@ -235660,6 +235676,8 @@ export interface EventConversationFormBlock {
             id?: string | null;
           }[]
         | null;
+      showPreferredDay?: boolean | null;
+      preferredDayRequired?: boolean | null;
       preferredDayLabel?: string | null;
       preferredDayPlaceholder?: string | null;
       preferredDayOptions?:
@@ -235668,6 +235686,8 @@ export interface EventConversationFormBlock {
             id?: string | null;
           }[]
         | null;
+      showMeetingFormat?: boolean | null;
+      meetingFormatRequired?: boolean | null;
       meetingFormatLabel?: string | null;
       meetingFormatPlaceholder?: string | null;
       meetingFormatOptions?:
@@ -235676,8 +235696,12 @@ export interface EventConversationFormBlock {
             id?: string | null;
           }[]
         | null;
+      showNotes?: boolean | null;
+      notesRequired?: boolean | null;
       notesLabel?: string | null;
       notesPlaceholder?: string | null;
+      showConsent?: boolean | null;
+      consentRequired?: boolean | null;
       consentLabel?: string | null;
       privacyLinkText?: string | null;
       privacyLinkUrl?: string | null;
@@ -264998,12 +265022,13 @@ export interface Event {
  */
 export interface EventInquiry {
   id: string;
-  firstName: string;
-  lastName: string;
+  firstName?: string | null;
+  lastName?: string | null;
   workEmail: string;
-  organisation: string;
+  phone?: string | null;
+  organisation?: string | null;
   jobTitle?: string | null;
-  discussionTopic: string;
+  discussionTopic?: string | null;
   preferredDay?: string | null;
   meetingFormat?: string | null;
   notes?: string | null;
@@ -307342,16 +307367,32 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
         fieldsConfig?:
           | T
           | {
+              showFirstName?: T;
+              firstNameRequired?: T;
               firstNameLabel?: T;
               firstNamePlaceholder?: T;
+              showLastName?: T;
+              lastNameRequired?: T;
               lastNameLabel?: T;
               lastNamePlaceholder?: T;
+              showEmail?: T;
+              emailRequired?: T;
               emailLabel?: T;
               emailPlaceholder?: T;
+              showPhone?: T;
+              phoneRequired?: T;
+              phoneLabel?: T;
+              phonePlaceholder?: T;
+              showOrganisation?: T;
+              organisationRequired?: T;
               organisationLabel?: T;
               organisationPlaceholder?: T;
+              showJobTitle?: T;
+              jobTitleRequired?: T;
               jobTitleLabel?: T;
               jobTitlePlaceholder?: T;
+              showDiscussionTopic?: T;
+              discussionTopicRequired?: T;
               discussionTopicLabel?: T;
               discussionTopicPlaceholder?: T;
               discussionTopicOptions?:
@@ -307360,6 +307401,8 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
                     option?: T;
                     id?: T;
                   };
+              showPreferredDay?: T;
+              preferredDayRequired?: T;
               preferredDayLabel?: T;
               preferredDayPlaceholder?: T;
               preferredDayOptions?:
@@ -307368,6 +307411,8 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
                     option?: T;
                     id?: T;
                   };
+              showMeetingFormat?: T;
+              meetingFormatRequired?: T;
               meetingFormatLabel?: T;
               meetingFormatPlaceholder?: T;
               meetingFormatOptions?:
@@ -307376,8 +307421,12 @@ export interface EventConversationFormBlockSelect<T extends boolean = true> {
                     option?: T;
                     id?: T;
                   };
+              showNotes?: T;
+              notesRequired?: T;
               notesLabel?: T;
               notesPlaceholder?: T;
+              showConsent?: T;
+              consentRequired?: T;
               consentLabel?: T;
               privacyLinkText?: T;
               privacyLinkUrl?: T;
@@ -308765,6 +308814,7 @@ export interface EventInquiriesSelect<T extends boolean = true> {
   firstName?: T;
   lastName?: T;
   workEmail?: T;
+  phone?: T;
   organisation?: T;
   jobTitle?: T;
   discussionTopic?: T;

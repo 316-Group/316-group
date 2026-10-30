@@ -93,7 +93,7 @@ export const EventRecapArticleBlock: React.FC<EventRecapArticleProps> = (props) 
             : cn(paddingLeft || 'px-6', paddingRight),
         )}
       >
-        <div className="max-w-4xl flex flex-col">
+        <div className="w-full max-w-none flex flex-col">
           {/* 1. Kicker / Accent Square + Text */}
           {kickerText && (
             <div
@@ -127,7 +127,7 @@ export const EventRecapArticleBlock: React.FC<EventRecapArticleProps> = (props) 
           {heading && (
             <div
               className={cn(
-                'tracking-tight leading-[1.12]',
+                'w-full max-w-none tracking-tight leading-[1.12]',
                 headingStyles.textColor || 'text-gray-950',
                 headingStyles.fontSizeMobile || 'text-3xl',
                 `md:${headingStyles.fontSizeDesktop || 'text-4xl md:text-5xl lg:text-6xl'}`,
@@ -135,17 +135,18 @@ export const EventRecapArticleBlock: React.FC<EventRecapArticleProps> = (props) 
                 `md:${headingStyles.fontWeightDesktop || 'font-bold'}`,
                 headingStyles.marginBottomMobile || 'mb-4',
                 `md:${headingStyles.marginBottomDesktop || 'mb-6 md:mb-8'}`,
-                '[&_p]:m-0 [&_h1]:m-0 [&_h2]:m-0',
+                '[&_p]:m-0 [&_h1]:m-0 [&_h2]:m-0 [&_.prose]:max-w-none',
               )}
             >
               <RichText content={heading} enableGutter={false} />
             </div>
           )}
 
-          {/* 3. Description (Preserving paragraph spacing) */}
+          {/* 3. Description (Preserving paragraph spacing and taking full available width) */}
           {description && (
             <div
               className={cn(
+                'w-full max-w-none',
                 descriptionStyles.textColor || 'text-slate-600',
                 descriptionStyles.fontSizeMobile || 'text-sm md:text-base',
                 `md:${descriptionStyles.fontSizeDesktop || 'text-base md:text-lg'}`,
@@ -153,7 +154,7 @@ export const EventRecapArticleBlock: React.FC<EventRecapArticleProps> = (props) 
                 `md:${descriptionStyles.fontWeightDesktop || 'font-normal'}`,
                 descriptionStyles.marginBottomMobile || 'mb-6',
                 `md:${descriptionStyles.marginBottomDesktop || 'mb-8 md:mb-10'}`,
-                'prose-p:mb-6 prose-p:leading-relaxed',
+                'prose-p:mb-6 prose-p:leading-relaxed prose-p:max-w-none [&_.prose]:max-w-none',
               )}
             >
               <RichText content={description} enableGutter={false} />

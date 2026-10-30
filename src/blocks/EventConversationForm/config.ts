@@ -262,11 +262,26 @@ export const eventConversationFormFields: Field[] = [
               {
                 name: 'fieldsConfig',
                 type: 'group',
-                label: 'Form Field Labels & Options',
+                label: 'Form Field Configuration, Options & Validation',
                 fields: [
+                  // 1. First Name
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showFirstName',
+                        type: 'checkbox',
+                        label: 'Show First Name',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'firstNameRequired',
+                        type: 'checkbox',
+                        label: 'First Name Required',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'firstNameLabel',
                         type: 'text',
@@ -279,6 +294,27 @@ export const eventConversationFormFields: Field[] = [
                         type: 'text',
                         label: 'First Name Placeholder',
                         defaultValue: 'Your first name',
+                        admin: { width: '25%' },
+                      },
+                    ],
+                  },
+
+                  // 2. Last Name
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'showLastName',
+                        type: 'checkbox',
+                        label: 'Show Last Name',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'lastNameRequired',
+                        type: 'checkbox',
+                        label: 'Last Name Required',
+                        defaultValue: true,
                         admin: { width: '25%' },
                       },
                       {
@@ -297,28 +333,95 @@ export const eventConversationFormFields: Field[] = [
                       },
                     ],
                   },
+
+                  // 3. Work Email
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showEmail',
+                        type: 'checkbox',
+                        label: 'Show Work Email',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'emailRequired',
+                        type: 'checkbox',
+                        label: 'Work Email Required',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'emailLabel',
                         type: 'text',
                         label: 'Work Email Label',
                         defaultValue: 'Work email',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                       {
                         name: 'emailPlaceholder',
                         type: 'text',
                         label: 'Work Email Placeholder',
                         defaultValue: 'you@organisation.com',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                     ],
                   },
+
+                  // 4. Phone Number (Default: NOT available)
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showPhone',
+                        type: 'checkbox',
+                        label: 'Show Phone Number (Disabled by default)',
+                        defaultValue: false,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'phoneRequired',
+                        type: 'checkbox',
+                        label: 'Phone Required',
+                        defaultValue: false,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'phoneLabel',
+                        type: 'text',
+                        label: 'Phone Label',
+                        defaultValue: 'Phone number',
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'phonePlaceholder',
+                        type: 'text',
+                        label: 'Phone Placeholder',
+                        defaultValue: '+1 (555) 000-0000',
+                        admin: { width: '25%' },
+                      },
+                    ],
+                  },
+
+                  // 5. Organisation
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'showOrganisation',
+                        type: 'checkbox',
+                        label: 'Show Organisation',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'organisationRequired',
+                        type: 'checkbox',
+                        label: 'Organisation Required',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'organisationLabel',
                         type: 'text',
@@ -331,6 +434,27 @@ export const eventConversationFormFields: Field[] = [
                         type: 'text',
                         label: 'Organisation Placeholder',
                         defaultValue: 'Organisation name',
+                        admin: { width: '25%' },
+                      },
+                    ],
+                  },
+
+                  // 6. Job Title
+                  {
+                    type: 'row',
+                    fields: [
+                      {
+                        name: 'showJobTitle',
+                        type: 'checkbox',
+                        label: 'Show Job Title',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'jobTitleRequired',
+                        type: 'checkbox',
+                        label: 'Job Title Required',
+                        defaultValue: false,
                         admin: { width: '25%' },
                       },
                       {
@@ -349,29 +473,45 @@ export const eventConversationFormFields: Field[] = [
                       },
                     ],
                   },
+
+                  // 7. Discussion Topic
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showDiscussionTopic',
+                        type: 'checkbox',
+                        label: 'Show Discussion Topic',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'discussionTopicRequired',
+                        type: 'checkbox',
+                        label: 'Discussion Topic Required',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'discussionTopicLabel',
                         type: 'text',
                         label: 'Discussion Topic Label',
                         defaultValue: 'What would you like to discuss?',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                       {
                         name: 'discussionTopicPlaceholder',
                         type: 'text',
                         label: 'Discussion Topic Placeholder',
                         defaultValue: 'Select a discussion topic',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                     ],
                   },
                   {
                     name: 'discussionTopicOptions',
                     type: 'array',
-                    label: 'Discussion Topic Dropdown Options',
+                    label: 'Discussion Topic Dropdown Options (Add, edit, or delete options)',
                     defaultValue: [
                       { option: 'Connecting technology to clinical reality' },
                       { option: 'Data that actually serves clinicians' },
@@ -388,29 +528,45 @@ export const eventConversationFormFields: Field[] = [
                       },
                     ],
                   },
+
+                  // 8. Preferred Day
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showPreferredDay',
+                        type: 'checkbox',
+                        label: 'Show Preferred Day',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'preferredDayRequired',
+                        type: 'checkbox',
+                        label: 'Preferred Day Required',
+                        defaultValue: false,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'preferredDayLabel',
                         type: 'text',
                         label: 'Preferred Day Label',
                         defaultValue: 'Preferred day',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                       {
                         name: 'preferredDayPlaceholder',
                         type: 'text',
                         label: 'Preferred Day Placeholder',
                         defaultValue: 'Select 23–27 October',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                     ],
                   },
                   {
                     name: 'preferredDayOptions',
                     type: 'array',
-                    label: 'Preferred Day Options',
+                    label: 'Preferred Day Dropdown Options (Add, edit, or delete options)',
                     defaultValue: [
                       { option: 'Friday, 23 October 2026' },
                       { option: 'Saturday, 24 October 2026' },
@@ -428,29 +584,45 @@ export const eventConversationFormFields: Field[] = [
                       },
                     ],
                   },
+
+                  // 9. Meeting Format
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showMeetingFormat',
+                        type: 'checkbox',
+                        label: 'Show Meeting Format',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'meetingFormatRequired',
+                        type: 'checkbox',
+                        label: 'Meeting Format Required',
+                        defaultValue: false,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'meetingFormatLabel',
                         type: 'text',
                         label: 'Meeting Format Label',
                         defaultValue: 'Meeting format',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                       {
                         name: 'meetingFormatPlaceholder',
                         type: 'text',
                         label: 'Meeting Format Placeholder',
                         defaultValue: 'Select a preference',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                     ],
                   },
                   {
                     name: 'meetingFormatOptions',
                     type: 'array',
-                    label: 'Meeting Format Options',
+                    label: 'Meeting Format Dropdown Options (Add, edit, or delete options)',
                     defaultValue: [
                       { option: 'One-to-one exchange' },
                       { option: 'Team discussion' },
@@ -466,15 +638,31 @@ export const eventConversationFormFields: Field[] = [
                       },
                     ],
                   },
+
+                  // 10. Notes / Additional Info
                   {
                     type: 'row',
                     fields: [
                       {
+                        name: 'showNotes',
+                        type: 'checkbox',
+                        label: 'Show Notes / Additional Info',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'notesRequired',
+                        type: 'checkbox',
+                        label: 'Notes Required',
+                        defaultValue: false,
+                        admin: { width: '25%' },
+                      },
+                      {
                         name: 'notesLabel',
                         type: 'text',
-                        label: 'Notes / Textarea Label',
+                        label: 'Notes Label',
                         defaultValue: "Anything else you'd like us to know?",
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                       {
                         name: 'notesPlaceholder',
@@ -482,13 +670,29 @@ export const eventConversationFormFields: Field[] = [
                         label: 'Notes Placeholder',
                         defaultValue:
                           'Share your priorities or availability. Please do not include patient or sensitive health information.',
-                        admin: { width: '50%' },
+                        admin: { width: '25%' },
                       },
                     ],
                   },
+
+                  // 11. Consent
                   {
                     type: 'row',
                     fields: [
+                      {
+                        name: 'showConsent',
+                        type: 'checkbox',
+                        label: 'Show Consent Checkbox',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
+                      {
+                        name: 'consentRequired',
+                        type: 'checkbox',
+                        label: 'Consent Required',
+                        defaultValue: true,
+                        admin: { width: '25%' },
+                      },
                       {
                         name: 'consentLabel',
                         type: 'text',
@@ -497,22 +701,29 @@ export const eventConversationFormFields: Field[] = [
                           'I agree that 316 Group may use these details to contact me about this meeting request.',
                         admin: { width: '50%' },
                       },
+                    ],
+                  },
+                  {
+                    type: 'row',
+                    fields: [
                       {
                         name: 'privacyLinkText',
                         type: 'text',
                         label: 'Privacy Link Text',
                         defaultValue: 'See our Privacy notice.',
-                        admin: { width: '25%' },
+                        admin: { width: '50%' },
                       },
                       {
                         name: 'privacyLinkUrl',
                         type: 'text',
                         label: 'Privacy Link URL',
                         defaultValue: '/privacy-policy',
-                        admin: { width: '25%' },
+                        admin: { width: '50%' },
                       },
                     ],
                   },
+
+                  // Submit button & Disclaimer
                   {
                     name: 'submitButtonText',
                     type: 'text',

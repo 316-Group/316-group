@@ -1,21 +1,52 @@
 export interface EventInquiryData {
   firstName: string
-  lastName: string
+  lastName?: string
   workEmail: string
-  organisation: string
+  phone?: string
+  organisation?: string
   jobTitle?: string
-  discussionTopic: string
+  discussionTopic?: string
   preferredDay?: string
   meetingFormat?: string
   notes?: string
   sourceEventTitle?: string
+  eventHeroHeading?: string
+  eventStartDate?: string
+  roadmapTitle?: string
+  roadmapSteps?: Array<{
+    numberText?: string | null
+    text?: string | null
+  }>
   inquiryId?: string
   adminDashboardUrl?: string
 }
 
 export function generateUserConfirmationEmail(data: EventInquiryData): string {
-  const { firstName, organisation, discussionTopic, preferredDay, meetingFormat, sourceEventTitle } = data
-  const eventName = sourceEventTitle || 'ESMO 2026'
+  const {
+    firstName,
+    discussionTopic,
+    preferredDay,
+    meetingFormat,
+    sourceEventTitle,
+    eventHeroHeading,
+    eventStartDate,
+    roadmapTitle,
+    roadmapSteps,
+  } = data
+
+  const eventName = (eventHeroHeading || sourceEventTitle || '316 Group Event').trim()
+  const startDateText = eventStartDate || 'the scheduled event date'
+  const formatText = (meetingFormat && meetingFormat.trim()) ? meetingFormat.trim() : 'team discussion'
+  const topicText = (discussionTopic && discussionTopic.trim()) ? discussionTopic.trim() : 'our capabilities can'
+  const sectionTitle = (roadmapTitle && roadmapTitle.trim()) ? roadmapTitle.trim() : 'What happens next?'
+
+  const defaultSteps = [
+    { numberText: '01', text: 'Share your interests and availability.' },
+    { numberText: '02', text: "We'll follow up to shape the conversation." },
+    { numberText: '03', text: 'Confirm a time and place together.' },
+  ]
+
+  const activeSteps = roadmapSteps && roadmapSteps.length > 0 ? roadmapSteps : defaultSteps
 
   return `
 <!DOCTYPE html>
@@ -48,21 +79,22 @@ export function generateUserConfirmationEmail(data: EventInquiryData): string {
 <body>
   <div class="container">
     <div class="header">
-      <div class="kicker">316 Group at ${eventName}</div>
+      <div class="kicker">316 Group Event</div>
       <h1 class="title">We received your meeting request</h1>
     </div>
     <div class="content">
       <p class="greeting">
         Hello ${firstName},<br><br>
-        Thank you for reaching out to 316 Group. We are excited to connect with you and ${organisation || 'your team'} during ${eventName}.
+        We are excited to connect with you at the upcoming ‘${eventName}’ event on ${startDateText} for a ‘${formatText}’ to discuss how ‘${topicText}’ be a solution for your business.
       </p>
 
       <div class="summary-card">
         <h3 class="summary-title">Meeting Details Requested</h3>
+        ${discussionTopic ? `
         <div class="summary-row">
           <span class="summary-label">Discussion Topic:</span>
           <span class="summary-val">${discussionTopic}</span>
-        </div>
+        </div>` : ''}
         ${preferredDay ? `
         <div class="summary-row">
           <span class="summary-label">Preferred Date:</span>
@@ -74,25 +106,23 @@ export function generateUserConfirmationEmail(data: EventInquiryData): string {
           <span class="summary-val">${meetingFormat}</span>
         </div>` : ''}
         <div class="summary-row">
-          <span class="summary-label">Location:</span>
-          <span class="summary-val">The Westin Palace, Madrid</span>
+          <span class="summary-label">Event:</span>
+          <span class="summary-val">${eventName}</span>
         </div>
       </div>
 
       <div class="steps-section">
-        <div class="steps-heading">What happens next?</div>
-        <div class="step-item">
-          <span class="step-num">1</span>
-          <span class="step-text"><strong>Reviewing your priorities:</strong> Our oncology and health solutions team is reviewing your requested discussion points.</span>
-        </div>
-        <div class="step-item">
-          <span class="step-num">2</span>
-          <span class="step-text"><strong>Coordinating with you:</strong> We'll be in touch shortly to confirm a specific time and location that fits your congress schedule.</span>
-        </div>
-        <div class="step-item">
-          <span class="step-num">3</span>
-          <span class="step-text"><strong>Meeting in Madrid:</strong> We look forward to an open, productive exchange.</span>
-        </div>
+        <div class="steps-heading">${sectionTitle}</div>
+        ${activeSteps
+          .map((step, idx) => {
+            const num = (step.numberText && step.numberText.trim()) || String(idx + 1).padStart(2, '0')
+            return `
+          <div class="step-item">
+            <span class="step-num">${num}</span>
+            <span class="step-text">${step.text || ''}</span>
+          </div>`
+          })
+          .join('')}
       </div>
 
       <p style="font-size: 13px; color: #64748b; line-height: 1.5; margin: 0;">
@@ -114,6 +144,7 @@ export function generateAdminNotificationEmail(data: EventInquiryData): string {
     firstName,
     lastName,
     workEmail,
+    phone,
     organisation,
     jobTitle,
     discussionTopic,
@@ -123,6 +154,8 @@ export function generateAdminNotificationEmail(data: EventInquiryData): string {
     sourceEventTitle,
     adminDashboardUrl,
   } = data
+
+  const attendeeName = [firstName, lastName].filter(Boolean).join(' ') || 'Attendee'
 
   return `
 <!DOCTYPE html>
@@ -145,16 +178,17 @@ export function generateAdminNotificationEmail(data: EventInquiryData): string {
 <body>
   <div class="box">
     <span class="badge">New Event Meeting Request</span>
-    <h2>${firstName} ${lastName} from ${organisation}</h2>
+    <h2>${attendeeName} ${organisation ? `from ${organisation}` : ''}</h2>
     <table>
-      <tr><td class="label">Attendee Name</td><td class="value">${firstName} ${lastName}</td></tr>
+      <tr><td class="label">Attendee Name</td><td class="value">${attendeeName}</td></tr>
       <tr><td class="label">Work Email</td><td class="value"><a href="mailto:${workEmail}">${workEmail}</a></td></tr>
-      <tr><td class="label">Organisation</td><td class="value">${organisation}</td></tr>
+      ${phone ? `<tr><td class="label">Phone</td><td class="value">${phone}</td></tr>` : ''}
+      <tr><td class="label">Organisation</td><td class="value">${organisation || 'N/A'}</td></tr>
       <tr><td class="label">Job Title</td><td class="value">${jobTitle || 'N/A'}</td></tr>
-      <tr><td class="label">Discussion Topic</td><td class="value">${discussionTopic}</td></tr>
+      <tr><td class="label">Discussion Topic</td><td class="value">${discussionTopic || 'N/A'}</td></tr>
       <tr><td class="label">Preferred Day</td><td class="value">${preferredDay || 'Flexible'}</td></tr>
       <tr><td class="label">Meeting Format</td><td class="value">${meetingFormat || 'Not specified'}</td></tr>
-      <tr><td class="label">Source Event</td><td class="value">${sourceEventTitle || 'ESMO 2026'}</td></tr>
+      <tr><td class="label">Source Event</td><td class="value">${sourceEventTitle || '316 Group Event'}</td></tr>
       ${notes ? `<tr><td class="label">Additional Notes</td><td class="value">${notes}</td></tr>` : ''}
     </table>
     ${adminDashboardUrl ? `<a href="${adminDashboardUrl}" class="btn">View in Payload CMS &rarr;</a>` : ''}

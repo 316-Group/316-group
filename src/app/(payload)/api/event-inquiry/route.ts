@@ -7,6 +7,31 @@ import {
 } from '@/collections/EventInquiries/EmailTemplates'
 import { getServerSideURL } from '@/utilities/getURL'
 
+function cleanHeadingText(raw?: string | null): string {
+  if (!raw) return ''
+  return raw
+    .replace(/<style=(["'])(.*?)\1>(.*?)<\/style>/gi, '$3')
+    .replace(/<[^>]*>/g, '')
+    .replace(/\r?\n|\r/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function formatEventStartDate(dateString?: string | null): string {
+  if (!dateString) return ''
+  try {
+    const d = new Date(dateString)
+    if (isNaN(d.getTime())) return ''
+    return d.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  } catch (err) {
+    return ''
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const payload = await getPayload({ config })
@@ -16,6 +41,7 @@ export async function POST(request: NextRequest) {
       firstName,
       lastName,
       workEmail,
+      phone,
       organisation,
       jobTitle,
       discussionTopic,
@@ -27,31 +53,30 @@ export async function POST(request: NextRequest) {
       sourceEventSlug,
     } = body
 
-    // 1. Validate required fields
-    if (!firstName || !lastName || !workEmail || !organisation || !discussionTopic) {
+    // 1. Validate workEmail (required for delivering meeting confirmation)
+    if (!workEmail || !workEmail.trim()) {
       return NextResponse.json(
-        { error: 'Please provide all required fields: first name, last name, work email, organisation, and discussion topic.' },
+        { error: 'Please provide a valid work email address.' },
         { status: 400 },
       )
     }
 
-    if (!consentAccepted) {
-      return NextResponse.json(
-        { error: 'Please accept the privacy policy to submit your meeting request.' },
-        { status: 400 },
-      )
-    }
+    let eventHeroHeading = ''
+    let eventStartDateFormatted = ''
+    let roadmapTitle = 'What happens next?'
+    let roadmapSteps: Array<{ numberText?: string | null; text?: string | null }> = []
 
-    // 2. Check if the event has concluded
+    // 2. Query event document to check operational schedule and extract dynamic content
     if (sourceEventSlug) {
       try {
         const sourceEvent = await payload.find({
           collection: 'events',
           where: { slug: { equals: sourceEventSlug } },
-          depth: 0,
+          depth: 1,
           limit: 1,
         })
         const eventDoc: any = sourceEvent.docs?.[0]
+
         if (eventDoc?.schedule?.endDate) {
           const now = new Date()
           const eventEnd = new Date(eventDoc.schedule.endDate)
@@ -65,8 +90,36 @@ export async function POST(request: NextRequest) {
             )
           }
         }
+
+        // Extract Event Hero Main Heading
+        const heroBlock = Array.isArray(eventDoc?.layout)
+          ? eventDoc.layout.find((b: any) => b?.blockType === 'eventHero')
+          : null
+        const rawHeading = heroBlock?.headingGroup?.heading
+        eventHeroHeading = cleanHeadingText(rawHeading) || eventDoc?.title || sourceEventTitle || ''
+
+        // Extract and format Start Date (required before publishing)
+        if (eventDoc?.schedule?.startDate) {
+          eventStartDateFormatted = formatEventStartDate(eventDoc.schedule.startDate)
+        }
+
+        // Extract Roadmap Section Title and Steps from Event Conversation Form block
+        const formBlock = Array.isArray(eventDoc?.layout)
+          ? eventDoc.layout.find((b: any) => b?.blockType === 'eventConversationForm')
+          : null
+
+        if (formBlock?.leftColumn?.stepsTitle?.text) {
+          roadmapTitle = formBlock.leftColumn.stepsTitle.text.trim()
+        }
+
+        if (Array.isArray(formBlock?.leftColumn?.steps) && formBlock.leftColumn.steps.length > 0) {
+          roadmapSteps = formBlock.leftColumn.steps.map((s: any) => ({
+            numberText: s?.numberText || null,
+            text: s?.text || null,
+          }))
+        }
       } catch (err) {
-        // Non-blocking query error
+        console.error('Non-blocking error retrieving event document:', err)
       }
     }
 
@@ -76,17 +129,18 @@ export async function POST(request: NextRequest) {
     const inquiry = await payload.create({
       collection: 'event-inquiries',
       data: {
-        firstName,
-        lastName,
+        firstName: firstName || '',
+        lastName: lastName || '',
         workEmail,
-        organisation,
+        phone: phone || '',
+        organisation: organisation || '',
         jobTitle: jobTitle || '',
-        discussionTopic,
+        discussionTopic: discussionTopic || '',
         preferredDay: preferredDay || 'Flexible',
         meetingFormat: meetingFormat || 'One-to-one exchange',
         notes: notes || '',
         consentAccepted: Boolean(consentAccepted),
-        sourceEventTitle: sourceEventTitle || '316 Group at ESMO 2026',
+        sourceEventTitle: eventHeroHeading || sourceEventTitle || '316 Group Event',
         sourceEventSlug: sourceEventSlug || 'esmo-2026',
         status: 'pending',
       },
@@ -94,12 +148,13 @@ export async function POST(request: NextRequest) {
 
     const adminDashboardUrl = `${serverUrl}/admin/collections/event-inquiries/${inquiry.id}`
 
-    // 3. Dispatch Requester Confirmation Email
+    // 4. Dispatch Requester Confirmation Email with dynamic data
     try {
       const userHtml = generateUserConfirmationEmail({
-        firstName,
-        lastName,
+        firstName: firstName || 'there',
+        lastName: lastName || '',
         workEmail,
+        phone,
         organisation,
         jobTitle,
         discussionTopic,
@@ -107,40 +162,48 @@ export async function POST(request: NextRequest) {
         meetingFormat,
         notes,
         sourceEventTitle,
+        eventHeroHeading,
+        eventStartDate: eventStartDateFormatted,
+        roadmapTitle,
+        roadmapSteps,
         inquiryId: String(inquiry.id),
       })
 
+      const emailSubjectEvent = eventHeroHeading || sourceEventTitle || '316 Group Event'
+
       await payload.sendEmail({
         to: workEmail,
-        subject: `We received your meeting request for ${sourceEventTitle || 'ESMO 2026'} | 316 Group`,
+        subject: `We received your meeting request for ${emailSubjectEvent} | 316 Group`,
         html: userHtml,
       })
     } catch (emailErr) {
       console.error('Failed to dispatch user confirmation email:', emailErr)
     }
 
-    // 4. Dispatch Admin Notification Email
+    // 5. Dispatch Admin Notification Email
     try {
       const adminHtml = generateAdminNotificationEmail({
-        firstName,
-        lastName,
+        firstName: firstName || '',
+        lastName: lastName || '',
         workEmail,
+        phone,
         organisation,
         jobTitle,
         discussionTopic,
         preferredDay,
         meetingFormat,
         notes,
-        sourceEventTitle,
+        sourceEventTitle: eventHeroHeading || sourceEventTitle || '316 Group Event',
         inquiryId: String(inquiry.id),
         adminDashboardUrl,
       })
 
       const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@316group.co.uk'
+      const attendeeName = [firstName, lastName].filter(Boolean).join(' ') || 'Attendee'
 
       await payload.sendEmail({
         to: adminEmail,
-        subject: `[New Event Lead] ${firstName} ${lastName} from ${organisation} (${sourceEventTitle || 'ESMO 2026'})`,
+        subject: `[New Event Lead] ${attendeeName} ${organisation ? `from ${organisation}` : ''} (${eventHeroHeading || sourceEventTitle || '316 Group Event'})`,
         html: adminHtml,
       })
     } catch (adminEmailErr) {
