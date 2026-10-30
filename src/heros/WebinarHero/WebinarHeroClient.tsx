@@ -343,11 +343,11 @@ export const WebinarHeroClient: React.FC<WebinarHeroClientProps> = ({
             : cn('w-full', `${sectionClass}-inner`),
         )}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-10 items-center w-full">
           {/* ═══════════════════════════════════════════════════════════════════
               LEFT COLUMN: Kicker, Heading, Description, Metadata, CTAs
               ═══════════════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center text-white">
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center text-white">
             {/* 1. Kicker Badge */}
             {kickerText && (
               <div className="flex items-center gap-2.5 mb-4 md:mb-5">
@@ -424,8 +424,8 @@ export const WebinarHeroClient: React.FC<WebinarHeroClientProps> = ({
           {/* ═══════════════════════════════════════════════════════════════════
               RIGHT COLUMN: Showcase Card (Mockup UI)
               ═══════════════════════════════════════════════════════════════════ */}
-          <div className="lg:col-span-6 xl:col-span-5 flex items-center justify-center">
-            <div className="w-full bg-[#181B24] rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
+          <div className="lg:col-span-6 xl:col-span-6 flex items-center justify-center">
+            <div className="w-full max-w-none bg-[#181B24] rounded-3xl border border-white/10 shadow-2xl overflow-hidden">
               <div className="flex flex-col md:flex-row items-stretch">
                 {/* ── Left Part of Card: Brand, Heading, Speakers ── */}
                 <div className="w-full md:w-[62%] flex flex-col justify-between p-6 sm:p-7 md:p-8 order-2 md:order-1 text-white">

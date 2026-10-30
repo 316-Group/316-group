@@ -263,16 +263,14 @@ export const PastWebinarClient: React.FC<PastWebinarClientProps> = ({
 
             // Card content extraction from hero right-column card
             const cardCol = heroBlock?.cardCol || {}
+            const cardBrandIcon = cardCol.cardIcon
             const cardBrandText = cardCol.cardSubText || '316group'
             const cardHeadline =
               cardCol.cardHeading ||
+              webinarDoc.title ||
               'We back disruptive products and founders in retail'
-            const speakers = Array.isArray(cardCol.speakers) && cardCol.speakers.length > 0
-              ? cardCol.speakers
-              : [
-                  { name: 'John Flanery', role: 'Senior Software Engineer', flag: 'uk' },
-                  { name: 'John Flanery', role: 'Senior Sales Manager', flag: 'ke' },
-                ]
+            const speakers: any[] = Array.isArray(cardCol.speakers) ? cardCol.speakers : []
+            const hasSpeakers = speakers.length > 0
 
             // RECAP LOGIC:
             // If Publish End Event Recap is checked (recapConfig.isPublished === true) -> Watch Video (opens recap)
@@ -290,74 +288,110 @@ export const PastWebinarClient: React.FC<PastWebinarClientProps> = ({
               >
                 {/* Left Column: Showcase Card with World Map */}
                 <div className="lg:col-span-7 xl:col-span-6">
-                  <div className="w-full bg-[#181B24] rounded-3xl border border-white/10 shadow-2xl p-6 sm:p-8 md:p-10 relative overflow-hidden flex flex-col justify-between min-h-[260px] sm:min-h-[290px]">
-                    <WorldMapDots />
+                  <div className="w-full bg-[#242541] rounded-[28px] border border-white/10 shadow-2xl p-6 sm:p-8 md:p-10 relative overflow-hidden">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
+                      {/* ── Left Section: World Map Background, Brand, Headline ── */}
+                      <div
+                        className={cn(
+                          hasSpeakers ? 'md:col-span-7' : 'md:col-span-12',
+                          'relative flex flex-col justify-between min-h-[190px] sm:min-h-[220px]',
+                        )}
+                      >
+                        {/* World Map Background (Left Section Only) */}
+                        <div className="absolute -inset-4 z-0 pointer-events-none overflow-hidden opacity-25 flex items-center">
+                          <img
+                            src="/assets/world-map.png"
+                            alt="World Map"
+                            className="w-full h-full object-contain object-left"
+                            loading="lazy"
+                          />
+                        </div>
 
-                    {/* Top Brand Subtext & Logo */}
-                    <div className="relative z-10 flex items-center gap-2.5 mb-6 sm:mb-8">
-                      <span className="w-7 h-7 rounded-full bg-slate-700/80 border border-slate-600 flex items-center justify-center text-white text-xs font-bold shrink-0">
-                        3
-                      </span>
-                      <span className="text-sm md:text-base font-semibold tracking-tight text-white">
-                        {cardBrandText}
-                      </span>
-                    </div>
+                        {/* Brand Row: Icon + Subtext (dynamic from webinar) */}
+                        <div className="relative z-10 flex items-center gap-2.5 mb-6 sm:mb-8">
+                          {cardBrandIcon && typeof cardBrandIcon === 'object' ? (
+                            (cardBrandIcon as any).url ? (
+                              <img
+                                src={(cardBrandIcon as any).url}
+                                alt={cardBrandText}
+                                className="w-8 h-8 rounded-full object-cover shrink-0"
+                              />
+                            ) : (
+                              <Media
+                                resource={cardBrandIcon}
+                                className="w-8 h-8 rounded-full overflow-hidden shrink-0"
+                                imgClassName="w-full h-full object-cover"
+                              />
+                            )
+                          ) : (
+                            <span className="w-8 h-8 rounded-full bg-slate-600/80 border border-slate-500/80 flex items-center justify-center text-white text-xs font-bold shrink-0">
+                              3
+                            </span>
+                          )}
+                          {cardBrandText && (
+                            <span className="text-base font-semibold tracking-tight text-white">
+                              {cardBrandText}
+                            </span>
+                          )}
+                        </div>
 
-                    {/* Card Content Row: Headline (Left) + 2 Speakers (Right) */}
-                    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-                      {/* Left: Card Headline */}
-                      <div className="sm:col-span-6">
+                        {/* Dynamic Webinar Headline */}
                         <h3
-                          className="text-white text-lg sm:text-xl md:text-2xl font-bold tracking-tight leading-snug"
+                          className="relative z-10 text-white text-xl sm:text-2xl lg:text-[1.65rem] font-bold tracking-tight leading-snug"
                           dangerouslySetInnerHTML={{
                             __html: formatInlineHtml(cardHeadline),
                           }}
                         />
                       </div>
 
-                      {/* Right: 2 Speakers Vertical Stack */}
-                      <div className="sm:col-span-6 flex flex-col gap-4">
-                        {speakers.slice(0, 2).map((spk: any, sIdx: number) => (
-                          <div key={sIdx} className="flex items-center gap-3">
-                            <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-xl shrink-0">
-                              {spk.image && typeof spk.image === 'object' ? (
-                                <Media
-                                  resource={spk.image}
-                                  className="w-full h-full rounded-xl overflow-hidden object-cover border border-white/20"
-                                  imgClassName="w-full h-full object-cover rounded-xl"
-                                />
-                              ) : (
-                                <div className="w-full h-full rounded-xl bg-slate-700/80 border border-white/20 flex items-center justify-center text-white font-semibold text-sm">
-                                  {spk.name
-                                    ? spk.name
-                                        .split(' ')
-                                        .map((n: string) => n[0])
-                                        .join('')
-                                        .slice(0, 2)
-                                    : 'JF'}
-                                </div>
-                              )}
-                              <div className="absolute -bottom-1 -right-1 shadow-sm">
-                                <FlagBadge
-                                  flag={spk.flag || (sIdx === 0 ? 'uk' : 'ke')}
-                                />
+                      {/* ── Right Section: Dynamic Speakers Vertical Stack (1, 2, 3... or none) ── */}
+                      {hasSpeakers && (
+                        <div className="md:col-span-5 flex flex-col gap-4 sm:gap-5 justify-center relative z-10">
+                          {speakers.map((spk: any, sIdx: number) => (
+                            <div key={spk.id || sIdx} className="flex items-center gap-3.5">
+                              {/* Speaker Photo with Country Flag */}
+                              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl shrink-0 overflow-visible">
+                                {spk.image && typeof spk.image === 'object' ? (
+                                  <Media
+                                    resource={spk.image}
+                                    className="w-full h-full rounded-2xl overflow-hidden object-cover border border-white/10"
+                                    imgClassName="w-full h-full object-cover rounded-2xl"
+                                  />
+                                ) : (
+                                  <div className="w-full h-full rounded-2xl bg-gradient-to-tr from-slate-700 to-slate-600 border border-white/10 flex items-center justify-center text-white font-bold text-sm">
+                                    {spk.name
+                                      ? spk.name
+                                          .split(' ')
+                                          .map((n: string) => n[0])
+                                          .join('')
+                                          .slice(0, 2)
+                                      : 'SP'}
+                                  </div>
+                                )}
+                                {spk.flag && spk.flag !== 'none' && (
+                                  <div className="absolute -bottom-1 -right-1 shadow-xs">
+                                    <FlagBadge flag={spk.flag} />
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Speaker Name & Role */}
+                              <div className="flex flex-col min-w-0 justify-center">
+                                {spk.name && (
+                                  <span className="text-sm sm:text-base font-bold truncate text-white">
+                                    {spk.name}
+                                  </span>
+                                )}
+                                {spk.role && (
+                                  <span className="text-xs sm:text-[13px] truncate leading-tight text-slate-300 font-normal mt-0.5">
+                                    {spk.role}
+                                  </span>
+                                )}
                               </div>
                             </div>
-
-                            <div className="flex flex-col min-w-0">
-                              <span className="text-sm font-semibold truncate text-white">
-                                {spk.name || 'John Flanery'}
-                              </span>
-                              <span className="text-xs truncate leading-tight text-slate-400">
-                                {spk.role ||
-                                  (sIdx === 0
-                                    ? 'Senior Software Engineer'
-                                    : 'Senior Sales Manager')}
-                              </span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
