@@ -309,18 +309,23 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
           paddingMode === 'custom' && cn('w-full max-w-none', padUid),
         )}
       >
-        {/* ─── 2-COLUMN MAIN CONTENT GRID ────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start w-full">
-          {/* ── Left Column: Editorial & Context (5 cols) ── */}
-          <div
-            className={cn(
-              'lg:col-span-5 flex flex-col items-start w-full transition-all duration-1000 ease-out',
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
-            )}
-          >
-            {/* Pill Badge */}
-            {showBadge && (
-              <div className={cn('inline-flex', badgeMb)}>
+        {/* ─── 2-COLUMN MAIN CONTENT GRID (DESKTOP ROW-ALIGNED) ─────────────── */}
+        <div
+          className={cn(
+            'grid grid-cols-1 lg:grid-cols-12 gap-x-10 lg:gap-x-16 items-start w-full',
+            showBadge ? 'lg:grid-rows-[auto_1fr]' : '',
+          )}
+        >
+          {/* Pill Badge (Row 1 on Desktop, stacks first on mobile) */}
+          {showBadge && (
+            <div
+              className={cn(
+                'lg:col-span-5 lg:row-start-1 flex flex-col items-start w-full transition-all duration-1000 ease-out',
+                badgeMb,
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+              )}
+            >
+              <div className="inline-flex">
                 <span
                   className={cn(
                     'inline-flex items-center px-5 py-2 rounded-full backdrop-blur-sm transition-all',
@@ -332,8 +337,17 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
                   {badgeText}
                 </span>
               </div>
-            )}
+            </div>
+          )}
 
+          {/* ── Left Column: Editorial & Context (5 cols, Row 2 on Desktop when Badge present) ── */}
+          <div
+            className={cn(
+              'lg:col-span-5 flex flex-col items-start w-full transition-all duration-1000 ease-out',
+              showBadge ? 'lg:row-start-2' : 'lg:row-start-1',
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
+            )}
+          >
             {/* Main Heading */}
             {heading && (
               <div
@@ -363,10 +377,11 @@ export const TimelineAccordionClient: React.FC<TimelineAccordionProps> = ({
             )}
           </div>
 
-          {/* ── Right Column: Timeline Accordion (7 cols) ── */}
+          {/* ── Right Column: Timeline Accordion (7 cols, Row 2 on Desktop when Badge present) ── */}
           <div
             className={cn(
-              'lg:col-span-7 relative w-full transition-all duration-1000 ease-out delay-200',
+              'lg:col-span-7 relative w-full transition-all duration-1000 ease-out delay-200 mt-10 lg:mt-0',
+              showBadge ? 'lg:row-start-2' : 'lg:row-start-1',
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8',
             )}
           >

@@ -306,35 +306,118 @@ export const EventUpcomingBlock: React.FC<EventUpcomingProps> = async (props) =>
 
             const eventUrl = `/events/${eventDoc.slug}`
 
+            const cardUid = `ec-${eventDoc.id || Math.random().toString(36).slice(2, 8)}`
+
             return (
-              <div
+              <Link
                 key={eventDoc.id}
+                href={eventUrl}
                 className={cn(
-                  'w-full p-6 md:p-8 rounded-none border transition-all duration-200',
-                  cardSettings.cardBgColor || 'bg-white',
-                  cardSettings.cardBorderColor || 'border-gray-200/80',
-                  'hover:border-gray-300 hover:shadow-sm',
+                  'group relative overflow-hidden rounded-[3px] border transition-colors duration-300 no-underline w-full block',
+                  cardSettings.cardBgColor || 'bg-[#f6f7f9]',
+                  cardSettings.cardBorderColor || 'border-[#c3c9d2]',
+                  'hover:bg-[#f4f4fd] hover:border-[#b2b4ef]',
+                  'p-6 sm:p-8 lg:p-10',
                 )}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                  {/* Column 1: EVENT */}
-                  <div className="lg:col-span-4 flex flex-col">
-                    <span className="text-[11px] md:text-xs font-semibold tracking-wider uppercase text-gray-500 mb-1.5">
-                      {subHeading}
-                    </span>
-                    <h3 className="text-xl md:text-2xl font-semibold text-gray-950 tracking-tight leading-snug">
-                      {heading}
-                    </h3>
+                {/* ── Scoped Hover Gradient Stop Colors ── */}
+                <style>{`
+                  .ec-cream-${cardUid} { stop-color: #FFECB1; transition: stop-color 0.6s ease-out; }
+                  .group:hover .ec-cream-${cardUid} { stop-color: #FFDD76; transition: stop-color 1s ease-out; }
 
-                    <Link
-                      href={eventUrl}
-                      className="mt-4 md:mt-6 text-[#0256FF] font-semibold text-sm md:text-base inline-flex items-center gap-1.5 hover:gap-2.5 transition-all group w-fit"
-                    >
+                  .ec-green-${cardUid} { stop-color: #A8F0D3; transition: stop-color 0.6s ease-out; }
+                  .group:hover .ec-green-${cardUid} { stop-color: #69DDAF; transition: stop-color 0.9s ease-out 100ms; }
+
+                  .ec-blue-${cardUid} { stop-color: #CDE0FD; transition: stop-color 0.6s ease-out; }
+                  .group:hover .ec-blue-${cardUid} { stop-color: #83B2F9; transition: stop-color 0.8s ease-out 150ms; }
+
+                  .ec-purple-${cardUid} { stop-color: #F4F4FD; transition: stop-color 0.6s ease-out; }
+                  .group:hover .ec-purple-${cardUid} { stop-color: #B2B4EF; transition: stop-color 0.7s ease-out 200ms; }
+                `}</style>
+
+                {/* ── Layer 1: Slanted Yellow / Cream (Bottom) ── */}
+                <svg
+                  className="absolute -top-[20%] -left-[10%] h-[140%] w-auto pointer-events-none invisible sm:visible blur-[1.5px] -translate-x-full group-hover:translate-x-20 transition-transform ease-out group-hover:ease-[cubic-bezier(0.22,1.08,0.36,1)] duration-1400 delay-300 group-hover:duration-1200 group-hover:delay-0"
+                  viewBox="0 0 205 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id={`grad-cream-${cardUid}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="205" y2="100">
+                      <stop offset="0%" stopColor="#FFECB1" />
+                      <stop offset="100%" className={`ec-cream-${cardUid}`} />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="0,0 181,0 33,100 0,100" fill={`url(#grad-cream-${cardUid})`} opacity="0.5" />
+                  <polygon points="181,0 196,0 48,100 33,100" fill={`url(#grad-cream-${cardUid})`} opacity="0.5" />
+                </svg>
+
+                {/* ── Layer 2: Slanted Mint / Green ── */}
+                <svg
+                  className="absolute -top-[20%] -left-[10%] h-[140%] w-auto pointer-events-none invisible sm:visible blur-[1.5px] -translate-x-full group-hover:translate-x-20 transition-transform ease-out group-hover:ease-[cubic-bezier(0.22,1.02,0.36,1)] duration-1000 delay-200 group-hover:duration-1100 group-hover:delay-100"
+                  viewBox="0 0 205 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id={`grad-green-${cardUid}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="205" y2="100">
+                      <stop offset="0%" stopColor="#A8F0D3" />
+                      <stop offset="100%" className={`ec-green-${cardUid}`} />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="0,0 181,0 33,100 0,100" fill={`url(#grad-green-${cardUid})`} opacity="0.5" />
+                  <polygon points="181,0 196,0 48,100 33,100" fill={`url(#grad-green-${cardUid})`} opacity="0.5" />
+                </svg>
+
+                {/* ── Layer 3: Slanted Sky / Blue ── */}
+                <svg
+                  className="absolute -top-[20%] -left-[10%] h-[140%] w-auto pointer-events-none invisible sm:visible -translate-x-full group-hover:translate-x-20 transition-transform ease-out group-hover:ease-[cubic-bezier(0.22,1.02,0.36,1)] duration-800 group-hover:duration-900 group-hover:delay-200"
+                  viewBox="0 0 205 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id={`grad-blue-${cardUid}`} gradientUnits="userSpaceOnUse" x1="205" y1="0" x2="0" y2="100">
+                      <stop offset="0%" stopColor="#CDE0FD" />
+                      <stop offset="100%" className={`ec-blue-${cardUid}`} />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="0,0 181,0 33,100 0,100" fill={`url(#grad-blue-${cardUid})`} opacity="0.85" />
+                  <polygon points="181,0 196,0 48,100 33,100" fill={`url(#grad-blue-${cardUid})`} opacity="0.85" />
+                </svg>
+
+                {/* ── Layer 4: Slanted Lavender / Purple (Top Card) ── */}
+                <svg
+                  className="absolute -top-[20%] -left-[10%] h-[140%] w-auto pointer-events-none invisible sm:visible -translate-x-full group-hover:translate-x-0 transition-transform ease-out group-hover:ease-[cubic-bezier(0.22,1.02,0.36,1)] duration-1200 group-hover:duration-800 group-hover:delay-300"
+                  viewBox="0 0 205 100"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id={`grad-purple-${cardUid}`} gradientUnits="userSpaceOnUse" x1="205" y1="0" x2="0" y2="100">
+                      <stop offset="0%" stopColor="#F4F4FD" />
+                      <stop offset="100%" className={`ec-purple-${cardUid}`} />
+                    </linearGradient>
+                  </defs>
+                  <polygon points="0,0 181,0 33,100 0,100" fill={`url(#grad-purple-${cardUid})`} />
+                  <polygon points="181,0 196,0 48,100 33,100" fill={`url(#grad-purple-${cardUid})`} />
+                </svg>
+
+                {/* ── Foreground Content Grid (Sitting safely above SVGs) ── */}
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
+                  {/* Column 1: EVENT */}
+                  <div className="lg:col-span-4 flex flex-col justify-between">
+                    <div>
+                      <span className="text-[11px] md:text-xs font-semibold tracking-wider uppercase text-gray-500 mb-1.5 block">
+                        {subHeading}
+                      </span>
+                      <h3 className="text-xl md:text-2xl font-semibold text-gray-950 tracking-tight leading-snug transition-colors duration-300 group-hover:text-[#0256FF]">
+                        {heading}
+                      </h3>
+                    </div>
+
+                    <div className="mt-4 md:mt-6 text-[#0256FF] font-semibold text-sm md:text-base inline-flex items-center gap-1.5 transition-all w-fit">
                       <span>Request a meeting</span>
-                      <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                      <span className="transition-transform duration-300 ease-out group-hover:translate-x-1">
                         →
                       </span>
-                    </Link>
+                    </div>
                   </div>
 
                   {/* Column 2: ABOUT THE EVENT */}
@@ -366,7 +449,7 @@ export const EventUpcomingBlock: React.FC<EventUpcomingProps> = async (props) =>
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             )
           })
         )}
