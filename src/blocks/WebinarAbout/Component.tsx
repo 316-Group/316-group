@@ -232,13 +232,13 @@ export const WebinarAboutBlock: React.FC<WebinarAboutProps> = (props) => {
             : cn(paddingLeft || 'px-6', paddingRight),
         )}
       >
-        <div className="max-w-5xl mx-auto flex flex-col">
+        <div className="w-full flex flex-col">
           {/* ═════════════════════════════════════════════════════════════════
               ZONE 1: TOP BAR (Left Title, Right Date/Time Metadata)
               ═════════════════════════════════════════════════════════════════ */}
           <div
             className={cn(
-              'flex items-baseline justify-between flex-wrap gap-4',
+              'w-full flex items-baseline justify-between flex-wrap gap-4',
               topBarStyles.marginBottomMobile || 'mb-4',
               `md:${topBarStyles.marginBottomDesktop || 'mb-6'}`,
             )}
@@ -332,7 +332,7 @@ export const WebinarAboutBlock: React.FC<WebinarAboutProps> = (props) => {
           {introDesc && (
             <div
               className={cn(
-                'leading-relaxed max-w-4xl',
+                'leading-relaxed w-full',
                 introStyles.descColor || 'text-gray-700',
                 introStyles.descFontSizeMobile || 'text-sm md:text-base',
                 `md:${introStyles.descFontSizeDesktop || 'text-base md:text-lg'}`,
@@ -412,7 +412,7 @@ export const WebinarAboutBlock: React.FC<WebinarAboutProps> = (props) => {
                 {/* Text area with bold prefix */}
                 <div
                   className={cn(
-                    'leading-relaxed max-w-4xl',
+                    'leading-relaxed w-full flex-1',
                     coverageStyles.itemTextColor || 'text-gray-800',
                     coverageStyles.itemFontSizeMobile || 'text-sm md:text-base',
                     `md:${coverageStyles.itemFontSizeDesktop || 'text-base md:text-lg'}`,
@@ -437,7 +437,7 @@ export const WebinarAboutBlock: React.FC<WebinarAboutProps> = (props) => {
           {concludingText && (
             <div
               className={cn(
-                'leading-relaxed max-w-4xl [&_p]:mb-4 [&_p:last-child]:mb-0',
+                'leading-relaxed w-full [&_p]:mb-4 [&_p:last-child]:mb-0',
                 concludingStyles.marginTopMobile || 'mt-6',
                 `md:${concludingStyles.marginTopDesktop || 'mt-8 md:mt-12'}`,
                 concludingStyles.textColor || 'text-gray-700',
