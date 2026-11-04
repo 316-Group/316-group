@@ -17,6 +17,8 @@ import 'swiper/css/pagination'
 export interface ImageSliderCardItem {
   id?: string | null
   image?: MediaType | string | null
+  cardHeight?: 'default' | 'compact' | 'medium' | 'extraTall' | 'giant' | 'custom' | null
+  cardHeightCustom?: string | null
 
   titleGroup?: {
     text?: string | null
@@ -70,9 +72,13 @@ export interface SliderSettings {
   autoSlide?: boolean | null
   autoSlideInterval?: number | null
   slidesToScroll?: '1' | '2' | '3' | null
+  slidesPerViewDesktop?: 'auto' | '1' | '1.5' | '2' | '2.5' | '3' | '3.3' | '4' | null
+  cardHeight?: 'default' | 'compact' | 'medium' | 'extraTall' | 'giant' | 'custom' | null
+  cardHeightCustom?: string | null
 }
 
 export interface ImageSliderProps {
+  isColumn?: boolean
   sectionBgColor?: string | null
   paddingTop?: string | null
   paddingBottom?: string | null
@@ -109,6 +115,7 @@ export function formatInlineHtml(content?: string | null): string {
 }
 
 export const ImageSliderClient: React.FC<ImageSliderProps> = ({
+  isColumn = false,
   sectionBgColor = 'bg-transparent',
   paddingTop = 'pt-8',
   paddingBottom = 'pb-16',
@@ -194,6 +201,22 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
   const autoDelay = sliderSettings?.autoSlideInterval || 4000
   const desktopScroll = parseInt(sliderSettings?.slidesToScroll || '1', 10)
 
+  // Desktop slidesPerView resolution
+  let resolvedDesktopSlides = 3.3
+  const spvSetting = sliderSettings?.slidesPerViewDesktop
+  if (spvSetting && spvSetting !== 'auto') {
+    resolvedDesktopSlides = parseFloat(spvSetting) || 3.3
+  } else if (isColumn) {
+    resolvedDesktopSlides = 1.35
+  }
+
+  let resolvedLgSlides = 2.5
+  if (spvSetting && spvSetting !== 'auto') {
+    resolvedLgSlides = Math.min(parseFloat(spvSetting) || 2.5, 2.5)
+  } else if (isColumn) {
+    resolvedLgSlides = 1.2
+  }
+
   // Alignment classes
   const textAlignClasses: Record<string, string> = {
     left: 'text-left',
@@ -210,6 +233,24 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
   // ─── Single Card Renderer ──────────────────────────────────────────────────
   const renderCard = (card: ImageSliderCardItem, index: number) => {
     const image = card.image
+
+    // Card Height Resolution (increased default height)
+    const cardHeightSetting = card.cardHeight || sliderSettings?.cardHeight || 'default'
+    const cardHeightCustom = card.cardHeightCustom || sliderSettings?.cardHeightCustom
+
+    const cardHeightMap: Record<string, string> = {
+      compact: 'h-[480px] md:h-[520px] lg:h-[540px]',
+      medium: 'h-[520px] md:h-[560px] lg:h-[600px]',
+      default: 'h-[560px] md:h-[620px] lg:h-[660px]',
+      extraTall: 'h-[620px] md:h-[680px] lg:h-[720px]',
+      giant: 'h-[680px] md:h-[740px] lg:h-[780px]',
+      custom: '',
+    }
+    const resolvedHeightClass = cardHeightMap[cardHeightSetting] || cardHeightMap.default
+    const cardCustomStyle: React.CSSProperties =
+      cardHeightSetting === 'custom' && cardHeightCustom
+        ? { minHeight: cardHeightCustom, height: cardHeightCustom }
+        : {}
 
     // Title
     const titleText = card.titleGroup?.text?.trim()
@@ -280,9 +321,11 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
       <div
         key={card.id || index}
         className={cn(
-          'group relative w-full h-[460px] md:h-[500px] lg:h-[520px] rounded-[32px] overflow-hidden flex flex-col justify-end p-7 md:p-8',
+          'group relative w-full rounded-[32px] overflow-hidden flex flex-col justify-end p-7 md:p-8',
+          resolvedHeightClass,
           'transition-all duration-500 shadow-md hover:shadow-xl bg-slate-900',
         )}
+        style={cardCustomStyle}
       >
         {/* Background Uploaded Image */}
         {image && typeof image === 'object' && (
@@ -307,9 +350,9 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
           {hasTitle && (
             <h3
               className={cn(
-                'tracking-tight leading-tight transition-colors',
+                'tracking-tight leading-tight transition-colors [&_strong]:font-inherit',
                 titleColor,
-                titleTypography,
+                titleTypography.combined,
                 textAlignClasses[titleAlign],
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(titleText) }}
@@ -325,9 +368,9 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
           {hasDesc && (
             <div
               className={cn(
-                'leading-relaxed transition-colors',
+                'leading-relaxed transition-colors [&_strong]:font-inherit',
                 descColor,
-                descTypography,
+                descTypography.combined,
                 textAlignClasses[descAlign],
               )}
               dangerouslySetInnerHTML={{ __html: formatInlineHtml(descText) }}
@@ -354,7 +397,7 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
                   className={cn(
                     'tracking-normal transition-colors duration-200 group-hover/btn:opacity-90',
                     btnTextCol,
-                    btnTypography,
+                    btnTypography.combined,
                   )}
                 >
                   {btnText}
@@ -401,10 +444,15 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
       <div
         className={cn(
           'w-full',
+          isColumn && 'h-full flex-1 flex flex-col',
           paddingTop,
           paddingBottom,
-          paddingMode === 'default' && 'max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12',
-          padClassName,
+          (!paddingMode || paddingMode === 'default') &&
+            (isColumn
+              ? 'w-full px-0'
+              : 'max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12'),
+          paddingMode === 'none' && cn('w-full max-w-none px-0', padClassName),
+          paddingMode === 'custom' && cn('w-full max-w-none', padClassName),
         )}
       >
         {enableSlider ? (
@@ -478,12 +526,12 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
                   spaceBetween: 24,
                 },
                 1024: {
-                  slidesPerView: 2.5,
+                  slidesPerView: resolvedLgSlides,
                   slidesPerGroup: 1,
                   spaceBetween: 26,
                 },
                 1280: {
-                  slidesPerView: 3.3, // Desktop: 3 cards showing + 4th cut off
+                  slidesPerView: resolvedDesktopSlides,
                   slidesPerGroup: desktopScroll,
                   spaceBetween: 28,
                 },

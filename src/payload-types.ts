@@ -9967,6 +9967,9 @@ export interface Page {
     | ClickExpandBlock
     | GridColBlock
     | {
+        /**
+         * Set background color for this section.
+         */
         sectionBgColor?:
           | (
               | 'bg-inherit'
@@ -75130,6 +75133,9 @@ export interface ContentBlock {
                 };
               };
               animatedIconsGrid?: {
+                /**
+                 * Set background color for this content inside the column (defaults to transparent).
+                 */
                 sectionBgColor?:
                   | (
                       | 'bg-inherit'
@@ -75413,7 +75419,7 @@ export interface ContentBlock {
                 paddingTop?: ('pt-0' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-28') | null;
                 paddingBottom?: ('pb-0' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-28' | 'pb-32' | 'pb-40') | null;
                 /**
-                 * Set custom padding to adjust the inner icon grid and content padding independently.
+                 * Set custom horizontal padding to adjust the inner icon grid and content padding independently of the column container.
                  */
                 paddingMode?: ('default' | 'none' | 'custom') | null;
                 /**
@@ -87219,8 +87225,12 @@ export interface ContentBlock {
                       | 'bg-rose-950'
                     )
                   | null;
-                paddingTop?: ('pt-0' | 'pt-4' | 'pt-8' | 'pt-12' | 'pt-16') | null;
-                paddingBottom?: ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16') | null;
+                paddingTop?:
+                  | ('pt-0' | 'pt-4' | 'pt-8' | 'pt-12' | 'pt-16' | 'pt-20' | 'pt-24' | 'pt-28' | 'pt-32')
+                  | null;
+                paddingBottom?:
+                  | ('pb-0' | 'pb-4' | 'pb-8' | 'pb-12' | 'pb-16' | 'pb-20' | 'pb-24' | 'pb-28' | 'pb-32')
+                  | null;
                 /**
                  * Set to "No Padding" to let the slider occupy the full width of the column.
                  */
@@ -87331,6 +87341,18 @@ export interface ContentBlock {
                    * Number of cards to advance when clicking the navigation arrow.
                    */
                   slidesToScroll?: ('1' | '2' | '3') | null;
+                  /**
+                   * Controls how many cards are visible side-by-side on desktop. "Auto" smartly adjusts to 1.5 inside narrow columns and 3.3 in full-width rows.
+                   */
+                  slidesPerViewDesktop?: ('auto' | '1' | '1.5' | '2' | '2.5' | '3' | '3.3' | '4') | null;
+                  /**
+                   * Select the height for all image showcase cards.
+                   */
+                  cardHeight?: ('default' | 'medium' | 'compact' | 'extraTall' | 'giant' | 'custom') | null;
+                  /**
+                   * Enter any valid CSS height (e.g. 680px, 720px, 45rem).
+                   */
+                  cardHeightCustom?: string | null;
                 };
                 cards?:
                   | {
@@ -87652,6 +87674,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | ''
                               | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
@@ -87707,6 +87730,7 @@ export interface ContentBlock {
                           | null;
                         fontWeightMobile?:
                           | (
+                              | ''
                               | 'font-light'
                               | 'font-normal'
                               | 'font-medium'
@@ -87720,7 +87744,23 @@ export interface ContentBlock {
                       /**
                        * Spacing between the card title and description.
                        */
-                      titleSpacingBottom?: ('0px' | '8px' | '12px' | '16px' | '20px' | '24px' | 'custom') | null;
+                      titleSpacingBottom?:
+                        | (
+                            | '0px'
+                            | '4px'
+                            | '8px'
+                            | '12px'
+                            | '16px'
+                            | '20px'
+                            | '24px'
+                            | '28px'
+                            | '32px'
+                            | '36px'
+                            | '40px'
+                            | '48px'
+                            | 'custom'
+                          )
+                        | null;
                       titleSpacingBottomCustom?: string | null;
                       descriptionGroup?: {
                         text?: string | null;
@@ -88039,6 +88079,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | ''
                               | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
@@ -88094,6 +88135,7 @@ export interface ContentBlock {
                           | null;
                         fontWeightMobile?:
                           | (
+                              | ''
                               | 'font-light'
                               | 'font-normal'
                               | 'font-medium'
@@ -88422,6 +88464,7 @@ export interface ContentBlock {
                           | null;
                         fontSizeMobile?:
                           | (
+                              | ''
                               | 'text-[11px]'
                               | 'text-xs'
                               | 'text-sm'
@@ -88477,6 +88520,7 @@ export interface ContentBlock {
                           | null;
                         fontWeightMobile?:
                           | (
+                              | ''
                               | 'font-light'
                               | 'font-normal'
                               | 'font-medium'
@@ -243055,6 +243099,9 @@ export interface Event {
         | CenteredContentBlock
         | SpacingBlock
         | {
+            /**
+             * Set background color for this section.
+             */
             sectionBgColor?:
               | (
                   | 'bg-inherit'
@@ -304142,6 +304189,9 @@ export interface ContentBlockSelect<T extends boolean = true> {
                           autoSlide?: T;
                           autoSlideInterval?: T;
                           slidesToScroll?: T;
+                          slidesPerViewDesktop?: T;
+                          cardHeight?: T;
+                          cardHeightCustom?: T;
                         };
                     cards?:
                       | T

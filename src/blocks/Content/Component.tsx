@@ -1360,26 +1360,18 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
                   if (contentType === 'imageSlider' && (content as any).imageSlider) {
                     const blockData = { ...(content as any).imageSlider }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
                     if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
+                      applyBg &&
+                      colBg &&
+                      colBg !== 'bg-transparent' &&
+                      (!blockData.sectionBgColor || blockData.sectionBgColor === 'bg-transparent')
                     ) {
-                      blockData.paddingMode = 'none'
+                      blockData.sectionBgColor = 'bg-transparent'
                     }
                     return (
                       <ImageSliderBlock
                         key={index}
+                        isColumn={true}
                         {...blockData}
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col',

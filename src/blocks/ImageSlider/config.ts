@@ -12,6 +12,26 @@ const alignmentOptions = [
   { label: 'Right', value: 'right' },
 ]
 
+export const cardHeightOptions = [
+  { label: 'Tall / Increased (640px - Default)', value: 'default' },
+  { label: 'Medium (580px)', value: 'medium' },
+  { label: 'Compact (520px - Legacy)', value: 'compact' },
+  { label: 'Extra Tall (700px)', value: 'extraTall' },
+  { label: 'Giant (760px)', value: 'giant' },
+  { label: 'Custom Height', value: 'custom' },
+]
+
+export const slidesPerViewOptions = [
+  { label: 'Auto (3.3 in full width, 1.5 in columns)', value: 'auto' },
+  { label: '1 Slide Visible', value: '1' },
+  { label: '1.5 Slides Visible', value: '1.5' },
+  { label: '2 Slides Visible', value: '2' },
+  { label: '2.5 Slides Visible', value: '2.5' },
+  { label: '3 Slides Visible', value: '3' },
+  { label: '3.3 Slides Visible (Default)', value: '3.3' },
+  { label: '4 Slides Visible', value: '4' },
+]
+
 export const imageSliderFields: Field[] = [
   // ─── Section Background & Spacing ──────────────────────────────────────────
   {
@@ -38,6 +58,10 @@ export const imageSliderFields: Field[] = [
           { label: 'Small (pt-8)', value: 'pt-8' },
           { label: 'Medium (pt-12)', value: 'pt-12' },
           { label: 'Standard (pt-16)', value: 'pt-16' },
+          { label: 'Large (pt-20)', value: 'pt-20' },
+          { label: 'Extra Large (pt-24)', value: 'pt-24' },
+          { label: '2X Large (pt-28)', value: 'pt-28' },
+          { label: '3X Large (pt-32)', value: 'pt-32' },
         ],
         admin: { width: '33.33%' },
       },
@@ -53,6 +77,10 @@ export const imageSliderFields: Field[] = [
           { label: 'Small (pb-8)', value: 'pb-8' },
           { label: 'Medium (pb-12)', value: 'pb-12' },
           { label: 'Standard (pb-16)', value: 'pb-16' },
+          { label: 'Large (pb-20)', value: 'pb-20' },
+          { label: 'Extra Large (pb-24)', value: 'pb-24' },
+          { label: '2X Large (pb-28)', value: 'pb-28' },
+          { label: '3X Large (pb-32)', value: 'pb-32' },
         ],
         admin: { width: '33.33%' },
       },
@@ -446,6 +474,46 @@ export const imageSliderFields: Field[] = [
               description: 'Number of cards to advance when clicking the navigation arrow.',
             },
           },
+          {
+            name: 'slidesPerViewDesktop',
+            type: 'select',
+            label: 'Visible Slides on Desktop',
+            defaultValue: 'auto',
+            validate: allowAnySelect,
+            options: slidesPerViewOptions,
+            admin: {
+              width: '50%',
+              description:
+                'Controls how many cards are visible side-by-side on desktop. "Auto" smartly adjusts to 1.5 inside narrow columns and 3.3 in full-width rows.',
+            },
+          },
+        ],
+      },
+      {
+        type: 'row',
+        fields: [
+          {
+            name: 'cardHeight',
+            type: 'select',
+            label: 'Card Height',
+            defaultValue: 'default',
+            validate: allowAnySelect,
+            options: cardHeightOptions,
+            admin: {
+              width: '50%',
+              description: 'Select the height for all image showcase cards.',
+            },
+          },
+          {
+            name: 'cardHeightCustom',
+            type: 'text',
+            label: 'Custom Card Height (e.g. 680px)',
+            admin: {
+              width: '50%',
+              condition: (_, siblingData) => siblingData?.cardHeight === 'custom',
+              description: 'Enter any valid CSS height (e.g. 680px, 720px, 45rem).',
+            },
+          },
         ],
       },
     ],
@@ -502,9 +570,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontSizeMobile',
                 type: 'select',
                 label: 'Font Size (Mobile)',
-                defaultValue: 'text-2xl',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontSizeOptions,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
@@ -520,9 +591,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontWeightMobile',
                 type: 'select',
                 label: 'Font Weight (Mobile)',
-                defaultValue: 'font-semibold',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontWeightOptions,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
@@ -551,11 +625,17 @@ export const imageSliderFields: Field[] = [
             validate: allowAnySelect,
             options: [
               { label: '0px (No Margin)', value: '0px' },
+              { label: '4px', value: '4px' },
               { label: '8px', value: '8px' },
               { label: '12px (Default)', value: '12px' },
               { label: '16px', value: '16px' },
               { label: '20px', value: '20px' },
               { label: '24px', value: '24px' },
+              { label: '28px', value: '28px' },
+              { label: '32px', value: '32px' },
+              { label: '36px', value: '36px' },
+              { label: '40px', value: '40px' },
+              { label: '48px', value: '48px' },
               { label: 'Custom Value', value: 'custom' },
             ],
             admin: {
@@ -613,9 +693,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontSizeMobile',
                 type: 'select',
                 label: 'Font Size (Mobile)',
-                defaultValue: 'text-sm',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontSizeOptions,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
@@ -631,9 +714,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontWeightMobile',
                 type: 'select',
                 label: 'Font Weight (Mobile)',
-                defaultValue: 'font-normal',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontWeightOptions,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
@@ -699,9 +785,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontSizeMobile',
                 type: 'select',
                 label: 'Font Size (Mobile)',
-                defaultValue: 'text-base',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontSizeOptions,
+                options: [
+                  { label: 'Inherit / Auto Responsive', value: '' },
+                  ...fontSizeOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
@@ -717,9 +806,12 @@ export const imageSliderFields: Field[] = [
                 name: 'fontWeightMobile',
                 type: 'select',
                 label: 'Font Weight (Mobile)',
-                defaultValue: 'font-semibold',
+                defaultValue: '',
                 validate: allowAnySelect,
-                options: fontWeightOptions,
+                options: [
+                  { label: 'Inherit / Default', value: '' },
+                  ...fontWeightOptions,
+                ],
                 admin: { width: '25%' },
               },
               {
