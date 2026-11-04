@@ -32,7 +32,7 @@ import { link } from '@/fields/link'
 import { centeredContentFields } from '../CenteredContent/config'
 import { clickExpandFields } from '../ClickExpand/config'
 import { gridColFields } from '../GridCol/config'
-import { animatedIconsGridFields } from '../AnimatedIconsGrid/config'
+import { animatedIconsGridColumnFields } from '../AnimatedIconsGrid/config'
 import { featureCardsFields } from '../FeatureCards/config'
 import { featureCardsV2Fields } from '../FeatureCardsV2/config'
 import { verticalCTAv2Fields } from '../VerticalCTAv2/config'
@@ -2281,7 +2281,7 @@ const columnFields: Field[] = [
         admin: {
           condition: (_, { contentType }) => contentType === 'animatedIconsGrid',
         },
-        fields: animatedIconsGridFields,
+        fields: animatedIconsGridColumnFields,
       },
 
       // ─── Feature Cards ─────────────────────────────────────────────────────

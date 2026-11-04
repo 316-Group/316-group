@@ -47,7 +47,9 @@ const mobilePaddingOptions = [
   { label: 'Custom Value', value: 'custom' },
 ]
 
-export const animatedIconsGridFields: Field[] = [
+export const getAnimatedIconsGridFields = ({
+  isColumn = false,
+}: { isColumn?: boolean } = {}): Field[] => [
   // ─── 1. Section Spacing & Background ─────────────────────────────────────
   {
     type: 'row',
@@ -55,17 +57,22 @@ export const animatedIconsGridFields: Field[] = [
       bgColorPickerAll({
         overrides: {
           name: 'sectionBgColor',
-          label: 'Section Background Color',
-          defaultValue: 'bg-[#F4F6FB]',
+          label: isColumn ? 'Content Background Color' : 'Section Background Color',
+          defaultValue: isColumn ? 'bg-transparent' : 'bg-[#F4F6FB]',
           validate: allowAnySelect,
-          admin: { width: '33.33%' },
+          admin: {
+            width: '33.33%',
+            description: isColumn
+              ? 'Set background color for this content inside the column (defaults to transparent).'
+              : 'Set background color for this section.',
+          },
         },
       }),
       {
         name: 'paddingTop',
         type: 'select',
-        label: 'Padding Top',
-        defaultValue: 'pt-20',
+        label: isColumn ? 'Content Padding Top' : 'Padding Top',
+        defaultValue: isColumn ? 'pt-0' : 'pt-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -79,8 +86,8 @@ export const animatedIconsGridFields: Field[] = [
       {
         name: 'paddingBottom',
         type: 'select',
-        label: 'Padding Bottom',
-        defaultValue: 'pb-20',
+        label: isColumn ? 'Content Padding Bottom' : 'Padding Bottom',
+        defaultValue: isColumn ? 'pb-0' : 'pb-20',
         validate: allowAnySelect,
         admin: { width: '33.33%' },
         options: [
@@ -103,17 +110,24 @@ export const animatedIconsGridFields: Field[] = [
       {
         name: 'paddingMode',
         type: 'select',
-        label: 'Horizontal Padding Mode',
+        label: isColumn ? 'Content Horizontal Padding Mode' : 'Horizontal Padding Mode',
         defaultValue: 'default',
         validate: allowAnySelect,
         options: [
-          { label: 'Default Padding (Responsive 16px - 48px, Max-Width 1720px)', value: 'default' },
+          {
+            label: isColumn
+              ? 'Default Padding (Contained within Column)'
+              : 'Default Padding (Responsive 16px - 48px, Max-Width 1720px)',
+            value: 'default',
+          },
           { label: 'No Padding / Full Screen Bleed (0px)', value: 'none' },
           { label: 'Custom Horizontal Padding', value: 'custom' },
         ],
         admin: {
           width: '50%',
-          description: 'Set custom padding to adjust the inner icon grid and content padding independently.',
+          description: isColumn
+            ? 'Set custom horizontal padding to adjust the inner icon grid and content padding independently of the column container.'
+            : 'Set custom padding to adjust the inner icon grid and content padding independently.',
         },
       },
       {
@@ -882,6 +896,9 @@ export const animatedIconsGridFields: Field[] = [
       ],
     },
   ]
+
+export const animatedIconsGridFields: Field[] = getAnimatedIconsGridFields({ isColumn: false })
+export const animatedIconsGridColumnFields: Field[] = getAnimatedIconsGridFields({ isColumn: true })
 
 export const AnimatedIconsGrid: Block = {
   slug: 'animatedIconsGrid',

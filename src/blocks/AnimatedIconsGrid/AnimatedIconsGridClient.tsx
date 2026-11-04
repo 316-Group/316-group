@@ -28,6 +28,7 @@ export interface AnimationSettings {
 }
 
 export interface AnimatedIconsGridProps {
+  isColumn?: boolean
   sectionBgColor?: string | null
   paddingTop?: string | null
   paddingBottom?: string | null
@@ -126,9 +127,10 @@ const TOTAL_DESKTOP_SLOTS = 21
 const TOTAL_SLOTS = 24
 
 export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
-  sectionBgColor = 'bg-[#F4F6FB]',
-  paddingTop = 'pt-20',
-  paddingBottom = 'pb-20',
+  isColumn = false,
+  sectionBgColor,
+  paddingTop,
+  paddingBottom,
   paddingMode = 'default',
   paddingSide = 'both',
   paddingXDesktop,
@@ -345,6 +347,12 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     right: 'text-right ml-auto',
   }
 
+  const stageAlignClasses = {
+    left: 'items-start text-left',
+    center: 'items-center text-center',
+    right: 'items-end text-right',
+  }
+
   const btnAlignClasses = {
     left: 'justify-start',
     center: 'justify-center mx-auto',
@@ -505,14 +513,21 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
     }
   }
 
+  const resolvedSectionBg = sectionBgColor ?? (isColumn ? 'bg-transparent' : 'bg-[#F4F6FB]')
+  const resolvedPaddingTop = paddingTop ?? (isColumn ? 'pt-0' : 'pt-20')
+  const resolvedPaddingBottom = paddingBottom ?? (isColumn ? 'pb-0' : 'pb-20')
+
+  const Tag = isColumn ? 'div' : 'section'
+
   return (
-    <section
-      ref={sectionRef}
+    <Tag
+      ref={sectionRef as any}
       className={cn(
         'w-full relative overflow-hidden select-none',
-        sectionBgColor || 'bg-[#F4F6FB]',
-        paddingTop || 'pt-20',
-        paddingBottom || 'pb-20',
+        isColumn && 'h-full flex-1 flex flex-col',
+        resolvedSectionBg,
+        resolvedPaddingTop,
+        resolvedPaddingBottom,
         className,
       )}
     >
@@ -533,8 +548,11 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
       <div
         className={cn(
           'w-full relative',
+          isColumn && 'h-full flex-1 flex flex-col justify-center',
           (!paddingMode || paddingMode === 'default') &&
-            'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1720px]',
+            (isColumn
+              ? 'w-full px-4 sm:px-6 lg:px-8'
+              : 'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1720px]'),
           paddingMode === 'none' && cn('w-full max-w-none px-0', padUid),
           paddingMode === 'custom' && cn('w-full max-w-none', padUid),
         )}
@@ -557,7 +575,12 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           </div>
 
           {/* Center Stage Content (col-start-3 col-span-5 row-start-2 row-span-3) */}
-          <div className="col-start-3 col-span-5 row-start-2 row-span-3 flex flex-col justify-center items-center px-4 xl:px-8 text-center z-10 my-auto py-6">
+          <div
+            className={cn(
+              'col-start-3 col-span-5 row-start-2 row-span-3 flex flex-col justify-center px-4 xl:px-8 z-10 my-auto py-6',
+              stageAlignClasses[headingAlign],
+            )}
+          >
             {/* Heading */}
             {headingText && (
               <h2
@@ -637,8 +660,13 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           </div>
 
           {/* Layer 2: Floating Centered Content Overlay (Z-10) */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-center px-2 sm:px-6 pointer-events-none">
-            <div className="flex flex-col items-center justify-center max-w-[320px] sm:max-w-md mx-auto">
+          <div className="absolute inset-0 flex flex-col justify-center items-center z-10 px-2 sm:px-6 pointer-events-none">
+            <div
+              className={cn(
+                'flex flex-col justify-center max-w-[320px] sm:max-w-md mx-auto',
+                stageAlignClasses[headingAlign],
+              )}
+            >
               {/* Heading */}
               {headingText && (
                 <h2
@@ -718,6 +746,6 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           </div>
         </div>
       </div>
-    </section>
+    </Tag>
   )
 }

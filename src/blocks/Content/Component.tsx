@@ -1215,26 +1215,18 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
                   if (contentType === 'animatedIconsGrid' && (content as any).animatedIconsGrid) {
                     const blockData = { ...(content as any).animatedIconsGrid }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
                     if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
+                      applyBg &&
+                      colBg &&
+                      colBg !== 'bg-transparent' &&
+                      (!blockData.sectionBgColor || blockData.sectionBgColor === 'bg-[#F4F6FB]')
                     ) {
-                      blockData.paddingMode = 'none'
+                      blockData.sectionBgColor = 'bg-transparent'
                     }
                     return (
                       <AnimatedIconsGridBlock
                         key={index}
+                        isColumn={true}
                         {...blockData}
                         className={cn(
                           stretchContent && 'h-full flex-1 flex flex-col',
