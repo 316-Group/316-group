@@ -201,20 +201,16 @@ export const ImageSliderClient: React.FC<ImageSliderProps> = ({
   const autoDelay = sliderSettings?.autoSlideInterval || 4000
   const desktopScroll = parseInt(sliderSettings?.slidesToScroll || '1', 10)
 
-  // Desktop slidesPerView resolution
+  // Desktop slidesPerView resolution (Defaults to 3.3 cards everywhere, preserving original card width)
   let resolvedDesktopSlides = 3.3
   const spvSetting = sliderSettings?.slidesPerViewDesktop
-  if (spvSetting && spvSetting !== 'auto') {
+  if (spvSetting && spvSetting !== 'auto' && spvSetting !== '3.3') {
     resolvedDesktopSlides = parseFloat(spvSetting) || 3.3
-  } else if (isColumn) {
-    resolvedDesktopSlides = 1.35
   }
 
   let resolvedLgSlides = 2.5
-  if (spvSetting && spvSetting !== 'auto') {
+  if (spvSetting && spvSetting !== 'auto' && spvSetting !== '3.3') {
     resolvedLgSlides = Math.min(parseFloat(spvSetting) || 2.5, 2.5)
-  } else if (isColumn) {
-    resolvedLgSlides = 1.2
   }
 
   // Alignment classes

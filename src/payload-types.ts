@@ -87342,9 +87342,9 @@ export interface ContentBlock {
                    */
                   slidesToScroll?: ('1' | '2' | '3') | null;
                   /**
-                   * Controls how many cards are visible side-by-side on desktop. "Auto" smartly adjusts to 1.5 inside narrow columns and 3.3 in full-width rows.
+                   * Controls how many cards are visible side-by-side on desktop. Defaults to the original 3.3 cards width.
                    */
-                  slidesPerViewDesktop?: ('auto' | '1' | '1.5' | '2' | '2.5' | '3' | '3.3' | '4') | null;
+                  slidesPerViewDesktop?: ('3.3' | '3' | '4' | '2.5' | '2' | '1.5' | '1') | null;
                   /**
                    * Select the height for all image showcase cards.
                    */

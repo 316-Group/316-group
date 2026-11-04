@@ -22,14 +22,13 @@ export const cardHeightOptions = [
 ]
 
 export const slidesPerViewOptions = [
-  { label: 'Auto (3.3 in full width, 1.5 in columns)', value: 'auto' },
-  { label: '1 Slide Visible', value: '1' },
-  { label: '1.5 Slides Visible', value: '1.5' },
-  { label: '2 Slides Visible', value: '2' },
-  { label: '2.5 Slides Visible', value: '2.5' },
+  { label: '3.3 Slides Visible (Default - Original Width)', value: '3.3' },
   { label: '3 Slides Visible', value: '3' },
-  { label: '3.3 Slides Visible (Default)', value: '3.3' },
   { label: '4 Slides Visible', value: '4' },
+  { label: '2.5 Slides Visible', value: '2.5' },
+  { label: '2 Slides Visible', value: '2' },
+  { label: '1.5 Slides Visible', value: '1.5' },
+  { label: '1 Slide Visible', value: '1' },
 ]
 
 export const imageSliderFields: Field[] = [
@@ -478,13 +477,13 @@ export const imageSliderFields: Field[] = [
             name: 'slidesPerViewDesktop',
             type: 'select',
             label: 'Visible Slides on Desktop',
-            defaultValue: 'auto',
+            defaultValue: '3.3',
             validate: allowAnySelect,
             options: slidesPerViewOptions,
             admin: {
               width: '50%',
               description:
-                'Controls how many cards are visible side-by-side on desktop. "Auto" smartly adjusts to 1.5 inside narrow columns and 3.3 in full-width rows.',
+                'Controls how many cards are visible side-by-side on desktop. Defaults to the original 3.3 cards width.',
             },
           },
         ],
