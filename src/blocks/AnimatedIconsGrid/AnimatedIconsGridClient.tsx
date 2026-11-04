@@ -551,14 +551,19 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
           isColumn && 'h-full flex-1 flex flex-col justify-center',
           (!paddingMode || paddingMode === 'default') &&
             (isColumn
-              ? 'w-full px-4 sm:px-6 lg:px-8'
+              ? 'w-full px-0'
               : 'container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1720px]'),
           paddingMode === 'none' && cn('w-full max-w-none px-0', padUid),
           paddingMode === 'custom' && cn('w-full max-w-none', padUid),
         )}
       >
         {/* ─── DESKTOP VIEW (9 Columns × 4 Rows) ─────────────────────────────── */}
-        <div className="hidden lg:grid grid-cols-9 gap-4 xl:gap-5 items-stretch relative min-h-[580px] xl:min-h-[640px]">
+        <div
+          className={cn(
+            'hidden lg:grid grid-cols-9 gap-4 xl:gap-5 items-stretch relative py-3 xl:py-4 px-1',
+            isColumn ? 'min-h-0' : 'min-h-[580px] xl:min-h-[640px]',
+          )}
+        >
           {/* Top Row Center (5 Cards: T1..T5, cols 3..7 of Row 1) */}
           <div className="col-start-3 col-span-5 grid grid-cols-5 gap-4 xl:gap-5 h-fit z-0">
             {topCenterCards.map((card, i) => renderCard(card, 8 + i))}
@@ -585,7 +590,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
             {headingText && (
               <h2
                 className={cn(
-                  'w-full tracking-tight leading-[1.12] transition-all',
+                  'w-full tracking-tight leading-[1.12] transition-all [&_strong]:font-inherit',
                   headingTypography.combined,
                   headingColor,
                   textAlignClasses[headingAlign],
@@ -651,7 +656,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
         </div>
 
         {/* ─── MOBILE & TABLET VIEW (6 Columns × 4 Rows = 24 Cards + Centered Overlay) ─── */}
-        <div className="block lg:hidden relative w-full overflow-hidden">
+        <div className="block lg:hidden relative w-full py-3 sm:py-4 px-1">
           {/* Layer 1: Continuous 6 Columns × 4 Rows Grid (Z-0) */}
           <div className="grid grid-cols-6 gap-2 sm:gap-3 w-full relative z-0">
             {slotMap.slice(0, 24).map((card, i) =>
@@ -671,9 +676,8 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
               {headingText && (
                 <h2
                   className={cn(
-                    'w-full tracking-tight leading-[1.12] transition-all',
-                    headingGroup?.headingFontSizeMobile || 'text-xl sm:text-2xl md:text-3xl',
-                    headingGroup?.headingFontWeightMobile || headingTypography.weightClass,
+                    'w-full tracking-tight leading-[1.12] transition-all [&_strong]:font-inherit',
+                    headingTypography.combined,
                     headingColor,
                     textAlignClasses[headingAlign],
                     isInView
@@ -689,8 +693,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
                 <p
                   className={cn(
                     'w-full mt-2 sm:mt-2.5 leading-relaxed transition-all',
-                    descriptionGroup?.descriptionFontSizeMobile || 'text-xs sm:text-sm',
-                    descriptionGroup?.descriptionFontWeightMobile || descTypography.weightClass,
+                    descTypography.combined,
                     descColor,
                     textAlignClasses[descAlign],
                     isInView
@@ -724,8 +727,7 @@ export const AnimatedIconsGridClient: React.FC<AnimatedIconsGridProps> = ({
                     <span
                       className={cn(
                         'tracking-normal',
-                        buttonGroup?.buttonFontSizeMobile || 'text-xs sm:text-sm',
-                        buttonGroup?.buttonFontWeightMobile || btnTypography.weightClass,
+                        btnTypography.combined,
                         btnTextCol,
                       )}
                     >
