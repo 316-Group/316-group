@@ -87344,11 +87344,11 @@ export interface ContentBlock {
                   /**
                    * Controls how many cards are visible side-by-side on desktop. Defaults to the original 3.3 cards width.
                    */
-                  slidesPerViewDesktop?: ('3.3' | '3' | '4' | '2.5' | '2' | '1.5' | '1') | null;
+                  slidesPerViewDesktop?: ('auto' | '3.3' | '3' | '4' | '2.5' | '2' | '1.5' | '1') | null;
                   /**
                    * Select the height for all image showcase cards.
                    */
-                  cardHeight?: ('default' | 'medium' | 'compact' | 'extraTall' | 'giant' | 'custom') | null;
+                  cardHeight?: ('default' | 'medium' | 'compact' | 'extraTall' | 'giant' | 'custom' | 'auto') | null;
                   /**
                    * Enter any valid CSS height (e.g. 680px, 720px, 45rem).
                    */

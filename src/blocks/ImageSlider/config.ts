@@ -19,10 +19,12 @@ export const cardHeightOptions = [
   { label: 'Extra Tall (700px)', value: 'extraTall' },
   { label: 'Giant (760px)', value: 'giant' },
   { label: 'Custom Height', value: 'custom' },
+  { label: 'Auto', value: 'auto' },
 ]
 
 export const slidesPerViewOptions = [
-  { label: '3.3 Slides Visible (Default - Original Width)', value: '3.3' },
+  { label: 'Auto (Original / Default - 3.3 Cards)', value: 'auto' },
+  { label: '3.3 Slides Visible', value: '3.3' },
   { label: '3 Slides Visible', value: '3' },
   { label: '4 Slides Visible', value: '4' },
   { label: '2.5 Slides Visible', value: '2.5' },
