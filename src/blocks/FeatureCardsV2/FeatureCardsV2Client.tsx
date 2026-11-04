@@ -130,6 +130,7 @@ export interface FeatureCardsV2Props {
 
   cards?: FeatureCardItem[] | null
   className?: string
+  isEmbedded?: boolean
 }
 
 /**
@@ -156,6 +157,7 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
   headerGroup,
   cards,
   className,
+  isEmbedded = false,
 }) => {
   const sectionRef = useRef<HTMLElement>(null)
   const prevRef = useRef<HTMLButtonElement>(null)
@@ -495,8 +497,8 @@ export const FeatureCardsV2Client: React.FC<FeatureCardsV2Props> = ({
       className={cn(
         'w-full relative transition-colors duration-200',
         sectionBgColor || 'bg-transparent',
-        paddingTop || 'pt-16',
-        paddingBottom || 'pb-16',
+        paddingTop || (isEmbedded ? 'pt-0' : 'pt-16'),
+        paddingBottom || (isEmbedded ? 'pb-0' : 'pb-16'),
         className,
       )}
     >

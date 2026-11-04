@@ -86,6 +86,7 @@ export interface FeatureCardsProps {
 
   cards?: FeatureCardItem[] | null
   className?: string
+  isEmbedded?: boolean
 }
 
 /**
@@ -111,6 +112,7 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
   sliderSettings,
   cards,
   className,
+  isEmbedded = false,
 }) => {
   const sectionRef = useRef<HTMLElement>(null)
   const prevRef = useRef<HTMLButtonElement>(null)
@@ -335,8 +337,8 @@ export const FeatureCardsClient: React.FC<FeatureCardsProps> = ({
       className={cn(
         'w-full relative transition-colors duration-200',
         sectionBgColor || 'bg-transparent',
-        paddingTop || 'pt-16',
-        paddingBottom || 'pb-16',
+        paddingTop || (isEmbedded ? 'pt-0' : 'pt-16'),
+        paddingBottom || (isEmbedded ? 'pb-0' : 'pb-16'),
         className,
       )}
     >

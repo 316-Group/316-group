@@ -180,8 +180,12 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       style={{
         ...gradientStyle,
         ...(paddingType === 'custom' && sectionPaddingTop ? { paddingTop: sectionPaddingTop } : {}),
-        ...(paddingType === 'custom' && sectionPaddingBottom ? { paddingBottom: sectionPaddingBottom } : {}),
-        ...(paddingType === 'custom' && sectionPaddingX ? { paddingLeft: sectionPaddingX, paddingRight: sectionPaddingX } : {}),
+        ...(paddingType === 'custom' && sectionPaddingBottom
+          ? { paddingBottom: sectionPaddingBottom }
+          : {}),
+        ...(paddingType === 'custom' && sectionPaddingX
+          ? { paddingLeft: sectionPaddingX, paddingRight: sectionPaddingX }
+          : {}),
       }}
       className={cn(
         'w-full relative overflow-hidden',
@@ -223,13 +227,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
             >
               {columns?.map((col, index) => {
                 const isMatchHeaderPillWidth = Boolean((col as any).matchHeaderPillWidth)
-                const size = isMatchHeaderPillWidth ? 'full' : (col.size || 'full')
+                const size = isMatchHeaderPillWidth ? 'full' : col.size || 'full'
                 const mobileOrder = col.mobileOrder || index + 1
                 const orderClass = orderClasses[mobileOrder as keyof typeof orderClasses] || ''
                 const mdOrderClass = mdOrderClasses[index + 1] || 'md:order-0'
                 const colWidth = colsSpanClasses[size]
                 const colBg = (col as any).columnBgColor
-                const isColFullWidth = !isMatchHeaderPillWidth && (col as any).widthMode === 'fullWidth'
+                const isColFullWidth =
+                  !isMatchHeaderPillWidth && (col as any).widthMode === 'fullWidth'
 
                 // Column padding resolution
                 const colPaddingMode = (col as any).paddingMode || 'default'
@@ -441,1194 +446,1263 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                       }}
                     >
                       {col.columnContent?.map((content, index) => {
-                  const {
-                    contentType,
-                    links,
-                    richText,
-                    media,
-                    verticalCTA,
-                    cardWithList,
-                    linkAlignment,
-                    verticalCTABgColor,
-                    verticalCTABgOpacity,
-                  } = content
+                        const {
+                          contentType,
+                          links,
+                          richText,
+                          media,
+                          verticalCTA,
+                          cardWithList,
+                          linkAlignment,
+                          verticalCTABgColor,
+                          verticalCTABgOpacity,
+                        } = content
 
-                  if (contentType === 'media' && media && typeof media !== 'string') {
-                    const { mediaWidth, mediaCustomWidth, mediaMobileCustomWidth } = content
-                    let wrapperClasses = 'rounded-xl overflow-hidden'
-                    let imgClasses = 'rounded-xl'
-                    let fill = false
-                    const wrapperStyle: React.CSSProperties = {}
-                    const mobileClass = mediaMobileCustomWidth
-                      ? `media-mobile-${index}`
-                      : undefined
+                        if (contentType === 'media' && media && typeof media !== 'string') {
+                          const { mediaWidth, mediaCustomWidth, mediaMobileCustomWidth } = content
+                          let wrapperClasses = 'rounded-xl overflow-hidden'
+                          let imgClasses = 'rounded-xl'
+                          let fill = false
+                          const wrapperStyle: React.CSSProperties = {}
+                          const mobileClass = mediaMobileCustomWidth
+                            ? `media-mobile-${index}`
+                            : undefined
 
-                    if (mediaWidth === 'fill') {
-                      wrapperClasses = cn(wrapperClasses, 'relative w-full h-full')
-                      imgClasses = cn(imgClasses, 'object-cover')
-                      fill = true
-                    } else if (mediaWidth === 'full') {
-                      wrapperClasses = cn(wrapperClasses, 'w-full')
-                      imgClasses = cn(imgClasses, 'w-full h-auto')
-                    } else if (mediaWidth === 'custom' && mediaCustomWidth) {
-                      wrapperStyle.width = mediaCustomWidth
-                      imgClasses = cn(imgClasses, 'w-full h-auto')
-                    }
+                          if (mediaWidth === 'fill') {
+                            wrapperClasses = cn(wrapperClasses, 'relative w-full h-full')
+                            imgClasses = cn(imgClasses, 'object-cover')
+                            fill = true
+                          } else if (mediaWidth === 'full') {
+                            wrapperClasses = cn(wrapperClasses, 'w-full')
+                            imgClasses = cn(imgClasses, 'w-full h-auto')
+                          } else if (mediaWidth === 'custom' && mediaCustomWidth) {
+                            wrapperStyle.width = mediaCustomWidth
+                            imgClasses = cn(imgClasses, 'w-full h-auto')
+                          }
 
-                    return (
-                      <>
-                        {mobileClass && (
-                          <style>{`@media (max-width: 768px) { .${mobileClass} { width: ${mediaMobileCustomWidth} !important; } }`}</style>
-                        )}
-                        <div
-                          className={cn(wrapperClasses, mobileClass)}
-                          style={wrapperStyle}
-                          key={index}
-                        >
-                          <Media resource={media} size="33vw" imgClassName={imgClasses} fill={fill} />
-                        </div>
-                      </>
-                    )
-                  }
-                  if (contentType === 'cardInvert' && content.cardInvert) {
-                    const { cardTitle, cardDescription, cardImage } = content.cardInvert
-                    if (typeof cardImage === 'object')
-                      return (
-                        <CardInvert
-                          key={index}
-                          cardTitle={cardTitle}
-                          cardDescription={cardDescription}
-                          cardImage={cardImage}
-                        />
-                      )
-                  }
-
-                  if (contentType === 'swiperSlider' && content.swiperImages) {
-                    const images = content.swiperImages
-                    return <SwiperElement key={index} images={images} />
-                  }
-
-                  if (contentType === 'testimonials' && content.testimonials) {
-                    const testimonials = content.testimonials
-                    const bgColor = content.testimonialCustomizer?.cardBgColor
-                    const textClasses = content.testimonialCustomizer?.textClasses
-                    if (bgColor && textClasses) {
-                      return (
-                        <TestimonialCarousel
-                          testimonials={testimonials}
-                          testimonialModifier={{ bgColor, textClasses }}
-                          showArrows={true}
-                          showBars={true}
-                          key={index}
-                          className="w-[95%] md:w-[70%] lg:[w-60%] m-auto"
-                        />
-                      )
-                    } else
-                      return (
-                        <TestimonialCarousel
-                          testimonials={testimonials}
-                          showArrows={true}
-                          showBars={true}
-                          key={index}
-                          className="w-[95%] md:w-[70%] lg:[w-60%] m-auto"
-                        />
-                      )
-                  }
-
-                  if (contentType === 'carousel' && content.carousel) {
-                    const carousel = content.carousel
-
-                    return <Carousel key={index} {...carousel} />
-                  }
-
-                  if (contentType === 'richText') {
-                    // const richText = content.richText
-                    const richTextClasses = content.richTextClasses
-                    return (
-                      richText && (
-                        <RichText
-                          content={richText}
-                          enableGutter={false}
-                          enableProse={false}
-                          className={cn(richTextClasses, col.alignment === 'center' && 'text-center mx-auto')}
-                        />
-                      )
-                    )
-                  }
-                  if (contentType === 'styledHeading') {
-                    const styledHeading = content.styledHeading
-                    return (
-                      styledHeading?.heading && (
-                        <h2
-                          key={index}
-                          className={cn(
-                            styledHeading?.headingClasses,
-                            col.alignment === 'center' && 'text-center mx-auto',
-                            styledHeading?.leftBorderStyle &&
-                              `pl-4 md:pl-8 border-l-4 border-${styledHeading?.borderColor}`,
-                          )}
-                          dangerouslySetInnerHTML={{ __html: styledHeading?.heading }}
-                        />
-                      )
-                    )
-                  }
-
-                  if (contentType === 'verticalCTA') {
-                    // const verticalCTA = content.verticalCTA
-                    return (
-                      verticalCTA && (
-                        <div
-                          key={index}
-                          className={cn(
-                            'flex flex-col',
-                            verticalCTA.alignment === 'top' && 'justify-start h-full',
-                            verticalCTA.alignment === 'center' && 'justify-center h-full',
-                            verticalCTA.alignment === 'bottom' && 'justify-end h-full',
-                            verticalCTABgColor && verticalCTABgColor,
-                            verticalCTABgOpacity && verticalCTABgOpacity,
-                            verticalCTABgColor && 'p-8 md:p-12 rounded-2xl',
-                          )}
-                        >
-                          {verticalCTA.subtitle && (
-                            <p
-                              className={cn(verticalCTA.subtitleClasses)}
-                              dangerouslySetInnerHTML={{ __html: verticalCTA.subtitle }}
-                            />
-                          )}
-
-                          {verticalCTA.title && (
-                            <h3
-                              dangerouslySetInnerHTML={{ __html: verticalCTA.title }}
-                              className={cn(verticalCTA.titleClasses)}
-                            ></h3>
-                          )}
-                          {verticalCTA.description && (
-                            <RichText
-                              className={cn(verticalCTA.descriptionClasses)}
-                              content={verticalCTA.description}
-                              enableGutter={false}
-                              enableProse={false}
-                            />
-                          )}
-                          <div className="flex gap-8">
-                            {(verticalCTA.links || []).map(({ link, buttonClasses }, i) => {
-                              return (
-                                <CMSLink
-                                  key={i}
-                                  size="lg"
-                                  {...link}
-                                  className={cn(buttonClasses)}
+                          return (
+                            <>
+                              {mobileClass && (
+                                <style>{`@media (max-width: 768px) { .${mobileClass} { width: ${mediaMobileCustomWidth} !important; } }`}</style>
+                              )}
+                              <div
+                                className={cn(wrapperClasses, mobileClass)}
+                                style={wrapperStyle}
+                                key={index}
+                              >
+                                <Media
+                                  resource={media}
+                                  size="33vw"
+                                  imgClassName={imgClasses}
+                                  fill={fill}
                                 />
-                              )
-                            })}
-                          </div>
-                        </div>
-                      )
-                    )
-                  }
+                              </div>
+                            </>
+                          )
+                        }
+                        if (contentType === 'cardInvert' && content.cardInvert) {
+                          const { cardTitle, cardDescription, cardImage } = content.cardInvert
+                          if (typeof cardImage === 'object')
+                            return (
+                              <CardInvert
+                                key={index}
+                                cardTitle={cardTitle}
+                                cardDescription={cardDescription}
+                                cardImage={cardImage}
+                              />
+                            )
+                        }
 
-                  if (contentType === 'cardWithList' && cardWithList) {
-                    const { cardTitle, listItems, cardBgColor, titleClasses } = cardWithList
-                    return (
-                      <div
-                        key={index}
-                        className={cn('p-8 md:p-16 lg:p-24 rounded-2xl', cardBgColor)}
-                      >
-                        <h3
-                          className={cn(titleClasses)}
-                          dangerouslySetInnerHTML={{ __html: cardTitle }}
-                        />
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                          {listItems?.map((item, i) => (
-                            <li key={i} className="flex items-center gap-2">
-                              {item.icon && <Media resource={item.icon} className="w-6 h-6" />}
-                              <span className={cn(item.textClasses)}>{item.text}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
-                  }
+                        if (contentType === 'swiperSlider' && content.swiperImages) {
+                          const images = content.swiperImages
+                          return <SwiperElement key={index} images={images} />
+                        }
 
-                  if (contentType === 'autoScrollSlider' && content.autoScrollSlider) {
-                    const { images, dimensionClasses, speed, showFadingEffect } = content.autoScrollSlider
-                    return (
-                      <AutoScrollSlider
-                        key={index}
-                        images={images}
-                        dimensionClasses={dimensionClasses || []}
-                        speed={speed || 1000}
-                        showFadingEffect={showFadingEffect ?? true}
-                      />
-                    )
-                  }
+                        if (contentType === 'testimonials' && content.testimonials) {
+                          const testimonials = content.testimonials
+                          const bgColor = content.testimonialCustomizer?.cardBgColor
+                          const textClasses = content.testimonialCustomizer?.textClasses
+                          if (bgColor && textClasses) {
+                            return (
+                              <TestimonialCarousel
+                                testimonials={testimonials}
+                                testimonialModifier={{ bgColor, textClasses }}
+                                showArrows={true}
+                                showBars={true}
+                                key={index}
+                                className="w-[95%] md:w-[70%] lg:[w-60%] m-auto"
+                              />
+                            )
+                          } else
+                            return (
+                              <TestimonialCarousel
+                                testimonials={testimonials}
+                                showArrows={true}
+                                showBars={true}
+                                key={index}
+                                className="w-[95%] md:w-[70%] lg:[w-60%] m-auto"
+                              />
+                            )
+                        }
 
-                  if (contentType === 'styledCards' && content.styledCards) {
-                    const {
-                      cards,
-                      imageClasses,
-                      gapClasses,
-                      titleClasses,
-                      descriptionClasses,
-                      shadowClasses,
-                      cardBgColor,
-                      cardHoverBgColor,
-                      borderClasses,
-                      cardsPerRow,
-                      marginSpace,
-                      alignContent,
-                      alignCardContent,
-                      cardRounded,
-                      descriptionAlign,
-                    } = content.styledCards
-                    return (
-                      <StyledCards
-                        key={index}
-                        cards={cards}
-                        imageClasses={imageClasses}
-                        gapClasses={gapClasses}
-                        titleClasses={titleClasses}
-                        descriptionClasses={descriptionClasses}
-                        shadowClasses={shadowClasses}
-                        cardBgColor={cardBgColor}
-                        cardHoverBgColor={cardHoverBgColor}
-                        borderClasses={borderClasses}
-                        cardsPerRow={cardsPerRow}
-                        marginSpace={marginSpace}
-                        alignContent={alignContent}
-                        alignCardContent={alignCardContent}
-                        cardRounded={cardRounded}
-                        descriptionAlign={descriptionAlign}
-                      />
-                    )
-                  }
+                        if (contentType === 'carousel' && content.carousel) {
+                          const carousel = content.carousel
 
-                  if (contentType === 'statusBanner' && content.statusBanner) {
-                    const {
-                      content: bannerContent,
-                      contentClasses,
-                      flavor,
-                      alignment,
-                      icon,
-                    } = content.statusBanner
+                          return <Carousel key={index} {...carousel} />
+                        }
 
-                    const flavorClasses = {
-                      success: {
-                        bg: 'bg-green-900/30',
-                        text: 'text-green-500',
-                        border: 'border-green-800',
-                      },
-                      danger: {
-                        bg: 'bg-red-900/30',
-                        text: 'text-red-500',
-                        border: 'border-red-800',
-                      },
-                      warning: {
-                        bg: 'bg-amber-900/30',
-                        text: 'text-amber-500',
-                        border: 'border-amber-800',
-                      },
-                      info: {
-                        bg: 'bg-blue-900/30',
-                        text: 'text-blue-500',
-                        border: 'border-blue-800',
-                      },
-                      primary: {
-                        bg: 'bg-slate-800',
-                        text: 'text-white',
-                        border: 'border-slate-700',
-                      },
-                      secondary: {
-                        bg: 'bg-gray-100',
-                        text: 'text-gray-800',
-                        border: 'border-gray-200',
-                      },
-                    }
+                        if (contentType === 'richText') {
+                          // const richText = content.richText
+                          const richTextClasses = content.richTextClasses
+                          return (
+                            richText && (
+                              <RichText
+                                content={richText}
+                                enableGutter={false}
+                                enableProse={false}
+                                className={cn(
+                                  richTextClasses,
+                                  col.alignment === 'center' && 'text-center mx-auto',
+                                )}
+                              />
+                            )
+                          )
+                        }
+                        if (contentType === 'styledHeading') {
+                          const styledHeading = content.styledHeading
+                          return (
+                            styledHeading?.heading && (
+                              <h2
+                                key={index}
+                                className={cn(
+                                  styledHeading?.headingClasses,
+                                  col.alignment === 'center' && 'text-center mx-auto',
+                                  styledHeading?.leftBorderStyle &&
+                                    `pl-4 md:pl-8 border-l-4 border-${styledHeading?.borderColor}`,
+                                )}
+                                dangerouslySetInnerHTML={{ __html: styledHeading?.heading }}
+                              />
+                            )
+                          )
+                        }
 
-                    const selectedFlavor = flavorClasses[flavor || 'success']
+                        if (contentType === 'verticalCTA') {
+                          // const verticalCTA = content.verticalCTA
+                          return (
+                            verticalCTA && (
+                              <div
+                                key={index}
+                                className={cn(
+                                  'flex flex-col',
+                                  verticalCTA.alignment === 'top' && 'justify-start h-full',
+                                  verticalCTA.alignment === 'center' && 'justify-center h-full',
+                                  verticalCTA.alignment === 'bottom' && 'justify-end h-full',
+                                  verticalCTABgColor && verticalCTABgColor,
+                                  verticalCTABgOpacity && verticalCTABgOpacity,
+                                  verticalCTABgColor && 'p-8 md:p-12 rounded-2xl',
+                                )}
+                              >
+                                {verticalCTA.subtitle && (
+                                  <p
+                                    className={cn(verticalCTA.subtitleClasses)}
+                                    dangerouslySetInnerHTML={{ __html: verticalCTA.subtitle }}
+                                  />
+                                )}
 
-                    return (
-                      <div
-                        key={index}
-                        className={cn(
-                          'w-full py-4 px-6 rounded-xl border flex items-center gap-3',
-                          selectedFlavor.bg,
-                          selectedFlavor.border,
-                          alignment === 'center' && 'justify-center',
-                          alignment === 'right' && 'justify-end',
-                          alignment === 'left' && 'justify-start',
-                        )}
-                      >
-                        {icon && (
-                          <Icon name={icon} className={cn('w-8 h-8', selectedFlavor.text)} />
-                        )}
-                        <span className={cn(contentClasses, selectedFlavor.text)}>
-                          {bannerContent}
-                        </span>
-                      </div>
-                    )
-                  }
+                                {verticalCTA.title && (
+                                  <h3
+                                    dangerouslySetInnerHTML={{ __html: verticalCTA.title }}
+                                    className={cn(verticalCTA.titleClasses)}
+                                  ></h3>
+                                )}
+                                {verticalCTA.description && (
+                                  <RichText
+                                    className={cn(verticalCTA.descriptionClasses)}
+                                    content={verticalCTA.description}
+                                    enableGutter={false}
+                                    enableProse={false}
+                                  />
+                                )}
+                                <div className="flex gap-8">
+                                  {(verticalCTA.links || []).map(({ link, buttonClasses }, i) => {
+                                    return (
+                                      <CMSLink
+                                        key={i}
+                                        size="lg"
+                                        {...link}
+                                        className={cn(buttonClasses)}
+                                      />
+                                    )
+                                  })}
+                                </div>
+                              </div>
+                            )
+                          )
+                        }
 
-                  if (contentType === 'modernCard' && content.modernCard) {
-                    const {
-                      title,
-                      titleClasses,
-                      description,
-                      descriptionClasses,
-                      links,
-                      cardBgColor,
-                      cardBgOpacity,
-                      icon: iconName,
-                    } = content.modernCard
-
-                    return (
-                      <div
-                        key={index}
-                        className={cn(
-                          'rounded-3xl p-8 md:p-12 flex flex-col gap-6',
-                          cardBgColor,
-                          cardBgOpacity,
-                        )}
-                      >
-                        {iconName && (
-                          <Icon name={iconName} className="w-12 h-12 mb-4 text-blue-600" />
-                        )}
-                        {title && (
-                          <h3
-                            dangerouslySetInnerHTML={{ __html: title }}
-                            className={cn(titleClasses)}
-                          />
-                        )}
-                        {description && (
-                          <RichText
-                            content={description}
-                            enableGutter={false}
-                            enableProse={false}
-                            className={cn(descriptionClasses)}
-                          />
-                        )}
-                        {links && Array.isArray(links) && links.length > 0 && (
-                          <div className="flex gap-4 mt-auto">
-                            {links.map(({ link, buttonClasses }, i) => (
-                              <CMSLink key={i} size="lg" {...link} className={cn(buttonClasses)} />
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )
-                  }
-
-                  if (contentType === 'spacer' && content.spacer) {
-                    const spacer = content.spacer
-                    return (
-                      <div
-                        key={index}
-                        className={cn(spacer.spacing, spacer.bgColor, spacer.width)}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'accordion' && content.accordion) {
-                    return (
-                      <AccordionClient
-                        key={index}
-                        accordion={content.accordion}
-                        textColor={getBestContrastTextColor(sectionBackgroundColor)}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'caseStudySlider' && content.caseStudySlider) {
-                    return (
-                      <CaseStudySliderClient
-                        key={index}
-                        caseStudySlider={content.caseStudySlider}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'imageTextSplit' && content.imageTextSplit) {
-                    const splitData = { ...(content.imageTextSplit as any) }
-                    if (splitData.sectionBgColor === undefined || splitData.sectionBgColor === null) {
-                      splitData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (splitData.paddingTop === undefined || splitData.paddingTop === null) {
-                      splitData.paddingTop = 'pt-0'
-                    }
-                    if (splitData.paddingBottom === undefined || splitData.paddingBottom === null) {
-                      splitData.paddingBottom = 'pb-0'
-                    }
-                    return (
-                      <ImageTextSplitBlock
-                        key={index}
-                        blockType="imageTextSplit"
-                        isColumn={true}
-                        {...splitData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          splitData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'divider' && content.divider) {
-                    const { color, thickness, width, alignment } = content.divider
-                    // Map legacy 'center' value (old DB data) to 'mx-auto'
-                    const resolvedAlignment = alignment === 'center' ? 'mx-auto' : alignment
-                    return (
-                      <div className="py-4 w-full" key={index}>
-                        <hr
-                          className={cn(
-                            thickness,
-                            width,
-                            resolvedAlignment,
-                            color ? `border-${color}` : 'border-slate-300',
-                          )}
-                        />
-                      </div>
-                    )
-                  }
-
-                  if (contentType === 'customJobAction' && content.customJobAction) {
-                    const {
-                      link,
-                      paddingX,
-                      paddingY,
-                      rounded,
-                      borderWidth,
-                      borderColor,
-                      bgColor,
-                      textColor,
-                      nestedBadge,
-                      fontWeight,
-                      fontStyle,
-                      textSize,
-                      textTransform,
-                    } = content.customJobAction
-
-                    const nestedBg = nestedBadge?.bgColor || 'bg-slate-100'
-                    const nestedText = nestedBadge?.textColor ? `text-${nestedBadge.textColor}` : 'text-slate-900'
-                    const nestedRounded = nestedBadge?.rounded || 'rounded-full'
-
-                    const resolvedFontWeight = fontWeight || 'font-semibold'
-                    const resolvedFontStyle = fontStyle || 'not-italic'
-                    const resolvedTextSize = textSize || 'text-base'
-                    const resolvedTextTransform = textTransform || 'normal-case'
-
-                    return (
-                      <div className="py-2 w-full" key={index}>
-                        <CMSLink
-                          {...link}
-                          label={null}
-                          className={cn(
-                            'flex items-center justify-between transition-all duration-300 w-full text-left',
-                            paddingX,
-                            paddingY,
-                            rounded,
-                            borderWidth,
-                            borderColor && `border-${borderColor}`,
-                            bgColor,
-                            textColor && `text-${textColor}`,
-                          )}
-                        >
-                          <span
-                            className={cn(
-                              resolvedFontWeight,
-                              resolvedFontStyle,
-                              resolvedTextSize,
-                              resolvedTextTransform,
-                            )}
-                          >
-                            {link?.label}
-                          </span>
-                          
-                          {nestedBadge && (
+                        if (contentType === 'cardWithList' && cardWithList) {
+                          const { cardTitle, listItems, cardBgColor, titleClasses } = cardWithList
+                          return (
                             <div
+                              key={index}
+                              className={cn('p-8 md:p-16 lg:p-24 rounded-2xl', cardBgColor)}
+                            >
+                              <h3
+                                className={cn(titleClasses)}
+                                dangerouslySetInnerHTML={{ __html: cardTitle }}
+                              />
+                              <ul className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {listItems?.map((item, i) => (
+                                  <li key={i} className="flex items-center gap-2">
+                                    {item.icon && (
+                                      <Media resource={item.icon} className="w-6 h-6" />
+                                    )}
+                                    <span className={cn(item.textClasses)}>{item.text}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )
+                        }
+
+                        if (contentType === 'autoScrollSlider' && content.autoScrollSlider) {
+                          const { images, dimensionClasses, speed, showFadingEffect } =
+                            content.autoScrollSlider
+                          return (
+                            <AutoScrollSlider
+                              key={index}
+                              images={images}
+                              dimensionClasses={dimensionClasses || []}
+                              speed={speed || 1000}
+                              showFadingEffect={showFadingEffect ?? true}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'styledCards' && content.styledCards) {
+                          const {
+                            cards,
+                            imageClasses,
+                            gapClasses,
+                            titleClasses,
+                            descriptionClasses,
+                            shadowClasses,
+                            cardBgColor,
+                            cardHoverBgColor,
+                            borderClasses,
+                            cardsPerRow,
+                            marginSpace,
+                            alignContent,
+                            alignCardContent,
+                            cardRounded,
+                            descriptionAlign,
+                          } = content.styledCards
+                          return (
+                            <StyledCards
+                              key={index}
+                              cards={cards}
+                              imageClasses={imageClasses}
+                              gapClasses={gapClasses}
+                              titleClasses={titleClasses}
+                              descriptionClasses={descriptionClasses}
+                              shadowClasses={shadowClasses}
+                              cardBgColor={cardBgColor}
+                              cardHoverBgColor={cardHoverBgColor}
+                              borderClasses={borderClasses}
+                              cardsPerRow={cardsPerRow}
+                              marginSpace={marginSpace}
+                              alignContent={alignContent}
+                              alignCardContent={alignCardContent}
+                              cardRounded={cardRounded}
+                              descriptionAlign={descriptionAlign}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'statusBanner' && content.statusBanner) {
+                          const {
+                            content: bannerContent,
+                            contentClasses,
+                            flavor,
+                            alignment,
+                            icon,
+                          } = content.statusBanner
+
+                          const flavorClasses = {
+                            success: {
+                              bg: 'bg-green-900/30',
+                              text: 'text-green-500',
+                              border: 'border-green-800',
+                            },
+                            danger: {
+                              bg: 'bg-red-900/30',
+                              text: 'text-red-500',
+                              border: 'border-red-800',
+                            },
+                            warning: {
+                              bg: 'bg-amber-900/30',
+                              text: 'text-amber-500',
+                              border: 'border-amber-800',
+                            },
+                            info: {
+                              bg: 'bg-blue-900/30',
+                              text: 'text-blue-500',
+                              border: 'border-blue-800',
+                            },
+                            primary: {
+                              bg: 'bg-slate-800',
+                              text: 'text-white',
+                              border: 'border-slate-700',
+                            },
+                            secondary: {
+                              bg: 'bg-gray-100',
+                              text: 'text-gray-800',
+                              border: 'border-gray-200',
+                            },
+                          }
+
+                          const selectedFlavor = flavorClasses[flavor || 'success']
+
+                          return (
+                            <div
+                              key={index}
                               className={cn(
-                                'flex items-center gap-2 py-1.5 px-4 transition-all duration-300',
-                                nestedBg,
-                                nestedText,
-                                nestedRounded,
+                                'w-full py-4 px-6 rounded-xl border flex items-center gap-3',
+                                selectedFlavor.bg,
+                                selectedFlavor.border,
+                                alignment === 'center' && 'justify-center',
+                                alignment === 'right' && 'justify-end',
+                                alignment === 'left' && 'justify-start',
                               )}
                             >
-                              {nestedBadge.image && typeof nestedBadge.image === 'object' && (
-                                <div className="relative w-5 h-5 overflow-hidden flex-shrink-0">
-                                  <Media
-                                    resource={nestedBadge.image}
-                                    imgClassName="object-contain w-full h-full"
-                                    fill
-                                  />
-                                </div>
+                              {icon && (
+                                <Icon name={icon} className={cn('w-8 h-8', selectedFlavor.text)} />
                               )}
-                              <span className="text-sm font-medium whitespace-nowrap">
-                                {nestedBadge.text}
+                              <span className={cn(contentClasses, selectedFlavor.text)}>
+                                {bannerContent}
                               </span>
                             </div>
-                          )}
-                        </CMSLink>
-                      </div>
-                    )
-                  }
+                          )
+                        }
 
-                  if (contentType === 'customButton' && content.customButton) {
-                    const {
-                      link,
-                      paddingX,
-                      paddingY,
-                      rounded,
-                      borderWidth,
-                      borderColor,
-                      bgColor,
-                      textColor,
-                      alignment,
-                    } = content.customButton
-                    return (
-                      <div
-                        className={cn(
-                          'w-full flex py-2',
-                          alignment === 'center' && 'justify-center',
-                          alignment === 'right' && 'justify-end',
-                          alignment === 'left' && 'justify-start',
-                        )}
-                        key={index}
-                      >
-                        <CMSLink
-                          {...link}
-                          className={cn(
-                            'inline-flex items-center justify-center transition-all duration-300',
-                            paddingX,
-                            paddingY,
-                            rounded,
-                            borderWidth,
-                            borderColor && `border-${borderColor}`,
-                            bgColor,
-                            textColor && `text-${textColor}`,
-                          )}
-                        />
-                      </div>
-                    )
-                  }
+                        if (contentType === 'modernCard' && content.modernCard) {
+                          const {
+                            title,
+                            titleClasses,
+                            description,
+                            descriptionClasses,
+                            links,
+                            cardBgColor,
+                            cardBgOpacity,
+                            icon: iconName,
+                          } = content.modernCard
 
-                  if (contentType === 'solutionsAccordion' && content.solutionsAccordion) {
-                    const solData = { ...(content.solutionsAccordion as any) }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      solData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (!solData.paddingMode || solData.paddingMode === 'default') {
-                      if (
-                        isMatchHeaderPillWidth ||
-                        colPaddingMode === 'none' ||
-                        colPaddingMode === 'custom' ||
-                        colPaddingMode === 'matchHeader'
-                      ) {
-                        solData.paddingMode = 'none'
-                      }
-                    }
-                    return (
-                      <AccordionPanel
-                        key={index}
-                        {...solData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          solData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'centeredContent' && (content as any).centeredContent) {
-                    const centeredData = { ...(content as any).centeredContent }
-                    if (centeredData.sectionBgColor === undefined || centeredData.sectionBgColor === null) {
-                      centeredData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (centeredData.paddingTop === undefined || centeredData.paddingTop === null) {
-                      centeredData.paddingTop = 'pt-0'
-                    }
-                    if (centeredData.paddingBottom === undefined || centeredData.paddingBottom === null) {
-                      centeredData.paddingBottom = 'pb-0'
-                    }
-                    return (
-                      <CenteredContentComponent
-                        key={index}
-                        isColumn={true}
-                        {...centeredData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          centeredData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'centeredButton' && (content as any).centeredButton) {
-                    const btnData = { ...(content as any).centeredButton }
-                    if (btnData.sectionBgColor === undefined || btnData.sectionBgColor === null) {
-                      btnData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (btnData.paddingTop === undefined || btnData.paddingTop === null) {
-                      btnData.paddingTop = 'pt-0'
-                    }
-                    if (btnData.paddingBottom === undefined || btnData.paddingBottom === null) {
-                      btnData.paddingBottom = 'pb-0'
-                    }
-                    return (
-                      <CenteredButtonBlock
-                        key={index}
-                        isColumn={true}
-                        {...btnData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          btnData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'eventUpcoming' && (content as any).eventUpcoming) {
-                    const blockData = { ...(content as any).eventUpcoming }
-                    return (
-                      <EventUpcomingBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'pastEvent' && (content as any).pastEvent) {
-                    const blockData = { ...(content as any).pastEvent }
-                    return (
-                      <PastEventBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'featuredWebinar' && (content as any).featuredWebinar) {
-                    const blockData = { ...(content as any).featuredWebinar }
-                    return (
-                      <FeaturedWebinarBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'pastWebinar' && (content as any).pastWebinar) {
-                    const blockData = { ...(content as any).pastWebinar }
-                    return (
-                      <PastWebinarBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'clickExpand' && (content as any).clickExpand) {
-                    const blockData = { ...(content as any).clickExpand }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <ClickExpandBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'gridCol' && (content as any).gridCol) {
-                    const blockData = { ...(content as any).gridCol }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <GridColBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'animatedIconsGrid' && (content as any).animatedIconsGrid) {
-                    const blockData = { ...(content as any).animatedIconsGrid }
-                    if (
-                      applyBg &&
-                      colBg &&
-                      colBg !== 'bg-transparent' &&
-                      (!blockData.sectionBgColor || blockData.sectionBgColor === 'bg-[#F4F6FB]')
-                    ) {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    return (
-                      <AnimatedIconsGridBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'featureCards' && (content as any).featureCards) {
-                    const blockData = { ...(content as any).featureCards }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <FeatureCardsBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'featureCardsV2' && (content as any).featureCardsV2) {
-                    const blockData = { ...(content as any).featureCardsV2 }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <FeatureCardsV2Block
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'verticalCTAv2' && (content as any).verticalCTAv2) {
-                    const blockData = { ...(content as any).verticalCTAv2 }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    return (
-                      <VerticalCTAv2Component
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'splitText' && (content as any).splitText) {
-                    const blockData = { ...(content as any).splitText }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <SplitTextBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'imageSlider' && (content as any).imageSlider) {
-                    const blockData = { ...(content as any).imageSlider }
-                    if (
-                      applyBg &&
-                      colBg &&
-                      colBg !== 'bg-transparent' &&
-                      (!blockData.sectionBgColor || blockData.sectionBgColor === 'bg-transparent')
-                    ) {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    return (
-                      <ImageSliderBlock
-                        key={index}
-                        isColumn={true}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'blogPostUpdated' && (content as any).blogPostUpdated) {
-                    const blockData = { ...(content as any).blogPostUpdated }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <BlogPostUpdatedBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'readyToGrow' && (content as any).readyToGrow) {
-                    const blockData = { ...(content as any).readyToGrow }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      blockData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      blockData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      blockData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      blockData.paddingMode = 'none'
-                    }
-                    return (
-                      <ReadyToGrowBlock
-                        key={index}
-                        {...blockData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          blockData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'whoWeAre' && (content as any).whoWeAre) {
-                    const whoWeAreData = { ...(content as any).whoWeAre }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      whoWeAreData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      whoWeAreData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      whoWeAreData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      whoWeAreData.paddingMode = 'none'
-                    }
-                    return (
-                      <WhoWeAreBlock
-                        key={index}
-                        {...whoWeAreData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
-                          whoWeAreData.className,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (contentType === 'numberedGrid' && (content as any).numberedGrid) {
-                    const numGridData = { ...(content as any).numberedGrid }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      numGridData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      numGridData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      numGridData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      numGridData.paddingMode = 'none'
-                    }
-                    return (
-                      <NumberedGridBlock
-                        key={index}
-                        {...numGridData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
-                          numGridData.className,
-                        )}
-                      />
-                    )
-                  }
-
-                  if ((contentType as string) === 'missionVision' && (content as any).missionVision) {
-                    const mvData = { ...(content as any).missionVision }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      mvData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      mvData.paddingTopDesktop = '0px'
-                      mvData.paddingTopMobile = '0px'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      mvData.paddingBottomDesktop = '0px'
-                      mvData.paddingBottomMobile = '0px'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      mvData.paddingMode = 'none'
-                    }
-                    return (
-                      <MissionVisionBlock
-                        key={index}
-                        {...mvData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
-                          mvData.className,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (
-                    (contentType as string) === 'timelineAccordion' &&
-                    (content as any).timelineAccordion
-                  ) {
-                    const taData = { ...(content as any).timelineAccordion }
-                    if (applyBg && colBg && colBg !== 'bg-transparent') {
-                      taData.sectionBgColor = 'bg-transparent'
-                    }
-                    if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
-                      taData.paddingTop = 'pt-0'
-                    }
-                    if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
-                      taData.paddingBottom = 'pb-0'
-                    }
-                    if (
-                      isMatchHeaderPillWidth ||
-                      colPaddingMode === 'none' ||
-                      colPaddingMode === 'custom' ||
-                      colPaddingMode === 'matchHeader'
-                    ) {
-                      taData.paddingMode = 'none'
-                    }
-                    return (
-                      <TimelineAccordionBlock
-                        key={index}
-                        {...taData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col justify-between',
-                          taData.className,
-                        )}
-                      />
-                    )
-                  }
-
-                  if (
-                    (contentType as string) === 'centeredContentCTA' &&
-                    (content as any).centeredContentCTA
-                  ) {
-                    const ctaData = { ...(content as any).centeredContentCTA }
-                    return (
-                      <CenteredContentCTABlock
-                        key={index}
-                        isColumn={true}
-                        isMatchHeader={isMatchHeaderPillWidth}
-                        {...ctaData}
-                        className={cn(
-                          stretchContent && 'h-full flex-1 flex flex-col',
-                          ctaData.className,
-                          col.alignment && `text-${col.alignment}`,
-                        )}
-                      />
-                    )
-                  }
-
-                  return (
-                    Array.isArray(links) &&
-                    links.length > 0 && (
-                      <div
-                        className={cn(
-                          'flex gap-4',
-                          linkAlignment === 'center' && 'justify-center',
-                          linkAlignment === 'right' && 'justify-end',
-                          linkAlignment === 'left' && 'justify-start',
-                        )}
-                        key={index}
-                      >
-                        {links.map(({ link, buttonClasses, size }, i) => {
                           return (
-                            <div key={i} className="flex">
-                              <CMSLink
-                                size={size ? size : 'lg'}
-                                {...link}
+                            <div
+                              key={index}
+                              className={cn(
+                                'rounded-3xl p-8 md:p-12 flex flex-col gap-6',
+                                cardBgColor,
+                                cardBgOpacity,
+                              )}
+                            >
+                              {iconName && (
+                                <Icon name={iconName} className="w-12 h-12 mb-4 text-blue-600" />
+                              )}
+                              {title && (
+                                <h3
+                                  dangerouslySetInnerHTML={{ __html: title }}
+                                  className={cn(titleClasses)}
+                                />
+                              )}
+                              {description && (
+                                <RichText
+                                  content={description}
+                                  enableGutter={false}
+                                  enableProse={false}
+                                  className={cn(descriptionClasses)}
+                                />
+                              )}
+                              {links && Array.isArray(links) && links.length > 0 && (
+                                <div className="flex gap-4 mt-auto">
+                                  {links.map(({ link, buttonClasses }, i) => (
+                                    <CMSLink
+                                      key={i}
+                                      size="lg"
+                                      {...link}
+                                      className={cn(buttonClasses)}
+                                    />
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        }
+
+                        if (contentType === 'spacer' && content.spacer) {
+                          const spacer = content.spacer
+                          return (
+                            <div
+                              key={index}
+                              className={cn(spacer.spacing, spacer.bgColor, spacer.width)}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'accordion' && content.accordion) {
+                          return (
+                            <AccordionClient
+                              key={index}
+                              accordion={content.accordion}
+                              textColor={getBestContrastTextColor(sectionBackgroundColor)}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'caseStudySlider' && content.caseStudySlider) {
+                          return (
+                            <CaseStudySliderClient
+                              key={index}
+                              caseStudySlider={content.caseStudySlider}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'imageTextSplit' && content.imageTextSplit) {
+                          const splitData = { ...(content.imageTextSplit as any) }
+                          if (
+                            splitData.sectionBgColor === undefined ||
+                            splitData.sectionBgColor === null
+                          ) {
+                            splitData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (splitData.paddingTop === undefined || splitData.paddingTop === null) {
+                            splitData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            splitData.paddingBottom === undefined ||
+                            splitData.paddingBottom === null
+                          ) {
+                            splitData.paddingBottom = 'pb-0'
+                          }
+                          return (
+                            <ImageTextSplitBlock
+                              key={index}
+                              blockType="imageTextSplit"
+                              isColumn={true}
+                              {...splitData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                splitData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'divider' && content.divider) {
+                          const { color, thickness, width, alignment } = content.divider
+                          // Map legacy 'center' value (old DB data) to 'mx-auto'
+                          const resolvedAlignment = alignment === 'center' ? 'mx-auto' : alignment
+                          return (
+                            <div className="py-4 w-full" key={index}>
+                              <hr
                                 className={cn(
-                                  'rounded-xl bg-transparent border-slate-950',
-                                  buttonClasses,
+                                  thickness,
+                                  width,
+                                  resolvedAlignment,
+                                  color ? `border-${color}` : 'border-slate-300',
                                 )}
                               />
                             </div>
                           )
-                        })}
-                      </div>
-                    )
-                  )
-                })}
-                </div>
-              </React.Fragment>
-            )
-          })}
+                        }
+
+                        if (contentType === 'customJobAction' && content.customJobAction) {
+                          const {
+                            link,
+                            paddingX,
+                            paddingY,
+                            rounded,
+                            borderWidth,
+                            borderColor,
+                            bgColor,
+                            textColor,
+                            nestedBadge,
+                            fontWeight,
+                            fontStyle,
+                            textSize,
+                            textTransform,
+                          } = content.customJobAction
+
+                          const nestedBg = nestedBadge?.bgColor || 'bg-slate-100'
+                          const nestedText = nestedBadge?.textColor
+                            ? `text-${nestedBadge.textColor}`
+                            : 'text-slate-900'
+                          const nestedRounded = nestedBadge?.rounded || 'rounded-full'
+
+                          const resolvedFontWeight = fontWeight || 'font-semibold'
+                          const resolvedFontStyle = fontStyle || 'not-italic'
+                          const resolvedTextSize = textSize || 'text-base'
+                          const resolvedTextTransform = textTransform || 'normal-case'
+
+                          return (
+                            <div className="py-2 w-full" key={index}>
+                              <CMSLink
+                                {...link}
+                                label={null}
+                                className={cn(
+                                  'flex items-center justify-between transition-all duration-300 w-full text-left',
+                                  paddingX,
+                                  paddingY,
+                                  rounded,
+                                  borderWidth,
+                                  borderColor && `border-${borderColor}`,
+                                  bgColor,
+                                  textColor && `text-${textColor}`,
+                                )}
+                              >
+                                <span
+                                  className={cn(
+                                    resolvedFontWeight,
+                                    resolvedFontStyle,
+                                    resolvedTextSize,
+                                    resolvedTextTransform,
+                                  )}
+                                >
+                                  {link?.label}
+                                </span>
+
+                                {nestedBadge && (
+                                  <div
+                                    className={cn(
+                                      'flex items-center gap-2 py-1.5 px-4 transition-all duration-300',
+                                      nestedBg,
+                                      nestedText,
+                                      nestedRounded,
+                                    )}
+                                  >
+                                    {nestedBadge.image && typeof nestedBadge.image === 'object' && (
+                                      <div className="relative w-5 h-5 overflow-hidden flex-shrink-0">
+                                        <Media
+                                          resource={nestedBadge.image}
+                                          imgClassName="object-contain w-full h-full"
+                                          fill
+                                        />
+                                      </div>
+                                    )}
+                                    <span className="text-sm font-medium whitespace-nowrap">
+                                      {nestedBadge.text}
+                                    </span>
+                                  </div>
+                                )}
+                              </CMSLink>
+                            </div>
+                          )
+                        }
+
+                        if (contentType === 'customButton' && content.customButton) {
+                          const {
+                            link,
+                            paddingX,
+                            paddingY,
+                            rounded,
+                            borderWidth,
+                            borderColor,
+                            bgColor,
+                            textColor,
+                            alignment,
+                          } = content.customButton
+                          return (
+                            <div
+                              className={cn(
+                                'w-full flex py-2',
+                                alignment === 'center' && 'justify-center',
+                                alignment === 'right' && 'justify-end',
+                                alignment === 'left' && 'justify-start',
+                              )}
+                              key={index}
+                            >
+                              <CMSLink
+                                {...link}
+                                className={cn(
+                                  'inline-flex items-center justify-center transition-all duration-300',
+                                  paddingX,
+                                  paddingY,
+                                  rounded,
+                                  borderWidth,
+                                  borderColor && `border-${borderColor}`,
+                                  bgColor,
+                                  textColor && `text-${textColor}`,
+                                )}
+                              />
+                            </div>
+                          )
+                        }
+
+                        if (contentType === 'solutionsAccordion' && content.solutionsAccordion) {
+                          const solData = { ...(content.solutionsAccordion as any) }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            solData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (!solData.paddingMode || solData.paddingMode === 'default') {
+                            if (
+                              isMatchHeaderPillWidth ||
+                              colPaddingMode === 'none' ||
+                              colPaddingMode === 'custom' ||
+                              colPaddingMode === 'matchHeader'
+                            ) {
+                              solData.paddingMode = 'none'
+                            }
+                          }
+                          return (
+                            <AccordionPanel
+                              key={index}
+                              {...solData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                solData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'centeredContent' && (content as any).centeredContent) {
+                          const centeredData = { ...(content as any).centeredContent }
+                          if (
+                            centeredData.sectionBgColor === undefined ||
+                            centeredData.sectionBgColor === null
+                          ) {
+                            centeredData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (
+                            centeredData.paddingTop === undefined ||
+                            centeredData.paddingTop === null
+                          ) {
+                            centeredData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            centeredData.paddingBottom === undefined ||
+                            centeredData.paddingBottom === null
+                          ) {
+                            centeredData.paddingBottom = 'pb-0'
+                          }
+                          return (
+                            <CenteredContentComponent
+                              key={index}
+                              isColumn={true}
+                              {...centeredData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                centeredData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'centeredButton' && (content as any).centeredButton) {
+                          const btnData = { ...(content as any).centeredButton }
+                          if (
+                            btnData.sectionBgColor === undefined ||
+                            btnData.sectionBgColor === null
+                          ) {
+                            btnData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (btnData.paddingTop === undefined || btnData.paddingTop === null) {
+                            btnData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            btnData.paddingBottom === undefined ||
+                            btnData.paddingBottom === null
+                          ) {
+                            btnData.paddingBottom = 'pb-0'
+                          }
+                          return (
+                            <CenteredButtonBlock
+                              key={index}
+                              isColumn={true}
+                              {...btnData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                btnData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'eventUpcoming' && (content as any).eventUpcoming) {
+                          const blockData = { ...(content as any).eventUpcoming }
+                          return (
+                            <EventUpcomingBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'pastEvent' && (content as any).pastEvent) {
+                          const blockData = { ...(content as any).pastEvent }
+                          return (
+                            <PastEventBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'featuredWebinar' && (content as any).featuredWebinar) {
+                          const blockData = { ...(content as any).featuredWebinar }
+                          return (
+                            <FeaturedWebinarBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'pastWebinar' && (content as any).pastWebinar) {
+                          const blockData = { ...(content as any).pastWebinar }
+                          return (
+                            <PastWebinarBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'clickExpand' && (content as any).clickExpand) {
+                          const blockData = { ...(content as any).clickExpand }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <ClickExpandBlock
+                              key={index}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'gridCol' && (content as any).gridCol) {
+                          const blockData = { ...(content as any).gridCol }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <GridColBlock
+                              key={index}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (
+                          contentType === 'animatedIconsGrid' &&
+                          (content as any).animatedIconsGrid
+                        ) {
+                          const blockData = { ...(content as any).animatedIconsGrid }
+                          if (
+                            applyBg &&
+                            colBg &&
+                            colBg !== 'bg-transparent' &&
+                            (!blockData.sectionBgColor ||
+                              blockData.sectionBgColor === 'bg-[#F4F6FB]')
+                          ) {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          return (
+                            <AnimatedIconsGridBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'featureCards' && (content as any).featureCards) {
+                          const blockData = { ...(content as any).featureCards }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (
+                            colVerticalMode === 'none' ||
+                            colPtClass === 'pt-0' ||
+                            !blockData.paddingTop ||
+                            blockData.paddingTop === 'pt-16'
+                          ) {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            colVerticalMode === 'none' ||
+                            colPbClass === 'pb-0' ||
+                            !blockData.paddingBottom ||
+                            blockData.paddingBottom === 'pb-16'
+                          ) {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <FeatureCardsBlock
+                              key={index}
+                              {...blockData}
+                              isEmbedded={true}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'featureCardsV2' && (content as any).featureCardsV2) {
+                          const blockData = { ...(content as any).featureCardsV2 }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (
+                            colVerticalMode === 'none' ||
+                            colPtClass === 'pt-0' ||
+                            !blockData.paddingTop ||
+                            blockData.paddingTop === 'pt-16'
+                          ) {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            colVerticalMode === 'none' ||
+                            colPbClass === 'pb-0' ||
+                            !blockData.paddingBottom ||
+                            blockData.paddingBottom === 'pb-16'
+                          ) {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <FeatureCardsV2Block
+                              key={index}
+                              {...blockData}
+                              isEmbedded={true}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'verticalCTAv2' && (content as any).verticalCTAv2) {
+                          const blockData = { ...(content as any).verticalCTAv2 }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          return (
+                            <VerticalCTAv2Component
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'splitText' && (content as any).splitText) {
+                          const blockData = { ...(content as any).splitText }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <SplitTextBlock
+                              key={index}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'imageSlider' && (content as any).imageSlider) {
+                          const blockData = { ...(content as any).imageSlider }
+                          if (
+                            applyBg &&
+                            colBg &&
+                            colBg !== 'bg-transparent' &&
+                            (!blockData.sectionBgColor ||
+                              blockData.sectionBgColor === 'bg-transparent')
+                          ) {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          return (
+                            <ImageSliderBlock
+                              key={index}
+                              isColumn={true}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'blogPostUpdated' && (content as any).blogPostUpdated) {
+                          const blockData = { ...(content as any).blogPostUpdated }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <BlogPostUpdatedBlock
+                              key={index}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'readyToGrow' && (content as any).readyToGrow) {
+                          const blockData = { ...(content as any).readyToGrow }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            blockData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            blockData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            blockData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            blockData.paddingMode = 'none'
+                          }
+                          return (
+                            <ReadyToGrowBlock
+                              key={index}
+                              {...blockData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                blockData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'whoWeAre' && (content as any).whoWeAre) {
+                          const whoWeAreData = { ...(content as any).whoWeAre }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            whoWeAreData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            whoWeAreData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            whoWeAreData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            whoWeAreData.paddingMode = 'none'
+                          }
+                          return (
+                            <WhoWeAreBlock
+                              key={index}
+                              {...whoWeAreData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                                whoWeAreData.className,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'numberedGrid' && (content as any).numberedGrid) {
+                          const numGridData = { ...(content as any).numberedGrid }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            numGridData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            numGridData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            numGridData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            numGridData.paddingMode = 'none'
+                          }
+                          return (
+                            <NumberedGridBlock
+                              key={index}
+                              {...numGridData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                                numGridData.className,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (
+                          (contentType as string) === 'missionVision' &&
+                          (content as any).missionVision
+                        ) {
+                          const mvData = { ...(content as any).missionVision }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            mvData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            mvData.paddingTopDesktop = '0px'
+                            mvData.paddingTopMobile = '0px'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            mvData.paddingBottomDesktop = '0px'
+                            mvData.paddingBottomMobile = '0px'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            mvData.paddingMode = 'none'
+                          }
+                          return (
+                            <MissionVisionBlock
+                              key={index}
+                              {...mvData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                                mvData.className,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (
+                          (contentType as string) === 'timelineAccordion' &&
+                          (content as any).timelineAccordion
+                        ) {
+                          const taData = { ...(content as any).timelineAccordion }
+                          if (applyBg && colBg && colBg !== 'bg-transparent') {
+                            taData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (colVerticalMode === 'none' || colPtClass === 'pt-0') {
+                            taData.paddingTop = 'pt-0'
+                          }
+                          if (colVerticalMode === 'none' || colPbClass === 'pb-0') {
+                            taData.paddingBottom = 'pb-0'
+                          }
+                          if (
+                            isMatchHeaderPillWidth ||
+                            colPaddingMode === 'none' ||
+                            colPaddingMode === 'custom' ||
+                            colPaddingMode === 'matchHeader'
+                          ) {
+                            taData.paddingMode = 'none'
+                          }
+                          return (
+                            <TimelineAccordionBlock
+                              key={index}
+                              {...taData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col justify-between',
+                                taData.className,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (
+                          (contentType as string) === 'centeredContentCTA' &&
+                          (content as any).centeredContentCTA
+                        ) {
+                          const ctaData = { ...(content as any).centeredContentCTA }
+                          return (
+                            <CenteredContentCTABlock
+                              key={index}
+                              isColumn={true}
+                              isMatchHeader={isMatchHeaderPillWidth}
+                              {...ctaData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                ctaData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        return (
+                          Array.isArray(links) &&
+                          links.length > 0 && (
+                            <div
+                              className={cn(
+                                'flex gap-4',
+                                linkAlignment === 'center' && 'justify-center',
+                                linkAlignment === 'right' && 'justify-end',
+                                linkAlignment === 'left' && 'justify-start',
+                              )}
+                              key={index}
+                            >
+                              {links.map(({ link, buttonClasses, size }, i) => {
+                                return (
+                                  <div key={i} className="flex">
+                                    <CMSLink
+                                      size={size ? size : 'lg'}
+                                      {...link}
+                                      className={cn(
+                                        'rounded-xl bg-transparent border-slate-950',
+                                        buttonClasses,
+                                      )}
+                                    />
+                                  </div>
+                                )
+                              })}
+                            </div>
+                          )
+                        )
+                      })}
+                    </div>
+                  </React.Fragment>
+                )
+              })}
             </div>
           </div>
         )

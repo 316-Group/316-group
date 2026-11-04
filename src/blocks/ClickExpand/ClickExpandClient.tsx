@@ -109,6 +109,7 @@ export interface ClickExpandProps {
   cardHeight?: string | null
   scrollBehavior?: 'sticky' | 'wheel' | 'clickOnly' | null
   showIndicators?: boolean | null
+  minimizedCardsMobile?: string | null
   cards?: CardItem[] | null
   className?: string
   isEmbedded?: boolean
@@ -136,6 +137,7 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
   cardHeight = 'h-[580px] md:h-[680px] lg:h-[720px]',
   scrollBehavior = 'sticky',
   showIndicators = true,
+  minimizedCardsMobile = '2',
   cards = [],
   className,
   isEmbedded = false,
@@ -823,16 +825,29 @@ export const ClickExpandClient: React.FC<ClickExpandProps> = ({
     </div>
   )
 
-  // ─── Mobile View (Vertical Stack: 1 Active Card + Up to 2 Inactive Preview Banners + 'More' Button) ──
+  // ─── Mobile View (Vertical Stack: 1 Active Card + Configurable Inactive Preview Banners + 'More' Button) ──
   const activeCard = items[activeIndex] || items[0]
-  const mobilePreviewIndices: number[] = []
-  if (count > 1) {
-    mobilePreviewIndices.push((activeIndex + 1) % count)
-    if (count > 2) {
-      mobilePreviewIndices.push((activeIndex + 2) % count)
+  const totalMinimizedAvailable = Math.max(0, count - 1)
+
+  let limitMinimized = 2 // default matching existing behavior
+  if (minimizedCardsMobile === 'all') {
+    limitMinimized = totalMinimizedAvailable
+  } else if (minimizedCardsMobile) {
+    const parsed = parseInt(minimizedCardsMobile, 10)
+    if (!isNaN(parsed) && parsed >= 0) {
+      limitMinimized = Math.min(parsed, totalMinimizedAvailable)
     }
+  } else {
+    limitMinimized = Math.min(2, totalMinimizedAvailable)
   }
-  const hasMoreCards = count > 3
+
+  const mobilePreviewIndices: number[] = []
+  for (let offset = 1; offset <= limitMinimized; offset++) {
+    mobilePreviewIndices.push((activeIndex + offset) % count)
+  }
+
+  const remainingCount = totalMinimizedAvailable - limitMinimized
+  const hasMoreCards = remainingCount > 0
 
   // Active card mobile config
   const activeOverlay = overlayMap[activeCard.overlayStyle || 'vignette']

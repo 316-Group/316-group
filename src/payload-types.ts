@@ -67804,6 +67804,10 @@ export interface ContentBlock {
                  * Control how mouse wheel scroll interacts with the cards.
                  */
                 scrollBehavior?: ('sticky' | 'wheel' | 'clickOnly') | null;
+                /**
+                 * Choose how many collapsed/minimized cards are displayed beneath the active card on mobile screens. "Show All" stacks all available cards.
+                 */
+                minimizedCardsMobile?: ('all' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
                 showIndicators?: boolean | null;
                 cards?:
                   | {
@@ -193898,6 +193902,10 @@ export interface ClickExpandBlock {
    * Control how mouse wheel scroll interacts with the cards.
    */
   scrollBehavior?: ('sticky' | 'wheel' | 'clickOnly') | null;
+  /**
+   * Choose how many collapsed/minimized cards are displayed beneath the active card on mobile screens. "Show All" stacks all available cards.
+   */
+  minimizedCardsMobile?: ('all' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10') | null;
   showIndicators?: boolean | null;
   cards?:
     | {
@@ -303551,6 +303559,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
                     paddingXMobileCustom?: T;
                     cardHeight?: T;
                     scrollBehavior?: T;
+                    minimizedCardsMobile?: T;
                     showIndicators?: T;
                     cards?:
                       | T
@@ -305940,6 +305949,7 @@ export interface ClickExpandBlockSelect<T extends boolean = true> {
   paddingXMobileCustom?: T;
   cardHeight?: T;
   scrollBehavior?: T;
+  minimizedCardsMobile?: T;
   showIndicators?: T;
   cards?:
     | T

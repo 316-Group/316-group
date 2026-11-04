@@ -236,10 +236,43 @@ export const clickExpandFields: Field[] = [
   },
 
   {
-    name: 'showIndicators',
-    type: 'checkbox',
-    label: 'Show Bottom Position Indicators / Pill Dots',
-    defaultValue: true,
+    type: 'row',
+    fields: [
+      {
+        name: 'minimizedCardsMobile',
+        type: 'select',
+        label: 'Minimized Cards to Show (Mobile)',
+        defaultValue: '2',
+        validate: allowAnySelect,
+        options: [
+          { label: 'Show All Minimized Cards', value: 'all' },
+          { label: '1 Card', value: '1' },
+          { label: '2 Cards (Default)', value: '2' },
+          { label: '3 Cards', value: '3' },
+          { label: '4 Cards', value: '4' },
+          { label: '5 Cards', value: '5' },
+          { label: '6 Cards', value: '6' },
+          { label: '7 Cards', value: '7' },
+          { label: '8 Cards', value: '8' },
+          { label: '9 Cards', value: '9' },
+          { label: '10 Cards', value: '10' },
+        ],
+        admin: {
+          width: '50%',
+          description:
+            'Choose how many collapsed/minimized cards are displayed beneath the active card on mobile screens. "Show All" stacks all available cards.',
+        },
+      },
+      {
+        name: 'showIndicators',
+        type: 'checkbox',
+        label: 'Show Bottom Position Indicators / Pill Dots',
+        defaultValue: true,
+        admin: {
+          width: '50%',
+        },
+      },
+    ],
   },
 
   // ─── Expandable Cards Array ────────────────────────────────────────────────
