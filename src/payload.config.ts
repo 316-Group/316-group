@@ -90,6 +90,22 @@ export default buildConfig({
   editor: defaultLexical,
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
+    afterOpenConnection: async (adapter) => {
+      try {
+        if (adapter.versions) {
+          for (const model of Object.values(adapter.versions)) {
+            await model.collection.createIndex(
+              { parent: 1, updatedAt: -1 },
+              { background: true, name: 'parent_1_updatedAt_-1' },
+            )
+          }
+        }
+      } catch (err) {
+        adapter.payload?.logger?.error?.(
+          `Failed to create version compound indexes: ${(err as Error).message}`,
+        )
+      }
+    },
   }),
   collections: [
     Pages,
