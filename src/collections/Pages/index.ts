@@ -12,6 +12,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
+import { checkSlugOnPublish } from './hooks/checkSlugOnPublish'
 
 import {
   MetaDescriptionField,
@@ -220,11 +221,45 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
-    ...slugField(),
+    ...slugField('title', {
+      slugOverrides: {
+        validate: async (value: any, { req, id, data, siblingData }: any) => {
+          if (!value) return 'Slug is required.'
+          if (!req?.payload) return true
+
+          const status = data?._status || siblingData?._status
+          if (status === 'published') {
+            const targetSlug = String(value).trim().toLowerCase()
+            const currentId = id || data?.id
+
+            const existing = await req.payload.find({
+              collection: 'pages',
+              where: {
+                and: [
+                  { slug: { equals: targetSlug } },
+                  ...(currentId ? [{ id: { not_equals: currentId } }] : []),
+                ],
+              },
+              limit: 1,
+              depth: 0,
+              req,
+            })
+
+            if (existing.totalDocs > 0) {
+              if (targetSlug === 'home') {
+                return 'home already exist'
+              }
+              return `A page with the slug "${targetSlug}" already exists.`
+            }
+          }
+          return true
+        },
+      },
+    }),
   ],
   hooks: {
     afterChange: [revalidatePage],
-    beforeChange: [populatePublishedAt],
+    beforeChange: [populatePublishedAt, checkSlugOnPublish],
   },
   versions: {
     drafts: {

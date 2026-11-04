@@ -45,7 +45,7 @@ type Args = {
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { slug = 'home' } = await paramsPromise
+  const { slug = 'home' } = (await paramsPromise) || {}
   const url = '/' + slug
 
   let page: PageType | null
@@ -77,8 +77,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
+export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
+  const { slug = 'home' } = (await paramsPromise) || {}
   const page = await queryPageBySlug({
     slug,
   })
