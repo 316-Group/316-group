@@ -34,6 +34,7 @@ import { IndustriesBlockComponent } from './Industries/Component'
 import { CardGridBlock } from './CardGrid/Component'
 import { BrandSliderBlock } from './BrandSlider/Component'
 import { ImageTextSplitBlock } from './ImageTextSplit/Component'
+import { ImageTextSplit2Block } from './ImageTextSplit2/Component'
 import { AgenticGridBlock } from './AgenticGrid/Component'
 import { SolutionsAccordionBlock } from './SolutionsAccordion/Component'
 import { CenteredContentBlock } from './CenteredContent/Component'
@@ -99,6 +100,7 @@ const blockComponents = {
   cardGrid: CardGridBlock,
   brandSlider: BrandSliderBlock,
   imageTextSplit: ImageTextSplitBlock,
+  imageTextSplit2: ImageTextSplit2Block,
   agenticGrid: AgenticGridBlock,
   solutionsAccordion: SolutionsAccordionBlock,
   centeredContent: CenteredContentBlock,

@@ -19,6 +19,7 @@ import { AccordionClient } from './AccordionClient'
 import { CaseStudySliderClient } from './CaseStudySliderClient'
 import { getBestContrastTextColor } from '@/utilities/getBestContrastTextColor'
 import { ImageTextSplitBlock } from '../ImageTextSplit/Component'
+import { ImageTextSplit2Block } from '../ImageTextSplit2/Component'
 import { AccordionPanel } from '../SolutionsAccordion/AccordionPanel'
 import { CenteredContentComponent } from '../CenteredContent/Component'
 import { ClickExpandBlock } from '../ClickExpand/Component'
@@ -889,6 +890,38 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                             <ImageTextSplitBlock
                               key={index}
                               blockType="imageTextSplit"
+                              isColumn={true}
+                              {...splitData}
+                              className={cn(
+                                stretchContent && 'h-full flex-1 flex flex-col',
+                                splitData.className,
+                                col.alignment && `text-${col.alignment}`,
+                              )}
+                            />
+                          )
+                        }
+
+                        if (contentType === 'imageTextSplit2' && content.imageTextSplit2) {
+                          const splitData = { ...(content.imageTextSplit2 as any) }
+                          if (
+                            splitData.sectionBgColor === undefined ||
+                            splitData.sectionBgColor === null
+                          ) {
+                            splitData.sectionBgColor = 'bg-transparent'
+                          }
+                          if (splitData.paddingTop === undefined || splitData.paddingTop === null) {
+                            splitData.paddingTop = 'pt-0'
+                          }
+                          if (
+                            splitData.paddingBottom === undefined ||
+                            splitData.paddingBottom === null
+                          ) {
+                            splitData.paddingBottom = 'pb-0'
+                          }
+                          return (
+                            <ImageTextSplit2Block
+                              key={index}
+                              blockType="imageTextSplit2"
                               isColumn={true}
                               {...splitData}
                               className={cn(

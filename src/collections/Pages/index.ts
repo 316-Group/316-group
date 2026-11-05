@@ -47,6 +47,7 @@ import { Industries } from '../../blocks/Industries/config'
 import { CardGrid } from '@/blocks/CardGrid/config'
 import { BrandSlider } from '@/blocks/BrandSlider/config'
 import { ImageTextSplit } from '@/blocks/ImageTextSplit/config'
+import { ImageTextSplit2 } from '@/blocks/ImageTextSplit2/config'
 import { AgenticGrid } from '@/blocks/AgenticGrid/config'
 import { SolutionsAccordion } from '@/blocks/SolutionsAccordion/config'
 import { CenteredContent } from '@/blocks/CenteredContent/config'
@@ -157,6 +158,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 CardGrid,
                 BrandSlider,
                 ImageTextSplit,
+                ImageTextSplit2,
                 AgenticGrid,
                 SolutionsAccordion,
                 CenteredContent,

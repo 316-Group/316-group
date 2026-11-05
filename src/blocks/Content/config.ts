@@ -46,6 +46,7 @@ import { numberedGridFields, numberedGridColumnFields } from '../NumberedGrid/co
 import { missionVisionFields, missionVisionColumnFields } from '../MissionVision/config'
 import { timelineAccordionFields, timelineAccordionColumnFields } from '../TimelineAccordion/config'
 import { imageTextSplitColumnFields } from '../ImageTextSplit/config'
+import { imageTextSplit2ColumnFields } from '../ImageTextSplit2/config'
 import { centeredButtonColumnFields } from '../CenteredButton/config'
 import { eventUpcomingColumnFields } from '../EventUpcoming/config'
 import { pastEventColumnFields } from '../PastEvent/config'
@@ -607,6 +608,7 @@ const columnFields: Field[] = [
           { label: 'Accordion', value: 'accordion' },
           { label: 'Case Study Slider', value: 'caseStudySlider' },
           { label: 'Image Text Split', value: 'imageTextSplit' },
+          { label: 'Image Text Split 2', value: 'imageTextSplit2' },
           { label: 'Divider / Line', value: 'divider' },
           { label: 'Custom Job Action', value: 'customJobAction' },
           { label: 'Custom Button', value: 'customButton' },
@@ -1576,6 +1578,15 @@ const columnFields: Field[] = [
           condition: (_, { contentType }) => contentType === 'imageTextSplit',
         },
         fields: imageTextSplitColumnFields,
+      },
+      {
+        name: 'imageTextSplit2',
+        type: 'group',
+        label: 'Image Text Split 2 Settings',
+        admin: {
+          condition: (_, { contentType }) => contentType === 'imageTextSplit2',
+        },
+        fields: imageTextSplit2ColumnFields,
       },
       {
         name: 'divider',
