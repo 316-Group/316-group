@@ -661,10 +661,13 @@ export const getImageTextSplit2Fields = ({
             name: 'descriptionFontSize',
             type: 'select',
             label: 'Description Font Size (Desktop)',
-            defaultValue: 'text-base lg:text-lg',
+            defaultValue: 'text-base md:text-lg',
             validate: allowAnySelect,
             admin: { width: '25%' },
-            options: fontSizeOptions,
+            options: [
+              ...fontSizeOptions,
+              { label: 'Responsive Base to Large (lg)', value: 'text-base lg:text-lg' },
+            ],
           },
           {
             name: 'descriptionFontWeight',
@@ -679,10 +682,13 @@ export const getImageTextSplit2Fields = ({
             name: 'descriptionFontSizeMobile',
             type: 'select',
             label: 'Description Font Size (Mobile)',
-            defaultValue: 'text-sm sm:text-base',
+            defaultValue: 'text-sm md:text-base',
             validate: allowAnySelect,
             admin: { width: '25%' },
-            options: fontSizeOptions,
+            options: [
+              ...fontSizeOptions,
+              { label: 'Responsive SM to Base (sm)', value: 'text-sm sm:text-base' },
+            ],
           },
           {
             name: 'descriptionFontWeightMobile',

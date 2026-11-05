@@ -290,7 +290,7 @@ export const ImageTextSplit2Client: React.FC<ImageTextSplit2Props> = ({
     descriptionGroup?.descriptionFontSizeMobile,
     descriptionGroup?.descriptionFontWeight,
     descriptionGroup?.descriptionFontWeightMobile,
-    'text-base lg:text-lg',
+    'text-base md:text-lg',
     'font-normal',
   )
 

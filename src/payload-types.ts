@@ -51043,6 +51043,7 @@ export interface ContentBlock {
                         | 'text-4xl sm:text-5xl lg:text-6xl'
                         | 'text-5xl md:text-6xl lg:text-7xl'
                         | 'text-6xl md:text-7xl lg:text-8xl'
+                        | 'text-base lg:text-lg'
                       )
                     | null;
                   descriptionFontWeight?:
@@ -51091,6 +51092,7 @@ export interface ContentBlock {
                         | 'text-4xl sm:text-5xl lg:text-6xl'
                         | 'text-5xl md:text-6xl lg:text-7xl'
                         | 'text-6xl md:text-7xl lg:text-8xl'
+                        | 'text-sm sm:text-base'
                       )
                     | null;
                   descriptionFontWeightMobile?:
@@ -187823,6 +187825,7 @@ export interface ImageTextSplit2Block {
           | 'text-4xl sm:text-5xl lg:text-6xl'
           | 'text-5xl md:text-6xl lg:text-7xl'
           | 'text-6xl md:text-7xl lg:text-8xl'
+          | 'text-base lg:text-lg'
         )
       | null;
     descriptionFontWeight?:
@@ -187871,6 +187874,7 @@ export interface ImageTextSplit2Block {
           | 'text-4xl sm:text-5xl lg:text-6xl'
           | 'text-5xl md:text-6xl lg:text-7xl'
           | 'text-6xl md:text-7xl lg:text-8xl'
+          | 'text-sm sm:text-base'
         )
       | null;
     descriptionFontWeightMobile?:
