@@ -33,9 +33,9 @@ const nextConfig = {
     cpus: 1,
     workerThreads: false,
     serverActions: {
-      bodySizeLimit: '25mb',
+      bodySizeLimit: '100mb',
     },
-    largePageDataBytes: 25 * 1024 * 1024,
+    largePageDataBytes: 100 * 1024 * 1024,
   },
 }
 

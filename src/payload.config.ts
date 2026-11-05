@@ -130,6 +130,12 @@ export default buildConfig({
   upload: {
     limits: {
       fileSize: 300000000, // 300MB, written in bytes
+      fieldSize: 100 * 1024 * 1024, // 100MB (prevents Busboy 1MB truncation of _payload form data)
+    },
+  },
+  bodyParser: {
+    limits: {
+      fieldSize: 100 * 1024 * 1024, // 100MB
     },
   },
   cors: [getServerSideURL()].filter(Boolean),
